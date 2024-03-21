@@ -48,7 +48,7 @@ public class BoxSetup : MonoBehaviour
     }
 
     /// <summary> Calcule la dimension des slots </summary>
-    void CalculateSlotDimension()
+   private void CalculateSlotDimension()
     {
         m_slotLength = m_boxLength / m_nbSlotLength;
         m_slotWidth = m_boxWidth / m_nbSlotWidth;
@@ -56,13 +56,13 @@ public class BoxSetup : MonoBehaviour
         slotWidthCalculation = m_slotWidth;
     }
 
-    void SetAvailableSlots()
+   private void SetAvailableSlots()
     {
         m_box.InitAvailableSlots(m_nbSlotWidth * m_nbSlotLength);
     }
 
     /// <summary> Les calculs de positionement puis ajout dans la boite </summary>
-    void CreateSlots()
+   private void CreateSlots()
     {
         List<float> slotsLengthPosition = new List<float>();
         List<float> slotsWidthPosition = new List<float>();

@@ -92,7 +92,7 @@ public class Box : MonoBehaviour
                 List<int> allIndex = new List<int>();
                 allIndex.Add(i);
                 m_itemsInBox.Push(new ItemInBox(item, allIndex));
-                Debug.Log("Added: '" + item.name + "' inside box number: " + i);
+                Debug.Log("Added: '" + item.name + "' inside " + gameObject.name + " at slot: " + i);
                 return;
             }
         }

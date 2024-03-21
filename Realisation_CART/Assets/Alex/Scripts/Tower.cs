@@ -18,6 +18,7 @@ public class Tower : MonoBehaviour
         m_boxCount++;
         GameObject instant = Instantiate(boxPrefab);
         instant.transform.SetParent(transform);
+        instant.name = "Boxe " + m_boxCount;
         Box instantBox = instant.GetComponent<Box>();
         float height = (m_boxCount - 1) * boxHeight;
         instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
@@ -28,8 +29,11 @@ public class Tower : MonoBehaviour
     public void RemoveBoxeToTower()
     {
         if (m_boxCount == 1)
+        {
+            Debug.LogError("¨On peut pas enlever toute les boites du panier");
             return;
-
+        }
+           
         m_boxCount--;
         Box boxToRemove = m_boxesInCart.Pop();
         Destroy(boxToRemove.gameObject);
@@ -46,5 +50,28 @@ public class Tower : MonoBehaviour
         {
             RemoveBoxeToTower();
         }
+    }
+
+    public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
+    {
+        if (size == ItemData.ESize.small)
+        {
+           return GetTopBox().CanTakeItem(size);
+        }
+        else
+        {
+            Debug.Log("TODO");
+            return false;
+        }
+    }
+
+    public void TakeObjectInActualBoxe(GameObject item, ItemData.ESize size)
+    {
+        GetTopBox().TakeItem(item, size);
+    }
+
+    private Box GetTopBox()
+    {
+        return m_boxesInCart.Peek();
     }
 }
