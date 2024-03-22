@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,8 +16,8 @@ public class BoxSetup : MonoBehaviour
     [SerializeField] private int m_nbSlotLength;
     [SerializeField] private int m_nbSlotWidth;
 
-    [Header("Hauteur des slots")]
-    [SerializeField] private float m_slotHeight;
+    [field: Header("Hauteur des slots")]
+    [field: SerializeField] public float SlotHeight { get; private set;}
 
     [Header("READ ONLY")]
     [SerializeField] private float slotLengthCalculation;
@@ -179,7 +178,7 @@ public class BoxSetup : MonoBehaviour
                 Vector3 slotPosition = new Vector3(slotsLengthPosition[j], 0, slotsWidthPosition[i]);
                 GameObject instant = Instantiate(m_slotPrefab, m_slotsParent);
                 instant.transform.localPosition = slotPosition;
-                instant.transform.localScale = new Vector3(m_slotLength, m_slotHeight, m_slotWidth);
+                instant.transform.localScale = new Vector3(m_slotLength, SlotHeight, m_slotWidth);
                 m_box.AddSlotInList(instant.transform);
             }
         }

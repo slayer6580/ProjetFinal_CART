@@ -263,7 +263,7 @@ MonoBehaviour:
   m_boxWidth: 2
   m_nbSlotLength: 6
   m_nbSlotWidth: 4
-  m_slotHeight: 0.46
+  <SlotHeight>k__BackingField: 0.46
   slotLengthCalculation: 0
   slotWidthCalculation: 0
 --- !u!114 &7277978599770623468
@@ -278,7 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da745de8c2988b14984871a89fb8844c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemHeightOffset: 0.23
   m_slotsInfo: []
 --- !u!1 &4749397371045065519
 GameObject:

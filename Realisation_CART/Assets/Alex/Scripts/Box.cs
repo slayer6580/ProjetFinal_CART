@@ -1,15 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxSetup))]
 
 public class Box : MonoBehaviour
 {
-
-
-    struct MultiSlots // public TEST
+    struct MultiSlots
     {
         public MultiSlots(List<int> slotIndexes)
         {
@@ -19,8 +16,7 @@ public class Box : MonoBehaviour
         public List<int> m_slotIndexes;
     }
 
-    [Serializable] // TEST
-    public struct ItemInBox // public TEST
+   public struct ItemInBox
     {
         public ItemInBox(GameObject item, List<int> slotIndex, Vector3 localPosition)
         {
@@ -46,14 +42,21 @@ public class Box : MonoBehaviour
         public Transform m_slotTransform;
         public bool m_isAvailable;
     }
-    [SerializeField] private float itemHeightOffset;
 
     public List<SlotInfo> m_slotsInfo = new List<SlotInfo>(); // public TEST
-    public Stack<ItemInBox> m_itemsInBox = new Stack<ItemInBox>(); // public TEST
+    private Stack<ItemInBox> m_itemsInBox = new Stack<ItemInBox>(); 
     private List<MultiSlots> m_doubleSlots = new List<MultiSlots>();
     private List<MultiSlots> m_fourSlots = new List<MultiSlots>();
     private int m_availableSlotsLeft;
     private Tower m_tower;
+    private BoxSetup m_boxSetup;
+    private const int MEDIUM_SIZE = 2;
+    private const int LARGE_SIZE = 4;
+
+    private void Awake()
+    {
+        m_boxSetup = GetComponent<BoxSetup>();
+    }
 
 
     public void AddSlotInList(Transform slotTransform)
@@ -76,55 +79,60 @@ public class Box : MonoBehaviour
         m_availableSlotsLeft = numberOfSlots;
     }
 
-    public bool CanTakeItemInsideBox(ItemData.ESize size)
+    public bool CanPutItemInsideBox(ItemData.ESize size)
     {
         if (size == ItemData.ESize.small)
-        {
-            return CanTakeSmallItem();
-        }
-        else
-        {
-            return CanTakeMultiSlotItem(size);
-        }
+            return CanPutSmallItemInBox();
 
+        else
+            return CanPutMultiSlotItemInBox(size);
     }
 
-    private bool CanTakeSmallItem()
+    private bool CanPutSmallItemInBox()
     {
         if (m_availableSlotsLeft > 0)
-        {
             return true;
-        }
 
         return false;
     }
 
-    private bool CanTakeMultiSlotItem(ItemData.ESize size)
+    private bool CanPutMultiSlotItemInBox(ItemData.ESize size)
     {
-        int sizeInInt = 0;
+        int sizeInt = 0;
+        List<MultiSlots> multiSlotList = new List<MultiSlots>();
+
         if (size == ItemData.ESize.medium)
         {
-            sizeInInt = 2;
+            sizeInt = MEDIUM_SIZE;
+            multiSlotList = m_doubleSlots;
         }
         else if (size == ItemData.ESize.large)
         {
-            sizeInInt = 4;
+            sizeInt = LARGE_SIZE;
+            multiSlotList = m_fourSlots;
         }
 
-        if (m_availableSlotsLeft < sizeInInt)
-        {
-            Debug.Log("Not enough space for multiSlot item");
+        if (m_availableSlotsLeft < sizeInt)
             return false;
-        }
 
-        if (CanPlaceItemBySize(size))
+        foreach (MultiSlots multiSlot in multiSlotList)
         {
-            return true;
+            List<bool> slotsAvailable = new List<bool>();
+            for (int i = 0; i < sizeInt; i++)
+            {
+                slotsAvailable.Add(m_slotsInfo[multiSlot.m_slotIndexes[i]].m_isAvailable);
+            }
+
+            if (AllSlotIsAvailable(slotsAvailable))
+            {
+                return true;
+            }
         }
 
         // TODO Try Reorganize box Here
         // TODO After Reorganize, try CanPlaceItRightAway again
 
+        Debug.Log("Can't place it in this box");
         return false;
     }
 
@@ -133,60 +141,29 @@ public class Box : MonoBehaviour
         // TODO
     }
 
-
-    private bool CanPlaceItemBySize(ItemData.ESize size)
+    public void PutItemInBox(GameObject item, ItemData.ESize size)
     {
-        if (size == ItemData.ESize.medium)
+        switch (size)
         {
-            foreach (MultiSlots multiSlot in m_doubleSlots)
-            {
-                bool firstIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[0]].m_isAvailable;
-                bool secondIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[1]].m_isAvailable;
-
-                if (firstIndexIsAvailable && secondIndexIsAvailable)
-                {
-                    return true;
-                }
-            }
-        }
-        else if (size == ItemData.ESize.large)
-        {
-            foreach (MultiSlots multiSlot in m_fourSlots)
-            {
-                bool firstIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[0]].m_isAvailable;
-                bool secondIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[1]].m_isAvailable;
-                bool thirdIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[2]].m_isAvailable;
-                bool fourthIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[3]].m_isAvailable;
-
-                if ((firstIndexIsAvailable && secondIndexIsAvailable) && (thirdIndexIsAvailable && fourthIndexIsAvailable))
-                {
-                    return true;
-                }
-            }
+            case ItemData.ESize.small:
+                PutSmallItemInBox(item);
+                break;
+            case ItemData.ESize.medium:
+                PutMultiSlotItemInBox(item, MEDIUM_SIZE, m_doubleSlots);
+                break;
+            case ItemData.ESize.large:
+                PutMultiSlotItemInBox(item, LARGE_SIZE, m_fourSlots);
+                break;
+            default:
+                break;
         }
 
-        Debug.Log("Can't place it in this box");
-        return false;
+        if (IsBoxFull())
+            m_tower.AddBoxToTower();
+
     }
 
-
-    public void TakeItem(GameObject item, ItemData.ESize size)
-    {
-        if (size == ItemData.ESize.small)
-        {
-            TakeSmallItem(item);
-        }
-        else if (size == ItemData.ESize.medium)
-        {
-            TakeMediumItem(item);
-        }
-        else
-        {
-            TakeLargeItem(item);
-        }
-    }
-
-    private void TakeSmallItem(GameObject item)
+    private void PutSmallItemInBox(GameObject item)
     {
         for (int i = 0; i < m_slotsInfo.Count; i++)
         {
@@ -199,128 +176,85 @@ public class Box : MonoBehaviour
                 allIndex.Add(i);
                 m_itemsInBox.Push(new ItemInBox(item, allIndex, slotTransform.localPosition));
 
-                item.transform.SetParent(gameObject.transform);
+                ItemSetParentInBox(item, slotTransform.localPosition);
                 Debug.Log("(ItemInBox info) item: " + item.name + "; box: " + gameObject.name + "; index: " + allIndex[0] + "; localPosition: " + slotTransform.localPosition);
-                item.transform.localPosition = slotTransform.localPosition + new Vector3(0, itemHeightOffset, 0); // TEST
-
-                if (IsBoxFull())
-                    m_tower.AddBoxToTower();
-
                 return;
             }
         }
     }
 
-    private void TakeMediumItem(GameObject item)
+    private void PutMultiSlotItemInBox(GameObject item, int size, List<MultiSlots> multiSlotsList)
     {
-        foreach (MultiSlots multiSlot in m_doubleSlots)
+        foreach (MultiSlots multiSlot in multiSlotsList)
         {
-            bool firstIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[0]].m_isAvailable;
-            bool secondIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[1]].m_isAvailable;
+            List<bool> slotsAvailable = new List<bool>();
 
-            if (firstIndexIsAvailable && secondIndexIsAvailable)
+            for (int i = 0; i < size; i++)
             {
-                m_availableSlotsLeft -= 2;
-                int index1 = multiSlot.m_slotIndexes[0];
-                int index2 = multiSlot.m_slotIndexes[1];
-                Transform slotTransform1 = m_slotsInfo[index1].m_slotTransform;
-                Transform slotTransform2 = m_slotsInfo[index2].m_slotTransform;
-                List<Vector3> allLocalPositions = new List<Vector3>
-                {
-                   slotTransform1.localPosition,
-                   slotTransform2.localPosition
-                };
-                m_slotsInfo[index1] = new SlotInfo(slotTransform1, false);
-                m_slotsInfo[index2] = new SlotInfo(slotTransform2, false);
-                Vector3 centralLocalPosition = CreateCentralSlotLocalPosition(allLocalPositions);
-                List<int> allIndex = new List<int>
-                {
-                    index1,
-                    index2
-                };
-                m_itemsInBox.Push(new ItemInBox(item, allIndex, centralLocalPosition));
+                slotsAvailable.Add(m_slotsInfo[multiSlot.m_slotIndexes[i]].m_isAvailable);
+            }
 
-                if (Mathf.Abs((index1 - index2)) != 1)
-                { 
-                    item.transform.localRotation = Quaternion.Euler(0,90,0);
+            if (AllSlotIsAvailable(slotsAvailable))
+            {
+                m_availableSlotsLeft -= size;
+                List<int> indexes = new List<int>();
+                List<Transform> transforms = new List<Transform>();
+                List<Vector3> allLocalPositions = new List<Vector3>();
+                for (int i = 0; i < size; i++)
+                {
+                    indexes.Add(multiSlot.m_slotIndexes[i]);
+                    transforms.Add(m_slotsInfo[indexes[i]].m_slotTransform);
+                    allLocalPositions.Add(transforms[i].localPosition);
+                    m_slotsInfo[indexes[i]] = new SlotInfo(transforms[i], false);
                 }
-                item.transform.SetParent(gameObject.transform);
 
-                Debug.Log("(ItemInBox info) item: " + item.name + "; box: " + gameObject.name + "; index: " + allIndex[0] + ", " + allIndex[1] + "; localPosition: " + centralLocalPosition);
-                item.transform.localPosition = centralLocalPosition + new Vector3(0, itemHeightOffset, 0); // TEST
+                Vector3 localPosition = CreateLocalPositionForItem(allLocalPositions);
+                m_itemsInBox.Push(new ItemInBox(item, indexes, localPosition));
 
-                if (IsBoxFull())
-                    m_tower.AddBoxToTower();
+                if (size == MEDIUM_SIZE && Mathf.Abs((indexes[0] - indexes[1])) != 1)
+                {
+                    item.transform.rotation = Quaternion.Euler(0, 90, 0);
+                }
+
+                ItemSetParentInBox(item, localPosition);
+
+                Debug.Log("(ItemInBox info) item: " + item.name + "; box: " + gameObject.name + "; localPosition: " + localPosition);
+
 
                 return;
             }
         }
     }
 
-    private void TakeLargeItem(GameObject item)
+    private void ItemSetParentInBox(GameObject item, Vector3 localPosition)
     {
-        foreach (MultiSlots multiSlot in m_fourSlots)
-        {
-            bool firstIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[0]].m_isAvailable;
-            bool secondIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[1]].m_isAvailable;
-            bool thirdIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[2]].m_isAvailable;
-            bool fourthIndexIsAvailable = m_slotsInfo[multiSlot.m_slotIndexes[3]].m_isAvailable;
+        item.transform.SetParent(gameObject.transform);
+        item.transform.localPosition = localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0); // TEST
+    }
 
-            if ((firstIndexIsAvailable && secondIndexIsAvailable) && (thirdIndexIsAvailable && fourthIndexIsAvailable))
+    private bool AllSlotIsAvailable(List<bool> slotsAvailable)
+    {
+        foreach (bool slotAvailable in slotsAvailable)
+        {
+            if (!slotAvailable)
             {
-                m_availableSlotsLeft -= 4;
-                int index1 = multiSlot.m_slotIndexes[0];
-                int index2 = multiSlot.m_slotIndexes[1];
-                int index3 = multiSlot.m_slotIndexes[2];
-                int index4 = multiSlot.m_slotIndexes[3];
-                Transform slotTransform1 = m_slotsInfo[index1].m_slotTransform;
-                Transform slotTransform2 = m_slotsInfo[index2].m_slotTransform;
-                Transform slotTransform3 = m_slotsInfo[index3].m_slotTransform;
-                Transform slotTransform4 = m_slotsInfo[index4].m_slotTransform;
-                List<Vector3> allLocalPositions = new List<Vector3>
-                {
-                   slotTransform1.localPosition,
-                   slotTransform2.localPosition,
-                   slotTransform3.localPosition,
-                   slotTransform4.localPosition
-                };
-                m_slotsInfo[index1] = new SlotInfo(slotTransform1, false);
-                m_slotsInfo[index2] = new SlotInfo(slotTransform2, false);
-                m_slotsInfo[index3] = new SlotInfo(slotTransform3, false);
-                m_slotsInfo[index4] = new SlotInfo(slotTransform4, false);
-                Vector3 centralLocalPosition = CreateCentralSlotLocalPosition(allLocalPositions);
-                List<int> allIndex = new List<int>
-                {
-                    index1,
-                    index2,
-                    index3,
-                    index4
-                };
-                m_itemsInBox.Push(new ItemInBox(item, allIndex, centralLocalPosition));
-
-                item.transform.SetParent(gameObject.transform);
-                Debug.Log("(ItemInBox info) item: " + item.name + "; box: " + gameObject.name + "; index: " + allIndex[0] + ", " + allIndex[1] + ", " + allIndex[2] + ", " + allIndex[3] + "; localPosition: " + centralLocalPosition);
-                item.transform.localPosition = centralLocalPosition + new Vector3(0, itemHeightOffset, 0) ; // TEST
-
-                if (IsBoxFull())
-                    m_tower.AddBoxToTower();
-
-                return;
+                return false;
             }
         }
+        return true;
     }
 
-    private Vector3 CreateCentralSlotLocalPosition(List<Vector3> localPositions)
+    private Vector3 CreateLocalPositionForItem(List<Vector3> slotLocalPositions)
     {
-        Vector3 centralLocalPosition = Vector3.zero;
-        int nbOfPositions = localPositions.Count;
+        Vector3 localposition = Vector3.zero;
+        int nbOfPositions = slotLocalPositions.Count;
 
-        foreach (Vector3 localPosition in localPositions)
+        foreach (Vector3 localPosition in slotLocalPositions)
         {
-            centralLocalPosition += localPosition;
+            localposition += localPosition;
         }
 
-        return centralLocalPosition / nbOfPositions;
+        return localposition / nbOfPositions;
     }
 
     private bool IsBoxFull()

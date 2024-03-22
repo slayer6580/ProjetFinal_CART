@@ -56,12 +56,12 @@ public class Tower : MonoBehaviour
 
     public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
     {
-        return GetTopBox().CanTakeItemInsideBox(size);
+        return GetTopBox().CanPutItemInsideBox(size);
     }
 
     public void PutObjectInTopBox(GameObject item, ItemData.ESize size)
     {
-        GetTopBox().TakeItem(item, size);
+        GetTopBox().PutItemInBox(item, size);
     }
 
     private Box GetTopBox()
