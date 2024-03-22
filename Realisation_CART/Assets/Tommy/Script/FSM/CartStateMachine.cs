@@ -6,28 +6,50 @@ public class CartStateMachine : StateMachine<CartState>
 {
 	private const float BASE_ADD_FORCE = 1000 ;
 
-	[Header("Test Value")]
-	public float m_forwardPressedPercent;
-	public float m_backwardPressedPercent;
-	public float m_steeringValue;
-	public float velMagnitude;	//To delete
+	///
+	[field: Header("Test Value")]
+	public float velMagnitude;  //To delete
+	[field: SerializeField] public float ForwardPressedPercent { get; set; }
+	[field: SerializeField] public float BackwardPressedPercent { get; set; }
+	[field: SerializeField] public float SteeringValue { get; set; }
+	[field: SerializeField] public Vector3 LocalVelocity { get; set; }
 
-	[Header("Stats")]
-	public float m_acceleration;
-	public float m_maxSpeed;
-	public float m_maxBackwardSpeed;
-	public float m_idleRotatingSpeed;
-	public float m_movingRotatingSpeed;
+	///
+	[field: Header("Stats")]
+	[field: SerializeField] public float Acceleration { get; set; }
+	[field: SerializeField] public float MaxSpeed { get; set; }
+	[field: SerializeField] public float MaxBackwardSpeed { get; private set; }
+	[field: SerializeField] public float IdleRotatingSpeed { get; private set; }
+	[field: SerializeField] public float MovingRotatingSpeed { get; set; }
+	[field: SerializeField][field: Range(0,3)] public float TurningDrag { get; set; }
 
-	[Space]
-	[Range(0,3)] public float m_turningDrag;
 	[Tooltip("This will multiply Turning Drag depending of the steer value. Left side of the curve = No steer. Right side = max steer.")]
-	public AnimationCurve m_turningDragDependingOnJoystickValue; //Not touching the controller on the left of the curve; Max steer at the right of the curve
+	[field: SerializeField] public AnimationCurve TurningDragRelativeToJoystick { get; set; } //Not touching the controller on the left of the curve; Max steer at the right of the curve
+	
+	///
+	[field: Header("Drifting")]
+	[field: SerializeField] public float MinimumSpeedToDrift { get; private set; }
+	[field: SerializeField][field: Range(0, 3)] public float DriftingDrag { get; private set; }
 
+	[Tooltip("This will multiply Drifting Drag depending of the steer value. Left side of the curve = No steer. Right side = max steer.")]
+	[field: SerializeField] public AnimationCurve DriftingDragRelativeToJoystick { get; private set; } //Not used for now
+	[field: SerializeField] public float DriftingRotatingSpeed { get; private set; }
+	[field: SerializeField] public float AddedRotatingSpeedWhenBreaking { get; private set; }
+	[field: SerializeField] public float DriftingAcceleration { get; private set; }
+
+
+	[field: Space]
+	[field: SerializeField] public bool AutoDriftWhenTurning { get; private set; }
+	[field: SerializeField] public float TurningTimeBeforeDrift { get; private set; }
+
+	///
 	[Header("To Set")]
 	public GameObject m_cart;
 	public Rigidbody m_cartRB;
 
+
+	//
+	[HideInInspector] public bool CanDrift { get; set; }
 
 	protected override void Start()
 	{
@@ -46,6 +68,7 @@ public class CartStateMachine : StateMachine<CartState>
 		//For test value
 		velMagnitude = m_cartRB.velocity.magnitude;
 
+		m_currentState.OnUpdate();
 		TryToChangeState();
 	}
 
@@ -58,6 +81,7 @@ public class CartStateMachine : StateMachine<CartState>
 	{
 		m_possibleStates.Add(new CartState_Idle());
 		m_possibleStates.Add(new CartState_Moving());
+		m_possibleStates.Add(new CartState_Drifting());
 	}
 
 
@@ -66,17 +90,17 @@ public class CartStateMachine : StateMachine<CartState>
 	//Receive Input
 	public void OnForward(float pressValue)
 	{
-		m_forwardPressedPercent = pressValue;
+		ForwardPressedPercent = pressValue;
 	}
 
 	public void OnBackward(float pressValue)
 	{
-		m_backwardPressedPercent = pressValue;
+		BackwardPressedPercent = pressValue;
 	}
 
 	public void OnSteer(float steerValue)
 	{
-		m_steeringValue = steerValue;
+		SteeringValue = steerValue;
 	}
 
 
@@ -87,53 +111,24 @@ public class CartStateMachine : StateMachine<CartState>
 	public void Move()
 	{
 		//Transform default velocity (which is global) to a local velocity
-		Vector3 localVelocity = m_cart.transform.InverseTransformDirection(m_cartRB.velocity);
+		LocalVelocity = m_cart.transform.InverseTransformDirection(m_cartRB.velocity);
 
 		//Debug.Log("X vel: " + localVelocity.x);
-		if (m_forwardPressedPercent > 0.1f || m_backwardPressedPercent > 0.1f)
+		if (ForwardPressedPercent > 0.1f || BackwardPressedPercent > 0.1f)
 		{
-			if (m_maxSpeed > localVelocity.z && -m_maxBackwardSpeed < localVelocity.z)
+			if (MaxSpeed > LocalVelocity.z && -MaxBackwardSpeed < LocalVelocity.z)
 			{
-				m_cartRB.GetComponent<Rigidbody>().AddForce(transform.forward * BASE_ADD_FORCE * m_acceleration * Time.deltaTime
-				* (m_forwardPressedPercent - m_backwardPressedPercent)
+				m_cartRB.GetComponent<Rigidbody>().AddForce(transform.forward * BASE_ADD_FORCE * Acceleration * Time.fixedDeltaTime
+				* (ForwardPressedPercent - BackwardPressedPercent)
 				);
 			}
 		}
 
-		Vector3 sideToPush = -transform.right * Mathf.Clamp(localVelocity.x, -1f, 1f);
-		float pushForce = BASE_ADD_FORCE * m_acceleration * m_turningDrag;
-		float pushMultiply = m_turningDragDependingOnJoystickValue.Evaluate(Mathf.Abs(m_steeringValue));
-		print("MULTIPLY" + pushMultiply);
-
-		m_cartRB.GetComponent<Rigidbody>().AddForce(sideToPush * pushForce * pushMultiply * Time.deltaTime);
-
-
-		/*
-		if (m_steeringValue != 0)
-		{
-			if (Mathf.Abs(localVelocity.x) > m_turnSideSpeedLimitWhileTurning)
-			{
-				m_cartRB.GetComponent<Rigidbody>().AddForce(-transform.right * BASE_ADD_FORCE * m_acceleration * Time.deltaTime
-					* Mathf.Clamp(localVelocity.x, -1f, 1f)
-					);
-			}
-		}
-		
-		else
-		{
-			if (Mathf.Abs(localVelocity.x) > m_turnSideSpeedLimitAfterTurning)
-			{
-				Debug.Log("REPLACE");
-				m_cartRB.GetComponent<Rigidbody>().AddForce(-transform.right * BASE_ADD_FORCE * m_acceleration * Time.deltaTime
-					* Mathf.Clamp(localVelocity.x, -1f, 1f)
-					);
-			}
-		}
-		
-		*/
-
-
-
+		Vector3 sideToPush = -transform.right * Mathf.Clamp(LocalVelocity.x, -1f, 1f);
+		float pushForce = BASE_ADD_FORCE * Acceleration * TurningDrag;
+		float pushMultiply = TurningDragRelativeToJoystick.Evaluate(Mathf.Abs(SteeringValue));
+	
+		m_cartRB.GetComponent<Rigidbody>().AddForce(sideToPush * pushForce * pushMultiply * Time.fixedDeltaTime);
 
 	}
 }

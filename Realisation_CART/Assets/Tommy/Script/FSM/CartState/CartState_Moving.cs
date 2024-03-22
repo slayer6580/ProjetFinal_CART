@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CartState_Moving : CartState
 {
+	private float m_turningTimer;
+	private float m_steerDirection;
+
 	public override void OnEnter()
 	{
 		Debug.LogWarning("current state: MOVING");
@@ -11,7 +14,30 @@ public class CartState_Moving : CartState
 
 	public override void OnUpdate()
 	{
+		if(m_cartStateMachine.AutoDriftWhenTurning)
+		{
+			if(Mathf.Abs(m_cartStateMachine.SteeringValue) == 1)
+			{
+				if(m_steerDirection == 0)
+				{
+					m_steerDirection = m_cartStateMachine.SteeringValue;
+				}
+				if(m_steerDirection == m_cartStateMachine.SteeringValue)
+				{
+					m_turningTimer += Time.deltaTime;
+				}
+				else
+				{
+					m_steerDirection = 0;
+					m_turningTimer = 0;
+				}
 
+				if(m_turningTimer >= m_cartStateMachine.TurningTimeBeforeDrift)
+				{
+					m_cartStateMachine.CanDrift = true;
+				}
+			}
+		}
 	}
 	public override void OnFixedUpdate()
 	{
@@ -21,12 +47,12 @@ public class CartState_Moving : CartState
 
 	private void UpdateOrientation()
 	{
-		if (m_cartStateMachine.m_steeringValue != 0)
+		if (m_cartStateMachine.SteeringValue != 0)
 		{
 			m_cartStateMachine.m_cart.transform.Rotate(Vector3.up
-				* m_cartStateMachine.m_movingRotatingSpeed
-				* m_cartStateMachine.m_steeringValue
-				* Time.deltaTime);
+				* m_cartStateMachine.MovingRotatingSpeed
+				* m_cartStateMachine.SteeringValue
+				* Time.fixedDeltaTime);
 		}
 	}
 
@@ -37,8 +63,8 @@ public class CartState_Moving : CartState
 
 	public override bool CanEnter(IState currentState)
 	{
-		if (m_cartStateMachine.m_forwardPressedPercent < 0.1f
-			&& m_cartStateMachine.m_backwardPressedPercent < 0.1f
+		if (m_cartStateMachine.ForwardPressedPercent < 0.1f
+			&& m_cartStateMachine.BackwardPressedPercent < 0.1f
 			&& m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f)
 		{
 			return false;
@@ -48,6 +74,7 @@ public class CartState_Moving : CartState
 
 	public override bool CanExit()
 	{
-		return m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f;
+		return true;
+		//return m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f;
 	}
 }
