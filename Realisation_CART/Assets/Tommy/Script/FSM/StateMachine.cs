@@ -7,7 +7,6 @@ public abstract class StateMachine<T> : MonoBehaviour where T : IState
     protected List<T> m_possibleStates = new List<T>();
 	protected T m_currentState;
 
-
     protected virtual void Start()
     {
         CreatePossibleStateList();
@@ -20,12 +19,10 @@ public abstract class StateMachine<T> : MonoBehaviour where T : IState
 
     }
 
-	
 	protected virtual void Update()
     {
 		m_currentState.OnUpdate();
         TryToChangeState();
-
 	}
 
 	protected virtual void FixedUpdate()

@@ -8,7 +8,6 @@ public class CartState : IState
 
 	public virtual void OnStart(CartStateMachine cartStateMachine)
 	{
-		Debug.Log("ON START");
 		m_cartStateMachine = cartStateMachine;
 	}
 

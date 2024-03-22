@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CartStateMachine : StateMachine<CartState>
 {
-	private const float BASE_ADD_FORCE = 1000 ;
+
 
 	///
 	[field: Header("Test Value")]
@@ -46,7 +46,7 @@ public class CartStateMachine : StateMachine<CartState>
 	[Header("To Set")]
 	public GameObject m_cart;
 	public Rigidbody m_cartRB;
-
+	[field: SerializeField]	public CartMovement CartMovement { get; private set; }
 
 	//
 	[HideInInspector] public bool CanDrift { get; set; }
@@ -54,13 +54,12 @@ public class CartStateMachine : StateMachine<CartState>
 	protected override void Start()
 	{
 		base.Start();
+		CartMovement.SM = this;
 
-		foreach(CartState state in m_possibleStates)
+		foreach (CartState state in m_possibleStates)
 		{
 			state.OnStart(this);
-		}
-
-		
+		}	
 	}
 
 	protected override void Update()
@@ -103,32 +102,4 @@ public class CartStateMachine : StateMachine<CartState>
 		SteeringValue = steerValue;
 	}
 
-
-
-
-
-
-	public void Move()
-	{
-		//Transform default velocity (which is global) to a local velocity
-		LocalVelocity = m_cart.transform.InverseTransformDirection(m_cartRB.velocity);
-
-		//Debug.Log("X vel: " + localVelocity.x);
-		if (ForwardPressedPercent > 0.1f || BackwardPressedPercent > 0.1f)
-		{
-			if (MaxSpeed > LocalVelocity.z && -MaxBackwardSpeed < LocalVelocity.z)
-			{
-				m_cartRB.GetComponent<Rigidbody>().AddForce(transform.forward * BASE_ADD_FORCE * Acceleration * Time.fixedDeltaTime
-				* (ForwardPressedPercent - BackwardPressedPercent)
-				);
-			}
-		}
-
-		Vector3 sideToPush = -transform.right * Mathf.Clamp(LocalVelocity.x, -1f, 1f);
-		float pushForce = BASE_ADD_FORCE * Acceleration * TurningDrag;
-		float pushMultiply = TurningDragRelativeToJoystick.Evaluate(Mathf.Abs(SteeringValue));
-	
-		m_cartRB.GetComponent<Rigidbody>().AddForce(sideToPush * pushForce * pushMultiply * Time.fixedDeltaTime);
-
-	}
 }

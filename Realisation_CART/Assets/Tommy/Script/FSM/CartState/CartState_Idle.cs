@@ -19,23 +19,10 @@ public class CartState_Idle : CartState
 
 	public override void OnFixedUpdate()
 	{
-		m_cartStateMachine.Move();
-		UpdateOrientation();
+		m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag);
+		m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.IdleRotatingSpeed);
+	}
 		
-	}
-	
-	
-	private void UpdateOrientation()
-	{
-		if(m_cartStateMachine.SteeringValue != 0)
-		{
-			m_cartStateMachine.m_cart.transform.Rotate(Vector3.up 
-				* m_cartStateMachine.IdleRotatingSpeed
-				* m_cartStateMachine.SteeringValue
-				* Time.fixedDeltaTime);
-		}
-	}
-	
 	public override void OnExit()
 	{
 
@@ -43,9 +30,9 @@ public class CartState_Idle : CartState
 
 	public override bool CanEnter(IState currentState)
 	{
-		if(m_cartStateMachine.ForwardPressedPercent < 0.1f 
-			&& m_cartStateMachine.BackwardPressedPercent < 0.1f
-			&& m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f)
+		if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
+			&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
+			&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
 		{
 			return true;
 		}
@@ -54,7 +41,7 @@ public class CartState_Idle : CartState
 
 	public override bool CanExit()
 	{
-		return m_cartStateMachine.m_cartRB.velocity.magnitude > 0.5f;
+		return m_cartStateMachine.m_cartRB.velocity.magnitude > GameConstants.DEADZONE;
 	}
 
 }

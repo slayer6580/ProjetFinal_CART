@@ -16,12 +16,14 @@ public class CartState_Moving : CartState
 	{
 		if(m_cartStateMachine.AutoDriftWhenTurning)
 		{
-			if(Mathf.Abs(m_cartStateMachine.SteeringValue) == 1)
+			//Increase timer only when turning at maximum value
+			if(Mathf.Abs(m_cartStateMachine.SteeringValue) > (1 - GameConstants.DEADZONE))
 			{
 				if(m_steerDirection == 0)
 				{
 					m_steerDirection = m_cartStateMachine.SteeringValue;
 				}
+				//Increase only if turning in the same direction,else reset everything
 				if(m_steerDirection == m_cartStateMachine.SteeringValue)
 				{
 					m_turningTimer += Time.deltaTime;
@@ -32,6 +34,7 @@ public class CartState_Moving : CartState
 					m_turningTimer = 0;
 				}
 
+				//Activate the possibility to change State
 				if(m_turningTimer >= m_cartStateMachine.TurningTimeBeforeDrift)
 				{
 					m_cartStateMachine.CanDrift = true;
@@ -39,21 +42,11 @@ public class CartState_Moving : CartState
 			}
 		}
 	}
+
 	public override void OnFixedUpdate()
 	{
-		m_cartStateMachine.Move();
-		UpdateOrientation();
-	}
-
-	private void UpdateOrientation()
-	{
-		if (m_cartStateMachine.SteeringValue != 0)
-		{
-			m_cartStateMachine.m_cart.transform.Rotate(Vector3.up
-				* m_cartStateMachine.MovingRotatingSpeed
-				* m_cartStateMachine.SteeringValue
-				* Time.fixedDeltaTime);
-		}
+		m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag);
+		m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeed);
 	}
 
 	public override void OnExit()
@@ -63,9 +56,9 @@ public class CartState_Moving : CartState
 
 	public override bool CanEnter(IState currentState)
 	{
-		if (m_cartStateMachine.ForwardPressedPercent < 0.1f
-			&& m_cartStateMachine.BackwardPressedPercent < 0.1f
-			&& m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f)
+		if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
+			&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
+			&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
 		{
 			return false;
 		}
@@ -75,6 +68,5 @@ public class CartState_Moving : CartState
 	public override bool CanExit()
 	{
 		return true;
-		//return m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f;
 	}
 }
