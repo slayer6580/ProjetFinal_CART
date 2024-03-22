@@ -1284,7 +1284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24374092, y: 0.000000014451748, z: -0.0000000036320227, w: 0.9698404}
+  m_LocalRotation: {x: 0.24374092, y: 1.6692084e-15, z: -4.2185253e-16, w: 0.9698404}
   m_LocalPosition: {x: 0, y: 5.56, z: -4.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1615,7 +1615,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535154984}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24374092, y: 0.000000014451748, z: -0.0000000036320227, w: 0.9698404}
+  m_LocalRotation: {x: 0.24374092, y: 1.6692084e-15, z: -4.2185253e-16, w: 0.9698404}
   m_LocalPosition: {x: 0, y: 5.56, z: -4.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2672,8 +2672,15 @@ MonoBehaviour:
   <DriftingAcceleration>k__BackingField: 70
   <AutoDriftWhenTurning>k__BackingField: 0
   <TurningTimeBeforeDrift>k__BackingField: 2
+  <BoostingAcceleration>k__BackingField: 200
+  <BoostingMaxSpeed>k__BackingField: 60
+  <BoostingTurnDrag>k__BackingField: 3
+  <DriftTimeToEarnBoost>k__BackingField: 1
+  <BoostingTime>k__BackingField: 2
   m_cart: {fileID: 811115955}
   m_cartRB: {fileID: 811115960}
+  m_gameplayCamera: {fileID: 535154984}
+  m_camBrain: {fileID: 330585548}
   <CartMovement>k__BackingField: {fileID: 811115958}
 --- !u!54 &811115960
 Rigidbody:

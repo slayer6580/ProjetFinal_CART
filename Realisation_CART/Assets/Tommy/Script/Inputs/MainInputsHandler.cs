@@ -34,6 +34,9 @@ namespace CartControl
 			m_mainInputs.Cart.Steer.started += OnSteer;
 			m_mainInputs.Cart.Steer.performed += OnSteer;
 			m_mainInputs.Cart.Steer.canceled += OnSteer;
+
+			m_mainInputs.Cart.Pause.started += OnPause;
+
 		}
 
 		public void OnForward(InputAction.CallbackContext context)
@@ -49,6 +52,11 @@ namespace CartControl
 		public void OnSteer(InputAction.CallbackContext context)
 		{
 			m_cartStateMachine.OnSteer(context.ReadValue<float>());
+		}
+
+		public void OnPause(InputAction.CallbackContext context)
+		{
+			m_cartStateMachine.OnPause();
 		}
 
 		private void OnEnable()
