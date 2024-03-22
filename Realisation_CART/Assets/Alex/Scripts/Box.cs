@@ -46,6 +46,7 @@ public class Box : MonoBehaviour
     private List<SlotInfo> m_slotsInfo = new List<SlotInfo>();
     private Stack<ItemInBox> m_itemsInBox = new Stack<ItemInBox>();
     public List<MultiSlots> m_doubleSlots = new List<MultiSlots>();
+    public List<MultiSlots> m_fourSlots = new List<MultiSlots>();
     private int m_availableSlotsLeft;
     private Tower m_tower;
 
@@ -57,6 +58,11 @@ public class Box : MonoBehaviour
     public void AddDoubleSlotInList(List<int> indexes)
     {
         m_doubleSlots.Add(new MultiSlots(indexes));
+    }
+
+    public void AddFourSlotInList(List<int> indexes)
+    {
+        m_fourSlots.Add(new MultiSlots(indexes));
     }
 
     public void InitAvailableSlots(int numberOfSlots)

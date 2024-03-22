@@ -77,7 +77,7 @@ public class BoxSetup : MonoBehaviour
         FindWidthPositions(slotsWidthPosition);
         PlaceSlotsInBox(slotsLengthPosition, slotsWidthPosition);
         FindAllDoubleSlots();
-        // TODO find all FourSlots
+        FindAllFourSlots();
     }
 
     private void FindAllDoubleSlots()
@@ -119,6 +119,34 @@ public class BoxSetup : MonoBehaviour
         }
     }
 
+    private void FindAllFourSlots()
+    {
+        // four slots
+        int index = 0;
+        int index2 = 0;
+        int index3 = 0;
+        int index4 = 0;
+
+        for (int i = 0; i < m_nbSlotWidth; i++)
+        {
+            for (int j = 0; j < m_nbSlotLength; j++)
+            {
+                if (i + 1 < m_nbSlotWidth) // pas la derniere rangée
+                {
+                    if ((index + 1) % m_nbSlotLength != 0) // pas colonne de droite
+                    {
+                        index2 = index + 1; // droite
+                        index3 = index + m_nbSlotLength; // bas
+                        index4 = index + m_nbSlotLength + 1; // en bas a droite
+                        SendFourSlotToBox(index, index2, index3, index4);
+                    }
+                }
+               
+                index++;
+            }
+        }
+    }
+
     private void SendDoubleSlotToBox(int index, int index2)
     {
         List<int> doubleSlots = new List<int>()
@@ -128,6 +156,20 @@ public class BoxSetup : MonoBehaviour
         };
 
         m_box.AddDoubleSlotInList(doubleSlots);
+
+    }
+
+    private void SendFourSlotToBox(int index, int index2, int index3, int index4)
+    {
+        List<int> fourSlots = new List<int>()
+        {
+          index,
+          index2,
+          index3,
+          index4
+        };
+
+        m_box.AddFourSlotInList(fourSlots);
 
     }
 
