@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace PlayerInput
+namespace CartControl
 {
     public partial class @MainInputs: IInputActionCollection2, IDisposable
     {
@@ -48,13 +48,13 @@ namespace PlayerInput
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Test2"",
-                    ""type"": ""Button"",
-                    ""id"": ""b9b01c8d-e0c5-43cc-b6a4-3234a677c7b9"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Steer"",
+                    ""type"": ""Value"",
+                    ""id"": ""1781cc4d-3a2f-4ee8-8bc7-e39f86373427"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -81,26 +81,37 @@ namespace PlayerInput
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""67b2494a-7ee7-4e13-8e85-f6055c2b31ea"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""c79e2156-cf2b-4dee-aa69-2840719c675a"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Test2"",
-                    ""isComposite"": false,
+                    ""action"": ""Steer"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""6a1166a5-4b1e-4cf6-8e64-cb50cca55a47"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""name"": ""negative"",
+                    ""id"": ""7f2d8b9f-acbe-4f56-9a3f-1ff6dee08997"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Test2"",
+                    ""action"": ""Steer"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6596ab19-a1be-4883-9b11-459bc61aa6c5"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -111,7 +122,7 @@ namespace PlayerInput
             m_Cart = asset.FindActionMap("Cart", throwIfNotFound: true);
             m_Cart_CartForward = m_Cart.FindAction("CartForward", throwIfNotFound: true);
             m_Cart_CartBackward = m_Cart.FindAction("CartBackward", throwIfNotFound: true);
-            m_Cart_Test2 = m_Cart.FindAction("Test2", throwIfNotFound: true);
+            m_Cart_Steer = m_Cart.FindAction("Steer", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -175,14 +186,14 @@ namespace PlayerInput
         private List<ICartActions> m_CartActionsCallbackInterfaces = new List<ICartActions>();
         private readonly InputAction m_Cart_CartForward;
         private readonly InputAction m_Cart_CartBackward;
-        private readonly InputAction m_Cart_Test2;
+        private readonly InputAction m_Cart_Steer;
         public struct CartActions
         {
             private @MainInputs m_Wrapper;
             public CartActions(@MainInputs wrapper) { m_Wrapper = wrapper; }
             public InputAction @CartForward => m_Wrapper.m_Cart_CartForward;
             public InputAction @CartBackward => m_Wrapper.m_Cart_CartBackward;
-            public InputAction @Test2 => m_Wrapper.m_Cart_Test2;
+            public InputAction @Steer => m_Wrapper.m_Cart_Steer;
             public InputActionMap Get() { return m_Wrapper.m_Cart; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -198,9 +209,9 @@ namespace PlayerInput
                 @CartBackward.started += instance.OnCartBackward;
                 @CartBackward.performed += instance.OnCartBackward;
                 @CartBackward.canceled += instance.OnCartBackward;
-                @Test2.started += instance.OnTest2;
-                @Test2.performed += instance.OnTest2;
-                @Test2.canceled += instance.OnTest2;
+                @Steer.started += instance.OnSteer;
+                @Steer.performed += instance.OnSteer;
+                @Steer.canceled += instance.OnSteer;
             }
 
             private void UnregisterCallbacks(ICartActions instance)
@@ -211,9 +222,9 @@ namespace PlayerInput
                 @CartBackward.started -= instance.OnCartBackward;
                 @CartBackward.performed -= instance.OnCartBackward;
                 @CartBackward.canceled -= instance.OnCartBackward;
-                @Test2.started -= instance.OnTest2;
-                @Test2.performed -= instance.OnTest2;
-                @Test2.canceled -= instance.OnTest2;
+                @Steer.started -= instance.OnSteer;
+                @Steer.performed -= instance.OnSteer;
+                @Steer.canceled -= instance.OnSteer;
             }
 
             public void RemoveCallbacks(ICartActions instance)
@@ -235,7 +246,7 @@ namespace PlayerInput
         {
             void OnCartForward(InputAction.CallbackContext context);
             void OnCartBackward(InputAction.CallbackContext context);
-            void OnTest2(InputAction.CallbackContext context);
+            void OnSteer(InputAction.CallbackContext context);
         }
     }
 }

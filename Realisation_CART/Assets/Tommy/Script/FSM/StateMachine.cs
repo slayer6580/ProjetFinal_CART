@@ -28,7 +28,12 @@ public abstract class StateMachine<T> : MonoBehaviour where T : IState
 
 	}
 
-    protected virtual void TryToChangeState()
+	protected virtual void FixedUpdate()
+	{
+
+	}
+
+	protected virtual void TryToChangeState()
     {
         foreach (var state in m_possibleStates) 
         {

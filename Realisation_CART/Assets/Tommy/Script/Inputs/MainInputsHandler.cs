@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
 
-namespace PlayerInput
+namespace CartControl
 {
     public class MainInputsHandler : MonoBehaviour
     {
         private MainInputs m_mainInputs;
         public static MainInputsHandler Instance;
+		[SerializeField] private CartStateMachine m_cartStateMachine;
+
 		private void Awake()
 		{
 			m_mainInputs = new MainInputs();
@@ -21,27 +23,40 @@ namespace PlayerInput
 			}
 			Instance = this;
 
-			m_mainInputs.Cart.CartForward.started += OnStartForward;
+			m_mainInputs.Cart.CartForward.started += OnForward;
 			m_mainInputs.Cart.CartForward.performed += OnForward;
-			m_mainInputs.Cart.CartForward.canceled += OnCancelForward;
+			m_mainInputs.Cart.CartForward.canceled += OnForward;
+
+			m_mainInputs.Cart.CartBackward.started += OnBackward;
+			m_mainInputs.Cart.CartBackward.performed += OnBackward;
+			m_mainInputs.Cart.CartBackward.canceled += OnBackward;
+
+			m_mainInputs.Cart.Steer.started += OnSteer;
+			m_mainInputs.Cart.Steer.performed += OnSteer;
+			m_mainInputs.Cart.Steer.canceled += OnSteer;
 		}
 
-		public void OnStartForward(InputAction.CallbackContext context)
-		{
-			print("START: ");
-			Debug.Log(context.ReadValue<float>());
-		}
+	
 
 		public void OnForward(InputAction.CallbackContext context)
 		{
-			Debug.Log(context.ReadValue<float>());
+			m_cartStateMachine.OnForward(context.ReadValue<float>());
+			//Debug.Log(context.ReadValue<float>());
 		}
 
-		public void OnCancelForward(InputAction.CallbackContext context)
+		public void OnBackward(InputAction.CallbackContext context)
 		{
-			print("CANCEL: ");
-			Debug.Log(context.ReadValue<float>());
+			m_cartStateMachine.OnBackward(context.ReadValue<float>());
+			//Debug.Log(context.ReadValue<float>());
 		}
+
+		public void OnSteer(InputAction.CallbackContext context)
+		{
+			m_cartStateMachine.OnSteer(context.ReadValue<float>());
+			//Debug.Log(context.ReadValue<float>());
+		}
+
+
 
 
 

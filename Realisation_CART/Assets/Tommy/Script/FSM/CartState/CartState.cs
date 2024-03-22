@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CartState : IState
 {
-	private StateMachine<CartState> m_cartStateMachine;
+	protected CartStateMachine m_cartStateMachine;
 
-	public virtual void OnStart(StateMachine<CartState> cartStateMachine)
+	public virtual void OnStart(CartStateMachine cartStateMachine)
 	{
+		Debug.Log("ON START");
 		m_cartStateMachine = cartStateMachine;
 	}
 
@@ -20,6 +21,12 @@ public class CartState : IState
 	{
 		throw new System.NotImplementedException();
 	}
+
+	public virtual void OnFixedUpdate()
+	{
+		throw new System.NotImplementedException();
+	}
+
 
 	public virtual void OnExit()
 	{
@@ -36,9 +43,5 @@ public class CartState : IState
 		throw new System.NotImplementedException();
 	}
 
-	
 
-	
-
-	
 }
