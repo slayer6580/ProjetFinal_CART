@@ -36,29 +36,20 @@ namespace CartControl
 			m_mainInputs.Cart.Steer.canceled += OnSteer;
 		}
 
-	
-
 		public void OnForward(InputAction.CallbackContext context)
 		{
 			m_cartStateMachine.OnForward(context.ReadValue<float>());
-			//Debug.Log(context.ReadValue<float>());
 		}
 
 		public void OnBackward(InputAction.CallbackContext context)
 		{
 			m_cartStateMachine.OnBackward(context.ReadValue<float>());
-			//Debug.Log(context.ReadValue<float>());
 		}
 
 		public void OnSteer(InputAction.CallbackContext context)
 		{
 			m_cartStateMachine.OnSteer(context.ReadValue<float>());
-			//Debug.Log(context.ReadValue<float>());
 		}
-
-
-
-
 
 		private void OnEnable()
 		{

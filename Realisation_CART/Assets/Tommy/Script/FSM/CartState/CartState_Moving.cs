@@ -2,52 +2,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CartState_Moving : CartState
+namespace CartControl
 {
-	public override void OnEnter()
+	public class CartState_Moving : CartState
 	{
-		Debug.LogWarning("current state: MOVING");
-	}
+		private float m_turningTimer;
+		private float m_steerDirection;
 
-	public override void OnUpdate()
-	{
-
-	}
-	public override void OnFixedUpdate()
-	{
-		m_cartStateMachine.Move();
-		UpdateOrientation();
-	}
-
-	private void UpdateOrientation()
-	{
-		if (m_cartStateMachine.m_steeringValue != 0)
+		public override void OnEnter()
 		{
-			m_cartStateMachine.m_cart.transform.Rotate(Vector3.up
-				* m_cartStateMachine.m_movingRotatingSpeed
-				* m_cartStateMachine.m_steeringValue
-				* Time.deltaTime);
+			Debug.LogWarning("current state: MOVING");
 		}
-	}
 
-	public override void OnExit()
-	{
-
-	}
-
-	public override bool CanEnter(IState currentState)
-	{
-		if (m_cartStateMachine.m_forwardPressedPercent < 0.1f
-			&& m_cartStateMachine.m_backwardPressedPercent < 0.1f
-			&& m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f)
+		public override void OnUpdate()
 		{
-			return false;
-		}
-		return true;
-	}
+			if (m_cartStateMachine.AutoDriftWhenTurning)
+			{
+				//Increase timer only when turning at maximum value
+				if (Mathf.Abs(m_cartStateMachine.SteeringValue) > (1 - GameConstants.DEADZONE))
+				{
+					if (m_steerDirection == 0)
+					{
+						m_steerDirection = m_cartStateMachine.SteeringValue;
+					}
+					//Increase only if turning in the same direction,else reset everything
+					if (m_steerDirection == m_cartStateMachine.SteeringValue)
+					{
+						m_turningTimer += Time.deltaTime;
+					}
+					else
+					{
+						m_steerDirection = 0;
+						m_turningTimer = 0;
+					}
 
-	public override bool CanExit()
-	{
-		return m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f;
+					//Activate the possibility to change State
+					if (m_turningTimer >= m_cartStateMachine.TurningTimeBeforeDrift)
+					{
+						m_cartStateMachine.CanDrift = true;
+					}
+				}
+			}
+		}
+
+		public override void OnFixedUpdate()
+		{
+			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag);
+			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeed);
+		}
+
+		public override void OnExit()
+		{
+
+		}
+
+		public override bool CanEnter(IState currentState)
+		{
+			if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
+				&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
+				&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public override bool CanExit()
+		{
+			return true;
+		}
 	}
 }

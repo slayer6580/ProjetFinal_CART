@@ -3,58 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CartState_Idle : CartState
+namespace CartControl
 {
-	//m_cartStateMachine;
+	public class CartState_Idle : CartState
+	{
+		//m_cartStateMachine;
 
-	public override void OnEnter()
-	{
-		Debug.LogWarning("current state: IDLE");
-	}
-
-	public override void OnUpdate()
-	{
-		
-	}
-
-	public override void OnFixedUpdate()
-	{
-		m_cartStateMachine.Move();
-		UpdateOrientation();
-		
-	}
-	
-	
-	private void UpdateOrientation()
-	{
-		if(m_cartStateMachine.m_steeringValue != 0)
+		public override void OnEnter()
 		{
-			m_cartStateMachine.m_cart.transform.Rotate(Vector3.up 
-				* m_cartStateMachine.m_idleRotatingSpeed 
-				* m_cartStateMachine.m_steeringValue
-				* Time.deltaTime);
+			Debug.LogWarning("current state: IDLE");
 		}
-	}
-	
-	public override void OnExit()
-	{
 
-	}
-
-	public override bool CanEnter(IState currentState)
-	{
-		if(m_cartStateMachine.m_forwardPressedPercent < 0.1f 
-			&& m_cartStateMachine.m_backwardPressedPercent < 0.1f
-			&& m_cartStateMachine.m_cartRB.velocity.magnitude < 0.5f)
+		public override void OnUpdate()
 		{
-			return true;
+
 		}
-		return false;
-	}
 
-	public override bool CanExit()
-	{
-		return m_cartStateMachine.m_cartRB.velocity.magnitude > 0.5f;
-	}
+		public override void OnFixedUpdate()
+		{
+			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag);
+			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.IdleRotatingSpeed);
+		}
 
+		public override void OnExit()
+		{
+
+		}
+
+		public override bool CanEnter(IState currentState)
+		{
+			if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
+				&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
+				&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public override bool CanExit()
+		{
+			return m_cartStateMachine.m_cartRB.velocity.magnitude > GameConstants.DEADZONE;
+		}
+
+	}
 }

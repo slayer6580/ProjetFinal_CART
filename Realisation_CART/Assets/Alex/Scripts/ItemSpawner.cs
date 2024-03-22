@@ -1,5 +1,5 @@
-using UnityEditor.Profiling;
 using UnityEngine;
+using BoxSystem;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -25,12 +25,12 @@ public class ItemSpawner : MonoBehaviour
             m_itemPrefab = m_smallPrefab;
             TakeAnItemFromStorage(ItemData.ESize.small);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && m_sizeOfObjects == ItemData.ESize.medium)
+        else if (Input.GetKeyDown(KeyCode.Alpha5) && m_sizeOfObjects == ItemData.ESize.medium)
         {
             m_itemPrefab = m_mediumPrefab;
             TakeAnItemFromStorage(ItemData.ESize.medium);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && m_sizeOfObjects == ItemData.ESize.large)
+        else if (Input.GetKeyDown(KeyCode.Alpha9) && m_sizeOfObjects == ItemData.ESize.large)
         {
             m_itemPrefab = m_largePrefab;
             TakeAnItemFromStorage(ItemData.ESize.large);
@@ -48,7 +48,6 @@ public class ItemSpawner : MonoBehaviour
         }
 
         GameObject instant = Instantiate(m_itemPrefab);
-        instant.transform.SetParent(m_tower.transform);
         instant.transform.position = transform.position;
         m_tower.PutObjectInTopBox(instant, size);
     }
