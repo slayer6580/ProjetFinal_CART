@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class BoxSetup : MonoBehaviour
 {
-   
-
     [Header("Prefabs")]
     [SerializeField] private GameObject m_slotPrefab;
 
@@ -42,7 +40,6 @@ public class BoxSetup : MonoBehaviour
         CalculateBoxHalfDimension();
         CalculateSlotDimension();
         CreateSlots();
-
     }
 
     /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
@@ -80,9 +77,9 @@ public class BoxSetup : MonoBehaviour
         FindAllFourSlots();
     }
 
+    /// <summary> Trouve tout les double slots de la boite </summary>
     private void FindAllDoubleSlots()
     {
-        // double slots
         int index = 0;
         int index2 = 0;
 
@@ -98,7 +95,7 @@ public class BoxSetup : MonoBehaviour
                         SendDoubleSlotToBox(index, index2);
                     }
                 }
-                else
+                else // les autres rangées
                 {
                     if ((index + 1) % m_nbSlotLength == 0) // colonne de droite
                     {
@@ -119,9 +116,9 @@ public class BoxSetup : MonoBehaviour
         }
     }
 
+    /// <summary> Trouve tout les four slots de la boite </summary>
     private void FindAllFourSlots()
     {
-        // four slots
         int index = 0;
         int index2 = 0;
         int index3 = 0;
@@ -140,13 +137,13 @@ public class BoxSetup : MonoBehaviour
                         index4 = index + m_nbSlotLength + 1; // en bas a droite
                         SendFourSlotToBox(index, index2, index3, index4);
                     }
-                }
-               
+                }               
                 index++;
             }
         }
     }
 
+    /// <summary> Donne les double slots au box script </summary>
     private void SendDoubleSlotToBox(int index, int index2)
     {
         List<int> doubleSlots = new List<int>()
@@ -156,9 +153,9 @@ public class BoxSetup : MonoBehaviour
         };
 
         m_box.AddDoubleSlotInList(doubleSlots);
-
     }
 
+    /// <summary> Donne les four slots au box script </summary>
     private void SendFourSlotToBox(int index, int index2, int index3, int index4)
     {
         List<int> fourSlots = new List<int>()
@@ -170,7 +167,6 @@ public class BoxSetup : MonoBehaviour
         };
 
         m_box.AddFourSlotInList(fourSlots);
-
     }
 
     /// <summary> Ajouter les slots dans la boite selon des calculs de positionement </summary>
@@ -214,6 +210,4 @@ public class BoxSetup : MonoBehaviour
             m_slotsLengthPosition.Add(lengthPosition);
         }
     }
-
-
 }

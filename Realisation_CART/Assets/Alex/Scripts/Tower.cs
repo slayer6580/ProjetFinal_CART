@@ -24,7 +24,7 @@ public class Tower : MonoBehaviour
         float height = (m_boxCount - 1) * boxHeight;
         instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
         m_boxesInCart.Push(instantBox);
-       // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
+        // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
     }
 
     public void RemoveBoxToTower()
@@ -38,17 +38,17 @@ public class Tower : MonoBehaviour
         m_boxCount--;
         Box boxToRemove = m_boxesInCart.Pop();
         Destroy(boxToRemove.gameObject);
-       // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
+        // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
     }
 
     // TEST
     private void Update()
-    {     
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
             AddBoxToTower();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             RemoveBoxToTower();
         }
@@ -56,15 +56,7 @@ public class Tower : MonoBehaviour
 
     public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
     {
-        if (size == ItemData.ESize.small)
-        {
-            return GetTopBox().CanTakeItem(size);
-        }
-        else
-        {
-            Debug.Log("TODO, NOT SUPPOSED TO HAPPEN");
-            return false;
-        }
+        return GetTopBox().CanTakeItemInsideBox(size);
     }
 
     public void PutObjectInTopBox(GameObject item, ItemData.ESize size)
