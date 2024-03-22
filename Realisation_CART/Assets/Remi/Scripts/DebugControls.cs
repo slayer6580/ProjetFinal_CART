@@ -6,7 +6,7 @@ namespace DiscountDelirium
 {
     public class DebugControls : MonoBehaviour
     {
-        [field: SerializeField]private Rigidbody RB { get; set; }
+        [field: SerializeField]public Rigidbody RB { get; set; }
         [field: SerializeField]private Camera Camera { get; set; }
         private float m_speed = 500.0f;
 
@@ -20,14 +20,16 @@ namespace DiscountDelirium
         // Update is called once per frame
         void Update()
         {
+            if (RB == null) return;
+
             Vector3 newDirection = Vector3.zero;
             Vector3 cameraForward = Vector3.ProjectOnPlane(Camera.transform.forward, Vector3.up).normalized;
             Vector3 cameraRight = Vector3.ProjectOnPlane(Camera.transform.right, Vector3.up).normalized;
 
-            if (!Input.anyKey)
-            {
-                RB.velocity = Vector3.zero;
-            }
+            //if (!Input.anyKey)
+            //{
+            //    RB.velocity = Vector3.zero;
+            //}
 
             if (Input.GetKeyDown(KeyCode.W))
             {
