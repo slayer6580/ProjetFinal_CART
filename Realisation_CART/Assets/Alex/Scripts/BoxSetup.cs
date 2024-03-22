@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class BoxSetup : MonoBehaviour
 {
+   
+
     [Header("Prefabs")]
     [SerializeField] private GameObject m_slotPrefab;
 
@@ -29,15 +32,17 @@ public class BoxSetup : MonoBehaviour
     private float m_halfWidth;
     private Transform m_slotsParent;
     private Box m_box;
+    private int m_totalSlots;
 
     private void Awake()
     {
         m_box = GetComponent<Box>();
         m_slotsParent = transform.GetChild(0);
+        SetAvailableSlots();
         CalculateBoxHalfDimension();
         CalculateSlotDimension();
         CreateSlots();
-        SetAvailableSlots();
+
     }
 
     /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
@@ -48,7 +53,7 @@ public class BoxSetup : MonoBehaviour
     }
 
     /// <summary> Calcule la dimension des slots </summary>
-   private void CalculateSlotDimension()
+    private void CalculateSlotDimension()
     {
         m_slotLength = m_boxLength / m_nbSlotLength;
         m_slotWidth = m_boxWidth / m_nbSlotWidth;
@@ -56,13 +61,14 @@ public class BoxSetup : MonoBehaviour
         slotWidthCalculation = m_slotWidth;
     }
 
-   private void SetAvailableSlots()
+    private void SetAvailableSlots()
     {
-        m_box.InitAvailableSlots(m_nbSlotWidth * m_nbSlotLength);
+        m_totalSlots = m_nbSlotWidth * m_nbSlotLength;
+        m_box.InitAvailableSlots(m_totalSlots);
     }
 
     /// <summary> Les calculs de positionement puis ajout dans la boite </summary>
-   private void CreateSlots()
+    private void CreateSlots()
     {
         List<float> slotsLengthPosition = new List<float>();
         List<float> slotsWidthPosition = new List<float>();
@@ -70,6 +76,59 @@ public class BoxSetup : MonoBehaviour
         FindLengthPositions(slotsLengthPosition);
         FindWidthPositions(slotsWidthPosition);
         PlaceSlotsInBox(slotsLengthPosition, slotsWidthPosition);
+        FindAllDoubleSlots();
+        // TODO find all FourSlots
+    }
+
+    private void FindAllDoubleSlots()
+    {
+        // double slots
+        int index = 0;
+        int index2 = 0;
+
+        for (int i = 0; i < m_nbSlotWidth; i++)
+        {
+            for (int j = 0; j < m_nbSlotLength; j++)
+            {
+                if (i == 0) // premiere rangée
+                {
+                    if (index != (m_nbSlotLength - 1)) // pas colonne de droite
+                    {
+                        index2 = index + 1; // droite
+                        SendDoubleSlotToBox(index, index2);
+                    }
+                }
+                else
+                {
+                    if ((index + 1) % m_nbSlotLength == 0) // colonne de droite
+                    {
+                        index2 = index - m_nbSlotLength; //haut
+                        SendDoubleSlotToBox(index, index2);
+                    }
+                    else // colonne dans le milieu
+                    {
+                        index2 = index - m_nbSlotLength; //haut
+                        SendDoubleSlotToBox(index, index2);
+
+                        index2 = index + 1; //droite
+                        SendDoubleSlotToBox(index, index2);
+                    }
+                }
+                index++;
+            }
+        }
+    }
+
+    private void SendDoubleSlotToBox(int index, int index2)
+    {
+        List<int> doubleSlots = new List<int>()
+        {
+          index,
+          index2
+        };
+
+        m_box.AddDoubleSlotInList(doubleSlots);
+
     }
 
     /// <summary> Ajouter les slots dans la boite selon des calculs de positionement </summary>

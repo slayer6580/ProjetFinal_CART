@@ -1,3 +1,4 @@
+using UnityEditor.Profiling;
 using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
@@ -10,35 +11,46 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private ItemData.ESize m_sizeOfObjects;
     private GameObject m_itemPrefab;
 
+    //TEST
+    private void Start()
+    {
+        gameObject.name = "Item Spawner: " + m_sizeOfObjects.ToString();
+    }
 
+    //TEST
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && m_sizeOfObjects == ItemData.ESize.small)
         {
             m_itemPrefab = m_smallPrefab;
-            TryToTakeItem(ItemData.ESize.small);
+            TakeAnItemFromStorage(ItemData.ESize.small);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && m_sizeOfObjects == ItemData.ESize.medium)
         {
             m_itemPrefab = m_mediumPrefab;
-            TryToTakeItem(ItemData.ESize.medium);
+            TakeAnItemFromStorage(ItemData.ESize.medium);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4) && m_sizeOfObjects == ItemData.ESize.large)
         {
             m_itemPrefab = m_largePrefab;
-            TryToTakeItem(ItemData.ESize.large);
+            TakeAnItemFromStorage(ItemData.ESize.large);
         }
 
     }
 
-    private void TryToTakeItem(ItemData.ESize size)
+
+    private void TakeAnItemFromStorage(ItemData.ESize size)
     {
-        if (m_tower.CanTakeObjectInTheActualBox(size))
+        if (!m_tower.CanTakeObjectInTheActualBox(size))
         {
-            GameObject instant = Instantiate(m_itemPrefab);
-            instant.transform.SetParent(m_tower.transform);
-            instant.transform.position = transform.position;
-            m_tower.TakeObjectInActualBoxe(m_itemPrefab, size);
+            Debug.Log("Need a new box to put item");
+            m_tower.AddBoxToTower();
         }
+
+        GameObject instant = Instantiate(m_itemPrefab);
+        instant.transform.SetParent(m_tower.transform);
+        instant.transform.position = transform.position;
+        m_tower.PutObjectInTopBox(instant, size);
     }
+
 }
