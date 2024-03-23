@@ -21,7 +21,7 @@ namespace CartControl
 
 		public override void OnFixedUpdate()
 		{
-			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag);
+			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag, m_cartStateMachine.MaxSpeed);
 			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.IdleRotatingSpeed);
 		}
 
@@ -32,18 +32,24 @@ namespace CartControl
 
 		public override bool CanEnter(IState currentState)
 		{
+			if(m_cartStateMachine.CanBoost)
+			{
+				return false;
+			}
+
 			if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
 			{
 				return true;
 			}
+
 			return false;
 		}
 
 		public override bool CanExit()
 		{
-			return m_cartStateMachine.m_cartRB.velocity.magnitude > GameConstants.DEADZONE;
+			return true;
 		}
 
 	}

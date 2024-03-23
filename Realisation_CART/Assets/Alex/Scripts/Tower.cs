@@ -45,8 +45,6 @@ namespace BoxSystem
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box instantBox = instant.GetComponent<Box>();
-            instantBox.SetTower(this);
-
             float height = (m_boxCount - 1) * boxHeight;
             
             if (m_boxCount > 1)
@@ -119,9 +117,9 @@ namespace BoxSystem
             return GetTopBox().CanPutItemInsideBox(size);
         }
 
-        public void PutObjectInTopBox(GameObject item, ItemData.ESize size)
+        public void PutObjectInTopBox(GameObject item)
         {
-            GetTopBox().PutItemInBox(item, size);
+            GetTopBox().PutItemInBox(item);
         }
 
         private Box GetTopBox()

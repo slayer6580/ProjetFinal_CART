@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,14 +43,27 @@ namespace CartControl
 		[field: SerializeField] public bool AutoDriftWhenTurning { get; private set; }
 		[field: SerializeField] public float TurningTimeBeforeDrift { get; private set; }
 
+		//
+		[field: Header("Boosting")]
+		[field: SerializeField] public float BoostingAcceleration { get; private set; }
+		[field: SerializeField] public float BoostingMaxSpeed { get; private set; }
+		[field: SerializeField] public float BoostingTurnDrag { get; private set; }
+		[field: SerializeField] public float DriftTimeToEarnBoost { get; private set; }
+		[field: SerializeField] public float BoostingTime { get; private set; }
+
 		///
 		[Header("To Set")]
 		public GameObject m_cart;
 		public Rigidbody m_cartRB;
+		public GameObject m_gameplayCamera;
+		public CinemachineBrain m_camBrain;
+
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
 
 		//
 		[HideInInspector] public bool CanDrift { get; set; }
+		[HideInInspector] public bool CanBoost { get; set; }
+		[HideInInspector] public bool IsPaused { get; set; }
 
 		protected override void Start()
 		{
@@ -81,6 +95,8 @@ namespace CartControl
 			m_possibleStates.Add(new CartState_Idle());
 			m_possibleStates.Add(new CartState_Moving());
 			m_possibleStates.Add(new CartState_Drifting());
+			m_possibleStates.Add(new CartState_Boosting());
+			m_possibleStates.Add(new CartState_Stopped());
 		}
 
 
@@ -100,6 +116,11 @@ namespace CartControl
 		public void OnSteer(float steerValue)
 		{
 			SteeringValue = steerValue;
+		}
+
+		public void OnPause()
+		{
+			IsPaused = !IsPaused;
 		}
 
 	}

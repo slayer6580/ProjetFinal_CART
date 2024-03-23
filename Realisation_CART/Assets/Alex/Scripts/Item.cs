@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] public ItemData m_data;
+    public ItemData m_data;
 
     // pour le slerp
     private Transform m_target;
     private bool m_isMoving = false;
-
 
 
     public void GoInsideBoxSlot(Transform target)

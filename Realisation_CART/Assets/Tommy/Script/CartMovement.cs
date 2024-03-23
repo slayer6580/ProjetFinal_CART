@@ -8,7 +8,7 @@ namespace CartControl
 	{
 		public CartStateMachine SM { private get; set; }
 
-		public void Move(float acceleration, float turnDrag)
+		public void Move(float acceleration, float turnDrag, float maxSpeed)
 		{
 			//Transform default velocity (which is global) to a local velocity
 			SM.LocalVelocity = SM.m_cart.transform.InverseTransformDirection(SM.m_cartRB.velocity);
@@ -16,7 +16,7 @@ namespace CartControl
 			//Check for movement input
 			if (SM.ForwardPressedPercent > GameConstants.DEADZONE || SM.BackwardPressedPercent > GameConstants.DEADZONE)
 			{
-				if (SM.MaxSpeed > SM.LocalVelocity.z && -SM.MaxBackwardSpeed < SM.LocalVelocity.z)
+				if (maxSpeed > SM.LocalVelocity.z && -SM.MaxBackwardSpeed < SM.LocalVelocity.z)
 				{
 					SM.m_cartRB.GetComponent<Rigidbody>().AddForce(transform.forward
 						* GameConstants.BASE_ADD_FORCE
@@ -45,6 +45,11 @@ namespace CartControl
 					* SM.SteeringValue
 					* Time.fixedDeltaTime);
 			}
+		}
+
+		public void StopMovement()
+		{
+			SM.m_cartRB.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 	}
 }
