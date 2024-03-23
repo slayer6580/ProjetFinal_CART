@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static BoxSystem.Box;
 
 namespace BoxSystem
 {
@@ -39,8 +38,7 @@ namespace BoxSystem
             }
         }
 
-        [Serializable] // TEST
-        public struct SlotInfo // public TEST
+        public struct SlotInfo 
         {
             public SlotInfo(Transform slotPosition, bool isAvailable)
             {
@@ -52,13 +50,12 @@ namespace BoxSystem
             public bool m_isAvailable;
         }
 
-        public List<SlotInfo> m_slotsInfo = new List<SlotInfo>(); // public TEST
+        private List<SlotInfo> m_slotsInfo = new List<SlotInfo>(); 
         private Stack<ItemInBox> m_itemsInBox = new Stack<ItemInBox>();
-        private List<MultiSlots> m_doubleSlots = new List<MultiSlots>();
-        private List<MultiSlots> m_fourSlots = new List<MultiSlots>();
+        private List<MultiSlots> m_doubleSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot double
+        private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot a quatre (2 x 2)
         private int m_totalSlots;
         private int m_availableSlotsLeft;
-        private Tower m_tower;
         private BoxSetup m_boxSetup;
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
@@ -112,6 +109,7 @@ namespace BoxSystem
             return false;
         }
 
+        /// <summary> Regarde si on peut prendre un objet multi slot </summary>
         private bool CanPutMultiSlotItemInBox(ItemData.ESize size)
         {
             int sizeInt = size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
@@ -132,18 +130,14 @@ namespace BoxSystem
                     PutSmallItemInBox(GO);
                     break;
                 case ItemData.ESize.medium:
-                    CheckForReorganization(GO);
+                    PutInBoxOrReorganize(GO);
                     break;
                 case ItemData.ESize.large:
-                    CheckForReorganization(GO);
+                    PutInBoxOrReorganize(GO);
                     break;
                 default:
                     break;
             }
-
-            //if (IsBoxFull())
-            //    m_tower.AddBoxToTower();
-
         }
 
         /// <summary> Pour mettre un petit objet dans la boite </summary>
@@ -165,8 +159,8 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Regarde si on peut prendre un objet multi slot </summary>
-        private void CheckForReorganization(GameObject GO)
+        /// <summary> Prend un objet multi slot, peut réorganiser la boite si nécéssaire </summary>
+        private void PutInBoxOrReorganize(GameObject GO)
         {
             Item item = GO.GetComponent<Item>();
             List<MultiSlots> multiSlotList = new List<MultiSlots>();
@@ -184,6 +178,7 @@ namespace BoxSystem
 
                 if (AllSlotIsAvailable(slotsAvailable))
                 {
+                 
                     PutMultiSlotItemInBox(GO, multiSlot);
                     return;
                 }
@@ -234,23 +229,20 @@ namespace BoxSystem
         {
             Item item = GO.GetComponent<Item>();
             int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
+            List<Vector3> allLocalPositions = new List<Vector3>();
 
             m_availableSlotsLeft -= sizeInt;
-            List<int> indexes = new List<int>();
-            List<Transform> transforms = new List<Transform>();
-            List<Vector3> allLocalPositions = new List<Vector3>();
+       
             for (int i = 0; i < sizeInt; i++)
             {
-                indexes.Add(multiSlot.m_slotIndexes[i]);
-                transforms.Add(m_slotsInfo[indexes[i]].m_slotTransform);
-                allLocalPositions.Add(transforms[i].localPosition);
-                m_slotsInfo[indexes[i]] = new SlotInfo(transforms[i], false);
+                allLocalPositions.Add(m_slotsInfo[multiSlot.m_slotIndexes[i]].m_slotTransform.localPosition);
+                m_slotsInfo[multiSlot.m_slotIndexes[i]] = new SlotInfo(m_slotsInfo[multiSlot.m_slotIndexes[i]].m_slotTransform, false);
             }
 
             Vector3 localPosition = CreateLocalPositionForItem(allLocalPositions);
-            m_itemsInBox.Push(new ItemInBox(GO, indexes, localPosition));
+            m_itemsInBox.Push(new ItemInBox(GO, multiSlot.m_slotIndexes, localPosition));
 
-            if (sizeInt == MEDIUM_SIZE && Mathf.Abs((indexes[0] - indexes[1])) != 1)
+            if (sizeInt == MEDIUM_SIZE && Mathf.Abs((multiSlot.m_slotIndexes[0] - multiSlot.m_slotIndexes[1])) != 1)
             {
                 GO.transform.rotation = Quaternion.Euler(0, 90, 0);
             }
@@ -291,24 +283,6 @@ namespace BoxSystem
             }
 
             return localposition / nbOfPositions;
-        }
-
-        /// <summary> Regarde si la boite es pleine </summary>
-        private bool IsBoxFull()
-        {
-            if (m_availableSlotsLeft == 0)
-            {
-                Debug.Log("Item picked up just fill the box");
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary> Pour avoir une référence a la tour lors de sa création </summary>
-        public void SetTower(Tower tower)
-        {
-            m_tower = tower;
         }
 
     }

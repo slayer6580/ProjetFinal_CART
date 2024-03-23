@@ -23,11 +23,9 @@ namespace BoxSystem
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box instantBox = instant.GetComponent<Box>();
-            instantBox.SetTower(this);
             float height = (m_boxCount - 1) * boxHeight;
             instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
             m_boxesInCart.Push(instantBox);
-            // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
         }
 
         public void RemoveBoxToTower()
@@ -41,7 +39,6 @@ namespace BoxSystem
             m_boxCount--;
             Box boxToRemove = m_boxesInCart.Pop();
             Destroy(boxToRemove.gameObject);
-            // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
         }
 
         // TEST

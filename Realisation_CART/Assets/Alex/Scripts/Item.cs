@@ -9,7 +9,6 @@ public class Item : MonoBehaviour
     private bool m_isMoving = false;
 
 
-
     public void GoInsideBoxSlot(Transform target)
     {
         // TODO l'objet doit Lerp vers le transform du slot.
