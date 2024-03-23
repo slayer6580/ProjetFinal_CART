@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] private ItemData m_data;
+    [SerializeField] public ItemData m_data;
 
     // pour le slerp
     private Transform m_target;

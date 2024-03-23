@@ -11,7 +11,7 @@ namespace CartControl
 
 		public override void OnEnter()
 		{
-			Debug.LogWarning("current state: IDLE");
+			//Debug.LogWarning("current state: IDLE");
 		}
 
 		public override void OnUpdate()

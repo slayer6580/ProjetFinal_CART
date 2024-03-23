@@ -16,7 +16,8 @@ namespace BoxSystem
         {
             AddBoxToTower();
             Box firstBox = m_boxesInCart.Peek();
-            GetComponent<DebugControls>().RB = firstBox.GetComponent<Rigidbody>();
+            //GetComponent<DebugControls>().RB = firstBox.GetComponent<Rigidbody>();
+            //if (GetComponent<DebugControls>().RB == null) Debug.LogError("RB is null");
         }
 
         public void AddBoxToTower()
@@ -24,24 +25,30 @@ namespace BoxSystem
             m_boxCount++;
             Vector3 newBoxPos = transform.position;
             Quaternion newBoxRot = Quaternion.identity;
+            float _x = transform.position.x;
+            float _z = transform.position.z;
 
             if (m_boxCount > 1)
             {
-                newBoxPos = new Vector3(
-                    m_boxesInCart.ToArray()[0].transform.position.x,
-                    m_boxesInCart.ToArray()[0].transform.position.y,
-                    m_boxesInCart.ToArray()[0].transform.position.z);
+                //newBoxPos = new Vector3(
+                //    m_boxesInCart.ToArray()[0].transform.position.x,
+                //    m_boxesInCart.ToArray()[0].transform.position.y,
+                //    m_boxesInCart.ToArray()[0].transform.position.z);
+                newBoxPos = m_boxesInCart.ToArray()[0].transform.position;
+                newBoxRot = m_boxesInCart.ToArray()[0].transform.rotation;
             }
+
+            //Debug.Log("newBoxPos: " + newBoxPos);
+            //Debug.Log("newBoxRot: " + newBoxRot);
 
             GameObject instant = Instantiate(boxPrefab, newBoxPos, newBoxRot);
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box instantBox = instant.GetComponent<Box>();
             instantBox.SetTower(this);
-            float _x = transform.position.x;
-            float _z = transform.position.z;
+
             float height = (m_boxCount - 1) * boxHeight;
-            Debug.Log("m_boxCount: " + m_boxCount);
+            
             if (m_boxCount > 1)
             {
                 _x = m_boxesInCart.ToArray()[0].transform.position.x;
@@ -92,6 +99,19 @@ namespace BoxSystem
             }
 
             // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
+        }
+
+        // TEST
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.KeypadPlus))
+            {
+                AddBoxToTower();
+            }
+            else if (Input.GetKeyDown(KeyCode.KeypadMinus))
+            {
+                RemoveBoxToTower();
+            }
         }
 
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)

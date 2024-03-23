@@ -6,7 +6,7 @@ namespace DiscountDelirium
 {
     public class DebugControls : MonoBehaviour
     {
-        [field: SerializeField]public Rigidbody RB { get; set; }
+        public Rigidbody RB { get; set; }
         [field: SerializeField]private Camera Camera { get; set; }
         private float m_speed = 500.0f;
 
