@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxPrefab: {fileID: 3665573428290585098, guid: 4a9ec3d4dfd1f0c469abfa2d64000b26,
     type: 3}
-  boxHeight: 3
+  boxHeight: 0.55

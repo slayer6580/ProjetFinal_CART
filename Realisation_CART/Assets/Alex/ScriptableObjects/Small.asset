@@ -15,3 +15,4 @@ MonoBehaviour:
   m_name: Small
   m_cost: 10
   m_size: 0
+  m_slerpTimeInMilliSeconds: 50

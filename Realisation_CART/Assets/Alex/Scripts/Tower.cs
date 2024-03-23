@@ -6,8 +6,9 @@ namespace BoxSystem
 
     public class Tower : MonoBehaviour
     {
-        [SerializeField] private GameObject boxPrefab;
-        [SerializeField] private float boxHeight;
+        [field: SerializeField] public GameObject Cart { get; private set; }
+        [SerializeField] private GameObject m_boxPrefab;       
+        [SerializeField] private float m_boxHeight;
         private int m_boxCount = 0;
         private Stack<Box> m_boxesInCart = new Stack<Box>();
 
@@ -19,11 +20,13 @@ namespace BoxSystem
         public void AddBoxToTower()
         {
             m_boxCount++;
-            GameObject instant = Instantiate(boxPrefab);
+            GameObject instant = Instantiate(m_boxPrefab);
+            instant.transform.rotation = Cart.transform.rotation;
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box instantBox = instant.GetComponent<Box>();
-            float height = (m_boxCount - 1) * boxHeight;
+            instantBox.SetTower(this);
+            float height = (m_boxCount - 1) * m_boxHeight;
             instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
             m_boxesInCart.Push(instantBox);
         }
@@ -32,7 +35,7 @@ namespace BoxSystem
         {
             if (m_boxCount == 1)
             {
-                Debug.LogError("¨On peut pas enlever toute les boites du panier");
+                Debug.LogWarning("¨On peut pas enlever toute les boites du panier");
                 return;
             }
 

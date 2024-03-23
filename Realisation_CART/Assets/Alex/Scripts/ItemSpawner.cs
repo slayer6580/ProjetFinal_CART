@@ -3,41 +3,31 @@ using BoxSystem;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject m_smallPrefab;
-    [SerializeField] private GameObject m_mediumPrefab;
-    [SerializeField] private GameObject m_largePrefab;
-
+    [SerializeField] private Item m_itemPrefab;
     [SerializeField] private Tower m_tower;
-    [SerializeField] private ItemData.ESize m_sizeOfObjects;
-    private GameObject m_itemPrefab;
 
-    //TEST
     private void Start()
     {
-        gameObject.name = "Item Spawner: " + m_sizeOfObjects.ToString();
+        gameObject.name = "Item Spawner: " + m_itemPrefab.m_data.m_name;
     }
 
     //TEST
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && m_sizeOfObjects == ItemData.ESize.small)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && m_itemPrefab.m_data.m_size == ItemData.ESize.small)
         {
-            m_itemPrefab = m_smallPrefab;
             TakeAnItemFromStorage(ItemData.ESize.small);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha5) && m_sizeOfObjects == ItemData.ESize.medium)
+        else if (Input.GetKeyDown(KeyCode.Alpha5) && m_itemPrefab.m_data.m_size == ItemData.ESize.medium)
         {
-            m_itemPrefab = m_mediumPrefab;
             TakeAnItemFromStorage(ItemData.ESize.medium);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha9) && m_sizeOfObjects == ItemData.ESize.large)
+        else if (Input.GetKeyDown(KeyCode.Alpha9) && m_itemPrefab.m_data.m_size == ItemData.ESize.large)
         {
-            m_itemPrefab = m_largePrefab;
             TakeAnItemFromStorage(ItemData.ESize.large);
         }
 
     }
-
 
     private void TakeAnItemFromStorage(ItemData.ESize size)
     {
@@ -47,7 +37,7 @@ public class ItemSpawner : MonoBehaviour
             m_tower.AddBoxToTower();
         }
 
-        GameObject instant = Instantiate(m_itemPrefab);
+        GameObject instant = Instantiate(m_itemPrefab.gameObject);
         instant.transform.position = transform.position;
         m_tower.PutObjectInTopBox(instant);
     }
