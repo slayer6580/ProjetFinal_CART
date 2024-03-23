@@ -62,9 +62,9 @@ namespace BoxSystem
             return GetTopBox().CanPutItemInsideBox(size);
         }
 
-        public void PutObjectInTopBox(GameObject item, ItemData.ESize size)
+        public void PutObjectInTopBox(GameObject item)
         {
-            GetTopBox().PutItemInBox(item, size);
+            GetTopBox().PutItemInBox(item);
         }
 
         private Box GetTopBox()

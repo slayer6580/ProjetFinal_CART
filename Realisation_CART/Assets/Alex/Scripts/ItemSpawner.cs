@@ -49,7 +49,7 @@ public class ItemSpawner : MonoBehaviour
 
         GameObject instant = Instantiate(m_itemPrefab);
         instant.transform.position = transform.position;
-        m_tower.PutObjectInTopBox(instant, size);
+        m_tower.PutObjectInTopBox(instant);
     }
 
 }
