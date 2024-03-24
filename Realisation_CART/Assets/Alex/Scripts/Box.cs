@@ -67,12 +67,10 @@ namespace BoxSystem
         private const int LARGE_SIZE = 4;
         private Tower m_tower;
         #endregion
-      
-        private void Awake() 
+
+        private void Awake()
         {
-            // yes sir miller
-            m_boxSetup = GetComponent<BoxSetup>();   // yes sir miller
-            // yes sir miller
+            m_boxSetup = GetComponent<BoxSetup>();
         }
 
 
@@ -107,7 +105,8 @@ namespace BoxSystem
         {
             m_tower = tower;    
         }
-        #endregion 
+        #endregion
+
 
 
         #region (--- Bool Verification ---)
