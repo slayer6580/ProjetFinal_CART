@@ -108,7 +108,6 @@ namespace BoxSystem
         #endregion
 
 
-
         #region (--- Bool Verification ---)
         /// <summary> Regarde si on peut prendre l'objet selon sa taille </summary>
         public bool CanPutItemInsideBox(ItemData.ESize size)
