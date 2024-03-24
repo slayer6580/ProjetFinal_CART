@@ -1284,7 +1284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24374092, y: -1.6692084e-15, z: 4.2185253e-16, w: 0.9698404}
+  m_LocalRotation: {x: 0.24374092, y: 0.000000014451748, z: -0.0000000036320227, w: 0.9698404}
   m_LocalPosition: {x: 0, y: 5.81, z: -4.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1615,7 +1615,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535154984}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24374092, y: -1.6692084e-15, z: 4.2185253e-16, w: 0.9698404}
+  m_LocalRotation: {x: 0.24374092, y: 0.000000014451748, z: -0.0000000036320227, w: 0.9698404}
   m_LocalPosition: {x: 0, y: 5.81, z: -4.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4983,7 +4983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Cart>k__BackingField: {fileID: 811115955}
-  m_boxPrefab: {fileID: 3665573428290585098, guid: 4a9ec3d4dfd1f0c469abfa2d64000b26,
+  m_boxPrefab: {fileID: 3665573428290585098, guid: c65aeb46513875047a96b06a7e5371c9,
     type: 3}
   m_boxHeight: 0.55
 --- !u!1 &8686256006321128653

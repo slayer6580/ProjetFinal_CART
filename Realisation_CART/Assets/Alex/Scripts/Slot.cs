@@ -18,7 +18,7 @@ public class Slot : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + Vector3.up, Color.black);
     }
 
-    /// <summary> Donne une couleur random a la slot sp�cial </summary>
+    /// <summary> Donne une couleur random a la slot spécial </summary>
     Color GetRandomColor(int value)
     {
         return new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);

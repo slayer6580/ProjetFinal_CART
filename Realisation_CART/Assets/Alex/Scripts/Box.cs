@@ -58,8 +58,8 @@ namespace BoxSystem
 
         private List<SlotInfo> m_slotsList = new List<SlotInfo>();
         private List<ItemInBox> m_itemsList = new List<ItemInBox>();
-        private List<MultiSlots> m_doubleSlots = new List<MultiSlots>(); // Coordonn�s de tout les connections de slot double
-        private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonn�s de tout les connections de slot a quatre (2 x 2)
+        private List<MultiSlots> m_doubleSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot double
+        private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot a quatre (2 x 2)
         private int m_totalSlots;
         private int m_availableSlotsLeft;
         private int m_itemCount = 0;
@@ -109,7 +109,7 @@ namespace BoxSystem
         {
             m_tower = tower;    
         }
-        #endregion
+        #endregion 
 
 
         #region (--- Bool Verification ---)
