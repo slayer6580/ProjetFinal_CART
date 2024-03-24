@@ -1,5 +1,6 @@
 using DiscountDelirium;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BoxSystem
@@ -16,9 +17,6 @@ namespace BoxSystem
         void Start()
         {
             AddBoxToTower();
-            Box firstBox = m_boxesInCart.Peek();
-            //GetComponent<DebugControls>().RB = firstBox.GetComponent<Rigidbody>();
-            //if (GetComponent<DebugControls>().RB == null) Debug.LogError("RB is null");
         }
 
         public void AddBoxToTower()
@@ -26,38 +24,30 @@ namespace BoxSystem
             m_boxCount++;
             GameObject instant = Instantiate(m_boxPrefab);
             instant.transform.rotation = Cart.transform.rotation;
-            Vector3 newBoxPos = transform.position;
-            Quaternion newBoxRot = Quaternion.identity;
-            float _x = transform.position.x;
-            float _z = transform.position.z;
-
-            if (m_boxCount > 1)
-            {
-                //newBoxPos = new Vector3(
-                //    m_boxesInCart.ToArray()[0].transform.position.x,
-                //    m_boxesInCart.ToArray()[0].transform.position.y,
-                //    m_boxesInCart.ToArray()[0].transform.position.z);
-                newBoxPos = m_boxesInCart.ToArray()[0].transform.position;
-                newBoxRot = m_boxesInCart.ToArray()[0].transform.rotation;
-            }
-
-            //Debug.Log("newBoxPos: " + newBoxPos);
-            //Debug.Log("newBoxRot: " + newBoxRot);
-
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box instantBox = instant.GetComponent<Box>();
             instantBox.SetTower(this);
             float height = (m_boxCount - 1) * m_boxHeight;
-            instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
-            
+            instant.transform.position = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
+            m_boxesInCart.Push(instantBox);
+        }
+
+        public void AddSpringToBox()
+        {
+            Debug.Log("Add spring to box");
             if (m_boxCount > 1)
             {
-                _x = m_boxesInCart.ToArray()[0].transform.position.x;
-                _z = m_boxesInCart.ToArray()[0].transform.position.z;
-                Box newBoxe = m_boxesInCart.ToArray()[m_boxesInCart.Count - 1];
-                SpringJoint springJoint = instant.AddComponent<SpringJoint>();
-                springJoint.connectedBody = newBoxe.GetComponent<Rigidbody>();
+                Box previousBoxe = m_boxesInCart.ToArray()[m_boxesInCart.Count - 1];
+                Debug.Log("previousBoxe: " + previousBoxe.name);
+                Debug.Log("newBoxe: " + m_boxesInCart.ToArray()[0].transform.name);
+                SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
+                Rigidbody newBoxeRB = previousBoxe.GetComponent<Rigidbody>();
+                if (newBoxeRB == null)
+                {
+                    newBoxeRB = previousBoxe.AddComponent<Rigidbody>();
+                }
+                springJoint.connectedBody = newBoxeRB;
                 springJoint.spring = 5;
                 springJoint.damper = 0;
                 springJoint.minDistance = 0;
@@ -74,9 +64,6 @@ namespace BoxSystem
                 SpringJoint previousSpringJoint = previousBox.GetComponent<SpringJoint>();
                 previousSpringJoint.spring = 100;
             }
-
-            instant.transform.position = new Vector3(_x, height, _z);
-            m_boxesInCart.Push(instantBox);
         }
 
         public void RemoveBoxToTower()
@@ -109,6 +96,7 @@ namespace BoxSystem
             if (Input.GetKeyDown(KeyCode.KeypadPlus))
             {
                 AddBoxToTower();
+                AddSpringToBox();
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
