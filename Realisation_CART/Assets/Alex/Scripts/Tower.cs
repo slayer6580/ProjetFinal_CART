@@ -39,7 +39,7 @@ namespace BoxSystem
         {
             if (m_boxCount == 1) // Pour ajouter un spring entre la première boite et le panier
             {
-                Debug.Log("Add spring to box : m_boxCount == 0");
+                //Debug.Log("Add spring to box : m_boxCount == 0");
                 Rigidbody cartRB = GetComponentInParent<Rigidbody>();
                 if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
                 SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
@@ -50,8 +50,8 @@ namespace BoxSystem
             if (m_boxCount > 1) // Pour ajouter un spring entre les boites
             {
                 Box previousBoxe = m_boxesInCart.ToArray()[m_boxesInCart.Count - 1];
-                Debug.Log("previousBoxe: " + previousBoxe.name);
-                Debug.Log("newBoxe: " + m_boxesInCart.ToArray()[0].transform.name);
+                //Debug.Log("previousBoxe: " + previousBoxe.name);
+                //Debug.Log("newBoxe: " + m_boxesInCart.ToArray()[0].transform.name);
                 SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
                 Rigidbody newBoxeRB = previousBoxe.GetComponent<Rigidbody>();
                 if (newBoxeRB == null)
@@ -120,14 +120,11 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.O))
             {
-                Debug.Log("O");
                 Box currentTopBox = m_boxesInCart.ToArray()[0];
-                Debug.Log("previousBox: " + currentTopBox.name);
                 currentTopBox.RemoveItemImpulse();
             }
             else if (Input.GetKeyDown(KeyCode.P))
             {
-                Debug.Log("P");
                 RemoveBoxImpulse();
             }
         }
