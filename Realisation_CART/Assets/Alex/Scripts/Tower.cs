@@ -102,6 +102,13 @@ namespace BoxSystem
             {
                 RemoveBoxToTower();
             }
+            else if (Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log("P");
+                Box currentTopBox = m_boxesInCart.ToArray()[0];
+                Debug.Log("previousBox: " + currentTopBox.name);
+                currentTopBox.RemoveItemImpulse();
+            }
         }
 
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)

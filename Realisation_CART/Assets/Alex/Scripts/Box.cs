@@ -62,11 +62,14 @@ namespace BoxSystem
         private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonn�s de tout les connections de slot a quatre (2 x 2)
         private int m_totalSlots;
         private int m_availableSlotsLeft;
+        private int m_itemCount = 0;
         private BoxSetup m_boxSetup;
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
         private Tower m_tower;
         #endregion
+
+
 
         private void Awake()
         {
@@ -74,6 +77,7 @@ namespace BoxSystem
             m_boxSetup = GetComponent<BoxSetup>();   // yes sir miller
             // yes sir miller
         }
+
 
 
         #region (--- InitFunctions ---)
@@ -108,6 +112,7 @@ namespace BoxSystem
             m_tower = tower;
         }
         #endregion 
+
 
 
         #region (--- Bool Verification ---)
@@ -153,7 +158,16 @@ namespace BoxSystem
                 if (m_slotsList[i].m_isAvailable)
                 {
                     m_availableSlotsLeft--;
+                    m_itemCount++;
+                    GO.name = "Item " + m_itemCount;
+
+                    // Pour empecher de spawner sous la boite lorsque la boite se trouve plus haut que sa position initial
                     Transform slotTransform = m_slotsList[i].m_slotTransform;
+                    Vector3 destination = slotTransform.localPosition + transform.parent.parent.position + transform.parent.localPosition;
+                    Vector3 slotHeight = new Vector3(0, m_boxSetup.SlotHeight / 2 + 0.11f, 0);
+                    destination += slotHeight;
+                    GO.transform.position = destination;
+
                     m_slotsList[i] = new SlotInfo(slotTransform, false);
                     List<int> allIndex = new List<int>();
                     allIndex.Add(i);
@@ -254,6 +268,25 @@ namespace BoxSystem
 
             SetItemForSlerpAndSnap(GO, localPosition, turn90Degree);
         }
+        #endregion
+
+
+
+        #region (--- RemoveItemFromBox ---)
+
+        public void RemoveItemImpulse()
+        {
+            // get the top item
+            if (m_itemsList.Count == 0)
+            {
+                Debug.LogWarning("No item in the box");
+                return;
+            }
+
+            ItemInBox itemInBox = m_itemsList[m_itemsList.Count - 1];
+            Debug.Log("Item to remove: " + itemInBox.m_item.name);
+        }
+
         #endregion
 
 
