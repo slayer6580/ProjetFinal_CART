@@ -68,19 +68,12 @@ namespace BoxSystem
         private const int LARGE_SIZE = 4;
         private Tower m_tower;
         #endregion
-<<<<<<< HEAD
 
 
 
         private void Awake()
-=======
-      
-        private void Awake() 
->>>>>>> main
         {
-            // yes sir miller
-            m_boxSetup = GetComponent<BoxSetup>();   // yes sir miller
-            // yes sir miller
+            m_boxSetup = GetComponent<BoxSetup>();
         }
 
 
@@ -111,16 +104,12 @@ namespace BoxSystem
             m_availableSlotsLeft = m_totalSlots;
         }
 
-        /// <summary> La boite se connecte a la tour lors de sa propre cr�ation </summary>
+        /// <summary> La boite se connecte a la tour lors de sa propre création </summary>
         public void SetTower(Tower tower)
         {
-            m_tower = tower;
+            m_tower = tower;    
         }
-        #endregion 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
+        #endregion
 
 
         #region (--- Bool Verification ---)
@@ -186,7 +175,7 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Regarde si on peut placer le multi slot item tout de suite ou r�organizer </summary>
+        /// <summary> Regarde si on peut placer le multi slot item tout de suite ou réorganizer </summary>
         private void PutInBoxOrReorganize(GameObject GO)
         {
             Item item = GO.GetComponent<Item>();
@@ -212,7 +201,7 @@ namespace BoxSystem
             ReorganizeBox(GO);
         }
 
-        /// <summary> Pour r�organiser la boite et placer l'item � l'interieur </summary>
+        /// <summary> Pour réorganiser la boite et placer l'item à l'interieur </summary>
         private void ReorganizeBox(GameObject GO)
         {
             // Faire une nouvelle liste temporaire et ajouter le nouvel item dedans
@@ -230,8 +219,8 @@ namespace BoxSystem
             }
             m_itemsList.Clear();
 
-            // r�organiser le liste du plus grand object au plus petit
-            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); // pr�cis comme ca
+            // réorganiser le liste du plus grand object au plus petit
+            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); // précis comme ca
 
             // remettre la boite a zero
             m_availableSlotsLeft = m_totalSlots;
