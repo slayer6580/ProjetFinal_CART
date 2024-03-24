@@ -62,7 +62,7 @@ namespace BoxSystem
                 Box previousBox = m_boxesInCart.ToArray()[0];
                 Debug.Log("previousBox: " + previousBox.name);
                 SpringJoint previousSpringJoint = previousBox.GetComponent<SpringJoint>();
-                previousSpringJoint.spring = 100;
+                previousSpringJoint.spring = 5;
             }
         }
 
