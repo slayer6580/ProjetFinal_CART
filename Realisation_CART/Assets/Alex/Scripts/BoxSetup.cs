@@ -43,6 +43,19 @@ namespace BoxSystem
             CreateSlots();
         }
 
+        /// <summary> Les calculs de positionement puis ajout dans la boite </summary>
+        private void CreateSlots()
+        {
+            List<float> slotsLengthPosition = new List<float>();
+            List<float> slotsWidthPosition = new List<float>();
+
+            FindLengthPositions(slotsLengthPosition);
+            FindWidthPositions(slotsWidthPosition);
+            PlaceSlotsInBox(slotsLengthPosition, slotsWidthPosition);
+            FindAllDoubleSlots();
+            FindAllFourSlots();
+        }
+
         /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
         private void CalculateBoxHalfDimension()
         {
@@ -65,19 +78,7 @@ namespace BoxSystem
             m_box.InitAvailableSlots(m_totalSlots);
         }
 
-        /// <summary> Les calculs de positionement puis ajout dans la boite </summary>
-        private void CreateSlots()
-        {
-            List<float> slotsLengthPosition = new List<float>();
-            List<float> slotsWidthPosition = new List<float>();
-
-            FindLengthPositions(slotsLengthPosition);
-            FindWidthPositions(slotsWidthPosition);
-            PlaceSlotsInBox(slotsLengthPosition, slotsWidthPosition);
-            FindAllDoubleSlots();
-            FindAllFourSlots();
-        }
-
+     
         /// <summary> Trouve tout les double slots de la boite </summary>
         private void FindAllDoubleSlots()
         {

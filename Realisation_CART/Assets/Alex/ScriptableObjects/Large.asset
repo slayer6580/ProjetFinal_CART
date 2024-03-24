@@ -15,3 +15,4 @@ MonoBehaviour:
   m_name: Large
   m_cost: 75
   m_size: 2
+  m_slerpTimeInMilliSeconds: 150

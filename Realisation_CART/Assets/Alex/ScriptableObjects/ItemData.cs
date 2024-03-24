@@ -3,7 +3,6 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "itemData", menuName = "item/item data")]
 
-
 public class ItemData : ScriptableObject
 {
     public enum ESize
