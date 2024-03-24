@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -58,21 +58,21 @@ namespace BoxSystem
 
         private List<SlotInfo> m_slotsList = new List<SlotInfo>();
         private List<ItemInBox> m_itemsList = new List<ItemInBox>();
-        private List<MultiSlots> m_doubleSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot double
-        private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot a quatre (2 x 2)
+        private List<MultiSlots> m_doubleSlots = new List<MultiSlots>(); // Coordonnï¿½s de tout les connections de slot double
+        private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonnï¿½s de tout les connections de slot a quatre (2 x 2)
         private int m_totalSlots;
         private int m_availableSlotsLeft;
         private BoxSetup m_boxSetup;
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
         private Tower m_tower;
-        private int m_itemCount = 0;
-        private int m_itemCountTest = 0;
         #endregion
 
         private void Awake()
         {
-            m_boxSetup = GetComponent<BoxSetup>();
+            // yes sir miller
+            m_boxSetup = GetComponent<BoxSetup>();   // yes sir miller
+            // yes sir miller
         }
 
 
@@ -102,13 +102,12 @@ namespace BoxSystem
             m_availableSlotsLeft = m_totalSlots;
         }
 
-        /// <summary> La boite se connecte a la tour lors de sa propre création </summary>
+        /// <summary> La boite se connecte a la tour lors de sa propre crï¿½ation </summary>
         public void SetTower(Tower tower)
         {
-            m_tower = tower;    
+            m_tower = tower;
         }
-        #endregion
-
+        #endregion 
 
 
         #region (--- Bool Verification ---)
@@ -144,12 +143,6 @@ namespace BoxSystem
                 PutSmallItemInBox(GO);
             else
                 PutInBoxOrReorganize(GO);
-     
-   
-
-            AddNewSrpingJoint(GetLastIndex());
-            //AddNewSrpingJoint(m_itemCount);
-            DeactivateLastSpring();
         }
 
         /// <summary> Pour mettre un petit objet dans la boite </summary>
@@ -159,9 +152,6 @@ namespace BoxSystem
             {
                 if (m_slotsList[i].m_isAvailable)
                 {
-                    m_itemCountTest++;
-                    //m_itemCount++;
-                    Debug.Log("PutSmallItemInBox()##################################################################");
                     m_availableSlotsLeft--;
                     Transform slotTransform = m_slotsList[i].m_slotTransform;
                     m_slotsList[i] = new SlotInfo(slotTransform, false);
@@ -169,15 +159,12 @@ namespace BoxSystem
                     allIndex.Add(i);
                     m_itemsList.Add(new ItemInBox(GO, allIndex, slotTransform.localPosition));
                     SetItemForSlerpAndSnap(GO, slotTransform.localPosition, false);
-                    GO.name = "Item " + m_itemCountTest;
-                    m_itemsList.Add(new ItemInBox(GO, allIndex, slotTransform.localPosition));
-                    SetItemForSlerpAndSnap(GO, slotTransform.localPosition, false);
                     return;
                 }
             }
         }
 
-        /// <summary> Regarde si on peut placer le multi slot item tout de suite ou réorganizer </summary>
+        /// <summary> Regarde si on peut placer le multi slot item tout de suite ou rï¿½organizer </summary>
         private void PutInBoxOrReorganize(GameObject GO)
         {
             Item item = GO.GetComponent<Item>();
@@ -203,7 +190,7 @@ namespace BoxSystem
             ReorganizeBox(GO);
         }
 
-        /// <summary> Pour réorganiser la boite et placer l'item à l'interieur </summary>
+        /// <summary> Pour rï¿½organiser la boite et placer l'item ï¿½ l'interieur </summary>
         private void ReorganizeBox(GameObject GO)
         {
             // Faire une nouvelle liste temporaire et ajouter le nouvel item dedans
@@ -221,8 +208,8 @@ namespace BoxSystem
             }
             m_itemsList.Clear();
 
-            // réorganiser le liste du plus grand object au plus petit
-            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); // précis comme ca
+            // rï¿½organiser le liste du plus grand object au plus petit
+            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); // prï¿½cis comme ca
 
             // remettre la boite a zero
             m_availableSlotsLeft = m_totalSlots;
@@ -269,100 +256,13 @@ namespace BoxSystem
         }
         #endregion
 
-        /// <summary> Retourne l'index des derniers items sur le stack </summary>
-        private int GetLastIndex()
-        {
-            //Debug.Log("GetLastIndex m_itemCount: " + m_itemCount);
-            //if (m_itemCount > 1)
-            if (m_itemsList.Count > 1)
-            {
-                return 0;
-            }
-            else
-            {
-                return m_itemsList.Count - 1;
-            }
-        }
 
-        /// <summary> Desactive le string entre l'item ajoute precedemment et la boite</summary>
-        private void DeactivateLastSpring()
-        {
-            //Debug.Log("DeactivateLastSpring m_itemCount: " + m_itemCount);
-
-            if (m_itemCount > 1)
-            {
-                //Debug.Log("m_itemsInBox.ToArray()[0] " + m_itemsInBox.ToArray()[0].m_item.name);
-                //Debug.Log("m_itemsInBox.ToArray()[1] " + m_itemsInBox.ToArray()[1].m_item.name);
-                //Debug.Log("m_itemsInBox.ToArray()[GetLastIndex()] " + m_itemsInBox.ToArray()[GetLastIndex()].m_item.name);
-                Debug.Log("DeactivateLastSpring m_itemCount: " + m_itemCount);
-                m_itemsList.ToArray()[0].m_item.transform.position = transform.position + m_itemsList.ToArray()[0].m_localPositionInsideBox + new Vector3(0, m_boxSetup.SlotHeight / 1.5f, 0);
-
-                m_itemsList.ToArray()[1].m_item.transform.rotation = transform.rotation;
-                m_itemsList.ToArray()[1].m_item.transform.position = transform.position + m_itemsList.ToArray()[1].m_localPositionInsideBox + new Vector3(0, m_boxSetup.SlotHeight / 1.5f, 0);
-
-                SpringJoint springJoint = m_itemsList.ToArray()[1].m_item.GetComponent<SpringJoint>();
-                if (springJoint != null)
-                {
-                    springJoint.connectedBody = null;
-                    Destroy(springJoint);
-                }
-
-                Rigidbody rigidbody = m_itemsList.ToArray()[1].m_item.GetComponent<Rigidbody>();
-                if (rigidbody != null)
-                {
-                    rigidbody.isKinematic = true;
-                    Destroy(rigidbody);
-                }
-
-                Vector3 vector3 = transform.position + m_itemsList.ToArray()[1].m_localPositionInsideBox;
-                vector3 += new Vector3(0, m_boxSetup.SlotHeight / 1.5f, 0);
-
-                m_itemsList.ToArray()[1].m_item.transform.rotation = transform.rotation;
-                m_itemsList.ToArray()[1].m_item.transform.position = new Vector3(vector3.x, vector3.y, vector3.z);
-                //Debug.Log("Item location " + m_itemsInBox.ToArray()[1].m_item.transform.position);
-            }
-
-        }
-
-        /// <summary> Ajoute et attache un joint de type spring entre le dernier item et la boite</summary>
-        private void AddNewSrpingJoint(int lastIndex)
-        {
-            //Debug.Log("AddNewSrpingJoint lastIndex: " + lastIndex);
-            Debug.Log(" m_itemsInBox.Count: " + (m_itemsList.Count - 1));
-            Debug.Log(" lastIndex: " + lastIndex);
-
-            //Debug.Log("AddNewSrpingJoint()");
-
-            //if (lastIndex < 0 || lastIndex >= m_itemsInBox.Count) return;
-
-
-            GameObject itemInBox = m_itemsList.ToArray()[m_itemsList.Count - 1].m_item;
-            if (itemInBox == null)
-            {
-                Debug.LogWarning("lastIndex is out of range");
-                return;
-            }
-
-            //Debug.Log("Adding spring joint to " + itemInBox.name);
-            SpringJoint springJoint = itemInBox.AddComponent<SpringJoint>();
-            springJoint.connectedBody = GetComponentInParent<Rigidbody>();
-            springJoint.spring = 5;
-            springJoint.damper = 0;
-            springJoint.minDistance = 0;
-            springJoint.maxDistance = 0.2f;
-            springJoint.tolerance = 0.06f;
-            springJoint.enableCollision = true;
-            Debug.Log("springJoint.connectedBody: " + springJoint.connectedBody.name);
-        }
 
         #region (--- HelpFunctions ---)
         /// <summary> Place l'objet dans la hierarchie enfant de la boite </summary>
         private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree)
         {
             GO.transform.SetParent(gameObject.transform);
-            //Debug.Log("Parent name: " + GO.transform.parent.name);
-            GO.transform.localPosition = localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0); // TEST
-            //GO.transform.localRotation = Quaternion.identity;
             GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Cart.transform, turn90Degree);
         }
 
