@@ -50,7 +50,7 @@ namespace BoxSystem
 
         private void EndSlerp()
         {
-            Debug.Log("Slerp Ended");
+            //Debug.Log("Slerp Ended");
             enabled = false;
         }
 
