@@ -59,6 +59,7 @@ namespace BoxSystem
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
         private int m_itemCount = 0;
+        private int m_itemCountTest = 0;
 
         private void Awake()
         {
@@ -140,6 +141,7 @@ namespace BoxSystem
             }
 
             AddNewSrpingJoint(GetLastIndex());
+            //AddNewSrpingJoint(m_itemCount);
             DeactivateLastSpring();
         }
 
@@ -174,11 +176,15 @@ namespace BoxSystem
             {
                 if (m_slotsInfo[i].m_isAvailable)
                 {
+                    m_itemCountTest++;
+                    //m_itemCount++;
+                    Debug.Log("PutSmallItemInBox()##################################################################");
                     m_availableSlotsLeft--;
                     Transform slotTransform = m_slotsInfo[i].m_slotTransform;
                     m_slotsInfo[i] = new SlotInfo(slotTransform, false);
                     List<int> allIndex = new List<int>();
                     allIndex.Add(i);
+                    GO.name = "Item " + m_itemCountTest;
                     m_itemsInBox.Push(new ItemInBox(GO, allIndex, slotTransform.localPosition));
                     ItemSetParentInBox(GO, slotTransform.localPosition);
                     return;
@@ -281,27 +287,31 @@ namespace BoxSystem
         /// <summary> Retourne l'index des derniers items sur le stack </summary>
         private int GetLastIndex()
         {
-            if (m_itemCount > 1)
+            //Debug.Log("GetLastIndex m_itemCount: " + m_itemCount);
+            //if (m_itemCount > 1)
+            if (m_itemsInBox.Count > 1)
             {
                 return 0;
             }
             else
             {
-                return m_itemCount - 1;
+                return m_itemsInBox.Count - 1;
             }
         }
 
         /// <summary> Desactive le string entre l'item ajoute precedemment et la boite</summary>
         private void DeactivateLastSpring()
         {
+            //Debug.Log("DeactivateLastSpring m_itemCount: " + m_itemCount);
+
             if (m_itemCount > 1)
             {
-
                 //Debug.Log("m_itemsInBox.ToArray()[0] " + m_itemsInBox.ToArray()[0].m_item.name);
                 //Debug.Log("m_itemsInBox.ToArray()[1] " + m_itemsInBox.ToArray()[1].m_item.name);
                 //Debug.Log("m_itemsInBox.ToArray()[GetLastIndex()] " + m_itemsInBox.ToArray()[GetLastIndex()].m_item.name);
-
+                Debug.Log("DeactivateLastSpring m_itemCount: " + m_itemCount);
                 m_itemsInBox.ToArray()[0].m_item.transform.position = transform.position + m_itemsInBox.ToArray()[0].m_localPositionInsideBox + new Vector3(0, m_boxSetup.SlotHeight / 1.5f, 0);
+                
                 m_itemsInBox.ToArray()[1].m_item.transform.rotation = transform.rotation;
                 m_itemsInBox.ToArray()[1].m_item.transform.position = transform.position + m_itemsInBox.ToArray()[1].m_localPositionInsideBox + new Vector3(0, m_boxSetup.SlotHeight / 1.5f, 0);
 
@@ -332,25 +342,32 @@ namespace BoxSystem
         /// <summary> Ajoute et attache un joint de type spring entre le dernier item et la boite</summary>
         private void AddNewSrpingJoint(int lastIndex)
         {
-            Debug.Log("AddNewSrpingJoint lastIndex: " + lastIndex);
+            //Debug.Log("AddNewSrpingJoint lastIndex: " + lastIndex);
+            Debug.Log(" m_itemsInBox.Count: " + (m_itemsInBox.Count - 1));
+            Debug.Log(" lastIndex: " + lastIndex);
 
-            if (lastIndex < 0) return;
+            //Debug.Log("AddNewSrpingJoint()");
 
-            GameObject itemInBox = m_itemsInBox.ToArray()[lastIndex].m_item;
+            //if (lastIndex < 0 || lastIndex >= m_itemsInBox.Count) return;
+
+
+            GameObject itemInBox = m_itemsInBox.ToArray()[m_itemsInBox.Count - 1].m_item;
             if (itemInBox == null)
             {
                 Debug.LogWarning("lastIndex is out of range");
                 return;
             }
 
+            //Debug.Log("Adding spring joint to " + itemInBox.name);
             SpringJoint springJoint = itemInBox.AddComponent<SpringJoint>();
-            springJoint.connectedBody = GetComponent<Rigidbody>();
+            springJoint.connectedBody = GetComponentInParent<Rigidbody>();
             springJoint.spring = 5;
             springJoint.damper = 0;
             springJoint.minDistance = 0;
             springJoint.maxDistance = 0.2f;
             springJoint.tolerance = 0.06f;
             springJoint.enableCollision = true;
+            Debug.Log("springJoint.connectedBody: " + springJoint.connectedBody.name);
         }
 
         /// <summary> Place l'objet dans la hierarchie enfant de la boite </summary>
@@ -382,7 +399,9 @@ namespace BoxSystem
         private void ItemSetParentInBox(GameObject GO, Vector3 localPosition)
         {
             GO.transform.SetParent(gameObject.transform);
+            //Debug.Log("Parent name: " + GO.transform.parent.name);
             GO.transform.localPosition = localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0); // TEST
+            GO.transform.localRotation = Quaternion.identity;
         }
 
         /// <summary> Regarde si une liste de bool est toute vrai </summary>
