@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CartControl
@@ -48,8 +46,15 @@ namespace CartControl
 		[field: SerializeField] public float BoostingAcceleration { get; private set; }
 		[field: SerializeField] public float BoostingMaxSpeed { get; private set; }
 		[field: SerializeField] public float BoostingTurnDrag { get; private set; }
-		[field: SerializeField] public float DriftTimeToEarnBoost { get; private set; }
-		[field: SerializeField] public float BoostingTime { get; private set; }
+		[field: SerializeField] public float DriftTimeToEarnMinBoost { get; private set; }
+		[field: SerializeField] public float DriftTimeToEarnMaxBoost { get; private set; }
+
+		[field: HideInInspector] public float BoostingTime { get; set; }
+		[field: SerializeField] public float MinBoostTime { get; private set; }
+		[field: SerializeField] public float MaxBoostTime { get; private set; }
+
+		[field: Header("Stopped")]
+		[field: SerializeField] public bool BackToIdleAfterStop { get; set; }
 
 		///
 		[Header("To Set")]
@@ -57,13 +62,15 @@ namespace CartControl
 		public Rigidbody m_cartRB;
 		public GameObject m_gameplayCamera;
 		public CinemachineBrain m_camBrain;
-
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
 
 		//
 		[HideInInspector] public bool CanDrift { get; set; }
+		[HideInInspector] public bool IsDrifting { get; set; }
 		[HideInInspector] public bool CanBoost { get; set; }
+		[HideInInspector] public bool IsBoosting { get; set; }
 		[HideInInspector] public bool IsPaused { get; set; }
+		
 
 		protected override void Start()
 		{

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CartControl
@@ -13,19 +11,24 @@ namespace CartControl
 			//Transform default velocity (which is global) to a local velocity
 			SM.LocalVelocity = SM.m_cart.transform.InverseTransformDirection(SM.m_cartRB.velocity);
 
-			//Check for movement input
-			if (SM.ForwardPressedPercent > GameConstants.DEADZONE || SM.BackwardPressedPercent > GameConstants.DEADZONE)
+			if(SM.m_cartRB.velocity.magnitude < maxSpeed)
 			{
-				if (maxSpeed > SM.LocalVelocity.z && -SM.MaxBackwardSpeed < SM.LocalVelocity.z)
+				//Check for movement input
+				if (SM.ForwardPressedPercent > GameConstants.DEADZONE || SM.BackwardPressedPercent > GameConstants.DEADZONE)
 				{
-					SM.m_cartRB.GetComponent<Rigidbody>().AddForce(transform.forward
-						* GameConstants.BASE_ADD_FORCE
-						* acceleration
-						* Time.fixedDeltaTime
-						* (SM.ForwardPressedPercent - SM.BackwardPressedPercent)
-					);
+					if (maxSpeed > SM.LocalVelocity.z && -SM.MaxBackwardSpeed < SM.LocalVelocity.z)
+					{
+						SM.m_cartRB.GetComponent<Rigidbody>().AddForce(transform.forward
+							* GameConstants.BASE_ADD_FORCE
+							* acceleration
+							* Time.fixedDeltaTime
+							* (SM.ForwardPressedPercent - SM.BackwardPressedPercent)
+						);
+					}
 				}
 			}
+			
+
 
 			//Manage drag when turning
 			//If the cart is not ONLY going forward (it's going a bit sideway because it's turning) push in opposite direction to stabilize
@@ -35,6 +38,7 @@ namespace CartControl
 
 			SM.m_cartRB.GetComponent<Rigidbody>().AddForce(sideToPush * pushForce * pushMultiply * Time.fixedDeltaTime);
 		}
+
 
 		public void UpdateOrientation(float rotationSpeed)
 		{

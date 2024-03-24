@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CartControl
@@ -58,11 +56,22 @@ namespace CartControl
 
 		public override bool CanEnter(IState currentState)
 		{
+			
+			if(currentState is CartState_Boosting)
+			{
+				return m_cartStateMachine.IsBoosting == false;
+			}
+			if (currentState is CartState_Drifting)
+			{
+				return m_cartStateMachine.IsDrifting == false;
+			}
+
 			if (m_cartStateMachine.CanBoost)
 			{
 				return false;
 			}
 
+			
 			if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
@@ -70,6 +79,7 @@ namespace CartControl
 				return false;
 			}
 			return true;
+			
 		}
 
 		public override bool CanExit()

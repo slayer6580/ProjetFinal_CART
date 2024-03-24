@@ -1,6 +1,3 @@
-using CartControl;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CartControl
@@ -8,18 +5,35 @@ namespace CartControl
     public class CartState_Stopped : CartState
 	{
 		private Vector3 m_tempCartVelocity;
+		private IState m_comingFromState;
 
 		public override void OnEnter()
 		{
 			Debug.LogWarning("current state: STOPPED");
+
+			//Save the velocity
 			m_tempCartVelocity = m_cartStateMachine.m_cartRB.velocity;
-			Debug.Log("m_tempCartVelocity AAAA: " + m_tempCartVelocity);
+			
+			//Stop all movement
 			m_cartStateMachine.CartMovement.StopMovement();
 			m_cartStateMachine.m_cartRB.isKinematic = true;
-
 			m_cartStateMachine.m_gameplayCamera.SetActive(false);
 			m_cartStateMachine.m_camBrain.enabled = false;
-			
+
+			//If wanted, depending of the coming state, reactivate variables so we can get back to these State after this one
+			if (!m_cartStateMachine.BackToIdleAfterStop)
+			{
+				if (m_comingFromState is CartState_Boosting)
+				{
+					m_cartStateMachine.CanBoost = true;
+				}
+
+				if (m_comingFromState is CartState_Drifting)
+				{
+					m_cartStateMachine.CanDrift = true;
+				}
+			}
+				
 		}
 
 		public override void OnUpdate()
@@ -35,16 +49,20 @@ namespace CartControl
 		public override void OnExit()
 		{
 			m_cartStateMachine.m_cartRB.isKinematic = false;
-			Debug.Log("m_tempCartVelocity BBB: " + m_tempCartVelocity);
-			m_cartStateMachine.m_cartRB.velocity = m_tempCartVelocity;
-
 			m_cartStateMachine.m_camBrain.enabled = true;
 			m_cartStateMachine.m_gameplayCamera.SetActive(true);
 
+			//Reactivate movement as they was if wanted
+			if (!m_cartStateMachine.BackToIdleAfterStop)
+			{			
+				m_cartStateMachine.m_cartRB.velocity = m_tempCartVelocity;			
+			}
+			
 		}
 
 		public override bool CanEnter(IState currentState)
-		{		
+		{
+			m_comingFromState = currentState;
 			return m_cartStateMachine.IsPaused;
 		}
 

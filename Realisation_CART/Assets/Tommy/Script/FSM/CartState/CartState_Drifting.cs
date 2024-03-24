@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CartControl
@@ -7,22 +5,47 @@ namespace CartControl
 	public class CartState_Drifting : CartState
 	{
 		private float m_driftingTimer;
-
+		private float m_boostPercentageObtain;
+		private IState m_comingFromState;
 
 		public override void OnEnter()
 		{
 			Debug.LogWarning("current state: DRIFTING");
+
 			m_cartStateMachine.CanDrift = false;
+			m_cartStateMachine.IsDrifting = true;
+
+			//Some value must not be reset when coming from Stopped State
+			if (m_comingFromState is CartState_Stopped)
+			{
+				return;
+			}
 			m_driftingTimer = 0;
+			m_boostPercentageObtain = 0;
 		}
 
 		public override void OnUpdate()
 		{
 			m_driftingTimer += Time.deltaTime;
-			if(m_driftingTimer >= m_cartStateMachine.DriftTimeToEarnBoost)
+
+			//After minimum drifting time obtain. Calculate how much boost to give
+			if(m_driftingTimer >= m_cartStateMachine.DriftTimeToEarnMinBoost)
 			{
-				Debug.Log("CAN BOOST");
+				if(m_boostPercentageObtain < 1)
+				{
+					m_boostPercentageObtain = (m_driftingTimer - m_cartStateMachine.MinBoostTime) / (m_cartStateMachine.MaxBoostTime - m_cartStateMachine.MinBoostTime);			
+				}
+				else
+				{
+					m_boostPercentageObtain = 1;
+				}
 				m_cartStateMachine.CanBoost = true;
+
+			}
+
+			if (Mathf.Abs(m_cartStateMachine.LocalVelocity.x) < GameConstants.DEADZONE)
+			{
+				m_cartStateMachine.IsDrifting = false;
 			}
 		}
 
@@ -34,11 +57,14 @@ namespace CartControl
 
 		public override void OnExit()
 		{
-			
+			//Calculate boosting time
+			m_cartStateMachine.BoostingTime = m_cartStateMachine.MinBoostTime + (m_boostPercentageObtain * (m_cartStateMachine.MaxBoostTime - m_cartStateMachine.MinBoostTime));
 		}
 
 		public override bool CanEnter(IState currentState)
 		{
+			m_comingFromState = currentState;
+
 			if (m_cartStateMachine.CanDrift)
 			{
 				return true;
@@ -55,12 +81,8 @@ namespace CartControl
 		}
 
 		public override bool CanExit()
-		{
-			if (Mathf.Abs(m_cartStateMachine.LocalVelocity.x) < GameConstants.DEADZONE)
-			{
-				return true;
-			}
-			return false;
+		{			
+			return true;
 		}
 	}
 }
