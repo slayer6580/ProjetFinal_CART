@@ -95,7 +95,7 @@ namespace BoxSystem
             Destroy(boxToRemove.gameObject);
         }
 
-        private void ModifyLastBoxesSpringIntesity()
+        private void ModifyTopBoxSpringIntesity()
         {
             if (m_boxCount > 2)
             {
@@ -119,7 +119,7 @@ namespace BoxSystem
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
                 RemoveBoxToTower();
-                ModifyLastBoxesSpringIntesity();
+                ModifyTopBoxSpringIntesity();
             }
             else if (Input.GetKeyDown(KeyCode.O))
             {
