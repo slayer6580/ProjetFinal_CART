@@ -93,7 +93,10 @@ namespace BoxSystem
             m_boxCount--;
             Box1 boxToRemove = m_boxesInCart.Pop();
             Destroy(boxToRemove.gameObject);
+        }
 
+        private void ModifyLastBoxesSpringIntesity()
+        {
             if (m_boxCount > 2)
             {
                 Debug.Log("m_boxCount > 2: " + (m_boxesInCart.Count - 1));
@@ -103,7 +106,6 @@ namespace BoxSystem
                 previousSpringJoint.spring = 5;
             }
 
-            // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
         }
 
         // TEST
@@ -117,6 +119,7 @@ namespace BoxSystem
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
                 RemoveBoxToTower();
+                ModifyLastBoxesSpringIntesity();
             }
             else if (Input.GetKeyDown(KeyCode.O))
             {
