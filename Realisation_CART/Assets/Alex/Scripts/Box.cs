@@ -1,4 +1,4 @@
-ï»¿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -58,8 +58,8 @@ namespace BoxSystem
 
         private List<SlotInfo> m_slotsList = new List<SlotInfo>();
         private List<ItemInBox> m_itemsList = new List<ItemInBox>();
-        private List<MultiSlots> m_doubleSlots = new List<MultiSlots>(); // CoordonnÃ©s de tout les connections de slot double
-        private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // CoordonnÃ©s de tout les connections de slot a quatre (2 x 2)
+        private List<MultiSlots> m_doubleSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot double
+        private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot a quatre (2 x 2)
         private int m_totalSlots;
         private int m_availableSlotsLeft;
         private BoxSetup m_boxSetup;
@@ -67,14 +67,13 @@ namespace BoxSystem
         private const int LARGE_SIZE = 4;
         private Tower m_tower;
         #endregion
-
-
-
-        private void Awake()
+      
+        private void Awake() 
         {
-            m_boxSetup = GetComponent<BoxSetup>();
+            // yes sir miller
+            m_boxSetup = GetComponent<BoxSetup>();   // yes sir miller
+            // yes sir miller
         }
-
 
 
         #region (--- InitFunctions ---)
@@ -103,7 +102,7 @@ namespace BoxSystem
             m_availableSlotsLeft = m_totalSlots;
         }
 
-        /// <summary> La boite se connecte a la tour lors de sa propre crÃ©ation </summary>
+        /// <summary> La boite se connecte a la tour lors de sa propre création </summary>
         public void SetTower(Tower tower)
         {
             m_tower = tower;    
@@ -165,7 +164,7 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Regarde si on peut placer le multi slot item tout de suite ou rÃ©organizer </summary>
+        /// <summary> Regarde si on peut placer le multi slot item tout de suite ou réorganizer </summary>
         private void PutInBoxOrReorganize(GameObject GO)
         {
             Item item = GO.GetComponent<Item>();
@@ -191,7 +190,7 @@ namespace BoxSystem
             ReorganizeBox(GO);
         }
 
-        /// <summary> Pour rÃ©organiser la boite et placer l'item Ã  l'interieur </summary>
+        /// <summary> Pour réorganiser la boite et placer l'item à l'interieur </summary>
         private void ReorganizeBox(GameObject GO)
         {
             // Faire une nouvelle liste temporaire et ajouter le nouvel item dedans
@@ -209,8 +208,8 @@ namespace BoxSystem
             }
             m_itemsList.Clear();
 
-            // rÃ©organiser le liste du plus grand object au plus petit
-            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); // prÃ©cis comme ca
+            // réorganiser le liste du plus grand object au plus petit
+            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); // précis comme ca
 
             // remettre la boite a zero
             m_availableSlotsLeft = m_totalSlots;
@@ -255,33 +254,6 @@ namespace BoxSystem
 
             SetItemForSlerpAndSnap(GO, localPosition, turn90Degree);
         }
-        #endregion
-
-
-
-        #region (--- RemoveItemFromBox ---)
-
-        public void RemoveItemImpulse()
-        {
-            // get the top item
-            if (m_itemsList.Count <= 0)
-            {
-                Debug.LogWarning("No item in the box");
-                return;
-            }
-
-            ItemInBox itemInBox = m_itemsList[m_itemsList.Count - 1];
-            if (itemInBox.m_item == null)
-            {
-                Debug.LogWarning("Item is null");
-                return;
-            }
-
-            Debug.Log("Item to remove: " + itemInBox.m_item.name);
-            itemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            m_itemsList.RemoveAt(m_itemsList.Count - 1);
-        }
-
         #endregion
 
 

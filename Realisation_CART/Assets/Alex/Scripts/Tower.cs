@@ -1,8 +1,5 @@
-using DiscountDelirium;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static BoxSystem.Box;
 
 namespace BoxSystem
 {
@@ -18,7 +15,6 @@ namespace BoxSystem
         void Start()
         {
             AddBoxToTower();
-            AddSpringToBox();
         }
 
         public void AddBoxToTower()
@@ -31,55 +27,8 @@ namespace BoxSystem
             Box instantBox = instant.GetComponent<Box>();
             instantBox.SetTower(this);
             float height = (m_boxCount - 1) * m_boxHeight;
-            instant.transform.position = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
+            instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
             m_boxesInCart.Push(instantBox);
-        }
-
-        public void AddSpringToBox()
-        {
-            if (m_boxCount == 1) // Pour ajouter un spring entre la première boite et le panier
-            {
-                //Debug.Log("Add spring to box : m_boxCount == 0");
-                Rigidbody cartRB = GetComponentInParent<Rigidbody>();
-                if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
-                SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
-                SetSprintJointValues(springJoint, cartRB);
-                return;
-            }
-
-            if (m_boxCount > 1) // Pour ajouter un spring entre les boites
-            {
-                Box previousBoxe = m_boxesInCart.ToArray()[m_boxesInCart.Count - 1];
-                //Debug.Log("previousBoxe: " + previousBoxe.name);
-                //Debug.Log("newBoxe: " + m_boxesInCart.ToArray()[0].transform.name);
-                SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
-                Rigidbody newBoxeRB = previousBoxe.GetComponent<Rigidbody>();
-                if (newBoxeRB == null)
-                {
-                    newBoxeRB = previousBoxe.AddComponent<Rigidbody>();
-                }
-                SetSprintJointValues(springJoint, newBoxeRB);
-            }
-
-            if (m_boxCount > 2) // Pour changer la force du spring du top box
-            {
-                Debug.Log("m_boxCount > 2: " + m_boxesInCart.Count);
-                Box previousBox = m_boxesInCart.ToArray()[0];
-                Debug.Log("previousBox: " + previousBox.name);
-                SpringJoint previousSpringJoint = previousBox.GetComponent<SpringJoint>();
-                previousSpringJoint.spring = 10;
-            }
-        }
-
-        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
-        {
-            springJoint.connectedBody = newBoxeRB;
-            springJoint.spring = 1;
-            springJoint.damper = 0;
-            springJoint.minDistance = 0;
-            springJoint.maxDistance = 0.2f;
-            springJoint.tolerance = 0.06f;
-            springJoint.enableCollision = true;
         }
 
         public void RemoveBoxToTower()
@@ -93,17 +42,6 @@ namespace BoxSystem
             m_boxCount--;
             Box boxToRemove = m_boxesInCart.Pop();
             Destroy(boxToRemove.gameObject);
-
-            if (m_boxCount > 2)
-            {
-                Debug.Log("m_boxCount > 2: " + (m_boxesInCart.Count - 1));
-                Box currentTopBox = m_boxesInCart.ToArray()[0];
-                Debug.Log("previousBox: " + currentTopBox.name);
-                SpringJoint previousSpringJoint = currentTopBox.GetComponent<SpringJoint>();
-                previousSpringJoint.spring = 5;
-            }
-
-            // Debug.Log("boxes in tower: " + m_boxesInCart.Count);
         }
 
         // TEST
@@ -112,20 +50,10 @@ namespace BoxSystem
             if (Input.GetKeyDown(KeyCode.KeypadPlus))
             {
                 AddBoxToTower();
-                AddSpringToBox();
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
                 RemoveBoxToTower();
-            }
-            else if (Input.GetKeyDown(KeyCode.O))
-            {
-                Box currentTopBox = m_boxesInCart.ToArray()[0];
-                currentTopBox.RemoveItemImpulse();
-            }
-            else if (Input.GetKeyDown(KeyCode.P))
-            {
-                RemoveBoxImpulse();
             }
         }
 
@@ -142,29 +70,6 @@ namespace BoxSystem
         private Box GetTopBox()
         {
             return m_boxesInCart.Peek();
-        }
-
-        public void RemoveBoxImpulse()
-        {
-            // get the top item
-            if (m_boxesInCart.Count <= 0)
-            {
-                Debug.LogWarning("No box on the stack");
-                return;
-            }
-
-            Debug.Log("Item to remove: " + m_boxesInCart.ToArray()[0].name);
-
-            Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
-            SpringJoint springJoint = m_boxesInCart.ToArray()[0].GetComponent<SpringJoint>();
-            if (springJoint != null)
-                Destroy(springJoint);
-
-            if (boxRB == null)
-                boxRB = m_boxesInCart.ToArray()[0].AddComponent<Rigidbody>();
-
-            boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            m_boxesInCart.Pop();
         }
     }
 }
