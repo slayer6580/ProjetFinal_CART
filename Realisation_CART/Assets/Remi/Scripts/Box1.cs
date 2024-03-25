@@ -291,13 +291,6 @@ namespace BoxSystem
         private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree)
         {
             GO.transform.SetParent(gameObject.transform);
-            if (GO == null) Debug.LogError("GO is null");
-            if (m_tower == null) Debug.LogError("m_tower is null");
-            if (m_tower.Cart == null) Debug.LogError("m_tower.Cart is null");
-            if (GO.GetComponent<Item1>() == null) Debug.LogError("GO.GetComponent<Item1>() is null");
-            if (m_boxSetup == null) Debug.LogError("m_boxSetup is null");
-
-
             GO.GetComponent<Item1>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Cart.transform, turn90Degree);
         }
 

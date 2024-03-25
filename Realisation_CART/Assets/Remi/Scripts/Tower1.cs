@@ -61,10 +61,14 @@ namespace BoxSystem
             if (m_boxCount == 1) // Pour ajouter un spring entre la première boite et le panier
             {
                 //Debug.Log("Add spring to box : m_boxCount == 0");
-                Rigidbody cartRB = GetComponentInParent<Rigidbody>();
-                if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
-                SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
-                SetSprintJointValues(springJoint, cartRB);
+                //Rigidbody cartRB = GetComponentInParent<Rigidbody>();
+                //if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
+                //SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
+                //SetSprintJointValues(springJoint, cartRB);
+
+                Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
+                if (boxRB == null) Debug.LogWarning("Box n'a pas de rigidbody");
+                boxRB.isKinematic = true;
                 return;
             }
 
