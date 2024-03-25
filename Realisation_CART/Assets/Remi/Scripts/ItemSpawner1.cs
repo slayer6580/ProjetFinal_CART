@@ -3,7 +3,7 @@ using BoxSystem;
 
 public class ItemSpawner1 : MonoBehaviour
 {
-    [SerializeField] private Item m_itemPrefab;
+    [SerializeField] private Item1 m_itemPrefab;
     [SerializeField] private Tower1 m_tower;
 
     private void Start()

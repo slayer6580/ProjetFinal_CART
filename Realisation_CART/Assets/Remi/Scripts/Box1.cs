@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BoxSystem
 {
-    [RequireComponent(typeof(BoxSetup))]
+    [RequireComponent(typeof(BoxSetup1))]
 
     public class Box1 : MonoBehaviour
     {
@@ -62,7 +62,7 @@ namespace BoxSystem
         private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot a quatre (2 x 2)
         private int m_totalSlots;
         private int m_availableSlotsLeft;
-        private BoxSetup m_boxSetup;
+        private BoxSetup1 m_boxSetup;
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
         private Tower1 m_tower;
@@ -72,7 +72,7 @@ namespace BoxSystem
 
         private void Awake()
         {
-            m_boxSetup = GetComponent<BoxSetup>();
+            m_boxSetup = GetComponent<BoxSetup1>();
         }
 
 
@@ -138,7 +138,7 @@ namespace BoxSystem
         /// <summary> Pour mettre l'objet dans la boite selon sa taille </summary>
         public void PutItemInBox(GameObject GO)
         {
-            Item item = GO.GetComponent<Item>();
+            Item1 item = GO.GetComponent<Item1>();
 
             if (item.m_data.m_size == ItemData.ESize.small)
                 PutSmallItemInBox(GO);
@@ -168,7 +168,7 @@ namespace BoxSystem
         /// <summary> Regarde si on peut placer le multi slot item tout de suite ou réorganizer </summary>
         private void PutInBoxOrReorganize(GameObject GO)
         {
-            Item item = GO.GetComponent<Item>();
+            Item1 item = GO.GetComponent<Item1>();
             List<MultiSlots> multiSlotList = new List<MultiSlots>();
 
             multiSlotList = item.m_data.m_size == ItemData.ESize.medium ? m_doubleSlots : m_fourSlots;
@@ -210,7 +210,7 @@ namespace BoxSystem
             m_itemsList.Clear();
 
             // réorganiser le liste du plus grand object au plus petit
-            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); // précis comme ca
+            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item1>().m_data.m_size).ToList(); // précis comme ca
 
             // remettre la boite a zero
             m_availableSlotsLeft = m_totalSlots;
@@ -230,7 +230,7 @@ namespace BoxSystem
         /// <summary> Pour mettre un objet multi slot dans la boite </summary>
         private void PutMultiSlotItemInBox(GameObject GO, MultiSlots multiSlot)
         {
-            Item item = GO.GetComponent<Item>();
+            Item1 item = GO.GetComponent<Item1>();
             int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
             List<Vector3> allLocalPositions = new List<Vector3>();
 
@@ -291,6 +291,13 @@ namespace BoxSystem
         private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree)
         {
             GO.transform.SetParent(gameObject.transform);
+            if (GO == null) Debug.LogError("GO is null");
+            if (m_tower == null) Debug.LogError("m_tower is null");
+            if (m_tower.Cart == null) Debug.LogError("m_tower.Cart is null");
+            if (GO.GetComponent<Item1>() == null) Debug.LogError("GO.GetComponent<Item1>() is null");
+            if (m_boxSetup == null) Debug.LogError("m_boxSetup is null");
+
+
             GO.GetComponent<Item1>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Cart.transform, turn90Degree);
         }
 

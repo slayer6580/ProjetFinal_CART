@@ -27,7 +27,7 @@ namespace BoxSystem
             Box instantBox = instant.GetComponent<Box>();
             instantBox.SetTower(this);
             float height = (m_boxCount - 1) * m_boxHeight;
-            instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
+            instant.transform.position = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
             m_boxesInCart.Push(instantBox);
         }
 

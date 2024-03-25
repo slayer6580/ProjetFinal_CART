@@ -21,17 +21,38 @@ namespace BoxSystem
             AddSpringToBox();
         }
 
+        //public void AddBoxToTower()
+        //{
+        //    Debug.Log("AddBoxToTower()");
+        //    m_boxCount++;
+        //    float height = (m_boxCount - 1) * m_boxHeight;
+        //    GameObject instant = Instantiate(m_boxPrefab, transform.position, Cart.transform.rotation);
+        //    instant.transform.rotation = Cart.transform.rotation;
+        //    instant.transform.SetParent(transform);
+        //    instant.name = "Box " + m_boxCount;
+        //    Box1 instantBox = instant.GetComponent<Box1>();
+        //    instantBox.SetTower(this);
+        //    instant.transform.position = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
+        //    m_boxesInCart.Push(instantBox);
+        //}
+
         public void AddBoxToTower()
         {
+            Debug.Log("AddBoxToTower()");
             m_boxCount++;
-            GameObject instant = Instantiate(m_boxPrefab);
+            float height = (m_boxCount - 1) * m_boxHeight;
+            Debug.Log("(m_boxCount - 1)" + (m_boxCount - 1));
+            Debug.Log("m_boxHeight: " + m_boxHeight);
+            Debug.Log("height: " + height);
+            Vector3 desiredPos = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
+            Debug.Log("desiredPos: " + desiredPos);
+            GameObject instant = Instantiate(m_boxPrefab, desiredPos, Cart.transform.rotation);
             instant.transform.rotation = Cart.transform.rotation;
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box1 instantBox = instant.GetComponent<Box1>();
             instantBox.SetTower(this);
-            float height = (m_boxCount - 1) * m_boxHeight;
-            instant.transform.position = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
+            instant.transform.position = desiredPos;
             m_boxesInCart.Push(instantBox);
         }
 

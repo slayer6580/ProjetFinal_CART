@@ -15,7 +15,9 @@ public class Slot1 : MonoBehaviour
     private void Update()
     {
         // Sert a tester le placement de slot avec rendu au gameplay (Scene)
-        Debug.DrawLine(transform.position, transform.position + Vector3.up, Color.black);
+        //Debug.DrawLine(transform.position, transform.position + Vector3.up, Color.black);
+        Vector3 slotPosition = transform.parent.parent.position + transform.localPosition;
+        Debug.DrawLine(slotPosition, slotPosition + new Vector3(0,0.25f,0), Color.black);
     }
 
     /// <summary> Donne une couleur random a la slot spécial </summary>
