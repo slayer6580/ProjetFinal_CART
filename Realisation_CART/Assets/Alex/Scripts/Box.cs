@@ -245,7 +245,6 @@ namespace BoxSystem
 
 
             bool turn90Degree = false;
-            // TODO va devoir transferer l'information du if ci dessous dans la fonction SetItemSlerpAndSnap()
             if (sizeInt == MEDIUM_SIZE && Mathf.Abs((multiSlot.m_slotIndexes[0] - multiSlot.m_slotIndexes[1])) != 1)
             {
                 turn90Degree = true;
@@ -255,6 +254,31 @@ namespace BoxSystem
         }
         #endregion
 
+
+        #region (--- RemoveItemFromBox ---)
+
+        public void RemoveItemImpulse()
+        {
+            // get the top item
+            if (m_itemsList.Count <= 0)
+            {
+                Debug.LogWarning("No item in the box");
+                return;
+            }
+
+            ItemInBox itemInBox = m_itemsList[m_itemsList.Count - 1];
+            if (itemInBox.m_item == null)
+            {
+                Debug.LogWarning("Item is null");
+                return;
+            }
+
+            Debug.Log("Item to remove: " + itemInBox.m_item.name);
+            itemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+            m_itemsList.RemoveAt(m_itemsList.Count - 1);
+        }
+
+        #endregion
 
 
         #region (--- HelpFunctions ---)
