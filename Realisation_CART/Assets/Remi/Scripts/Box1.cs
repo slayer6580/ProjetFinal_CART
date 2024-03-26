@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiscountDelirium;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -264,6 +265,7 @@ namespace BoxSystem
 
         #region (--- RemoveItemFromBox ---)
 
+
         public void RemoveItemImpulse()
         {
             // get the top item
@@ -273,16 +275,25 @@ namespace BoxSystem
                 return;
             }
 
-            ItemInBox itemInBox = m_itemsList[m_itemsList.Count - 1];
-            if (itemInBox.m_item == null)
+            ItemInBox lastItemInBox = GetLastItem();
+
+            if (lastItemInBox.m_item == null)
             {
                 Debug.LogWarning("Item is null");
                 return;
             }
 
-            Debug.Log("Item to remove: " + itemInBox.m_item.name);
-            itemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            m_itemsList.RemoveAt(m_itemsList.Count - 1);
+            Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
+            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+
+            foreach (int item in lastItemInBox.m_slotIndex)
+            {
+                Transform slotTransform = m_slotsList[item].m_slotTransform;
+                m_slotsList[item] = new SlotInfo(slotTransform, true);
+            }
+
+            lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
+            m_itemsList.Remove(lastItemInBox);
         }
 
         public void RemoveItemImpulse(Vector3 velocity)
@@ -294,17 +305,22 @@ namespace BoxSystem
                 return;
             }
 
-            Item1 itemInBox = GetLastItem();
-            if (itemInBox == null)
+            ItemInBox lastItemInBox = GetLastItem();
+            if (lastItemInBox.m_item == null)
             {
                 Debug.LogWarning("Item is null");
                 return;
             }
 
-            Debug.Log("Item to remove: " + itemInBox.name);
-            itemInBox.gameObject.AddComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
-            itemInBox.GetComponent<Item1>().MarkForDelete();
-            m_itemsList.RemoveAt(m_itemsList.Count - 1);
+            Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
+
+            if (rb == null) 
+                lastItemInBox.m_item.gameObject.AddComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            else 
+                rb.AddForce(velocity, ForceMode.Impulse);
+
+            lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
+            m_itemsList.Remove(lastItemInBox);
         }
 
         /// <summary> Marker la boite pour la supprimer </summary>
@@ -339,10 +355,10 @@ namespace BoxSystem
 
         #region (--- HelpFunctions ---)
         /// <summary> Place l'objet dans la hierarchie enfant de la boite </summary>
-        private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree)
+        private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
-            GO.transform.SetParent(gameObject.transform);
-            GO.GetComponent<Item1>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Cart.transform, turn90Degree);
+            GO.transform.localScale = GO.GetComponent<Item1>().m_data.m_scaleInBox; // change le scale de l'objet choisi
+            GO.GetComponent<Item1>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player.transform, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
         }
 
         /// <summary> Regarde si une liste de bool est toute vrai </summary>
@@ -376,9 +392,9 @@ namespace BoxSystem
 
 
         #region (--- Fields ---)
-        private Item1 GetLastItem()
+        private ItemInBox GetLastItem()
         {
-            return m_itemsList.Count > 0 ? m_itemsList[m_itemsList.Count - 1].m_item.GetComponent<Item1>() : null;
+            return m_itemsList[m_itemsList.Count - 1];
         }
 
         private int GetLastItemIndex()

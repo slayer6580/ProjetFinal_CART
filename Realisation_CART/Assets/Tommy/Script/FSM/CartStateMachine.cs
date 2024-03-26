@@ -94,7 +94,7 @@ namespace CartControl
 			m_currentState.OnUpdate();
 			TryToChangeState();
 
-			m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
+			//m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
 
 		}
 

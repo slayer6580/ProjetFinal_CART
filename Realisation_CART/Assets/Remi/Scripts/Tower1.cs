@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BoxSystem
@@ -7,13 +8,22 @@ namespace BoxSystem
 
     public class Tower1 : MonoBehaviour
     {
+        [field: Header("Mettre le Cart GO ici")]
         [field: SerializeField] public GameObject Cart { get; private set; }
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
-        [field: SerializeField] private GameObject Character { get; set; } = null;
-        [SerializeField] private GameObject m_boxPrefab;       
+        [field: SerializeField] public GameObject Player { get; private set; }
+
+        [field: Header("La distance ou un item devrait snap a la boite pendant le slerp")]
+        [field: SerializeField] public float ItemSnapDistance { get; private set; }
+
+        [Header("Mettre le Prefab de la boite")]
+        [SerializeField] private GameObject m_boxPrefab;
+        [Header("La hauteur de placement de la boite")]
         [SerializeField] private float m_boxHeight;
+
         private int m_boxCount = 0;
         private Stack<Box1> m_boxesInCart = new Stack<Box1>();
+
         private const int MAX_BOXES_BEFORE_DROP = 4;
 
         void Start()
@@ -22,24 +32,49 @@ namespace BoxSystem
             AddSpringToBox();
         }
 
+        /// <summary> Ajoute une boite a la tour </summary>
         public void AddBoxToTower()
         {
-            //Debug.Log("AddBoxToTower()");
             m_boxCount++;
-            float height = (m_boxCount - 1) * m_boxHeight;
-            Vector3 desiredPos = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
 
-            GameObject instant = Instantiate(m_boxPrefab, desiredPos, Cart.transform.rotation);
-            instant.transform.rotation = Cart.transform.rotation;
+            // setup de la boite
+            GameObject instant = Instantiate(m_boxPrefab);
+            instant.transform.rotation = Player.transform.rotation;
             instant.transform.SetParent(transform);
             instant.name = "Box " + m_boxCount;
             Box1 instantBox = instant.GetComponent<Box1>();
             instantBox.SetTower(this);
-            instant.transform.position = desiredPos;
+
+            // hauteur de la boite dans la tour
+            float height = (m_boxCount - 1) * m_boxHeight;
+            instant.transform.localPosition = new Vector3(0, height, 0);
+
+            // ajout a la liste
             m_boxesInCart.Push(instantBox);
+
+            //  AddSpringToBox();  // Ta fonction ici, p-e rajouter instantBox en parametre
         }
 
-        public void AddSpringToBox()
+
+        //public void AddBoxToTower()
+        //{
+        //    //Debug.Log("AddBoxToTower()");
+        //    m_boxCount++;
+        //    float height = (m_boxCount - 1) * m_boxHeight;
+        //    Vector3 desiredPos = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
+
+        //    GameObject instant = Instantiate(m_boxPrefab, desiredPos, Cart.transform.rotation);
+        //    instant.transform.rotation = Cart.transform.rotation;
+        //    instant.transform.SetParent(transform);
+        //    instant.name = "Box " + m_boxCount;
+        //    Box1 instantBox = instant.GetComponent<Box1>();
+        //    instantBox.SetTower(this);
+        //    instant.transform.position = desiredPos;
+        //    m_boxesInCart.Push(instantBox);
+        //}
+
+
+        public void AddSpringToBox() // p-e rajouter instantBox en parametre    // Rémi
         {
             if (m_boxCount == 1) // Pour ajouter un spring entre la première boite et le panier
             {
@@ -77,7 +112,7 @@ namespace BoxSystem
             }
         }
 
-        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
+        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB) // Rémi
         {
             springJoint.connectedBody = newBoxeRB;
             springJoint.spring = 1;
@@ -88,6 +123,7 @@ namespace BoxSystem
             springJoint.enableCollision = true;
         }
 
+        /// <summary> Enleve une boite a la tour </summary>
         public void RemoveBoxToTower()
         {
             if (m_boxCount == 1)
@@ -99,6 +135,7 @@ namespace BoxSystem
             m_boxCount--;
             Box1 boxToRemove = m_boxesInCart.Pop();
             Destroy(boxToRemove.gameObject);
+            // ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
         }
 
         public void RemoveBoxImpulse(Vector3 velocity)
@@ -128,7 +165,6 @@ namespace BoxSystem
             //    SpringJoint previousSpringJoint = currentTopBox.GetComponent<SpringJoint>();
             //    previousSpringJoint.spring = 5;
             //}
-
         }
 
         // TEST
@@ -144,25 +180,36 @@ namespace BoxSystem
                 RemoveBoxToTower();
                 ModifyTopBoxSpringIntesity();
             }
+            else if (Input.GetKeyDown(KeyCode.O))
+            {
+                Box1 currentTopBox = m_boxesInCart.ToArray()[0];
+                currentTopBox.RemoveItemImpulse();
+            }
+            else if (Input.GetKeyDown(KeyCode.P))
+            {
+                RemoveBoxImpulse();
+            }
             else if (Input.GetKeyDown(KeyCode.K))
             {
-                Vector3 pos = Character.transform.localPosition + Cart.transform.localPosition;
-                Quaternion rot = Character.transform.localRotation * Cart.transform.localRotation;
-                GameObject instant = Instantiate(DebugCartPrefab, pos + new Vector3(-3, 0, 0), rot * Quaternion.Euler(0, 90, 0));
+                Vector3 pos = Player.transform.localPosition + Cart.transform.localPosition;
+                Quaternion rot = Player.transform.localRotation * Cart.transform.localRotation;
+                Instantiate(DebugCartPrefab, pos + new Vector3(-3, 0, 0), rot * Quaternion.Euler(0, 90, 0));
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
-                Vector3 pos = Character.transform.localPosition + Cart.transform.localPosition;
-                Quaternion rot = Character.transform.localRotation * Cart.transform.localRotation;
-                GameObject instant = Instantiate(DebugCartPrefab, pos + new Vector3(3, 0, 0), rot * Quaternion.Euler(0, -90, 0));
+                Vector3 pos = Player.transform.localPosition + Cart.transform.localPosition;
+                Quaternion rot = Player.transform.localRotation * Cart.transform.localRotation;
+                Instantiate(DebugCartPrefab, pos + new Vector3(3, 0, 0), rot * Quaternion.Euler(0, -90, 0));
             }
         }
 
+        /// <summary> Regarde si la boite du dessus pourrait prendre un objet d'une certaine taille </summary>
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
         {
             return GetTopBox().CanPutItemInsideBox(size);
         }
 
+        /// <summary> Pour donner un item a la boite du dessus </summary>
         public void PutObjectInTopBox(GameObject item)
         {
             GetTopBox().PutItemInBox(item);
@@ -178,15 +225,38 @@ namespace BoxSystem
             if (m_boxesInCart.Count == 0) return;
             Debug.Log("Dropping content");
             Box1 box = GetTopBox();
-            if (box.IsEmpty() && !box.IsLast()) 
+            if (box.IsEmpty() && !box.IsLast())
                 RemoveBoxImpulse(velocity);
-            else if (!box.IsEmpty() && GetBoxesCount() < MAX_BOXES_BEFORE_DROP) 
+            else if (!box.IsEmpty() && GetBoxesCount() < MAX_BOXES_BEFORE_DROP)
                 box.RemoveItemImpulse(velocity);
         }
 
         internal int GetBoxesCount()
         {
             return m_boxCount;
+        }
+
+        public void RemoveBoxImpulse() // Rémi
+        {
+            // get the top item
+            if (m_boxesInCart.Count <= 0)
+            {
+                Debug.LogWarning("No box on the stack");
+                return;
+            }
+
+            Debug.Log("Item to remove: " + m_boxesInCart.ToArray()[0].name);
+
+            Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
+            SpringJoint springJoint = m_boxesInCart.ToArray()[0].GetComponent<SpringJoint>();
+            if (springJoint != null)
+                Destroy(springJoint);
+
+            if (boxRB == null)
+                boxRB = m_boxesInCart.ToArray()[0].AddComponent<Rigidbody>();
+
+            boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+            m_boxesInCart.Pop();
         }
     }
 }

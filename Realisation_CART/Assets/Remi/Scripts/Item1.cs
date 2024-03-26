@@ -1,3 +1,4 @@
+using DiscountDelirium;
 using System.Collections;
 using UnityEngine;
 
@@ -5,18 +6,20 @@ namespace BoxSystem
 {
     public class Item1 : MonoBehaviour
     {
-        [SerializeField] private float m_distanceSnap;
 
         public ItemData m_data;
         private Box1 m_box;
-        private Transform m_playerTransform;
+        private Transform m_cartTransform;
         private Vector3 m_targetLocalPosition;
+        private Vector3 m_startPosition;
 
         private float m_timer = 0;
+        private float m_distanceSnap;
         private bool m_isMoving = false;
         private bool m_turn90Degree = false;
-        private const float SLERP_TIME = 30.0f;
-        private readonly float DELAY_UNTIL_DELETE = 1.5f;
+        private const float SLERP_TIME = 2.0f;
+
+        private Transform m_boxTransform; // NEW
 
         private void Awake()
         {
@@ -29,20 +32,35 @@ namespace BoxSystem
             Slerping();
         }
 
-        public void StartSlerpAndSnap(Box1 box, Vector3 localPosition, Transform cartTransform, bool turn90Degree)
+        public void StartSlerpAndSnap(Box1 box, Vector3 localPosition, Transform cartTransform, bool turn90Degree, float snapDistance, bool autoSnap)
         {
             m_turn90Degree = turn90Degree;
-            m_playerTransform = cartTransform;
-            m_isMoving = true;
+            m_cartTransform = cartTransform;
             m_targetLocalPosition = localPosition;
             m_box = box;
+            m_boxTransform = box.transform;
+            m_startPosition = transform.position;
+            if (autoSnap) // apres un reorganize
+            {
+                SnapToBox();
+                return;
+            }
+            m_isMoving = true;
+
+            m_distanceSnap = snapDistance;
             enabled = true;
         }
 
         private void SnapToBox()
         {
+            transform.SetParent(m_boxTransform);
             transform.localPosition = m_targetLocalPosition;
-            transform.rotation = m_playerTransform.rotation;
+            Vector3 eulerOfCart = m_cartTransform.rotation.eulerAngles;
+            Vector3 localEulerOfBox = m_boxTransform.transform.localRotation.eulerAngles;
+
+            transform.eulerAngles = Vector3.zero;
+            transform.eulerAngles += eulerOfCart;
+            transform.eulerAngles += localEulerOfBox;
 
             if (m_turn90Degree)
                 transform.eulerAngles += new Vector3(0, 90, 0);
@@ -66,7 +84,7 @@ namespace BoxSystem
 
             Vector3 boxLocalPosition = m_box.transform.position + m_targetLocalPosition;
 
-            transform.position = Vector3.Slerp(transform.position, boxLocalPosition, slerpTime);
+            transform.position = Vector3.Slerp(m_startPosition, boxLocalPosition, slerpTime);
             float targetDistance = Mathf.Abs(Vector3.Distance(transform.position, boxLocalPosition));
 
             if (targetDistance < m_distanceSnap)
@@ -78,24 +96,23 @@ namespace BoxSystem
 
         }
 
-        internal void MarkForDelete()
-        {
-            StartCoroutine(DestroyObject());
-        }
+        //internal void MarkForDelete()
+        //{
+        //    StartCoroutine(DestroyObject());
+        //}
 
-        // TODO Remi Alex: A voir plus tard system de pooling et heritage commun entre box et item
-        IEnumerator DestroyObject()
-        {
-            yield return new WaitForSeconds(DELAY_UNTIL_DELETE);
+        //IEnumerator DestroyObject()
+        //{
+        //    yield return new WaitForSeconds(DELAY_UNTIL_DELETE);
 
-            if (m_box == null)
-            {
-                Debug.LogWarning("No tower to remove box from");
-                m_box = GetComponentInParent<Box1>();
-            }
+        //    if (m_box == null)
+        //    {
+        //        Debug.LogWarning("No tower to remove box from");
+        //        m_box = GetComponentInParent<Box1>();
+        //    }
 
-            m_box.RemoveLastItemFromBox();
-            Destroy(gameObject);
-        }
+        //    m_box.RemoveLastItemFromBox();
+        //    Destroy(gameObject);
+        //}
     }
 }
