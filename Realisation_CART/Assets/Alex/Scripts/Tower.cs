@@ -7,9 +7,16 @@ namespace BoxSystem
 
     public class Tower : MonoBehaviour
     {
+        [field: Header("Mettre le Cart GO ici")]
         [field: SerializeField] public GameObject Cart { get; private set; }
-        [SerializeField] private GameObject m_boxPrefab;       
+        [field: Header("La distance ou un item devrait snap a la boite pendant le slerp")]
+        [field: SerializeField] public float ItemSnapDistance { get; private set; }
+
+        [Header("Mettre le Prefab de la boite")]
+        [SerializeField] private GameObject m_boxPrefab;
+        [Header("La hauteur de placement de la boite")]
         [SerializeField] private float m_boxHeight;
+
         private int m_boxCount = 0;
         private Stack<Box> m_boxesInCart = new Stack<Box>();
 
@@ -18,22 +25,31 @@ namespace BoxSystem
             AddBoxToTower();
         }
 
+        /// <summary> Ajoute une boite a la tour </summary>
         public void AddBoxToTower()
         {
             m_boxCount++;
+
+            // setup de la boite
             GameObject instant = Instantiate(m_boxPrefab);
             instant.transform.rotation = Cart.transform.rotation;
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box instantBox = instant.GetComponent<Box>();
             instantBox.SetTower(this);
+
+            // hauteur de la boite dans la tour
             float height = (m_boxCount - 1) * m_boxHeight;
             instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
+
+            // ajout a la liste
             m_boxesInCart.Push(instantBox);
-            AddSpringToBox();  // Ta fonction ici, p-e rajouter instantBox en parametre
+
+          //  AddSpringToBox();  // Ta fonction ici, p-e rajouter instantBox en parametre
         }
 
-        public void AddSpringToBox() // p-e rajouter instantBox en parametre   
+
+        public void AddSpringToBox() // p-e rajouter instantBox en parametre    // Rémi
         {
             if (m_boxCount == 1) // Pour ajouter un spring entre la première boite et le panier
             {
@@ -71,7 +87,7 @@ namespace BoxSystem
             }
         }
 
-        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
+        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB) // Rémi
         {
             springJoint.connectedBody = newBoxeRB;
             springJoint.spring = 1;
@@ -82,6 +98,7 @@ namespace BoxSystem
             springJoint.enableCollision = true;
         }
 
+        /// <summary> Enleve une boite a la tour </summary>
         public void RemoveBoxToTower()
         {
             if (m_boxCount == 1)
@@ -93,7 +110,7 @@ namespace BoxSystem
             m_boxCount--;
             Box boxToRemove = m_boxesInCart.Pop();
             Destroy(boxToRemove.gameObject);
-            ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
+           // ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
         }
 
         // TEST
@@ -119,22 +136,25 @@ namespace BoxSystem
             }
         }
 
+        /// <summary> Regarde si la boite du dessus pourrait prendre un objet d'une certaine taille </summary>
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
         {
             return GetTopBox().CanPutItemInsideBox(size);
         }
 
+        /// <summary> Pour donner un item a la boite du dessus </summary>
         public void PutObjectInTopBox(GameObject item)
         {
             GetTopBox().PutItemInBox(item);
         }
 
+        /// <summary> Donne la boite du dessus </summary>
         private Box GetTopBox()
         {
             return m_boxesInCart.Peek();
         }
 
-        private void ModifyTopBoxSpringIntesity()
+        private void ModifyTopBoxSpringIntesity() // Rémi
         {
             if (m_boxCount > 2)
             {
@@ -148,7 +168,7 @@ namespace BoxSystem
 
         }
 
-        public void RemoveBoxImpulse()
+        public void RemoveBoxImpulse() // Rémi
         {
             // get the top item
             if (m_boxesInCart.Count <= 0)

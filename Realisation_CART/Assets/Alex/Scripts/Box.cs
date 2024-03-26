@@ -108,7 +108,6 @@ namespace BoxSystem
         #endregion
 
 
-
         #region (--- Bool Verification ---)
         /// <summary> Regarde si on peut prendre l'objet selon sa taille </summary>
         public bool CanPutItemInsideBox(ItemData.ESize size)
@@ -131,21 +130,20 @@ namespace BoxSystem
         #endregion
 
 
-
         #region (--- PutItemInsideBox ---)
         /// <summary> Pour mettre l'objet dans la boite selon sa taille </summary>
-        public void PutItemInBox(GameObject GO)
+        public void PutItemInBox(GameObject GO, bool autoSnap = false)
         {
             Item item = GO.GetComponent<Item>();
 
             if (item.m_data.m_size == ItemData.ESize.small)
-                PutSmallItemInBox(GO);
+                PutSmallItemInBox(GO, autoSnap);
             else
-                PutInBoxOrReorganize(GO);
+                PutInBoxOrReorganize(GO, autoSnap);
         }
 
         /// <summary> Pour mettre un petit objet dans la boite </summary>
-        private void PutSmallItemInBox(GameObject GO)
+        private void PutSmallItemInBox(GameObject GO, bool autoSnap)
         {
             for (int i = 0; i < m_slotsList.Count; i++)
             {
@@ -157,14 +155,14 @@ namespace BoxSystem
                     List<int> allIndex = new List<int>();
                     allIndex.Add(i);
                     m_itemsList.Add(new ItemInBox(GO, allIndex, slotTransform.localPosition));
-                    SetItemForSlerpAndSnap(GO, slotTransform.localPosition, false);
+                    SetItemForSlerpAndSnap(GO, slotTransform.localPosition, false, autoSnap);
                     return;
                 }
             }
         }
 
         /// <summary> Regarde si on peut placer le multi slot item tout de suite ou réorganizer </summary>
-        private void PutInBoxOrReorganize(GameObject GO)
+        private void PutInBoxOrReorganize(GameObject GO, bool autoSnap)
         {
             Item item = GO.GetComponent<Item>();
             List<MultiSlots> multiSlotList = new List<MultiSlots>();
@@ -182,7 +180,7 @@ namespace BoxSystem
 
                 if (AllSlotIsAvailable(slotsAvailable))
                 {
-                    PutMultiSlotItemInBox(GO, multiSlot);
+                    PutMultiSlotItemInBox(GO, multiSlot, autoSnap);
                     return;
                 }
             }
@@ -221,12 +219,12 @@ namespace BoxSystem
             // replacer les items du plus grand au plus petit, 100% accurate
             foreach (GameObject item in newList)
             {
-                PutItemInBox(item);
+                PutItemInBox(item, true);
             }
         }
 
         /// <summary> Pour mettre un objet multi slot dans la boite </summary>
-        private void PutMultiSlotItemInBox(GameObject GO, MultiSlots multiSlot)
+        private void PutMultiSlotItemInBox(GameObject GO, MultiSlots multiSlot, bool autoSnap)
         {
             Item item = GO.GetComponent<Item>();
             int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
@@ -250,7 +248,7 @@ namespace BoxSystem
                 turn90Degree = true;
             }
 
-            SetItemForSlerpAndSnap(GO, localPosition, turn90Degree);
+            SetItemForSlerpAndSnap(GO, localPosition, turn90Degree, autoSnap);
         }
         #endregion
 
@@ -283,10 +281,10 @@ namespace BoxSystem
 
         #region (--- HelpFunctions ---)
         /// <summary> Place l'objet dans la hierarchie enfant de la boite </summary>
-        private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree)
+        private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
             GO.transform.SetParent(gameObject.transform);
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Cart.transform, turn90Degree);
+            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Cart.transform, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
         }
 
         /// <summary> Regarde si une liste de bool est toute vrai </summary>
