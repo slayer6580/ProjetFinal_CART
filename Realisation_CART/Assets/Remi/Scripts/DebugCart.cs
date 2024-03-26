@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
@@ -7,13 +8,19 @@ namespace DiscountDelirium
 {
     public class DebugCart : MonoBehaviour
     {
-        // Start is called before the first frame update
+
         void Start()
         {
-        
+            
+            StartCoroutine(AutoDestroy());
         }
 
-        // Update is called once per frame
+        IEnumerator AutoDestroy()
+        {
+            yield return new WaitForSeconds(2);
+            Destroy(gameObject);
+        }
+
         void FixedUpdate()
         {
             GetComponent<Rigidbody>().AddForce(transform.forward
