@@ -9,12 +9,13 @@ namespace BoxSystem
         private Box m_box;
         private Transform m_cartTransform;
         private Vector3 m_targetLocalPosition;
+        private Vector3 m_startPosition;
 
         private float m_timer = 0;
         private float m_distanceSnap;
         private bool m_isMoving = false;
         private bool m_turn90Degree = false;
-        private const float SLERP_TIME = 30.0f;
+        private const float SLERP_TIME = 2.0f;
 
         private Transform m_boxTransform; // NEW
 
@@ -36,6 +37,7 @@ namespace BoxSystem
             m_targetLocalPosition = localPosition;          
             m_box = box;
             m_boxTransform = box.transform;
+            m_startPosition = transform.position;
             if (autoSnap) // apres un reorganize
             {
                 SnapToBox();
@@ -49,8 +51,8 @@ namespace BoxSystem
 
         private void SnapToBox()
         {
+            transform.SetParent(m_boxTransform);
             transform.localPosition = m_targetLocalPosition;
-
             Vector3 eulerOfCart = m_cartTransform.rotation.eulerAngles; 
             Vector3 localEulerOfBox = m_boxTransform.transform.localRotation.eulerAngles;
 
@@ -82,7 +84,7 @@ namespace BoxSystem
 
             Vector3 boxLocalPosition = m_box.transform.position + m_targetLocalPosition;
 
-            transform.position = Vector3.Slerp(transform.position, boxLocalPosition, slerpTime);
+            transform.position = Vector3.Slerp(m_startPosition, boxLocalPosition, slerpTime);
             float targetDistance = Mathf.Abs(Vector3.Distance(transform.position, boxLocalPosition));
 
             if (targetDistance < m_distanceSnap)
