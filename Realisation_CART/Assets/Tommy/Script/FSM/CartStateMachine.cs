@@ -1,4 +1,5 @@
 using Cinemachine;
+using DiscountDelirium;
 using UnityEngine;
 
 namespace CartControl
@@ -63,6 +64,8 @@ namespace CartControl
 		public GameObject m_gameplayCamera;
 		public CinemachineBrain m_camBrain;
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
+		[Space]
+		public TowerBalanceAnimCtrlr m_towerCtrlr;
 
 		//
 		[HideInInspector] public bool CanDrift { get; set; }
@@ -90,11 +93,15 @@ namespace CartControl
 
 			m_currentState.OnUpdate();
 			TryToChangeState();
+
+			m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
+
 		}
 
 		protected override void FixedUpdate()
 		{
 			m_currentState.OnFixedUpdate();
+			
 		}
 
 		protected override void CreatePossibleStateList()
