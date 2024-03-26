@@ -285,7 +285,7 @@ namespace BoxSystem
         {
             GO.transform.localScale = GO.GetComponent<Item>().m_data.m_scaleInBox; // change le scale de l'objet choisi
             GO.transform.SetParent(gameObject.transform);
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Cart.transform, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
+            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player.transform, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
         }
 
         /// <summary> Regarde si une liste de bool est toute vrai </summary>
