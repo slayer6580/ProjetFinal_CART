@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 
 namespace CartControl
@@ -9,6 +10,7 @@ namespace CartControl
         private MainInputs m_mainInputs;
         public static MainInputsHandler Instance;
 		[SerializeField] private CartStateMachine m_cartStateMachine;
+		[SerializeField] private UnityEvent m_grabItemEvent;
 
 		private void Awake()
 		{
@@ -35,6 +37,9 @@ namespace CartControl
 
 			m_mainInputs.Cart.Pause.started += OnPause;
 
+
+			m_mainInputs.Cart.GrabItem.started += OnGrabItem;
+
 		}
 
 		public void OnForward(InputAction.CallbackContext context)
@@ -55,6 +60,11 @@ namespace CartControl
 		public void OnPause(InputAction.CallbackContext context)
 		{
 			m_cartStateMachine.OnPause();
+		}
+
+		public void OnGrabItem(InputAction.CallbackContext context)
+		{
+			m_grabItemEvent.Invoke();
 		}
 
 		private void OnEnable()

@@ -64,6 +64,15 @@ namespace CartControl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GrabItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""03125146-057f-4d87-835c-6f23e97f6423"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ namespace CartControl
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5a71c97-a82b-4930-9933-44d8ca1dba03"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GrabItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +164,7 @@ namespace CartControl
             m_Cart_CartBackward = m_Cart.FindAction("CartBackward", throwIfNotFound: true);
             m_Cart_Steer = m_Cart.FindAction("Steer", throwIfNotFound: true);
             m_Cart_Pause = m_Cart.FindAction("Pause", throwIfNotFound: true);
+            m_Cart_GrabItem = m_Cart.FindAction("GrabItem", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -209,6 +230,7 @@ namespace CartControl
         private readonly InputAction m_Cart_CartBackward;
         private readonly InputAction m_Cart_Steer;
         private readonly InputAction m_Cart_Pause;
+        private readonly InputAction m_Cart_GrabItem;
         public struct CartActions
         {
             private @MainInputs m_Wrapper;
@@ -217,6 +239,7 @@ namespace CartControl
             public InputAction @CartBackward => m_Wrapper.m_Cart_CartBackward;
             public InputAction @Steer => m_Wrapper.m_Cart_Steer;
             public InputAction @Pause => m_Wrapper.m_Cart_Pause;
+            public InputAction @GrabItem => m_Wrapper.m_Cart_GrabItem;
             public InputActionMap Get() { return m_Wrapper.m_Cart; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -238,6 +261,9 @@ namespace CartControl
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @GrabItem.started += instance.OnGrabItem;
+                @GrabItem.performed += instance.OnGrabItem;
+                @GrabItem.canceled += instance.OnGrabItem;
             }
 
             private void UnregisterCallbacks(ICartActions instance)
@@ -254,6 +280,9 @@ namespace CartControl
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @GrabItem.started -= instance.OnGrabItem;
+                @GrabItem.performed -= instance.OnGrabItem;
+                @GrabItem.canceled -= instance.OnGrabItem;
             }
 
             public void RemoveCallbacks(ICartActions instance)
@@ -277,6 +306,7 @@ namespace CartControl
             void OnCartBackward(InputAction.CallbackContext context);
             void OnSteer(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
+            void OnGrabItem(InputAction.CallbackContext context);
         }
     }
 }
