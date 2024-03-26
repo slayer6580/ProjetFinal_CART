@@ -1,6 +1,5 @@
-using CartControl;
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BoxSystem
@@ -15,6 +14,7 @@ namespace BoxSystem
         [SerializeField] private float m_boxHeight;
         private int m_boxCount = 0;
         private Stack<Box1> m_boxesInCart = new Stack<Box1>();
+        private const int MAX_BOXES_BEFORE_DROP = 4;
 
         void Start()
         {
@@ -64,6 +64,8 @@ namespace BoxSystem
                 //SetSprintJointValues(springJoint, newBoxeRB);
                 //Box1 box1 = GetTopBox();
                 //box1.GetComponent<Rigidbody>().isKinematic = true;
+                Box1 box1 = GetTopBox();
+                box1.GetComponent<Rigidbody>().isKinematic = true;
                 return;
             }
 
@@ -109,21 +111,23 @@ namespace BoxSystem
             }
 
             Debug.Log("Box to remove: " + topBox.name);
+            topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            topBox.MarkForDelete();
             //m_boxesInCart.Pop();
             //Destroy(topBox.gameObject);
         }
 
         private void ModifyTopBoxSpringIntesity()
         {
-            if (m_boxCount > 2)
-            {
-                Debug.Log("m_boxCount > 2: " + (m_boxesInCart.Count - 1));
-                Box1 currentTopBox = m_boxesInCart.ToArray()[0];
-                Debug.Log("previousBox: " + currentTopBox.name);
-                SpringJoint previousSpringJoint = currentTopBox.GetComponent<SpringJoint>();
-                previousSpringJoint.spring = 5;
-            }
+            //if (m_boxCount > 2)
+            //{
+            //    Debug.Log("m_boxCount > 2: " + (m_boxesInCart.Count - 1));
+            //    Box1 currentTopBox = m_boxesInCart.ToArray()[0];
+            //    Debug.Log("previousBox: " + currentTopBox.name);
+            //    SpringJoint previousSpringJoint = currentTopBox.GetComponent<SpringJoint>();
+            //    previousSpringJoint.spring = 5;
+            //}
 
         }
 
@@ -174,9 +178,15 @@ namespace BoxSystem
             if (m_boxesInCart.Count == 0) return;
             Debug.Log("Dropping content");
             Box1 box = GetTopBox();
-            if (box.IsEmpty() && !box.IsLast()) RemoveBoxImpulse(velocity);
-            else if (!box.IsEmpty()) box.RemoveItemImpulse(velocity);
-            // TODO Remi: Mark for delete
+            if (box.IsEmpty() && !box.IsLast()) 
+                RemoveBoxImpulse(velocity);
+            else if (!box.IsEmpty() && GetBoxesCount() < MAX_BOXES_BEFORE_DROP) 
+                box.RemoveItemImpulse(velocity);
+        }
+
+        internal int GetBoxesCount()
+        {
+            return m_boxCount;
         }
     }
 }

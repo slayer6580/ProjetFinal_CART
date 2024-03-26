@@ -8,6 +8,7 @@ namespace DiscountDelirium
 {
     public class DebugCart : MonoBehaviour
     {
+        private const float m_speed = 2.0f;
 
         void Start()
         {
@@ -25,6 +26,7 @@ namespace DiscountDelirium
         {
             GetComponent<Rigidbody>().AddForce(transform.forward
                                             * GameConstants.BASE_ADD_FORCE
+                                            * m_speed
                                             * Time.fixedDeltaTime
                                         );
         }

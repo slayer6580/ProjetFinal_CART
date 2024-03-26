@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace BoxSystem
@@ -15,6 +16,7 @@ namespace BoxSystem
         private bool m_isMoving = false;
         private bool m_turn90Degree = false;
         private const float SLERP_TIME = 30.0f;
+        private readonly float DELAY_UNTIL_DELETE = 1.5f;
 
         private void Awake()
         {
@@ -74,6 +76,26 @@ namespace BoxSystem
                 return;
             }
 
+        }
+
+        internal void MarkForDelete()
+        {
+            StartCoroutine(DestroyObject());
+        }
+
+        // TODO Remi Alex: A voir plus tard system de pooling et heritage commun entre box et item
+        IEnumerator DestroyObject()
+        {
+            yield return new WaitForSeconds(DELAY_UNTIL_DELETE);
+
+            if (m_box == null)
+            {
+                Debug.LogWarning("No tower to remove box from");
+                m_box = GetComponentInParent<Box1>();
+            }
+
+            m_box.RemoveLastItemFromBox();
+            Destroy(gameObject);
         }
     }
 }

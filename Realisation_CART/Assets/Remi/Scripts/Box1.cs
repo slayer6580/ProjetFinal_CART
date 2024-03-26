@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -67,6 +68,7 @@ namespace BoxSystem
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
         private Tower1 m_tower;
+        private const float DELAY_UNTIL_DELETE = 1.5f;
         #endregion
 
 
@@ -292,16 +294,43 @@ namespace BoxSystem
                 return;
             }
 
-            ItemInBox itemInBox = GetLastItem();
-            if (itemInBox.m_item == null)
+            Item1 itemInBox = GetLastItem();
+            if (itemInBox == null)
             {
                 Debug.LogWarning("Item is null");
                 return;
             }
 
-            Debug.Log("Item to remove: " + itemInBox.m_item.name);
-            itemInBox.m_item.AddComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            Debug.Log("Item to remove: " + itemInBox.name);
+            itemInBox.gameObject.AddComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            itemInBox.GetComponent<Item1>().MarkForDelete();
             m_itemsList.RemoveAt(m_itemsList.Count - 1);
+        }
+
+        /// <summary> Marker la boite pour la supprimer </summary>
+        internal void MarkForDelete()
+        {
+            StartCoroutine(DestroyObject());
+        }
+
+        // TODO Remi Alex: A voir plus tard system de pooling et heritage commun entre box et item
+        IEnumerator DestroyObject()
+        {
+            yield return new WaitForSeconds(DELAY_UNTIL_DELETE);
+
+            if (m_tower == null)
+            {
+                Debug.LogWarning("No tower to remove box from");
+                m_tower = GetComponentInParent<Tower1>();
+            }
+
+            m_tower.RemoveBoxToTower();
+            Destroy(gameObject);
+        }
+
+        internal void RemoveLastItemFromBox()
+        {
+            m_itemsList.RemoveAt(GetLastItemIndex());
         }
 
         #endregion
@@ -347,16 +376,20 @@ namespace BoxSystem
 
 
         #region (--- Fields ---)
-
-        private ItemInBox GetLastItem()
+        private Item1 GetLastItem()
         {
-            return m_itemsList.Last();
+            return m_itemsList.Count > 0 ? m_itemsList[m_itemsList.Count - 1].m_item.GetComponent<Item1>() : null;
+        }
+
+        private int GetLastItemIndex()
+        {
+            return m_itemsList.Count > 0 ? m_itemsList.Count - 1 : -1;
         }
 
         internal bool IsEmpty()
         {
-            Debug.LogWarning("m_totalSlots - m_availableSlotsLeft= " + (m_totalSlots - m_availableSlotsLeft));
-            Debug.LogWarning("m_itemsList.Count: " + m_itemsList.Count);
+            //Debug.LogWarning("m_totalSlots - m_availableSlotsLeft= " + (m_totalSlots - m_availableSlotsLeft));
+            //Debug.LogWarning("m_itemsList.Count: " + m_itemsList.Count);
             return (m_totalSlots - m_availableSlotsLeft) == 0 ? true : false;
         }
 
@@ -364,7 +397,6 @@ namespace BoxSystem
         {
             return m_itemsList.Count == 1 ? true : false;
         }
-
         #endregion
     }
 }
