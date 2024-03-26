@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 36cd32d7f5cf8a34ea31d41822df3066
+guid: 9a1b75783996bdd428e9796df787b7a0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -21,7 +21,7 @@ ModelImporter:
       copied configuration does not match position in animation file:\n\t'Ankle_L'
       : position error = 43.175697 mm\n\t'Toes_L' : position error = 93.026840 mm\nCopied
       Avatar Rig Configuration mis-match. Inbetween bone rotation in copied configuration
-      does not match rotation in animation file:\n\t'Ball_L' : rotation error = 9.526355
+      does not match rotation in animation file:\n\t'Ball_L' : rotation error = 42.957199
       deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'mixamo.com' has import animation warnings that
@@ -33,7 +33,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -42,11 +42,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Running Fastest
+      name: SprintTurn
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 16
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

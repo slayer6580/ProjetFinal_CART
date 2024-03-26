@@ -11,6 +11,8 @@ namespace CartControl
         public static MainInputsHandler Instance;
 		[SerializeField] private CartStateMachine m_cartStateMachine;
 		[SerializeField] private UnityEvent m_grabItemEvent;
+		[SerializeField] private UnityEvent m_meleeAttackEvent;
+		[SerializeField] private UnityEvent m_rangeAttackEvent;
 
 		private void Awake()
 		{
@@ -37,8 +39,11 @@ namespace CartControl
 
 			m_mainInputs.Cart.Pause.started += OnPause;
 
-
 			m_mainInputs.Cart.GrabItem.started += OnGrabItem;
+
+			m_mainInputs.Cart.MeleeAttack.started += OnMeleeAttack;
+
+			m_mainInputs.Cart.RangeAttack.started += OnRangeAttack;
 
 		}
 
@@ -66,6 +71,17 @@ namespace CartControl
 		{
 			m_grabItemEvent.Invoke();
 		}
+
+		public void OnMeleeAttack(InputAction.CallbackContext context)
+		{
+			m_meleeAttackEvent.Invoke();
+		}
+
+		public void OnRangeAttack(InputAction.CallbackContext context)
+		{
+			m_rangeAttackEvent.Invoke();
+		}
+
 
 		private void OnEnable()
 		{

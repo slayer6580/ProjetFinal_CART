@@ -52,19 +52,16 @@ namespace DiscountDelirium
 
 			if(m_checkLastBox != null)
 			{
-				print("BB");
 				m_fallingTimer += Time.deltaTime;
 
 				if ((m_tiltingLeft == false && m_towerBlendValue < 0.5f + m_tiltValueToFall) 
 					|| (m_tiltingLeft == true && m_towerBlendValue > 0.5f - m_tiltValueToFall))
 				{
-					print("CC");
 					m_fallingTimer = 0;
 				}
 
 				if(m_fallingTimer > 2)
 				{
-					print("DD");
 					m_boxesHasFallen[m_remainingBoxes - 1] = true;
 					m_checkLastBox.SetActive(false);
 					GameObject fallingBox = Instantiate(m_emptyBoxPrefab, m_checkLastBox.transform.position, m_checkLastBox.transform.rotation);
@@ -135,7 +132,7 @@ namespace DiscountDelirium
 			float tiltSpeedMultiply = 6 - Mathf.Abs(Mathf.Clamp(value, -5, 5));
 			m_towerBlendValue = Mathf.Lerp(m_towerBlendValue, m_lerpAnim, Time.deltaTime * m_tiltSpeed * tiltSpeedMultiply);
 
-			print("INCLINAISON: " + m_towerBlendValue);
+			//print("INCLINAISON: " + m_towerBlendValue);
 		}
 
 

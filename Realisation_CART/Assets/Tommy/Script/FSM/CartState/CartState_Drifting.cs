@@ -26,6 +26,9 @@ namespace CartControl
 
 		public override void OnUpdate()
 		{
+			//For animation
+			m_cartStateMachine.m_humanAnimator.SetFloat("DriftingValue", Mathf.Clamp(m_cartStateMachine.LocalVelocity.x / 30, -1,1));
+
 			m_driftingTimer += Time.deltaTime;
 
 			//After minimum drifting time obtain. Calculate how much boost to give
@@ -57,6 +60,9 @@ namespace CartControl
 
 		public override void OnExit()
 		{
+			//For animation
+			m_cartStateMachine.m_humanAnimator.SetFloat("DriftingValue", 0);
+
 			//Calculate boosting time
 			m_cartStateMachine.BoostingTime = m_cartStateMachine.MinBoostTime + (m_boostPercentageObtain * (m_cartStateMachine.MaxBoostTime - m_cartStateMachine.MinBoostTime));
 		}
