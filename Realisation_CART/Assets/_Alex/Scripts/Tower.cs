@@ -7,7 +7,7 @@ namespace BoxSystem
 
     public class Tower : MonoBehaviour
     {
-        [field: Header("Mettre le Cart GO ici")]
+        [field: Header("Mettre le Player ici")]
         [field: SerializeField] public GameObject Player { get; private set; }
         [field: Header("La distance ou un item devrait snap a la boite pendant le slerp")]
         [field: SerializeField] public float ItemSnapDistance { get; private set; }

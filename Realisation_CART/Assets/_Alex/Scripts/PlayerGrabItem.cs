@@ -5,8 +5,12 @@ namespace BoxSystem
 {
     public class PlayerGrabItem : MonoBehaviour
     {
+        [field: Header("le temps maximal que prend un item pour venir dans le panier")]
         [field: SerializeField] public float ItemSlerpTime { get; private set; }
+
+        [Header("mettre la tour du player ici")]
         [SerializeField] private Tower m_tower;
+
         private List<Shelf> m_takableShelves = new List<Shelf>();
         private Shelf m_choosenShelf = null;
 
@@ -43,6 +47,7 @@ namespace BoxSystem
             }
         }
 
+        /// <summary>  Regarde qu'elle Shelf es la plus proche du Dot Product du vector vers l'avant avant du cart  </summary>
         private void UpdateBestShelfOption()
         {
             if (m_takableShelves.Count == 0)
@@ -83,7 +88,7 @@ namespace BoxSystem
         }
 
 
-
+        /// <summary> Prendre un item du Shelf Choisi </summary>
         public void TakeItemFromShelf()
         {
             if (m_choosenShelf == null)

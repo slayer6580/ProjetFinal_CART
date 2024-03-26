@@ -1,15 +1,17 @@
-using System.Collections.Generic;
 using TMPro;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 namespace BoxSystem
 {
     public class Shelf : MonoBehaviour
     {
+        [Header("mettre l'item que l'étagere donne ici")]
         [SerializeField] private GameObject m_itemPrefab;
+        [Header("la quantité de l'item")]
         [SerializeField] private int m_itemQuantity;
+        [Header("mettre le debug visuel TMP ici")]
         [SerializeField] private TextMeshPro m_quantityText;
+
         private int m_remainingItems;
         private Color m_initialColor;
 
@@ -23,12 +25,14 @@ namespace BoxSystem
             
         }
 
+        /// <summary> Est ce qu'il reste un item dans l'étagère </summary>
         public bool CanTakeItem()
         {
             return m_remainingItems > 0 ? true : false;
 
         }
 
+        /// <summary> Prendre une instance d'un item </summary>
         public GameObject GetItemFromShelf()
         {
             m_remainingItems--;
@@ -45,8 +49,8 @@ namespace BoxSystem
             ColorShelf();
         }
 
-   
 
+        /// <summary> Change la couleur du shelf selon la grosseur de l'item </summary>
         private void ColorShelf()
         {
             MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
@@ -68,12 +72,13 @@ namespace BoxSystem
         }
 
 
-
+        /// <summary> change la couleur du shelf pour montrer que c'est la choisi </summary>
         public void SelectedShelf()
         {
             GetComponent<MeshRenderer>().material.color = Color.black;
         }
 
+        /// <summary> change la couleur du shelf pour son originale pour montrer qu'elle n'es plu choisi </summary>
         public void UnSelectedShelf()
         {
             GetComponent<MeshRenderer>().material.color = m_initialColor;
