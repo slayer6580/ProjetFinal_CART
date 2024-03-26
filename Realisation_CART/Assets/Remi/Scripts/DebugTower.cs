@@ -1,11 +1,12 @@
-using System;
+using CartControl;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BoxSystem
 {
 
-    public class Tower1 : MonoBehaviour
+    public class DebugTower : MonoBehaviour
     {
         [field: SerializeField] public GameObject Cart { get; private set; }
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
@@ -14,7 +15,6 @@ namespace BoxSystem
         [SerializeField] private float m_boxHeight;
         private int m_boxCount = 0;
         private Stack<Box1> m_boxesInCart = new Stack<Box1>();
-        private const int MAX_BOXES_BEFORE_DROP = 4;
 
         void Start()
         {
@@ -34,7 +34,7 @@ namespace BoxSystem
             instant.transform.SetParent(transform);
             instant.name = "Box " + m_boxCount;
             Box1 instantBox = instant.GetComponent<Box1>();
-            instantBox.SetTower(this);
+            //instantBox.SetTower(this);
             instant.transform.position = desiredPos;
             m_boxesInCart.Push(instantBox);
         }
@@ -54,26 +54,21 @@ namespace BoxSystem
 
             if (m_boxCount > 1) // Pour ajouter un spring entre les boites
             {
-                //Box1 previousBoxe = m_boxesInCart.ToArray()[m_boxesInCart.Count - 1];
-                //SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
-                //Rigidbody newBoxeRB = previousBoxe.GetComponent<Rigidbody>();
-                //if (newBoxeRB == null)
-                //{
-                //    newBoxeRB = previousBoxe.AddComponent<Rigidbody>();
-                //}
-                //SetSprintJointValues(springJoint, newBoxeRB);
-                //Box1 box1 = GetTopBox();
-                //box1.GetComponent<Rigidbody>().isKinematic = true;
-                Box1 box1 = GetTopBox();
-                box1.GetComponent<Rigidbody>().isKinematic = true;
-                return;
+                Box1 previousBoxe = m_boxesInCart.ToArray()[m_boxesInCart.Count - 1];
+                SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
+                Rigidbody newBoxeRB = previousBoxe.GetComponent<Rigidbody>();
+                if (newBoxeRB == null)
+                {
+                    newBoxeRB = previousBoxe.AddComponent<Rigidbody>();
+                }
+                SetSprintJointValues(springJoint, newBoxeRB);
             }
 
             if (m_boxCount > 2) // Pour changer la force du spring du top box
             {
-                //Box1 previousBox = m_boxesInCart.ToArray()[0];
-                //SpringJoint previousSpringJoint = previousBox.GetComponent<SpringJoint>();
-                //previousSpringJoint.spring = 10;
+                Box1 previousBox = m_boxesInCart.ToArray()[0];
+                SpringJoint previousSpringJoint = previousBox.GetComponent<SpringJoint>();
+                previousSpringJoint.spring = 10;
             }
         }
 
@@ -111,7 +106,6 @@ namespace BoxSystem
             }
 
             Debug.Log("Box to remove: " + topBox.name);
-            topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
             topBox.MarkForDelete();
             //m_boxesInCart.Pop();
@@ -120,42 +114,42 @@ namespace BoxSystem
 
         private void ModifyTopBoxSpringIntesity()
         {
-            //if (m_boxCount > 2)
-            //{
-            //    Debug.Log("m_boxCount > 2: " + (m_boxesInCart.Count - 1));
-            //    Box1 currentTopBox = m_boxesInCart.ToArray()[0];
-            //    Debug.Log("previousBox: " + currentTopBox.name);
-            //    SpringJoint previousSpringJoint = currentTopBox.GetComponent<SpringJoint>();
-            //    previousSpringJoint.spring = 5;
-            //}
+            if (m_boxCount > 2)
+            {
+                Debug.Log("m_boxCount > 2: " + (m_boxesInCart.Count - 1));
+                Box1 currentTopBox = m_boxesInCart.ToArray()[0];
+                Debug.Log("previousBox: " + currentTopBox.name);
+                SpringJoint previousSpringJoint = currentTopBox.GetComponent<SpringJoint>();
+                previousSpringJoint.spring = 5;
+            }
 
         }
 
         // TEST
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.KeypadPlus))
-            {
-                AddBoxToTower();
-                AddSpringToBox();
-            }
-            else if (Input.GetKeyDown(KeyCode.KeypadMinus))
-            {
-                RemoveBoxToTower();
-                ModifyTopBoxSpringIntesity();
-            }
-            else if (Input.GetKeyDown(KeyCode.K))
-            {
-                Vector3 pos = Character.transform.localPosition + Cart.transform.localPosition;
-                Quaternion rot = Character.transform.localRotation * Cart.transform.localRotation;
-                GameObject instant = Instantiate(DebugCartPrefab, pos + new Vector3(-3, 0, 0), rot * Quaternion.Euler(0, 90, 0));
-            }
-            else if (Input.GetKeyDown(KeyCode.L))
-            {
-                Vector3 pos = Character.transform.localPosition + Cart.transform.localPosition;
-                Quaternion rot = Character.transform.localRotation * Cart.transform.localRotation;
-                GameObject instant = Instantiate(DebugCartPrefab, pos + new Vector3(3, 0, 0), rot * Quaternion.Euler(0, -90, 0));
-            }
+            //if (Input.GetKeyDown(KeyCode.KeypadPlus))
+            //{
+            //    AddBoxToTower();
+            //    AddSpringToBox();
+            //}
+            //else if (Input.GetKeyDown(KeyCode.KeypadMinus))
+            //{
+            //    RemoveBoxToTower();
+            //    ModifyTopBoxSpringIntesity();
+            //}
+            //else if (Input.GetKeyDown(KeyCode.K))
+            //{
+            //    Vector3 pos = Character.transform.localPosition + Cart.transform.localPosition;
+            //    Quaternion rot = Character.transform.localRotation * Cart.transform.localRotation;
+            //    GameObject instant = Instantiate(DebugCartPrefab, pos + new Vector3(-3, 0, 0), rot * Quaternion.Euler(0, 90, 0));
+            //}
+            //else if (Input.GetKeyDown(KeyCode.L))
+            //{
+            //    Vector3 pos = Character.transform.localPosition + Cart.transform.localPosition;
+            //    Quaternion rot = Character.transform.localRotation * Cart.transform.localRotation;
+            //    GameObject instant = Instantiate(DebugCartPrefab, pos + new Vector3(3, 0, 0), rot * Quaternion.Euler(0, -90, 0));
+            //}
         }
 
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
@@ -178,15 +172,8 @@ namespace BoxSystem
             if (m_boxesInCart.Count == 0) return;
             Debug.Log("Dropping content");
             Box1 box = GetTopBox();
-            if (box.IsEmpty() && !box.IsLast()) 
-                RemoveBoxImpulse(velocity);
-            else if (!box.IsEmpty() && GetBoxesCount() < MAX_BOXES_BEFORE_DROP) 
-                box.RemoveItemImpulse(velocity);
-        }
-
-        internal int GetBoxesCount()
-        {
-            return m_boxCount;
+            if (box.IsEmpty()) RemoveBoxImpulse(velocity);
+            else box.RemoveItemImpulse(velocity);
         }
     }
 }
