@@ -1,3 +1,4 @@
+using DiscountDelirium;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -281,6 +282,7 @@ namespace BoxSystem
                 m_slotsList[item] = new SlotInfo(slotTransform, true);
             }
 
+            lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
             m_itemsList.Remove(lastItemInBox);
         }
 
