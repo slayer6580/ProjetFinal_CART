@@ -38,18 +38,18 @@ namespace BoxSystem
 
         public void AddBoxToTower()
         {
-            Debug.Log("AddBoxToTower()");
+            //Debug.Log("AddBoxToTower()");
             m_boxCount++;
             float height = (m_boxCount - 1) * m_boxHeight;
-            Debug.Log("(m_boxCount - 1)" + (m_boxCount - 1));
-            Debug.Log("m_boxHeight: " + m_boxHeight);
-            Debug.Log("height: " + height);
+            //Debug.Log("(m_boxCount - 1)" + (m_boxCount - 1));
+            //Debug.Log("m_boxHeight: " + m_boxHeight);
+            //Debug.Log("height: " + height);
             Vector3 desiredPos = new Vector3(transform.position.x, height + transform.position.y, transform.position.z);
-            Debug.Log("desiredPos: " + desiredPos);
+            //Debug.Log("desiredPos: " + desiredPos);
             GameObject instant = Instantiate(m_boxPrefab, desiredPos, Cart.transform.rotation);
             instant.transform.rotation = Cart.transform.rotation;
             instant.transform.SetParent(transform);
-            instant.name = "Boxe " + m_boxCount;
+            instant.name = "Box " + m_boxCount;
             Box1 instantBox = instant.GetComponent<Box1>();
             instantBox.SetTower(this);
             instant.transform.position = desiredPos;
@@ -60,15 +60,17 @@ namespace BoxSystem
         {
             if (m_boxCount == 1) // Pour ajouter un spring entre la première boite et le panier
             {
-                //Debug.Log("Add spring to box : m_boxCount == 0");
-                //Rigidbody cartRB = GetComponentInParent<Rigidbody>();
-                //if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
-                //SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
-                //SetSprintJointValues(springJoint, cartRB);
+                Debug.Log("Add spring to box : m_boxCount == 0");
+                Rigidbody cartRB = GetComponentInParent<Rigidbody>();
+                if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
+                SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
+                SetSprintJointValues(springJoint, cartRB);
 
-                Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
-                if (boxRB == null) Debug.LogWarning("Box n'a pas de rigidbody");
-                boxRB.isKinematic = true;
+                //Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
+                //if (boxRB == null) Debug.LogWarning("Box n'a pas de rigidbody");
+                //boxRB.isKinematic = true;
+
+          
                 return;
             }
 
@@ -84,6 +86,8 @@ namespace BoxSystem
                     newBoxeRB = previousBoxe.AddComponent<Rigidbody>();
                 }
                 SetSprintJointValues(springJoint, newBoxeRB);
+                //m_boxesInCart.ToArray()[0].GetComponent<Box1>().SetMonobehaviourActive(true);
+                //m_boxesInCart.ToArray()[0].GetComponent<Box1>().FlagBoxAddSpring();
             }
 
             if (m_boxCount > 2) // Pour changer la force du spring du top box
