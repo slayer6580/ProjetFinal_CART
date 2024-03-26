@@ -8,7 +8,7 @@ namespace BoxSystem
     public class Tower : MonoBehaviour
     {
         [field: Header("Mettre le Cart GO ici")]
-        [field: SerializeField] public GameObject Cart { get; private set; }
+        [field: SerializeField] public GameObject Player { get; private set; }
         [field: Header("La distance ou un item devrait snap a la boite pendant le slerp")]
         [field: SerializeField] public float ItemSnapDistance { get; private set; }
 
@@ -32,7 +32,7 @@ namespace BoxSystem
 
             // setup de la boite
             GameObject instant = Instantiate(m_boxPrefab);
-            instant.transform.rotation = Cart.transform.rotation;
+            instant.transform.rotation = Player.transform.rotation;
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box instantBox = instant.GetComponent<Box>();
@@ -40,7 +40,7 @@ namespace BoxSystem
 
             // hauteur de la boite dans la tour
             float height = (m_boxCount - 1) * m_boxHeight;
-            instant.transform.position = new Vector3(transform.position.x, height, transform.position.z);
+            instant.transform.localPosition = new Vector3(0, height, 0);
 
             // ajout a la liste
             m_boxesInCart.Push(instantBox);

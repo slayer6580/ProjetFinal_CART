@@ -53,8 +53,8 @@ namespace BoxSystem
 
             Vector3 eulerOfCart = m_cartTransform.rotation.eulerAngles; 
             Vector3 localEulerOfBox = m_boxTransform.transform.localRotation.eulerAngles;
-            transform.eulerAngles = Vector3.zero;
 
+            transform.eulerAngles = Vector3.zero;
             transform.eulerAngles += eulerOfCart;
             transform.eulerAngles += localEulerOfBox; 
 
