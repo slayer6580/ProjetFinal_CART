@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -350,6 +351,18 @@ namespace BoxSystem
         private ItemInBox GetLastItem()
         {
             return m_itemsList.Last();
+        }
+
+        internal bool IsEmpty()
+        {
+            Debug.LogWarning("m_totalSlots - m_availableSlotsLeft= " + (m_totalSlots - m_availableSlotsLeft));
+            Debug.LogWarning("m_itemsList.Count: " + m_itemsList.Count);
+            return (m_totalSlots - m_availableSlotsLeft) == 0 ? true : false;
+        }
+
+        internal bool IsLast()
+        {
+            return m_itemsList.Count == 1 ? true : false;
         }
 
         #endregion
