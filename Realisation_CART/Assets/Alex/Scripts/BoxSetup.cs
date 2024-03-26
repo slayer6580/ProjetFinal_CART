@@ -11,8 +11,8 @@ namespace BoxSystem
         [SerializeField] private GameObject m_slotPrefab;
 
         [Header("Longeur et largeur de la boite")]
-        [SerializeField] private float m_boxLength;
         [SerializeField] private float m_boxWidth;
+        [SerializeField] private float m_boxLength;
 
         [Header("Nombre de slot par longeur et largeur")]
         [SerializeField] private int m_nbSlotWidth;
@@ -59,15 +59,15 @@ namespace BoxSystem
         /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
         private void CalculateBoxHalfDimension()
         {
-            m_halfLength = m_boxLength / 2;
-            m_halfWidth = m_boxWidth / 2;
+            m_halfLength = m_boxWidth / 2;
+            m_halfWidth = m_boxLength / 2;
         }
 
         /// <summary> Calcule la dimension des slots </summary>
         private void CalculateSlotDimension()
         {
-            m_slotLength = m_boxLength / m_nbSlotWidth;
-            m_slotWidth = m_boxWidth / m_nbSlotLength;
+            m_slotLength = m_boxWidth / m_nbSlotWidth;
+            m_slotWidth = m_boxLength / m_nbSlotLength;
             slotLengthCalculation = m_slotLength;
             slotWidthCalculation = m_slotWidth;
         }

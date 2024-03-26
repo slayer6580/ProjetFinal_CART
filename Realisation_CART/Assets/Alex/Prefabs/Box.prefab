@@ -259,8 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_slotPrefab: {fileID: 143819864821063928, guid: 6627cabcbca284f4fbee7270cb00ba41,
     type: 3}
-  m_boxLength: 2
-  m_boxWidth: 3
+  m_boxWidth: 2
+  m_boxLength: 3
   m_nbSlotWidth: 4
   m_nbSlotLength: 6
   <SlotHeight>k__BackingField: 0.46

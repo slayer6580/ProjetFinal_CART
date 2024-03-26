@@ -283,6 +283,7 @@ namespace BoxSystem
         /// <summary> Place l'objet dans la hierarchie enfant de la boite </summary>
         private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
+            GO.transform.localScale = GO.GetComponent<Item>().m_data.m_scaleInBox; // change le scale de l'objet choisi
             GO.transform.SetParent(gameObject.transform);
             GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Cart.transform, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
         }

@@ -15,4 +15,4 @@ MonoBehaviour:
   m_name: Large
   m_cost: 75
   m_size: 2
-  m_slerpTimeInMilliSeconds: 150
+  m_scaleInBox: {x: 0.92, y: 0.46, z: 0.92}

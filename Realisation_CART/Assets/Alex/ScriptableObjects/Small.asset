@@ -15,4 +15,4 @@ MonoBehaviour:
   m_name: Small
   m_cost: 10
   m_size: 0
-  m_slerpTimeInMilliSeconds: 50
+  m_scaleInBox: {x: 0.46, y: 0.46, z: 0.46}
