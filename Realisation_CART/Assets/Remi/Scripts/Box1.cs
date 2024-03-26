@@ -259,30 +259,30 @@ namespace BoxSystem
 
 
 
-        #region (--- RemoveItemFromBox ---)
+        //#region (--- RemoveItemFromBox ---)
 
-        public void RemoveItemImpulse()
-        {
-            // get the top item
-            if (m_itemsList.Count <= 0)
-            {
-                Debug.LogWarning("No item in the box");
-                return;
-            }
+        //public void RemoveItemImpulse()
+        //{
+        //    // get the top item
+        //    if (m_itemsList.Count <= 0)
+        //    {
+        //        Debug.LogWarning("No item in the box");
+        //        return;
+        //    }
 
-            ItemInBox itemInBox = m_itemsList[m_itemsList.Count - 1];
-            if (itemInBox.m_item == null)
-            {
-                Debug.LogWarning("Item is null");
-                return;
-            }
+        //    ItemInBox itemInBox = m_itemsList[m_itemsList.Count - 1];
+        //    if (itemInBox.m_item == null)
+        //    {
+        //        Debug.LogWarning("Item is null");
+        //        return;
+        //    }
 
-            Debug.Log("Item to remove: " + itemInBox.m_item.name);
-            itemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            m_itemsList.RemoveAt(m_itemsList.Count - 1);
-        }
+        //    Debug.Log("Item to remove: " + itemInBox.m_item.name);
+        //    itemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+        //    m_itemsList.RemoveAt(m_itemsList.Count - 1);
+        //}
 
-        #endregion
+        //#endregion
 
 
 

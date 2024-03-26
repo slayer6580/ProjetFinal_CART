@@ -1,8 +1,6 @@
-using DiscountDelirium;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static BoxSystem.Box;
 
 namespace BoxSystem
 {
@@ -60,7 +58,7 @@ namespace BoxSystem
         {
             if (m_boxCount == 1) // Pour ajouter un spring entre la première boite et le panier
             {
-                Debug.Log("Add spring to box : m_boxCount == 0");
+                //Debug.Log("Add spring to box : m_boxCount == 0");
                 Rigidbody cartRB = GetComponentInParent<Rigidbody>();
                 if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
                 SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
@@ -92,9 +90,9 @@ namespace BoxSystem
 
             if (m_boxCount > 2) // Pour changer la force du spring du top box
             {
-                Debug.Log("m_boxCount > 2: " + m_boxesInCart.Count);
+                //Debug.Log("m_boxCount > 2: " + m_boxesInCart.Count);
                 Box1 previousBox = m_boxesInCart.ToArray()[0];
-                Debug.Log("previousBox: " + previousBox.name);
+                //Debug.Log("previousBox: " + previousBox.name);
                 SpringJoint previousSpringJoint = previousBox.GetComponent<SpringJoint>();
                 previousSpringJoint.spring = 10;
             }
@@ -150,15 +148,6 @@ namespace BoxSystem
                 RemoveBoxToTower();
                 ModifyTopBoxSpringIntesity();
             }
-            else if (Input.GetKeyDown(KeyCode.O))
-            {
-                Box1 currentTopBox = m_boxesInCart.ToArray()[0];
-                currentTopBox.RemoveItemImpulse();
-            }
-            else if (Input.GetKeyDown(KeyCode.P))
-            {
-                RemoveBoxImpulse();
-            }
         }
 
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
@@ -176,27 +165,27 @@ namespace BoxSystem
             return m_boxesInCart.Peek();
         }
 
-        public void RemoveBoxImpulse()
-        {
-            // get the top item
-            if (m_boxesInCart.Count <= 0)
-            {
-                Debug.LogWarning("No box on the stack");
-                return;
-            }
+        //public void RemoveBoxImpulse()
+        //{
+        //    // get the top item
+        //    if (m_boxesInCart.Count <= 0)
+        //    {
+        //        Debug.LogWarning("No box on the stack");
+        //        return;
+        //    }
 
-            Debug.Log("Item to remove: " + m_boxesInCart.ToArray()[0].name);
+        //    Debug.Log("Item to remove: " + m_boxesInCart.ToArray()[0].name);
 
-            Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
-            SpringJoint springJoint = m_boxesInCart.ToArray()[0].GetComponent<SpringJoint>();
-            if (springJoint != null)
-                Destroy(springJoint);
+        //    Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
+        //    SpringJoint springJoint = m_boxesInCart.ToArray()[0].GetComponent<SpringJoint>();
+        //    if (springJoint != null)
+        //        Destroy(springJoint);
 
-            if (boxRB == null)
-                boxRB = m_boxesInCart.ToArray()[0].AddComponent<Rigidbody>();
+        //    if (boxRB == null)
+        //        boxRB = m_boxesInCart.ToArray()[0].AddComponent<Rigidbody>();
 
-            boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            m_boxesInCart.Pop();
-        }
+        //    boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+        //    m_boxesInCart.Pop();
+        //}
     }
 }
