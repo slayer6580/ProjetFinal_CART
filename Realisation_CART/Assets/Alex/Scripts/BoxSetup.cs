@@ -11,12 +11,12 @@ namespace BoxSystem
         [SerializeField] private GameObject m_slotPrefab;
 
         [Header("Longeur et largeur de la boite")]
-        [SerializeField] private float m_boxLength;
         [SerializeField] private float m_boxWidth;
+        [SerializeField] private float m_boxLength;
 
         [Header("Nombre de slot par longeur et largeur")]
-        [SerializeField] private int m_nbSlotLength;
         [SerializeField] private int m_nbSlotWidth;
+        [SerializeField] private int m_nbSlotLength;
 
         [field: Header("Hauteur des slots")]
         [field: SerializeField] public float SlotHeight { get; private set; }
@@ -59,22 +59,22 @@ namespace BoxSystem
         /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
         private void CalculateBoxHalfDimension()
         {
-            m_halfLength = m_boxLength / 2;
-            m_halfWidth = m_boxWidth / 2;
+            m_halfLength = m_boxWidth / 2;
+            m_halfWidth = m_boxLength / 2;
         }
 
         /// <summary> Calcule la dimension des slots </summary>
         private void CalculateSlotDimension()
         {
-            m_slotLength = m_boxLength / m_nbSlotLength;
-            m_slotWidth = m_boxWidth / m_nbSlotWidth;
+            m_slotLength = m_boxWidth / m_nbSlotWidth;
+            m_slotWidth = m_boxLength / m_nbSlotLength;
             slotLengthCalculation = m_slotLength;
             slotWidthCalculation = m_slotWidth;
         }
 
         private void SetAvailableSlots()
         {
-            m_totalSlots = m_nbSlotWidth * m_nbSlotLength;
+            m_totalSlots = m_nbSlotLength * m_nbSlotWidth;
             m_box.InitAvailableSlots(m_totalSlots);
         }
 
@@ -84,13 +84,13 @@ namespace BoxSystem
         {
             int index = 0; int index2 = 0;
 
-            for (int i = 0; i < m_nbSlotWidth; i++)
+            for (int i = 0; i < m_nbSlotLength; i++)
             {
-                for (int j = 0; j < m_nbSlotLength; j++)
+                for (int j = 0; j < m_nbSlotWidth; j++)
                 {
                     if (i == 0) // premiere rangée
                     {
-                        if (index != (m_nbSlotLength - 1)) // pas colonne de droite
+                        if (index != (m_nbSlotWidth - 1)) // pas colonne de droite
                         {
                             index2 = index + 1; // droite
                             SendDoubleSlotToBox(index, index2);
@@ -98,14 +98,14 @@ namespace BoxSystem
                     }
                     else // les autres rangées
                     {
-                        if ((index + 1) % m_nbSlotLength == 0) // colonne de droite
+                        if ((index + 1) % m_nbSlotWidth == 0) // colonne de droite
                         {
-                            index2 = index - m_nbSlotLength; //haut
+                            index2 = index - m_nbSlotWidth; //haut
                             SendDoubleSlotToBox(index, index2);
                         }
                         else // colonne dans le milieu
                         {
-                            index2 = index - m_nbSlotLength; //haut
+                            index2 = index - m_nbSlotWidth; //haut
                             SendDoubleSlotToBox(index, index2);
 
                             index2 = index + 1; //droite
@@ -122,17 +122,17 @@ namespace BoxSystem
         {
             int index = 0; int index2 = 0; int index3 = 0; int index4 = 0;
 
-            for (int i = 0; i < m_nbSlotWidth; i++)
+            for (int i = 0; i < m_nbSlotLength; i++)
             {
-                for (int j = 0; j < m_nbSlotLength; j++)
+                for (int j = 0; j < m_nbSlotWidth; j++)
                 {
-                    if (i + 1 < m_nbSlotWidth) // pas la derniere rangée
+                    if (i + 1 < m_nbSlotLength) // pas la derniere rangée
                     {
-                        if ((index + 1) % m_nbSlotLength != 0) // pas colonne de droite
+                        if ((index + 1) % m_nbSlotWidth != 0) // pas colonne de droite
                         {
                             index2 = index + 1; // droite
-                            index3 = index + m_nbSlotLength; // bas
-                            index4 = index + m_nbSlotLength + 1; // en bas a droite
+                            index3 = index + m_nbSlotWidth; // bas
+                            index4 = index + m_nbSlotWidth + 1; // en bas a droite
                             SendFourSlotToBox(index, index2, index3, index4);
                         }
                     }
@@ -170,9 +170,9 @@ namespace BoxSystem
         /// <summary> Ajouter les slots dans la boite selon des calculs de positionement </summary>
         private void PlaceSlotsInBox(List<float> slotsLengthPosition, List<float> slotsWidthPosition)
         {
-            for (int i = 0; i < m_nbSlotWidth; i++)
+            for (int i = 0; i < m_nbSlotLength; i++)
             {
-                for (int j = 0; j < m_nbSlotLength; j++)
+                for (int j = 0; j < m_nbSlotWidth; j++)
                 {
                     Vector3 slotPosition = new Vector3(slotsLengthPosition[j], 0, slotsWidthPosition[i]);
                     GameObject instant = Instantiate(m_slotPrefab, m_slotsParent);
@@ -189,7 +189,7 @@ namespace BoxSystem
             float halfWidthSpacing = m_slotWidth / 2;
             float widthPosition = m_halfWidth;
 
-            for (int i = 0; i < m_nbSlotWidth; i++)
+            for (int i = 0; i < m_nbSlotLength; i++)
             {
                 widthPosition -= i == 0 ? halfWidthSpacing : m_slotWidth;
                 slotsWidthPosition.Add(widthPosition);
@@ -202,7 +202,7 @@ namespace BoxSystem
             float halfLengthSpacing = m_slotLength / 2;
             float lengthPosition = -m_halfLength;
 
-            for (int i = 0; i < m_nbSlotLength; i++)
+            for (int i = 0; i < m_nbSlotWidth; i++)
             {
                 lengthPosition += i == 0 ? halfLengthSpacing : m_slotLength;
                 m_slotsLengthPosition.Add(lengthPosition);

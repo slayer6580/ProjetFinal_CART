@@ -1187,6 +1187,11 @@ PrefabInstance:
       propertyPath: <Cart>k__BackingField
       value: 
       objectReference: {fileID: 2012198740}
+    - target: {fileID: 5482258694893433943, guid: 25ea9fa75284a604b8314efae8083afe,
+        type: 3}
+      propertyPath: <ItemSnapDistance>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
