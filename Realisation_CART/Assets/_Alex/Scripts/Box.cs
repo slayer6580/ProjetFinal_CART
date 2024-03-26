@@ -264,16 +264,24 @@ namespace BoxSystem
                 return;
             }
 
-            ItemInBox itemInBox = m_itemsList[m_itemsList.Count - 1];
-            if (itemInBox.m_item == null)
+            ItemInBox lastItemInBox = GetLastItem();
+
+            if (lastItemInBox.m_item == null)
             {
                 Debug.LogWarning("Item is null");
                 return;
             }
 
-            Debug.Log("Item to remove: " + itemInBox.m_item.name);
-            itemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            m_itemsList.RemoveAt(m_itemsList.Count - 1);
+            Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
+            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+
+            foreach (int item in lastItemInBox.m_slotIndex)
+            {
+                Transform slotTransform = m_slotsList[item].m_slotTransform;
+                m_slotsList[item] = new SlotInfo(slotTransform, true);
+            }
+
+            m_itemsList.Remove(lastItemInBox);
         }
 
         #endregion
@@ -312,6 +320,11 @@ namespace BoxSystem
             }
 
             return localposition / nbOfPositions;
+        }
+
+        private ItemInBox GetLastItem()
+        {
+            return m_itemsList[m_itemsList.Count - 1];
         }
         #endregion
     }
