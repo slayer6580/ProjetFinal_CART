@@ -218,9 +218,9 @@ namespace BoxSystem
             }
 
             // replacer les items du plus grand au plus petit, 100% accurate
-            foreach (GameObject item in newList)
+            foreach (GameObject newItem in newList)
             {
-                PutItemInBox(item, true);
+                PutItemInBox(newItem, true);
             }
         }
 
@@ -274,16 +274,16 @@ namespace BoxSystem
             }
 
             Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
-            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(transform.up * 10, ForceMode.Impulse);
 
-            foreach (int item in lastItemInBox.m_slotIndex)
+            foreach (int itemIndex in lastItemInBox.m_slotIndex)
             {
-                Transform slotTransform = m_slotsList[item].m_slotTransform;
-                m_slotsList[item] = new SlotInfo(slotTransform, true);
+                Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
+                m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
             }
-
             lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
             m_itemsList.Remove(lastItemInBox);
+
         }
 
         #endregion
@@ -294,7 +294,7 @@ namespace BoxSystem
         private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
             GO.transform.localScale = GO.GetComponent<Item>().m_data.m_scaleInBox; // change le scale de l'objet choisi
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player.transform, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
+            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
         }
 
         /// <summary> Regarde si une liste de bool est toute vrai </summary>

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f7b0ea5988eac42b5894cc78b72b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_delayUntilDelete: 2
+  m_delayUntilDelete: 1
 --- !u!114 &8552623313382744456
 MonoBehaviour:
   m_ObjectHideFlags: 0
