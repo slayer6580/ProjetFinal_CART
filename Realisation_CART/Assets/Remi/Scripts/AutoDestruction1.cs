@@ -15,6 +15,7 @@ namespace DiscountDelirium
 
         private void DestroyItem()
         {
+            // If it is a box
             if (GetComponent<Box1>() != null)
             {
                 GetComponent<Box1>().GetTower().RemoveBoxFromTower();
@@ -32,7 +33,6 @@ namespace DiscountDelirium
             ItemInBox lastItemInBox = GetComponent<Item1>().GetBox().GetLastItem();
             GetComponent<Item1>().GetBox().RemoveLastItemFromBox();
 
-            //Destroy(this.gameObject);
         }
     }
 }

@@ -159,9 +159,6 @@ namespace BoxSystem
 
             boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
             topBox.gameObject.GetComponent<AutoDestruction>().enabled = true;
-
-            //m_boxCount--;
-            //m_boxesInCart.Pop();
         }
 
         /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
@@ -180,9 +177,6 @@ namespace BoxSystem
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
             Debug.Log("AutoDestruction enabled");
             topBox.GetComponent<AutoDestruction1>().enabled = true;
-
-            //m_boxCount--;
-            //m_boxesInCart.Pop();
         }
 
         private void ModifyTopBoxSpringIntesity()
