@@ -176,7 +176,7 @@ namespace BoxSystem
             topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
 
-            topBox.GetComponent<ItemMarkForDelete>().enabled = true;
+            topBox.GetComponent<AutoDestruction>().enabled = true;
             Debug.LogWarning("Box int autodestruction mode: " + topBox.name);
             m_boxesInCart.Pop();
         }
@@ -222,7 +222,7 @@ namespace BoxSystem
                 Quaternion additionalRotation = Quaternion.Euler(0, 90, 0);
                 Quaternion finalRotation = rot * additionalRotation;
 
-                Vector3 localOffset = new Vector3(-3, 0.5f, 0.5f);
+                Vector3 localOffset = new Vector3(-3, 0, -0.5f);
                 Vector3 worldOffset = rot * localOffset;
 
                 Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
@@ -234,7 +234,7 @@ namespace BoxSystem
                 Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
                 Quaternion finalRotation = rot * additionalRotation;
 
-                Vector3 localOffset = new Vector3(3, 0.5f, 0.5f);
+                Vector3 localOffset = new Vector3(3, 0, -0.5f);
                 Vector3 worldOffset = rot * localOffset;
 
                 Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);

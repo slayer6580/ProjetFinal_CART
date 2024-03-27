@@ -292,7 +292,7 @@ namespace BoxSystem
                 m_slotsList[item] = new SlotInfo(slotTransform, true);
             }
 
-            lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
+            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
             m_itemsList.Remove(lastItemInBox);
         }
 
@@ -319,7 +319,7 @@ namespace BoxSystem
             else 
                 rb.AddForce(velocity, ForceMode.Impulse);
 
-            lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
+            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
             Debug.Log("Item in autodestruction mode: " + lastItemInBox.m_item.name);
             m_itemsList.Remove(lastItemInBox);
         }

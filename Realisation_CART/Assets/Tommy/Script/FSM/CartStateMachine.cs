@@ -104,7 +104,7 @@ namespace CartControl
 			m_humanAnimator.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeed);
 
 			//Testing tower tilt with Animation
-			m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
+			//m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
 		}
 
 		protected override void FixedUpdate()
