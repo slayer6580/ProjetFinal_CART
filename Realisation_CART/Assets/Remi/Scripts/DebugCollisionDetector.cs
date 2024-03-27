@@ -16,10 +16,10 @@ namespace BoxSystem
         {
             if(other.gameObject.name != "front") return;
             if (other.attachedRigidbody.velocity.magnitude < MAX_VEL_TO_DROP_CONTENT) return;
-            Debug.Log("Velocity of " + other.gameObject.name + " is: " + other.attachedRigidbody.velocity.magnitude);
+            //Debug.Log("Velocity of " + other.gameObject.name + " is: " + other.attachedRigidbody.velocity.magnitude);
             
             Vector3 velocity = other.attachedRigidbody.velocity;
-            _Tower.DropContent(velocity);
+            //_Tower.DropContent(velocity);
         }
     }
 }

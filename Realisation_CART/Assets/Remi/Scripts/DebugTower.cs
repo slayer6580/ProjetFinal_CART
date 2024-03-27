@@ -107,7 +107,7 @@ namespace BoxSystem
 
             Debug.Log("Box to remove: " + topBox.name);
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
-            topBox.MarkForDelete();
+            //topBox.MarkForDelete();
             //m_boxesInCart.Pop();
             //Destroy(topBox.gameObject);
         }

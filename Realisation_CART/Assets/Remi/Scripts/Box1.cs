@@ -323,26 +323,26 @@ namespace BoxSystem
             m_itemsList.Remove(lastItemInBox);
         }
 
-        /// <summary> Marker la boite pour la supprimer </summary>
-        internal void MarkForDelete()
-        {
-            StartCoroutine(DestroyObject());
-        }
+        ///// <summary> Marker la boite pour la supprimer </summary>
+        //internal void MarkForDelete()
+        //{
+        //    StartCoroutine(DestroyObject());
+        //}
 
         // TODO Remi Alex: A voir plus tard system de pooling et heritage commun entre box et item
-        IEnumerator DestroyObject()
-        {
-            yield return new WaitForSeconds(DELAY_UNTIL_DELETE);
+        //IEnumerator DestroyObject()
+        //{
+        //    yield return new WaitForSeconds(DELAY_UNTIL_DELETE);
 
-            if (m_tower == null)
-            {
-                Debug.LogWarning("No tower to remove box from");
-                m_tower = GetComponentInParent<Tower1>();
-            }
+        //    if (m_tower == null)
+        //    {
+        //        Debug.LogWarning("No tower to remove box from");
+        //        m_tower = GetComponentInParent<Tower1>();
+        //    }
 
-            m_tower.RemoveBoxToTower();
-            Destroy(gameObject);
-        }
+        //    m_tower.RemoveBoxToTower();
+        //    Destroy(gameObject);
+        //}
 
         internal void RemoveLastItemFromBox()
         {

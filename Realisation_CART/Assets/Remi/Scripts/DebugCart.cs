@@ -8,7 +8,7 @@ namespace DiscountDelirium
 {
     public class DebugCart : MonoBehaviour
     {
-        private const float m_speed = 2.0f;
+        private const float m_speed = 3.0f;
 
         void Start()
         {

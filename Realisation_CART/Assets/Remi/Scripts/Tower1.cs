@@ -1,7 +1,9 @@
+using DiscountDelirium;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 namespace BoxSystem
 {
@@ -138,8 +140,32 @@ namespace BoxSystem
             // ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
         }
 
+        public void RemoveBoxImpulse() // Rémi
+        {
+            // get the top item
+            if (m_boxesInCart.Count <= 0)
+            {
+                Debug.LogWarning("No box on the stack");
+                return;
+            }
+
+            Debug.Log("Item to remove: " + m_boxesInCart.ToArray()[0].name);
+
+            Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
+            SpringJoint springJoint = m_boxesInCart.ToArray()[0].GetComponent<SpringJoint>();
+            if (springJoint != null)
+                Destroy(springJoint);
+
+            if (boxRB == null)
+                boxRB = m_boxesInCart.ToArray()[0].AddComponent<Rigidbody>();
+
+            boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+            m_boxesInCart.Pop();
+        }
+
         public void RemoveBoxImpulse(Vector3 velocity)
         {
+            Debug.Log("RemoveBoxImpulse()");
             Box1 topBox = GetTopBox();
             if (topBox == null)
             {
@@ -150,9 +176,9 @@ namespace BoxSystem
             Debug.Log("Box to remove: " + topBox.name);
             topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
-            topBox.MarkForDelete();
-            //m_boxesInCart.Pop();
-            //Destroy(topBox.gameObject);
+
+            topBox.GetComponent<ItemMarkForDelete>().enabled = true;
+            m_boxesInCart.Pop();
         }
 
         private void ModifyTopBoxSpringIntesity()
@@ -182,7 +208,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.O))
             {
-                Box1 currentTopBox = m_boxesInCart.ToArray()[0];
+                Box1 currentTopBox = GetTopBox();
                 currentTopBox.RemoveItemImpulse();
             }
             else if (Input.GetKeyDown(KeyCode.P))
@@ -191,15 +217,27 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.K))
             {
-                Vector3 pos = Player.transform.localPosition + Cart.transform.localPosition;
-                Quaternion rot = Player.transform.localRotation * Cart.transform.localRotation;
-                Instantiate(DebugCartPrefab, pos + new Vector3(-3, 0, 0), rot * Quaternion.Euler(0, 90, 0));
+                Vector3 pos = Player.transform.position + transform.localPosition;
+                Quaternion rot = transform.rotation;
+                Quaternion additionalRotation = Quaternion.Euler(0, 90, 0);
+                Quaternion finalRotation = rot * additionalRotation;
+
+                Vector3 localOffset = new Vector3(-3, 0.5f, 0.5f);
+                Vector3 worldOffset = rot * localOffset;
+
+                Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
-                Vector3 pos = Player.transform.localPosition + Cart.transform.localPosition;
-                Quaternion rot = Player.transform.localRotation * Cart.transform.localRotation;
-                Instantiate(DebugCartPrefab, pos + new Vector3(3, 0, 0), rot * Quaternion.Euler(0, -90, 0));
+                Vector3 pos = Player.transform.position + transform.localPosition;
+                Quaternion rot = transform.rotation;
+                Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
+                Quaternion finalRotation = rot * additionalRotation;
+
+                Vector3 localOffset = new Vector3(3, 0.5f, 0.5f);
+                Vector3 worldOffset = rot * localOffset;
+
+                Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
             }
         }
 
@@ -220,12 +258,16 @@ namespace BoxSystem
             return m_boxesInCart.Peek();
         }
 
-        public void DropContent(Vector3 velocity)
+        public void CheckIfCanDropContent(Vector3 velocity)
         {
-            if (m_boxesInCart.Count == 0) return;
+            //Debug.Log("m_boxesInCart.Count: " + m_boxesInCart.Count);
+            //if (m_boxesInCart.Count <= 1) return;
             Debug.Log("Dropping content");
+
+
             Box1 box = GetTopBox();
-            if (box.IsEmpty() && !box.IsLast())
+
+            if (box.IsEmpty() && m_boxesInCart.Count > 1)
                 RemoveBoxImpulse(velocity);
             else if (!box.IsEmpty() && GetBoxesCount() < MAX_BOXES_BEFORE_DROP)
                 box.RemoveItemImpulse(velocity);
@@ -236,27 +278,6 @@ namespace BoxSystem
             return m_boxCount;
         }
 
-        public void RemoveBoxImpulse() // Rémi
-        {
-            // get the top item
-            if (m_boxesInCart.Count <= 0)
-            {
-                Debug.LogWarning("No box on the stack");
-                return;
-            }
 
-            Debug.Log("Item to remove: " + m_boxesInCart.ToArray()[0].name);
-
-            Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
-            SpringJoint springJoint = m_boxesInCart.ToArray()[0].GetComponent<SpringJoint>();
-            if (springJoint != null)
-                Destroy(springJoint);
-
-            if (boxRB == null)
-                boxRB = m_boxesInCart.ToArray()[0].AddComponent<Rigidbody>();
-
-            boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            m_boxesInCart.Pop();
-        }
     }
 }
