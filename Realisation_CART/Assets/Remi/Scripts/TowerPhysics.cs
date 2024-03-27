@@ -51,7 +51,7 @@ namespace DiscountDelirium
             }
 
             topBox.GetComponent<Rigidbody>().isKinematic = false;
-
+            topBox.GetComponent<BoxPhysics>().m_incomingVelocity = velocity;
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
             Debug.Log("AutoDestruction enabled");
             topBox.GetComponent<AutoDestruction1>().enabled = true;
@@ -71,12 +71,13 @@ namespace DiscountDelirium
 
         public void AddJointToBox() // p-e rajouter instantBox en parametre    // Rémi
         {
-            if(m_isInHingeMode)
+            if (m_isInHingeMode)
             {
                 AddHingeJoint();
                 return;
             }
 
+            //Debug.LogError("AddJointToBox()");
             AddSpringJoint();
         }
 
@@ -105,26 +106,20 @@ namespace DiscountDelirium
 
         private void AddSpringJoint()
         {
-            // TODO: Should be done in the rigidbody in the prefab
-            //if (_Tower.GetBoxCount() == 1) // Pour ajouter un spring entre la première boite et le panier
-            //{
-            //    Box1 box = _Tower.GetTopBox();
-            //    box.GetComponent<Rigidbody>().isKinematic = true;
-            //    return;
-            //}
-
-            if (_Tower.GetBoxCount() <= NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
+            //Box1 box = _Tower.GetTopBox();
+            //box.GetComponent<Rigidbody>().isKinematic = true;
+            if (_Tower.GetBoxCount() == 1) // Pour ajouter un spring entre la première boite et le panier
             {
                 //Rigidbody cartRB = GetComponentInParent<Rigidbody>();
                 //if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
                 //SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
                 //SetSprintJointValues(springJoint, cartRB);
-                Box1 box = _Tower.GetTopBox();
-                box.GetComponent<Rigidbody>().isKinematic = true;
+                Box1 box1 = _Tower.GetTopBox();
+                box1.GetComponent<Rigidbody>().isKinematic = true;
                 return;
             }
 
-            if (_Tower.GetBoxCount() >= NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre les boites
+            if (_Tower.GetBoxCount() > 1) // Pour ajouter un spring entre les boites
             {
                 //Box1 previousBoxe = m_boxesInCart.ToArray()[m_boxesInCart.Count - 1];
                 //SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
@@ -136,8 +131,8 @@ namespace DiscountDelirium
                 //SetSprintJointValues(springJoint, newBoxeRB);
                 //Box1 box1 = GetTopBox();
                 //box1.GetComponent<Rigidbody>().isKinematic = true;
-                Box1 box = _Tower.GetTopBox();
-                box.GetComponent<Rigidbody>().isKinematic = true;
+                Box1 box1 = _Tower.GetTopBox();
+                box1.GetComponent<Rigidbody>().isKinematic = true;
                 return;
             }
 
