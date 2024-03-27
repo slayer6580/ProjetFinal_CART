@@ -292,8 +292,8 @@ namespace BoxSystem
                 m_slotsList[item] = new SlotInfo(slotTransform, true);
             }
 
-            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
-            m_itemsList.Remove(lastItemInBox);
+            lastItemInBox.m_item.GetComponent<AutoDestruction1>().enabled = true;
+            //m_itemsList.Remove(lastItemInBox);
         }
 
         public void RemoveItemImpulse(Vector3 velocity)
@@ -319,9 +319,9 @@ namespace BoxSystem
             else 
                 rb.AddForce(velocity, ForceMode.Impulse);
 
-            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
+            lastItemInBox.m_item.GetComponent<AutoDestruction1>().enabled = true;
             Debug.Log("Item in autodestruction mode: " + lastItemInBox.m_item.name);
-            m_itemsList.Remove(lastItemInBox);
+            //m_itemsList.Remove(lastItemInBox);
         }
 
         ///// <summary> Marker la boite pour la supprimer </summary>
@@ -393,7 +393,13 @@ namespace BoxSystem
 
 
         #region (--- Fields ---)
-        private ItemInBox GetLastItem()
+
+        public Tower1 GetTower()
+        {
+            return m_tower;
+        }
+
+        public ItemInBox GetLastItem()
         {
             return m_itemsList[m_itemsList.Count - 1];
         }
@@ -408,11 +414,6 @@ namespace BoxSystem
             //Debug.LogWarning("m_totalSlots - m_availableSlotsLeft= " + (m_totalSlots - m_availableSlotsLeft));
             //Debug.LogWarning("m_itemsList.Count: " + m_itemsList.Count);
             return (m_totalSlots - m_availableSlotsLeft) == 0 ? true : false;
-        }
-
-        internal bool IsLast()
-        {
-            return m_itemsList.Count == 1 ? true : false;
         }
         #endregion
     }

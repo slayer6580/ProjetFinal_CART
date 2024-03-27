@@ -1,9 +1,7 @@
 using DiscountDelirium;
-using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 namespace BoxSystem
 {
@@ -126,20 +124,22 @@ namespace BoxSystem
         }
 
         /// <summary> Enleve une boite a la tour </summary>
-        public void RemoveBoxToTower()
+        public void RemoveBoxFromTower()
         {
             if (m_boxCount == 1)
             {
                 Debug.LogWarning("¨On peut pas enlever toute les boites du panier");
                 return;
             }
-
+            Debug.Log("RemoveBoxFromTower() m_boxCount: " + m_boxCount);
             m_boxCount--;
+            Debug.Log("RemoveBoxFromTower() m_boxCount: " + m_boxCount);
             Box1 boxToRemove = m_boxesInCart.Pop();
             Destroy(boxToRemove.gameObject);
             // ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
         }
 
+        /// <summary> Retire une boite avec une force sur mesure</summary>
         public void RemoveBoxImpulse() // Rémi
         {
             // get the top item
@@ -151,18 +151,20 @@ namespace BoxSystem
 
             Debug.Log("Item to remove: " + m_boxesInCart.ToArray()[0].name);
 
-            Rigidbody boxRB = m_boxesInCart.ToArray()[0].GetComponent<Rigidbody>();
-            SpringJoint springJoint = m_boxesInCart.ToArray()[0].GetComponent<SpringJoint>();
-            if (springJoint != null)
-                Destroy(springJoint);
+            Box1 topBox = GetTopBox();
 
+            Rigidbody boxRB = topBox.GetComponent<Rigidbody>();
             if (boxRB == null)
-                boxRB = m_boxesInCart.ToArray()[0].AddComponent<Rigidbody>();
+                boxRB = topBox.AddComponent<Rigidbody>();
 
             boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            m_boxesInCart.Pop();
+            topBox.gameObject.GetComponent<AutoDestruction>().enabled = true;
+
+            //m_boxCount--;
+            //m_boxesInCart.Pop();
         }
 
+        /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
         public void RemoveBoxImpulse(Vector3 velocity)
         {
             Debug.Log("RemoveBoxImpulse()");
@@ -174,11 +176,13 @@ namespace BoxSystem
             }
 
             topBox.GetComponent<Rigidbody>().isKinematic = false;
-            topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
 
-            topBox.GetComponent<AutoDestruction>().enabled = true;
-            Debug.LogWarning("Box int autodestruction mode: " + topBox.name);
-            m_boxesInCart.Pop();
+            topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            Debug.Log("AutoDestruction enabled");
+            topBox.GetComponent<AutoDestruction1>().enabled = true;
+
+            //m_boxCount--;
+            //m_boxesInCart.Pop();
         }
 
         private void ModifyTopBoxSpringIntesity()
@@ -203,7 +207,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
-                RemoveBoxToTower();
+                RemoveBoxFromTower();
                 ModifyTopBoxSpringIntesity();
             }
             else if (Input.GetKeyDown(KeyCode.O))
@@ -253,8 +257,12 @@ namespace BoxSystem
             GetTopBox().PutItemInBox(item);
         }
 
+        /// <summary> Donne la boite du dessus </summary>
         private Box1 GetTopBox()
         {
+            if (m_boxesInCart.Count == 0)
+                return null;
+
             return m_boxesInCart.Peek();
         }
 

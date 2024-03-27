@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4444500604705994386}
-  - component: {fileID: -633076899462673968}
+  - component: {fileID: 8123530398196712547}
   - component: {fileID: 2115764859553650417}
   - component: {fileID: 1484936681145047329}
   - component: {fileID: 915630244215535929}
@@ -35,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-633076899462673968
+--- !u!114 &8123530398196712547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5150462725352331899}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f7b0ea5988eac42b5894cc78b72b70, type: 3}
+  m_Script: {fileID: 11500000, guid: af7c15d589b373644987b39109b81302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_delayUntilDelete: 2
@@ -60,7 +60,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64dd8612a46838489e46c6801daf89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_distanceSnap: 0
   m_data: {fileID: 11400000, guid: 47f7e3ec34cb9fb48a34e2c836fa0ece, type: 2}
 --- !u!33 &1484936681145047329
 MeshFilter:

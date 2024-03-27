@@ -1,5 +1,6 @@
 using DiscountDelirium;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BoxSystem
@@ -114,5 +115,10 @@ namespace BoxSystem
         //    m_box.RemoveLastItemFromBox();
         //    Destroy(gameObject);
         //}
+
+        public Box1 GetBox()
+        {
+            return m_box;
+        }
     }
 }
