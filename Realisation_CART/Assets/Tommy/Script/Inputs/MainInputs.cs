@@ -73,6 +73,24 @@ namespace CartControl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MeleeAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb94bad4-8e3f-4d81-a9a8-e8526b0e6f2b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RangeAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac97f67a-a2c3-483e-85a8-a95e5103a73b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ namespace CartControl
                     ""action"": ""GrabItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2182888-b1d0-4dc0-9333-2e9a9191a44b"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8937fa26-2bc3-405b-b9c3-0bd10e48c8e7"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RangeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -165,6 +205,8 @@ namespace CartControl
             m_Cart_Steer = m_Cart.FindAction("Steer", throwIfNotFound: true);
             m_Cart_Pause = m_Cart.FindAction("Pause", throwIfNotFound: true);
             m_Cart_GrabItem = m_Cart.FindAction("GrabItem", throwIfNotFound: true);
+            m_Cart_MeleeAttack = m_Cart.FindAction("MeleeAttack", throwIfNotFound: true);
+            m_Cart_RangeAttack = m_Cart.FindAction("RangeAttack", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -231,6 +273,8 @@ namespace CartControl
         private readonly InputAction m_Cart_Steer;
         private readonly InputAction m_Cart_Pause;
         private readonly InputAction m_Cart_GrabItem;
+        private readonly InputAction m_Cart_MeleeAttack;
+        private readonly InputAction m_Cart_RangeAttack;
         public struct CartActions
         {
             private @MainInputs m_Wrapper;
@@ -240,6 +284,8 @@ namespace CartControl
             public InputAction @Steer => m_Wrapper.m_Cart_Steer;
             public InputAction @Pause => m_Wrapper.m_Cart_Pause;
             public InputAction @GrabItem => m_Wrapper.m_Cart_GrabItem;
+            public InputAction @MeleeAttack => m_Wrapper.m_Cart_MeleeAttack;
+            public InputAction @RangeAttack => m_Wrapper.m_Cart_RangeAttack;
             public InputActionMap Get() { return m_Wrapper.m_Cart; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -264,6 +310,12 @@ namespace CartControl
                 @GrabItem.started += instance.OnGrabItem;
                 @GrabItem.performed += instance.OnGrabItem;
                 @GrabItem.canceled += instance.OnGrabItem;
+                @MeleeAttack.started += instance.OnMeleeAttack;
+                @MeleeAttack.performed += instance.OnMeleeAttack;
+                @MeleeAttack.canceled += instance.OnMeleeAttack;
+                @RangeAttack.started += instance.OnRangeAttack;
+                @RangeAttack.performed += instance.OnRangeAttack;
+                @RangeAttack.canceled += instance.OnRangeAttack;
             }
 
             private void UnregisterCallbacks(ICartActions instance)
@@ -283,6 +335,12 @@ namespace CartControl
                 @GrabItem.started -= instance.OnGrabItem;
                 @GrabItem.performed -= instance.OnGrabItem;
                 @GrabItem.canceled -= instance.OnGrabItem;
+                @MeleeAttack.started -= instance.OnMeleeAttack;
+                @MeleeAttack.performed -= instance.OnMeleeAttack;
+                @MeleeAttack.canceled -= instance.OnMeleeAttack;
+                @RangeAttack.started -= instance.OnRangeAttack;
+                @RangeAttack.performed -= instance.OnRangeAttack;
+                @RangeAttack.canceled -= instance.OnRangeAttack;
             }
 
             public void RemoveCallbacks(ICartActions instance)
@@ -307,6 +365,8 @@ namespace CartControl
             void OnSteer(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
             void OnGrabItem(InputAction.CallbackContext context);
+            void OnMeleeAttack(InputAction.CallbackContext context);
+            void OnRangeAttack(InputAction.CallbackContext context);
         }
     }
 }

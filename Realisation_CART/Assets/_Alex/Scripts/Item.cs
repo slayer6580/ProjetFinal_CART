@@ -1,4 +1,3 @@
-using DiscountDelirium;
 using UnityEngine;
 
 namespace BoxSystem
@@ -8,7 +7,7 @@ namespace BoxSystem
       
         public ItemData m_data;
         private Box m_box;
-        private Transform m_cartTransform;
+        private Transform m_playerTransform;
         private Vector3 m_targetLocalPosition;
         private Vector3 m_startPosition;
 
@@ -16,7 +15,7 @@ namespace BoxSystem
         private float m_distanceSnap;
         private bool m_isMoving = false;
         private bool m_turn90Degree = false;
-        private const float SLERP_TIME = 2.0f;
+        private float m_slerpTime;
 
         private Transform m_boxTransform; // NEW
 
@@ -31,30 +30,32 @@ namespace BoxSystem
             Slerping();
         }
 
-        public void StartSlerpAndSnap(Box box, Vector3 localPosition, Transform cartTransform, bool turn90Degree, float snapDistance, bool autoSnap)
+        /// <summary> Pour configurer le slerp et le snap </summary>
+        public void StartSlerpAndSnap(Box box, Vector3 localPosition, GameObject player, bool turn90Degree, float snapDistance, bool autoSnap)
         {
             m_turn90Degree = turn90Degree;
-            m_cartTransform = cartTransform;           
+            m_playerTransform = player.transform;           
             m_targetLocalPosition = localPosition;          
             m_box = box;
             m_boxTransform = box.transform;
             m_startPosition = transform.position;
+            m_slerpTime = player.GetComponent<PlayerGrabItem>().ItemSlerpTime;
             if (autoSnap) // apres un reorganize
             {
                 SnapToBox();
                 return;
             }
             m_isMoving = true;
-
             m_distanceSnap = snapDistance;
             enabled = true;
         }
 
+        /// <summary> Pour que l'objet Snap dans la boite avec la rotation du joueur et la rotation locale de la boite </summary>
         private void SnapToBox()
         {
             transform.SetParent(m_boxTransform);
             transform.localPosition = m_targetLocalPosition;
-            Vector3 eulerOfCart = m_cartTransform.rotation.eulerAngles; 
+            Vector3 eulerOfCart = m_playerTransform.rotation.eulerAngles; 
             Vector3 localEulerOfBox = m_boxTransform.transform.localRotation.eulerAngles;
 
             transform.eulerAngles = Vector3.zero;
@@ -67,20 +68,20 @@ namespace BoxSystem
             EndSlerp();
         }
 
+        /// <summary> Pour désactiver l'update de la classe </summary>
         private void EndSlerp()
         {
             Debug.Log("Slerp Ended");
             enabled = false;
         }
 
+        /// <summary> Le slerp entre le point de départ de l'objet et sa place dans la boite </summary>
         private void Slerping()
         {
             if (!m_isMoving)
                 return;
 
-            
-
-            float slerpTime = m_timer / SLERP_TIME;
+            float slerpTime = m_timer / m_slerpTime;
             m_timer += Time.deltaTime;
 
             Vector3 boxLocalPosition = m_box.transform.position + m_targetLocalPosition;

@@ -14,6 +14,18 @@ namespace CartControl
 
 		public override void OnUpdate()
 		{
+			//For animation:
+			//Is only pressing break
+			if((m_cartStateMachine.BackwardPressedPercent > GameConstants.DEADZONE) && (m_cartStateMachine.LocalVelocity.z > 0))
+			{
+				m_cartStateMachine.m_humanAnimator.SetBool("Breaking", true);
+			}
+			else
+			{
+				m_cartStateMachine.m_humanAnimator.SetBool("Breaking", false);
+			}
+
+
 			if (m_cartStateMachine.AutoDriftWhenTurning)
 			{
 				//Increase timer only when turning at maximum value
@@ -51,7 +63,8 @@ namespace CartControl
 
 		public override void OnExit()
 		{
-
+			//For Animation
+			m_cartStateMachine.m_humanAnimator.SetBool("Breaking", false);
 		}
 
 		public override bool CanEnter(IState currentState)

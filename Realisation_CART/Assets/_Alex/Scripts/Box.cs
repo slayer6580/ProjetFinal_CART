@@ -156,7 +156,7 @@ namespace BoxSystem
                     List<int> allIndex = new List<int>();
                     allIndex.Add(i);
                     m_itemsList.Add(new ItemInBox(GO, allIndex, slotTransform.localPosition));
-                    SetItemForSlerpAndSnap(GO, slotTransform.localPosition, false, autoSnap);
+                    SlerpAndSnap(GO, slotTransform.localPosition, false, autoSnap);
                     return;
                 }
             }
@@ -217,10 +217,10 @@ namespace BoxSystem
                 m_slotsList[i] = new SlotInfo(lastTransform, true);
             }
 
-            // replacer les items du plus grand au plus petit, 100% accurate
-            foreach (GameObject item in newList)
+            // replacer les items du plus grand au plus petit, 100% accurate, avec le snap
+            foreach (GameObject newItem in newList)
             {
-                PutItemInBox(item, true);
+                PutItemInBox(newItem, true);
             }
         }
 
@@ -249,7 +249,7 @@ namespace BoxSystem
                 turn90Degree = true;
             }
 
-            SetItemForSlerpAndSnap(GO, localPosition, turn90Degree, autoSnap);
+            SlerpAndSnap(GO, localPosition, turn90Degree, autoSnap);
         }
         #endregion
 
@@ -274,27 +274,27 @@ namespace BoxSystem
             }
 
             Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
-            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(transform.up * 10, ForceMode.Impulse);
 
-            foreach (int item in lastItemInBox.m_slotIndex)
+            foreach (int itemIndex in lastItemInBox.m_slotIndex)
             {
-                Transform slotTransform = m_slotsList[item].m_slotTransform;
-                m_slotsList[item] = new SlotInfo(slotTransform, true);
+                Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
+                m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
             }
-
-            lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
+            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
             m_itemsList.Remove(lastItemInBox);
+
         }
 
         #endregion
 
 
         #region (--- HelpFunctions ---)
-        /// <summary> Place l'objet dans la hierarchie enfant de la boite </summary>
-        private void SetItemForSlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
+        /// <summary> Change le scale de l'item et commence le Slerp And Snap </summary>
+        private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
             GO.transform.localScale = GO.GetComponent<Item>().m_data.m_scaleInBox; // change le scale de l'objet choisi
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player.transform, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
+            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
         }
 
         /// <summary> Regarde si une liste de bool est toute vrai </summary>
@@ -327,6 +327,11 @@ namespace BoxSystem
         private ItemInBox GetLastItem()
         {
             return m_itemsList[m_itemsList.Count - 1];
+        }
+
+        public bool BoxIsEmpty()
+        {
+           return m_itemsList.Count == 0;
         }
         #endregion
     }

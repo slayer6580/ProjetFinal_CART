@@ -1,6 +1,7 @@
 using Cinemachine;
 using DiscountDelirium;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace CartControl
 {
@@ -63,7 +64,10 @@ namespace CartControl
 		public Rigidbody m_cartRB;
 		public GameObject m_gameplayCamera;
 		public CinemachineBrain m_camBrain;
+		public Animator m_humanAnimator;
+		public Rig m_feetOnCartRig;
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
+
 		[Space]
 		public TowerBalanceAnimCtrlr m_towerCtrlr;
 
@@ -94,8 +98,13 @@ namespace CartControl
 			m_currentState.OnUpdate();
 			TryToChangeState();
 
-			//m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
 
+			//Update Animation
+			//print("VEL: " + LocalVelocity.z / MaxSpeed);
+			m_humanAnimator.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeed);
+
+			//Testing tower tilt with Animation
+			m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
 		}
 
 		protected override void FixedUpdate()

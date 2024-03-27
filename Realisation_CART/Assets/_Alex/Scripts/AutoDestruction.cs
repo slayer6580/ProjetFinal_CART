@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DiscountDelirium
 {
-    public class ItemMarkForDelete : MonoBehaviour
+    public class AutoDestruction : MonoBehaviour
     {
         [SerializeField] private float m_delayUntilDelete;
 
