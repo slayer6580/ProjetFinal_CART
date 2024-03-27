@@ -320,6 +320,7 @@ namespace BoxSystem
                 rb.AddForce(velocity, ForceMode.Impulse);
 
             lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
+            Debug.Log("Item in autodestruction mode: " + lastItemInBox.m_item.name);
             m_itemsList.Remove(lastItemInBox);
         }
 

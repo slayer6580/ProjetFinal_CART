@@ -26,7 +26,7 @@ namespace BoxSystem
         private int m_boxCount = 0;
         private Stack<Box1> m_boxesInCart = new Stack<Box1>();
 
-        private const int MAX_BOXES_BEFORE_DROP = 4;
+        private const int NB_UNDROPPABLE_BOXES = 4;
 
         void Start()
         {
@@ -173,11 +173,11 @@ namespace BoxSystem
                 return;
             }
 
-            Debug.Log("Box to remove: " + topBox.name);
             topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
 
             topBox.GetComponent<ItemMarkForDelete>().enabled = true;
+            Debug.LogWarning("Box int autodestruction mode: " + topBox.name);
             m_boxesInCart.Pop();
         }
 
@@ -262,14 +262,14 @@ namespace BoxSystem
         {
             //Debug.Log("m_boxesInCart.Count: " + m_boxesInCart.Count);
             //if (m_boxesInCart.Count <= 1) return;
-            Debug.Log("Dropping content");
+            Debug.Log("CheckIfCanDropContent");
 
 
             Box1 box = GetTopBox();
 
-            if (box.IsEmpty() && m_boxesInCart.Count > 1)
+            if (box.IsEmpty() && GetBoxesCount() > NB_UNDROPPABLE_BOXES)
                 RemoveBoxImpulse(velocity);
-            else if (!box.IsEmpty() && GetBoxesCount() < MAX_BOXES_BEFORE_DROP)
+            else if (!box.IsEmpty())
                 box.RemoveItemImpulse(velocity);
         }
 
