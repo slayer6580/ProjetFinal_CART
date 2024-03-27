@@ -12,7 +12,7 @@ namespace DiscountDelirium
         private const int NB_UNDROPPABLE_BOXES = 4;
 
         private Tower1 _Tower { get; set; } = null;
-        private bool m_isInHingeMode = true;
+        private bool m_isInHingeMode = false;
 
         private void Awake()
         {
@@ -82,28 +82,37 @@ namespace DiscountDelirium
 
         private void AddHingeJoint()
         {
-            if (_Tower.GetBoxCount() == 1) // Pour ajouter un spring entre la première boite et le panier
-            {
-                Box1 box = _Tower.GetTopBox();
-                box.GetComponent<Rigidbody>().isKinematic = true;
-                return;
-            }
+            // TODO: Should be done in the rigidbody in the prefab
+            //if (_Tower.GetBoxCount() == 1) // Pour ajouter un spring entre la première boite et le panier
+            //{
+            //    Box1 box = _Tower.GetTopBox();
+            //    box.GetComponent<Rigidbody>().isKinematic = true;
+            //    return;
+            //}
 
-            if (_Tower.GetBoxCount() > 1) // Pour ajouter un spring entre les boites
-            {
-                Box1 box = _Tower.GetTopBox();
-                box.GetComponent<Rigidbody>().isKinematic = true;
-                return;
-            }
+            //if (_Tower.GetBoxCount() > 1) // Pour ajouter un spring entre les boites
+            //{
+            //    Box1 box = _Tower.GetTopBox();
+            //    box.GetComponent<Rigidbody>().isKinematic = true;
+            //    return;
+            //}
 
-            if (_Tower.GetBoxCount() > NB_UNDROPPABLE_BOXES) 
-            {
-                Box1 box1 = _Tower.GetTopBox();
-            }
+            //if (_Tower.GetBoxCount() > NB_UNDROPPABLE_BOXES) 
+            //{
+            //    Box1 box = _Tower.GetTopBox();
+            //}
         }
 
         private void AddSpringJoint()
         {
+            // TODO: Should be done in the rigidbody in the prefab
+            //if (_Tower.GetBoxCount() == 1) // Pour ajouter un spring entre la première boite et le panier
+            //{
+            //    Box1 box = _Tower.GetTopBox();
+            //    box.GetComponent<Rigidbody>().isKinematic = true;
+            //    return;
+            //}
+
             if (_Tower.GetBoxCount() <= NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
             {
                 //Rigidbody cartRB = GetComponentInParent<Rigidbody>();
