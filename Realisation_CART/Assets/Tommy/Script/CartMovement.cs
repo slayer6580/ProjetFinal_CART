@@ -9,16 +9,16 @@ namespace CartControl
 		public void Move(float acceleration, float turnDrag, float maxSpeed)
 		{
 			//Transform default velocity (which is global) to a local velocity
-			SM.LocalVelocity = SM.m_cart.transform.InverseTransformDirection(SM.m_cartRB.velocity);
+			SM.LocalVelocity = SM.Cart.transform.InverseTransformDirection(SM.CartRB.velocity);
 
-			if(SM.m_cartRB.velocity.magnitude < maxSpeed)
+			if(SM.CartRB.velocity.magnitude < maxSpeed)
 			{
 				//Check for movement input
 				if (SM.ForwardPressedPercent > GameConstants.DEADZONE || SM.BackwardPressedPercent > GameConstants.DEADZONE)
 				{
 					if (maxSpeed > SM.LocalVelocity.z && -SM.MaxBackwardSpeed < SM.LocalVelocity.z)
 					{
-						SM.m_cartRB.GetComponent<Rigidbody>().AddForce(transform.forward
+						SM.CartRB.GetComponent<Rigidbody>().AddForce(transform.forward
 							* GameConstants.BASE_ADD_FORCE
 							* acceleration
 							* Time.fixedDeltaTime
@@ -28,15 +28,13 @@ namespace CartControl
 				}
 			}
 			
-
-
 			//Manage drag when turning
 			//If the cart is not ONLY going forward (it's going a bit sideway because it's turning) push in opposite direction to stabilize
 			Vector3 sideToPush = -transform.right * Mathf.Clamp(SM.LocalVelocity.x, -1f, 1f);
 			float pushForce = GameConstants.BASE_ADD_FORCE * acceleration * turnDrag;
 			float pushMultiply = SM.TurningDragRelativeToJoystick.Evaluate(Mathf.Abs(SM.SteeringValue));
 
-			SM.m_cartRB.GetComponent<Rigidbody>().AddForce(sideToPush * pushForce * pushMultiply * Time.fixedDeltaTime);
+			SM.CartRB.GetComponent<Rigidbody>().AddForce(sideToPush * pushForce * pushMultiply * Time.fixedDeltaTime);
 		}
 
 
@@ -44,7 +42,7 @@ namespace CartControl
 		{
 			if (SM.SteeringValue != 0)
 			{
-				SM.m_cart.transform.Rotate(Vector3.up
+				SM.Cart.transform.Rotate(Vector3.up
 					* rotationSpeed
 					* SM.SteeringValue
 					* Time.fixedDeltaTime);
@@ -53,7 +51,7 @@ namespace CartControl
 
 		public void StopMovement()
 		{
-			SM.m_cartRB.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			SM.CartRB.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 	}
 }

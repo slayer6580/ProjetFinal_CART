@@ -36,7 +36,7 @@ namespace CartControl
 
 			if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
-				&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
+				&& m_cartStateMachine.CartRB.velocity.magnitude < GameConstants.DEADZONE)
 			{
 				return true;
 			}

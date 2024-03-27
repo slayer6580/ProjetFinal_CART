@@ -12,13 +12,13 @@ namespace CartControl
 			Debug.LogWarning("current state: STOPPED");
 
 			//Save the velocity
-			m_tempCartVelocity = m_cartStateMachine.m_cartRB.velocity;
+			m_tempCartVelocity = m_cartStateMachine.CartRB.velocity;
 			
 			//Stop all movement
 			m_cartStateMachine.CartMovement.StopMovement();
-			m_cartStateMachine.m_cartRB.isKinematic = true;
-			m_cartStateMachine.m_gameplayCamera.SetActive(false);
-			m_cartStateMachine.m_camBrain.enabled = false;
+			m_cartStateMachine.CartRB.isKinematic = true;
+			m_cartStateMachine.VirtualCamera.SetActive(false);
+			m_cartStateMachine.CamBrain.enabled = false;
 
 			//If wanted, depending of the coming state, reactivate variables so we can get back to these State after this one
 			if (!m_cartStateMachine.BackToIdleAfterStop)
@@ -48,14 +48,14 @@ namespace CartControl
 
 		public override void OnExit()
 		{
-			m_cartStateMachine.m_cartRB.isKinematic = false;
-			m_cartStateMachine.m_camBrain.enabled = true;
-			m_cartStateMachine.m_gameplayCamera.SetActive(true);
+			m_cartStateMachine.CartRB.isKinematic = false;
+			m_cartStateMachine.CamBrain.enabled = true;
+			m_cartStateMachine.VirtualCamera.SetActive(true);
 
 			//Reactivate movement as they was if wanted
 			if (!m_cartStateMachine.BackToIdleAfterStop)
 			{			
-				m_cartStateMachine.m_cartRB.velocity = m_tempCartVelocity;			
+				m_cartStateMachine.CartRB.velocity = m_tempCartVelocity;			
 			}
 			
 		}
