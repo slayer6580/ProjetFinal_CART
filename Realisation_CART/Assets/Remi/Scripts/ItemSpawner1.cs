@@ -38,7 +38,6 @@ public class ItemSpawner1 : MonoBehaviour
         {
             Debug.Log("Need a new box to put item");
             m_tower.AddBoxToTower();
-            m_towerPhysics.AddSpringToBox();
         }
 
         GameObject instant = Instantiate(m_itemPrefab.gameObject);

@@ -51,7 +51,7 @@ namespace BoxSystem
             // ajout a la liste
             m_boxesInCart.Push(instantBox);
 
-            //_TowerPhysics.AddSpringToBox();  // Ta fonction ici, p-e rajouter instantBox en parametre
+            _TowerPhysics.AddJointToBox();  // Ta fonction ici, p-e rajouter instantBox en parametre
         }
 
         /// <summary> Enleve une boite a la tour </summary>
@@ -69,7 +69,7 @@ namespace BoxSystem
             Box1 boxToRemove = m_boxesInCart.Pop();
             //Destroy(GetTopBox().gameObject);
             Destroy(boxToRemove.gameObject);
-            //_TowerPhysics.ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
+            _TowerPhysics.ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
         }
 
         // TEST
