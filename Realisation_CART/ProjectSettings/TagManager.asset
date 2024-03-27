@@ -11,17 +11,17 @@ TagManager:
   - 
   - Water
   - UI
+  - PlayerCollider
   - 
+  - ClientCollider
   - 
+  - ItemCollider
   - 
+  - BoxCollider
   - 
+  - TowerCollider
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - GroundCollider
   - 
   - 
   - 
