@@ -281,7 +281,7 @@ namespace BoxSystem
                 Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
                 m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
             }
-            lastItemInBox.m_item.GetComponent<ItemMarkForDelete>().enabled = true;
+            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
             m_itemsList.Remove(lastItemInBox);
 
         }
@@ -327,6 +327,11 @@ namespace BoxSystem
         private ItemInBox GetLastItem()
         {
             return m_itemsList[m_itemsList.Count - 1];
+        }
+
+        public bool BoxIsEmpty()
+        {
+           return m_itemsList.Count == 0;
         }
         #endregion
     }

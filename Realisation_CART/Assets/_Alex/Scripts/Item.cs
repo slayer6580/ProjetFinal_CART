@@ -1,4 +1,3 @@
-using DiscountDelirium;
 using UnityEngine;
 
 namespace BoxSystem
@@ -31,6 +30,7 @@ namespace BoxSystem
             Slerping();
         }
 
+        /// <summary> Pour configurer le slerp et le snap </summary>
         public void StartSlerpAndSnap(Box box, Vector3 localPosition, GameObject player, bool turn90Degree, float snapDistance, bool autoSnap)
         {
             m_turn90Degree = turn90Degree;
@@ -46,11 +46,11 @@ namespace BoxSystem
                 return;
             }
             m_isMoving = true;
-
             m_distanceSnap = snapDistance;
             enabled = true;
         }
 
+        /// <summary> Pour que l'objet Snap dans la boite avec la rotation du joueur et la rotation locale de la boite </summary>
         private void SnapToBox()
         {
             transform.SetParent(m_boxTransform);
@@ -68,18 +68,18 @@ namespace BoxSystem
             EndSlerp();
         }
 
+        /// <summary> Pour désactiver l'update de la classe </summary>
         private void EndSlerp()
         {
             Debug.Log("Slerp Ended");
             enabled = false;
         }
 
+        /// <summary> Le slerp entre le point de départ de l'objet et sa place dans la boite </summary>
         private void Slerping()
         {
             if (!m_isMoving)
                 return;
-
-            
 
             float slerpTime = m_timer / m_slerpTime;
             m_timer += Time.deltaTime;
