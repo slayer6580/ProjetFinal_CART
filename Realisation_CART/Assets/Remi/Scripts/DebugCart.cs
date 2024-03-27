@@ -12,7 +12,7 @@ namespace DiscountDelirium
 
         void Start()
         {
-            
+
             StartCoroutine(AutoDestroy());
         }
 

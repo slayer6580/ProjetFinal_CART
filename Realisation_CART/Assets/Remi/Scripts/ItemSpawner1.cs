@@ -1,14 +1,17 @@
 using UnityEngine;
 using BoxSystem;
+using DiscountDelirium;
 
 public class ItemSpawner1 : MonoBehaviour
 {
     [SerializeField] private Item1 m_itemPrefab;
-    [SerializeField] private Tower1 m_tower;
+    [SerializeField] private Tower1 m_tower; // Warning : TowerPhysics bellow depends on this prefab
+    private TowerPhysics m_towerPhysics;
 
     private void Start()
     {
         gameObject.name = "Item Spawner: " + m_itemPrefab.m_data.m_name;
+        m_towerPhysics = m_tower.GetComponent<TowerPhysics>();
     }
 
     //TEST
@@ -35,7 +38,7 @@ public class ItemSpawner1 : MonoBehaviour
         {
             Debug.Log("Need a new box to put item");
             m_tower.AddBoxToTower();
-            m_tower.AddSpringToBox();
+            m_towerPhysics.AddSpringToBox();
         }
 
         GameObject instant = Instantiate(m_itemPrefab.gameObject);
