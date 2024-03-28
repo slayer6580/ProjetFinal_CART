@@ -12,18 +12,23 @@ namespace BoxSystem
         [Header("mettre le debug visuel TMP ici")]
         [SerializeField] private TextMeshPro m_quantityText;
 
-        private int m_remainingItems;
         private MeshRenderer m_renderer;
+
+        private int m_remainingItems;
         private Color m_initialColor;
 
         private void Awake()
         {
             m_remainingItems = m_itemQuantity;
             m_quantityText.text = m_itemQuantity.ToString();
-            ColorShelf();
             m_renderer = GetComponent<MeshRenderer>();
-            m_initialColor = m_renderer.material.color;
+      
+        }
 
+        private void Start()
+        {
+            ColorShelf();
+            m_initialColor = m_renderer.material.color;
         }
 
         /// <summary> Est ce qu'il reste un item dans l'étagère </summary>
@@ -47,27 +52,25 @@ namespace BoxSystem
         private void OnValidate()
         {
             m_quantityText.text = m_itemQuantity.ToString();
-            ColorShelf();
         }
 
 
         /// <summary> Change la couleur du shelf selon la grosseur de l'item </summary>
         private void ColorShelf()
         {
-  
             switch (m_itemPrefab.GetComponent<Item>().m_data.m_size)
             {
                 case ItemData.ESize.small:
-                    m_renderer.sharedMaterial.color = Color.green;
+                    m_renderer.material.color = Color.green;
                     break;
                 case ItemData.ESize.medium:
-                    m_renderer.sharedMaterial.color = Color.yellow;
+                    m_renderer.material.color = Color.yellow;
                     break;
                 case ItemData.ESize.large:
-                    m_renderer.sharedMaterial.color = Color.red;
+                    m_renderer.material.color = Color.red;
                     break;
                 default:
-                    m_renderer.sharedMaterial.color = Color.white;
+                    m_renderer.material.color = Color.white;
                     break;
             }
         }
@@ -86,7 +89,6 @@ namespace BoxSystem
         }
     }
 
-  
+
 
 }
-        
