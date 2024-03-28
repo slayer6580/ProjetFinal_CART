@@ -1,6 +1,7 @@
 using UnityEngine;
 using DiscountDelirium;
 using CartControl;
+using System;
 
 namespace BoxSystem
 {
@@ -137,7 +138,7 @@ namespace BoxSystem
         public void RemoveItemImpulse(Vector3 velocity)
         {
             Box topBox = _Tower.GetTopBox();
-            // get the top item
+
             if (topBox.GetItemsInBox().Count <= 0)
             {
                 Debug.LogWarning("No item in the box");
@@ -177,14 +178,14 @@ namespace BoxSystem
             }
 
             topBox.GetComponent<Rigidbody>().isKinematic = false;
-            //topBox.GetComponent<BoxPhysics>().m_incomingVelocity = velocity;
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
             Debug.Log("AutoDestruction enabled");
             topBox.GetComponent<AutoDestruction>().enabled = true;
             _Tower.RemoveLastBoxFromTower();
         }
 
-        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB) // Rémi
+        /// <summary> Configure les valeurs du join Spring  </summary>
+        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
         {
             springJoint.connectedBody = newBoxeRB;
             springJoint.spring = 1;
@@ -195,10 +196,9 @@ namespace BoxSystem
             springJoint.enableCollision = true;
         }
 
+        /// <summary> Vérifie si on peut retirer le contenu de la boite </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
-            //Debug.Log("m_boxesInCart.Count: " + m_boxesInCart.Count);
-            //if (m_boxesInCart.Count <= 1) return;
             Debug.Log("CheckIfCanDropContent");
 
             Box box = _Tower.GetTopBox();
