@@ -12,8 +12,10 @@ namespace BoxSystem
         [field: SerializeField] private GameObject Player { get; set; } = null;
 
         [Header("Items and boxes physics settings")]
-        [SerializeField] private float m_removeImpulseIntesity = 1.0f;
-        [SerializeField] private float m_vectorUpImpulseIntesity = 1.0f;
+        [SerializeField] private float m_itemRemoveImpulseIntesity = 0.2f;
+        [SerializeField] private float m_itemVectorUpImpulseIntesity = 10.0f;
+        [SerializeField] private float m_boxRemoveImpulseIntesity = 0.2f;
+        [SerializeField] private float m_boxVectorUpImpulseIntesity = 10.0f;
         [Header("Debug Cart Settings")]
         [SerializeField] private float m_debugCartDistance = 10.0f;
         [SerializeField] private float m_debugCartSpeed = 3.0f;
@@ -180,12 +182,20 @@ namespace BoxSystem
                 return;
             }
 
-            Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
+            Vector3 vectorUp = topBox.transform.up * m_itemVectorUpImpulseIntesity;
+            Vector3 incomingImpulse = velocity * m_itemRemoveImpulseIntesity;
+            Vector3 totalImpulse = vectorUp + incomingImpulse;
+            //Debug.Log("Incoming Impulse: " + impulse.magnitude);
 
+            Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
             if (rb == null)
-                lastItemInBox.m_item.gameObject.AddComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            {
+                rb = lastItemInBox.m_item.gameObject.AddComponent<Rigidbody>();
+                rb.AddForce(totalImpulse, ForceMode.Impulse);
+                rb.mass = 0.1f; // TODO Remi: Get the mass depending on the item info mass
+            }
             else
-                rb.AddForce(velocity, ForceMode.Impulse);
+                rb.AddForce(totalImpulse, ForceMode.Impulse);
 
             lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
             Debug.Log("Item in autodestruction mode: " + lastItemInBox.m_item.name);
@@ -205,12 +215,12 @@ namespace BoxSystem
                 return;
             }
 
-            Vector3 vectorUp = topBox.transform.up * m_vectorUpImpulseIntesity;
-            Vector3 incomingImpulse = velocity * m_removeImpulseIntesity;
-            Vector3 impulse = vectorUp + incomingImpulse;
-            Debug.Log("Incoming Impulse: " + impulse.magnitude);
+            Vector3 vectorUp = topBox.transform.up * m_boxVectorUpImpulseIntesity;
+            Vector3 incomingImpulse = velocity * m_boxRemoveImpulseIntesity;
+            Vector3 totalImpulse = vectorUp + incomingImpulse;
+            Debug.Log("Incoming Impulse: " + totalImpulse.magnitude);
             topBox.GetComponent<Rigidbody>().isKinematic = false;
-            topBox.GetComponent<Rigidbody>().AddForce(vectorUp + incomingImpulse, ForceMode.Impulse);
+            topBox.GetComponent<Rigidbody>().AddForce(totalImpulse, ForceMode.Impulse);
             //topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
 
             //Debug.Log("AutoDestruction enabled");
