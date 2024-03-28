@@ -87,10 +87,13 @@ namespace BoxSystem
             instant.name = "Boxe " + m_boxCount;
             Box instantBox = instant.GetComponent<Box>();
             instantBox.SetTower(this);
+          
 
             // hauteur de la boite dans la tour
             float height = (m_boxCount - 1) * (instantBox.gameObject.GetComponent<BoxSetup>().SlotHeight + m_boxGapHeight);
-            instant.transform.localPosition = new Vector3(0, height, 0);
+            Vector3 localPosition = new Vector3(0, height, 0);
+            instant.transform.localPosition = localPosition;
+            instantBox.SetInitialLocationInBox(localPosition);
 
             // ajout a la liste
             m_boxesInCart.Push(instantBox);
