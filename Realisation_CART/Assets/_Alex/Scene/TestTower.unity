@@ -1842,7 +1842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
-  <m_tower>k__BackingField: {fileID: 1750706378}
+  <Tower>k__BackingField: {fileID: 0}
 --- !u!135 &269257463
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3894,7 +3894,10 @@ MonoBehaviour:
     Press (P) to remove a box with force.
 
     Press
-    (A) to take an item when close to shelves.'
+    (A) to take an item when close to shelves.
+
+    Press (Y) to empty cart, give
+    score and give nb of items'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
@@ -24457,18 +24460,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4481828586471022658}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1750706378 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
-    type: 3}
-  m_PrefabInstance: {fileID: 4481828586471022658}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30fec34152f0950469342d6514045743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1755214422
 GameObject:
   m_ObjectHideFlags: 0

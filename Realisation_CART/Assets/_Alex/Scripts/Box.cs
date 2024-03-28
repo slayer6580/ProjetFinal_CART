@@ -75,7 +75,6 @@ namespace BoxSystem
             m_boxSetup = GetComponent<BoxSetup>();
         }
 
-
         #region (--- InitFunctions ---)
         /// <summary> BoxSetup va nous donner les infos des slots </summary>
         public void AddSlotInList(Transform slotTransform)
@@ -277,15 +276,14 @@ namespace BoxSystem
             Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
             lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(transform.up * 10, ForceMode.Impulse);
 
-            foreach (int itemIndex in lastItemInBox.m_slotIndex)
-            {
-                Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
-                m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
-            }
+            ResetSlots(lastItemInBox);
+
             lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
             m_itemsList.Remove(lastItemInBox);
 
         }
+
+
 
         #endregion
 
@@ -339,6 +337,17 @@ namespace BoxSystem
         {  
             return m_itemsList; 
         }
+
+        public void ResetSlots(ItemInBox lastItemInBox)
+        {
+            foreach (int itemIndex in lastItemInBox.m_slotIndex)
+            {
+                Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
+                m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
+            }
+        }
+
+
         #endregion
     }
 }

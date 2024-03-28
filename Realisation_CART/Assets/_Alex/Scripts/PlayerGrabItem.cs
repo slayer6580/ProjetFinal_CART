@@ -40,8 +40,7 @@ namespace BoxSystem
             if (m_choosenShelf == shelf)
             {
                 m_choosenShelf.UnSelectedShelf();
-                m_choosenShelf = null;
-                
+                m_choosenShelf = null;               
             }
         }
 
