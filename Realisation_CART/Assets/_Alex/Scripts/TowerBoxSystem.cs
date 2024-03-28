@@ -17,7 +17,7 @@ namespace BoxSystem
         [Header("Mettre le Prefab de la boite")]
         [SerializeField] private GameObject m_boxPrefab;
         [Header("La hauteur de placement de la boite")]
-        [SerializeField] private float m_boxHeight;
+        [SerializeField] private float m_boxGapHeight;
 
         private int m_boxCount = 0;
         private Stack<Box> m_boxesInCart = new Stack<Box>();
@@ -87,7 +87,7 @@ namespace BoxSystem
             instantBox.SetTower(this);
 
             // hauteur de la boite dans la tour
-            float height = (m_boxCount - 1) * m_boxHeight;
+            float height = (m_boxCount - 1) * (instantBox.gameObject.GetComponent<BoxSetup>().SlotHeight + m_boxGapHeight);
             instant.transform.localPosition = new Vector3(0, height, 0);
 
             // ajout a la liste
