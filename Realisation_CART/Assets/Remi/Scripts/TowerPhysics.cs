@@ -137,8 +137,8 @@ namespace BoxSystem
         {
             if (_Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Debug.Log("AddSpringJoint() _Tower.GetBoxCount(): " + _Tower.GetBoxCount());
-            Box previousTopBox = null; // GetPreviousTopBox();
+            //Debug.Log("AddSpringJoint() _Tower.GetBoxCount(): " + _Tower.GetBoxCount());
+            Box previousTopBox = _Tower.GetPreviousTopBox();
             if (previousTopBox == null) Debug.LogWarning("Previous Top Box est null");
             else Debug.Log("Previous Top Box: " + previousTopBox.name);
 
@@ -154,27 +154,15 @@ namespace BoxSystem
 
             if (previousSpringJoint != null)
             {
-                Debug.Log("Spring found in previous box: " + previousTopBoxRB.gameObject.name);
-                previousTopBoxRB.transform.localPosition = GetBoxDesiredPosition(previousTopBox);
+                //Debug.Log("Spring found in previous box: " + previousTopBoxRB.gameObject.name);
+                previousTopBox.ReplaceBoxToOrigin();
+                previousTopBox.transform.eulerAngles = Vector3.zero;
                 previousSpringJoint.spring = 0;
                 previousSpringJoint.connectedBody = null;
-            }
-            else
-            {
-                Debug.Log("No srping in previous box: " + previousTopBoxRB.gameObject.name);
-
             }
 
             previousTopBoxRB.isKinematic = true;
         }
-
-        //public Box GetPreviousTopBox()
-        //{
-        //    if (_Tower.m_boxesInCart.Count < 2)
-        //        return null;
-
-        //    return _Tower.m_boxesInCart.ToArray()[1];
-        //}
 
         public void RemoveItemImpulse(Vector3 velocity)
         {
@@ -281,11 +269,6 @@ namespace BoxSystem
                 RemoveBoxImpulse(velocity);
             else if (!box.IsEmpty())
                 RemoveItemImpulse(velocity);
-        }
-
-        public Vector3 GetBoxDesiredPosition(Box box)
-        {
-            return new Vector3(0, box.gameObject.GetComponent<BoxSetup>().SlotHeight * _Tower.GetBoxesCount(), 0);
         }
     }
 }

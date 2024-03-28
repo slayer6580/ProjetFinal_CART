@@ -167,6 +167,14 @@ namespace BoxSystem
             m_boxCount--;
             m_boxesInCart.Pop();       
         }
+
+        public Box GetPreviousTopBox()
+        {
+            if (m_boxesInCart.Count < 2)
+                return null;
+
+            return m_boxesInCart.ToArray()[1];
+        }
         #endregion
     }
 
