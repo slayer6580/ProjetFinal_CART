@@ -34,40 +34,36 @@ namespace BoxSystem
         {
             if (Input.GetKeyDown(KeyCode.K))
             {
-                Vector3 eulerOfCart = Player.transform.rotation.eulerAngles;
-                Vector3 localEulerOfTower = transform.localRotation.eulerAngles;
                 Vector3 rotation = new Vector3(0, 90, 0);
                 Vector3 rightSideOfPlayer = -Player.transform.right;
                 Vector3 rightStartPosition = Player.transform.position + (rightSideOfPlayer * m_debugCartDistance);
 
-                Vector3 desiredSpawnPostion = Vector3.zero;
-                desiredSpawnPostion += eulerOfCart;
-                desiredSpawnPostion += localEulerOfTower;
-                desiredSpawnPostion += rotation;
-
-                Transform debugCart = Instantiate(DebugCartPrefab).transform;
-                debugCart.eulerAngles = desiredSpawnPostion;
-                debugCart.position = rightStartPosition;
-                debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
+                SpawnDebugCartAtOffsetPosition(rotation, rightStartPosition);
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
-                Vector3 eulerOfCart = Player.transform.rotation.eulerAngles;
-                Vector3 localEulerOfTower = transform.localRotation.eulerAngles;
                 Vector3 rotation = new Vector3(0, -90, 0);
                 Vector3 leftSideOfPlayer = Player.transform.right;
                 Vector3 leftStartPosition = Player.transform.position + (leftSideOfPlayer * m_debugCartDistance);
 
-                Vector3 desiredSpawnPostion = Vector3.zero;
-                desiredSpawnPostion += eulerOfCart;
-                desiredSpawnPostion += localEulerOfTower;
-                desiredSpawnPostion += rotation;
-
-                Transform debugCart = Instantiate(DebugCartPrefab).transform;
-                debugCart.eulerAngles = desiredSpawnPostion;
-                debugCart.position = leftStartPosition;
-                debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
+                SpawnDebugCartAtOffsetPosition(rotation, leftStartPosition);
             }
+        }
+
+        private void SpawnDebugCartAtOffsetPosition(Vector3 rotation, Vector3 rightStartPosition)
+        {
+            Vector3 eulerOfCart = Player.transform.rotation.eulerAngles;
+            Vector3 localEulerOfTower = transform.localRotation.eulerAngles;
+
+            Vector3 desiredSpawnPostion = Vector3.zero;
+            desiredSpawnPostion += eulerOfCart;
+            desiredSpawnPostion += localEulerOfTower;
+            desiredSpawnPostion += rotation;
+
+            Transform debugCart = Instantiate(DebugCartPrefab).transform;
+            debugCart.eulerAngles = desiredSpawnPostion;
+            debugCart.position = rightStartPosition;
+            debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
         }
 
         public void ModifyTopBoxSpringIntesity()
