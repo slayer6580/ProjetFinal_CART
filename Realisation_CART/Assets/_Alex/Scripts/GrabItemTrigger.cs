@@ -9,8 +9,11 @@ namespace BoxSystem
         [field: SerializeField] public float ItemSlerpTime { get; private set; }
 
         [field: Header("mettre la tour du player ici")]
-        [field: SerializeField] public TowerBoxSystem Tower { get; private set; }
+        [field: SerializeField] public TowerBoxSystem TowerBoxSystem { get; private set; }
 
+        [Header("Choose shelf calcul weight")]
+        [SerializeField] [Range(0.0f, 30.0f)] private float m_sideDotProductImpact;
+        [SerializeField] [Range(0.0f, 10.0f)] private float m_distanceImpact;
         private List<Shelf> m_takableShelves = new List<Shelf>();
         private Shelf m_choosenShelf = null;
 
@@ -50,21 +53,27 @@ namespace BoxSystem
             if (m_takableShelves.Count == 0)
                 return;
 
-            float closestDotProduct = -2;
-
+            float bestScore = float.NegativeInfinity;
             Shelf closestShelf = null;
 
             foreach (Shelf shelf in m_takableShelves)
             {
+             
                 if (!shelf.CanTakeItem())
                     continue;
 
-                Vector3 vectorToShelf = (shelf.transform.position - transform.position).normalized;
-                float dotProduct = Vector3.Dot(vectorToShelf, transform.forward);
+                float closestDotProduct = -2;         
 
-                if (dotProduct > closestDotProduct)
+                Vector3 vectorToShelf = (shelf.transform.position - transform.position).normalized;
+                float leftDotProduct = Vector3.Dot(vectorToShelf, -transform.right);
+                float rightDotProduct = Vector3.Dot(vectorToShelf, transform.right);
+                closestDotProduct = Mathf.Max(leftDotProduct, rightDotProduct);
+                float shelfDistance = Vector3.Distance(transform.position, shelf.transform.position);
+                float score = (closestDotProduct * m_sideDotProductImpact) + (-shelfDistance * m_distanceImpact);
+
+                if (score > bestScore)
                 {
-                    closestDotProduct = dotProduct;
+                    bestScore = score;
                     closestShelf = shelf;
                 }
             }
@@ -94,13 +103,13 @@ namespace BoxSystem
             GameObject itemTaken = m_choosenShelf.GetItemFromShelf();
             ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size; 
 
-            if (!Tower.CanTakeObjectInTheActualBox(size))
+            if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
             {
                 Debug.Log("Need a new box to put item");
-                Tower.AddBoxToTower();
+                TowerBoxSystem.AddBoxToTower();
             }
         
-            Tower.PutObjectInTopBox(itemTaken);
+            TowerBoxSystem.PutObjectInTopBox(itemTaken);
 
         }
     }
