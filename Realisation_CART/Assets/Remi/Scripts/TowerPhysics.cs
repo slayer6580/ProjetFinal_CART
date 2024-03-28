@@ -10,8 +10,13 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
-        [SerializeField] private float m_debugCartDistance = 1.0f;
-        [SerializeField] private float m_debugCartSpeed = 1.0f;
+
+        [Header("Items and boxes physics settings")]
+        [SerializeField] private float m_removeImpulseIntesity = 1.0f;
+        [SerializeField] private float m_vectorUpImpulseIntesity = 1.0f;
+        [Header("Debug Cart Settings")]
+        [SerializeField] private float m_debugCartDistance = 10.0f;
+        [SerializeField] private float m_debugCartSpeed = 3.0f;
 
         [SerializeField] private const int NB_UNDROPPABLE_BOXES = 4;
 
@@ -112,23 +117,25 @@ namespace BoxSystem
 
         private void AddSpringJoint()
         {
-            //Box1 box = _Tower.GetTopBox();
+            //Box box = _Tower.GetTopBox();
+
             //box.GetComponent<Rigidbody>().isKinematic = true;
+
             if (_Tower.GetBoxCount() <= NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
             {
-                Box box = _Tower.GetTopBox();
-                box.GetComponent<Rigidbody>().isKinematic = true;
+                //Box box = _Tower.GetTopBox();
+                //box.GetComponent<Rigidbody>().isKinematic = true;
                 return;
             }
 
             if (_Tower.GetBoxCount() > NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
             {
-                Box box = _Tower.GetTopBox();
-                box.GetComponent<Rigidbody>().isKinematic = false;
-                Rigidbody cartRB = GetComponentInParent<Rigidbody>();
-                if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
-                SpringJoint springJoint = box.gameObject.AddComponent<SpringJoint>();
-                SetSprintJointValues(springJoint, cartRB);
+                //Box box = _Tower.GetTopBox();
+                //box.GetComponent<Rigidbody>().isKinematic = false;
+                //Rigidbody cartRB = GetComponentInParent<Rigidbody>();
+                //if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
+                //SpringJoint springJoint = box.gameObject.AddComponent<SpringJoint>();
+                //SetSprintJointValues(springJoint, cartRB);
             }
 
             if (_Tower.GetBoxCount() > 1) // Pour ajouter un spring entre les boites
@@ -142,9 +149,9 @@ namespace BoxSystem
                 //}
                 //SetSprintJointValues(springJoint, newBoxeRB);
                 //Box1 box1 = GetTopBox();
-                //box1.GetComponent<Rigidbody>().isKinematic = true;
-                Box box1 = _Tower.GetTopBox();
-                box1.GetComponent<Rigidbody>().isKinematic = true;
+                ////box1.GetComponent<Rigidbody>().isKinematic = true;
+                //Box box = _Tower.GetTopBox();
+                //box.GetComponent<Rigidbody>().isKinematic = true;
                 return;
             }
 
@@ -190,7 +197,7 @@ namespace BoxSystem
         /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
         public void RemoveBoxImpulse(Vector3 velocity)
         {
-            Debug.Log("RemoveBoxImpulse() Velocity: " + velocity.magnitude);
+            //Debug.Log("RemoveBoxImpulse() Velocity: " + velocity.magnitude);
             Box topBox = _Tower.GetTopBox();
             if (topBox == null)
             {
@@ -198,9 +205,15 @@ namespace BoxSystem
                 return;
             }
 
+            Vector3 vectorUp = topBox.transform.up * m_vectorUpImpulseIntesity;
+            Vector3 incomingImpulse = velocity * m_removeImpulseIntesity;
+            Vector3 impulse = vectorUp + incomingImpulse;
+            Debug.Log("Incoming Impulse: " + impulse.magnitude);
             topBox.GetComponent<Rigidbody>().isKinematic = false;
-            topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
-            Debug.Log("AutoDestruction enabled");
+            topBox.GetComponent<Rigidbody>().AddForce(vectorUp + incomingImpulse, ForceMode.Impulse);
+            //topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+
+            //Debug.Log("AutoDestruction enabled");
             topBox.GetComponent<AutoDestruction>().enabled = true;
             _Tower.RemoveLastBoxFromTower();
         }
