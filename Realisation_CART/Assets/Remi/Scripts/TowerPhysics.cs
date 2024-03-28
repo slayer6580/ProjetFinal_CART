@@ -138,7 +138,7 @@ namespace BoxSystem
             if (_Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
             Debug.Log("AddSpringJoint() _Tower.GetBoxCount(): " + _Tower.GetBoxCount());
-            Box previousTopBox = GetPreviousTopBox();
+            Box previousTopBox = null; // GetPreviousTopBox();
             if (previousTopBox == null) Debug.LogWarning("Previous Top Box est null");
             else Debug.Log("Previous Top Box: " + previousTopBox.name);
 
