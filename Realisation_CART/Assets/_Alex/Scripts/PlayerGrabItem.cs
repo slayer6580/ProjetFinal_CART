@@ -9,7 +9,7 @@ namespace BoxSystem
         [field: SerializeField] public float ItemSlerpTime { get; private set; }
 
         [field: Header("mettre la tour du player ici")]
-        [field: SerializeField] public TowerBoxSystem m_tower { get; private set; }
+        [field: SerializeField] public TowerBoxSystem Tower { get; private set; }
 
         private List<Shelf> m_takableShelves = new List<Shelf>();
         private Shelf m_choosenShelf = null;
@@ -95,13 +95,13 @@ namespace BoxSystem
             GameObject itemTaken = m_choosenShelf.GetItemFromShelf();
             ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size; 
 
-            if (!m_tower.CanTakeObjectInTheActualBox(size))
+            if (!Tower.CanTakeObjectInTheActualBox(size))
             {
                 Debug.Log("Need a new box to put item");
-                m_tower.AddBoxToTower();
+                Tower.AddBoxToTower();
             }
         
-            m_tower.PutObjectInTopBox(itemTaken);
+            Tower.PutObjectInTopBox(itemTaken);
 
         }
     }
