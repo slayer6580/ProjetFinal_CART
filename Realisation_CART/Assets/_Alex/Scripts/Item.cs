@@ -39,7 +39,7 @@ namespace BoxSystem
             m_box = box;
             m_boxTransform = box.transform;
             m_startPosition = transform.position;
-            m_slerpTime = player.GetComponent<PlayerGrabItem>().ItemSlerpTime;
+            m_slerpTime = player.GetComponent<GrabItemTrigger>().ItemSlerpTime;
             if (autoSnap) // apres un reorganize
             {
                 SnapToBox();

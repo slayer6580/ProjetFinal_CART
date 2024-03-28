@@ -53,7 +53,6 @@ namespace BoxSystem
         }
         #endregion
 
-
         #region (--- Variables ---)
 
         private List<SlotInfo> m_slotsList = new List<SlotInfo>();
@@ -107,7 +106,6 @@ namespace BoxSystem
         }
         #endregion
 
-
         #region (--- Bool Verification ---)
         /// <summary> Regarde si on peut prendre l'objet selon sa taille </summary>
         public bool CanPutItemInsideBox(ItemData.ESize size)
@@ -128,7 +126,6 @@ namespace BoxSystem
             return m_availableSlotsLeft < sizeInt ? false : true;
         }
         #endregion
-
 
         #region (--- PutItemInsideBox ---)
         /// <summary> Pour mettre l'objet dans la boite selon sa taille </summary>
@@ -253,15 +250,20 @@ namespace BoxSystem
         }
         #endregion
 
+        #region (--- SlerpAndSnap ---)
 
-        #region (--- HelpFunctions ---)
         /// <summary> Change le scale de l'item et commence le Slerp And Snap </summary>
         private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
             Vector3 scaleInBox = GO.GetComponent<Item>().m_data.m_scaleInBox;
             GO.transform.localScale = new Vector3(scaleInBox.x * m_boxSetup.SlotWidth, scaleInBox.y * m_boxSetup.SlotHeight, scaleInBox.z * m_boxSetup.SlotLenght);
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
+            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
         }
+
+        #endregion
+
+        #region (--- HelpFunctions ---)
+
 
         /// <summary> Regarde si une liste de bool est toute vrai </summary>
         private bool AllSlotIsAvailable(List<bool> slotsAvailable)

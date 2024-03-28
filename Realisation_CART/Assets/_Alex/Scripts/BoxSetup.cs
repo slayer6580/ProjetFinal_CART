@@ -44,7 +44,7 @@ namespace BoxSystem
         {
             m_box = GetComponent<Box>();
             m_slotsParent = transform.GetChild(0);
-          
+
             AjustBoxGraphics();
             SetAvailableSlots();
             CalculateBoxHalfDimension();
@@ -56,6 +56,8 @@ namespace BoxSystem
         {
             AjustBoxGraphics();
         }
+
+        #region (--- AjustBoxGraphics ---)
 
         /// <summary> Ajuster les dimensions de la boite selon les grandeurs donnés </summary>
         private void AjustBoxGraphics()
@@ -108,6 +110,11 @@ namespace BoxSystem
             part.transform.localPosition = boxlocalPosition;
         }
 
+        #endregion
+
+
+        #region (--- CreateSlots ---)
+
         /// <summary> Les calculs de positionement puis ajout dans la boite </summary>
         private void CreateSlots()
         {
@@ -121,27 +128,47 @@ namespace BoxSystem
             FindAllFourSlots();
         }
 
-        /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
-        private void CalculateBoxHalfDimension()
+        /// <summary> Trouver tout les positions de longueur </summary>
+        private void FindLengthPositions(List<float> m_slotsLengthPosition)
         {
-            m_halfLength = m_boxWidth / 2;
-            m_halfWidth = m_boxLength / 2;
+            float halfLengthSpacing = SlotLenght / 2;
+            float lengthPosition = -m_halfLength;
+
+            for (int i = 0; i < m_nbSlotWidth; i++)
+            {
+                lengthPosition += i == 0 ? halfLengthSpacing : SlotLenght;
+                m_slotsLengthPosition.Add(lengthPosition);
+            }
         }
 
-        /// <summary> Calcule la dimension des slots </summary>
-        private void CalculateSlotDimension()
+        /// <summary> Trouver tout les positions de largeur </summary>
+        private void FindWidthPositions(List<float> slotsWidthPosition)
         {
-            SlotLenght = m_boxWidth / m_nbSlotWidth;
-            SlotWidth = m_boxLength / m_nbSlotLength;
-            SlotHeight = m_boxHeight;
+            float halfWidthSpacing = SlotWidth / 2;
+            float widthPosition = m_halfWidth;
+
+            for (int i = 0; i < m_nbSlotLength; i++)
+            {
+                widthPosition -= i == 0 ? halfWidthSpacing : SlotWidth;
+                slotsWidthPosition.Add(widthPosition);
+            }
         }
 
-        private void SetAvailableSlots()
+        /// <summary> Ajouter les slots dans la boite selon des calculs de positionement </summary>
+        private void PlaceSlotsInBox(List<float> slotsLengthPosition, List<float> slotsWidthPosition)
         {
-            m_totalSlots = m_nbSlotLength * m_nbSlotWidth;
-            m_box.InitAvailableSlots(m_totalSlots);
+            for (int i = 0; i < m_nbSlotLength; i++)
+            {
+                for (int j = 0; j < m_nbSlotWidth; j++)
+                {
+                    Vector3 slotPosition = new Vector3(slotsLengthPosition[j], 0, slotsWidthPosition[i]);
+                    GameObject instant = Instantiate(m_slotPrefab, m_slotsParent);
+                    instant.transform.localPosition = slotPosition;
+                    instant.transform.localScale = new Vector3(SlotLenght, SlotHeight, SlotWidth);
+                    m_box.AddSlotInList(instant.transform);
+                }
+            }
         }
-
 
         /// <summary> Trouve tout les double slots de la boite </summary>
         private void FindAllDoubleSlots()
@@ -231,46 +258,34 @@ namespace BoxSystem
             m_box.AddFourSlotInList(fourSlots);
         }
 
-        /// <summary> Ajouter les slots dans la boite selon des calculs de positionement </summary>
-        private void PlaceSlotsInBox(List<float> slotsLengthPosition, List<float> slotsWidthPosition)
+        #endregion
+
+
+        #region (--- CalculateDimension ---)
+
+        /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
+        private void CalculateBoxHalfDimension()
         {
-            for (int i = 0; i < m_nbSlotLength; i++)
-            {
-                for (int j = 0; j < m_nbSlotWidth; j++)
-                {
-                    Vector3 slotPosition = new Vector3(slotsLengthPosition[j], 0, slotsWidthPosition[i]);
-                    GameObject instant = Instantiate(m_slotPrefab, m_slotsParent);
-                    instant.transform.localPosition = slotPosition;
-                    instant.transform.localScale = new Vector3(SlotLenght, SlotHeight, SlotWidth);
-                    m_box.AddSlotInList(instant.transform);
-                }
-            }
+            m_halfLength = m_boxWidth / 2;
+            m_halfWidth = m_boxLength / 2;
         }
 
-        /// <summary> Trouver tout les positions de largeur </summary>
-        private void FindWidthPositions(List<float> slotsWidthPosition)
+        /// <summary> Calcule la dimension des slots </summary>
+        private void CalculateSlotDimension()
         {
-            float halfWidthSpacing = SlotWidth / 2;
-            float widthPosition = m_halfWidth;
-
-            for (int i = 0; i < m_nbSlotLength; i++)
-            {
-                widthPosition -= i == 0 ? halfWidthSpacing : SlotWidth;
-                slotsWidthPosition.Add(widthPosition);
-            }
+            SlotLenght = m_boxWidth / m_nbSlotWidth;
+            SlotWidth = m_boxLength / m_nbSlotLength;
+            SlotHeight = m_boxHeight;
         }
 
-        /// <summary> Trouver tout les positions de longueur </summary>
-        private void FindLengthPositions(List<float> m_slotsLengthPosition)
+        /// <summary> Donne le nombre total de slot au Box </summary>
+        private void SetAvailableSlots()
         {
-            float halfLengthSpacing = SlotLenght / 2;
-            float lengthPosition = -m_halfLength;
-
-            for (int i = 0; i < m_nbSlotWidth; i++)
-            {
-                lengthPosition += i == 0 ? halfLengthSpacing : SlotLenght;
-                m_slotsLengthPosition.Add(lengthPosition);
-            }
+            m_totalSlots = m_nbSlotLength * m_nbSlotWidth;
+            m_box.InitAvailableSlots(m_totalSlots);
         }
+
+        #endregion
+
     }
 }

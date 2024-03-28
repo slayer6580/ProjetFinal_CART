@@ -13,6 +13,7 @@ namespace BoxSystem
         [SerializeField] private TextMeshPro m_quantityText;
 
         private int m_remainingItems;
+        private MeshRenderer m_renderer;
         private Color m_initialColor;
 
         private void Awake()
@@ -20,14 +21,15 @@ namespace BoxSystem
             m_remainingItems = m_itemQuantity;
             m_quantityText.text = m_itemQuantity.ToString();
             ColorShelf();
-            m_initialColor = GetComponent<MeshRenderer>().material.color;
-            
+            m_renderer = GetComponent<MeshRenderer>();
+            m_initialColor = m_renderer.material.color;
+
         }
 
         /// <summary> Est ce qu'il reste un item dans l'étagère </summary>
         public bool CanTakeItem()
         {
-            return m_remainingItems > 0 ? true : false;
+            return m_remainingItems > 0;
 
         }
 
@@ -52,20 +54,20 @@ namespace BoxSystem
         /// <summary> Change la couleur du shelf selon la grosseur de l'item </summary>
         private void ColorShelf()
         {
-            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+  
             switch (m_itemPrefab.GetComponent<Item>().m_data.m_size)
             {
                 case ItemData.ESize.small:
-                    meshRenderer.sharedMaterial.color = Color.green;
+                    m_renderer.sharedMaterial.color = Color.green;
                     break;
                 case ItemData.ESize.medium:
-                    meshRenderer.sharedMaterial.color = Color.yellow;
+                    m_renderer.sharedMaterial.color = Color.yellow;
                     break;
                 case ItemData.ESize.large:
-                    meshRenderer.sharedMaterial.color = Color.red;
+                    m_renderer.sharedMaterial.color = Color.red;
                     break;
                 default:
-                    meshRenderer.sharedMaterial.color = Color.white;
+                    m_renderer.sharedMaterial.color = Color.white;
                     break;
             }
         }
@@ -74,13 +76,13 @@ namespace BoxSystem
         /// <summary> change la couleur du shelf pour montrer que c'est la choisi </summary>
         public void SelectedShelf()
         {
-            GetComponent<MeshRenderer>().material.color = Color.black;
+            m_renderer.material.color = Color.black;
         }
 
         /// <summary> change la couleur du shelf pour son originale pour montrer qu'elle n'es plu choisi </summary>
         public void UnSelectedShelf()
         {
-            GetComponent<MeshRenderer>().material.color = m_initialColor;
+            m_renderer.material.color = m_initialColor;
         }
     }
 

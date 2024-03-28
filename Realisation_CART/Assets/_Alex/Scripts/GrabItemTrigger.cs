@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BoxSystem
 {
-    public class PlayerGrabItem : MonoBehaviour
+    public class GrabItemTrigger : MonoBehaviour
     {
         [field: Header("le temps maximal que prend un item pour venir dans le panier")]
         [field: SerializeField] public float ItemSlerpTime { get; private set; }
