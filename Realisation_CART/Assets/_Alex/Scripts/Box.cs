@@ -66,6 +66,7 @@ namespace BoxSystem
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
         private TowerBoxSystem m_tower;
+
         #endregion
 
         private void Awake()
@@ -257,7 +258,8 @@ namespace BoxSystem
         /// <summary> Change le scale de l'item et commence le Slerp And Snap </summary>
         private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
-            GO.transform.localScale = GO.GetComponent<Item>().m_data.m_scaleInBox; // change le scale de l'objet choisi
+            Vector3 scaleInBox = GO.GetComponent<Item>().m_data.m_scaleInBox;
+            GO.transform.localScale = new Vector3(scaleInBox.x * m_boxSetup.SlotWidth, scaleInBox.y * m_boxSetup.SlotHeight, scaleInBox.z * m_boxSetup.SlotLenght);
             GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
         }
 

@@ -10,23 +10,30 @@ namespace BoxSystem
         [Header("Prefabs")]
         [SerializeField] private GameObject m_slotPrefab;
 
-        [Header("Longeur et largeur de la boite")]
+        [Header("Longeur, largeur et hauteur de la boite")]
         [SerializeField] private float m_boxWidth;
         [SerializeField] private float m_boxLength;
+        [SerializeField] private float m_boxHeight;
+        [SerializeField] private float m_boxThickness;
 
         [Header("Nombre de slot par longeur et largeur")]
         [SerializeField] private int m_nbSlotWidth;
         [SerializeField] private int m_nbSlotLength;
 
-        [field: Header("Hauteur des slots")]
-        [field: SerializeField] public float SlotHeight { get; private set; }
+        public float SlotHeight { get; private set; }
+        public float SlotWidth { get; private set; }
+        public float SlotLenght { get; private set; }
 
-        [Header("READ ONLY")]
-        [SerializeField] private float slotLengthCalculation;
-        [SerializeField] private float slotWidthCalculation;
 
-        private float m_slotLength;
-        private float m_slotWidth;
+        [Header("Pour placer les parties de la boite")]
+        [SerializeField] private bool m_showBoxParts;
+        [Space]
+        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxBottom;
+        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxSideLeft;
+        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxSideRight;
+        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxFront;
+        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxBack;
+
         private float m_halfLength;
         private float m_halfWidth;
         private Transform m_slotsParent;
@@ -37,10 +44,68 @@ namespace BoxSystem
         {
             m_box = GetComponent<Box>();
             m_slotsParent = transform.GetChild(0);
+          
+            AjustBoxGraphics();
             SetAvailableSlots();
             CalculateBoxHalfDimension();
             CalculateSlotDimension();
             CreateSlots();
+        }
+
+        private void OnValidate()
+        {
+            AjustBoxGraphics();
+        }
+
+        /// <summary> Ajuster les dimensions de la boite selon les grandeurs donnés </summary>
+        private void AjustBoxGraphics()
+        {
+            float lenght = m_boxLength;
+            float width = m_boxWidth;
+            float thickness = m_boxThickness;
+            float height = m_boxHeight;
+            float halfHeight = height / 2;
+            float halfThickness = thickness / 2;
+            float halfLength = lenght / 2;
+            float halfWidth = width / 2;
+            float halfWidthAndHalfThickness = halfWidth + halfThickness;
+            float doubleThickness = thickness * 2;
+            float lenghtAndDoubleThickness = lenght + doubleThickness;
+            float HeightAndThickness = height + thickness;
+            float halfHeightMinusHalfThickness = halfHeight - halfThickness;
+            float HalfLenghtAndHalfThickness = halfLength + halfThickness;
+
+            // bottom
+            SetUpParts(m_boxBottom,
+                new Vector3(lenght, thickness, width),
+                new Vector3(0, -halfThickness, 0));
+
+            // side left
+            SetUpParts(m_boxSideLeft,
+                new Vector3(lenghtAndDoubleThickness, thickness, HeightAndThickness),
+                new Vector3(0, halfHeightMinusHalfThickness, -halfWidthAndHalfThickness));
+
+            // side right
+            SetUpParts(m_boxSideRight,
+                   new Vector3(lenghtAndDoubleThickness, thickness, HeightAndThickness),
+              new Vector3(0, halfHeightMinusHalfThickness, halfWidthAndHalfThickness));
+
+            // back
+            SetUpParts(m_boxBack,
+                new Vector3(width, thickness, HeightAndThickness),
+                new Vector3(HalfLenghtAndHalfThickness, halfHeightMinusHalfThickness, 0));
+
+
+            // front
+            SetUpParts(m_boxFront,
+                new Vector3(width, thickness, HeightAndThickness),
+                new Vector3(-HalfLenghtAndHalfThickness, halfHeightMinusHalfThickness, 0));
+        }
+
+        private void SetUpParts(GameObject part, Vector3 boxScale, Vector3 boxlocalPosition)
+        {
+            part.transform.localScale = boxScale;
+            part.transform.localPosition = boxlocalPosition;
         }
 
         /// <summary> Les calculs de positionement puis ajout dans la boite </summary>
@@ -66,10 +131,9 @@ namespace BoxSystem
         /// <summary> Calcule la dimension des slots </summary>
         private void CalculateSlotDimension()
         {
-            m_slotLength = m_boxWidth / m_nbSlotWidth;
-            m_slotWidth = m_boxLength / m_nbSlotLength;
-            slotLengthCalculation = m_slotLength;
-            slotWidthCalculation = m_slotWidth;
+            SlotLenght = m_boxWidth / m_nbSlotWidth;
+            SlotWidth = m_boxLength / m_nbSlotLength;
+            SlotHeight = m_boxHeight;
         }
 
         private void SetAvailableSlots()
@@ -78,7 +142,7 @@ namespace BoxSystem
             m_box.InitAvailableSlots(m_totalSlots);
         }
 
-     
+
         /// <summary> Trouve tout les double slots de la boite </summary>
         private void FindAllDoubleSlots()
         {
@@ -177,7 +241,7 @@ namespace BoxSystem
                     Vector3 slotPosition = new Vector3(slotsLengthPosition[j], 0, slotsWidthPosition[i]);
                     GameObject instant = Instantiate(m_slotPrefab, m_slotsParent);
                     instant.transform.localPosition = slotPosition;
-                    instant.transform.localScale = new Vector3(m_slotLength, SlotHeight, m_slotWidth);
+                    instant.transform.localScale = new Vector3(SlotLenght, SlotHeight, SlotWidth);
                     m_box.AddSlotInList(instant.transform);
                 }
             }
@@ -186,12 +250,12 @@ namespace BoxSystem
         /// <summary> Trouver tout les positions de largeur </summary>
         private void FindWidthPositions(List<float> slotsWidthPosition)
         {
-            float halfWidthSpacing = m_slotWidth / 2;
+            float halfWidthSpacing = SlotWidth / 2;
             float widthPosition = m_halfWidth;
 
             for (int i = 0; i < m_nbSlotLength; i++)
             {
-                widthPosition -= i == 0 ? halfWidthSpacing : m_slotWidth;
+                widthPosition -= i == 0 ? halfWidthSpacing : SlotWidth;
                 slotsWidthPosition.Add(widthPosition);
             }
         }
@@ -199,12 +263,12 @@ namespace BoxSystem
         /// <summary> Trouver tout les positions de longueur </summary>
         private void FindLengthPositions(List<float> m_slotsLengthPosition)
         {
-            float halfLengthSpacing = m_slotLength / 2;
+            float halfLengthSpacing = SlotLenght / 2;
             float lengthPosition = -m_halfLength;
 
             for (int i = 0; i < m_nbSlotWidth; i++)
             {
-                lengthPosition += i == 0 ? halfLengthSpacing : m_slotLength;
+                lengthPosition += i == 0 ? halfLengthSpacing : SlotLenght;
                 m_slotsLengthPosition.Add(lengthPosition);
             }
         }
