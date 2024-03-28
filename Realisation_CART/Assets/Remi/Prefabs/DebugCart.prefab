@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 199761443349556051}
-  - component: {fileID: 6399328748897223617}
   m_Layer: 7
   m_Name: Tower
   m_TagString: Untagged
@@ -32,24 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8322665020331673882}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6399328748897223617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490993143876365957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0158f907ac675419cd9145129dbd96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Cart>k__BackingField: {fileID: 4644262542305384270}
-  <DebugCartPrefab>k__BackingField: {fileID: 4644262542305384270}
-  <Character>k__BackingField: {fileID: 4644262542305384270}
-  m_boxPrefab: {fileID: 7525785094457928907, guid: c65aeb46513875047a96b06a7e5371c9,
-    type: 3}
-  m_boxHeight: 0
 --- !u!1 &509773323408832723
 GameObject:
   m_ObjectHideFlags: 0

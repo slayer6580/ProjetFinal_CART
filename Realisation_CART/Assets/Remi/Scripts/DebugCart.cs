@@ -1,24 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 namespace DiscountDelirium
 {
     public class DebugCart : MonoBehaviour
     {
-        private const float m_speed = 3.0f;
+        private float m_speed = 3.0f;
 
         void Start()
         {
-
-            StartCoroutine(AutoDestroy());
+            Invoke("DestroyItem", 2);
         }
 
-        IEnumerator AutoDestroy()
+        private void DestroyItem()
         {
-            yield return new WaitForSeconds(2);
             Destroy(gameObject);
         }
 
@@ -29,6 +23,11 @@ namespace DiscountDelirium
                                             * m_speed
                                             * Time.fixedDeltaTime
                                         );
+        }
+
+        public void SetSpeed(float speed)
+        {
+            m_speed = speed;
         }
     }
 }

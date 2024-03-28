@@ -2,6 +2,7 @@ using UnityEngine;
 using DiscountDelirium;
 using CartControl;
 using System;
+using static UnityEditor.PlayerSettings;
 
 namespace BoxSystem
 {
@@ -9,6 +10,8 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
+        [SerializeField] private float m_debugCartDistance = 1.0f;
+        [SerializeField] private float m_debugCartSpeed = 1.0f;
 
         [SerializeField] private const int NB_UNDROPPABLE_BOXES = 4;
 
@@ -24,27 +27,39 @@ namespace BoxSystem
         {
             if (Input.GetKeyDown(KeyCode.K))
             {
-                Vector3 pos = Player.transform.position + transform.localPosition;
-                Quaternion rot = transform.rotation;
-                Quaternion additionalRotation = Quaternion.Euler(0, 90, 0);
-                Quaternion finalRotation = rot * additionalRotation;
+                Vector3 eulerOfCart = Player.transform.rotation.eulerAngles;
+                Vector3 localEulerOfTower = transform.localRotation.eulerAngles;
+                Vector3 rotation = new Vector3(0, 90, 0);
+                Vector3 rightSideOfPlayer = -Player.transform.right;
+                Vector3 rightStartPosition = Player.transform.position + (rightSideOfPlayer * m_debugCartDistance);
 
-                Vector3 localOffset = new Vector3(-3, 0, 0);
-                Vector3 worldOffset = rot * localOffset;
+                Vector3 desiredSpawnPostion = Vector3.zero;
+                desiredSpawnPostion += eulerOfCart;
+                desiredSpawnPostion += localEulerOfTower;
+                desiredSpawnPostion += rotation;
 
-                Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
+                Transform debugCart = Instantiate(DebugCartPrefab).transform;
+                debugCart.eulerAngles = desiredSpawnPostion;
+                debugCart.position = rightStartPosition;
+                debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
-                Vector3 pos = Player.transform.position + transform.localPosition;
-                Quaternion rot = transform.localRotation;
-                Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
-                Quaternion finalRotation = rot * additionalRotation;
+                Vector3 eulerOfCart = Player.transform.rotation.eulerAngles;
+                Vector3 localEulerOfTower = transform.localRotation.eulerAngles;
+                Vector3 rotation = new Vector3(0, -90, 0);
+                Vector3 leftSideOfPlayer = Player.transform.right;
+                Vector3 leftStartPosition = Player.transform.position + (leftSideOfPlayer * m_debugCartDistance);
 
-                Vector3 localOffset = new Vector3(3, 0, 0);
-                Vector3 worldOffset = rot * localOffset;
+                Vector3 desiredSpawnPostion = Vector3.zero;
+                desiredSpawnPostion += eulerOfCart;
+                desiredSpawnPostion += localEulerOfTower;
+                desiredSpawnPostion += rotation;
 
-                Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
+                Transform debugCart = Instantiate(DebugCartPrefab).transform;
+                debugCart.eulerAngles = desiredSpawnPostion;
+                debugCart.position = leftStartPosition;
+                debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
             }
         }
 
