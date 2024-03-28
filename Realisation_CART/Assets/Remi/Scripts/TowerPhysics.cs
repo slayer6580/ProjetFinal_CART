@@ -112,18 +112,6 @@ namespace BoxSystem
             debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
         }
 
-        public void ModifyTopBoxSpringIntesity()
-        {
-            //if (m_boxCount > 2)
-            //{
-            //    Debug.Log("m_boxCount > 2: " + (m_boxesInCart.Count - 1));
-            //    Box1 currentTopBox = m_boxesInCart.ToArray()[0];
-            //    Debug.Log("previousBox: " + currentTopBox.name);
-            //    SpringJoint previousSpringJoint = currentTopBox.GetComponent<SpringJoint>();
-            //    previousSpringJoint.spring = 5;
-            //}
-        }
-
         public void AddJointToBox()
         {
             if (m_currentJointMode == JointMode.Hinge)
@@ -140,25 +128,7 @@ namespace BoxSystem
 
         private void AddHingeJoint()
         {
-            // TODO: Should be done in the rigidbody in the prefab
-            //if (_Tower.GetBoxCount() == 1) // Pour ajouter un spring entre la première boite et le panier
-            //{
-            //    Box1 box = _Tower.GetTopBox();
-            //    box.GetComponent<Rigidbody>().isKinematic = true;
-            //    return;
-            //}
 
-            //if (_Tower.GetBoxCount() > 1) // Pour ajouter un spring entre les boites
-            //{
-            //    Box1 box = _Tower.GetTopBox();
-            //    box.GetComponent<Rigidbody>().isKinematic = true;
-            //    return;
-            //}
-
-            //if (_Tower.GetBoxCount() > NB_UNDROPPABLE_BOXES) 
-            //{
-            //    Box1 box = _Tower.GetTopBox();
-            //}
         }
 
         private void AddSpringJoint()
@@ -168,29 +138,33 @@ namespace BoxSystem
             //Debug.Log("AddSpringJoint() _Tower.GetBoxCount(): " + _Tower.GetBoxCount());
             Box previousTopBox = _Tower.GetPreviousTopBox();
             if (previousTopBox == null) Debug.LogWarning("Previous Top Box est null");
-            else previousTopBox.GetComponent<BoxPhysics>().enabled = false;
-
-            Box topBox = _Tower.GetTopBox();
-            topBox.GetComponent<BoxPhysics>().enabled = true;
-            topBox.GetComponent<Rigidbody>().isKinematic = false;
-
-            Rigidbody previousTopBoxRB = previousTopBox.GetComponent<Rigidbody>();
-            if (previousTopBoxRB == null) Debug.LogError("Previous Top Box n'a pas de rigidbody");
-            SpringJoint springJoint = topBox.gameObject.AddComponent<SpringJoint>();
-            SetSprintJointValues(springJoint, previousTopBoxRB);
-
-            SpringJoint previousSpringJoint = previousTopBoxRB.GetComponent<SpringJoint>();
-
-            if (previousSpringJoint != null)
+            else
             {
-                //Debug.Log("Spring found in previous box: " + previousTopBoxRB.gameObject.name);
-                previousTopBox.ReplaceBoxToOrigin();
-                previousTopBox.transform.eulerAngles = Vector3.zero;
-                previousSpringJoint.spring = 0;
-                previousSpringJoint.connectedBody = null;
+                previousTopBox.GetComponent<CollisionDetector>().enabled = false;
+
+                Box topBox = _Tower.GetTopBox();
+                topBox.GetComponent<CollisionDetector>().enabled = true;
+                topBox.GetComponent<Rigidbody>().isKinematic = false;
+
+                Rigidbody previousTopBoxRB = previousTopBox.GetComponent<Rigidbody>();
+                if (previousTopBoxRB == null) Debug.LogError("Previous Top Box n'a pas de rigidbody");
+                SpringJoint springJoint = topBox.gameObject.AddComponent<SpringJoint>();
+                SetSprintJointValues(springJoint, previousTopBoxRB);
+
+                SpringJoint previousSpringJoint = previousTopBoxRB.GetComponent<SpringJoint>();
+
+                if (previousSpringJoint != null)
+                {
+                    //Debug.Log("Spring found in previous box: " + previousTopBoxRB.gameObject.name);
+                    previousTopBox.ReplaceBoxToOrigin();
+                    previousTopBox.transform.eulerAngles = Vector3.zero;
+                    previousSpringJoint.spring = 0;
+                    previousSpringJoint.connectedBody = null;
+                }
+
+                previousTopBoxRB.isKinematic = true;
             }
 
-            previousTopBoxRB.isKinematic = true;
         }
 
         public void RemoveItemImpulse(Vector3 velocity)
