@@ -3,6 +3,7 @@ using DiscountDelirium;
 using CartControl;
 using System;
 using static UnityEditor.PlayerSettings;
+using Unity.VisualScripting;
 
 namespace BoxSystem
 {
@@ -26,13 +27,14 @@ namespace BoxSystem
         [SerializeField] public JointMode m_currentJointMode = JointMode.Spring;
 
         [Header("Spring Settings")]
-        [SerializeField] public static float m_springStrenght = 100.0f;
-        [SerializeField] public static float m_springDamper = 0;
-        [SerializeField] public static float m_springMinDistance = 0;
-        [SerializeField] public static float m_springMaxDistance = 0.2f;
-        [SerializeField] public static float m_springTolerance = 0.06f;
-        [SerializeField] public static bool m_springEnableCollision = true;
-
+        [SerializeField] public float m_springStrenght = 100.0f;
+        [SerializeField] public float m_springDamper = 0;
+        [SerializeField] public float m_springMinDistance = 0;
+        [SerializeField] public float m_springMaxDistance = 0.2f;
+        [SerializeField] public float m_springTolerance = 0.06f;
+        [SerializeField] public bool m_springEnableCollision = true;
+        [SerializeField] public float m_springBreakForce = 100.0f;
+        [SerializeField] public float m_springBreakTorque = 100.0f;
 
         private TowerBoxSystem _Tower { get; set; } = null;
 
@@ -268,7 +270,7 @@ namespace BoxSystem
         }
 
         /// <summary> Configure les valeurs du join Spring  </summary>
-        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
+        private void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
         {
             springJoint.connectedBody = newBoxeRB;
             springJoint.spring = m_springStrenght;
@@ -277,6 +279,8 @@ namespace BoxSystem
             springJoint.maxDistance = m_springMaxDistance;
             springJoint.tolerance = m_springTolerance;
             springJoint.enableCollision = m_springEnableCollision;
+            springJoint.breakForce = m_springBreakForce;
+            springJoint.breakTorque = m_springBreakTorque;
         }
 
         /// <summary> Vérifie si on peut retirer le contenu de la boite </summary>
