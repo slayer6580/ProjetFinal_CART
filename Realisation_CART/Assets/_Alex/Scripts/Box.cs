@@ -125,6 +125,12 @@ namespace BoxSystem
             int sizeInt = size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
             return m_availableSlotsLeft < sizeInt ? false : true;
         }
+
+        /// <summary> Regarde si la boite est vide </summary>
+        public bool IsEmpty()
+        {
+            return m_itemsList.Count == 0;
+        }
         #endregion
 
         #region (--- PutItemInsideBox ---)
@@ -264,7 +270,6 @@ namespace BoxSystem
 
         #region (--- HelpFunctions ---)
 
-
         /// <summary> Regarde si une liste de bool est toute vrai </summary>
         private bool AllSlotIsAvailable(List<bool> slotsAvailable)
         {
@@ -292,26 +297,13 @@ namespace BoxSystem
             return localposition / nbOfPositions;
         }
 
-        public TowerBoxSystem GetTower()
-        {
-            return m_tower;
-        }
-
+        /// <summary> Donne le dernier objet ajouter de la boite </summary>
         public ItemInBox GetLastItem()
         {
             return m_itemsList[m_itemsList.Count - 1];
         }
 
-        public bool IsEmpty()
-        {
-           return m_itemsList.Count == 0;
-        }
-
-        public List<ItemInBox> GetItemsList()
-        {  
-            return m_itemsList; 
-        }
-
+        /// <summary> Remet les slots dans la liste comme vide </summary>
         public void ResetSlots(ItemInBox lastItemInBox)
         {
             foreach (int itemIndex in lastItemInBox.m_slotIndex)
@@ -321,6 +313,7 @@ namespace BoxSystem
             }
         }
 
+        /// <summary> Donne tout les itemInBox de la boite </summary>
         public List<ItemInBox> GetItemsInBox()
         {
             return m_itemsList;
