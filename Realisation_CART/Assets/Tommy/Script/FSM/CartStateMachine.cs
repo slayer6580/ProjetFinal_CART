@@ -66,7 +66,6 @@ namespace CartControl
 		[field: SerializeField] public Animator HumanAnimCtrlr { get; private set; }
 		[field: SerializeField] public Rig FeetOnCartRig { get; private set; }
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
-		[field: SerializeField] public Tower Tower { get; private set; }
 
 		//
 		[Space]
