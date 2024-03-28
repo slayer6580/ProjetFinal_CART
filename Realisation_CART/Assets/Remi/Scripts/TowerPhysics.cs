@@ -40,6 +40,7 @@ namespace BoxSystem
         {
             Spring,
             Hinge,
+            None,
             Count
         }
 
@@ -66,6 +67,31 @@ namespace BoxSystem
 
                 SpawnDebugCartAtOffsetPosition(rotation, leftStartPosition);
             }
+            else if (Input.GetKeyDown(KeyCode.N))
+            {
+                if (m_currentJointMode - 1 < 0)
+                {
+                    m_currentJointMode = JointMode.None;
+                    Debug.Log("Current Joint Mode: " + m_currentJointMode);
+                    return;
+                }
+
+                m_currentJointMode = m_currentJointMode - 1;
+                Debug.Log("Current Joint Mode: " + m_currentJointMode);
+            }
+            else if (Input.GetKeyDown(KeyCode.M))
+            {
+                if (m_currentJointMode + 1 > JointMode.None)
+                {
+                    m_currentJointMode = (JointMode)0;
+                    Debug.Log("Current Joint Mode: " + m_currentJointMode);
+                    return;
+                }
+
+                m_currentJointMode = m_currentJointMode + 1;
+                Debug.Log("Current Joint Mode: " + m_currentJointMode);
+            }
+
         }
 
         private void SpawnDebugCartAtOffsetPosition(Vector3 rotation, Vector3 rightStartPosition)
@@ -96,7 +122,7 @@ namespace BoxSystem
             //}
         }
 
-        public void AddJointToBox() // p-e rajouter instantBox en parametre    // Rémi
+        public void AddJointToBox()
         {
             if (m_currentJointMode == JointMode.Hinge)
             {
