@@ -7,7 +7,7 @@ namespace BoxSystem
     public class CollisionDetector : MonoBehaviour
     {
         private TowerPhysics _TowerPhysics { get; set; } = null;
-        private Collider m_previousCollider = null;
+        //private Collider m_previousCollider = null;
         private const float MAX_VEL_TO_DROP_CONTENT = 15f;
         private bool m_isPlayer = true;
 
@@ -48,6 +48,8 @@ namespace BoxSystem
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (!m_isPlayer) return;
+
             //if (other.gameObject.name != "front") return;
             //Debug.Log("Velocity of " + collision.gameObject.name + " is: " + collision.relativeVelocity.magnitude);
             if (collision.relativeVelocity.magnitude < MAX_VEL_TO_DROP_CONTENT) return;
@@ -56,6 +58,8 @@ namespace BoxSystem
             Vector3 velocity = collision.relativeVelocity;
 
             _TowerPhysics.CheckIfCanDropContent(velocity);
+
+            //Debug.Log("Velocity of " + collision.gameObject.name + " is: " + collision.relativeVelocity.magnitude);
         }
     }
 }

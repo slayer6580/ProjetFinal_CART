@@ -1,30 +1,51 @@
-using BoxSystem;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using DiscountDelirium;
-using static BoxSystem.Box1;
+using CartControl;
 
 namespace BoxSystem
 {
     public class TowerPhysics : MonoBehaviour
     {
-
-
-        private const int NB_UNDROPPABLE_BOXES = 4;
+        [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
+        [field: SerializeField] private GameObject Player { get; set; } = null;
 
         private TowerBoxSystem _Tower { get; set; } = null;
+        private const int NB_UNDROPPABLE_BOXES = 4;
         private bool m_isInHingeMode = false;
-
 
         private void Awake()
         {
             _Tower = GetComponent<TowerBoxSystem>();
+            Player = GetComponentInParent<MainInputsHandler>().gameObject;
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                Vector3 pos = Player.transform.position + transform.localPosition;
+                Quaternion rot = transform.rotation;
+                Quaternion additionalRotation = Quaternion.Euler(0, 90, 0);
+                Quaternion finalRotation = rot * additionalRotation;
 
+                Vector3 localOffset = new Vector3(-3, -1, 0);
+                Vector3 worldOffset = rot * localOffset;
+
+                Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
+            }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                Vector3 pos = Player.transform.position + transform.localPosition;
+                Quaternion rot = transform.rotation;
+                Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
+                Quaternion finalRotation = rot * additionalRotation;
+
+                Vector3 localOffset = new Vector3(3, -1, 0);
+                Vector3 worldOffset = rot * localOffset;
+
+                Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
+            }
+        }
 
         public void ModifyTopBoxSpringIntesity()
         {
