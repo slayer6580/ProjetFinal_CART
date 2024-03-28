@@ -10,14 +10,14 @@ namespace BoxSystem
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
 
+        [SerializeField] private const int NB_UNDROPPABLE_BOXES = 4;
+
         private TowerBoxSystem _Tower { get; set; } = null;
-        private const int NB_UNDROPPABLE_BOXES = 4;
         private bool m_isInHingeMode = false;
 
         private void Awake()
         {
             _Tower = GetComponent<TowerBoxSystem>();
-            Player = GetComponentInParent<MainInputsHandler>().gameObject;
         }
 
         private void Update()
@@ -29,7 +29,7 @@ namespace BoxSystem
                 Quaternion additionalRotation = Quaternion.Euler(0, 90, 0);
                 Quaternion finalRotation = rot * additionalRotation;
 
-                Vector3 localOffset = new Vector3(-3, -1, 0);
+                Vector3 localOffset = new Vector3(-3, 0, 0);
                 Vector3 worldOffset = rot * localOffset;
 
                 Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
@@ -37,11 +37,11 @@ namespace BoxSystem
             else if (Input.GetKeyDown(KeyCode.L))
             {
                 Vector3 pos = Player.transform.position + transform.localPosition;
-                Quaternion rot = transform.rotation;
+                Quaternion rot = transform.localRotation;
                 Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
                 Quaternion finalRotation = rot * additionalRotation;
 
-                Vector3 localOffset = new Vector3(3, -1, 0);
+                Vector3 localOffset = new Vector3(3, 0, 0);
                 Vector3 worldOffset = rot * localOffset;
 
                 Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
@@ -99,15 +99,21 @@ namespace BoxSystem
         {
             //Box1 box = _Tower.GetTopBox();
             //box.GetComponent<Rigidbody>().isKinematic = true;
-            if (_Tower.GetBoxCount() == 1) // Pour ajouter un spring entre la première boite et le panier
+            if (_Tower.GetBoxCount() <= NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
             {
-                //Rigidbody cartRB = GetComponentInParent<Rigidbody>();
-                //if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
-                //SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
-                //SetSprintJointValues(springJoint, cartRB);
-                Box box1 = _Tower.GetTopBox();
-                box1.GetComponent<Rigidbody>().isKinematic = true;
+                Box box = _Tower.GetTopBox();
+                box.GetComponent<Rigidbody>().isKinematic = true;
                 return;
+            }
+
+            if (_Tower.GetBoxCount() > NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
+            {
+                Box box = _Tower.GetTopBox();
+                box.GetComponent<Rigidbody>().isKinematic = false;
+                Rigidbody cartRB = GetComponentInParent<Rigidbody>();
+                if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
+                SpringJoint springJoint = box.gameObject.AddComponent<SpringJoint>();
+                SetSprintJointValues(springJoint, cartRB);
             }
 
             if (_Tower.GetBoxCount() > 1) // Pour ajouter un spring entre les boites
@@ -188,7 +194,7 @@ namespace BoxSystem
         private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
         {
             springJoint.connectedBody = newBoxeRB;
-            springJoint.spring = 1;
+            springJoint.spring = 100;
             springJoint.damper = 0;
             springJoint.minDistance = 0;
             springJoint.maxDistance = 0.2f;
@@ -202,6 +208,11 @@ namespace BoxSystem
             Debug.Log("CheckIfCanDropContent");
 
             Box box = _Tower.GetTopBox();
+            if(box == null)
+            {
+                Debug.LogWarning("No box to check");
+                return;
+            }
 
             if (box.IsEmpty() && _Tower.GetBoxesCount() > NB_UNDROPPABLE_BOXES)
                 RemoveBoxImpulse(velocity);
