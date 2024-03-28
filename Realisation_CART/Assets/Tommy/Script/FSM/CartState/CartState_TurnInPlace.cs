@@ -43,16 +43,7 @@ namespace CartControl
 
 		public override bool CanExit()
 		{
-			if(m_cartStateMachine.SteeringValue < 0 + GameConstants.DEADZONE && m_cartStateMachine.SteeringValue > 0 - GameConstants.DEADZONE)
-			{
-				return true;
-			}
-
-			if(m_cartStateMachine.ForwardPressedPercent > 0 + GameConstants.DEADZONE || m_cartStateMachine.BackwardPressedPercent > 0+ GameConstants.DEADZONE)
-			{
-				return true;
-			}
-			return false;
+			return true;
 		}
 
 	}

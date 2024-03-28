@@ -79,6 +79,7 @@ namespace CartControl
 		[HideInInspector] public bool CanBoost { get; set; }
 		[HideInInspector] public bool IsBoosting { get; set; }
 		[HideInInspector] public bool IsPaused { get; set; }
+		[HideInInspector] public bool TEST { get; set; }
 		
 
 		protected override void Start()
