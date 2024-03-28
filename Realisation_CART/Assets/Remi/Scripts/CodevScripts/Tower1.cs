@@ -126,7 +126,7 @@ namespace BoxSystem
                 Vector3 worldOffset = rot * localOffset;
 
                 Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
-            }
+        }
         }
 
         /// <summary> Regarde si la boite du dessus pourrait prendre un objet d'une certaine taille </summary>

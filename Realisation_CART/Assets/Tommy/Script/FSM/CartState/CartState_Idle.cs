@@ -5,22 +5,10 @@ namespace CartControl
 	public class CartState_Idle : CartState
 	{
 		//m_cartStateMachine;
-		private bool m_firstTime = true;
 
 		public override void OnEnter()
 		{
-<<<<<<< HEAD
-			//Debug.LogWarning("current state: IDLE");
-=======
 			Debug.LogWarning("current state: IDLE");
-			
-			if(m_firstTime)
-			{
-				m_firstTime = false;
-				return;
-			}
-
->>>>>>> main
 		}
 
 		public override void OnUpdate()
@@ -41,21 +29,19 @@ namespace CartControl
 
 		public override bool CanEnter(IState currentState)
 		{
-			if(currentState is CartState_TurnInPlace)
-			{
-				return (m_cartStateMachine.SteeringValue < 0 + GameConstants.DEADZONE && m_cartStateMachine.SteeringValue > 0 - GameConstants.DEADZONE);
-				
-			}
-
 			if(m_cartStateMachine.CanBoost)
 			{
 				return false;
 			}
 
-			return (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
+			if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
-				&& m_cartStateMachine.CartRB.velocity.magnitude < GameConstants.DEADZONE);
-			
+				&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		public override bool CanExit()

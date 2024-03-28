@@ -116,9 +116,5 @@ namespace BoxSystem
         //    Destroy(gameObject);
         //}
 
-        public Box1 GetBox()
-        {
-            return m_box;
-        }
     }
 }

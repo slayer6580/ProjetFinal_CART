@@ -9,11 +9,23 @@ namespace CartControl
 
 		public override void OnEnter()
 		{
-			//Debug.LogWarning("current state: MOVING");
+			Debug.LogWarning("current state: MOVING");
 		}
 
 		public override void OnUpdate()
 		{
+			//For animation:
+			//Is only pressing break
+			if((m_cartStateMachine.BackwardPressedPercent > GameConstants.DEADZONE) && (m_cartStateMachine.LocalVelocity.z > 0))
+			{
+				m_cartStateMachine.m_humanAnimator.SetBool("Breaking", true);
+			}
+			else
+			{
+				m_cartStateMachine.m_humanAnimator.SetBool("Breaking", false);
+			}
+
+
 			if (m_cartStateMachine.AutoDriftWhenTurning)
 			{
 				//Increase timer only when turning at maximum value
@@ -41,17 +53,6 @@ namespace CartControl
 					}
 				}
 			}
-
-			//For animation:
-			//Is only pressing break
-			if ((m_cartStateMachine.BackwardPressedPercent > GameConstants.DEADZONE) && (m_cartStateMachine.LocalVelocity.z > 0))
-			{
-				m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", true);
-			}
-			else
-			{
-				m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
-			}
 		}
 
 		public override void OnFixedUpdate()
@@ -63,11 +64,12 @@ namespace CartControl
 		public override void OnExit()
 		{
 			//For Animation
-			m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
+			m_cartStateMachine.m_humanAnimator.SetBool("Breaking", false);
 		}
 
 		public override bool CanEnter(IState currentState)
-		{		
+		{
+			
 			if(currentState is CartState_Boosting)
 			{
 				return m_cartStateMachine.IsBoosting == false;
@@ -81,14 +83,16 @@ namespace CartControl
 			{
 				return false;
 			}
-		
+
+			
 			if (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
-				&& m_cartStateMachine.CartRB.velocity.magnitude < GameConstants.DEADZONE)
+				&& m_cartStateMachine.m_cartRB.velocity.magnitude < GameConstants.DEADZONE)
 			{
 				return false;
 			}
-			return true;			
+			return true;
+			
 		}
 
 		public override bool CanExit()
