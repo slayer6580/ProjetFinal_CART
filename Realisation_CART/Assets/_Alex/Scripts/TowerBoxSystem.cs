@@ -7,6 +7,7 @@ namespace BoxSystem
 {
     public class TowerBoxSystem : MonoBehaviour
     {
+
         [field: Header("Mettre le Player ici")]
         [field: SerializeField] public GameObject Player { get; private set; }
 
@@ -20,10 +21,56 @@ namespace BoxSystem
 
         private int m_boxCount = 0;
         private Stack<Box> m_boxesInCart = new Stack<Box>();
+        private TowerPhysics m_towerPhysics;
+
+        private void Awake()
+        {
+            m_towerPhysics = GetComponent<TowerPhysics>();
+        }
 
         void Start()
         {
             AddBoxToTower();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.KeypadPlus))
+            {
+                AddBoxToTower();
+            }
+            else if (Input.GetKeyDown(KeyCode.KeypadMinus))
+            {
+                m_towerPhysics.RemoveBoxImpulse(Vector3.up * 10); // appel par TowerPhysics
+            }
+            else if (Input.GetKeyDown(KeyCode.O)) // Remove item
+            {
+                if (GetTopBox() == null)
+                {
+                    Debug.Log("Il n'y a pas de boite dans le cart");
+                    return;
+                }
+                if (GetTopBox().IsEmpty())
+                {
+                    Debug.Log("La boite est vide, on enleve la boite");
+                     m_towerPhysics.RemoveBoxImpulse(Vector3.up * 10); // appel par TowerPhysics
+                }
+
+                if (GetTopBox() != null)
+                {
+                    m_towerPhysics.RemoveItemImpulse(Vector3.up * 10);
+                }
+                else
+                {
+                    Debug.Log("Le cart vient de se vider, peut pas enlever d'objet");
+                }
+
+            }
+            else if (Input.GetKeyDown(KeyCode.Y))
+            {
+                int[] data = EmptyCartAndGetScore();
+                Debug.Log("totalScore: " + data[0] + ",  nbOfItems: " + data[1]);
+            }
         }
 
         /// <summary> Ajoute une boite a la tour </summary>
@@ -46,61 +93,16 @@ namespace BoxSystem
             // ajout a la liste
             m_boxesInCart.Push(instantBox);
 
-        }
+            m_towerPhysics.AddJointToBox();
 
-        /// <summary> Enleve une boite a la tour </summary>
-        public void RemoveBoxToTower()
-        {
-            if (m_boxCount == 1)
-            {
-                Debug.LogWarning("¨On peut pas enlever toute les boites du panier");
-                return;
-            }
-
-            m_boxCount--;
-            Box boxToRemove = m_boxesInCart.Pop();
-            Destroy(boxToRemove.gameObject);
-        }
-
-        // TEST
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.KeypadPlus))
-            {
-                AddBoxToTower();
-            }
-            else if (Input.GetKeyDown(KeyCode.KeypadMinus))
-            {
-                RemoveBoxToTower();
-            }
-            else if (Input.GetKeyDown(KeyCode.O))
-            {
-                if (GetTopBox() == null)
-                    return;
-
-                if (GetTopBox().BoxIsEmpty())
-                    RemoveBoxImpulse();
-
-                if (GetTopBox() != null)
-                    GetTopBox().RemoveItemImpulse();
-
-            }
-            else if (Input.GetKeyDown(KeyCode.P))
-            {
-                RemoveBoxImpulse();
-            }
-            else if (Input.GetKeyDown(KeyCode.Y))
-            {
-                int[] data = EmptyCartAndGetScore();
-                Debug.Log(" , totalScore: " + data[0] + "nbOfItems: " + data[1]);
-            }
         }
 
         /// <summary> Regarde si la boite du dessus pourrait prendre un objet d'une certaine taille </summary>
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
         {
-            if (GetTopBox() == null)
+            if (GetTopBox() == null)            
                 return false;
+           
 
             return GetTopBox().CanPutItemInsideBox(size);
         }
@@ -109,40 +111,6 @@ namespace BoxSystem
         public void PutObjectInTopBox(GameObject item)
         {
             GetTopBox().PutItemInBox(item);
-        }
-
-        /// <summary> Donne la boite du dessus </summary>
-        private Box GetTopBox()
-        {
-            if (m_boxesInCart.Count == 0)
-                return null;
-
-            return m_boxesInCart.Peek();
-        }
-
-        /// <summary> Retire une boite avec force </summary>
-        public void RemoveBoxImpulse()
-        {
-            // get the top item
-            if (m_boxesInCart.Count <= 0)
-            {
-                Debug.LogWarning("No box on the stack");
-                return;
-            }
-
-            Debug.Log("Item to remove: " + m_boxesInCart.ToArray()[0].name);
-
-            Box topBox = GetTopBox();
-
-            Rigidbody boxRB = topBox.GetComponent<Rigidbody>();
-            if (boxRB == null)
-                boxRB = topBox.AddComponent<Rigidbody>();
-
-            boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
-            topBox.gameObject.GetComponent<AutoDestruction>().enabled = true;
-
-            m_boxCount--;
-            m_boxesInCart.Pop();
         }
 
         /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
@@ -162,11 +130,39 @@ namespace BoxSystem
                     data[1]++;
                     data[0] += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
                 }
-                RemoveBoxImpulse();
+                 m_towerPhysics.RemoveBoxImpulse(Vector3.up * 10); // appel par TowerPhysics
             }
 
             return data;
         }
+
+        #region (--- Getter ---)
+        /// <summary> Donne le nombre de boites dans le panier </summary>
+        public int GetBoxCount()
+        {
+            return m_boxCount;
+        }
+
+        public int GetBoxesCount()
+        {
+            return m_boxCount;
+        }
+
+        /// <summary> Donne la boite du dessus </summary>
+        public Box GetTopBox()
+        {
+            if (m_boxesInCart.Count == 0)
+                return null;
+
+            return m_boxesInCart.Peek();
+        }
+
+        public void RemoveLastBoxFromTower()
+        {
+            m_boxCount--;
+            m_boxesInCart.Pop();       
+        }
+        #endregion
     }
 
 }

@@ -256,32 +256,32 @@ namespace BoxSystem
 
         #region (--- RemoveItemFromBox ---)
 
-        public void RemoveItemImpulse()
-        {
-            // get the top item
-            if (m_itemsList.Count <= 0)
-            {
-                Debug.LogWarning("No item in the box");
-                return;
-            }
+        //public void RemoveItemImpulse()
+        //{
+        //    // get the top item
+        //    if (m_itemsList.Count <= 0)
+        //    {
+        //        Debug.LogWarning("No item in the box");
+        //        return;
+        //    }
 
-            ItemInBox lastItemInBox = GetLastItem();
+        //    ItemInBox lastItemInBox = GetLastItem();
 
-            if (lastItemInBox.m_item == null)
-            {
-                Debug.LogWarning("Item is null");
-                return;
-            }
+        //    if (lastItemInBox.m_item == null)
+        //    {
+        //        Debug.LogWarning("Item is null");
+        //        return;
+        //    }
 
-            Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
-            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(transform.up * 10, ForceMode.Impulse);
+        //    Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
+        //    lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(transform.up * 10, ForceMode.Impulse);
 
-            ResetSlots(lastItemInBox);
+        //    ResetSlots(lastItemInBox);
 
-            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
-            m_itemsList.Remove(lastItemInBox);
+        //    lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
+        //    m_itemsList.Remove(lastItemInBox);
 
-        }
+        //}
 
 
 
@@ -323,12 +323,17 @@ namespace BoxSystem
             return localposition / nbOfPositions;
         }
 
-        private ItemInBox GetLastItem()
+        public TowerBoxSystem GetTower()
+        {
+            return m_tower;
+        }
+
+        public ItemInBox GetLastItem()
         {
             return m_itemsList[m_itemsList.Count - 1];
         }
 
-        public bool BoxIsEmpty()
+        public bool IsEmpty()
         {
            return m_itemsList.Count == 0;
         }
@@ -346,6 +351,13 @@ namespace BoxSystem
                 m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
             }
         }
+
+        public List<ItemInBox> GetItemsInBox()
+        {
+            return m_itemsList;
+        }
+
+
 
 
         #endregion
