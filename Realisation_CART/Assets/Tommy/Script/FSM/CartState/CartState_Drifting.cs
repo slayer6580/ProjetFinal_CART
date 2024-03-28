@@ -26,9 +26,6 @@ namespace CartControl
 
 		public override void OnUpdate()
 		{
-			//For animation
-			m_cartStateMachine.m_humanAnimator.SetFloat("DriftingValue", Mathf.Clamp(m_cartStateMachine.LocalVelocity.x / 30, -1,1));
-
 			m_driftingTimer += Time.deltaTime;
 
 			//After minimum drifting time obtain. Calculate how much boost to give
@@ -43,13 +40,15 @@ namespace CartControl
 					m_boostPercentageObtain = 1;
 				}
 				m_cartStateMachine.CanBoost = true;
-
 			}
 
 			if (Mathf.Abs(m_cartStateMachine.LocalVelocity.x) < GameConstants.DEADZONE)
 			{
 				m_cartStateMachine.IsDrifting = false;
 			}
+
+			//For animation
+			m_cartStateMachine.HumanAnimCtrlr.SetFloat("DriftingValue", Mathf.Clamp(m_cartStateMachine.LocalVelocity.x / 30, -1, 1));
 		}
 
 		public override void OnFixedUpdate()
@@ -60,11 +59,11 @@ namespace CartControl
 
 		public override void OnExit()
 		{
-			//For animation
-			m_cartStateMachine.m_humanAnimator.SetFloat("DriftingValue", 0);
-
 			//Calculate boosting time
 			m_cartStateMachine.BoostingTime = m_cartStateMachine.MinBoostTime + (m_boostPercentageObtain * (m_cartStateMachine.MaxBoostTime - m_cartStateMachine.MinBoostTime));
+
+			//For animation
+			m_cartStateMachine.HumanAnimCtrlr.SetFloat("DriftingValue", 0);
 		}
 
 		public override bool CanEnter(IState currentState)
@@ -76,7 +75,7 @@ namespace CartControl
 				return true;
 			}
 
-			if (m_cartStateMachine.MinimumSpeedToDrift < m_cartStateMachine.m_cartRB.velocity.magnitude
+			if (m_cartStateMachine.MinimumSpeedToAllowDrift < m_cartStateMachine.CartRB.velocity.magnitude
 				&& m_cartStateMachine.BackwardPressedPercent > GameConstants.DEADZONE
 				&& Mathf.Abs(m_cartStateMachine.SteeringValue) > GameConstants.DEADZONE)
 			{

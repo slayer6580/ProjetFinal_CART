@@ -17,7 +17,6 @@ namespace BoxSystem
 
         private void Awake()
         {
-
             m_remainingItems = m_itemQuantity;
             m_quantityText.text = m_itemQuantity.ToString();
             ColorShelf();

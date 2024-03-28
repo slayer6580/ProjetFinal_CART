@@ -980,6 +980,12 @@ MonoBehaviour:
   - m_Rig: {fileID: 27479446}
     m_Active: 1
   m_Effectors: []
+--- !u!95 &112360074 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3460278577312166371, guid: 395dd9c9138664d498a4547dbfac4c62,
+    type: 3}
+  m_PrefabInstance: {fileID: 112360055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &138299536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,32 +1806,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <MinimumSpeedToDrift>k__BackingField: 15
+  <MinimumSpeedToAllowDrift>k__BackingField: 0
   <DriftingDrag>k__BackingField: 1
-  <DriftingDragRelativeToJoystick>k__BackingField:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0.017332636
-      outSlope: 0.017332636
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.06803456
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.35225177
-      outSlope: -0.35225177
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.06695467
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   <DriftingRotatingSpeed>k__BackingField: 75
   <AddedRotatingSpeedWhenBreaking>k__BackingField: 30
   <DriftingAcceleration>k__BackingField: 70
@@ -1839,12 +1821,12 @@ MonoBehaviour:
   <MinBoostTime>k__BackingField: 1
   <MaxBoostTime>k__BackingField: 3
   <BackToIdleAfterStop>k__BackingField: 0
-  m_cart: {fileID: 269257456}
-  m_cartRB: {fileID: 269257458}
-  m_gameplayCamera: {fileID: 746864961}
-  m_camBrain: {fileID: 1221520798}
-  m_humanAnimator: {fileID: 0}
-  m_feetOnCartRig: {fileID: 0}
+  <Cart>k__BackingField: {fileID: 269257456}
+  <CartRB>k__BackingField: {fileID: 269257458}
+  <CamBrain>k__BackingField: {fileID: 1221520798}
+  <VirtualCamera>k__BackingField: {fileID: 746864961}
+  <HumanAnimCtrlr>k__BackingField: {fileID: 112360074}
+  <FeetOnCartRig>k__BackingField: {fileID: 1082291863}
   <CartMovement>k__BackingField: {fileID: 269257460}
   m_towerCtrlr: {fileID: 0}
 --- !u!114 &269257462
@@ -1860,7 +1842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
-  m_tower: {fileID: 1750706377}
+  <Tower>k__BackingField: {fileID: 0}
 --- !u!135 &269257463
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3912,7 +3894,10 @@ MonoBehaviour:
     Press (P) to remove a box with force.
 
     Press
-    (A) to take an item when close to shelves.'
+    (A) to take an item when close to shelves.
+
+    Press (Y) to empty cart, give
+    score and give nb of items'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
@@ -24469,55 +24454,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1750706375
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1750706376}
-  - component: {fileID: 1750706377}
-  m_Layer: 0
-  m_Name: Tower
-  m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1750706376
+--- !u!4 &1750706376 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750706375}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.268, z: -0.555}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 269257457}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1750706377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750706375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c1bd0ab716f394c951b2384610020f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Player>k__BackingField: {fileID: 269257456}
-  <ItemSnapDistance>k__BackingField: 1
-  m_boxPrefab: {fileID: 3665573428290585098, guid: 4a9ec3d4dfd1f0c469abfa2d64000b26,
+  m_CorrespondingSourceObject: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
     type: 3}
-  m_boxHeight: 0.1
+  m_PrefabInstance: {fileID: 4481828586471022658}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1755214422
 GameObject:
   m_ObjectHideFlags: 0
@@ -65334,6 +65276,79 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1001 &4481828586471022658
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 269257457}
+    m_Modifications:
+    - target: {fileID: 1080024677785248160, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_Name
+      value: Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.268
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.555
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704022285266379355, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: <Player>k__BackingField
+      value: 
+      objectReference: {fileID: 269257456}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2b2abbfa91512c84dbc464f9c8f8749b, type: 3}
 --- !u!1001 &5625649885266882570
 PrefabInstance:
   m_ObjectHideFlags: 0

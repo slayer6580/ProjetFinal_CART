@@ -14,49 +14,45 @@ namespace CartControl
 			m_cartStateMachine.CanBoost = false;
 
 			//For Animation
-			m_cartStateMachine.m_humanAnimator.SetBool("Boosting", true);
+			m_cartStateMachine.HumanAnimCtrlr.SetBool("Boosting", true);
 
 			//Some value must not be reset when coming from Stopped State
 			if (m_comingFromState is CartState_Stopped)
 			{
 				return;
 			}
-			boostingTimer = 0;		
+			boostingTimer = 0;
+
 		}
 
 		public override void OnUpdate()
 		{
 			boostingTimer += Time.deltaTime;
 
-			//For animation
-			if(boostingTimer >= m_cartStateMachine.BoostingTime - 0.5f)
-			{
-				m_cartStateMachine.m_humanAnimator.SetBool("Boosting", false);
-
-				if (m_cartStateMachine.m_humanAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpingFeetOnCartReverse"))
-				{				
-					float weightByTime = Mathf.Clamp(m_cartStateMachine.m_humanAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime, 0, 1);		
-					m_cartStateMachine.m_feetOnCartRig.weight = 1 - weightByTime;
-				}
-			}
-			else
-			{
-				if (m_cartStateMachine.m_humanAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpingFeetOnCart"))
-				{
-					float weightByTime = Mathf.Clamp(m_cartStateMachine.m_humanAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime, 0, 1);
-					m_cartStateMachine.m_feetOnCartRig.weight = weightByTime;
-				}
-			}
-
-			
-			
-			
-
 			if (boostingTimer >= m_cartStateMachine.BoostingTime)
 			{
 				m_cartStateMachine.IsBoosting = false;
 			}
 
+			//For animation : Modify the weight of the Animation Rig that hold the feet on the cart depending on the animation
+			if (boostingTimer >= m_cartStateMachine.BoostingTime - 0.5f)
+			{
+				m_cartStateMachine.HumanAnimCtrlr.SetBool("Boosting", false);
+
+				if (m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).IsName("JumpingFeetOnCartReverse"))
+				{				
+					float weightByTime = Mathf.Clamp(m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).normalizedTime, 0, 1);		
+					m_cartStateMachine.FeetOnCartRig.weight = 1 - weightByTime;
+				}
+			}
+			else
+			{
+				if (m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).IsName("JumpingFeetOnCart"))
+				{
+					float weightByTime = Mathf.Clamp(m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).normalizedTime, 0, 1);
+					m_cartStateMachine.FeetOnCartRig.weight = weightByTime;
+				}
+			}
 		}
 
 		public override void OnFixedUpdate()
@@ -70,9 +66,8 @@ namespace CartControl
 			m_cartStateMachine.IsBoosting = false;
 
 			//For Animation
-			m_cartStateMachine.m_humanAnimator.SetBool("Boosting", false);
-			m_cartStateMachine.m_feetOnCartRig.weight = 0;
-
+			m_cartStateMachine.HumanAnimCtrlr.SetBool("Boosting", false);
+			m_cartStateMachine.FeetOnCartRig.weight = 0;
 		}
 
 		public override bool CanEnter(IState currentState)

@@ -8,8 +8,8 @@ namespace BoxSystem
         [field: Header("le temps maximal que prend un item pour venir dans le panier")]
         [field: SerializeField] public float ItemSlerpTime { get; private set; }
 
-        [Header("mettre la tour du player ici")]
-        [SerializeField] private Tower m_tower;
+        [field: Header("mettre la tour du player ici")]
+        [field: SerializeField] public TowerBoxSystem Tower { get; private set; }
 
         private List<Shelf> m_takableShelves = new List<Shelf>();
         private Shelf m_choosenShelf = null;
@@ -25,7 +25,6 @@ namespace BoxSystem
 
             if (!shelf)
                 return;
-
             m_takableShelves.Add(shelf);
         }
 
@@ -35,15 +34,13 @@ namespace BoxSystem
 
             if (!shelf)
                 return;
-
          
             m_takableShelves.Remove(shelf);
 
             if (m_choosenShelf == shelf)
             {
                 m_choosenShelf.UnSelectedShelf();
-                m_choosenShelf = null;
-                
+                m_choosenShelf = null;               
             }
         }
 
@@ -97,13 +94,13 @@ namespace BoxSystem
             GameObject itemTaken = m_choosenShelf.GetItemFromShelf();
             ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size; 
 
-            if (!m_tower.CanTakeObjectInTheActualBox(size))
+            if (!Tower.CanTakeObjectInTheActualBox(size))
             {
                 Debug.Log("Need a new box to put item");
-                m_tower.AddBoxToTower();
+                Tower.AddBoxToTower();
             }
         
-            m_tower.PutObjectInTopBox(itemTaken);
+            Tower.PutObjectInTopBox(itemTaken);
 
         }
     }
