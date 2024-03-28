@@ -65,6 +65,7 @@ namespace BoxSystem
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
         private TowerBoxSystem m_tower;
+        private Vector3 m_initialLocalPositionInBox;
 
         #endregion
 
@@ -318,6 +319,18 @@ namespace BoxSystem
         {
             return m_itemsList;
         }
+
+        public void SetInitialLocationInBox(Vector3 localPosition)
+        {
+            m_initialLocalPositionInBox = localPosition;
+        }
+
+        public void ReplaceBoxToOrigin()
+        {
+            transform.localPosition = m_initialLocalPositionInBox;
+        }
+
+        
 
         #endregion
     }
