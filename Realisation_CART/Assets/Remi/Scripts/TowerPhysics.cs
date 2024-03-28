@@ -1,30 +1,52 @@
-using BoxSystem;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using DiscountDelirium;
-using static BoxSystem.Box1;
+using CartControl;
+using System;
 
 namespace BoxSystem
 {
     public class TowerPhysics : MonoBehaviour
     {
+        [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
+        [field: SerializeField] private GameObject Player { get; set; } = null;
 
-
-        private const int NB_UNDROPPABLE_BOXES = 4;
+        [SerializeField] private const int NB_UNDROPPABLE_BOXES = 4;
 
         private TowerBoxSystem _Tower { get; set; } = null;
         private bool m_isInHingeMode = false;
-
 
         private void Awake()
         {
             _Tower = GetComponent<TowerBoxSystem>();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                Vector3 pos = Player.transform.position + transform.localPosition;
+                Quaternion rot = transform.rotation;
+                Quaternion additionalRotation = Quaternion.Euler(0, 90, 0);
+                Quaternion finalRotation = rot * additionalRotation;
 
+                Vector3 localOffset = new Vector3(-3, 0, 0);
+                Vector3 worldOffset = rot * localOffset;
+
+                Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
+            }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                Vector3 pos = Player.transform.position + transform.localPosition;
+                Quaternion rot = transform.localRotation;
+                Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
+                Quaternion finalRotation = rot * additionalRotation;
+
+                Vector3 localOffset = new Vector3(3, 0, 0);
+                Vector3 worldOffset = rot * localOffset;
+
+                Instantiate(DebugCartPrefab, pos + worldOffset, finalRotation);
+            }
+        }
 
         public void ModifyTopBoxSpringIntesity()
         {
@@ -77,15 +99,21 @@ namespace BoxSystem
         {
             //Box1 box = _Tower.GetTopBox();
             //box.GetComponent<Rigidbody>().isKinematic = true;
-            if (_Tower.GetBoxCount() == 1) // Pour ajouter un spring entre la première boite et le panier
+            if (_Tower.GetBoxCount() <= NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
             {
-                //Rigidbody cartRB = GetComponentInParent<Rigidbody>();
-                //if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
-                //SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
-                //SetSprintJointValues(springJoint, cartRB);
-                Box box1 = _Tower.GetTopBox();
-                box1.GetComponent<Rigidbody>().isKinematic = true;
+                Box box = _Tower.GetTopBox();
+                box.GetComponent<Rigidbody>().isKinematic = true;
                 return;
+            }
+
+            if (_Tower.GetBoxCount() > NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
+            {
+                Box box = _Tower.GetTopBox();
+                box.GetComponent<Rigidbody>().isKinematic = false;
+                Rigidbody cartRB = GetComponentInParent<Rigidbody>();
+                if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
+                SpringJoint springJoint = box.gameObject.AddComponent<SpringJoint>();
+                SetSprintJointValues(springJoint, cartRB);
             }
 
             if (_Tower.GetBoxCount() > 1) // Pour ajouter un spring entre les boites
@@ -116,7 +144,7 @@ namespace BoxSystem
         public void RemoveItemImpulse(Vector3 velocity)
         {
             Box topBox = _Tower.GetTopBox();
-            // get the top item
+
             if (topBox.GetItemsInBox().Count <= 0)
             {
                 Debug.LogWarning("No item in the box");
@@ -156,17 +184,17 @@ namespace BoxSystem
             }
 
             topBox.GetComponent<Rigidbody>().isKinematic = false;
-            //topBox.GetComponent<BoxPhysics>().m_incomingVelocity = velocity;
             topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
             Debug.Log("AutoDestruction enabled");
             topBox.GetComponent<AutoDestruction>().enabled = true;
             _Tower.RemoveLastBoxFromTower();
         }
 
-        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB) // Rémi
+        /// <summary> Configure les valeurs du join Spring  </summary>
+        private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
         {
             springJoint.connectedBody = newBoxeRB;
-            springJoint.spring = 1;
+            springJoint.spring = 100;
             springJoint.damper = 0;
             springJoint.minDistance = 0;
             springJoint.maxDistance = 0.2f;
@@ -174,13 +202,17 @@ namespace BoxSystem
             springJoint.enableCollision = true;
         }
 
+        /// <summary> Vérifie si on peut retirer le contenu de la boite </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
-            //Debug.Log("m_boxesInCart.Count: " + m_boxesInCart.Count);
-            //if (m_boxesInCart.Count <= 1) return;
             Debug.Log("CheckIfCanDropContent");
 
             Box box = _Tower.GetTopBox();
+            if(box == null)
+            {
+                Debug.LogWarning("No box to check");
+                return;
+            }
 
             if (box.IsEmpty() && _Tower.GetBoxesCount() > NB_UNDROPPABLE_BOXES)
                 RemoveBoxImpulse(velocity);
