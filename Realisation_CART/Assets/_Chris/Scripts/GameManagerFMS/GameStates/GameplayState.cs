@@ -23,7 +23,7 @@ namespace DiscountDelirium
         {
             if (Input.GetKeyDown(KeyCode.Space) && !m_playerReady) //to delete eventually
             {
-                OnPlayerReady.Invoke();
+                OnPlayerReady?.Invoke();
                 m_playerReady = true;
             }
         }
@@ -35,17 +35,17 @@ namespace DiscountDelirium
 
         public override void OnExit()
         {
-
+            Debug.LogWarning("GameState Exit : GAMEPLAY");
         }
 
         public override bool CanEnter(IState currentState)
         {
-            return m_gameStateMachine.m_isGameOver;
+            return !m_gameStateMachine.m_isGameOver;
         }
 
         public override bool CanExit()
         {
-            return !m_gameStateMachine.m_isGameOver;
+            return m_gameStateMachine.m_isGameOver;
         }
 
         private void GameOver() 
@@ -56,7 +56,7 @@ namespace DiscountDelirium
 
         private void StartGame() 
         {
-            OnGameStarted.Invoke();
+            OnGameStarted?.Invoke();
         }
     }
 }

@@ -9,7 +9,11 @@ namespace DiscountDelirium
     {
         public static GameStateMachine Instance { get; private set; }
 
-        [HideInInspector] public bool m_isGameOver;
+        [SerializeField] private GameObject m_player; 
+        [SerializeField] public ScoreUI m_scoreUI; 
+
+        [HideInInspector] public bool m_isGameOver;//field
+        
 
         private void Awake()
         {
