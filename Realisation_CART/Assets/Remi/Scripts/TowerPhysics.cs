@@ -168,9 +168,10 @@ namespace BoxSystem
             //Debug.Log("AddSpringJoint() _Tower.GetBoxCount(): " + _Tower.GetBoxCount());
             Box previousTopBox = _Tower.GetPreviousTopBox();
             if (previousTopBox == null) Debug.LogWarning("Previous Top Box est null");
-            else Debug.Log("Previous Top Box: " + previousTopBox.name);
+            else previousTopBox.GetComponent<BoxPhysics>().enabled = false;
 
             Box topBox = _Tower.GetTopBox();
+            topBox.GetComponent<BoxPhysics>().enabled = true;
             topBox.GetComponent<Rigidbody>().isKinematic = false;
 
             Rigidbody previousTopBoxRB = previousTopBox.GetComponent<Rigidbody>();

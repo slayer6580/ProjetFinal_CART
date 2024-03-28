@@ -1789,7 +1789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746864961}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633594, y: 1.7431841e-15, z: -4.0273412e-17, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633597, y: -0.000000029524049, z: 0.0000000040631285, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.12, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2981,7 +2981,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221520797}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633594, y: 1.7431841e-15, z: -4.0273412e-17, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633597, y: -0.000000029524049, z: 0.0000000040631285, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.12, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3527,7 +3527,7 @@ GameObject:
   - component: {fileID: 1562710369}
   - component: {fileID: 1562710368}
   - component: {fileID: 1562710367}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48896,6 +48896,14 @@ MonoBehaviour:
   m_debugCartDistance: 10
   m_debugCartSpeed: 3
   m_currentJointMode: 0
+  m_springStrenght: 100
+  m_springDamper: 0
+  m_springMinDistance: 0
+  m_springMaxDistance: 0.2
+  m_springTolerance: 0.06
+  m_springEnableCollision: 1
+  m_springBreakForce: 25
+  m_springBreakTorque: 25
 --- !u!4 &5666850671349121825
 Transform:
   m_ObjectHideFlags: 0
