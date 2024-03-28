@@ -1,6 +1,7 @@
 using DiscountDelirium;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BoxSystem
@@ -66,7 +67,7 @@ namespace BoxSystem
         private BoxSetup m_boxSetup;
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
-        private Tower m_tower;
+        private TowerBoxSystem m_tower;
         #endregion
 
         private void Awake()
@@ -102,7 +103,7 @@ namespace BoxSystem
         }
 
         /// <summary> La boite se connecte a la tour lors de sa propre création </summary>
-        public void SetTower(Tower tower)
+        public void SetTower(TowerBoxSystem tower)
         {
             m_tower = tower;    
         }
@@ -332,6 +333,11 @@ namespace BoxSystem
         public bool BoxIsEmpty()
         {
            return m_itemsList.Count == 0;
+        }
+
+        public List<ItemInBox> GetItemsList()
+        {  
+            return m_itemsList; 
         }
         #endregion
     }

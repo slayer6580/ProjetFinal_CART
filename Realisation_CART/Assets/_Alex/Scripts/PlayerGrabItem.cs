@@ -8,8 +8,8 @@ namespace BoxSystem
         [field: Header("le temps maximal que prend un item pour venir dans le panier")]
         [field: SerializeField] public float ItemSlerpTime { get; private set; }
 
-        [Header("mettre la tour du player ici")]
-        [SerializeField] private Tower m_tower;
+        [field: Header("mettre la tour du player ici")]
+        [field: SerializeField] public TowerBoxSystem m_tower { get; private set; }
 
         private List<Shelf> m_takableShelves = new List<Shelf>();
         private Shelf m_choosenShelf = null;
@@ -25,7 +25,6 @@ namespace BoxSystem
 
             if (!shelf)
                 return;
-
             m_takableShelves.Add(shelf);
         }
 
@@ -35,7 +34,6 @@ namespace BoxSystem
 
             if (!shelf)
                 return;
-
          
             m_takableShelves.Remove(shelf);
 

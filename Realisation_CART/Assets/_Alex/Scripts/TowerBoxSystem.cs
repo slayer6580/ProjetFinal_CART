@@ -2,10 +2,11 @@ using DiscountDelirium;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace BoxSystem
 {
-    public class Tower : MonoBehaviour
+    public class TowerBoxSystem : MonoBehaviour
     {
         [field: Header("Mettre le Player ici")]
         [field: SerializeField] public GameObject Player { get; private set; }
@@ -45,7 +46,7 @@ namespace BoxSystem
             // ajout a la liste
             m_boxesInCart.Push(instantBox);
 
-          //  AddSpringToBox();  // Ta fonction ici, p-e rajouter instantBox en parametre
+            //  AddSpringToBox();  // Ta fonction ici, p-e rajouter instantBox en parametre
         }
 
         /// <summary> Enleve une boite a la tour </summary>
@@ -60,7 +61,7 @@ namespace BoxSystem
             m_boxCount--;
             Box boxToRemove = m_boxesInCart.Pop();
             Destroy(boxToRemove.gameObject);
-           // ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
+            // ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
         }
 
         // TEST
@@ -72,23 +73,28 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
-                RemoveBoxToTower();        
+                RemoveBoxToTower();
             }
             else if (Input.GetKeyDown(KeyCode.O))
             {
-                if (GetTopBox() == null)               
+                if (GetTopBox() == null)
                     return;
-                
+
                 if (GetTopBox().BoxIsEmpty())
                     RemoveBoxImpulse();
 
                 if (GetTopBox() != null)
-                GetTopBox().RemoveItemImpulse();
+                    GetTopBox().RemoveItemImpulse();
 
             }
             else if (Input.GetKeyDown(KeyCode.P))
             {
                 RemoveBoxImpulse();
+            }
+            else if (Input.GetKeyDown(KeyCode.Y))
+            {
+                int[] data = EmptyCartAndGetScore();
+                Debug.Log(" , totalScore: " + data[0] + "nbOfItems: " + data[1]);
             }
         }
 
@@ -133,14 +139,41 @@ namespace BoxSystem
             Rigidbody boxRB = topBox.GetComponent<Rigidbody>();
             if (boxRB == null)
                 boxRB = topBox.AddComponent<Rigidbody>();
-         
+
             boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
             topBox.gameObject.GetComponent<AutoDestruction>().enabled = true;
 
             m_boxCount--;
             m_boxesInCart.Pop();
         }
+
+        /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
+        public int[] EmptyCartAndGetScore()
+        {
+            int totalScore = 0;
+            int nbOfItems = 0;
+            int[] data = { totalScore, nbOfItems };
+
+            while (m_boxesInCart.Count > 0)
+            {
+                Box topBox = GetTopBox();
+                List<Box.ItemInBox> itemsInBox = topBox.GetItemsList();
+
+                for (int i = 0; i < itemsInBox.Count; i++)
+                {
+                    data[1]++;
+                    data[0] += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
+                }
+                RemoveBoxImpulse();
+            }
+
+            return data;
+        }
     }
+
+
+
+
 }
 
 
