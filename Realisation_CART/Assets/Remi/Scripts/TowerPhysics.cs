@@ -12,18 +12,36 @@ namespace BoxSystem
         [field: SerializeField] private GameObject Player { get; set; } = null;
 
         [Header("Items and boxes physics settings")]
-        [SerializeField] private float m_itemRemoveImpulseIntesity = 0.2f;
-        [SerializeField] private float m_itemVectorUpImpulseIntesity = 10.0f;
-        [SerializeField] private float m_boxRemoveImpulseIntesity = 0.2f;
-        [SerializeField] private float m_boxVectorUpImpulseIntesity = 10.0f;
-        [Header("Debug Cart Settings")]
-        [SerializeField] private float m_debugCartDistance = 10.0f;
-        [SerializeField] private float m_debugCartSpeed = 3.0f;
+        [SerializeField] public float m_itemRemoveImpulseIntesity = 0.2f;
+        [SerializeField] public float m_itemVectorUpImpulseIntesity = 10.0f;
+        [SerializeField] public float m_boxRemoveImpulseIntesity = 0.2f;
+        [SerializeField] public float m_boxVectorUpImpulseIntesity = 10.0f;
+        [SerializeField] public int m_nbOfUndroppableBoxes = 4;
 
-        [SerializeField] private const int NB_UNDROPPABLE_BOXES = 4;
+        [Header("Debug Cart Settings")]
+        [SerializeField] public float m_debugCartDistance = 10.0f;
+        [SerializeField] public float m_debugCartSpeed = 3.0f;
+
+        [Header("Joint Settings")]
+        [SerializeField] public JointMode m_currentJointMode = JointMode.Spring;
+
+        [Header("Spring Settings")]
+        [SerializeField] public static float m_springStrenght = 100.0f;
+        [SerializeField] public static float m_springDamper = 0;
+        [SerializeField] public static float m_springMinDistance = 0;
+        [SerializeField] public static float m_springMaxDistance = 0.2f;
+        [SerializeField] public static float m_springTolerance = 0.06f;
+        [SerializeField] public static bool m_springEnableCollision = true;
+
 
         private TowerBoxSystem _Tower { get; set; } = null;
-        private bool m_isInHingeMode = false;
+
+        public enum JointMode
+        {
+            Spring,
+            Hinge,
+            Count
+        }
 
         private void Awake()
         {
@@ -80,14 +98,16 @@ namespace BoxSystem
 
         public void AddJointToBox() // p-e rajouter instantBox en parametre    // Rémi
         {
-            if (m_isInHingeMode)
+            if (m_currentJointMode == JointMode.Hinge)
             {
                 AddHingeJoint();
                 return;
             }
-
-            //Debug.LogError("AddJointToBox()");
-            AddSpringJoint();
+            else if (m_currentJointMode == JointMode.Spring)
+            {
+                AddSpringJoint();
+                return;
+            }
         }
 
         private void AddHingeJoint()
@@ -115,51 +135,46 @@ namespace BoxSystem
 
         private void AddSpringJoint()
         {
-            //Box box = _Tower.GetTopBox();
+            if (_Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            //box.GetComponent<Rigidbody>().isKinematic = true;
+            Debug.Log("AddSpringJoint() _Tower.GetBoxCount(): " + _Tower.GetBoxCount());
+            Box previousTopBox = GetPreviousTopBox();
+            if (previousTopBox == null) Debug.LogWarning("Previous Top Box est null");
+            else Debug.Log("Previous Top Box: " + previousTopBox.name);
 
-            if (_Tower.GetBoxCount() <= NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
+            Box topBox = _Tower.GetTopBox();
+            topBox.GetComponent<Rigidbody>().isKinematic = false;
+
+            Rigidbody previousTopBoxRB = previousTopBox.GetComponent<Rigidbody>();
+            if (previousTopBoxRB == null) Debug.LogError("Previous Top Box n'a pas de rigidbody");
+            SpringJoint springJoint = topBox.gameObject.AddComponent<SpringJoint>();
+            SetSprintJointValues(springJoint, previousTopBoxRB);
+
+            SpringJoint previousSpringJoint = previousTopBoxRB.GetComponent<SpringJoint>();
+
+            if (previousSpringJoint != null)
             {
-                //Box box = _Tower.GetTopBox();
-                //box.GetComponent<Rigidbody>().isKinematic = true;
-                return;
+                Debug.Log("Spring found in previous box: " + previousTopBoxRB.gameObject.name);
+                previousTopBoxRB.transform.localPosition = GetBoxDesiredPosition(previousTopBox);
+                previousSpringJoint.spring = 0;
+                previousSpringJoint.connectedBody = null;
+            }
+            else
+            {
+                Debug.Log("No srping in previous box: " + previousTopBoxRB.gameObject.name);
+
             }
 
-            if (_Tower.GetBoxCount() > NB_UNDROPPABLE_BOXES) // Pour ajouter un spring entre la première boite et le panier
-            {
-                //Box box = _Tower.GetTopBox();
-                //box.GetComponent<Rigidbody>().isKinematic = false;
-                //Rigidbody cartRB = GetComponentInParent<Rigidbody>();
-                //if (cartRB == null) Debug.LogError("Cart n'a pas de rigidbody");
-                //SpringJoint springJoint = box.gameObject.AddComponent<SpringJoint>();
-                //SetSprintJointValues(springJoint, cartRB);
-            }
-
-            if (_Tower.GetBoxCount() > 1) // Pour ajouter un spring entre les boites
-            {
-                //Box1 previousBoxe = m_boxesInCart.ToArray()[m_boxesInCart.Count - 1];
-                //SpringJoint springJoint = m_boxesInCart.ToArray()[0].gameObject.AddComponent<SpringJoint>();
-                //Rigidbody newBoxeRB = previousBoxe.GetComponent<Rigidbody>();
-                //if (newBoxeRB == null)
-                //{
-                //    newBoxeRB = previousBoxe.AddComponent<Rigidbody>();
-                //}
-                //SetSprintJointValues(springJoint, newBoxeRB);
-                //Box1 box1 = GetTopBox();
-                ////box1.GetComponent<Rigidbody>().isKinematic = true;
-                //Box box = _Tower.GetTopBox();
-                //box.GetComponent<Rigidbody>().isKinematic = true;
-                return;
-            }
-
-            if (_Tower.GetBoxCount() > 2) // Pour changer la force du spring du top box
-            {
-                //Box1 previousBox = m_boxesInCart.ToArray()[0];
-                //SpringJoint previousSpringJoint = previousBox.GetComponent<SpringJoint>();
-                //previousSpringJoint.spring = 10;
-            }
+            previousTopBoxRB.isKinematic = true;
         }
+
+        //public Box GetPreviousTopBox()
+        //{
+        //    if (_Tower.m_boxesInCart.Count < 2)
+        //        return null;
+
+        //    return _Tower.m_boxesInCart.ToArray()[1];
+        //}
 
         public void RemoveItemImpulse(Vector3 velocity)
         {
@@ -211,6 +226,9 @@ namespace BoxSystem
                 return;
             }
 
+            // Detach joint from box
+            DetachJoint(topBox);
+
             Vector3 vectorUp = topBox.transform.up * m_boxVectorUpImpulseIntesity;
             Vector3 incomingImpulse = velocity * m_boxRemoveImpulseIntesity;
             Vector3 totalImpulse = vectorUp + incomingImpulse;
@@ -224,16 +242,27 @@ namespace BoxSystem
             _Tower.RemoveLastBoxFromTower();
         }
 
+        private static void DetachJoint(Box topBox)
+        {
+            SpringJoint springJoint = topBox.GetComponent<SpringJoint>();
+            if (springJoint != null)
+                Destroy(springJoint);
+
+            HingeJoint hingeJoint = topBox.GetComponent<HingeJoint>();
+            if (hingeJoint != null)
+                Destroy(hingeJoint);
+        }
+
         /// <summary> Configure les valeurs du join Spring  </summary>
         private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
         {
             springJoint.connectedBody = newBoxeRB;
-            springJoint.spring = 100;
-            springJoint.damper = 0;
-            springJoint.minDistance = 0;
-            springJoint.maxDistance = 0.2f;
-            springJoint.tolerance = 0.06f;
-            springJoint.enableCollision = true;
+            springJoint.spring = m_springStrenght;
+            springJoint.damper = m_springDamper;
+            springJoint.minDistance = m_springMinDistance;
+            springJoint.maxDistance = m_springMaxDistance;
+            springJoint.tolerance = m_springTolerance;
+            springJoint.enableCollision = m_springEnableCollision;
         }
 
         /// <summary> Vérifie si on peut retirer le contenu de la boite </summary>
@@ -242,16 +271,21 @@ namespace BoxSystem
             Debug.Log("CheckIfCanDropContent");
 
             Box box = _Tower.GetTopBox();
-            if(box == null)
+            if (box == null)
             {
                 Debug.LogWarning("No box to check");
                 return;
             }
 
-            if (box.IsEmpty() && _Tower.GetBoxesCount() > NB_UNDROPPABLE_BOXES)
+            if (box.IsEmpty() && _Tower.GetBoxesCount() > m_nbOfUndroppableBoxes)
                 RemoveBoxImpulse(velocity);
             else if (!box.IsEmpty())
                 RemoveItemImpulse(velocity);
+        }
+
+        public Vector3 GetBoxDesiredPosition(Box box)
+        {
+            return new Vector3(0, box.gameObject.GetComponent<BoxSetup>().SlotHeight * _Tower.GetBoxesCount(), 0);
         }
     }
 }
