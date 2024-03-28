@@ -10,11 +10,13 @@ namespace BoxSystem
         [Header("Prefabs")]
         [SerializeField] private GameObject m_slotPrefab;
 
-        [Header("Longeur, largeur et hauteur de la boite")]
+        [Header("Longeur, largeur et épaisseur de la boite")]
         [SerializeField] private float m_boxWidth;
-        [SerializeField] private float m_boxLength;
-        [SerializeField] private float m_boxHeight;
+        [SerializeField] private float m_boxLength; 
         [SerializeField] private float m_boxThickness;
+
+        [field: Header("Hauteur de la boite")]
+        [field: SerializeField] public float BoxHeight { get; private set; }
 
         [Header("Nombre de slot par longeur et largeur")]
         [SerializeField] private int m_nbSlotWidth;
@@ -65,7 +67,7 @@ namespace BoxSystem
             float lenght = m_boxLength;
             float width = m_boxWidth;
             float thickness = m_boxThickness;
-            float height = m_boxHeight;
+            float height = BoxHeight;
             float halfHeight = height / 2;
             float halfThickness = thickness / 2;
             float halfLength = lenght / 2;
@@ -275,7 +277,7 @@ namespace BoxSystem
         {
             SlotLenght = m_boxWidth / m_nbSlotWidth;
             SlotWidth = m_boxLength / m_nbSlotLength;
-            SlotHeight = m_boxHeight;
+            SlotHeight = BoxHeight;
         }
 
         /// <summary> Donne le nombre total de slot au Box </summary>

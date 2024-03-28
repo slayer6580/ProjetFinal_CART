@@ -263,8 +263,8 @@ MonoBehaviour:
     type: 3}
   m_boxWidth: 0.392
   m_boxLength: 0.588
-  m_boxHeight: 0.09
   m_boxThickness: 0.02
+  <BoxHeight>k__BackingField: 0.09
   m_nbSlotWidth: 4
   m_nbSlotLength: 6
   m_showBoxParts: 1
