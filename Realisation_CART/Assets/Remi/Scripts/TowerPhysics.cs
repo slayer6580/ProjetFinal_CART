@@ -4,24 +4,29 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static BoxSystem.Box1;
 
 namespace DiscountDelirium
 {
     public class TowerPhysics : MonoBehaviour
     {
+
+
         private const int NB_UNDROPPABLE_BOXES = 4;
 
         private Tower1 _Tower { get; set; } = null;
         private bool m_isInHingeMode = false;
+
 
         private void Awake()
         {
             _Tower = GetComponent<Tower1>();
         }
 
-        /// <summary> Retire une boite avec une force sur mesure</summary>
+        /// <summary> Retire une boite avec force </summary>
         public void RemoveBoxImpulse() // Rémi
         {
+            Debug.Log("RemoveBoxImpulse() No velocity");
             // get the top item
             if (_Tower.GetBoxCount() <= 0)
             {
@@ -37,24 +42,7 @@ namespace DiscountDelirium
 
             boxRB.AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
             topBox.gameObject.GetComponent<AutoDestruction>().enabled = true;
-        }
-
-        /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
-        public void RemoveBoxImpulse(Vector3 velocity)
-        {
-            Debug.Log("RemoveBoxImpulse()");
-            Box1 topBox = _Tower.GetTopBox();
-            if (topBox == null)
-            {
-                Debug.LogWarning("No box to remove");
-                return;
-            }
-
-            topBox.GetComponent<Rigidbody>().isKinematic = false;
-            topBox.GetComponent<BoxPhysics>().m_incomingVelocity = velocity;
-            topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
-            Debug.Log("AutoDestruction enabled");
-            topBox.GetComponent<AutoDestruction1>().enabled = true;
+            _Tower.RemoveLastBoxFromTower();
         }
 
         public void ModifyTopBoxSpringIntesity()
@@ -144,6 +132,56 @@ namespace DiscountDelirium
             }
         }
 
+        public void RemoveItemImpulse(Vector3 velocity)
+        {
+            Box1 topBox = _Tower.GetTopBox();
+            // get the top item
+            if (topBox.GetItemsInBox().Count <= 0)
+            {
+                Debug.LogWarning("No item in the box");
+                return;
+            }
+
+            ItemInBox lastItemInBox = topBox.GetLastItem();
+            if (lastItemInBox.m_item == null)
+            {
+                Debug.LogWarning("Item is null");
+                return;
+            }
+
+            Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
+
+            if (rb == null)
+                lastItemInBox.m_item.gameObject.AddComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            else
+                rb.AddForce(velocity, ForceMode.Impulse);
+
+            lastItemInBox.m_item.GetComponent<AutoDestruction1>().enabled = true;
+            Debug.Log("Item in autodestruction mode: " + lastItemInBox.m_item.name);
+            topBox.GetItemsInBox().Remove(lastItemInBox);
+
+            topBox.ResetSlots(lastItemInBox);
+        }
+
+        /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
+        public void RemoveBoxImpulse(Vector3 velocity)
+        {
+            Debug.Log("RemoveBoxImpulse() Velocity: " + velocity.magnitude);
+            Box1 topBox = _Tower.GetTopBox();
+            if (topBox == null)
+            {
+                Debug.LogWarning("No box to remove");
+                return;
+            }
+
+            topBox.GetComponent<Rigidbody>().isKinematic = false;
+            //topBox.GetComponent<BoxPhysics>().m_incomingVelocity = velocity;
+            topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            Debug.Log("AutoDestruction enabled");
+            topBox.GetComponent<AutoDestruction1>().enabled = true;
+            _Tower.DecreaseListOfOneBox();
+        }
+
         private static void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB) // Rémi
         {
             springJoint.connectedBody = newBoxeRB;
@@ -161,13 +199,12 @@ namespace DiscountDelirium
             //if (m_boxesInCart.Count <= 1) return;
             Debug.Log("CheckIfCanDropContent");
 
-
             Box1 box = _Tower.GetTopBox();
 
             if (box.IsEmpty() && _Tower.GetBoxesCount() > NB_UNDROPPABLE_BOXES)
                 RemoveBoxImpulse(velocity);
             else if (!box.IsEmpty())
-                box.RemoveItemImpulse(velocity);
+                RemoveItemImpulse(velocity);
         }
     }
 }

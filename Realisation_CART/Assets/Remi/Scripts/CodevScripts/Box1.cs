@@ -69,7 +69,6 @@ namespace BoxSystem
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
         private Tower1 m_tower;
-        private const float DELAY_UNTIL_DELETE = 1.5f;
         #endregion
 
 
@@ -284,45 +283,25 @@ namespace BoxSystem
             }
 
             Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
-            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(Vector3.left + Vector3.up * 10, ForceMode.Impulse);
+            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(transform.up * 10, ForceMode.Impulse);
 
-            foreach (int item in lastItemInBox.m_slotIndex)
-            {
-                Transform slotTransform = m_slotsList[item].m_slotTransform;
-                m_slotsList[item] = new SlotInfo(slotTransform, true);
-            }
+            ResetSlots(lastItemInBox);
 
-            lastItemInBox.m_item.GetComponent<AutoDestruction1>().enabled = true;
-            //m_itemsList.Remove(lastItemInBox);
+            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
+            m_itemsList.Remove(lastItemInBox);
+
         }
 
-        public void RemoveItemImpulse(Vector3 velocity)
+        public void ResetSlots(ItemInBox lastItemInBox)
         {
-            // get the top item
-            if (m_itemsList.Count <= 0)
+            foreach (int itemIndex in lastItemInBox.m_slotIndex)
             {
-                Debug.LogWarning("No item in the box");
-                return;
+                Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
+                m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
             }
-
-            ItemInBox lastItemInBox = GetLastItem();
-            if (lastItemInBox.m_item == null)
-            {
-                Debug.LogWarning("Item is null");
-                return;
-            }
-
-            Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
-
-            if (rb == null) 
-                lastItemInBox.m_item.gameObject.AddComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
-            else 
-                rb.AddForce(velocity, ForceMode.Impulse);
-
-            lastItemInBox.m_item.GetComponent<AutoDestruction1>().enabled = true;
-            Debug.Log("Item in autodestruction mode: " + lastItemInBox.m_item.name);
-            //m_itemsList.Remove(lastItemInBox);
         }
+
+
 
         ///// <summary> Marker la boite pour la supprimer </summary>
         //internal void MarkForDelete()
@@ -345,10 +324,11 @@ namespace BoxSystem
         //    Destroy(gameObject);
         //}
 
-        internal void RemoveLastItemFromBox()
-        {
-            m_itemsList.RemoveAt(GetLastItemIndex());
-        }
+        //internal void RemoveLastItemFromBox()
+        //{
+        //    m_itemsList.Remove();
+        //    m_itemsList.RemoveAt();
+        //}
 
         #endregion
 
@@ -404,15 +384,13 @@ namespace BoxSystem
             return m_itemsList[m_itemsList.Count - 1];
         }
 
-        private int GetLastItemIndex()
+        public List<ItemInBox> GetItemsInBox()
         {
-            return m_itemsList.Count > 0 ? m_itemsList.Count - 1 : -1;
+            return m_itemsList;
         }
 
         internal bool IsEmpty()
         {
-            //Debug.LogWarning("m_totalSlots - m_availableSlotsLeft= " + (m_totalSlots - m_availableSlotsLeft));
-            //Debug.LogWarning("m_itemsList.Count: " + m_itemsList.Count);
             return (m_totalSlots - m_availableSlotsLeft) == 0 ? true : false;
         }
         #endregion

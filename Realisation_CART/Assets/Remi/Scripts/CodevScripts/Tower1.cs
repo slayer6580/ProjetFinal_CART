@@ -1,4 +1,5 @@
 using DiscountDelirium;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -55,22 +56,32 @@ namespace BoxSystem
         }
 
         /// <summary> Enleve une boite a la tour </summary>
-        public void RemoveBoxFromTower()
+        public void RemoveLastBoxFromTower()
         {
+            Debug.LogError("RemoveLastBoxFromTower()");
             if (m_boxCount == 1)
             {
                 Debug.LogWarning("¨On peut pas enlever toute les boites du panier");
                 return;
             }
+
+            Box1 boxToRemove = GetTopBox();
+            DecreaseListOfOneBox();
+
+            Destroy(boxToRemove.gameObject);
+            _TowerPhysics.ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
+        }
+
+        public void DecreaseListOfOneBox()
+        {
             //Debug.Log("RemoveBoxFromTower() m_boxCount: " + m_boxCount);
             m_boxCount--;
             Debug.Log("RemoveBoxFromTower() m_boxCount: " + m_boxCount);
             //m_boxesInCart.Pop();
             Box1 boxToRemove = m_boxesInCart.Pop();
             //Destroy(GetTopBox().gameObject);
-            Destroy(boxToRemove.gameObject);
-            _TowerPhysics.ModifyTopBoxSpringIntesity(); // DÉPLASSER ICI
         }
+
 
         // TEST
         private void Update()
@@ -81,7 +92,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
-                RemoveBoxFromTower();
+                RemoveLastBoxFromTower();
             }
             else if (Input.GetKeyDown(KeyCode.O))
             {

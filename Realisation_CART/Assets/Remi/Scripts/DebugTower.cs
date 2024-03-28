@@ -169,11 +169,11 @@ namespace BoxSystem
 
         public void DropContent(Vector3 velocity)
         {
-            if (m_boxesInCart.Count == 0) return;
-            Debug.Log("Dropping content");
-            Box1 box = GetTopBox();
-            if (box.IsEmpty()) RemoveBoxImpulse(velocity);
-            else box.RemoveItemImpulse(velocity);
+            //if (m_boxesInCart.Count == 0) return;
+            //Debug.Log("Dropping content");
+            //Box1 box = GetTopBox();
+            //if (box.IsEmpty()) RemoveBoxImpulse(velocity);
+            //else RemoveItemImpulse(velocity);
         }
     }
 }

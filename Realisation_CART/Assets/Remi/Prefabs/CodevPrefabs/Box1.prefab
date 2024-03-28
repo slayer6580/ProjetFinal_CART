@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c065fded284df5646936cd831368cbd1, type: 2}
+  - {fileID: 2100000, guid: ee6393ea62169344198ce9bca6b324c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -234,7 +234,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c065fded284df5646936cd831368cbd1, type: 2}
+  - {fileID: 2100000, guid: ee6393ea62169344198ce9bca6b324c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -339,7 +339,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c065fded284df5646936cd831368cbd1, type: 2}
+  - {fileID: 2100000, guid: ee6393ea62169344198ce9bca6b324c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -444,7 +444,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c065fded284df5646936cd831368cbd1, type: 2}
+  - {fileID: 2100000, guid: ee6393ea62169344198ce9bca6b324c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -549,7 +549,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c065fded284df5646936cd831368cbd1, type: 2}
+  - {fileID: 2100000, guid: ee6393ea62169344198ce9bca6b324c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -602,7 +602,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9049132743971654737}
   - component: {fileID: 2772868743956478750}
-  - component: {fileID: 6404282294033793710}
   - component: {fileID: -714783116181938292}
   - component: {fileID: 3950715070291098403}
   - component: {fileID: 5355968148368944440}
@@ -642,19 +641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72fd1c16047db8449adeaf95af357afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6404282294033793710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7525785094457928907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f1441fb268f0d47a81d8fad351b2ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_incomingVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &-714783116181938292
 MonoBehaviour:
   m_ObjectHideFlags: 0
