@@ -1,7 +1,5 @@
-using DiscountDelirium;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BoxSystem
@@ -143,6 +141,7 @@ namespace BoxSystem
                 PutInBoxOrReorganize(GO, autoSnap);
         }
 
+
         /// <summary> Pour mettre un petit objet dans la boite </summary>
         private void PutSmallItemInBox(GameObject GO, bool autoSnap)
         {
@@ -254,40 +253,6 @@ namespace BoxSystem
         #endregion
 
 
-        #region (--- RemoveItemFromBox ---)
-
-        //public void RemoveItemImpulse()
-        //{
-        //    // get the top item
-        //    if (m_itemsList.Count <= 0)
-        //    {
-        //        Debug.LogWarning("No item in the box");
-        //        return;
-        //    }
-
-        //    ItemInBox lastItemInBox = GetLastItem();
-
-        //    if (lastItemInBox.m_item == null)
-        //    {
-        //        Debug.LogWarning("Item is null");
-        //        return;
-        //    }
-
-        //    Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
-        //    lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(transform.up * 10, ForceMode.Impulse);
-
-        //    ResetSlots(lastItemInBox);
-
-        //    lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
-        //    m_itemsList.Remove(lastItemInBox);
-
-        //}
-
-
-
-        #endregion
-
-
         #region (--- HelpFunctions ---)
         /// <summary> Change le scale de l'item et commence le Slerp And Snap </summary>
         private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
@@ -356,9 +321,6 @@ namespace BoxSystem
         {
             return m_itemsList;
         }
-
-
-
 
         #endregion
     }
