@@ -2,6 +2,7 @@ using Cinemachine;
 using DiscountDelirium;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using BoxSystem;
 
 namespace CartControl
 {
@@ -10,10 +11,10 @@ namespace CartControl
 		///
 		[field: Header("Test Value")]
 		public float velMagnitude;  //To delete
-		[field: SerializeField] public float ForwardPressedPercent { get; set; }
-		[field: SerializeField] public float BackwardPressedPercent { get; set; }
-		[field: SerializeField] public float SteeringValue { get; set; }
-		[field: SerializeField] public Vector3 LocalVelocity { get; set; }
+		[field: SerializeField] public float ForwardPressedPercent { get; set; }	//To deserialize
+		[field: SerializeField] public float BackwardPressedPercent { get; set; }   //To deserialize
+		[field: SerializeField] public float SteeringValue { get; set; }    //To deserialize
+		[field: SerializeField] public Vector3 LocalVelocity { get; set; }  //To deserialize
 
 		///
 		[field: Header("Stats")]
@@ -29,15 +30,11 @@ namespace CartControl
 
 		///
 		[field: Header("Drifting")]
-		[field: SerializeField] public float MinimumSpeedToDrift { get; private set; }
+		[field: SerializeField] public float MinimumSpeedToAllowDrift { get; private set; }
 		[field: SerializeField][field: Range(0, 3)] public float DriftingDrag { get; private set; }
-
-		[Tooltip("This will multiply Drifting Drag depending of the steer value. Left side of the curve = No steer. Right side = max steer.")]
-		[field: SerializeField] public AnimationCurve DriftingDragRelativeToJoystick { get; private set; } //Not used for now
 		[field: SerializeField] public float DriftingRotatingSpeed { get; private set; }
 		[field: SerializeField] public float AddedRotatingSpeedWhenBreaking { get; private set; }
 		[field: SerializeField] public float DriftingAcceleration { get; private set; }
-
 
 		[field: Space]
 		[field: SerializeField] public bool AutoDriftWhenTurning { get; private set; }
@@ -55,20 +52,24 @@ namespace CartControl
 		[field: SerializeField] public float MinBoostTime { get; private set; }
 		[field: SerializeField] public float MaxBoostTime { get; private set; }
 
+		///
 		[field: Header("Stopped")]
 		[field: SerializeField] public bool BackToIdleAfterStop { get; set; }
 
 		///
-		[Header("To Set")]
-		public GameObject m_cart;
-		public Rigidbody m_cartRB;
-		public GameObject m_gameplayCamera;
-		public CinemachineBrain m_camBrain;
-		public Animator m_humanAnimator;
-		public Rig m_feetOnCartRig;
+		[field: Header("To Set")]
+		[field: SerializeField] public GameObject Cart { get; private set; }
+		[field: SerializeField] public Rigidbody CartRB { get; private set; }
+		[field: SerializeField] public CinemachineBrain CamBrain { get; private set; }
+		[field: SerializeField] public GameObject VirtualCamera { get; private set; }
+
+		[field: SerializeField] public Animator HumanAnimCtrlr { get; private set; }
+		[field: SerializeField] public Rig FeetOnCartRig { get; private set; }
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
 
+		//
 		[Space]
+		[Header("Temp Testing")]
 		public TowerBalanceAnimCtrlr m_towerCtrlr;
 
 		//
@@ -77,6 +78,7 @@ namespace CartControl
 		[HideInInspector] public bool CanBoost { get; set; }
 		[HideInInspector] public bool IsBoosting { get; set; }
 		[HideInInspector] public bool IsPaused { get; set; }
+		[HideInInspector] public bool TEST { get; set; }
 		
 
 		protected override void Start()
@@ -93,24 +95,22 @@ namespace CartControl
 		protected override void Update()
 		{
 			//For test value
-			velMagnitude = m_cartRB.velocity.magnitude;
+			velMagnitude = CartRB.velocity.magnitude;
 
 			m_currentState.OnUpdate();
 			TryToChangeState();
 
-
-			//Update Animation
-			//print("VEL: " + LocalVelocity.z / MaxSpeed);
-			m_humanAnimator.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeed);
+			//For Animation
+			HumanAnimCtrlr.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeed);
 
 			//Testing tower tilt with Animation
-			m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
+			//TEMPORARY DEACTIVATED
+			//m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
 		}
 
 		protected override void FixedUpdate()
 		{
-			m_currentState.OnFixedUpdate();
-			
+			m_currentState.OnFixedUpdate();		
 		}
 
 		protected override void CreatePossibleStateList()
@@ -120,31 +120,26 @@ namespace CartControl
 			m_possibleStates.Add(new CartState_Drifting());
 			m_possibleStates.Add(new CartState_Boosting());
 			m_possibleStates.Add(new CartState_Stopped());
+			m_possibleStates.Add(new CartState_TurnInPlace());
+			m_possibleStates.Add(new CartState_Stunned());
 		}
-
-
-
 
 		//Receive Input
 		public void OnForward(float pressValue)
 		{
 			ForwardPressedPercent = pressValue;
 		}
-
 		public void OnBackward(float pressValue)
 		{
 			BackwardPressedPercent = pressValue;
 		}
-
 		public void OnSteer(float steerValue)
 		{
 			SteeringValue = steerValue;
 		}
-
 		public void OnPause()
 		{
 			IsPaused = !IsPaused;
 		}
-
 	}
 }
