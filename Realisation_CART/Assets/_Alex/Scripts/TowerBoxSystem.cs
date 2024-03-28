@@ -18,6 +18,8 @@ namespace BoxSystem
         [SerializeField] private GameObject m_boxPrefab;
         [Header("La hauteur de placement de la boite")]
         [SerializeField] private float m_boxGapHeight;
+        [Header("La force d'expulsion des boites a la caisse")]
+        [SerializeField] private float m_expulsionForce;
 
         private int m_boxCount = 0;
         private Stack<Box> m_boxesInCart = new Stack<Box>();
@@ -123,14 +125,14 @@ namespace BoxSystem
             while (m_boxesInCart.Count > 0)
             {
                 Box topBox = GetTopBox();
-                List<Box.ItemInBox> itemsInBox = topBox.GetItemsList();
+                List<Box.ItemInBox> itemsInBox = topBox.GetItemsInBox();
 
                 for (int i = 0; i < itemsInBox.Count; i++)
                 {
                     data[1]++;
                     data[0] += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
                 }
-                 m_towerPhysics.RemoveBoxImpulse(Vector3.up * 10); // appel par TowerPhysics
+                 m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce); // appel par TowerPhysics
             }
 
             return data;
