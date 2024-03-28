@@ -20007,6 +20007,7 @@ MonoBehaviour:
   <HumanAnimCtrlr>k__BackingField: {fileID: 918585231}
   <FeetOnCartRig>k__BackingField: {fileID: 1437413589}
   <CartMovement>k__BackingField: {fileID: 811115958}
+  <Tower>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 1875296464}
 --- !u!54 &811115960
 Rigidbody:

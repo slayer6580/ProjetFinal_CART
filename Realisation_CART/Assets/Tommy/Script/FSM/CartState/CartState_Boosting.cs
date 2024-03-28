@@ -21,7 +21,8 @@ namespace CartControl
 			{
 				return;
 			}
-			boostingTimer = 0;		
+			boostingTimer = 0;
+
 		}
 
 		public override void OnUpdate()

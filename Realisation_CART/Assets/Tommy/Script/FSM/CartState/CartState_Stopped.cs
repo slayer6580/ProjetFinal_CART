@@ -6,6 +6,7 @@ namespace CartControl
 	{
 		private Vector3 m_tempCartVelocity;
 		private IState m_comingFromState;
+		private AnimatorStateInfo m_currentStateInfo;
 
 		public override void OnEnter()
 		{
@@ -33,7 +34,10 @@ namespace CartControl
 					m_cartStateMachine.CanDrift = true;
 				}
 			}
-				
+
+			//For Animation
+			m_currentStateInfo = m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0);
+			m_cartStateMachine.HumanAnimCtrlr.enabled = false;			
 		}
 
 		public override void OnUpdate()
@@ -57,7 +61,10 @@ namespace CartControl
 			{			
 				m_cartStateMachine.CartRB.velocity = m_tempCartVelocity;			
 			}
-			
+
+			//For Animation		
+			m_cartStateMachine.HumanAnimCtrlr.enabled = true;
+			m_cartStateMachine.HumanAnimCtrlr.Play(m_currentStateInfo.fullPathHash, 0, m_currentStateInfo.normalizedTime);
 		}
 
 		public override bool CanEnter(IState currentState)
