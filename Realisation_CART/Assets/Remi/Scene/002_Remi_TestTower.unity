@@ -3527,7 +3527,7 @@ GameObject:
   - component: {fileID: 1562710369}
   - component: {fileID: 1562710368}
   - component: {fileID: 1562710367}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48896,6 +48896,14 @@ MonoBehaviour:
   m_debugCartDistance: 10
   m_debugCartSpeed: 3
   m_currentJointMode: 2
+  m_springStrenght: 100
+  m_springDamper: 0
+  m_springMinDistance: 0
+  m_springMaxDistance: 0.2
+  m_springTolerance: 0.06
+  m_springEnableCollision: 1
+  m_springBreakForce: 25
+  m_springBreakTorque: 25
 --- !u!4 &5666850671349121825
 Transform:
   m_ObjectHideFlags: 0

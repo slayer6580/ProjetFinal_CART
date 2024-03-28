@@ -15,8 +15,8 @@ TagManager:
   - ClientCollider
   - ItemCollider
   - BoxCollider
-  - ShelfCollider
   - GroundCollider
+  - 
   - 
   - 
   - 
