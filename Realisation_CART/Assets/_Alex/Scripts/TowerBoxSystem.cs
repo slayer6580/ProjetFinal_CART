@@ -164,6 +164,12 @@ namespace BoxSystem
 
         public void RemoveLastBoxFromTower()
         {
+            if (m_boxesInCart.Count == 0)
+            {
+                Debug.Log("No box to remove");
+                return;
+            }
+
             m_boxCount--;
             m_boxesInCart.Pop();       
         }

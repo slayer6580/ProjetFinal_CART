@@ -199,6 +199,8 @@ namespace BoxSystem
             else
                 rb.AddForce(totalImpulse, ForceMode.Impulse);
 
+            if (lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled) return;
+
             lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
             Debug.Log("Item in autodestruction mode: " + lastItemInBox.m_item.name);
             topBox.GetItemsInBox().Remove(lastItemInBox);
@@ -226,11 +228,11 @@ namespace BoxSystem
             Debug.Log("Incoming Impulse: " + totalImpulse.magnitude);
             topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(totalImpulse, ForceMode.Impulse);
-            //topBox.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
 
-            //Debug.Log("AutoDestruction enabled");
-            topBox.GetComponent<AutoDestruction>().enabled = true;
+            if (topBox.GetComponent<AutoDestruction>().enabled) return;
+
             _Tower.RemoveLastBoxFromTower();
+            topBox.GetComponent<AutoDestruction>().enabled = true;
         }
 
         private static void DetachJoint(Box topBox)
@@ -261,7 +263,7 @@ namespace BoxSystem
         /// <summary> Vérifie si on peut retirer le contenu de la boite </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
-            Debug.Log("CheckIfCanDropContent");
+            //Debug.Log("CheckIfCanDropContent");
 
             Box box = _Tower.GetTopBox();
             if (box == null)

@@ -29,7 +29,9 @@ namespace BoxSystem
             }
             else if (collision.gameObject.layer == m_groundLayer)
             {
-                Debug.Log("Collision with ground");
+                if (GetComponent<AutoDestruction>().enabled) return;
+
+                Debug.Log("Collision with ground: " + gameObject.name);
                 GetComponent<Box>().GetTower().RemoveLastBoxFromTower();
                 GetComponent<AutoDestruction>().enabled = true;
             }

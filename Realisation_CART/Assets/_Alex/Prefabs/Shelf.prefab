@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 4098625193968494305}
   - component: {fileID: 459308796322131879}
   - component: {fileID: 2288173390104200932}
-  - component: {fileID: 5573505949249150778}
+  - component: {fileID: 3930486414563214031}
   m_Layer: 11
   m_Name: Shelf
   m_TagString: Untagged
@@ -295,7 +295,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5573505949249150778
+--- !u!54 &3930486414563214031
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -317,8 +317,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
