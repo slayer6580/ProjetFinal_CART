@@ -205,7 +205,7 @@ namespace BoxSystem
         }
 
         /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
-        public void RemoveBoxImpulse(Vector3 velocity)
+        public void RemoveBoxImpulse(Vector3 velocity, bool single = false)
         {
             //Debug.Log("RemoveBoxImpulse() Velocity: " + velocity.magnitude);
             Box topBox = _Tower.GetTopBox();
@@ -218,9 +218,18 @@ namespace BoxSystem
             // Detach joint from box
             DetachJoint(topBox);
 
-            Vector3 vectorUp = topBox.transform.up * m_boxVectorUpImpulseIntesity;
-            Vector3 incomingImpulse = velocity * m_boxRemoveImpulseIntesity;
-            Vector3 totalImpulse = vectorUp + incomingImpulse;
+            Vector3 totalImpulse = Vector3.zero;
+            if (!single)
+            {
+                Vector3 vectorUp = topBox.transform.up * m_boxVectorUpImpulseIntesity;
+                Vector3 incomingImpulse = velocity * m_boxRemoveImpulseIntesity;
+                totalImpulse = vectorUp + incomingImpulse;
+            }
+            else 
+            {
+                totalImpulse = velocity;
+            }
+
             Debug.Log("Incoming Impulse: " + totalImpulse.magnitude);
             topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(totalImpulse, ForceMode.Impulse);

@@ -21,8 +21,7 @@ namespace BoxSystem
         {
             m_remainingItems = m_itemQuantity;
             m_quantityText.text = m_itemQuantity.ToString();
-            m_renderer = GetComponent<MeshRenderer>();
-      
+            m_renderer = GetComponent<MeshRenderer>();      
         }
 
         private void Start()

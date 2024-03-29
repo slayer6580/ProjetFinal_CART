@@ -1,6 +1,4 @@
-using DiscountDelirium;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BoxSystem
@@ -43,7 +41,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
-                m_towerPhysics.RemoveBoxImpulse(Vector3.up * 10); // appel par TowerPhysics
+                m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true); // appel par TowerPhysics
             }
             else if (Input.GetKeyDown(KeyCode.O)) // Remove item
             {
@@ -55,7 +53,7 @@ namespace BoxSystem
                 if (GetTopBox().IsEmpty())
                 {
                     Debug.Log("La boite est vide, on enleve la boite");
-                     m_towerPhysics.RemoveBoxImpulse(Vector3.up * 10); // appel par TowerPhysics
+                     m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true); // appel par TowerPhysics
                 }
 
                 if (GetTopBox() != null)
@@ -135,7 +133,7 @@ namespace BoxSystem
                     data[1]++;
                     data[0] += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
                 }
-                 m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce); // appel par TowerPhysics
+                 m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true); // appel par TowerPhysics
             }
 
             return data;
