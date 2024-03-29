@@ -330,7 +330,10 @@ namespace BoxSystem
             transform.localPosition = m_initialLocalPositionInBox;
         }
 
-        
+        public TowerBoxSystem GetTower()
+        {
+            return m_tower;
+        }
 
         #endregion
     }

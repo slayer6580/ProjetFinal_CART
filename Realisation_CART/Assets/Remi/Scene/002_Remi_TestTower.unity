@@ -48895,7 +48895,7 @@ MonoBehaviour:
   m_nbOfUndroppableBoxes: 4
   m_debugCartDistance: 10
   m_debugCartSpeed: 3
-  m_currentJointMode: 2
+  m_currentJointMode: 0
   m_springStrenght: 100
   m_springDamper: 0
   m_springMinDistance: 0
