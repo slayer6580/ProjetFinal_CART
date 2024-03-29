@@ -153,7 +153,7 @@ namespace BoxSystem
                 {
                     //Debug.Log("Spring found in previous box: " + previousTopBoxRB.gameObject.name);
                     previousTopBox.ReplaceBoxToOrigin();
-                    previousTopBox.transform.eulerAngles = Vector3.zero;
+                    previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
                     previousSpringJoint.spring = 0;
                     previousSpringJoint.connectedBody = null;
                 }
