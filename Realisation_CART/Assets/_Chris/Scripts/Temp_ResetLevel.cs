@@ -7,7 +7,7 @@ namespace DiscountDelirium
     {
         public void ResetLevel() 
         {
-            SceneManager.LoadScene("EndGame_Test");
+            SceneManager.LoadScene("Main");
         }
     }
 }
