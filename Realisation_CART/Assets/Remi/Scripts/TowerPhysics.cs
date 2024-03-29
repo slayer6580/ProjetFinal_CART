@@ -9,28 +9,28 @@ namespace BoxSystem
         [field: SerializeField] private GameObject Player { get; set; } = null;
 
         [Header("Items and boxes physics settings")]
-        [SerializeField] public float m_itemRemoveImpulseIntesity = 0.2f;
-        [SerializeField] public float m_itemVectorUpImpulseIntesity = 10.0f;
-        [SerializeField] public float m_boxRemoveImpulseIntesity = 0.2f;
-        [SerializeField] public float m_boxVectorUpImpulseIntesity = 10.0f;
-        [SerializeField] public int m_nbOfUndroppableBoxes = 4;
+        [SerializeField] private float m_itemRemoveImpulseIntesity = 0.2f;
+        [SerializeField] private float m_itemVectorUpImpulseIntesity = 10.0f;
+        [SerializeField] private float m_boxRemoveImpulseIntesity = 0.2f;
+        [SerializeField] private float m_boxVectorUpImpulseIntesity = 10.0f;
+        [SerializeField] private int m_nbOfUndroppableBoxes = 4;
 
         [Header("Debug Cart Settings")]
-        [SerializeField] public float m_debugCartDistance = 10.0f;
-        [SerializeField] public float m_debugCartSpeed = 3.0f;
+        [SerializeField] private float m_debugCartDistance = 10.0f;
+        [SerializeField] private float m_debugCartSpeed = 3.0f;
 
         [Header("Joint Settings")]
-        [SerializeField] public JointMode m_currentJointMode = JointMode.Spring;
+        [SerializeField] private JointMode m_currentJointMode = JointMode.Spring;
 
         [Header("Spring Settings")]
-        [SerializeField] public float m_springStrenght = 100.0f;
-        [SerializeField] public float m_springDamper = 0;
-        [SerializeField] public float m_springMinDistance = 0;
-        [SerializeField] public float m_springMaxDistance = 0.2f;
-        [SerializeField] public float m_springTolerance = 0.06f;
-        [SerializeField] public bool m_springEnableCollision = true;
-        [SerializeField] public float m_springBreakForce = 100.0f;
-        [SerializeField] public float m_springBreakTorque = 100.0f;
+        [SerializeField] private float m_springStrenght = 100.0f;
+        [SerializeField] private float m_springDamper = 0;
+        [SerializeField] private float m_springMinDistance = 0;
+        [SerializeField] private float m_springMaxDistance = 0.2f;
+        [SerializeField] private float m_springTolerance = 0.06f;
+        [SerializeField] private bool m_springEnableCollision = true;
+        [SerializeField] private float m_springBreakForce = 100.0f;
+        [SerializeField] private float m_springBreakTorque = 100.0f;
 
         private TowerBoxSystem _Tower { get; set; } = null;
 
@@ -230,7 +230,6 @@ namespace BoxSystem
                 totalImpulse = velocity;
             }
 
-            Debug.Log("Incoming Impulse: " + totalImpulse.magnitude);
             topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(totalImpulse, ForceMode.Impulse);
 
@@ -266,7 +265,7 @@ namespace BoxSystem
             springJoint.breakTorque = m_springBreakTorque;
         }
 
-        /// <summary> Vérifie si on peut retirer le contenu de la boite </summary>
+        /// <summary> Vérifie si le contenu de la tour (boite ou item) peut tomber </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
             Box box = _Tower.GetTopBox();
