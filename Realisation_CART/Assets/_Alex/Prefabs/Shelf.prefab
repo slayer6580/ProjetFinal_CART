@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 459308796322131879}
   - component: {fileID: 2288173390104200932}
   - component: {fileID: 5573505949249150778}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,6 @@ MonoBehaviour:
     type: 3}
   m_itemQuantity: 30
   m_quantityText: {fileID: 6367491464587995437}
-  m_renderer: {fileID: 459308796322131879}
 --- !u!33 &4098625193968494305
 MeshFilter:
   m_ObjectHideFlags: 0

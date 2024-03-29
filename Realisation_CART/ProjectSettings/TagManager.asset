@@ -16,7 +16,7 @@ TagManager:
   - ItemCollider
   - BoxCollider
   - GroundCollider
-  - 
+  - ShelfCollider
   - 
   - 
   - 

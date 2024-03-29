@@ -10,6 +10,8 @@ namespace DiscountDelirium
         public override void OnEnter()
         {
             Debug.LogWarning("GameState : EndGame");
+            m_gameStateMachine.m_scoreUI.EnableUI(true);
+            m_gameStateMachine.m_scoreUI.ShowScore(10.0f);
         }
 
         public override void OnUpdate()
