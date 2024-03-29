@@ -4,7 +4,7 @@
 - 'A' sur la manette: Prendre des items en appuyant 
 - '+' et '-' sur lee clavier: Retirer ajouter des boîtes 
 - 'O' pour retirer un item.
-- 'Y' Pour vider le panier.
+- 'Y' pour vider le panier.
 
 ## Tommy (déplacements)
 - R2 pour avancer
