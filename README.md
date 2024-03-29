@@ -1,7 +1,9 @@
 # DiscountDelirium
 
 ## Alex (placement des items et des boîtes)
-- Prendre des items en appuyant A sur la manette.
+- A sur la manette: Prendre des items en appuyant 
+- + et - sur lee clavier: Retirer ajouter des boîtes 
+- O pour retirer un item.
 
 ## Tommy (déplacements)
 - R2 pour avancer
@@ -9,7 +11,7 @@
 
 ## Chirstopher (encaisser les articles, victoire et defaite)
 1- Prenez des items dans les étagère.
-2- Se déplacer vers la zone rouge.
+2- Se déplacer vers la zone rouge ou appuyez sur Y pour calculer le score total.
 
 ## Remi (System d'équilibre de la tour et perte d'objets)
 1- '+' au clavier pour ajouter des boîtes.
