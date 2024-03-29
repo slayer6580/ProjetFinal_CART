@@ -6,19 +6,12 @@ namespace BoxSystem
 {
     public class CollisionDetector : MonoBehaviour
     {
-
-        private TowerPhysics _TowerPhysics { get; set; } = null;
+        [field:SerializeField] private TowerPhysics _TowerPhysics { get; set; } = null;
         private const float MAX_VEL_TO_DROP_CONTENT = 15f;
         private int m_playerLayer = 6;
         private int m_clientLayer = 7;
         private int m_boxLayer = 9;
         private int m_groundLayer = 10;
-
-        private void Start()
-        {
-            _TowerPhysics = GetComponentInChildren<TowerPhysics>();
-            if (_TowerPhysics == null) Debug.LogError("TowerPhysics not found in parent");
-        }
 
         private void OnCollisionEnter(Collision collision)
         {
