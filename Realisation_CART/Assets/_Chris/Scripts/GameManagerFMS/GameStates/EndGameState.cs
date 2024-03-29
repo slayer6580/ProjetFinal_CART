@@ -11,7 +11,8 @@ namespace DiscountDelirium
         {
             Debug.LogWarning("GameState : EndGame");
             m_gameStateMachine.m_scoreUI.EnableUI(true);
-            m_gameStateMachine.m_scoreUI.ShowScore(10.0f);
+            m_gameStateMachine.m_scoreUI.ShowScore(m_gameStateMachine.m_playerScore, m_gameStateMachine.m_nbItems);
+            m_gameStateMachine.m_playerSM.IsPaused = true;
         }
 
         public override void OnUpdate()

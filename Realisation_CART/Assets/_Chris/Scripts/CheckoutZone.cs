@@ -9,10 +9,13 @@ namespace DiscountDelirium
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            GrabItemTrigger itemTrigger = other.GetComponent<GrabItemTrigger>();
+            if (itemTrigger == null) 
             {
-                Debug.Log("Empty his cart");
+                return;
             }
+            int[] data = itemTrigger.TowerBoxSystem.EmptyCartAndGetScore();
+            GameStateMachine.Instance.GetScoreFromCart(data);
         }
     }
 }

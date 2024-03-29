@@ -9,11 +9,13 @@ namespace DiscountDelirium
     {
         public static GameStateMachine Instance { get; private set; }
 
-        [SerializeField] private GameObject m_player; 
+        public CartStateMachine m_playerSM; 
         [SerializeField] public ScoreUI m_scoreUI; 
 
         [HideInInspector] public bool m_isGameOver;//field
-        
+        [HideInInspector] public int m_playerScore = 0;
+        [HideInInspector] public int m_nbItems = 0;
+
 
         private void Awake()
         {
@@ -28,11 +30,11 @@ namespace DiscountDelirium
         protected override void Start()
         {
             base.Start();
-
             foreach (GameState state in m_possibleStates)
             {
                 state.OnStart(this);
             }
+            m_currentState.OnEnter();
         }
 
         protected override void Update()
@@ -50,6 +52,12 @@ namespace DiscountDelirium
         {
             m_possibleStates.Add(new GameplayState());
             m_possibleStates.Add(new EndGameState());
+        }
+
+        public void GetScoreFromCart(int[] data) 
+        {
+            m_playerScore += data[0];
+            m_nbItems += data[1];
         }
     }
 }

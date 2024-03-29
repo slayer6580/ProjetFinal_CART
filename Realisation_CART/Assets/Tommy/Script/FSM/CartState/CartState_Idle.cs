@@ -4,19 +4,9 @@ namespace CartControl
 {
 	public class CartState_Idle : CartState
 	{
-		//m_cartStateMachine;
-		private bool m_firstTime = true;
-
 		public override void OnEnter()
 		{
 			Debug.LogWarning("current state: IDLE");
-			
-			if(m_firstTime)
-			{
-				m_firstTime = false;
-				return;
-			}
-
 		}
 
 		public override void OnUpdate()

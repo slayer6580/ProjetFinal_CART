@@ -17,6 +17,7 @@ namespace DiscountDelirium
             Debug.LogWarning("GameState : GAMEPLAY");
             StartGameTimer.OnStartingTimeEnded += StartGame;
             Timer.TimesUp += GameOver;
+            m_gameStateMachine.m_playerSM.IsPaused = true;
         }
 
         public override void OnUpdate()
@@ -57,6 +58,7 @@ namespace DiscountDelirium
         private void StartGame() 
         {
             OnGameStarted?.Invoke();
+            m_gameStateMachine.m_playerSM.IsPaused = false;
         }
     }
 }

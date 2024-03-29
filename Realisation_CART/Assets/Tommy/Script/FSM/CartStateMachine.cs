@@ -78,7 +78,6 @@ namespace CartControl
 		[HideInInspector] public bool CanBoost { get; set; }
 		[HideInInspector] public bool IsBoosting { get; set; }
 		[HideInInspector] public bool IsPaused { get; set; }
-		[HideInInspector] public bool TEST { get; set; }
 		
 
 		protected override void Start()
@@ -90,7 +89,8 @@ namespace CartControl
 			{
 				state.OnStart(this);
 			}
-		}
+            m_currentState.OnEnter();
+        }
 
 		protected override void Update()
 		{

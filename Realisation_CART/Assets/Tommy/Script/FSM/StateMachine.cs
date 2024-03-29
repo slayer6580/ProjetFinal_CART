@@ -11,7 +11,6 @@ public abstract class StateMachine<T> : MonoBehaviour where T : IState
 	{
 		CreatePossibleStateList();
 		m_currentState = m_possibleStates[0];
-		m_currentState.OnEnter();
 	}
 
 	protected virtual void CreatePossibleStateList()
