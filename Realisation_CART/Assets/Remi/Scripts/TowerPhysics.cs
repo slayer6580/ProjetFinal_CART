@@ -32,7 +32,7 @@ namespace BoxSystem
         [SerializeField] private float m_springBreakForce = 100.0f;
         [SerializeField] private float m_springBreakTorque = 100.0f;
 
-        private TowerBoxSystem _Tower { get; set; } = null;
+        private TowerBoxSystem Tower { get; set; } = null;
 
         public enum JointMode
         {
@@ -44,7 +44,7 @@ namespace BoxSystem
 
         private void Awake()
         {
-            _Tower = GetComponent<TowerBoxSystem>();
+            Tower = GetComponent<TowerBoxSystem>();
         }
 
         private void Update()
@@ -133,15 +133,15 @@ namespace BoxSystem
         /// <summary> Ajoute un joint de type Spring à la boite </summary>
         private void AddSpringJoint()
         {
-            if (_Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
+            if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Box previousTopBox = _Tower.GetPreviousTopBox();
+            Box previousTopBox = Tower.GetPreviousTopBox();
             if (previousTopBox == null) Debug.LogWarning("Previous Top Box est null");
             else
             {
                 previousTopBox.GetComponent<CollisionDetector>().enabled = false;
 
-                Box topBox = _Tower.GetTopBox();
+                Box topBox = Tower.GetTopBox();
                 topBox.GetComponent<CollisionDetector>().enabled = true;
                 topBox.GetComponent<Rigidbody>().isKinematic = false;
 
@@ -168,7 +168,7 @@ namespace BoxSystem
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
         public void RemoveItemImpulse(Vector3 velocity)
         {
-            Box topBox = _Tower.GetTopBox();
+            Box topBox = Tower.GetTopBox();
 
             if (topBox.GetItemsInBox().Count <= 0)
             {
@@ -209,7 +209,7 @@ namespace BoxSystem
         /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
         public void RemoveBoxImpulse(Vector3 velocity, bool single = false)
         {
-            Box topBox = _Tower.GetTopBox();
+            Box topBox = Tower.GetTopBox();
             if (topBox == null)
             {
                 Debug.LogWarning("No box to remove");
@@ -235,7 +235,7 @@ namespace BoxSystem
 
             if (topBox.GetComponent<AutoDestruction>().enabled) return;
 
-            _Tower.RemoveLastBoxFromTower();
+            Tower.RemoveLastBoxFromTower();
             topBox.GetComponent<AutoDestruction>().enabled = true;
         }
 
@@ -268,14 +268,14 @@ namespace BoxSystem
         /// <summary> Vérifie si le contenu de la tour (boite ou item) peut tomber </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
-            Box box = _Tower.GetTopBox();
+            Box box = Tower.GetTopBox();
             if (box == null)
             {
                 Debug.LogWarning("No box to check");
                 return;
             }
 
-            if (box.IsEmpty() && _Tower.GetBoxCount() > m_nbOfUndroppableBoxes)
+            if (box.IsEmpty() && Tower.GetBoxCount() > m_nbOfUndroppableBoxes)
                 RemoveBoxImpulse(velocity);
             else if (!box.IsEmpty())
                 RemoveItemImpulse(velocity);
