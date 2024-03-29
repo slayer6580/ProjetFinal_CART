@@ -276,7 +276,7 @@ namespace BoxSystem
                 return;
             }
 
-            if (box.IsEmpty() && _Tower.GetBoxesCount() > m_nbOfUndroppableBoxes)
+            if (box.IsEmpty() && _Tower.GetBoxCount() > m_nbOfUndroppableBoxes)
                 RemoveBoxImpulse(velocity);
             else if (!box.IsEmpty())
                 RemoveItemImpulse(velocity);

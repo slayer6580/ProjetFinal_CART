@@ -146,11 +146,6 @@ namespace BoxSystem
             return m_boxCount;
         }
 
-        public int GetBoxesCount()
-        {
-            return m_boxCount;
-        }
-
         /// <summary> Donne la boite du dessus </summary>
         public Box GetTopBox()
         {
@@ -160,6 +155,7 @@ namespace BoxSystem
             return m_boxesInCart.Peek();
         }
 
+        /// <summary> Reduit le nombre de boites dans le panier </summary>
         public void RemoveLastBoxFromTower()
         {
             if (m_boxesInCart.Count == 0)
@@ -172,6 +168,7 @@ namespace BoxSystem
             m_boxesInCart.Pop();       
         }
 
+        /// <summary> Donne la boite en dessous de la boite du dessus </summary>
         public Box GetPreviousTopBox()
         {
             if (m_boxesInCart.Count < 2)
