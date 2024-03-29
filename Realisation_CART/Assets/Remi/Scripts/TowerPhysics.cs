@@ -1,9 +1,5 @@
 using UnityEngine;
 using DiscountDelirium;
-using CartControl;
-using System;
-using static UnityEditor.PlayerSettings;
-using Unity.VisualScripting;
 
 namespace BoxSystem
 {
