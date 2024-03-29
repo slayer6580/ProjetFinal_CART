@@ -11,6 +11,7 @@ namespace DiscountDelirium
             Invoke("DestroyItem", 2);
         }
 
+        /// <summary> Détruit l'objet </summary>
         private void DestroyItem()
         {
             Destroy(gameObject);
@@ -25,6 +26,7 @@ namespace DiscountDelirium
                                         );
         }
 
+        /// <summary> Définit la vitesse de l'objet </summary>
         public void SetSpeed(float speed)
         {
             m_speed = speed;

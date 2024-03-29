@@ -70,28 +70,29 @@ namespace BoxSystem
                 if (m_currentJointMode - 1 < 0)
                 {
                     m_currentJointMode = JointMode.None;
-                    Debug.Log("Current Joint Mode: " + m_currentJointMode);
+                    Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
                     return;
                 }
 
                 m_currentJointMode = m_currentJointMode - 1;
-                Debug.Log("Current Joint Mode: " + m_currentJointMode);
+                Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
             }
             else if (Input.GetKeyDown(KeyCode.M))
             {
                 if (m_currentJointMode + 1 > JointMode.None)
                 {
                     m_currentJointMode = (JointMode)0;
-                    Debug.Log("Current Joint Mode: " + m_currentJointMode);
+                    Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
                     return;
                 }
 
                 m_currentJointMode = m_currentJointMode + 1;
-                Debug.Log("Current Joint Mode: " + m_currentJointMode);
+                Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
             }
 
         }
 
+        /// <summary> Spawn un objet de débug CartDebug à une position offset </summary>
         private void SpawnDebugCartAtOffsetPosition(Vector3 rotation, Vector3 rightStartPosition)
         {
             Vector3 eulerOfCart = Player.transform.rotation.eulerAngles;
@@ -108,6 +109,7 @@ namespace BoxSystem
             debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
         }
 
+        /// <summary> Ajoute un joint à la boite </summary>
         public void AddJointToBox()
         {
             if (m_currentJointMode == JointMode.Hinge)
@@ -122,16 +124,17 @@ namespace BoxSystem
             }
         }
 
+        /// <summary> Ajoute un joint de type Hinge à la boite </summary>
         private void AddHingeJoint()
         {
-
+            // TODO: Remi: Implement hinge joint pour le Sprint 2
         }
 
+        /// <summary> Ajoute un joint de type Spring à la boite </summary>
         private void AddSpringJoint()
         {
             if (_Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            //Debug.Log("AddSpringJoint() _Tower.GetBoxCount(): " + _Tower.GetBoxCount());
             Box previousTopBox = _Tower.GetPreviousTopBox();
             if (previousTopBox == null) Debug.LogWarning("Previous Top Box est null");
             else
@@ -151,7 +154,6 @@ namespace BoxSystem
 
                 if (previousSpringJoint != null)
                 {
-                    //Debug.Log("Spring found in previous box: " + previousTopBoxRB.gameObject.name);
                     previousTopBox.ReplaceBoxToOrigin();
                     previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
                     previousSpringJoint.spring = 0;
@@ -163,6 +165,7 @@ namespace BoxSystem
 
         }
 
+        /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
         public void RemoveItemImpulse(Vector3 velocity)
         {
             Box topBox = _Tower.GetTopBox();
@@ -183,7 +186,6 @@ namespace BoxSystem
             Vector3 vectorUp = topBox.transform.up * m_itemVectorUpImpulseIntesity;
             Vector3 incomingImpulse = velocity * m_itemRemoveImpulseIntesity;
             Vector3 totalImpulse = vectorUp + incomingImpulse;
-            //Debug.Log("Incoming Impulse: " + impulse.magnitude);
 
             Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
             if (rb == null)
@@ -207,7 +209,6 @@ namespace BoxSystem
         /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
         public void RemoveBoxImpulse(Vector3 velocity, bool single = false)
         {
-            //Debug.Log("RemoveBoxImpulse() Velocity: " + velocity.magnitude);
             Box topBox = _Tower.GetTopBox();
             if (topBox == null)
             {
@@ -215,7 +216,6 @@ namespace BoxSystem
                 return;
             }
 
-            // Detach joint from box
             DetachJoint(topBox);
 
             Vector3 totalImpulse = Vector3.zero;
@@ -240,6 +240,7 @@ namespace BoxSystem
             topBox.GetComponent<AutoDestruction>().enabled = true;
         }
 
+        /// <summary> Détache le joint de la boite </summary>
         private static void DetachJoint(Box topBox)
         {
             SpringJoint springJoint = topBox.GetComponent<SpringJoint>();
@@ -268,8 +269,6 @@ namespace BoxSystem
         /// <summary> Vérifie si on peut retirer le contenu de la boite </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
-            //Debug.Log("CheckIfCanDropContent");
-
             Box box = _Tower.GetTopBox();
             if (box == null)
             {
