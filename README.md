@@ -1,9 +1,9 @@
 # DiscountDelirium
 
 ## Alex (placement des items et des boîtes)
-- A sur la manette: Prendre des items en appuyant 
-- + et - sur lee clavier: Retirer ajouter des boîtes 
-- O pour retirer un item.
+- 'A' sur la manette: Prendre des items en appuyant 
+- '+' et '-' sur lee clavier: Retirer ajouter des boîtes 
+- 'O' pour retirer un item.
 
 ## Tommy (déplacements)
 - R2 pour avancer
