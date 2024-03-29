@@ -11,7 +11,7 @@
 1- Prenez des items dans les étagère.
 2- Se déplacer vers la zone rouge.
 
-## Remi
+## Remi (System d'équilibre de la tour et perte d'objets)
 1- '+' au clavier pour ajouter des boîtes.
 2- Ajoutez plus que 3 boîtes et la quatrième qui sort du panier.
 4- Appuyez 'K' ou 'L' pour enclencher les DebugCart.
