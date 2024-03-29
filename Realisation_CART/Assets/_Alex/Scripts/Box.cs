@@ -320,16 +320,19 @@ namespace BoxSystem
             return m_itemsList;
         }
 
+        /// <summary> Assigne la position initial de la boite dans la tour </summary>
         public void SetInitialLocationInBox(Vector3 localPosition)
         {
             m_initialLocalPositionInBox = localPosition;
         }
 
+        /// <summary> Replace la boite à sa position initial dans la tour </summary>
         public void ReplaceBoxToOrigin()
         {
             transform.localPosition = m_initialLocalPositionInBox;
         }
 
+        /// <summary> Donne acces à la tour reliée à la boîte </summary>
         public TowerBoxSystem GetTower()
         {
             return m_tower;

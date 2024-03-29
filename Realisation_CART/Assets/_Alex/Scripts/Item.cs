@@ -22,6 +22,7 @@ namespace BoxSystem
         private void Awake()
         {
             gameObject.name = m_data.name;
+      
             enabled = false;
         }
 
@@ -35,10 +36,10 @@ namespace BoxSystem
         {
             m_turn90Degree = turn90Degree;
             m_playerTransform = player.transform;           
-            m_targetLocalPosition = localPosition;          
-            m_box = box;
-            m_boxTransform = box.transform;
+            m_targetLocalPosition = localPosition;
             m_startPosition = transform.position;
+            m_box = box;
+            m_boxTransform = box.transform;     
             m_slerpTime = player.GetComponent<GrabItemTrigger>().ItemSlerpTime;
             if (autoSnap) // apres un reorganize
             {
