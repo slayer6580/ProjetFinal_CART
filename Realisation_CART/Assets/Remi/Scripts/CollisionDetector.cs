@@ -12,6 +12,7 @@ namespace BoxSystem
         private int m_boxLayer = 9;
         private int m_groundLayer = 10;
 
+        // TODO Remi: Could be made into a hierachy to seperate the code for every different object needing a collision detector
 
         private void OnCollisionEnter(Collision collision)
         {
