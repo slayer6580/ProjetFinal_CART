@@ -12,7 +12,7 @@
 
 ## Chirstopher (encaisser les articles, victoire et defaite)
 1- Prenez des items dans les étagère.
-2- Se déplacer vers la zone rouge ou appuyez sur 'Y' pour calculer le score total.
+2- Se déplacer vers la zone rouge.
 
 ## Remi (System d'équilibre de la tour et perte d'objets)
 1- '+' au clavier pour ajouter des boîtes.
