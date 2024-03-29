@@ -5,7 +5,7 @@
 
 ## Tommy (déplacements)
 - R2 pour avancer
-- L2 Reculer
+- L2 Reculer (et drifter)
 
 ## Chirstopher (encaisser les articles, victoire et defaite)
 1- Prenez des items dans les étagère.
