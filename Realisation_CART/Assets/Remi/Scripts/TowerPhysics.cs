@@ -1,5 +1,6 @@
 using UnityEngine;
 using DiscountDelirium;
+using Unity.VisualScripting;
 
 namespace BoxSystem
 {
@@ -135,34 +136,50 @@ namespace BoxSystem
         {
             if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Box previousTopBox = Tower.GetPreviousTopBox();
-            if (previousTopBox == null) Debug.LogWarning("Previous Top Box est null");
-            else
+            Rigidbody topBoxRB = Tower.GetTopBox().GetComponent<Rigidbody>();
+            if (topBoxRB == null)
             {
-                previousTopBox.GetComponent<CollisionDetector>().enabled = false;
-
-                Box topBox = Tower.GetTopBox();
-                topBox.GetComponent<CollisionDetector>().enabled = true;
-                topBox.GetComponent<Rigidbody>().isKinematic = false;
-
-                Rigidbody previousTopBoxRB = previousTopBox.GetComponent<Rigidbody>();
-                if (previousTopBoxRB == null) Debug.LogError("Previous Top Box n'a pas de rigidbody");
-                SpringJoint springJoint = topBox.gameObject.AddComponent<SpringJoint>();
-                SetSprintJointValues(springJoint, previousTopBoxRB);
-
-                SpringJoint previousSpringJoint = previousTopBoxRB.GetComponent<SpringJoint>();
-
-                if (previousSpringJoint != null)
-                {
-                    previousTopBox.ReplaceBoxToOrigin();
-                    previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
-                    previousSpringJoint.spring = 0;
-                    previousSpringJoint.connectedBody = null;
-                }
-
-                previousTopBoxRB.isKinematic = true;
+                Debug.LogWarning("Top Box Rigidbody est null");
+                return;
             }
 
+            Rigidbody previousTopBoxRB = Tower.GetPreviousTopBox().GetComponent<Rigidbody>();
+            if (previousTopBoxRB == null)
+            {
+                Debug.LogWarning("Previous Top Box Rigidbody est null");
+                return;
+            }
+
+            EnablePhysicOnRB(topBoxRB);
+            DisablePhysicsOnRB(previousTopBoxRB);
+            SetSprintJointValues(previousTopBoxRB, topBoxRB);
+            RemoveSpringJointFromRB(previousTopBoxRB);
+        }
+
+        private static void EnablePhysicOnRB(Rigidbody _rigidBody)
+        {
+            _rigidBody.GetComponent<CollisionDetector>().enabled = true;
+            _rigidBody.isKinematic = false;
+        }
+
+        private static void DisablePhysicsOnRB(Rigidbody _rigidBody)
+        {
+            _rigidBody.GetComponent<CollisionDetector>().enabled = false;
+        }
+
+        private void RemoveSpringJointFromRB(Rigidbody _rigidBody)
+        {
+            Box previousTopBox = Tower.GetPreviousTopBox();
+            SpringJoint previousSpringJoint = _rigidBody.GetComponent<SpringJoint>();
+
+            if (previousSpringJoint != null)
+            {
+                previousTopBox.ReplaceBoxToOrigin();
+                previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
+                previousSpringJoint.spring = 0;
+                previousSpringJoint.connectedBody = null;
+            }
+            _rigidBody.isKinematic = true;
         }
 
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
@@ -251,10 +268,12 @@ namespace BoxSystem
                 Destroy(hingeJoint);
         }
 
-        /// <summary> Configure les valeurs du join Spring  </summary>
-        private void SetSprintJointValues(SpringJoint springJoint, Rigidbody newBoxeRB)
+        /// <summary> Configure les valeurs du join Spring entre deux rigidbody </summary>
+        private void SetSprintJointValues(Rigidbody attachedBody, Rigidbody sourceBody)
         {
-            springJoint.connectedBody = newBoxeRB;
+            SpringJoint springJoint = sourceBody.gameObject.AddComponent<SpringJoint>();
+
+            springJoint.connectedBody = attachedBody;
             springJoint.spring = m_springStrenght;
             springJoint.damper = m_springDamper;
             springJoint.minDistance = m_springMinDistance;
