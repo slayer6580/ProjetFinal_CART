@@ -1,6 +1,5 @@
-using UnityEngine;
 using DiscountDelirium;
-using Unity.VisualScripting;
+using UnityEngine;
 
 namespace BoxSystem
 {
@@ -129,6 +128,7 @@ namespace BoxSystem
         private void AddHingeJoint()
         {
             // TODO: Remi: Implement hinge joint pour le Sprint 2
+            Debug.Log("Hinge joint not implemented yet");
         }
 
         /// <summary> Ajoute un joint de type Spring à la boite </summary>
@@ -136,7 +136,14 @@ namespace BoxSystem
         {
             if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Rigidbody topBoxRB = Tower.GetTopBox().GetComponent<Rigidbody>();
+            Box topBox = Tower.GetTopBox();
+            if (topBox == null)
+            {
+                Debug.LogWarning("Top Box est null");
+                return;
+            }
+
+            Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
             if (topBoxRB == null)
             {
                 Debug.LogWarning("Top Box Rigidbody est null");
@@ -150,10 +157,14 @@ namespace BoxSystem
                 return;
             }
 
-            EnablePhysicOnRB(topBoxRB);
             DisablePhysicsOnRB(previousTopBoxRB);
-            SetSprintJointValues(previousTopBoxRB, topBoxRB);
             RemoveSpringJointFromRB(previousTopBoxRB);
+
+            EnablePhysicOnRB(topBoxRB);
+            Debug.Log("Spring joint added to the box");
+            topBox.gameObject.AddComponent<SpringJoint>();
+
+            SetSprintJointValues(previousTopBoxRB, topBoxRB);
         }
 
         private static void EnablePhysicOnRB(Rigidbody _rigidBody)
@@ -179,7 +190,9 @@ namespace BoxSystem
                 previousSpringJoint.spring = 0;
                 previousSpringJoint.connectedBody = null;
             }
+
             _rigidBody.isKinematic = true;
+            Destroy(previousSpringJoint);
         }
 
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
@@ -242,7 +255,7 @@ namespace BoxSystem
                 Vector3 incomingImpulse = velocity * m_boxRemoveImpulseIntesity;
                 totalImpulse = vectorUp + incomingImpulse;
             }
-            else 
+            else
             {
                 totalImpulse = velocity;
             }
@@ -271,8 +284,14 @@ namespace BoxSystem
         /// <summary> Configure les valeurs du join Spring entre deux rigidbody </summary>
         private void SetSprintJointValues(Rigidbody attachedBody, Rigidbody sourceBody)
         {
-            SpringJoint springJoint = sourceBody.gameObject.AddComponent<SpringJoint>();
+            SpringJoint springJoint = sourceBody.gameObject.GetComponent<SpringJoint>();
+            if (springJoint == null)
+            {
+                Debug.LogWarning("Spring joint is null");
+                return;
+            }
 
+            springJoint.anchor = Vector3.zero;
             springJoint.connectedBody = attachedBody;
             springJoint.spring = m_springStrenght;
             springJoint.damper = m_springDamper;
