@@ -161,7 +161,7 @@ namespace BoxSystem
             RemoveSpringJointFromRB(previousTopBoxRB);
 
             EnablePhysicOnRB(topBoxRB);
-            Debug.Log("Spring joint added to the box");
+
             topBox.gameObject.AddComponent<SpringJoint>();
 
             SetSprintJointValues(previousTopBoxRB, topBoxRB);
