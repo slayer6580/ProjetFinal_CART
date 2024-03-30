@@ -23,6 +23,33 @@ namespace BoxSystem
         [Header("Joint Settings")]
         [SerializeField] private JointMode m_currentJointMode = JointMode.Spring;
 
+        [Header("Hinge Settings")]
+        [SerializeField] private Vector3 m_hingeAnchor = Vector3.zero;
+        [SerializeField] private Vector3 m_hingeAxis = Vector3.zero;
+        [SerializeField] private bool m_hingeAutoConfigConnAnchor = true;
+        [SerializeField] private Vector3 m_hingeConnAnchor = Vector3.zero;
+        [SerializeField] private bool m_hingeUseSpring = true;
+        [SerializeField] private float m_hingeSpringStrenght = 100.0f;
+        [SerializeField] private float m_hingeSpringDamper = 0;
+        [SerializeField] private float m_hingeTargetPos = 0;
+        [SerializeField] private bool m_hingeUseMotor = true;
+        [SerializeField] private float m_hingeMotorTargetVelocity = 0;
+        [SerializeField] private float m_hingeMotorForce = 100.0f;
+        [SerializeField] private bool m_hingeMotorFreespin = true;
+        [SerializeField] private bool m_hingUseLimits = true;
+        [SerializeField] private float m_hingeLimitsMin = 0;
+        [SerializeField] private float m_hingeLimitsMax = 0;
+        [SerializeField] private float m_hingeLimitsBounciness = 0;
+        [SerializeField] private float m_hingeLimitsContactDistance = 0;
+        [SerializeField] private bool m_hingeExtendedLimits = true;
+        [SerializeField] private bool m_hingeUseAcceleration = true;
+        [SerializeField] private float m_hingeBreakForce = 100.0f;
+        [SerializeField] private float m_hingeBreakTorque = 100.0f;
+        [SerializeField] private bool m_hingeEnableCollision = true;
+        [SerializeField] private bool m_hingeEnablePreprocess = true;
+        [SerializeField] private float m_hingeMassScale = 1;
+        [SerializeField] private float m_hingeConnectedMassScale = 1;
+
         [Header("Spring Settings")]
         [SerializeField] private float m_springStrenght = 100.0f;
         [SerializeField] private float m_springDamper = 0;
@@ -32,6 +59,11 @@ namespace BoxSystem
         [SerializeField] private bool m_springEnableCollision = true;
         [SerializeField] private float m_springBreakForce = 100.0f;
         [SerializeField] private float m_springBreakTorque = 100.0f;
+        [SerializeField] private bool m_springAutoConfigConnAnchor = true;
+        [SerializeField] private bool m_springEnablePreprocess = true;
+        [SerializeField] private float m_springMassScale = 1;
+        [SerializeField] private float m_springConnectedMassScale = 1;
+
 
         private TowerBoxSystem Tower { get; set; } = null;
 
@@ -278,35 +310,66 @@ namespace BoxSystem
                     return;
                 }
 
-                hingeJoint.useLimits = true;
+                hingeJoint.connectedBody = attachedBody;
+                hingeJoint.anchor = m_hingeAnchor;
+                hingeJoint.axis = m_hingeAxis;
+                hingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
+                hingeJoint.connectedAnchor = m_hingeConnAnchor;
+
+                hingeJoint.useSpring = m_hingeUseSpring;
+                hingeJoint.spring = new JointSpring();
+                JointSpring spring = hingeJoint.spring;
+                {
+                    spring.spring = m_hingeSpringStrenght;
+                    spring.damper = m_hingeSpringDamper;
+                    spring.targetPosition = m_hingeTargetPos;
+                }
+
+                hingeJoint.useMotor = m_hingeUseMotor;
+                hingeJoint.motor = new JointMotor();
+                JointMotor motor = hingeJoint.motor;
+                {
+                    motor.targetVelocity = m_hingeMotorTargetVelocity;
+                    motor.force = m_hingeMotorForce;
+                    motor.freeSpin = m_hingeMotorFreespin;
+                }
+
+                hingeJoint.useLimits = m_hingUseLimits;
                 JointLimits limits = hingeJoint.limits;
                 {
-                    limits.min = -45f;
-                    limits.max = 45f;
-                    limits.bounciness = 0.5f;
-                    limits.contactDistance = 0.1f;
+                    limits.min = m_hingeLimitsMin;
+                    limits.max = m_hingeLimitsMax;
+                    limits.bounciness = m_hingeLimitsBounciness;
+                    limits.contactDistance = m_hingeLimitsContactDistance;
                 }
-                hingeJoint.limits = limits;
 
-                hingeJoint.anchor = Vector3.zero;
-                hingeJoint.connectedBody = attachedBody;
-                hingeJoint.enableCollision = m_springEnableCollision;
-                hingeJoint.breakForce = m_springBreakForce;
-                hingeJoint.breakTorque = m_springBreakTorque;
+                hingeJoint.limits = limits;
+                hingeJoint.extendedLimits = m_hingeExtendedLimits;
+                hingeJoint.useAcceleration = m_hingeUseAcceleration;
+                hingeJoint.breakForce = m_hingeBreakForce;
+                hingeJoint.breakTorque = m_hingeBreakTorque;
+                hingeJoint.enableCollision = m_hingeEnableCollision;
+                hingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
+                hingeJoint.massScale = m_hingeMassScale;
+                hingeJoint.connectedMassScale = m_hingeConnectedMassScale;
             }
             else if (m_currentJointMode == JointMode.Spring)
             {
                 SpringJoint springJoint = sourceBody.gameObject.AddComponent<SpringJoint>();
 
                 springJoint.connectedBody = attachedBody;
+                springJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
                 springJoint.spring = m_springStrenght;
                 springJoint.damper = m_springDamper;
                 springJoint.minDistance = m_springMinDistance;
                 springJoint.maxDistance = m_springMaxDistance;
                 springJoint.tolerance = m_springTolerance;
-                springJoint.enableCollision = m_springEnableCollision;
                 springJoint.breakForce = m_springBreakForce;
                 springJoint.breakTorque = m_springBreakTorque;
+                springJoint.enableCollision = m_springEnableCollision;
+                springJoint.enablePreprocessing = m_springEnablePreprocess;
+                springJoint.massScale = m_springMassScale;
+                springJoint.connectedMassScale = m_springConnectedMassScale;
             }
         }
 
