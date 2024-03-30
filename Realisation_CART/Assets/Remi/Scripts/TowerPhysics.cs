@@ -115,27 +115,17 @@ namespace BoxSystem
         {
             if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Box topBox = Tower.GetTopBox(); 
-            if (topBox == null) {Debug.LogWarning("Top Box est null");return;}
+            Box topBox = Tower.GetTopBox();
+            if (topBox == null) { Debug.LogWarning("Top Box est null"); return; }
             Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
-            if (topBoxRB == null){Debug.LogWarning("Top Box Rigidbody est null");return;}
+            if (topBoxRB == null) { Debug.LogWarning("Top Box Rigidbody est null"); return; }
             Rigidbody previousTopBoxRB = Tower.GetPreviousTopBox().GetComponent<Rigidbody>();
-            if (previousTopBoxRB == null){Debug.LogWarning("Previous Top Box Rigidbody est null");return;}
+            if (previousTopBoxRB == null) { Debug.LogWarning("Previous Top Box Rigidbody est null"); return; }
 
             DisablePhysicsOnRB(previousTopBoxRB);
+
             RemoveJointFromBoxRB(previousTopBoxRB);
-
-            if (m_currentJointMode == JointMode.Hinge)
-            {
-                topBox.gameObject.AddComponent<HingeJoint>();
-                SetHingeJointValues(previousTopBoxRB, topBoxRB);
-
-            }
-            else if (m_currentJointMode == JointMode.Spring)
-            {
-                topBox.gameObject.AddComponent<SpringJoint>();
-                SetSpringJointValues(previousTopBoxRB, topBoxRB);
-            }
+            AddJointBetween(previousTopBoxRB, topBoxRB);
 
             EnablePhysicOnRB(topBoxRB);
         }
@@ -276,52 +266,48 @@ namespace BoxSystem
                 Destroy(hingeJoint);
         }
 
-        /// <summary> Configure les valeurs du join Hinge entre deux rigidbody </summary>
-        private void SetHingeJointValues(Rigidbody attachedBody, Rigidbody sourceBody)
+        /// <summary> Ajoute et configure les valeurs du join entre deux rigidbody </summary>
+        private void AddJointBetween(Rigidbody attachedBody, Rigidbody sourceBody)
         {
-            HingeJoint hingeJoint = sourceBody.gameObject.GetComponent<HingeJoint>();
-            if (hingeJoint == null)
+            if (m_currentJointMode == JointMode.Hinge)
             {
-                Debug.LogWarning("Spring joint is null");
-                return;
-            }
+                HingeJoint hingeJoint = sourceBody.gameObject.AddComponent<HingeJoint>();
+                if (hingeJoint == null)
+                {
+                    Debug.LogWarning("Spring joint is null");
+                    return;
+                }
 
-            hingeJoint.useLimits = true;
-            JointLimits limits = hingeJoint.limits;
+                hingeJoint.useLimits = true;
+                JointLimits limits = hingeJoint.limits;
+                {
+                    limits.min = -45f;
+                    limits.max = 45f;
+                    limits.bounciness = 0.5f;
+                    limits.contactDistance = 0.1f;
+                }
+                hingeJoint.limits = limits;
+
+                hingeJoint.anchor = Vector3.zero;
+                hingeJoint.connectedBody = attachedBody;
+                hingeJoint.enableCollision = m_springEnableCollision;
+                hingeJoint.breakForce = m_springBreakForce;
+                hingeJoint.breakTorque = m_springBreakTorque;
+            }
+            else if (m_currentJointMode == JointMode.Spring)
             {
-                limits.min = -45f;
-                limits.max = 45f;
-                limits.bounciness = 0.5f;
-                limits.contactDistance = 0.1f;
+                SpringJoint springJoint = sourceBody.gameObject.AddComponent<SpringJoint>();
+
+                springJoint.connectedBody = attachedBody;
+                springJoint.spring = m_springStrenght;
+                springJoint.damper = m_springDamper;
+                springJoint.minDistance = m_springMinDistance;
+                springJoint.maxDistance = m_springMaxDistance;
+                springJoint.tolerance = m_springTolerance;
+                springJoint.enableCollision = m_springEnableCollision;
+                springJoint.breakForce = m_springBreakForce;
+                springJoint.breakTorque = m_springBreakTorque;
             }
-            hingeJoint.limits = limits;
-
-            hingeJoint.anchor = Vector3.zero;
-            hingeJoint.connectedBody = attachedBody;
-            hingeJoint.enableCollision = m_springEnableCollision;
-            hingeJoint.breakForce = m_springBreakForce;
-            hingeJoint.breakTorque = m_springBreakTorque;
-        }
-
-        /// <summary> Configure les valeurs du join Spring entre deux rigidbody </summary>
-        private void SetSpringJointValues(Rigidbody attachedBody, Rigidbody sourceBody)
-        {
-            SpringJoint springJoint = sourceBody.gameObject.GetComponent<SpringJoint>();
-            if (springJoint == null)
-            {
-                Debug.LogWarning("Spring joint is null");
-                return;
-            }
-
-            springJoint.connectedBody = attachedBody;
-            springJoint.spring = m_springStrenght;
-            springJoint.damper = m_springDamper;
-            springJoint.minDistance = m_springMinDistance;
-            springJoint.maxDistance = m_springMaxDistance;
-            springJoint.tolerance = m_springTolerance;
-            springJoint.enableCollision = m_springEnableCollision;
-            springJoint.breakForce = m_springBreakForce;
-            springJoint.breakTorque = m_springBreakTorque;
         }
 
         /// <summary> Vérifie si le contenu de la tour (boite ou item) peut tomber </summary>
