@@ -1,4 +1,5 @@
 using DiscountDelirium;
+using System;
 using UnityEngine;
 
 namespace BoxSystem
@@ -127,12 +128,11 @@ namespace BoxSystem
             if (m_currentJointMode == JointMode.Hinge)
             {
                 topBox.gameObject.AddComponent<HingeJoint>();
-                //SetHingeJointValues(previousTopBoxRB, topBoxRB);
+                SetHingeJointValues(previousTopBoxRB, topBoxRB);
 
             }
             else if (m_currentJointMode == JointMode.Spring)
             {
-                
                 topBox.gameObject.AddComponent<SpringJoint>();
                 SetSpringJointValues(previousTopBoxRB, topBoxRB);
             }
@@ -151,25 +151,36 @@ namespace BoxSystem
             _rigidBody.GetComponent<CollisionDetector>().enabled = false;
         }
 
-        private void RemoveJointFromBoxRB(Rigidbody boxRB) // TODO Remi: Could need refactor to remove the spring joint from both boxes and items
+        private void RemoveJointFromBoxRB(Rigidbody boxRB) 
         {
             ReplaceBoxToOrigin();
+            Joint previousJoint = null;
 
-            SpringJoint previousSpringJoint = boxRB.GetComponent<SpringJoint>();
-            if (previousSpringJoint != null)
+            if (m_currentJointMode == JointMode.Hinge)
             {
-                previousSpringJoint.spring = 0;
-                previousSpringJoint.connectedBody = null;
+                previousJoint = boxRB.GetComponent<HingeJoint>();
+                if (previousJoint == null)
+                {
+                    Debug.LogWarning("Hinge joint is null");
+                    return;
+                }
+                
+                previousJoint.connectedBody = null;
             }
-
-            HingeJoint previousHingeJoint = boxRB.GetComponent<HingeJoint>();
-            if (previousHingeJoint != null)
+            else if (m_currentJointMode == JointMode.Spring)
             {
-                previousHingeJoint.connectedBody = null;
+                previousJoint = boxRB.GetComponent<SpringJoint>();
+                if (previousJoint == null)
+                {
+                    Debug.LogWarning("Spring joint is null");
+                    return;
+                }
+
+                previousJoint.connectedBody = null;
             }
 
             boxRB.isKinematic = true;
-            Destroy(previousSpringJoint);
+            Destroy(previousJoint);
         }
 
         private void ReplaceBoxToOrigin()
@@ -265,6 +276,33 @@ namespace BoxSystem
                 Destroy(hingeJoint);
         }
 
+        /// <summary> Configure les valeurs du join Hinge entre deux rigidbody </summary>
+        private void SetHingeJointValues(Rigidbody attachedBody, Rigidbody sourceBody)
+        {
+            HingeJoint hingeJoint = sourceBody.gameObject.GetComponent<HingeJoint>();
+            if (hingeJoint == null)
+            {
+                Debug.LogWarning("Spring joint is null");
+                return;
+            }
+
+            hingeJoint.useLimits = true;
+            JointLimits limits = hingeJoint.limits;
+            {
+                limits.min = -45f;
+                limits.max = 45f;
+                limits.bounciness = 0.5f;
+                limits.contactDistance = 0.1f;
+            }
+            hingeJoint.limits = limits;
+
+            hingeJoint.anchor = Vector3.zero;
+            hingeJoint.connectedBody = attachedBody;
+            hingeJoint.enableCollision = m_springEnableCollision;
+            hingeJoint.breakForce = m_springBreakForce;
+            hingeJoint.breakTorque = m_springBreakTorque;
+        }
+
         /// <summary> Configure les valeurs du join Spring entre deux rigidbody </summary>
         private void SetSpringJointValues(Rigidbody attachedBody, Rigidbody sourceBody)
         {
@@ -275,7 +313,6 @@ namespace BoxSystem
                 return;
             }
 
-            springJoint.anchor = Vector3.zero;
             springJoint.connectedBody = attachedBody;
             springJoint.spring = m_springStrenght;
             springJoint.damper = m_springDamper;
