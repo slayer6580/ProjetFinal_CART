@@ -112,59 +112,32 @@ namespace BoxSystem
         /// <summary> Ajoute un joint à la boite </summary>
         public void AddJointToBox()
         {
+            if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
+
+            Box topBox = Tower.GetTopBox(); 
+            if (topBox == null) {Debug.LogWarning("Top Box est null");return;}
+            Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
+            if (topBoxRB == null){Debug.LogWarning("Top Box Rigidbody est null");return;}
+            Rigidbody previousTopBoxRB = Tower.GetPreviousTopBox().GetComponent<Rigidbody>();
+            if (previousTopBoxRB == null){Debug.LogWarning("Previous Top Box Rigidbody est null");return;}
+
+            DisablePhysicsOnRB(previousTopBoxRB);
+            RemoveJointFromBoxRB(previousTopBoxRB);
+
             if (m_currentJointMode == JointMode.Hinge)
             {
-                AddHingeJoint();
-                return;
+                topBox.gameObject.AddComponent<HingeJoint>();
+                //SetHingeJointValues(previousTopBoxRB, topBoxRB);
+
             }
             else if (m_currentJointMode == JointMode.Spring)
             {
-                AddSpringJoint();
-                return;
+                
+                topBox.gameObject.AddComponent<SpringJoint>();
+                SetSpringJointValues(previousTopBoxRB, topBoxRB);
             }
-        }
-
-        /// <summary> Ajoute un joint de type Hinge à la boite </summary>
-        private void AddHingeJoint()
-        {
-            // TODO: Remi: Implement hinge joint pour le Sprint 2
-            Debug.Log("Hinge joint not implemented yet");
-        }
-
-        /// <summary> Ajoute un joint de type Spring à la boite </summary>
-        private void AddSpringJoint()
-        {
-            if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
-
-            Box topBox = Tower.GetTopBox();
-            if (topBox == null)
-            {
-                Debug.LogWarning("Top Box est null");
-                return;
-            }
-
-            Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
-            if (topBoxRB == null)
-            {
-                Debug.LogWarning("Top Box Rigidbody est null");
-                return;
-            }
-
-            Rigidbody previousTopBoxRB = Tower.GetPreviousTopBox().GetComponent<Rigidbody>();
-            if (previousTopBoxRB == null)
-            {
-                Debug.LogWarning("Previous Top Box Rigidbody est null");
-                return;
-            }
-
-            DisablePhysicsOnRB(previousTopBoxRB);
-            RemoveSpringJointFromRB(previousTopBoxRB);
 
             EnablePhysicOnRB(topBoxRB);
-
-            topBox.gameObject.AddComponent<SpringJoint>();
-
-            SetSprintJointValues(previousTopBoxRB, topBoxRB);
         }
 
         private static void EnablePhysicOnRB(Rigidbody _rigidBody)
@@ -178,21 +151,32 @@ namespace BoxSystem
             _rigidBody.GetComponent<CollisionDetector>().enabled = false;
         }
 
-        private void RemoveSpringJointFromRB(Rigidbody _rigidBody)
+        private void RemoveJointFromBoxRB(Rigidbody boxRB) // TODO Remi: Could need refactor to remove the spring joint from both boxes and items
         {
-            Box previousTopBox = Tower.GetPreviousTopBox();
-            SpringJoint previousSpringJoint = _rigidBody.GetComponent<SpringJoint>();
+            ReplaceBoxToOrigin();
 
+            SpringJoint previousSpringJoint = boxRB.GetComponent<SpringJoint>();
             if (previousSpringJoint != null)
             {
-                previousTopBox.ReplaceBoxToOrigin();
-                previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
                 previousSpringJoint.spring = 0;
                 previousSpringJoint.connectedBody = null;
             }
 
-            _rigidBody.isKinematic = true;
+            HingeJoint previousHingeJoint = boxRB.GetComponent<HingeJoint>();
+            if (previousHingeJoint != null)
+            {
+                previousHingeJoint.connectedBody = null;
+            }
+
+            boxRB.isKinematic = true;
             Destroy(previousSpringJoint);
+        }
+
+        private void ReplaceBoxToOrigin()
+        {
+            Box previousTopBox = Tower.GetPreviousTopBox();
+            previousTopBox.ReplaceBoxToOrigin();
+            previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
         }
 
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
@@ -282,7 +266,7 @@ namespace BoxSystem
         }
 
         /// <summary> Configure les valeurs du join Spring entre deux rigidbody </summary>
-        private void SetSprintJointValues(Rigidbody attachedBody, Rigidbody sourceBody)
+        private void SetSpringJointValues(Rigidbody attachedBody, Rigidbody sourceBody)
         {
             SpringJoint springJoint = sourceBody.gameObject.GetComponent<SpringJoint>();
             if (springJoint == null)
