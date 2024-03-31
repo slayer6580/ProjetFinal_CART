@@ -176,6 +176,26 @@ namespace BoxSystem
 
             return m_boxesInCart.ToArray()[1];
         }
+
+        public Box GetBoxUnderneath(Box upperBox)
+        {
+            if (m_boxesInCart.Count < 2)
+                return null;
+
+            return m_boxesInCart.ToArray()[GetBoxIndex(upperBox)-1];
+        }
+
+        private int GetBoxIndex(Box box)
+        {
+            Box[] boxes = m_boxesInCart.ToArray();
+            for (int i = 0; i < boxes.Length; i++)
+            {
+                if (boxes[i] == box)
+                    return i;
+            }
+
+            return -1;
+        }
         #endregion
     }
 

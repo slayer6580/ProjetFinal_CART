@@ -25,7 +25,7 @@ namespace BoxSystem
 
         [Header("Hinge Settings")]
         [SerializeField] private Vector3 m_hingeAnchor = Vector3.zero;
-        [SerializeField] private Vector3 m_hingeAxis = Vector3.zero;
+        [SerializeField] private Vector3 m_hingeAxis = new Vector3(0, 0, 1);
         [SerializeField] private bool m_hingeAutoConfigConnAnchor = true;
         [SerializeField] private Vector3 m_hingeConnAnchor = Vector3.zero;
         [SerializeField] private bool m_hingeUseSpring = true;
@@ -50,8 +50,8 @@ namespace BoxSystem
         [SerializeField] private float m_hingeMassScale = 1;
         [SerializeField] private float m_hingeConnectedMassScale = 1;
 
-        [Header("Spring Settings")]
-        [SerializeField] private float m_springStrenght = 100.0f;
+        [Header("Top Box Spring Settings")]
+        [SerializeField] private float m_hingeStrenght = 100.0f;
         [SerializeField] private float m_springDamper = 0;
         [SerializeField] private float m_springMinDistance = 0;
         [SerializeField] private float m_springMaxDistance = 0.2f;
@@ -64,6 +64,19 @@ namespace BoxSystem
         [SerializeField] private float m_springMassScale = 1;
         [SerializeField] private float m_springConnectedMassScale = 1;
 
+        [Header("Undroppable Boxes Spring Settings")]
+        [SerializeField] private float m_undroppableBoxesSrpingStrenght = 0.0f;
+        [SerializeField] private float m_undroppableBoxesSpringDamper = 0;
+        [SerializeField] private float m_undroppableBoxesSpringMinDistance = 0;
+        [SerializeField] private float m_undroppableBoxesSpringMaxDistance = 0.2f;
+        [SerializeField] private float m_undroppableBoxesSpringTolerance = 0.00f;
+        [SerializeField] private bool m_undroppableBoxesSpringEnableCollision = false;
+        [SerializeField] private float m_undroppableBoxesSpringBreakForce = 100000000.0f;
+        [SerializeField] private float m_undroppableBoxesSpringBreakTorque = 10000000.0f;
+        [SerializeField] private bool m_undroppableBoxesSpringAutoConfigConnAnchor = true;
+        [SerializeField] private bool m_undroppableBoxesSpringEnablePreprocess = true;
+        [SerializeField] private float m_undroppableBoxesSpringMassScale = 1;
+        [SerializeField] private float m_undroppableBoxesSpringConnectedMassScale = 1;
 
         private TowerBoxSystem Tower { get; set; } = null;
 
@@ -82,6 +95,7 @@ namespace BoxSystem
 
         private void Update()
         {
+
             if (Input.GetKeyDown(KeyCode.K))
             {
                 Vector3 rotation = new Vector3(0, 90, 0);
@@ -123,6 +137,7 @@ namespace BoxSystem
                 Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
             }
 
+
         }
 
         /// <summary> Spawn un objet de débug CartDebug à une position offset </summary>
@@ -154,6 +169,7 @@ namespace BoxSystem
             Rigidbody previousTopBoxRB = Tower.GetPreviousTopBox().GetComponent<Rigidbody>();
             if (previousTopBoxRB == null) { Debug.LogWarning("Previous Top Box Rigidbody est null"); return; }
 
+
             DisablePhysicsOnRB(previousTopBoxRB);
 
             RemoveJointFromBoxRB(previousTopBoxRB);
@@ -162,18 +178,19 @@ namespace BoxSystem
             EnablePhysicOnRB(topBoxRB);
         }
 
+        private static void DisablePhysicsOnRB(Rigidbody _rigidBody)
+        {
+            if (_rigidBody.GetComponent<CollisionDetector>().enabled)
+                _rigidBody.GetComponent<CollisionDetector>().enabled = false;
+        }
+
         private static void EnablePhysicOnRB(Rigidbody _rigidBody)
         {
             _rigidBody.GetComponent<CollisionDetector>().enabled = true;
             _rigidBody.isKinematic = false;
         }
 
-        private static void DisablePhysicsOnRB(Rigidbody _rigidBody)
-        {
-            _rigidBody.GetComponent<CollisionDetector>().enabled = false;
-        }
-
-        private void RemoveJointFromBoxRB(Rigidbody boxRB) 
+        private void RemoveJointFromBoxRB(Rigidbody boxRB)
         {
             ReplaceBoxToOrigin();
             Joint previousJoint = null;
@@ -186,23 +203,36 @@ namespace BoxSystem
                     Debug.LogWarning("Hinge joint is null");
                     return;
                 }
-                
+
                 previousJoint.connectedBody = null;
             }
             else if (m_currentJointMode == JointMode.Spring)
             {
-                previousJoint = boxRB.GetComponent<SpringJoint>();
-                if (previousJoint == null)
+                SpringJoint springJoint = boxRB.GetComponent<SpringJoint>();
+                if (springJoint == null)
                 {
                     Debug.LogWarning("Spring joint is null");
                     return;
                 }
 
-                previousJoint.connectedBody = null;
+                springJoint.connectedBody = null;
+                springJoint.spring = m_undroppableBoxesSrpingStrenght;
+                springJoint.damper = m_undroppableBoxesSpringDamper;
+                springJoint.minDistance = m_undroppableBoxesSpringMinDistance;
+                springJoint.maxDistance = m_undroppableBoxesSpringMaxDistance;
+                springJoint.tolerance = m_undroppableBoxesSpringTolerance;
+                springJoint.breakForce = m_undroppableBoxesSpringBreakForce;
+                springJoint.breakTorque = m_undroppableBoxesSpringBreakTorque;
+                springJoint.enableCollision = m_undroppableBoxesSpringEnableCollision;
+                springJoint.enablePreprocessing = m_undroppableBoxesSpringEnablePreprocess;
+                springJoint.massScale = m_undroppableBoxesSpringMassScale;
+                springJoint.connectedMassScale = m_undroppableBoxesSpringConnectedMassScale;
+
+                previousJoint = springJoint;
             }
 
             boxRB.isKinematic = true;
-            Destroy(previousJoint);
+            //Destroy(previousJoint); // If we destroy the joint we need to add the new top box spring everytime a box is removed from the tower
         }
 
         private void ReplaceBoxToOrigin()
@@ -256,14 +286,15 @@ namespace BoxSystem
         /// <summary> Retire une boite avec une force provenant de l'exterieur </summary>
         public void RemoveBoxImpulse(Vector3 velocity, bool single = false)
         {
+
+            MoveTopJointToNewTopBox();
+
             Box topBox = Tower.GetTopBox();
             if (topBox == null)
             {
                 Debug.LogWarning("No box to remove");
                 return;
             }
-
-            DetachJoint(topBox);
 
             Vector3 totalImpulse = Vector3.zero;
             if (!single)
@@ -286,16 +317,66 @@ namespace BoxSystem
             topBox.GetComponent<AutoDestruction>().enabled = true;
         }
 
-        /// <summary> Détache le joint de la boite </summary>
-        private static void DetachJoint(Box topBox)
+        /// <summary> Retire le top joint de la top box et donne les valeurs top joint au joint de la nouvelle top box </summary>
+        private void MoveTopJointToNewTopBox()
         {
-            SpringJoint springJoint = topBox.GetComponent<SpringJoint>();
-            if (springJoint != null)
-                Destroy(springJoint);
+            if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            HingeJoint hingeJoint = topBox.GetComponent<HingeJoint>();
-            if (hingeJoint != null)
-                Destroy(hingeJoint);
+            Box oldTopBox = Tower.GetTopBox();
+
+            if (m_currentJointMode == JointMode.Spring)
+            {
+                if (oldTopBox == null) { Debug.LogWarning("No box to remove"); return; }
+                SpringJoint oldTopSpringJoint = oldTopBox.GetComponent<SpringJoint>();
+                if (oldTopSpringJoint == null) { Debug.LogWarning("Spring joint is null"); return; }
+                if (oldTopSpringJoint != null)
+                    Destroy(oldTopSpringJoint);
+
+                Box newTopBox = Tower.GetPreviousTopBox();
+                if (newTopBox == null) { Debug.LogWarning("No new top box"); return; }
+                SpringJoint newTopSpringJoint = newTopBox.GetComponent<SpringJoint>();
+                if (newTopSpringJoint == null) { Debug.LogWarning("New Spring joint is null"); return; }
+                Rigidbody newLowerBoxRB = Tower.GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
+                if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
+
+                newTopSpringJoint.connectedBody = newLowerBoxRB;
+                newTopSpringJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
+                newTopSpringJoint.spring = m_hingeStrenght;
+                newTopSpringJoint.damper = m_springDamper;
+                newTopSpringJoint.minDistance = m_springMinDistance;
+                newTopSpringJoint.maxDistance = m_springMaxDistance;
+                newTopSpringJoint.tolerance = m_springTolerance;
+                newTopSpringJoint.breakForce = m_springBreakForce;
+                newTopSpringJoint.breakTorque = m_springBreakTorque;
+                newTopSpringJoint.enableCollision = m_springEnableCollision;
+                newTopSpringJoint.enablePreprocessing = m_springEnablePreprocess;
+                newTopSpringJoint.massScale = m_springMassScale;
+                newTopSpringJoint.connectedMassScale = m_springConnectedMassScale;
+            }
+            else if (m_currentJointMode == JointMode.Hinge)
+            {
+                if (oldTopBox == null) { Debug.LogWarning("No box to remove"); return; }
+                HingeJoint oldTopSpringJoint = oldTopBox.GetComponent<HingeJoint>();
+                if (oldTopSpringJoint == null) { Debug.LogWarning("Spring joint is null"); return; }
+                if (oldTopSpringJoint != null)
+                    Destroy(oldTopSpringJoint);
+
+                Box newTopBox = Tower.GetPreviousTopBox();
+                if (newTopBox == null) { Debug.LogWarning("No new top box"); return; }
+                HingeJoint newTopHingeJoint = newTopBox.GetComponent<HingeJoint>();
+                if (newTopHingeJoint == null) { Debug.LogWarning("New Spring joint is null"); return; }
+                Rigidbody newLowerBoxRB = Tower.GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
+                if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
+
+                newTopHingeJoint.connectedBody = newLowerBoxRB;
+                newTopHingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
+                newTopHingeJoint.breakForce = m_hingeBreakForce;
+                newTopHingeJoint.breakTorque = m_hingeBreakTorque;
+                newTopHingeJoint.enableCollision = m_hingeEnableCollision;
+                newTopHingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
+                newTopHingeJoint.massScale = m_hingeMassScale;
+                newTopHingeJoint.connectedMassScale = m_hingeConnectedMassScale;
+            }
         }
 
         /// <summary> Ajoute et configure les valeurs du join entre deux rigidbody </summary>
@@ -311,7 +392,16 @@ namespace BoxSystem
                 }
 
                 hingeJoint.connectedBody = attachedBody;
-                hingeJoint.anchor = m_hingeAnchor;
+
+                // Get the top bordures of the box to set the anchor
+                BoxSetup boxSetup = sourceBody.GetComponent<BoxSetup>();
+                float boxWidth = boxSetup.BoxWidth;
+                float boxHeight = boxSetup.BoxHeight;
+                float boxLength = boxSetup.BoxLength;
+
+                // Hinge on the right side of the box
+                hingeJoint.anchor = Vector3.right * boxWidth / 2;
+
                 hingeJoint.axis = m_hingeAxis;
                 hingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
                 hingeJoint.connectedAnchor = m_hingeConnAnchor;
@@ -359,7 +449,7 @@ namespace BoxSystem
 
                 springJoint.connectedBody = attachedBody;
                 springJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
-                springJoint.spring = m_springStrenght;
+                springJoint.spring = m_hingeStrenght;
                 springJoint.damper = m_springDamper;
                 springJoint.minDistance = m_springMinDistance;
                 springJoint.maxDistance = m_springMaxDistance;

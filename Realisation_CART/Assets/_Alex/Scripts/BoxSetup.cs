@@ -10,13 +10,13 @@ namespace BoxSystem
         [Header("Prefabs")]
         [SerializeField] private GameObject m_slotPrefab;
 
-        [Header("Longeur, largeur et épaisseur de la boite")]
-        [SerializeField] private float m_boxWidth;
-        [SerializeField] private float m_boxLength; 
+        [Header("Longeur et épaisseur de la boite")]
         [SerializeField] private float m_boxThickness;
 
-        [field: Header("Hauteur de la boite")]
+        [field: Header("Hauteur et largeur de la boite")]
         [field: SerializeField] public float BoxHeight { get; private set; }
+        [field: SerializeField] public float BoxWidth { get; private set; }
+        [field: SerializeField] public float BoxLength { get; private set; }
 
         [Header("Nombre de slot par longeur et largeur")]
         [SerializeField] private int m_nbSlotWidth;
@@ -64,8 +64,8 @@ namespace BoxSystem
         /// <summary> Ajuster les dimensions de la boite selon les grandeurs donnés </summary>
         private void AjustBoxGraphics()
         {
-            float lenght = m_boxLength;
-            float width = m_boxWidth;
+            float lenght = BoxLength;
+            float width = BoxWidth;
             float thickness = m_boxThickness;
             float height = BoxHeight;
             float halfHeight = height / 2;
@@ -268,15 +268,15 @@ namespace BoxSystem
         /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
         private void CalculateBoxHalfDimension()
         {
-            m_halfLength = m_boxWidth / 2;
-            m_halfWidth = m_boxLength / 2;
+            m_halfLength = BoxWidth / 2;
+            m_halfWidth = BoxLength / 2;
         }
 
         /// <summary> Calcule la dimension des slots </summary>
         private void CalculateSlotDimension()
         {
-            SlotLenght = m_boxWidth / m_nbSlotWidth;
-            SlotWidth = m_boxLength / m_nbSlotLength;
+            SlotLenght = BoxWidth / m_nbSlotWidth;
+            SlotWidth = BoxLength / m_nbSlotLength;
             SlotHeight = BoxHeight;
         }
 
