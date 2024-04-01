@@ -348,6 +348,11 @@ namespace BoxSystem
             return m_boxSetup.BoxWidth + m_boxSetup.BoxThickness;
         }
 
+        public void EnabledAllColliders(bool value)
+        {
+            m_boxSetup.EnabledAllColliders(value);
+        }
+
         #endregion
     }
 }
