@@ -338,6 +338,16 @@ namespace BoxSystem
             return m_tower;
         }
 
+        public float GetAnchorHeight()
+        {
+            return m_boxSetup.BoxThickness;
+        }
+
+        public float GetAnchorWidth()
+        {
+            return m_boxSetup.BoxWidth + m_boxSetup.BoxThickness;
+        }
+
         #endregion
     }
 }

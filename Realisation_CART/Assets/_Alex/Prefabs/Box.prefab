@@ -263,9 +263,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_slotPrefab: {fileID: 143819864821063928, guid: 6627cabcbca284f4fbee7270cb00ba41,
     type: 3}
-  m_boxWidth: 0.392
+  <BoxWidth>k__BackingField: 0.392
   m_boxLength: 0.588
-  m_boxThickness: 0.02
+  <BoxThickness>k__BackingField: 0.02
   <BoxHeight>k__BackingField: 0.09
   m_nbSlotWidth: 4
   m_nbSlotLength: 6
@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376ce6f21c174ff44b4452185b346268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <_TowerPhysics>k__BackingField: {fileID: 0}
 --- !u!54 &5757727898776072923
 Rigidbody:
   m_ObjectHideFlags: 0
