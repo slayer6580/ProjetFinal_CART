@@ -102,7 +102,7 @@ namespace DiscountDelirium
             m_side = wantedSide;
             // BOX_HALF_WIDTH = GetTopBox.GetAnchorWidth()
             // BOX_HALF_HEIGHT = GetTopBox.GetAnchorHeight()
-            Vector3 anchorPosition = m_side == Eside.left ? new Vector3(-BOX_HALF_WIDTH, -BOX_HALF_HEIGHT - 0.025f, 0): new Vector3(BOX_HALF_WIDTH, -BOX_HALF_HEIGHT - 0.025f, 0);
+            Vector3 anchorPosition = m_side == Eside.left ? new Vector3(-BOX_HALF_WIDTH, -BOX_HALF_HEIGHT, 0): new Vector3(BOX_HALF_WIDTH, -BOX_HALF_HEIGHT, 0);
 
             foreach (HingeJoint hingeJoint in m_hinges)
             {
