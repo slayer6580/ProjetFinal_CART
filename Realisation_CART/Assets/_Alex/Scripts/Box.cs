@@ -330,6 +330,7 @@ namespace BoxSystem
         public void ReplaceBoxToOrigin()
         {
             transform.localPosition = m_initialLocalPositionInBox;
+            transform.localEulerAngles = Vector3.zero; // NEW
         }
 
         /// <summary> Donne acces à la tour reliée à la boîte </summary>
