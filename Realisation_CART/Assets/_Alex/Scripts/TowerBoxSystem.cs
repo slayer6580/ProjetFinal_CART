@@ -176,6 +176,11 @@ namespace BoxSystem
 
             return m_boxesInCart.ToArray()[1];
         }
+
+        public Stack<Box> GetAllBoxes()
+        {
+            return m_boxesInCart;
+        }
         #endregion
     }
 
