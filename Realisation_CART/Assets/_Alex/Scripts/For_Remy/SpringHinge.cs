@@ -50,7 +50,7 @@ namespace DiscountDelirium
             for (int i = 0; i < m_boxesWithHinge.Count; i++)
             {
                 m_boxesWithHinge[i].transform.localPosition = m_boxesInitialPosition[i];
-                m_boxesWithHinge[i].transform.eulerAngles = Vector3.zero;
+              //  m_boxesWithHinge[i].transform.localEulerAngles = Vector3.zero; 
             }
         }
 
