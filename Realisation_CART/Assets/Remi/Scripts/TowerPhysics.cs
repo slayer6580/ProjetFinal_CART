@@ -336,10 +336,10 @@ namespace BoxSystem
                 if (newTopBox == null) { Debug.LogWarning("No new top box"); return; }
                 SpringJoint newTopSpringJoint = newTopBox.GetComponent<SpringJoint>();
                 if (newTopSpringJoint == null) { Debug.LogWarning("New Spring joint is null"); return; }
-                //Rigidbody newLowerBoxRB = Tower.GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
-                //if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
+                Rigidbody newLowerBoxRB = GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
+                if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
 
-                //newTopSpringJoint.connectedBody = newLowerBoxRB;
+                newTopSpringJoint.connectedBody = newLowerBoxRB;
                 newTopSpringJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
                 newTopSpringJoint.spring = m_hingeStrenght;
                 newTopSpringJoint.damper = m_springDamper;
@@ -365,10 +365,10 @@ namespace BoxSystem
                 if (newTopBox == null) { Debug.LogWarning("No new top box"); return; }
                 HingeJoint newTopHingeJoint = newTopBox.GetComponent<HingeJoint>();
                 if (newTopHingeJoint == null) { Debug.LogWarning("New Spring joint is null"); return; }
-                //Rigidbody newLowerBoxRB = Tower.GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
-                //if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
+                Rigidbody newLowerBoxRB = GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
+                if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
 
-                //newTopHingeJoint.connectedBody = newLowerBoxRB;
+                newTopHingeJoint.connectedBody = newLowerBoxRB;
                 newTopHingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
                 newTopHingeJoint.breakForce = m_hingeBreakForce;
                 newTopHingeJoint.breakTorque = m_hingeBreakTorque;
@@ -484,25 +484,24 @@ namespace BoxSystem
                 RemoveItemImpulse(velocity);
         }
 
+        public Box GetBoxUnderneath(Box upperBox)
+        {
+            if (Tower.GetBoxCount() < 2)
+                return null;
 
-        //public Box GetBoxUnderneath(Box upperBox)
-        //{
-        //    if (m_boxesInCart.Count < 2)
-        //        return null;
+            return Tower.GetAllBoxes().ToArray()[GetBoxIndex(upperBox) - 1];
+        }
 
-        //    return m_boxesInCart.ToArray()[GetBoxIndex(upperBox) - 1];
-        //}
+        private int GetBoxIndex(Box box)
+        {
+            Box[] boxes = Tower.GetAllBoxes().ToArray();
+            for (int i = 0; i < boxes.Length; i++)
+            {
+                if (boxes[i] == box)
+                    return i;
+            }
 
-        //private int GetBoxIndex(Box box)
-        //{
-        //    Box[] boxes = m_boxesInCart.ToArray();
-        //    for (int i = 0; i < boxes.Length; i++)
-        //    {
-        //        if (boxes[i] == box)
-        //            return i;
-        //    }
-
-        //    return -1;
-        //}
+            return -1;
+        }
     }
 }
