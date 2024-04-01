@@ -72,6 +72,7 @@ namespace DiscountDelirium
             }
             else if (m_hinges[0].angle > -m_angleOffset && m_hinges[0].angle < m_angleOffset)
             {
+                Debug.LogWarning("collider disabled");
                 EnabledColliderOnBoxes(false);
             }
 
