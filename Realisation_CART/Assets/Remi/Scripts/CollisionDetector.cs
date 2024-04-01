@@ -5,7 +5,7 @@ namespace BoxSystem
 {
     public class CollisionDetector : MonoBehaviour
     {
-        [field:SerializeField] private TowerPhysics _TowerPhysics { get; set; } = null;
+        private TowerPhysics _TowerPhysics { get; set; } = null;
         private const float MAX_VEL_TO_DROP_CONTENT = 15f;
         private int m_playerLayer = 6;
         private int m_clientLayer = 7;
@@ -13,6 +13,24 @@ namespace BoxSystem
         private int m_groundLayer = 10;
 
         // TODO Remi: Could be made into a hierachy to seperate the code for every different object needing a collision detector
+
+        private void Awake()
+        {
+            if(gameObject.layer == m_playerLayer)
+            {
+                _TowerPhysics = transform.parent.GetComponentInChildren<TowerPhysics>();
+                enabled = true;
+            }
+            else
+            {
+                enabled = false;
+            }
+        }
+
+        private void OnEnable() // Keep then OnEnable to have the checkbox in the inspector
+        {
+
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
