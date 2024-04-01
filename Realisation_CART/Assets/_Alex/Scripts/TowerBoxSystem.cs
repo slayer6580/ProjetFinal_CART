@@ -20,7 +20,7 @@ namespace BoxSystem
         [SerializeField] private float m_expulsionForce;
 
         private int m_boxCount = 0;
-        private Stack<Box> m_boxesInCart = new Stack<Box>();
+        private List<Box> m_boxesInCart = new List<Box>();
         private TowerPhysics m_towerPhysics;
 
         private void Awake()
@@ -94,7 +94,7 @@ namespace BoxSystem
             instantBox.SetInitialLocationInBox(localPosition);
 
             // ajout a la liste
-            m_boxesInCart.Push(instantBox);
+            m_boxesInCart.Add(instantBox);
 
             m_towerPhysics.AddJointToBox();
 
@@ -160,8 +160,8 @@ namespace BoxSystem
         {
             if (m_boxesInCart.Count == 0)
                 return null;
-
-            return m_boxesInCart.Peek();
+            int total = m_boxesInCart.Count;
+            return m_boxesInCart[total - 1];
         }
 
         /// <summary> Reduit le nombre de boites dans le panier </summary>
@@ -174,7 +174,8 @@ namespace BoxSystem
             }
 
             m_boxCount--;
-            m_boxesInCart.Pop();       
+            int total = m_boxesInCart.Count;
+            m_boxesInCart.RemoveAt(total - 1);     
         }
 
         /// <summary> Donne la boite en dessous de la boite du dessus </summary>
@@ -187,11 +188,19 @@ namespace BoxSystem
         }
 
         /// <summary> Donne le stack complet des boites </summary>
-        public Stack<Box> GetAllBoxes()
+        public List<Box> GetAllBoxes()
         {
             return m_boxesInCart;
         }
         #endregion
+
+        public void EnabledColliderOnBoxes(bool value)
+        {
+            foreach (Box box in m_boxesInCart)
+            {
+                box.EnabledCollider(value);
+            }
+        }
     }
 
 }

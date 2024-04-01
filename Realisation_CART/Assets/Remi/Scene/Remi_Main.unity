@@ -37780,8 +37780,8 @@ MonoBehaviour:
   m_currentJointMode: 1
   m_hinges: []
   m_angle: 0
-  m_springForce: 15
-  m_angleOffset: 0.8
+  m_springForce: 100
+  m_angleOffset: 0.1
   m_springStrenght: 0
   m_springDamper: 0
   m_springMinDistance: 0
@@ -37790,6 +37790,7 @@ MonoBehaviour:
   m_springEnableCollision: 1
   m_springBreakForce: 10
   m_springBreakTorque: 10
+  m_angleRead: 0
 --- !u!137 &3176979780514127508
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

@@ -93,6 +93,9 @@ namespace BoxSystem
 
         private Eside m_side;
 
+        [Header("ReadOnly")]
+        [SerializeField] private float m_angleRead = 0;
+
         public enum JointMode
         {
             Spring,
@@ -157,52 +160,38 @@ namespace BoxSystem
                 Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
             }
 
-            //foreach (HingeJoint hingeJoint in m_hinges)
-            //{
-            //    JointSpring spring = hingeJoint.spring;
-            //    spring.targetPosition = m_angle;
-            //    spring.spring = m_springForce;
-            //    hingeJoint.spring = spring;
-            //}
-
             if (m_hinges.Count <= 0) return;
-
+            Debug.Log("Angle: " + m_hinges[0].angle);
             // DOIT REGARDER ANGLE DE LA BOITE AVEC LE PREMIER HINGE
             if (m_hinges[0].angle > m_angleOffset && m_side == Eside.right)
             {
+                
                 Tower.ReplaceAllBoxToOrigin();
-                EnabledColliderOnBoxes(true);
+                Tower.EnabledColliderOnBoxes(true);
                 ChangeAllAnchors(Eside.left);
 
             }
             else if (m_hinges[0].angle < -m_angleOffset && m_side == Eside.left)
+
             {
                 Tower.ReplaceAllBoxToOrigin();
-                EnabledColliderOnBoxes(true);
+                Tower.EnabledColliderOnBoxes(true);
                 ChangeAllAnchors(Eside.right);
             }
-            else if (m_hinges[0].angle > -m_angleOffset && m_hinges[0].angle < m_angleOffset)
+            else if (m_hinges[0].angle > -m_angleOffset && m_hinges[0].angle < m_angleOffset) 
             {
-                EnabledColliderOnBoxes(false);
+                Debug.LogError("Angle is between -0.1 and 0.1");
+                Tower.EnabledColliderOnBoxes(false);
             }
 
             UpdateSprings();
-        }
 
-        private void EnabledColliderOnBoxes(bool value)
-        {
-            Stack<Box> allBoxes = Tower.GetAllBoxes();
-            foreach (Box box in allBoxes)
-            {
-                box.EnabledAllColliders(value);
-            }
+            m_angleRead = m_hinges[0].angle;
         }
 
         private void ChangeAllAnchors(Eside wantedSide)
         {
             m_side = wantedSide;
-            // BOX_HALF_WIDTH = GetTopBox.GetAnchorWidth()new Vector3(-Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0)
-            // BOX_HALF_HEIGHT = GetTopBox.GetAnchorHeight()
             Vector3 anchorPosition = m_side == Eside.left ? new Vector3(-Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0) : new Vector3(Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0);
 
             foreach (HingeJoint hingeJoint in m_hinges)
@@ -299,18 +288,6 @@ namespace BoxSystem
                 }
 
                 springJoint.connectedBody = null;
-                //springJoint.spring = m_undroppableBoxesSrpingStrenght;
-                //springJoint.damper = m_undroppableBoxesSpringDamper;
-                //springJoint.minDistance = m_undroppableBoxesSpringMinDistance;
-                //springJoint.maxDistance = m_undroppableBoxesSpringMaxDistance;
-                //springJoint.tolerance = m_undroppableBoxesSpringTolerance;
-                //springJoint.breakForce = m_undroppableBoxesSpringBreakForce;
-                //springJoint.breakTorque = m_undroppableBoxesSpringBreakTorque;
-                //springJoint.enableCollision = m_undroppableBoxesSpringEnableCollision;
-                //springJoint.enablePreprocessing = m_undroppableBoxesSpringEnablePreprocess;
-                //springJoint.massScale = m_undroppableBoxesSpringMassScale;
-                //springJoint.connectedMassScale = m_undroppableBoxesSpringConnectedMassScale;
-
                 previousJoint = springJoint;
             }
 
@@ -427,7 +404,6 @@ namespace BoxSystem
                 if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
 
                 newTopSpringJoint.connectedBody = newLowerBoxRB;
-                //newTopSpringJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
                 newTopSpringJoint.spring = m_springStrenght;
                 newTopSpringJoint.damper = m_springDamper;
                 newTopSpringJoint.minDistance = m_springMinDistance;
@@ -436,9 +412,6 @@ namespace BoxSystem
                 newTopSpringJoint.breakForce = m_springBreakForce;
                 newTopSpringJoint.breakTorque = m_springBreakTorque;
                 newTopSpringJoint.enableCollision = m_springEnableCollision;
-                //newTopSpringJoint.enablePreprocessing = m_springEnablePreprocess;
-                //newTopSpringJoint.massScale = m_springMassScale;
-                //newTopSpringJoint.connectedMassScale = m_springConnectedMassScale;
             }
             else if (m_currentJointMode == JointMode.Hinge)
             {
@@ -456,13 +429,7 @@ namespace BoxSystem
                 if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
 
                 newTopHingeJoint.connectedBody = newLowerBoxRB;
-                //newTopHingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
-                //newTopHingeJoint.breakForce = m_hingeBreakForce;
-                //newTopHingeJoint.breakTorque = m_hingeBreakTorque;
                 newTopHingeJoint.enableCollision = true;
-                //newTopHingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
-                //newTopHingeJoint.massScale = m_hingeMassScale;
-                //newTopHingeJoint.connectedMassScale = m_hingeConnectedMassScale;
             }
         }
 
@@ -480,21 +447,10 @@ namespace BoxSystem
 
                 hingeJoint.connectedBody = attachedBody;
 
-
-                // Vector3 anchorPosition = wantedSide == Eside.left ? new Vector3(-BOX_HALF_WIDTH, -BOX_HALF_HEIGHT, 0) : new Vector3(0.5f, -0.5f, 0);
-                // Get the top bordures of the box to set the anchor
                 BoxSetup boxSetup = sourceBody.GetComponent<BoxSetup>();
                 float boxWidth = boxSetup.BoxWidth;
                 float boxHeight = boxSetup.BoxHeight;
-                //float boxLength = boxSetup.BoxLength;
-                Vector3 anchorPosLeft = new Vector3(-Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0);
-                //Vector3 anchorPosRight = new Vector3(Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0);
-                //anchorPosLeft += Vector3.up * boxHeight / 2;
 
-                // Hinge on the right side of the box
-                hingeJoint.anchor = anchorPosLeft;
-
-                //hingeJoint.axis = m_hingeAxis;
                 hingeJoint.axis = new Vector3(0, 0, 1);
 
                 hingeJoint.useSpring = true;
@@ -505,29 +461,6 @@ namespace BoxSystem
                 }
                 hingeJoint.spring = spring;
 
-                //hingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
-                //hingeJoint.connectedAnchor = m_hingeConnAnchor;
-
-
-                //hingeJoint.spring = new JointSpring();
-                //JointSpring spring = hingeJoint.spring;
-                //{
-                //    spring.spring = m_hingeSpringStrenght;
-                //    spring.damper = m_hingeSpringDamper;
-                //    spring.targetPosition = m_hingeTargetPos;
-                //}
-                //hingeJoint.spring = spring;
-
-
-                //hingeJoint.useMotor = m_hingeUseMotor;
-                //hingeJoint.motor = new JointMotor();
-                //JointMotor motor = hingeJoint.motor;
-                //{
-                //    motor.targetVelocity = m_hingeMotorTargetVelocity;
-                //    motor.force = m_hingeMotorForce;
-                //    motor.freeSpin = m_hingeMotorFreespin;
-                //}
-                //hingeJoint.motor = motor;
 
                 hingeJoint.useLimits = false;
                 JointLimits limits = hingeJoint.limits;
@@ -542,21 +475,17 @@ namespace BoxSystem
 
                 m_hinges.Add(hingeJoint);
 
-                //hingeJoint.extendedLimits = m_hingeExtendedLimits;
-                //hingeJoint.useAcceleration = m_hingeUseAcceleration;
                 hingeJoint.breakForce = float.PositiveInfinity;
                 hingeJoint.breakTorque = float.PositiveInfinity;
                 hingeJoint.enableCollision = true;
-                //hingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
-                //hingeJoint.massScale = m_hingeMassScale;
-                //hingeJoint.connectedMassScale = m_hingeConnectedMassScale;
+
             }
             else if (m_currentJointMode == JointMode.Spring)
             {
                 SpringJoint springJoint = sourceBody.gameObject.AddComponent<SpringJoint>();
 
                 springJoint.connectedBody = attachedBody;
-                //springJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
+
                 springJoint.spring = m_springStrenght;
                 springJoint.damper = m_springDamper;
                 springJoint.minDistance = m_springMinDistance;
@@ -565,9 +494,7 @@ namespace BoxSystem
                 springJoint.breakForce = m_springBreakForce;
                 springJoint.breakTorque = m_springBreakTorque;
                 springJoint.enableCollision = m_springEnableCollision;
-                //springJoint.enablePreprocessing = m_springEnablePreprocess;
-                //springJoint.massScale = m_springMassScale;
-                //springJoint.connectedMassScale = m_springConnectedMassScale;
+
             }
         }
 

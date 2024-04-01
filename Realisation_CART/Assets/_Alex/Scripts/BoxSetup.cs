@@ -289,14 +289,5 @@ namespace BoxSystem
 
         #endregion
 
-        public void EnabledAllColliders(bool value)
-        {
-            m_boxBottom.GetComponent<BoxCollider>().enabled = value;
-            m_boxSideLeft.GetComponent<BoxCollider>().enabled = value;
-            m_boxSideRight.GetComponent<BoxCollider>().enabled = value;
-            m_boxFront.GetComponent<BoxCollider>().enabled = value;
-            m_boxBack.GetComponent<BoxCollider>().enabled = value;
-        }
-
     }
 }
