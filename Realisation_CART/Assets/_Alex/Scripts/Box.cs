@@ -345,7 +345,7 @@ namespace BoxSystem
 
         public float GetAnchorWidth()
         {
-            return m_boxSetup.BoxWidth + m_boxSetup.BoxThickness;
+            return (m_boxSetup.BoxWidth / 2) + m_boxSetup.BoxThickness;
         }
 
         #endregion

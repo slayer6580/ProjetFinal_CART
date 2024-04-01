@@ -37771,62 +37771,24 @@ MonoBehaviour:
     type: 3}
   <Player>k__BackingField: {fileID: 4223823007780283570}
   m_itemRemoveImpulseIntesity: 0.2
-  m_itemVectorUpImpulseIntesity: 10
+  m_itemVectorUpImpulseIntesity: 1
   m_boxRemoveImpulseIntesity: 0.2
-  m_boxVectorUpImpulseIntesity: 10
+  m_boxVectorUpImpulseIntesity: 1
   m_nbOfUndroppableBoxes: 4
   m_debugCartDistance: 10
   m_debugCartSpeed: 3
   m_currentJointMode: 1
-  m_hingeAnchor: {x: 0, y: 0, z: 0}
-  m_hingeAxis: {x: 0, y: 0, z: 1}
-  m_hingeAutoConfigConnAnchor: 1
-  m_hingeConnAnchor: {x: 0, y: 0, z: 1}
-  m_hingeUseSpring: 0
-  m_hingeSpringStrenght: 0
-  m_hingeSpringDamper: 0
-  m_hingeTargetPos: 0
-  m_hingeUseMotor: 0
-  m_hingeMotorTargetVelocity: 0
-  m_hingeMotorForce: 100
-  m_hingeMotorFreespin: 0
-  m_hingUseLimits: 0
-  m_hingeLimitsMin: 213
-  m_hingeLimitsMax: 0
-  m_hingeLimitsBounciness: 50
-  m_hingeLimitsContactDistance: 10
-  m_hingeExtendedLimits: 0
-  m_hingeUseAcceleration: 0
-  m_hingeBreakForce: 20
-  m_hingeBreakTorque: 20
-  m_hingeEnableCollision: 1
-  m_hingeEnablePreprocess: 0
-  m_hingeMassScale: 1
-  m_hingeConnectedMassScale: 1
-  m_hingeStrenght: 100
+  m_hinges: []
+  m_angle: 0
+  m_springForce: 0
+  m_springStrenght: 0
   m_springDamper: 0
   m_springMinDistance: 0
   m_springMaxDistance: 0.2
   m_springTolerance: 0.06
   m_springEnableCollision: 1
-  m_springBreakForce: 100
-  m_springBreakTorque: 100
-  m_springAutoConfigConnAnchor: 1
-  m_springEnablePreprocess: 1
-  m_springMassScale: 1
-  m_springConnectedMassScale: 1
-  m_undroppableBoxesSrpingStrenght: 100
-  m_undroppableBoxesSpringDamper: 0
-  m_undroppableBoxesSpringMinDistance: 0
-  m_undroppableBoxesSpringMaxDistance: 0.2
-  m_undroppableBoxesSpringTolerance: 0.06
-  m_undroppableBoxesSpringEnableCollision: 1
-  m_undroppableBoxesSpringBreakForce: 100
-  m_undroppableBoxesSpringBreakTorque: 100
-  m_undroppableBoxesSpringAutoConfigConnAnchor: 1
-  m_undroppableBoxesSpringEnablePreprocess: 1
-  m_undroppableBoxesSpringMassScale: 1
-  m_undroppableBoxesSpringConnectedMassScale: 1
+  m_springBreakForce: 10
+  m_springBreakTorque: 10
 --- !u!137 &3176979780514127508
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

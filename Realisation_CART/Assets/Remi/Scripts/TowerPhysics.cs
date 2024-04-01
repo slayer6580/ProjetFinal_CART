@@ -1,5 +1,6 @@
 using DiscountDelirium;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BoxSystem
@@ -8,6 +9,8 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
+
+        private TowerBoxSystem Tower { get; set; } = null;
 
         [Header("Items and boxes physics settings")]
         [SerializeField] private float m_itemRemoveImpulseIntesity = 0.2f;
@@ -24,34 +27,42 @@ namespace BoxSystem
         [SerializeField] private JointMode m_currentJointMode = JointMode.Spring;
 
         [Header("Hinge Settings")]
-        [SerializeField] private Vector3 m_hingeAnchor = Vector3.zero;
-        [SerializeField] private Vector3 m_hingeAxis = new Vector3(0, 0, 1);
-        [SerializeField] private bool m_hingeAutoConfigConnAnchor = true;
-        [SerializeField] private Vector3 m_hingeConnAnchor = Vector3.zero;
-        [SerializeField] private bool m_hingeUseSpring = true;
-        [SerializeField] private float m_hingeSpringStrenght = 100.0f;
-        [SerializeField] private float m_hingeSpringDamper = 0;
-        [SerializeField] private float m_hingeTargetPos = 0;
-        [SerializeField] private bool m_hingeUseMotor = true;
-        [SerializeField] private float m_hingeMotorTargetVelocity = 0;
-        [SerializeField] private float m_hingeMotorForce = 100.0f;
-        [SerializeField] private bool m_hingeMotorFreespin = true;
-        [SerializeField] private bool m_hingUseLimits = true;
-        [SerializeField] private float m_hingeLimitsMin = 0;
-        [SerializeField] private float m_hingeLimitsMax = 0;
-        [SerializeField] private float m_hingeLimitsBounciness = 0;
-        [SerializeField] private float m_hingeLimitsContactDistance = 0;
-        [SerializeField] private bool m_hingeExtendedLimits = true;
-        [SerializeField] private bool m_hingeUseAcceleration = true;
-        [SerializeField] private float m_hingeBreakForce = 100.0f;
-        [SerializeField] private float m_hingeBreakTorque = 100.0f;
-        [SerializeField] private bool m_hingeEnableCollision = true;
-        [SerializeField] private bool m_hingeEnablePreprocess = true;
-        [SerializeField] private float m_hingeMassScale = 1;
-        [SerializeField] private float m_hingeConnectedMassScale = 1;
+        [SerializeField] private List<HingeJoint> m_hinges;
+        [SerializeField] private float m_angle = 0;
+        [SerializeField][Range(0.0f, 1000.0f)] private float m_springForce = 0;
+        //[SerializeField] private Vector3 m_hingeAnchor = Vector3.zero;
+        //[SerializeField] private Vector3 m_hingeAxis = new Vector3(0, 0, 1);
+        //[SerializeField] private bool m_hingeAutoConfigConnAnchor = true;
+        //[SerializeField] private Vector3 m_hingeConnAnchor = Vector3.zero;
+        //[SerializeField] private bool m_hingeUseSpring = true;
+        //[SerializeField] private float m_hingeSpringStrenght = 100.0f;
+        //[SerializeField] private float m_hingeSpringDamper = 0;
+        //[SerializeField] private float m_hingeTargetPos = 0;
+
+        //[SerializeField] private bool m_hingeUseMotor = true;
+        //[SerializeField] private float m_hingeMotorTargetVelocity = 0;
+        //[SerializeField] private float m_hingeMotorForce = 100.0f;
+        //[SerializeField] private bool m_hingeMotorFreespin = true;
+
+        //[SerializeField] private bool m_hingUseLimits = true;
+        //[SerializeField] private float m_hingeLimitsMin = 0;
+        //[SerializeField] private float m_hingeLimitsMax = 0;
+
+        //[SerializeField] private float m_hingeLimitsBounciness = 0;
+        //[SerializeField] private float m_hingeLimitsContactDistance = 0;
+        //[SerializeField] private bool m_hingeExtendedLimits = true;
+        //[SerializeField] private bool m_hingeUseAcceleration = true;
+
+        //[SerializeField] private float m_hingeBreakForce = float.PositiveInfinity;
+        //[SerializeField] private float m_hingeBreakTorque = float.PositiveInfinity;
+        //[SerializeField] private bool m_hingeEnableCollision = true;
+
+        //[SerializeField] private bool m_hingeEnablePreprocess = true;
+        //[SerializeField] private float m_hingeMassScale = 1;
+        //[SerializeField] private float m_hingeConnectedMassScale = 1;
 
         [Header("Top Box Spring Settings")]
-        [SerializeField] private float m_hingeStrenght = 100.0f;
+        [SerializeField] private float m_springStrenght = 100.0f;
         [SerializeField] private float m_springDamper = 0;
         [SerializeField] private float m_springMinDistance = 0;
         [SerializeField] private float m_springMaxDistance = 0.2f;
@@ -59,26 +70,25 @@ namespace BoxSystem
         [SerializeField] private bool m_springEnableCollision = true;
         [SerializeField] private float m_springBreakForce = 100.0f;
         [SerializeField] private float m_springBreakTorque = 100.0f;
-        [SerializeField] private bool m_springAutoConfigConnAnchor = true;
-        [SerializeField] private bool m_springEnablePreprocess = true;
-        [SerializeField] private float m_springMassScale = 1;
-        [SerializeField] private float m_springConnectedMassScale = 1;
 
-        [Header("Undroppable Boxes Spring Settings")]
-        [SerializeField] private float m_undroppableBoxesSrpingStrenght = 0.0f;
-        [SerializeField] private float m_undroppableBoxesSpringDamper = 0;
-        [SerializeField] private float m_undroppableBoxesSpringMinDistance = 0;
-        [SerializeField] private float m_undroppableBoxesSpringMaxDistance = 0.2f;
-        [SerializeField] private float m_undroppableBoxesSpringTolerance = 0.00f;
-        [SerializeField] private bool m_undroppableBoxesSpringEnableCollision = false;
-        [SerializeField] private float m_undroppableBoxesSpringBreakForce = 100000000.0f;
-        [SerializeField] private float m_undroppableBoxesSpringBreakTorque = 10000000.0f;
-        [SerializeField] private bool m_undroppableBoxesSpringAutoConfigConnAnchor = true;
-        [SerializeField] private bool m_undroppableBoxesSpringEnablePreprocess = true;
-        [SerializeField] private float m_undroppableBoxesSpringMassScale = 1;
-        [SerializeField] private float m_undroppableBoxesSpringConnectedMassScale = 1;
+        //[SerializeField] private bool m_springAutoConfigConnAnchor = true;
+        //[SerializeField] private bool m_springEnablePreprocess = true;
+        //[SerializeField] private float m_springMassScale = 1;
+        //[SerializeField] private float m_springConnectedMassScale = 1;
 
-        private TowerBoxSystem Tower { get; set; } = null;
+        //[Header("Undroppable Boxes Spring Settings")]
+        //[SerializeField] private float m_undroppableBoxesSrpingStrenght = 0.0f;
+        //[SerializeField] private float m_undroppableBoxesSpringDamper = 0;
+        //[SerializeField] private float m_undroppableBoxesSpringMinDistance = 0;
+        //[SerializeField] private float m_undroppableBoxesSpringMaxDistance = 0.2f;
+        //[SerializeField] private float m_undroppableBoxesSpringTolerance = 0.00f;
+        //[SerializeField] private bool m_undroppableBoxesSpringEnableCollision = false;
+        //[SerializeField] private float m_undroppableBoxesSpringBreakForce = 100000000.0f;
+        //[SerializeField] private float m_undroppableBoxesSpringBreakTorque = 10000000.0f;
+        //[SerializeField] private bool m_undroppableBoxesSpringAutoConfigConnAnchor = true;
+        //[SerializeField] private bool m_undroppableBoxesSpringEnablePreprocess = true;
+        //[SerializeField] private float m_undroppableBoxesSpringMassScale = 1;
+        //[SerializeField] private float m_undroppableBoxesSpringConnectedMassScale = 1;
 
         public enum JointMode
         {
@@ -137,7 +147,13 @@ namespace BoxSystem
                 Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
             }
 
-
+            foreach (HingeJoint hingeJoint in m_hinges)
+            {
+                JointSpring spring = hingeJoint.spring;
+                spring.targetPosition = m_angle; 
+                spring.spring = m_springForce;
+                hingeJoint.spring = spring;
+            }
         }
 
         /// <summary> Spawn un objet de débug CartDebug à une position offset </summary>
@@ -169,8 +185,7 @@ namespace BoxSystem
             Rigidbody previousTopBoxRB = Tower.GetPreviousTopBox().GetComponent<Rigidbody>();
             if (previousTopBoxRB == null) { Debug.LogWarning("Previous Top Box Rigidbody est null"); return; }
 
-
-            DisablePhysicsOnRB(previousTopBoxRB);
+            //DisablePhysicsOnRB(previousTopBoxRB);
 
             RemoveJointFromBoxRB(previousTopBoxRB);
             AddJointBetween(previousTopBoxRB, topBoxRB);
@@ -203,8 +218,8 @@ namespace BoxSystem
                     Debug.LogWarning("Hinge joint is null");
                     return;
                 }
-
-                previousJoint.connectedBody = null;
+                 
+                //previousJoint.connectedBody = null;
             }
             else if (m_currentJointMode == JointMode.Spring)
             {
@@ -216,22 +231,22 @@ namespace BoxSystem
                 }
 
                 springJoint.connectedBody = null;
-                springJoint.spring = m_undroppableBoxesSrpingStrenght;
-                springJoint.damper = m_undroppableBoxesSpringDamper;
-                springJoint.minDistance = m_undroppableBoxesSpringMinDistance;
-                springJoint.maxDistance = m_undroppableBoxesSpringMaxDistance;
-                springJoint.tolerance = m_undroppableBoxesSpringTolerance;
-                springJoint.breakForce = m_undroppableBoxesSpringBreakForce;
-                springJoint.breakTorque = m_undroppableBoxesSpringBreakTorque;
-                springJoint.enableCollision = m_undroppableBoxesSpringEnableCollision;
-                springJoint.enablePreprocessing = m_undroppableBoxesSpringEnablePreprocess;
-                springJoint.massScale = m_undroppableBoxesSpringMassScale;
-                springJoint.connectedMassScale = m_undroppableBoxesSpringConnectedMassScale;
+                //springJoint.spring = m_undroppableBoxesSrpingStrenght;
+                //springJoint.damper = m_undroppableBoxesSpringDamper;
+                //springJoint.minDistance = m_undroppableBoxesSpringMinDistance;
+                //springJoint.maxDistance = m_undroppableBoxesSpringMaxDistance;
+                //springJoint.tolerance = m_undroppableBoxesSpringTolerance;
+                //springJoint.breakForce = m_undroppableBoxesSpringBreakForce;
+                //springJoint.breakTorque = m_undroppableBoxesSpringBreakTorque;
+                //springJoint.enableCollision = m_undroppableBoxesSpringEnableCollision;
+                //springJoint.enablePreprocessing = m_undroppableBoxesSpringEnablePreprocess;
+                //springJoint.massScale = m_undroppableBoxesSpringMassScale;
+                //springJoint.connectedMassScale = m_undroppableBoxesSpringConnectedMassScale;
 
                 previousJoint = springJoint;
             }
 
-            boxRB.isKinematic = true;
+            //boxRB.isKinematic = true;
             //Destroy(previousJoint); // If we destroy the joint we need to add the new top box spring everytime a box is removed from the tower
         }
 
@@ -287,7 +302,7 @@ namespace BoxSystem
         public void RemoveBoxImpulse(Vector3 velocity, bool single = false)
         {
 
-            MoveTopJointToNewTopBox();
+            //MoveTopJointToNewTopBox();
 
             Box topBox = Tower.GetTopBox();
             if (topBox == null)
@@ -310,11 +325,15 @@ namespace BoxSystem
 
             topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(totalImpulse, ForceMode.Impulse);
+            
+            if (m_currentJointMode == JointMode.Hinge)
+                m_hinges.Remove(topBox.GetComponent<HingeJoint>());
 
-            if (topBox.GetComponent<AutoDestruction>().enabled) return;
+            // TODO Remi: Do not forget to uncomment
+            //if (topBox.GetComponent<AutoDestruction>().enabled) return;
 
-            Tower.RemoveLastBoxFromTower();
-            topBox.GetComponent<AutoDestruction>().enabled = true;
+            //Tower.RemoveLastBoxFromTower();
+            //topBox.GetComponent<AutoDestruction>().enabled = true;
         }
 
         /// <summary> Retire le top joint de la top box et donne les valeurs top joint au joint de la nouvelle top box </summary>
@@ -340,8 +359,8 @@ namespace BoxSystem
                 if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
 
                 newTopSpringJoint.connectedBody = newLowerBoxRB;
-                newTopSpringJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
-                newTopSpringJoint.spring = m_hingeStrenght;
+                //newTopSpringJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
+                newTopSpringJoint.spring = m_springStrenght;
                 newTopSpringJoint.damper = m_springDamper;
                 newTopSpringJoint.minDistance = m_springMinDistance;
                 newTopSpringJoint.maxDistance = m_springMaxDistance;
@@ -349,9 +368,9 @@ namespace BoxSystem
                 newTopSpringJoint.breakForce = m_springBreakForce;
                 newTopSpringJoint.breakTorque = m_springBreakTorque;
                 newTopSpringJoint.enableCollision = m_springEnableCollision;
-                newTopSpringJoint.enablePreprocessing = m_springEnablePreprocess;
-                newTopSpringJoint.massScale = m_springMassScale;
-                newTopSpringJoint.connectedMassScale = m_springConnectedMassScale;
+                //newTopSpringJoint.enablePreprocessing = m_springEnablePreprocess;
+                //newTopSpringJoint.massScale = m_springMassScale;
+                //newTopSpringJoint.connectedMassScale = m_springConnectedMassScale;
             }
             else if (m_currentJointMode == JointMode.Hinge)
             {
@@ -369,13 +388,13 @@ namespace BoxSystem
                 if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
 
                 newTopHingeJoint.connectedBody = newLowerBoxRB;
-                newTopHingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
-                newTopHingeJoint.breakForce = m_hingeBreakForce;
-                newTopHingeJoint.breakTorque = m_hingeBreakTorque;
-                newTopHingeJoint.enableCollision = m_hingeEnableCollision;
-                newTopHingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
-                newTopHingeJoint.massScale = m_hingeMassScale;
-                newTopHingeJoint.connectedMassScale = m_hingeConnectedMassScale;
+                //newTopHingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
+                //newTopHingeJoint.breakForce = m_hingeBreakForce;
+                //newTopHingeJoint.breakTorque = m_hingeBreakTorque;
+                //newTopHingeJoint.enableCollision = m_hingeEnableCollision;
+                //newTopHingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
+                //newTopHingeJoint.massScale = m_hingeMassScale;
+                //newTopHingeJoint.connectedMassScale = m_hingeConnectedMassScale;
             }
         }
 
@@ -393,68 +412,84 @@ namespace BoxSystem
 
                 hingeJoint.connectedBody = attachedBody;
 
+
+                // Vector3 anchorPosition = wantedSide == Eside.left ? new Vector3(-BOX_HALF_WIDTH, -BOX_HALF_HEIGHT, 0) : new Vector3(0.5f, -0.5f, 0);
                 // Get the top bordures of the box to set the anchor
                 BoxSetup boxSetup = sourceBody.GetComponent<BoxSetup>();
                 float boxWidth = boxSetup.BoxWidth;
                 float boxHeight = boxSetup.BoxHeight;
                 //float boxLength = boxSetup.BoxLength;
-                Vector3 anchorPos = Vector3.right * boxWidth / 2;
-                anchorPos += Vector3.up * boxHeight / 2;
+                Vector3 anchorPosLeft = new Vector3(-Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0);
+                //Vector3 anchorPosRight = new Vector3(Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0);
+                //anchorPosLeft += Vector3.up * boxHeight / 2;
 
                 // Hinge on the right side of the box
-                hingeJoint.anchor = anchorPos;
+                hingeJoint.anchor = anchorPosLeft;
 
-                hingeJoint.axis = m_hingeAxis;
-                hingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
-                hingeJoint.connectedAnchor = m_hingeConnAnchor;
+                //hingeJoint.axis = m_hingeAxis;
+                hingeJoint.axis = new Vector3(0, 0, 1);
 
-                hingeJoint.useSpring = m_hingeUseSpring;
-
-                hingeJoint.spring = new JointSpring();
+                hingeJoint.useSpring = true;
                 JointSpring spring = hingeJoint.spring;
                 {
-                    spring.spring = m_hingeSpringStrenght;
-                    spring.damper = m_hingeSpringDamper;
-                    spring.targetPosition = m_hingeTargetPos;
+                    spring.targetPosition = m_angle;
+                    spring.spring = m_springForce;
                 }
                 hingeJoint.spring = spring;
 
-                hingeJoint.useMotor = m_hingeUseMotor;
-                hingeJoint.motor = new JointMotor();
-                JointMotor motor = hingeJoint.motor;
-                {
-                    motor.targetVelocity = m_hingeMotorTargetVelocity;
-                    motor.force = m_hingeMotorForce;
-                    motor.freeSpin = m_hingeMotorFreespin;
-                }
-                hingeJoint.motor = motor;
+                //hingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
+                //hingeJoint.connectedAnchor = m_hingeConnAnchor;
 
-                hingeJoint.useLimits = m_hingUseLimits;
+
+                //hingeJoint.spring = new JointSpring();
+                //JointSpring spring = hingeJoint.spring;
+                //{
+                //    spring.spring = m_hingeSpringStrenght;
+                //    spring.damper = m_hingeSpringDamper;
+                //    spring.targetPosition = m_hingeTargetPos;
+                //}
+                //hingeJoint.spring = spring;
+
+
+                //hingeJoint.useMotor = m_hingeUseMotor;
+                //hingeJoint.motor = new JointMotor();
+                //JointMotor motor = hingeJoint.motor;
+                //{
+                //    motor.targetVelocity = m_hingeMotorTargetVelocity;
+                //    motor.force = m_hingeMotorForce;
+                //    motor.freeSpin = m_hingeMotorFreespin;
+                //}
+                //hingeJoint.motor = motor;
+
+                hingeJoint.useLimits = true;
                 JointLimits limits = hingeJoint.limits;
                 {
-                    limits.min = m_hingeLimitsMin;
-                    limits.max = m_hingeLimitsMax;
-                    limits.bounciness = m_hingeLimitsBounciness;
-                    limits.contactDistance = m_hingeLimitsContactDistance;
+                    limits.min = 0;
+                    limits.max = 0;
+                    limits.bounciness = 0;
+                    limits.bounceMinVelocity = 0;
+                    //limits.contactDistance = 180;
                 }
                 hingeJoint.limits = limits;
 
-                hingeJoint.extendedLimits = m_hingeExtendedLimits;
-                hingeJoint.useAcceleration = m_hingeUseAcceleration;
-                hingeJoint.breakForce = m_hingeBreakForce;
-                hingeJoint.breakTorque = m_hingeBreakTorque;
-                hingeJoint.enableCollision = m_hingeEnableCollision;
-                hingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
-                hingeJoint.massScale = m_hingeMassScale;
-                hingeJoint.connectedMassScale = m_hingeConnectedMassScale;
+                m_hinges.Add(hingeJoint);
+
+                //hingeJoint.extendedLimits = m_hingeExtendedLimits;
+                //hingeJoint.useAcceleration = m_hingeUseAcceleration;
+                //hingeJoint.breakForce = m_hingeBreakForce;
+                //hingeJoint.breakTorque = m_hingeBreakTorque;
+                //hingeJoint.enableCollision = m_hingeEnableCollision;
+                //hingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
+                //hingeJoint.massScale = m_hingeMassScale;
+                //hingeJoint.connectedMassScale = m_hingeConnectedMassScale;
             }
             else if (m_currentJointMode == JointMode.Spring)
             {
                 SpringJoint springJoint = sourceBody.gameObject.AddComponent<SpringJoint>();
 
                 springJoint.connectedBody = attachedBody;
-                springJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
-                springJoint.spring = m_hingeStrenght;
+                //springJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
+                springJoint.spring = m_springStrenght;
                 springJoint.damper = m_springDamper;
                 springJoint.minDistance = m_springMinDistance;
                 springJoint.maxDistance = m_springMaxDistance;
@@ -462,9 +497,9 @@ namespace BoxSystem
                 springJoint.breakForce = m_springBreakForce;
                 springJoint.breakTorque = m_springBreakTorque;
                 springJoint.enableCollision = m_springEnableCollision;
-                springJoint.enablePreprocessing = m_springEnablePreprocess;
-                springJoint.massScale = m_springMassScale;
-                springJoint.connectedMassScale = m_springConnectedMassScale;
+                //springJoint.enablePreprocessing = m_springEnablePreprocess;
+                //springJoint.massScale = m_springMassScale;
+                //springJoint.connectedMassScale = m_springConnectedMassScale;
             }
         }
 

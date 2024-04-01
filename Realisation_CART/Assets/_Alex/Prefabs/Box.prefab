@@ -312,7 +312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376ce6f21c174ff44b4452185b346268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <_TowerPhysics>k__BackingField: {fileID: 0}
 --- !u!54 &5757727898776072923
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -338,7 +337,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &6365372574127203300
 BoxCollider:
