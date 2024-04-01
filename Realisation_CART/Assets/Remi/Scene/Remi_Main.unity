@@ -37781,6 +37781,7 @@ MonoBehaviour:
   m_hinges: []
   m_angle: 0
   m_springForce: 0
+  m_angleOffset: 0
   m_springStrenght: 0
   m_springDamper: 0
   m_springMinDistance: 0
@@ -77091,6 +77092,7 @@ GameObject:
   - component: {fileID: 4594654661632719328}
   - component: {fileID: 1072772876755820122}
   - component: {fileID: 3175719756163402679}
+  - component: {fileID: 9085652324592433692}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -77098,6 +77100,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9085652324592433692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9085652324592433691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10957a88632347a4ea6087bde9c0e45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_force: 900
 --- !u!137 &9093522111641658344
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
