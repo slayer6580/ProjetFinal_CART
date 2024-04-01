@@ -41,7 +41,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
-                m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true); // appel par TowerPhysics
+                m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true);
             }
             else if (Input.GetKeyDown(KeyCode.O)) // Remove item
             {
@@ -53,7 +53,7 @@ namespace BoxSystem
                 if (GetTopBox().IsEmpty())
                 {
                     Debug.Log("La boite est vide, on enleve la boite");
-                     m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true); // appel par TowerPhysics
+                     m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true);
                 }
 
                 if (GetTopBox() != null)
@@ -133,10 +133,19 @@ namespace BoxSystem
                     data[1]++;
                     data[0] += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
                 }
-                 m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true); // appel par TowerPhysics
+                 m_towerPhysics.RemoveBoxImpulse(Vector3.up * m_expulsionForce, true);
             }
 
             return data;
+        }
+
+        /// <summary> Place toute les boites a leur origine pour placement des angrages des hinges </summary>
+        public void ReplaceAllBoxToOrigin()
+        {
+            for (int i = 0;i < m_boxesInCart.Count;i++)
+            {
+                m_boxesInCart.ToArray()[i].ReplaceBoxToOrigin();
+            }
         }
 
         #region (--- Getter ---)
@@ -177,6 +186,7 @@ namespace BoxSystem
             return m_boxesInCart.ToArray()[1];
         }
 
+        /// <summary> Donne le stack complet des boites </summary>
         public Stack<Box> GetAllBoxes()
         {
             return m_boxesInCart;
