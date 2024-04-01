@@ -398,15 +398,18 @@ namespace BoxSystem
                 float boxWidth = boxSetup.BoxWidth;
                 float boxHeight = boxSetup.BoxHeight;
                 float boxLength = boxSetup.BoxLength;
+                Vector3 anchorPos = Vector3.right * boxWidth / 2;
+                anchorPos += Vector3.up * boxHeight / 2;
 
                 // Hinge on the right side of the box
-                hingeJoint.anchor = Vector3.right * boxWidth / 2;
+                hingeJoint.anchor = anchorPos;
 
                 hingeJoint.axis = m_hingeAxis;
                 hingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
                 hingeJoint.connectedAnchor = m_hingeConnAnchor;
 
                 hingeJoint.useSpring = m_hingeUseSpring;
+
                 hingeJoint.spring = new JointSpring();
                 JointSpring spring = hingeJoint.spring;
                 {
@@ -414,6 +417,7 @@ namespace BoxSystem
                     spring.damper = m_hingeSpringDamper;
                     spring.targetPosition = m_hingeTargetPos;
                 }
+                hingeJoint.spring = spring;
 
                 hingeJoint.useMotor = m_hingeUseMotor;
                 hingeJoint.motor = new JointMotor();
@@ -423,6 +427,7 @@ namespace BoxSystem
                     motor.force = m_hingeMotorForce;
                     motor.freeSpin = m_hingeMotorFreespin;
                 }
+                hingeJoint.motor = motor;
 
                 hingeJoint.useLimits = m_hingUseLimits;
                 JointLimits limits = hingeJoint.limits;
@@ -432,8 +437,8 @@ namespace BoxSystem
                     limits.bounciness = m_hingeLimitsBounciness;
                     limits.contactDistance = m_hingeLimitsContactDistance;
                 }
-
                 hingeJoint.limits = limits;
+
                 hingeJoint.extendedLimits = m_hingeExtendedLimits;
                 hingeJoint.useAcceleration = m_hingeUseAcceleration;
                 hingeJoint.breakForce = m_hingeBreakForce;
@@ -478,5 +483,26 @@ namespace BoxSystem
             else if (!box.IsEmpty())
                 RemoveItemImpulse(velocity);
         }
+
+
+        //public Box GetBoxUnderneath(Box upperBox)
+        //{
+        //    if (m_boxesInCart.Count < 2)
+        //        return null;
+
+        //    return m_boxesInCart.ToArray()[GetBoxIndex(upperBox) - 1];
+        //}
+
+        //private int GetBoxIndex(Box box)
+        //{
+        //    Box[] boxes = m_boxesInCart.ToArray();
+        //    for (int i = 0; i < boxes.Length; i++)
+        //    {
+        //        if (boxes[i] == box)
+        //            return i;
+        //    }
+
+        //    return -1;
+        //}
     }
 }
