@@ -170,7 +170,6 @@ namespace BoxSystem
             // DOIT REGARDER ANGLE DE LA BOITE AVEC LE PREMIER HINGE
             if (m_hinges[0].angle > m_angleOffset && m_side == Eside.right)
             {
-                //ReplaceAllBoxesToOrigin(); // METTRE LE CODE DU TOWERBOXSYSTEM QUI FAIT PAREIL
                 Tower.ReplaceAllBoxToOrigin();
                 EnabledColliderOnBoxes(true);
                 ChangeAllAnchors(Eside.left);
@@ -195,9 +194,7 @@ namespace BoxSystem
             Stack<Box> allBoxes = Tower.GetAllBoxes();
             foreach (Box box in allBoxes)
             {
-                BoxCollider boxCollider = box.GetComponent<BoxCollider>();
-                if (boxCollider)
-                    box.GetComponent<BoxCollider>().enabled = value;
+                box.EnabledAllColliders(value);
             }
         }
 
@@ -535,8 +532,8 @@ namespace BoxSystem
                 hingeJoint.useLimits = false;
                 JointLimits limits = hingeJoint.limits;
                 {
-                    limits.min = 0;
-                    limits.max = 0;
+                    limits.min = 0f;
+                    limits.max = 90f;
                     limits.bounciness = 0;
                     limits.bounceMinVelocity = 0;
                     //limits.contactDistance = 180;
@@ -547,8 +544,8 @@ namespace BoxSystem
 
                 //hingeJoint.extendedLimits = m_hingeExtendedLimits;
                 //hingeJoint.useAcceleration = m_hingeUseAcceleration;
-                //hingeJoint.breakForce = m_hingeBreakForce;
-                //hingeJoint.breakTorque = m_hingeBreakTorque;
+                hingeJoint.breakForce = float.PositiveInfinity;
+                hingeJoint.breakTorque = float.PositiveInfinity;
                 hingeJoint.enableCollision = true;
                 //hingeJoint.enablePreprocessing = m_hingeEnablePreprocess;
                 //hingeJoint.massScale = m_hingeMassScale;

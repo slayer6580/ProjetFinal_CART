@@ -30037,7 +30037,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3959612820659040669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633594, y: -3.4863681e-15, z: 8.0546825e-17, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633594, y: -1.7431841e-15, z: 4.0273412e-17, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.77, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -37771,17 +37771,17 @@ MonoBehaviour:
     type: 3}
   <Player>k__BackingField: {fileID: 4223823007780283570}
   m_itemRemoveImpulseIntesity: 0.2
-  m_itemVectorUpImpulseIntesity: 1
+  m_itemVectorUpImpulseIntesity: 5
   m_boxRemoveImpulseIntesity: 0.2
-  m_boxVectorUpImpulseIntesity: 1
+  m_boxVectorUpImpulseIntesity: 5
   m_nbOfUndroppableBoxes: 4
-  m_debugCartDistance: 10
+  m_debugCartDistance: 60
   m_debugCartSpeed: 3
   m_currentJointMode: 1
   m_hinges: []
   m_angle: 0
-  m_springForce: 0
-  m_angleOffset: 0
+  m_springForce: 15
+  m_angleOffset: 0.8
   m_springStrenght: 0
   m_springDamper: 0
   m_springMinDistance: 0
@@ -41870,7 +41870,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695684694099198788}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633594, y: -3.4863681e-15, z: 8.0546825e-17, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633594, y: -1.7431841e-15, z: 4.0273412e-17, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.77, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
