@@ -336,10 +336,10 @@ namespace BoxSystem
                 if (newTopBox == null) { Debug.LogWarning("No new top box"); return; }
                 SpringJoint newTopSpringJoint = newTopBox.GetComponent<SpringJoint>();
                 if (newTopSpringJoint == null) { Debug.LogWarning("New Spring joint is null"); return; }
-                Rigidbody newLowerBoxRB = Tower.GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
-                if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
+                //Rigidbody newLowerBoxRB = Tower.GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
+                //if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
 
-                newTopSpringJoint.connectedBody = newLowerBoxRB;
+                //newTopSpringJoint.connectedBody = newLowerBoxRB;
                 newTopSpringJoint.autoConfigureConnectedAnchor = m_springAutoConfigConnAnchor;
                 newTopSpringJoint.spring = m_hingeStrenght;
                 newTopSpringJoint.damper = m_springDamper;
@@ -365,10 +365,10 @@ namespace BoxSystem
                 if (newTopBox == null) { Debug.LogWarning("No new top box"); return; }
                 HingeJoint newTopHingeJoint = newTopBox.GetComponent<HingeJoint>();
                 if (newTopHingeJoint == null) { Debug.LogWarning("New Spring joint is null"); return; }
-                Rigidbody newLowerBoxRB = Tower.GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
-                if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
+                //Rigidbody newLowerBoxRB = Tower.GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
+                //if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
 
-                newTopHingeJoint.connectedBody = newLowerBoxRB;
+                //newTopHingeJoint.connectedBody = newLowerBoxRB;
                 newTopHingeJoint.autoConfigureConnectedAnchor = m_hingeAutoConfigConnAnchor;
                 newTopHingeJoint.breakForce = m_hingeBreakForce;
                 newTopHingeJoint.breakTorque = m_hingeBreakTorque;
@@ -397,7 +397,7 @@ namespace BoxSystem
                 BoxSetup boxSetup = sourceBody.GetComponent<BoxSetup>();
                 float boxWidth = boxSetup.BoxWidth;
                 float boxHeight = boxSetup.BoxHeight;
-                float boxLength = boxSetup.BoxLength;
+                //float boxLength = boxSetup.BoxLength;
                 Vector3 anchorPos = Vector3.right * boxWidth / 2;
                 anchorPos += Vector3.up * boxHeight / 2;
 
