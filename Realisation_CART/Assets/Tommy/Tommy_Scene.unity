@@ -7273,7 +7273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633598, y: -0.0000000258667, z: 0.000000003559801, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633595, y: 0.0000000039159076, z: -5.389107e-10, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.77, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13832,7 +13832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535154984}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633598, y: -0.0000000258667, z: 0.000000003559801, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633595, y: 0.0000000039159076, z: -5.389107e-10, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.77, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19985,32 +19985,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <MinimumSpeedToDrift>k__BackingField: 15
+  <MinimumSpeedToAllowDrift>k__BackingField: 15
   <DriftingDrag>k__BackingField: 1
-  <DriftingDragRelativeToJoystick>k__BackingField:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0.017332636
-      outSlope: 0.017332636
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.06803456
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.35225177
-      outSlope: -0.35225177
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.06695467
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   <DriftingRotatingSpeed>k__BackingField: 75
   <AddedRotatingSpeedWhenBreaking>k__BackingField: 30
   <DriftingAcceleration>k__BackingField: 70
@@ -20024,13 +20000,14 @@ MonoBehaviour:
   <MinBoostTime>k__BackingField: 1
   <MaxBoostTime>k__BackingField: 3
   <BackToIdleAfterStop>k__BackingField: 0
-  m_cart: {fileID: 811115955}
-  m_cartRB: {fileID: 811115960}
-  m_gameplayCamera: {fileID: 535154984}
-  m_camBrain: {fileID: 330585548}
-  m_humanAnimator: {fileID: 918585231}
-  m_feetOnCartRig: {fileID: 1437413589}
+  <Cart>k__BackingField: {fileID: 811115955}
+  <CartRB>k__BackingField: {fileID: 811115960}
+  <CamBrain>k__BackingField: {fileID: 330585548}
+  <VirtualCamera>k__BackingField: {fileID: 535154984}
+  <HumanAnimCtrlr>k__BackingField: {fileID: 918585231}
+  <FeetOnCartRig>k__BackingField: {fileID: 1437413589}
   <CartMovement>k__BackingField: {fileID: 811115958}
+  <Tower>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 1875296464}
 --- !u!54 &811115960
 Rigidbody:

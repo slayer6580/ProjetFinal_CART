@@ -1,4 +1,3 @@
-using DiscountDelirium;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -54,7 +53,6 @@ namespace BoxSystem
         }
         #endregion
 
-
         #region (--- Variables ---)
 
         private List<SlotInfo> m_slotsList = new List<SlotInfo>();
@@ -66,14 +64,15 @@ namespace BoxSystem
         private BoxSetup m_boxSetup;
         private const int MEDIUM_SIZE = 2;
         private const int LARGE_SIZE = 4;
-        private Tower m_tower;
+        private TowerBoxSystem m_tower;
+        private Vector3 m_initialLocalPositionInBox;
+
         #endregion
 
         private void Awake()
         {
             m_boxSetup = GetComponent<BoxSetup>();
         }
-
 
         #region (--- InitFunctions ---)
         /// <summary> BoxSetup va nous donner les infos des slots </summary>
@@ -102,12 +101,11 @@ namespace BoxSystem
         }
 
         /// <summary> La boite se connecte a la tour lors de sa propre création </summary>
-        public void SetTower(Tower tower)
+        public void SetTower(TowerBoxSystem tower)
         {
             m_tower = tower;    
         }
         #endregion
-
 
         #region (--- Bool Verification ---)
         /// <summary> Regarde si on peut prendre l'objet selon sa taille </summary>
@@ -128,8 +126,13 @@ namespace BoxSystem
             int sizeInt = size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
             return m_availableSlotsLeft < sizeInt ? false : true;
         }
-        #endregion
 
+        /// <summary> Regarde si la boite est vide </summary>
+        public bool IsEmpty()
+        {
+            return m_itemsList.Count == 0;
+        }
+        #endregion
 
         #region (--- PutItemInsideBox ---)
         /// <summary> Pour mettre l'objet dans la boite selon sa taille </summary>
@@ -142,6 +145,7 @@ namespace BoxSystem
             else
                 PutInBoxOrReorganize(GO, autoSnap);
         }
+
 
         /// <summary> Pour mettre un petit objet dans la boite </summary>
         private void PutSmallItemInBox(GameObject GO, bool autoSnap)
@@ -253,49 +257,19 @@ namespace BoxSystem
         }
         #endregion
 
+        #region (--- SlerpAndSnap ---)
 
-        #region (--- RemoveItemFromBox ---)
-
-        public void RemoveItemImpulse()
+        /// <summary> Change le scale de l'item et commence le Slerp And Snap </summary>
+        private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
-            // get the top item
-            if (m_itemsList.Count <= 0)
-            {
-                Debug.LogWarning("No item in the box");
-                return;
-            }
-
-            ItemInBox lastItemInBox = GetLastItem();
-
-            if (lastItemInBox.m_item == null)
-            {
-                Debug.LogWarning("Item is null");
-                return;
-            }
-
-            Debug.Log("Item to remove: " + lastItemInBox.m_item.name);
-            lastItemInBox.m_item.AddComponent<Rigidbody>().AddForce(transform.up * 10, ForceMode.Impulse);
-
-            foreach (int itemIndex in lastItemInBox.m_slotIndex)
-            {
-                Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
-                m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
-            }
-            lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
-            m_itemsList.Remove(lastItemInBox);
-
+            Vector3 scaleInBox = GO.GetComponent<Item>().m_data.m_scaleInBox;
+            GO.transform.localScale = new Vector3(scaleInBox.x * m_boxSetup.SlotWidth, scaleInBox.y * m_boxSetup.SlotHeight, scaleInBox.z * m_boxSetup.SlotLenght);
+            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
         }
 
         #endregion
 
-
         #region (--- HelpFunctions ---)
-        /// <summary> Change le scale de l'item et commence le Slerp And Snap </summary>
-        private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
-        {
-            GO.transform.localScale = GO.GetComponent<Item>().m_data.m_scaleInBox; // change le scale de l'objet choisi
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap); 
-        }
 
         /// <summary> Regarde si une liste de bool est toute vrai </summary>
         private bool AllSlotIsAvailable(List<bool> slotsAvailable)
@@ -324,15 +298,46 @@ namespace BoxSystem
             return localposition / nbOfPositions;
         }
 
-        private ItemInBox GetLastItem()
+        /// <summary> Donne le dernier objet ajouter de la boite </summary>
+        public ItemInBox GetLastItem()
         {
             return m_itemsList[m_itemsList.Count - 1];
         }
 
-        public bool BoxIsEmpty()
+        /// <summary> Remet les slots dans la liste comme vide </summary>
+        public void ResetSlots(ItemInBox lastItemInBox)
         {
-           return m_itemsList.Count == 0;
+            foreach (int itemIndex in lastItemInBox.m_slotIndex)
+            {
+                Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
+                m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
+            }
         }
+
+        /// <summary> Donne tout les itemInBox de la boite </summary>
+        public List<ItemInBox> GetItemsInBox()
+        {
+            return m_itemsList;
+        }
+
+        /// <summary> Assigne la position initial de la boite dans la tour </summary>
+        public void SetInitialLocationInBox(Vector3 localPosition)
+        {
+            m_initialLocalPositionInBox = localPosition;
+        }
+
+        /// <summary> Replace la boite à sa position initial dans la tour </summary>
+        public void ReplaceBoxToOrigin()
+        {
+            transform.localPosition = m_initialLocalPositionInBox;
+        }
+
+        /// <summary> Donne acces à la tour reliée à la boîte </summary>
+        public TowerBoxSystem GetTower()
+        {
+            return m_tower;
+        }
+
         #endregion
     }
 }
