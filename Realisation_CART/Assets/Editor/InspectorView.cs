@@ -24,7 +24,12 @@ namespace BehaviourTree
             //Create editor with the value of the newly selected node
             //TODO - () =>  - Pourquoi vide?
             m_editor = Editor.CreateEditor(nodeView.m_node);
-            IMGUIContainer container = new IMGUIContainer(() => { m_editor.OnInspectorGUI(); });
+            IMGUIContainer container = new IMGUIContainer(() => {
+                if (m_editor.target)
+                {
+					m_editor.OnInspectorGUI();
+				}
+            });
             this.Add(container);
 
 		}

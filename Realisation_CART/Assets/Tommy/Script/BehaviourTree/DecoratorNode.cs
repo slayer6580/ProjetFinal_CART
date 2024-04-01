@@ -10,6 +10,8 @@ namespace BehaviourTree
     {
 		[HideInInspector] public Node m_child;
 
+
+		
 		//To allow multiple instance of the same BehaviourTree to execute at the same time
 		public override Node Clone()
 		{
@@ -17,5 +19,6 @@ namespace BehaviourTree
 			node.m_child = m_child.Clone();
 			return node;
 		}
+		
 	}
 }

@@ -28,6 +28,14 @@ namespace BehaviourTree
 
 			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
 			styleSheets.Add(styleSheet);
+
+			Undo.undoRedoPerformed += OnUndoRedo;
+		}
+
+		private void OnUndoRedo()
+		{
+			PopulateView(m_tree);
+			AssetDatabase.SaveAssets();
 		}
 
 		//NodeView have all the information on how to show the node. NodeView have a reference to the node it represent.
@@ -131,6 +139,16 @@ namespace BehaviourTree
 					m_tree.AddChild(parentView.m_node, childView.m_node);
 				});
 			}
+
+			//Call sorting children of composite when moving nodes.
+			if(graphViewChange.movedElements != null)
+			{
+				nodes.ForEach((n) =>
+				{
+					NodeView view = n as NodeView;
+					view.SortChildren();
+				});
+			}
 			return graphViewChange;
 		}
 
@@ -178,6 +196,15 @@ namespace BehaviourTree
 			//Here OnNodeSelected become a reference of m_onNodeSelected so they become both the same delegate
 			nodeView.m_OnNodeSelected = m_onNodeSelected;
 			AddElement(nodeView);
+		}
+
+		public void UpdateNodeState()
+		{
+			nodes.ForEach(n =>
+			{
+				NodeView view = n as NodeView;
+				view.UpdateState();
+			});
 		}
 	}
 }

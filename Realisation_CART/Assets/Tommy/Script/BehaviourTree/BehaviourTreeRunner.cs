@@ -11,6 +11,9 @@ namespace BehaviourTree
         {
             //To allow multiple instance of the same BehaviourTree to execute at the same time
             m_tree = m_tree.Clone();
+
+			//Check to integrate some AiAgent here
+			m_tree.Bind();
         }
 
         void Update()
