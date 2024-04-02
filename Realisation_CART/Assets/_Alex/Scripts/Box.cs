@@ -62,8 +62,6 @@ namespace BoxSystem
         private int m_totalSlots;
         private int m_availableSlotsLeft;
         private BoxSetup m_boxSetup;
-        private const int MEDIUM_SIZE = 2;
-        private const int LARGE_SIZE = 4;
         private TowerBoxSystem m_tower;
         private Vector3 m_initialLocalPositionInBox;
 
@@ -123,7 +121,7 @@ namespace BoxSystem
         /// <summary> Regarde si on peut prendre un objet multi slot </summary>
         private bool CanPutMultiSlotItemInBox(ItemData.ESize size)
         {
-            int sizeInt = size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
+            int sizeInt = size == ItemData.ESize.medium ? GameConstants.MEDIUM_SIZE : GameConstants.LARGE_SIZE;
             return m_availableSlotsLeft < sizeInt ? false : true;
         }
 
@@ -173,7 +171,7 @@ namespace BoxSystem
             List<MultiSlots> multiSlotList = new List<MultiSlots>();
 
             multiSlotList = item.m_data.m_size == ItemData.ESize.medium ? m_doubleSlots : m_fourSlots;
-            int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
+            int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? GameConstants.MEDIUM_SIZE : GameConstants.LARGE_SIZE;
 
             foreach (MultiSlots multiSlot in multiSlotList)
             {
@@ -232,7 +230,7 @@ namespace BoxSystem
         private void PutMultiSlotItemInBox(GameObject GO, MultiSlots multiSlot, bool autoSnap)
         {
             Item item = GO.GetComponent<Item>();
-            int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? MEDIUM_SIZE : LARGE_SIZE;
+            int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? GameConstants.MEDIUM_SIZE : GameConstants.LARGE_SIZE;
             List<Vector3> allLocalPositions = new List<Vector3>();
 
             m_availableSlotsLeft -= sizeInt;
@@ -248,7 +246,7 @@ namespace BoxSystem
 
 
             bool turn90Degree = false;
-            if (sizeInt == MEDIUM_SIZE && Mathf.Abs((multiSlot.m_slotIndexes[0] - multiSlot.m_slotIndexes[1])) != 1)
+            if (sizeInt == GameConstants.MEDIUM_SIZE && Mathf.Abs((multiSlot.m_slotIndexes[0] - multiSlot.m_slotIndexes[1])) != 1)
             {
                 turn90Degree = true;
             }
