@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 using UnityEditor.Callbacks;
 using System;
 using UnityEditor.IMGUI.Controls;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 namespace BehaviourTree
 {
@@ -54,12 +55,19 @@ namespace BehaviourTree
 			m_inspectorView = root.Q<InspectorView>();
 
 			m_blackboardView = root.Q<IMGUIContainer>();
+
 			m_blackboardView.onGUIHandler = () =>
 			{
-				m_treeObject.Update();
-				EditorGUILayout.PropertyField(m_blackboardProperty);
-				m_treeObject.ApplyModifiedProperties();
+				if(m_treeObject != null)
+				{
+					m_treeObject.Update();
+					EditorGUILayout.PropertyField(m_blackboardProperty);
+					m_treeObject.ApplyModifiedProperties();
+				}
+				
 			};
+			
+
 
 			//Because the BehaviourTreeView don't have the inspectorView in reference we subscribe the inspector update to an Action<>
 			m_treeView.m_onNodeSelected = OnNodeSelectionChanged;

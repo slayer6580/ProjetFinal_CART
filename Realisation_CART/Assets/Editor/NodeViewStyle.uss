@@ -12,15 +12,25 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 #input {
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    color: rgb(255, 0, 0);
 }
 
 #output {
     align-items: center;
+    min-width: auto;
+    min-height: auto;
+    flex-grow: 1;
 }
 
 #selection-border {
@@ -41,6 +51,12 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
 }
 
 :hover > #selection-border {
@@ -146,4 +162,9 @@
 
 .failure #node-state {
     background-color: rgba(245, 0, 0, 0);
+}
+
+.port {
+    color: rgb(255, 0, 0);
+    cursor: url('project://database/Assets/Editor/Texture/SelectionCursor.png?fileID=2800000&guid=7ab7a6913080c9746b2faba5adc6836b&type=3#SelectionCursor');
 }

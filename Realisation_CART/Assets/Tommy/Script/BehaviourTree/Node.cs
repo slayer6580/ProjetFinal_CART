@@ -17,7 +17,7 @@ namespace BehaviourTree
 		[HideInInspector] public Vector2 m_position;
 		[HideInInspector] public Blackboard m_Blackboard;
         //[HideInInspector] public AiAgent m_agent;
-        [TextArea] public string description;
+        [TextArea] public string m_description;
 
         
 		public State Update()

@@ -29,11 +29,9 @@ namespace BehaviourTree
             CreateOutputPorts();
 			SetupClasses();
 
-			//TODO - Don't works
 			Label descriptionLabel = this.Q<Label>("description");
 			descriptionLabel.Bind(new SerializedObject(node));
 			descriptionLabel.bindingPath = "m_description";
-			
 
 		}
 
@@ -78,7 +76,7 @@ namespace BehaviourTree
 			{
 				m_input.portName = "";
 				//FlexDirection is to align the port to show the node vertically
-				m_input.style.flexDirection = FlexDirection.Column;
+				//m_input.style.flexDirection = FlexDirection.Column;
 				inputContainer.Add(m_input);
 			}
 		}
