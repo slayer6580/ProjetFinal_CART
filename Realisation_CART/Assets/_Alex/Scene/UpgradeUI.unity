@@ -4697,7 +4697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_startingCartToken: 200
   m_upgradeCostByLevel: 0a00000014000000280000003c000000
-  m_ShowTMP: 1
+  m_ShowTMP: 0
   m_nbOfCartTokenText: {fileID: 1117004373}
   m_accelerationCostText: {fileID: 1621616504}
   m_accelerationBuyingText: {fileID: 993360852}

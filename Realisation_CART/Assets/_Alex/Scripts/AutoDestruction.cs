@@ -6,14 +6,9 @@ namespace DiscountDelirium
     {
         [SerializeField] private float m_delayUntilDelete;
 
-        private void OnEnable()
+        public void DestroyItem()
         {
-            Invoke("DestroyItem", m_delayUntilDelete);
-        }
-
-        private void DestroyItem()
-        {
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, m_delayUntilDelete);
         }
     }
 }

@@ -108,7 +108,7 @@ namespace StatsSystem
         private void UpdateCost()
         {
             if (AccelerationStat < MAX_LEVEL)
-            m_accelerationCostText.text = m_upgradeCostByLevel[AccelerationStat].ToString();
+                m_accelerationCostText.text = m_upgradeCostByLevel[AccelerationStat].ToString();
             else
                 m_accelerationCostText.text = " ";
 
@@ -174,12 +174,12 @@ namespace StatsSystem
                 m_accelerationBuyButton.interactable = false;
 
             if (MaxSpeedStat < MAX_LEVEL)
-            m_maxSpeedBuyButton.interactable = m_nbCartToken >= m_upgradeCostByLevel[MaxSpeedStat];
+                m_maxSpeedBuyButton.interactable = m_nbCartToken >= m_upgradeCostByLevel[MaxSpeedStat];
             else
                 m_maxSpeedBuyButton.interactable = false;
 
             if (HandlingStat < MAX_LEVEL)
-            m_handlingBuyButton.interactable = m_nbCartToken >= m_upgradeCostByLevel[HandlingStat];
+                m_handlingBuyButton.interactable = m_nbCartToken >= m_upgradeCostByLevel[HandlingStat];
             else
                 m_handlingBuyButton.interactable = false;
 

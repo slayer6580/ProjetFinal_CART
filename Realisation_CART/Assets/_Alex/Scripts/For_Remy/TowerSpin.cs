@@ -10,7 +10,8 @@ namespace DiscountDelirium
         // Update is called once per frame
         void Update()
         {
-            transform.Rotate(Vector3.up * m_turnSpeed);
+           // transform.Rotate(Vector3.up * m_turnSpeed);
+            GetComponent<Rigidbody>().AddTorque(Vector3.up * m_turnSpeed, ForceMode.Force);
         }
     }
 }

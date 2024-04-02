@@ -3161,7 +3161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746864961}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633597, y: -0.00000002952405, z: 0.000000004063129, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633597, y: -0.000000029524049, z: 0.0000000040631285, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.12, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8348,7 +8348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221520797}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633597, y: -0.00000002952405, z: 0.000000004063129, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633597, y: -0.000000029524049, z: 0.0000000040631285, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.12, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -63176,13 +63176,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
         type: 3}
+      propertyPath: m_boxPrefab
+      value: 
+      objectReference: {fileID: 3665573428290585098, guid: 32d92434184086948a6ad0954b1d3b75,
+        type: 3}
+    - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
       propertyPath: m_boxGapHeight
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
         type: 3}
       propertyPath: m_expulsionForce
-      value: 1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_boxExpulsionForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_itemExpulsionForce
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
         type: 3}

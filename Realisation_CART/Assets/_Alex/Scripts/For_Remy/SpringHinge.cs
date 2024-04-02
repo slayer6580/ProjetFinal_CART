@@ -60,14 +60,14 @@ namespace DiscountDelirium
             if (m_hinges[0].angle > m_angleOffset && m_side == Eside.right)
             {             
                 ReplaceAllBoxesToOrigin(); // METTRE LE CODE DU TOWERBOXSYSTEM QUI FAIT PAREIL
-                EnabledColliderOnBoxes(true);
+              //  EnabledColliderOnBoxes(true);
                 ChangeAllAnchors(Eside.left);
               
             }
             else if (m_hinges[0].angle < -m_angleOffset && m_side == Eside.left)
             {      
                 ReplaceAllBoxesToOrigin();
-                EnabledColliderOnBoxes(true);
+               // EnabledColliderOnBoxes(true);
                 ChangeAllAnchors(Eside.right);
             }
             else if (m_hinges[0].angle > -m_angleOffset && m_hinges[0].angle < m_angleOffset)
