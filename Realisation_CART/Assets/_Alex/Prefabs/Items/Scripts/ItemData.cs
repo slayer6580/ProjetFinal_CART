@@ -14,6 +14,6 @@ public class ItemData : ScriptableObject
     public string m_name;
     public int m_cost;
     public ESize m_size;
-    public Vector3 m_scaleInBox;
+    public GameObject m_object;
 
 }

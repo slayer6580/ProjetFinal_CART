@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62ef3f0db4d29b44e86996c864e2bfa9, type: 3}
-  m_Name: Large
+  m_Name: Medium
   m_EditorClassIdentifier: 
-  m_name: Large
-  m_cost: 75
-  m_size: 2
-  m_scaleInBox: {x: 2, y: 1, z: 2}
+  m_name: Medium
+  m_cost: 25
+  m_size: 1
+  m_object: {fileID: 1134162025243624237, guid: 6b3197cd3a9cbf34587f79d839906b50,
+    type: 3}

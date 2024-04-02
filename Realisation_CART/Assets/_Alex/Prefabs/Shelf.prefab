@@ -220,8 +220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9d36cffb3255542bd47fc54ec7935a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itemPrefab: {fileID: 9000504276230933140, guid: ec975b46424174841b2482405f1c20d8,
+  m_itemPrefab: {fileID: 9000504276230933140, guid: 636485a562efff143934db95e464347d,
     type: 3}
+  m_itemData: {fileID: 11400000, guid: d808cfc7e4269ba438baf517f1c539e3, type: 2}
   m_itemQuantity: 30
   m_quantityText: {fileID: 6367491464587995437}
 --- !u!33 &4098625193968494305

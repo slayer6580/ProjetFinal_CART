@@ -7,6 +7,7 @@ namespace BoxSystem
     {
         [Header("mettre l'item que l'étagere donne ici")]
         [SerializeField] private GameObject m_itemPrefab;
+        [SerializeField] private ItemData m_itemData;
         [Header("la quantité de l'item")]
         [SerializeField] private int m_itemQuantity;
         [Header("mettre le debug visuel TMP ici")]
@@ -21,7 +22,7 @@ namespace BoxSystem
         {
             m_remainingItems = m_itemQuantity;
             m_quantityText.text = m_itemQuantity.ToString();
-            m_renderer = GetComponent<MeshRenderer>();      
+            m_renderer = GetComponent<MeshRenderer>();
         }
 
         private void Start()
@@ -41,8 +42,16 @@ namespace BoxSystem
         public GameObject GetItemFromShelf()
         {
             m_remainingItems--;
-            GameObject instant = Instantiate(m_itemPrefab);
-            instant.transform.position = transform.position;
+
+            GameObject objectToSpawn = m_itemPrefab;
+            Item itemScript = objectToSpawn.GetComponent<Item>();
+            itemScript.m_data = m_itemData;
+            objectToSpawn.transform.position = transform.position;
+            GameObject instant = Instantiate(objectToSpawn);
+            GameObject graphics = Instantiate(itemScript.m_data.m_object);
+            graphics.transform.SetParent(instant.transform);
+            graphics.transform.localPosition = Vector3.zero;
+
             m_quantityText.text = m_remainingItems.ToString();
             return instant;
         }
@@ -57,7 +66,7 @@ namespace BoxSystem
         /// <summary> Change la couleur du shelf selon la grosseur de l'item </summary>
         private void ColorShelf()
         {
-            switch (m_itemPrefab.GetComponent<Item>().m_data.m_size)
+            switch (m_itemData.m_size)
             {
                 case ItemData.ESize.small:
                     m_renderer.material.color = Color.green;

@@ -22,9 +22,9 @@ namespace BoxSystem
         [SerializeField] private int m_nbSlotWidth;
         [SerializeField] private int m_nbSlotLength;
 
-        public float SlotHeight { get; private set; }
-        public float SlotWidth { get; private set; }
-        public float SlotLenght { get; private set; }
+        [field: SerializeField]  public float SlotHeight { get; private set; }
+        [field: SerializeField] public float SlotWidth { get; private set; }
+        [field: SerializeField] public float SlotLenght { get; private set; }
 
 
         [Header("Pour placer les parties de la boite")]

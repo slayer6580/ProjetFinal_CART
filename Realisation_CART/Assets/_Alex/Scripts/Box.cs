@@ -101,7 +101,7 @@ namespace BoxSystem
         /// <summary> La boite se connecte a la tour lors de sa propre création </summary>
         public void SetTower(TowerBoxSystem tower)
         {
-            m_tower = tower;    
+            m_tower = tower;
         }
         #endregion
 
@@ -260,8 +260,11 @@ namespace BoxSystem
         /// <summary> Change le scale de l'item et commence le Slerp And Snap </summary>
         private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
-            Vector3 scaleInBox = GO.GetComponent<Item>().m_data.m_scaleInBox;
-            GO.transform.localScale = new Vector3(scaleInBox.x * m_boxSetup.SlotWidth, scaleInBox.y * m_boxSetup.SlotHeight, scaleInBox.z * m_boxSetup.SlotLenght);
+            Transform GOChild = GO.transform.GetChild(0);
+
+            Vector3 itemScale = new Vector3(m_boxSetup.SlotWidth, m_boxSetup.SlotHeight, m_boxSetup.SlotLenght);
+            GO.transform.localScale = itemScale;
+            GOChild.localScale = Vector3.one;
             GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
         }
 
