@@ -14,7 +14,7 @@ namespace BehaviourTree
 		[HideInInspector] public State m_state = State.Running;
 		[HideInInspector] public bool m_started = false;
 		[HideInInspector] public string m_guid;   //An Id that will be assign when creating a node
-		[HideInInspector] public Vector2 m_position;
+		public Vector2 m_position;
 		[HideInInspector] public Blackboard m_Blackboard;
         //[HideInInspector] public AiAgent m_agent;
         [TextArea] public string m_description;

@@ -5,6 +5,7 @@ using UnityEditor;
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace BehaviourTree
 {
@@ -156,13 +157,16 @@ namespace BehaviourTree
 		//TODO - {  ---  }  ???
 		//TODO - async
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
-		{
+		{			
+			//Get the mouse position in the tree panel
+			Vector2 localMousePos = ElementAt(0).ChangeCoordinatesTo(ElementAt(1), evt.localMousePosition);
+			
 			{
 				var types = TypeCache.GetTypesDerivedFrom<LeafNode>();
 
 				foreach (var type in types)
 				{			
-					evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (async) => CreateNode(type));
+					evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (async) => CreateNode(type, localMousePos));
 				}
 			}
 
@@ -170,7 +174,7 @@ namespace BehaviourTree
 				var types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
 				foreach (var type in types)
 				{
-					evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (async) => CreateNode(type));
+					evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (async) => CreateNode(type, localMousePos));
 				}
 			}
 
@@ -178,21 +182,22 @@ namespace BehaviourTree
 				var types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
 				foreach (var type in types)
 				{
-					evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (async) => CreateNode(type));
+					evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (async) => CreateNode(type, localMousePos));
 				}
 			}
 		}
 		
-		void CreateNode(System.Type type)
+		void CreateNode(System.Type type, Vector2 mousePosition)
 		{
 			Node node = m_tree.CreateNode(type);
+			node.m_position = mousePosition;
 			CreateNodeView(node);
 		}
 
 		void CreateNodeView(Node node)
 		{
 			NodeView nodeView = new NodeView(node);
-			//TODO - Just need to be sure.
+
 			//Here OnNodeSelected become a reference of m_onNodeSelected so they become both the same delegate
 			nodeView.m_OnNodeSelected = m_onNodeSelected;
 			AddElement(nodeView);

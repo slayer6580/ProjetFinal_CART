@@ -36,10 +36,11 @@ namespace BehaviourTree
 				AssetDatabase.AddObjectToAsset(node, this);
 			}
 
-			//Since we used the tree to undo(this), we need to specify which parameter to specifically undo
+			//Since we used the tree(this) to undo, we need to specify which parameter to specifically undo
 			Undo.RegisterCreatedObjectUndo(node, "Behaviour Tree (CreateNode)");
             AssetDatabase.SaveAssets();
-            return node;
+
+			return node;
 		}
 
         public void DeleteNode(Node node)
@@ -156,8 +157,7 @@ namespace BehaviourTree
 			return tree;
 		}
 
-		
-		//TODO - Why an Action?
+
 		public void Traverse(Node node, System.Action<Node> visiter)
 		{
 			if (node)

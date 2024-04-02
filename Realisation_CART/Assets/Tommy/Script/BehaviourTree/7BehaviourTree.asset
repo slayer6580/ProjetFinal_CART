@@ -37,7 +37,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 1
   m_guid: 1b421fabd2e9be545ba5757bfafe4934
-  m_position: {x: 202, y: 113}
+  m_position: {x: 197.4, y: 225.70001}
   m_Blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 9fe271c1178398f49ab18212089c0da8
-  m_position: {x: 355, y: -212}
+  m_position: {x: 294, y: -177.50008}
   m_Blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
