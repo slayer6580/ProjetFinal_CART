@@ -65,24 +65,11 @@ namespace StatsSystem
 
         private const int MAX_LEVEL = 4;
 
-        private static UpgradeManager Instance;
-
         private void Awake()
         {
-            if (Instance)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
 
-            Instance = this;
 
             m_nbCartToken = m_startingCartToken;
-        }
-
-        public UpgradeManager GetInstance()
-        {
-            return Instance;
         }
 
         private void Start() // TEST ONLY
@@ -131,10 +118,10 @@ namespace StatsSystem
 
         private void UpdateFillBars()
         {
-            m_accelerationFillBar.fillAmount = AccelerationStat * 0.25f;
-            m_maxSpeedFillBar.fillAmount = MaxSpeedStat * 0.25f;
-            m_handlingFillBar.fillAmount = HandlingStat * 0.25f;
-            m_defenseFillBar.fillAmount = DefenseStat * 0.25f;
+            m_accelerationFillBar.fillAmount = (float)AccelerationStat / MAX_LEVEL;
+            m_maxSpeedFillBar.fillAmount = (float)MaxSpeedStat / MAX_LEVEL;
+            m_handlingFillBar.fillAmount = (float)HandlingStat / MAX_LEVEL;
+            m_defenseFillBar.fillAmount = (float)DefenseStat / MAX_LEVEL;
         }
 
         private void UpdateBuyingCost()
