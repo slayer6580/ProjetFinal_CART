@@ -6,7 +6,6 @@ namespace Manager
     public class AudioManager : MonoBehaviour
     {
         private AudioSource AudioManagerSource { get; set;}
-        [field: SerializeField] private AudioSource CartAudioSource { get; set; } = null;
 
         [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[2];
 
@@ -14,12 +13,33 @@ namespace Manager
 
         public static AudioManager _Instance { get; private set; }
 
+        public enum SoundSetting
+        {
+            Play,
+            Stop,
+            Count
+        }
+
         public enum SoundType
         {
             Client,
             Environment,
             GameEvent,
             UI,
+            Count
+        }
+
+        public enum SoundName
+        {
+            Footstep,
+            CartRolling,
+            CartBanging,
+            Count
+        }
+
+        public enum InGameAudioSource
+        {
+            Cart,
             Count
         }
 
@@ -94,16 +114,32 @@ namespace Manager
             AudioManagerSource.Play();
         }
 
-        public void PlaySoundOnGameObject(AudioClip selectedClip, GameObject gameObject)
+        public void SetSoundByTypeToSource(SoundSetting setSound, SoundType soundType, SoundName soundName, InGameAudioSource audioSource)
         {
-            AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-            if (audioSource == null)
+            if (m_soundsByType.ContainsKey(soundType))
             {
-                audioSource = gameObject.AddComponent<AudioSource>();
+                var clips = m_soundsByType[soundType];
+                var clip = clips[(int)soundName];
+                Debug.Log("Playing sound: " + clip.name);
+                GetAudioSource(audioSource).clip = clip;
+                GetAudioSource(audioSource).Play();
             }
+            else
+            {
+                Debug.LogError("No sounds of type: " + soundType);
+            }
+        }
 
-            audioSource.clip = selectedClip;
-            audioSource.Play();
+        private AudioSource GetAudioSource(InGameAudioSource audioSource)
+        {
+            if (audioSource == InGameAudioSource.Cart)
+            {
+                return AudioManagerSource;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

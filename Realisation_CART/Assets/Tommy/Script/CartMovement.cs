@@ -1,3 +1,5 @@
+using Manager;
+
 using UnityEngine;
 
 namespace CartControl
@@ -24,6 +26,12 @@ namespace CartControl
 							* Time.fixedDeltaTime
 							* (SM.ForwardPressedPercent - SM.BackwardPressedPercent)
 						);
+
+						AudioManager._Instance.SetSoundByTypeToSource(
+                            AudioManager.SoundSetting.Play,
+                            AudioManager.SoundType.Client, 
+							AudioManager.SoundName.CartRolling, 
+							AudioManager.InGameAudioSource.Cart);
 					}
 				}
 			}
