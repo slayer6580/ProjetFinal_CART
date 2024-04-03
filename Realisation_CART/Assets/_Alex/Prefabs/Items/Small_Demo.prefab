@@ -66,5 +66,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081b3fdd769ed76469cfaa5b87b651c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_boxSize: {x: 1, y: 1, z: 1}
-  m_color: {r: 0, g: 1, b: 0, a: 0.09803922}
+  m_size: 0

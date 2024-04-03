@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5209666830917344921}
   - component: {fileID: 2816664325319341241}
   - component: {fileID: 4164201652841173637}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RC_Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 5453864991665959447}
   - component: {fileID: 5453864991663092279}
   - component: {fileID: 5453864991664189687}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_RC_Car_01_Wheel_rr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 5453864991665959449}
   - component: {fileID: 5453864991663092281}
   - component: {fileID: 5453864991664189689}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_RC_Car_01_Wheel_rl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 5453864991665959451}
   - component: {fileID: 5453864991663092283}
   - component: {fileID: 5453864991664189691}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_RC_Car_01_Wheel_fr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 5453864991665959453}
   - component: {fileID: 5453864991663092285}
   - component: {fileID: 5453864991664189693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_RC_Car_01_Wheel_fl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 5453864991665959455}
   - component: {fileID: 5453864991663092287}
   - component: {fileID: 5453864991664189695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_RC_Car_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
