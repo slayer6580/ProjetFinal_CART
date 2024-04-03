@@ -26,17 +26,8 @@ namespace Manager
                 audioSystem.RefreshSoundPool();
             }
 
-            //// Play player sound type
-            //if (GUILayout.Button("Play Player Sound"))
-            //{
-            //    // Select player sound to play
-
-            //    Debug.Log("Playing player sound...");
-            //    audioSystem.PlaySoundByType(SoundType.Player);
-            //}
-
-            EditorGUILayout.LabelField("Player Sounds");
-            if (audioSystem.GetDictionary().TryGetValue(SoundType.Player, out var playerSounds))
+            EditorGUILayout.LabelField("Client Sounds");
+            if (audioSystem.GetDictionary().TryGetValue(SoundType.Client, out var playerSounds))
             {
                 string[] options = playerSounds.Select(clip => clip.name).ToArray();
                 selectedPlayerSoundIndex = EditorGUILayout.Popup("Select Sound", selectedPlayerSoundIndex, options);
@@ -47,7 +38,7 @@ namespace Manager
                     {
                         AudioClip selectedClip = playerSounds[selectedPlayerSoundIndex];
                         Debug.Log("Playing player sound: " + selectedClip.name);
-                        audioSystem.PlaySound(selectedClip);  
+                        audioSystem.PlaySoundInAudioSystemSource(selectedClip);  
                     }
                 }
             }

@@ -2682,7 +2682,7 @@ GameObject:
   - component: {fileID: 1882129685}
   - component: {fileID: 1882129686}
   m_Layer: 0
-  m_Name: AudioSystem
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2697,7 +2697,7 @@ Transform:
   m_GameObject: {fileID: 1882129683}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.26719534, y: 0.9916748, z: -0.1205588}
+  m_LocalPosition: {x: 0, y: 3.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2716,7 +2716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_soundsPool:
-  - {fileID: 8300000, guid: 4d4a87a91fd2bc1468e178ce5e5b56c0, type: 3}
+  - {fileID: 8300000, guid: a6bb78400f8356a46b997b99374a9c60, type: 3}
   - {fileID: 8300000, guid: dae3e2b26f44ba14ca3261470d91613e, type: 3}
 --- !u!82 &1882129686
 AudioSource:

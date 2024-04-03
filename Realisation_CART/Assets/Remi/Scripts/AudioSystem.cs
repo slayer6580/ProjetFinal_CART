@@ -5,17 +5,18 @@ namespace Manager
 {
     public class AudioSystem : MonoBehaviour
     {
+        private AudioSource AudioSystemSource { get; set;}
+        [field: SerializeField] private AudioSource CartAudioSource { get; set; } = null;
+
         [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[2];
 
         private Dictionary<SoundType, AudioClip[]> m_soundsByType = new Dictionary<SoundType, AudioClip[]>();
-
-        private AudioSource _AudioSource { get; set;}
 
         public static AudioSystem _Instance { get; private set; }
 
         public enum SoundType
         {
-            Player,
+            Client,
             Environment,
             GameEvent,
             UI,
@@ -36,7 +37,7 @@ namespace Manager
 
         private void Start()
         {
-            _AudioSource = GetComponent<AudioSource>();
+            AudioSystemSource = GetComponent<AudioSource>();
             RefreshSoundPool();
         }
 
@@ -47,15 +48,16 @@ namespace Manager
                 m_soundsPool[i] = null;
             }
 
-            LoadPlayerSoundToThePool();
+            LoadClientSoundsToThePool();
         }
 
-        private void LoadPlayerSoundToThePool()
+        /// <summary> Loads the sounds from Sounds/Client into the array, the sounds include Player and clients footsteps, cart rolling and banging.</summary>
+        private void LoadClientSoundsToThePool()
         {
-            var playerClips = Resources.LoadAll<AudioClip>("Sounds/Cart");
+            var playerClips = Resources.LoadAll<AudioClip>("Sounds/Client");
             Debug.Log("Player sounds loaded: " + playerClips.Length);
 
-            m_soundsByType[SoundType.Player] = playerClips;
+            m_soundsByType[SoundType.Client] = playerClips;
 
             for (int i = 0; i < m_soundsPool.Length && i < playerClips.Length; i++)
             {
@@ -83,16 +85,25 @@ namespace Manager
             return m_soundsByType;
         }
 
-        internal void PlaySound(AudioClip selectedClip)
+        public void PlaySoundInAudioSystemSource(AudioClip selectedClip)
         {
-            Debug.Log("Playing sound: " + selectedClip.name);
-
             // Keep this line to play sounds outside of play mode
-            if (_AudioSource == null) _AudioSource = GetComponent<AudioSource>(); 
+            if (AudioSystemSource == null) AudioSystemSource = GetComponent<AudioSource>(); 
 
-            _AudioSource.clip = selectedClip;
-            _AudioSource.Play();
+            AudioSystemSource.clip = selectedClip;
+            AudioSystemSource.Play();
+        }
 
+        public void PlaySoundOnGameObject(AudioClip selectedClip, GameObject gameObject)
+        {
+            AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+
+            audioSource.clip = selectedClip;
+            audioSource.Play();
         }
     }
 }
