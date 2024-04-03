@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Manager
 {
-    public class AudioSystem : MonoBehaviour
+    public class AudioManager : MonoBehaviour
     {
         private AudioSource AudioSystemSource { get; set;}
         [field: SerializeField] private AudioSource CartAudioSource { get; set; } = null;
@@ -12,7 +12,7 @@ namespace Manager
 
         private Dictionary<SoundType, AudioClip[]> m_soundsByType = new Dictionary<SoundType, AudioClip[]>();
 
-        public static AudioSystem _Instance { get; private set; }
+        public static AudioManager _Instance { get; private set; }
 
         public enum SoundType
         {
