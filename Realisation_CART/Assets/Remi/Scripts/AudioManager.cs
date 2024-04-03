@@ -5,7 +5,7 @@ namespace Manager
 {
     public class AudioManager : MonoBehaviour
     {
-        private AudioSource AudioSystemSource { get; set;}
+        private AudioSource AudioManagerSource { get; set;}
         [field: SerializeField] private AudioSource CartAudioSource { get; set; } = null;
 
         [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[2];
@@ -37,7 +37,7 @@ namespace Manager
 
         private void Start()
         {
-            AudioSystemSource = GetComponent<AudioSource>();
+            AudioManagerSource = GetComponent<AudioSource>();
             RefreshSoundPool();
         }
 
@@ -88,10 +88,10 @@ namespace Manager
         public void PlaySoundInAudioSystemSource(AudioClip selectedClip)
         {
             // Keep this line to play sounds outside of play mode
-            if (AudioSystemSource == null) AudioSystemSource = GetComponent<AudioSource>(); 
+            if (AudioManagerSource == null) AudioManagerSource = GetComponent<AudioSource>(); 
 
-            AudioSystemSource.clip = selectedClip;
-            AudioSystemSource.Play();
+            AudioManagerSource.clip = selectedClip;
+            AudioManagerSource.Play();
         }
 
         public void PlaySoundOnGameObject(AudioClip selectedClip, GameObject gameObject)
