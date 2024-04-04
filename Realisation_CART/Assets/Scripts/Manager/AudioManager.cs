@@ -5,22 +5,42 @@ namespace Manager
 {
     public class AudioManager : MonoBehaviour
     {
-        private AudioSource AudioManagerSource { get; set;}
+        [field: SerializeField] private AudioSource CartAudioSource { get; set;}
 
+        [field: Header("Put all audio sounds here, read the Tooltip for the sound order")]
+        [Tooltip("Footstep\nCartRolling\nCartBanging")]
         [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[2];
 
-        private Dictionary<SoundType, AudioClip[]> m_soundsByType = new Dictionary<SoundType, AudioClip[]>();
+        [Header("Put all AudioBox here")]
+        [SerializeField] private List<AudioBox> m_audioBox;
 
-        public static AudioManager _Instance { get; private set; }
+        private AudioSource AudioManagerSource { get; set;}
 
-        public enum SoundSetting
+        private Dictionary<ESoundType, AudioClip[]> m_soundsByType = new Dictionary<ESoundType, AudioClip[]>();
+
+        public static AudioManager _AudioManager { get; private set; }
+        public enum ESoundName
+        {
+            Footstep,
+            CartRolling,
+            CartBanging,
+        }
+
+        public enum ESoundSetting
         {
             Play,
             Stop,
             Count
         }
 
-        public enum SoundType
+        public enum ESoundModification
+        {
+            Pitch,
+            Volume,
+            Count
+        }
+
+        public enum ESoundType
         {
             Client,
             Environment,
@@ -29,29 +49,22 @@ namespace Manager
             Count
         }
 
-        public enum SoundName
+        public enum EInGameAudioSource
         {
-            Footstep,
-            CartRolling,
-            CartBanging,
-            Count
-        }
-
-        public enum InGameAudioSource
-        {
+            AudioManager,
             Cart,
             Count
         }
 
         private void Awake()
         {
-            if (_Instance != null)
+            if (_AudioManager != null)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            _Instance = this;
+            _AudioManager = this;
             DontDestroyOnLoad(gameObject);
         }
 
@@ -77,7 +90,7 @@ namespace Manager
             var playerClips = Resources.LoadAll<AudioClip>("Sounds/Client");
             Debug.Log("Player sounds loaded: " + playerClips.Length);
 
-            m_soundsByType[SoundType.Client] = playerClips;
+            m_soundsByType[ESoundType.Client] = playerClips;
 
             for (int i = 0; i < m_soundsPool.Length && i < playerClips.Length; i++)
             {
@@ -86,7 +99,7 @@ namespace Manager
             }
         }
 
-        public void PlaySoundByType(SoundType soundType)
+        public void PlaySoundByType(ESoundType soundType)
         {
             if (m_soundsByType.ContainsKey(soundType))
             {
@@ -100,7 +113,7 @@ namespace Manager
             }
         }
 
-        public Dictionary<SoundType, AudioClip[]> GetDictionary()
+        public Dictionary<ESoundType, AudioClip[]> GetDictionary()
         {
             return m_soundsByType;
         }
@@ -114,8 +127,14 @@ namespace Manager
             AudioManagerSource.Play();
         }
 
-        public void SetSoundByTypeToSource(SoundSetting setSound, SoundType soundType, SoundName soundName, InGameAudioSource audioSource)
+        public void SetSoundByTypeToSource(ESoundSetting setSound, ESoundType soundType, ESoundName soundName, EInGameAudioSource audioSource)
         {
+            if (setSound == ESoundSetting.Stop)
+            {
+                GetAudioSource(audioSource).Stop();
+                return;
+            }
+
             if (m_soundsByType.ContainsKey(soundType))
             {
                 var clips = m_soundsByType[soundType];
@@ -130,11 +149,27 @@ namespace Manager
             }
         }
 
-        private AudioSource GetAudioSource(InGameAudioSource audioSource)
+        public void ModifySoundBySource(EInGameAudioSource audioSource, ESoundModification modif, float value)
         {
-            if (audioSource == InGameAudioSource.Cart)
+            if (modif == ESoundModification.Pitch)
+            {
+                GetAudioSource(audioSource).pitch = value;
+            }
+            else if (modif == ESoundModification.Volume)
+            {
+                GetAudioSource(audioSource).volume = value;
+            }
+        }
+
+        private AudioSource GetAudioSource(EInGameAudioSource audioSource)
+        {
+            if (audioSource == EInGameAudioSource.AudioManager)
             {
                 return AudioManagerSource;
+            }
+            if (audioSource == EInGameAudioSource.Cart)
+            {
+                return CartAudioSource;
             }
             else
             {

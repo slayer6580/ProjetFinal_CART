@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace CartControl
 {
@@ -10,7 +11,12 @@ namespace CartControl
 		public override void OnEnter()
 		{
 			Debug.LogWarning("current state: MOVING");
-		}
+            _AudioManager.SetSoundByTypeToSource(
+				ESoundSetting.Play,
+				ESoundType.Client,
+				ESoundName.CartRolling,
+				EInGameAudioSource.Cart);
+        }
 
 		public override void OnUpdate()
 		{
@@ -52,7 +58,19 @@ namespace CartControl
 			{
 				m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
 			}
-		}
+
+
+            //For sound
+            _AudioManager.ModifySoundBySource(
+				EInGameAudioSource.Cart,
+				ESoundModification.Pitch,
+				Mathf.Lerp(0.8f, 2f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeed));
+
+			_AudioManager.ModifySoundBySource(
+				EInGameAudioSource.Cart,
+                ESoundModification.Volume,
+				Mathf.Lerp(0f, 1f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeed));
+        }
 
 		public override void OnFixedUpdate()
 		{
@@ -64,6 +82,13 @@ namespace CartControl
 		{
 			//For Animation
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
+
+            //For sound
+            _AudioManager.SetSoundByTypeToSource(
+				ESoundSetting.Stop, 
+				ESoundType.Client,
+				ESoundName.CartRolling,
+				EInGameAudioSource.Cart);
 		}
 
 		public override bool CanEnter(IState currentState)
