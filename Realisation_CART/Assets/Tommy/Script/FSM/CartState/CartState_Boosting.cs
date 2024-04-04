@@ -34,6 +34,7 @@ namespace CartControl
 				m_cartStateMachine.IsBoosting = false;
 			}
 
+			/*
 			//For animation : Modify the weight of the Animation Rig that hold the feet on the cart depending on the animation
 			if (boostingTimer >= m_cartStateMachine.BoostingTime - 0.5f)
 			{
@@ -53,6 +54,7 @@ namespace CartControl
 					m_cartStateMachine.FeetOnCartRig.weight = weightByTime;
 				}
 			}
+			*/
 		}
 
 		public override void OnFixedUpdate()
