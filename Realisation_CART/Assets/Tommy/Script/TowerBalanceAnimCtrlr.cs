@@ -29,7 +29,7 @@ namespace DiscountDelirium
 		void Start()
         {
 			m_remainingBoxes = m_boxes.Count;
-
+			m_checkLastBox = m_boxes[m_remainingBoxes - 1];
 		}
 
         // Update is called once per frame
@@ -37,6 +37,7 @@ namespace DiscountDelirium
         {
 			if (m_boxesHasFallen[m_remainingBoxes -1] == false)
 			{
+				
 				if (m_towerBlendValue < 0.5f - m_tiltValueToFall)
 				{
 					m_tiltingLeft = true;

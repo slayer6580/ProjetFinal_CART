@@ -15,6 +15,7 @@ namespace CartControl
 			m_cartStateMachine.CanDrift = false;
 			m_cartStateMachine.IsDrifting = true;
 
+			m_cartStateMachine.HumanAnimCtrlr.SetBool("IsDrifting", true);
 			//Some value must not be reset when coming from Stopped State
 			if (m_comingFromState is CartState_Stopped)
 			{
@@ -22,6 +23,8 @@ namespace CartControl
 			}
 			m_driftingTimer = 0;
 			m_boostPercentageObtain = 0;
+
+
 		}
 
 		public override void OnUpdate()
@@ -48,7 +51,14 @@ namespace CartControl
 			}
 
 			//For animation
-			m_cartStateMachine.HumanAnimCtrlr.SetFloat("DriftingValue", Mathf.Clamp(m_cartStateMachine.LocalVelocity.x / 30, -1, 1));
+				//Drift
+				//m_cartStateMachine.HumanAnimCtrlr.SetFloat("DriftingValue", Mathf.Clamp(m_cartStateMachine.LocalVelocity.x / 30, -1, 1));
+			if (m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).IsName("JumpingFeetOnCart"))
+			{
+				float weightByTime = Mathf.Clamp(m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).normalizedTime, 0, 1);
+				m_cartStateMachine.FeetOnCartRig.weight = weightByTime;
+			}
+
 		}
 
 		public override void OnFixedUpdate()
@@ -64,6 +74,8 @@ namespace CartControl
 
 			//For animation
 			m_cartStateMachine.HumanAnimCtrlr.SetFloat("DriftingValue", 0);
+			m_cartStateMachine.HumanAnimCtrlr.SetBool("IsDrifting", false);
+			m_cartStateMachine.FeetOnCartRig.weight = 0;
 		}
 
 		public override bool CanEnter(IState currentState)
