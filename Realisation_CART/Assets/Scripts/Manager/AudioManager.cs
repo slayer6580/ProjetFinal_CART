@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,11 +7,11 @@ namespace Manager
 {
     public class AudioManager : MonoBehaviour
     {
-        [field: SerializeField] private AudioSource CartAudioSource { get; set;}
-
         [field: Header("Put all audio sounds here, read the Tooltip for the sound order")]
         [Tooltip("Footstep\nCartRolling\nCartBanging")]
         [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[2];
+
+        [SerializeField] private GameObject m_audioBoxPrefab;
 
         [Header("Put all AudioBox here")]
         [SerializeField] private List<AudioBox> m_audioBox;
@@ -19,18 +21,14 @@ namespace Manager
         private Dictionary<ESoundType, AudioClip[]> m_soundsByType = new Dictionary<ESoundType, AudioClip[]>();
 
         public static AudioManager _AudioManager { get; private set; }
-        public enum ESoundName
+
+        [SerializeField] private int m_numberOfAudioBox = 10;
+
+        public enum ESound
         {
             Footstep,
             CartRolling,
             CartBanging,
-        }
-
-        public enum ESoundSetting
-        {
-            Play,
-            Stop,
-            Count
         }
 
         public enum ESoundModification
@@ -49,23 +47,24 @@ namespace Manager
             Count
         }
 
-        public enum EInGameAudioSource
-        {
-            AudioManager,
-            Cart,
-            Count
-        }
-
         private void Awake()
         {
             if (_AudioManager != null)
             {
+                Debug.LogWarning("AudioManager already exists.");
                 Destroy(gameObject);
                 return;
             }
 
             _AudioManager = this;
             DontDestroyOnLoad(gameObject);
+
+            for (int i = 0; i < m_numberOfAudioBox; i++)
+            {
+                GameObject audioBox = Instantiate(m_audioBoxPrefab, transform);
+                m_audioBox.Add(audioBox.GetComponent<AudioBox>());
+                audioBox.transform.SetParent(transform);
+            }
         }
 
         private void Start()
@@ -99,82 +98,137 @@ namespace Manager
             }
         }
 
-        public void PlaySoundByType(ESoundType soundType)
+
+        public void ModifySound(int index, ESoundModification modif, float value)
         {
-            if (m_soundsByType.ContainsKey(soundType))
-            {
-                var clips = m_soundsByType[soundType];
-                var clip = clips[Random.Range(0, clips.Length)];
-                Debug.Log("Playing sound: " + clip.name);
-            }
-            else
-            {
-                Debug.LogError("No sounds of type: " + soundType);
-            }
-        }
+            AudioSource audioSource = m_audioBox[index]._AudioSource;
 
-        public Dictionary<ESoundType, AudioClip[]> GetDictionary()
-        {
-            return m_soundsByType;
-        }
-
-        public void PlaySoundInAudioSystemSource(AudioClip selectedClip)
-        {
-            // Keep this line to play sounds outside of play mode
-            if (AudioManagerSource == null) AudioManagerSource = GetComponent<AudioSource>(); 
-
-            AudioManagerSource.clip = selectedClip;
-            AudioManagerSource.Play();
-        }
-
-        public void SetSoundByTypeToSource(ESoundSetting setSound, ESoundType soundType, ESoundName soundName, EInGameAudioSource audioSource)
-        {
-            if (setSound == ESoundSetting.Stop)
-            {
-                GetAudioSource(audioSource).Stop();
-                return;
-            }
-
-            if (m_soundsByType.ContainsKey(soundType))
-            {
-                var clips = m_soundsByType[soundType];
-                var clip = clips[(int)soundName];
-                Debug.Log("Playing sound: " + clip.name);
-                GetAudioSource(audioSource).clip = clip;
-                GetAudioSource(audioSource).Play();
-            }
-            else
-            {
-                Debug.LogError("No sounds of type: " + soundType);
-            }
-        }
-
-        public void ModifySoundBySource(EInGameAudioSource audioSource, ESoundModification modif, float value)
-        {
             if (modif == ESoundModification.Pitch)
             {
-                GetAudioSource(audioSource).pitch = value;
+                audioSource.pitch = value;
             }
             else if (modif == ESoundModification.Volume)
             {
-                GetAudioSource(audioSource).volume = value;
+                audioSource.volume = value;
             }
         }
 
-        private AudioSource GetAudioSource(EInGameAudioSource audioSource)
+        /// <summary> Tout les clients va jouer un son une fois </summary>
+        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition)
         {
-            if (audioSource == EInGameAudioSource.AudioManager)
+            AudioBox audiobox = FindAValidAudioBox();
+
+            if (audiobox == null)
+                return;
+
+            AudioClip clip = m_soundsPool[(int)sound];
+            audiobox.m_isPlaying = true;
+            MoveAudioBox(audiobox, newPosition);
+            PlayClipOneShot(audiobox, sound);
+            StartCoroutine(ReActivateAudioBox(audiobox, clip));
+        }
+
+        /// <summary> To play a sound one shot on a transform </summary>
+        public int PlaySoundEffectsLoopOnTransform(ESound sound, Transform parent)
+        {
+            if (parent == null)
             {
-                return AudioManagerSource;
+                parent = transform;
             }
-            if (audioSource == EInGameAudioSource.Cart)
+
+            AudioBox audiobox = FindAValidAudioBox();
+
+            int index = m_audioBox.IndexOf(audiobox);
+
+            if (audiobox == null)
+                return -1;
+
+            audiobox.transform.SetParent(parent);
+            AudioClip clip = m_soundsPool[(int)sound];
+            audiobox.m_isPlaying = true;
+            MoveAudioBox(audiobox, Vector3.zero);
+            PlayClipLoop(audiobox, sound);
+            return index;
+        }
+
+        /// <summary> To play a sound one shot at a position </summary>
+        public int PlaySoundEffectsLoop(ESound sound,  Vector3 newPosition)
+        {
+            AudioBox audiobox = FindAValidAudioBox();
+            int index = m_audioBox.IndexOf(audiobox);
+
+            if (audiobox == null)
+                return -1;
+
+            AudioClip clip = m_soundsPool[(int)sound];
+            audiobox.m_isPlaying = true;
+            MoveAudioBox(audiobox, newPosition);
+            PlayClipLoop(audiobox, sound);
+            return index;
+        }
+
+        /// <summary> To stop a sound effect </summary>
+        public void StopSoundEffectsLoop(int index)
+        {
+            AudioBox audiobox = m_audioBox[index];
+            audiobox.GetComponent<AudioSource>().Stop();
+            audiobox.m_isPlaying = false;
+
+            if (audiobox.transform.parent != transform)
             {
-                return CartAudioSource;
+                audiobox.transform.SetParent(transform);
             }
-            else
+        }
+
+        /// <summary> To find an audioBox in the audiobox pool </summary>
+        private AudioBox FindAValidAudioBox()
+        {
+            foreach (AudioBox audioBox in m_audioBox)
             {
-                return null;
+                if (!audioBox.m_isPlaying)
+                {
+                    return audioBox;
+                }
             }
+
+            return null;
+        }
+
+        /// <summary> To reactivate an audioBox for the duration of the Audiolip </summary>
+        private IEnumerator ReActivateAudioBox(AudioBox audiobox, AudioClip clip)
+        {
+            yield return new WaitForSeconds(clip.length);
+            audiobox.m_isPlaying = false;
+        }
+
+        /// <summary> To move an audioBox at a position </summary>
+        private void MoveAudioBox(AudioBox audioBox, Vector3 newPosition)
+        {
+            audioBox.transform.position = newPosition;
+        }
+
+        /// <summary> To make an audioBox play an audioclip one shot</summary>
+        private void PlayClipOneShot(AudioBox audiobox, ESound sound)
+        {
+            AudioSource audioSource = audiobox._AudioSource;
+            audioSource.loop = false;
+            audioSource.clip = m_soundsPool[(int)sound];
+            audioSource.Play();
+        }
+
+        /// <summary> To make an audiobox play tan audioclip in loop </summary>
+        private void PlayClipLoop(AudioBox audiobox, ESound sound)
+        {
+            AudioSource audioSource = audiobox._AudioSource;
+            audioSource.loop = true;
+            audioSource.clip = m_soundsPool[(int)sound];
+            audioSource.Play();
+        }
+
+        /// <summary> Pour désactiver la musique du jeu </summary>
+        private void DesactivateMusic()
+        {
+            GetComponent<AudioSource>().Stop();
         }
     }
 }
