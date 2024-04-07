@@ -37752,7 +37752,7 @@ MonoBehaviour:
   <DebugCartPrefab>k__BackingField: {fileID: 4644262542305384270, guid: 8b670a85c86120e4e8f778a929498f64,
     type: 3}
   <Player>k__BackingField: {fileID: 4223823007780283570}
-  m_boxNoHingePrefab: {fileID: 3665573428290585098, guid: 271b23927257241439eec4dcc453f0b7,
+  m_boxNoHingePrefab: {fileID: 3665573428290585098, guid: 395e4f84092fbc449be552e732fe489a,
     type: 3}
   m_boxWithHingePrefab: {fileID: 3665573428290585098, guid: 409c344c11207c9468c85e710f23b66a,
     type: 3}

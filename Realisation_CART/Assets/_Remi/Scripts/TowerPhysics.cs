@@ -1,4 +1,4 @@
-using DiscountDelirium;
+ï»¿using DiscountDelirium;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,19 +9,21 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
+        private TowerBoxSystem2 _TowerBoxSystem { get; set; } = null;
+
+        private List<GameObject> m_boxesWithHinge = new List<GameObject>();
+        private List<Vector3> m_boxesInitialPosition = new List<Vector3>();
 
         [Header("Mettre les Prefabs de la boite")]
         [SerializeField] private GameObject m_boxNoHingePrefab;
         [SerializeField] private GameObject m_boxWithHingePrefab;
-
-        private TowerBoxSystem2 Tower { get; set; } = null;
 
         [Header("Items and boxes physics settings")]
         [SerializeField] private float m_itemRemoveImpulseIntesity = 0.2f;
         [SerializeField] private float m_itemVectorUpImpulseIntesity = 10.0f;
         [SerializeField] private float m_boxRemoveImpulseIntesity = 0.2f;
         [SerializeField] private float m_boxVectorUpImpulseIntesity = 10.0f;
-        [SerializeField] private int m_nbOfUndroppableBoxes = 4;
+        private int m_nbOfUndroppableBoxes = 1;
 
         [Header("Debug Cart Settings")]
         [SerializeField] private float m_debugCartDistance = 10.0f;
@@ -31,6 +33,7 @@ namespace BoxSystem
         //[SerializeField] private JointMode m_currentJointMode = JointMode.Spring;
 
         [Header("Hinge Settings")]
+
         [SerializeField] private List<HingeJoint> m_hinges;
         [SerializeField] private float m_angle = 0;
         [SerializeField][Range(0.0f, 1000.0f)] private float m_springForce = 0;
@@ -116,7 +119,14 @@ namespace BoxSystem
 
         private void Awake()
         {
-            Tower = GetComponent<TowerBoxSystem2>();
+            foreach (GameObject go in m_boxesWithHinge)
+            {
+                //m_hinges.Add(go.GetComponent<HingeJoint>());
+                //PAS BESOIN DE PRENDRE LIGNE EN BAS CAR TU AS DEJA CETTE DONNï¿½ UTILISï¿½ DANS GetTopBox.ReplaceBoxToOrigin()
+                m_boxesInitialPosition.Add(go.transform.localPosition);
+            }
+
+            _TowerBoxSystem = GetComponent<TowerBoxSystem2>();
             m_side = Eside.left;
         }
 
@@ -145,23 +155,22 @@ namespace BoxSystem
             // DOIT REGARDER ANGLE DE LA BOITE AVEC LE PREMIER HINGE
             if (m_hinges[0].angle > m_angleOffset && m_side == Eside.right)
             {
-                
-                Tower.ReplaceAllBoxToOrigin();
-                Tower.EnabledColliderOnBoxes(true);
+
+                _TowerBoxSystem.ReplaceAllBoxToOrigin();
+                EnabledColliderOnBoxes(true);
                 ChangeAllAnchors(Eside.left);
 
             }
             else if (m_hinges[0].angle < -m_angleOffset && m_side == Eside.left)
-
             {
-                Tower.ReplaceAllBoxToOrigin();
-                Tower.EnabledColliderOnBoxes(true);
+                _TowerBoxSystem.ReplaceAllBoxToOrigin();
+                EnabledColliderOnBoxes(true);
                 ChangeAllAnchors(Eside.right);
             }
             else if (m_hinges[0].angle > -m_angleOffset && m_hinges[0].angle < m_angleOffset) 
             {
                 //Debug.Log("Angle is between -0.1 and 0.1");
-                Tower.EnabledColliderOnBoxes(false);
+                EnabledColliderOnBoxes(false);
             }
 
             UpdateSprings();
@@ -169,10 +178,40 @@ namespace BoxSystem
             m_angleRead = m_hinges[0].angle;
         }
 
+        private void LateUpdate()
+        {
+
+            foreach (GameObject box in m_boxesWithHinge)
+            {
+                Vector3 lockedPosition = new Vector3(box.transform.localPosition.x, box.transform.localPosition.y, _TowerBoxSystem.GetFirstBox().transform.localPosition.z);
+                box.transform.localPosition = lockedPosition;
+            }
+
+        }
+
+        private void EnabledColliderOnBoxes(bool value)
+        {
+            foreach (GameObject box in m_boxesWithHinge)
+            {
+                box.GetComponent<BoxCollider>().enabled = value;
+            }
+        }
+
+        private void ReplaceAllBoxesToOrigin()
+        {
+            Debug.Log("ReplaceAllBoxesToOrigin: " + m_boxesWithHinge.Count);
+            for (int i = 0; i < m_boxesWithHinge.Count; i++)
+            {
+                Debug.Log("i: " + i);
+                Debug.Log("ReplaceAllBoxesToOrigin: " + m_boxesWithHinge[i].name);
+                m_boxesWithHinge[i].transform.localPosition = m_boxesInitialPosition[i];
+            }
+        }
+
         private void ChangeAllAnchors(Eside wantedSide)
         {
             m_side = wantedSide;
-            Vector3 anchorPosition = m_side == Eside.left ? new Vector3(-Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0) : new Vector3(Tower.GetTopBox().GetAnchorWidth(), -Tower.GetTopBox().GetAnchorHeight(), 0);
+            Vector3 anchorPosition = m_side == Eside.left ? new Vector3(-_TowerBoxSystem.GetTopBox().GetAnchorWidth(), -_TowerBoxSystem.GetTopBox().GetAnchorHeight(), 0) : new Vector3(_TowerBoxSystem.GetTopBox().GetAnchorWidth(), -_TowerBoxSystem.GetTopBox().GetAnchorHeight(), 0);
 
             foreach (HingeJoint hingeJoint in m_hinges)
             {
@@ -193,7 +232,7 @@ namespace BoxSystem
         }
 
 
-        /// <summary> Spawn un objet de débug CartDebug à une position offset </summary>
+        /// <summary> Spawn un objet de dÃ©bug CartDebug Ã  une position offset </summary>
         private void SpawnDebugCartAtOffsetPosition(Vector3 rotation, Vector3 rightStartPosition)
         {
             Vector3 eulerOfCart = Player.transform.rotation.eulerAngles;
@@ -210,16 +249,16 @@ namespace BoxSystem
             debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
         }
 
-        /// <summary> Ajoute un joint à la boite</summary>
+        /// <summary> Ajoute un joint Ã  la boite</summary>
         public void ModifyJoint()
         {
-            if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
+            if (_TowerBoxSystem.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Box2 topBox = Tower.GetTopBox();
+            Box2 topBox = _TowerBoxSystem.GetTopBox();
             if (topBox == null) { Debug.LogWarning("Top Box est null"); return; }
             Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
             if (topBoxRB == null) { Debug.LogWarning("Top Box Rigidbody est null"); return; }
-            Rigidbody previousTopBoxRB = Tower.GetPreviousTopBox().GetComponent<Rigidbody>();
+            Rigidbody previousTopBoxRB = _TowerBoxSystem.GetPreviousTopBox().GetComponent<Rigidbody>();
             if (previousTopBoxRB == null) { Debug.LogWarning("Previous Top Box Rigidbody est null"); return; }
 
             if (previousTopBoxRB.GetComponent<CollisionDetector>().enabled)
@@ -238,6 +277,7 @@ namespace BoxSystem
 
         private void AttachJoint(Rigidbody attachedBody, Rigidbody sourceBody)
         {
+            Debug.Log("attachedBody: " + attachedBody.name + " sourceBody: " + sourceBody.name);
             HingeJoint hingeJoint = sourceBody.gameObject.GetComponent<HingeJoint>();
             if (hingeJoint == null)
             {
@@ -247,6 +287,7 @@ namespace BoxSystem
 
             hingeJoint.connectedBody = attachedBody;
             m_hinges.Add(hingeJoint);
+            m_boxesWithHinge.Add(sourceBody.gameObject);
         }
 
         //private static void DisablePhysicsOnRB(Rigidbody _rigidBody)
@@ -298,7 +339,7 @@ namespace BoxSystem
 
         private void ReplaceBoxToOrigin()
         {
-            Box2 previousTopBox = Tower.GetPreviousTopBox();
+            Box2 previousTopBox = _TowerBoxSystem.GetPreviousTopBox();
             previousTopBox.ReplaceBoxToOrigin();
             previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
         }
@@ -306,7 +347,7 @@ namespace BoxSystem
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
         public void RemoveItemImpulse(Vector3 velocity)
         {
-            Box2 topBox = Tower.GetTopBox();
+            Box2 topBox = _TowerBoxSystem.GetTopBox();
 
             if (topBox.GetItemsInBox().Count <= 0)
             {
@@ -339,6 +380,7 @@ namespace BoxSystem
 
             lastItemInBox.m_item.GetComponent<AutoDestruction>().enabled = true;
             Debug.Log("Item in autodestruction mode: " + lastItemInBox.m_item.name);
+            m_boxesWithHinge.Remove(lastItemInBox.m_item);
             topBox.GetItemsInBox().Remove(lastItemInBox);
 
             topBox.ResetSlots(lastItemInBox);
@@ -350,7 +392,7 @@ namespace BoxSystem
 
             //MoveTopJointToNewTopBox();
 
-            Box2 topBox = Tower.GetTopBox();
+            Box2 topBox = _TowerBoxSystem.GetTopBox();
             if (topBox == null)
             {
                 Debug.LogWarning("No box to remove");
@@ -454,17 +496,17 @@ namespace BoxSystem
         //    }
         //}
 
-        /// <summary> Vérifie si le contenu de la tour (boite ou item) peut tomber </summary>
+        /// <summary> VÃ©rifie si le contenu de la tour (boite ou item) peut tomber </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
-            Box2 box = Tower.GetTopBox();
+            Box2 box = _TowerBoxSystem.GetTopBox();
             if (box == null)
             {
                 Debug.LogWarning("No box to check");
                 return;
             }
 
-            if (box.IsEmpty() && Tower.GetBoxCount() > m_nbOfUndroppableBoxes)
+            if (box.IsEmpty() && _TowerBoxSystem.GetBoxCount() > m_nbOfUndroppableBoxes)
                 RemoveBoxImpulse(velocity);
             else if (!box.IsEmpty())
                 RemoveItemImpulse(velocity);
@@ -472,15 +514,15 @@ namespace BoxSystem
 
         public Box2 GetBoxUnderneath(Box2 upperBox)
         {
-            if (Tower.GetBoxCount() < 2)
+            if (_TowerBoxSystem.GetBoxCount() < 2)
                 return null;
 
-            return Tower.GetAllBoxes().ToArray()[GetBoxIndex(upperBox) - 1];
+            return _TowerBoxSystem.GetAllBoxes().ToArray()[GetBoxIndex(upperBox) - 1];
         }
 
         private int GetBoxIndex(Box2 box)
         {
-            Box2[] boxes = Tower.GetAllBoxes().ToArray();
+            Box2[] boxes = _TowerBoxSystem.GetAllBoxes().ToArray();
             for (int i = 0; i < boxes.Length; i++)
             {
                 if (boxes[i] == box)
@@ -492,10 +534,17 @@ namespace BoxSystem
 
         internal GameObject GetBoxPrefabFromDropableOrder()
         {
-            if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes)
+            Debug.Log("Box count: " + _TowerBoxSystem.GetBoxCount() + " <= " + m_nbOfUndroppableBoxes + " ? " + (_TowerBoxSystem.GetBoxCount() <= m_nbOfUndroppableBoxes));
+            if (_TowerBoxSystem.GetBoxCount() <= m_nbOfUndroppableBoxes)
+            {
+                Debug.Log("Box is undroppable");
                 return m_boxNoHingePrefab;
+            }
             else
+            {
+                Debug.Log("Box is droppable with hinge");
                 return m_boxWithHingePrefab;
+            }
         }
     }
 }

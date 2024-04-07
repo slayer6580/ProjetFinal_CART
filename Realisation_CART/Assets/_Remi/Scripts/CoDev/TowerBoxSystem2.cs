@@ -200,6 +200,12 @@ namespace BoxSystem
             return m_boxCount;
         }
 
+        /// 
+        public Box2 GetFirstBox()
+        {
+            return m_boxesInCart[0];
+        }
+
         /// <summary> Donne la boite du dessus </summary>
         public Box2 GetTopBox()
         {
@@ -229,7 +235,8 @@ namespace BoxSystem
             if (m_boxesInCart.Count < 2)
                 return null;
 
-            return m_boxesInCart.ToArray()[1];
+            Debug.Log("m_boxesInCart.Count: " + m_boxesInCart.Count);
+            return m_boxesInCart[m_boxesInCart.Count - 2];
         }
 
         /// <summary> Donne le stack complet des boites </summary>
