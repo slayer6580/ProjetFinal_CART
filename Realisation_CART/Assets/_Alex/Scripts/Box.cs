@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BoxSystem
 {
-    //[RequireComponent(typeof(BoxSetup))]
+    [RequireComponent(typeof(BoxSetup))]
 
     public class Box : MonoBehaviour
     {

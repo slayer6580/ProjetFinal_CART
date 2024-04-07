@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 1326208887701202262}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.19999999, z: -0.206}
-  m_LocalScale: {x: 0.628, y: 0.02, z: 0.44}
+  m_LocalPosition: {x: 0, y: 0.035000004, z: -0.206}
+  m_LocalScale: {x: 0.628, y: 0.02, z: 0.11}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6247474995554856196}
@@ -175,8 +175,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7803873549656776103}
-  - component: {fileID: 4818287507667155655}
-  - component: {fileID: 3304019717366675712}
+  - component: {fileID: 7557657317942726634}
+  - component: {fileID: 3065307995982686092}
   - component: {fileID: -1218392657508378092}
   - component: {fileID: 7742378177691178315}
   - component: {fileID: 5757727898776072923}
@@ -205,19 +205,7 @@ Transform:
   - {fileID: 6247474995554856196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4818287507667155655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3665573428290585098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b26188d59f00a48a7696246a56244d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3304019717366675712
+--- !u!114 &7557657317942726634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,7 +222,7 @@ MonoBehaviour:
   <BoxWidth>k__BackingField: 0.392
   m_boxLength: 0.588
   <BoxThickness>k__BackingField: 0.02
-  <BoxHeight>k__BackingField: 0.42
+  <BoxHeight>k__BackingField: 0.09
   m_nbSlotWidth: 4
   m_nbSlotLength: 6
   <SlotHeight>k__BackingField: 0
@@ -246,6 +234,18 @@ MonoBehaviour:
   m_boxSideRight: {fileID: 4749397371045065519}
   m_boxFront: {fileID: 6882044248481420249}
   m_boxBack: {fileID: 7211819444262910313}
+--- !u!114 &3065307995982686092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3665573428290585098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b26188d59f00a48a7696246a56244d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-1218392657508378092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,8 +317,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.43214872, y: 0.4420587, z: 0.6277878}
-  m_Center: {x: 0, y: 0.20040236, z: 0}
+  m_Size: {x: 0.43214872, y: 0.10925406, z: 0.6277878}
+  m_Center: {x: 0, y: 0.034, z: 0}
 --- !u!1 &4749397371045065519
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,8 +346,8 @@ Transform:
   m_GameObject: {fileID: 4749397371045065519}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.19999999, z: 0.206}
-  m_LocalScale: {x: 0.628, y: 0.02, z: 0.44}
+  m_LocalPosition: {x: 0, y: 0.035000004, z: 0.206}
+  m_LocalScale: {x: 0.628, y: 0.02, z: 0.11}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6247474995554856196}
@@ -429,8 +429,8 @@ Transform:
   m_GameObject: {fileID: 6882044248481420249}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0.304, y: 0.19999999, z: 0}
-  m_LocalScale: {x: 0.392, y: 0.02, z: 0.44}
+  m_LocalPosition: {x: -0.304, y: 0.035000004, z: 0}
+  m_LocalScale: {x: 0.392, y: 0.02, z: 0.11}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6247474995554856196}
@@ -512,8 +512,8 @@ Transform:
   m_GameObject: {fileID: 7211819444262910313}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.304, y: 0.19999999, z: 0}
-  m_LocalScale: {x: 0.392, y: 0.02, z: 0.44}
+  m_LocalPosition: {x: 0.304, y: 0.035000004, z: 0}
+  m_LocalScale: {x: 0.392, y: 0.02, z: 0.11}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6247474995554856196}

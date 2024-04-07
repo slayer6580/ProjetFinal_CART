@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BoxSystem
 {
-    //[RequireComponent(typeof(Box))]
+    [RequireComponent(typeof(Box))]
 
     public class BoxSetup : MonoBehaviour
     {
