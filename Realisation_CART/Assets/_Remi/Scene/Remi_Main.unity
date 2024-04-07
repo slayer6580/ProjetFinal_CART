@@ -30045,24 +30045,6 @@ Transform:
   - {fileID: 8784262683984035000}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 19.738, y: 0.932, z: 0.181}
---- !u!114 &1072772876755820122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9085652324592433691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30fec34152f0950469342d6514045743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Player>k__BackingField: {fileID: 507525211374631003}
-  <ItemSnapDistance>k__BackingField: 1
-  m_boxPrefab: {fileID: 3665573428290585098, guid: 4a9ec3d4dfd1f0c469abfa2d64000b26,
-    type: 3}
-  m_boxGapHeight: 0.01
-  m_expulsionForce: 5
 --- !u!23 &1089051859086016220
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -37770,6 +37752,10 @@ MonoBehaviour:
   <DebugCartPrefab>k__BackingField: {fileID: 4644262542305384270, guid: 8b670a85c86120e4e8f778a929498f64,
     type: 3}
   <Player>k__BackingField: {fileID: 4223823007780283570}
+  m_boxNoHingePrefab: {fileID: 3665573428290585098, guid: 271b23927257241439eec4dcc453f0b7,
+    type: 3}
+  m_boxWithHingePrefab: {fileID: 3665573428290585098, guid: 409c344c11207c9468c85e710f23b66a,
+    type: 3}
   m_itemRemoveImpulseIntesity: 0.2
   m_itemVectorUpImpulseIntesity: 5
   m_boxRemoveImpulseIntesity: 0.2
@@ -37777,7 +37763,6 @@ MonoBehaviour:
   m_nbOfUndroppableBoxes: 4
   m_debugCartDistance: 60
   m_debugCartSpeed: 3
-  m_currentJointMode: 1
   m_hinges: []
   m_angle: 0
   m_springForce: 100
@@ -38695,7 +38680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
-  <TowerBoxSystem>k__BackingField: {fileID: 1072772876755820122}
+  <TowerBoxSystem>k__BackingField: {fileID: 0}
   m_sideDotProductImpact: 20
   m_distanceImpact: 4
 --- !u!4 &3820525376737748646
@@ -77091,7 +77076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4594654661632719328}
-  - component: {fileID: 1072772876755820122}
+  - component: {fileID: 9085652324592433693}
   - component: {fileID: 3175719756163402679}
   - component: {fileID: 9085652324592433692}
   m_Layer: 0
@@ -77113,7 +77098,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10957a88632347a4ea6087bde9c0e45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_force: 900
+  m_impulseForce: 10
+  m_constantForce: 10
+--- !u!114 &9085652324592433693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9085652324592433691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ff1076e10afa8408759cd2a47213f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Player>k__BackingField: {fileID: 507525211374631003}
+  <ItemSnapDistance>k__BackingField: 1
+  m_boxGapHeight: 0.021
+  m_itemExpulsionForce: 0
+  m_boxExpulsionForce: 0
 --- !u!137 &9093522111641658344
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

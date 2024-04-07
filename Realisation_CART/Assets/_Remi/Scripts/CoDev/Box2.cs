@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace BoxSystem
 {
-    //[RequireComponent(typeof(BoxSetup))]
+    [RequireComponent(typeof(BoxSetup2))]
 
-    public class Box : MonoBehaviour
+    public class Box2 : MonoBehaviour
     {
 
         #region (--- Struct ---)
@@ -61,15 +61,15 @@ namespace BoxSystem
         private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot a quatre (2 x 2)
         private int m_totalSlots;
         private int m_availableSlotsLeft;
-        private BoxSetup m_boxSetup;
-        private TowerBoxSystem m_tower;
+        private BoxSetup2 m_boxSetup;
+        private TowerBoxSystem2 m_tower;
         private Vector3 m_initialLocalPositionInBox;
 
         #endregion
 
         private void Awake()
         {
-            m_boxSetup = GetComponent<BoxSetup>();
+            m_boxSetup = GetComponent<BoxSetup2>();
         }
 
         #region (--- InitFunctions ---)
@@ -99,7 +99,7 @@ namespace BoxSystem
         }
 
         /// <summary> La boite se connecte a la tour lors de sa propre création </summary>
-        public void SetTower(TowerBoxSystem tower)
+        public void SetTower(TowerBoxSystem2 tower)
         {
             m_tower = tower;
         }
@@ -265,7 +265,7 @@ namespace BoxSystem
             Vector3 itemScale = new Vector3(m_boxSetup.SlotWidth, m_boxSetup.SlotHeight, m_boxSetup.SlotLenght);
             GO.transform.localScale = itemScale;
             GOChild.localScale = Vector3.one;
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
+            GO.GetComponent<Item2>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
         }
 
         #endregion
@@ -335,7 +335,7 @@ namespace BoxSystem
         }
 
         /// <summary> Donne acces à la tour reliée à la boîte </summary>
-        public TowerBoxSystem GetTower()
+        public TowerBoxSystem2 GetTower()
         {
             return m_tower;
         }

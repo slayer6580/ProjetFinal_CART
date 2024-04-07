@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace BoxSystem
 {
-    //[RequireComponent(typeof(Box))]
+    [RequireComponent(typeof(Box2))]
 
-    public class BoxSetup : MonoBehaviour
+    public class BoxSetup2 : MonoBehaviour
     {
         [Header("Prefabs")]
         [SerializeField] private GameObject m_slotPrefab;
@@ -39,12 +39,12 @@ namespace BoxSystem
         private float m_halfLength;
         private float m_halfWidth;
         private Transform m_slotsParent;
-        private Box m_box;
+        private Box2 m_box;
         private int m_totalSlots;
 
         private void Awake()
         {
-            m_box = GetComponent<Box>();
+            m_box = GetComponent<Box2>();
             m_slotsParent = transform.GetChild(0);
 
             AjustBoxGraphics();

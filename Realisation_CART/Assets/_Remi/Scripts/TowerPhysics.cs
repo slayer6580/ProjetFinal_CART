@@ -10,7 +10,11 @@ namespace BoxSystem
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
 
-        private TowerBoxSystem Tower { get; set; } = null;
+        [Header("Mettre les Prefabs de la boite")]
+        [SerializeField] private GameObject m_boxNoHingePrefab;
+        [SerializeField] private GameObject m_boxWithHingePrefab;
+
+        private TowerBoxSystem2 Tower { get; set; } = null;
 
         [Header("Items and boxes physics settings")]
         [SerializeField] private float m_itemRemoveImpulseIntesity = 0.2f;
@@ -23,8 +27,8 @@ namespace BoxSystem
         [SerializeField] private float m_debugCartDistance = 10.0f;
         [SerializeField] private float m_debugCartSpeed = 3.0f;
 
-        [Header("Joint Settings")]
-        [SerializeField] private JointMode m_currentJointMode = JointMode.Spring;
+        //[Header("Joint Settings")]
+        //[SerializeField] private JointMode m_currentJointMode = JointMode.Spring;
 
         [Header("Hinge Settings")]
         [SerializeField] private List<HingeJoint> m_hinges;
@@ -96,13 +100,13 @@ namespace BoxSystem
         [Header("ReadOnly")]
         [SerializeField] private float m_angleRead = 0;
 
-        public enum JointMode
-        {
-            Spring,
-            Hinge,
-            None,
-            Count
-        }
+        //public enum JointMode
+        //{
+        //    Spring,
+        //    Hinge,
+        //    None,
+        //    Count
+        //}
 
         enum Eside
         {
@@ -112,7 +116,7 @@ namespace BoxSystem
 
         private void Awake()
         {
-            Tower = GetComponent<TowerBoxSystem>();
+            Tower = GetComponent<TowerBoxSystem2>();
             m_side = Eside.left;
         }
 
@@ -135,33 +139,9 @@ namespace BoxSystem
 
                 SpawnDebugCartAtOffsetPosition(rotation, leftStartPosition);
             }
-            else if (Input.GetKeyDown(KeyCode.N))
-            {
-                if (m_currentJointMode - 1 < 0)
-                {
-                    m_currentJointMode = JointMode.None;
-                    Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
-                    return;
-                }
-
-                m_currentJointMode = m_currentJointMode - 1;
-                Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
-            }
-            else if (Input.GetKeyDown(KeyCode.M))
-            {
-                if (m_currentJointMode + 1 > JointMode.None)
-                {
-                    m_currentJointMode = (JointMode)0;
-                    Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
-                    return;
-                }
-
-                m_currentJointMode = m_currentJointMode + 1;
-                Debug.Log("Current Joint Mode: " + m_currentJointMode); // Do not erase: Necessary for the selection of the joint mode
-            }
 
             if (m_hinges.Count <= 0) return;
-            Debug.Log("Angle: " + m_hinges[0].angle);
+            //Debug.Log("Angle: " + m_hinges[0].angle);
             // DOIT REGARDER ANGLE DE LA BOITE AVEC LE PREMIER HINGE
             if (m_hinges[0].angle > m_angleOffset && m_side == Eside.right)
             {
@@ -180,7 +160,7 @@ namespace BoxSystem
             }
             else if (m_hinges[0].angle > -m_angleOffset && m_hinges[0].angle < m_angleOffset) 
             {
-                Debug.LogError("Angle is between -0.1 and 0.1");
+                //Debug.Log("Angle is between -0.1 and 0.1");
                 Tower.EnabledColliderOnBoxes(false);
             }
 
@@ -207,7 +187,7 @@ namespace BoxSystem
             {
                 JointSpring spring = m_hinges[i].spring;
                 spring.targetPosition = m_angle;
-                spring.spring = m_springForce; // POUR DIMINUER LA FORCE DU SPRING DES BOITES AU DESSUS
+                spring.spring = m_springForce / (i + 1); // POUR DIMINUER LA FORCE DU SPRING DES BOITES AU DESSUS
                 m_hinges[i].spring = spring;
             }
         }
@@ -230,74 +210,95 @@ namespace BoxSystem
             debugCart.gameObject.GetComponent<DebugCart>().SetSpeed(m_debugCartSpeed);
         }
 
-        /// <summary> Ajoute un joint à la boite </summary>
-        public void AddJointToBox()
+        /// <summary> Ajoute un joint à la boite</summary>
+        public void ModifyJoint()
         {
             if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Box topBox = Tower.GetTopBox();
+            Box2 topBox = Tower.GetTopBox();
             if (topBox == null) { Debug.LogWarning("Top Box est null"); return; }
             Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
             if (topBoxRB == null) { Debug.LogWarning("Top Box Rigidbody est null"); return; }
             Rigidbody previousTopBoxRB = Tower.GetPreviousTopBox().GetComponent<Rigidbody>();
             if (previousTopBoxRB == null) { Debug.LogWarning("Previous Top Box Rigidbody est null"); return; }
 
+            if (previousTopBoxRB.GetComponent<CollisionDetector>().enabled)
+                previousTopBoxRB.GetComponent<CollisionDetector>().enabled = false;
+            if (topBoxRB.GetComponent<CollisionDetector>().enabled == false)
+                topBoxRB.GetComponent<CollisionDetector>().enabled = true;
+
             //DisablePhysicsOnRB(previousTopBoxRB);
 
-            RemoveJointFromBoxRB(previousTopBoxRB);
-            AddJointBetween(previousTopBoxRB, topBoxRB);
+            //RemoveJointFromBoxRB(previousTopBoxRB);
+            //AddJointBetween(previousTopBoxRB, topBoxRB);
+            AttachJoint(previousTopBoxRB, topBoxRB);
 
-            EnablePhysicOnRB(topBoxRB);
+            //EnablePhysicOnRB(topBoxRB);
         }
 
-        private static void DisablePhysicsOnRB(Rigidbody _rigidBody)
+        private void AttachJoint(Rigidbody attachedBody, Rigidbody sourceBody)
         {
-            if (_rigidBody.GetComponent<CollisionDetector>().enabled)
-                _rigidBody.GetComponent<CollisionDetector>().enabled = false;
-        }
-
-        private static void EnablePhysicOnRB(Rigidbody _rigidBody)
-        {
-            _rigidBody.GetComponent<CollisionDetector>().enabled = true;
-            _rigidBody.isKinematic = false;
-        }
-
-        private void RemoveJointFromBoxRB(Rigidbody boxRB)
-        {
-            ReplaceBoxToOrigin();
-            Joint previousJoint = null;
-
-            if (m_currentJointMode == JointMode.Hinge)
+            HingeJoint hingeJoint = sourceBody.gameObject.GetComponent<HingeJoint>();
+            if (hingeJoint == null)
             {
-                previousJoint = boxRB.GetComponent<HingeJoint>();
-                if (previousJoint == null)
-                {
-                    Debug.LogWarning("Hinge joint is null");
-                    return;
-                }
-
-                //previousJoint.connectedBody = null;
-            }
-            else if (m_currentJointMode == JointMode.Spring)
-            {
-                SpringJoint springJoint = boxRB.GetComponent<SpringJoint>();
-                if (springJoint == null)
-                {
-                    Debug.LogWarning("Spring joint is null");
-                    return;
-                }
-
-                springJoint.connectedBody = null;
-                previousJoint = springJoint;
+                Debug.LogWarning("Hinge joint is null");
+                return;
             }
 
-            //boxRB.isKinematic = true;
-            //Destroy(previousJoint); // If we destroy the joint we need to add the new top box spring everytime a box is removed from the tower
+            hingeJoint.connectedBody = attachedBody;
+            m_hinges.Add(hingeJoint);
         }
+
+        //private static void DisablePhysicsOnRB(Rigidbody _rigidBody)
+        //{
+        //    if (_rigidBody.GetComponent<CollisionDetector>().enabled)
+        //        _rigidBody.GetComponent<CollisionDetector>().enabled = false;
+        //}
+
+        //private static void EnablePhysicOnRB(Rigidbody _rigidBody)
+        //{
+        //    if (_rigidBody.GetComponent<CollisionDetector>().enabled == false)
+        //        _rigidBody.GetComponent<CollisionDetector>().enabled = true;
+        //    //_rigidBody.isKinematic = false;
+        //}
+
+
+        //private void RemoveJointFromBoxRB(Rigidbody boxRB)
+        //{
+        //    ReplaceBoxToOrigin();
+        //    Joint previousJoint = null;
+
+        //    if (m_currentJointMode == JointMode.Hinge)
+        //    {
+        //        previousJoint = boxRB.GetComponent<HingeJoint>();
+        //        if (previousJoint == null)
+        //        {
+        //            Debug.LogWarning("Hinge joint is null");
+        //            return;
+        //        }
+
+        //        //previousJoint.connectedBody = null;
+        //    }
+        //    else if (m_currentJointMode == JointMode.Spring)
+        //    {
+        //        SpringJoint springJoint = boxRB.GetComponent<SpringJoint>();
+        //        if (springJoint == null)
+        //        {
+        //            Debug.LogWarning("Spring joint is null");
+        //            return;
+        //        }
+
+        //        springJoint.connectedBody = null;
+        //        previousJoint = springJoint;
+        //    }
+
+        //    //boxRB.isKinematic = true;
+        //    //Destroy(previousJoint); // If we destroy the joint we need to add the new top box spring everytime a box is removed from the tower
+        //}
 
         private void ReplaceBoxToOrigin()
         {
-            Box previousTopBox = Tower.GetPreviousTopBox();
+            Box2 previousTopBox = Tower.GetPreviousTopBox();
             previousTopBox.ReplaceBoxToOrigin();
             previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
         }
@@ -305,7 +306,7 @@ namespace BoxSystem
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
         public void RemoveItemImpulse(Vector3 velocity)
         {
-            Box topBox = Tower.GetTopBox();
+            Box2 topBox = Tower.GetTopBox();
 
             if (topBox.GetItemsInBox().Count <= 0)
             {
@@ -313,7 +314,7 @@ namespace BoxSystem
                 return;
             }
 
-            Box.ItemInBox lastItemInBox = topBox.GetLastItem();
+            Box2.ItemInBox lastItemInBox = topBox.GetLastItem();
             if (lastItemInBox.m_item == null)
             {
                 Debug.LogWarning("Item is null");
@@ -349,12 +350,22 @@ namespace BoxSystem
 
             //MoveTopJointToNewTopBox();
 
-            Box topBox = Tower.GetTopBox();
+            Box2 topBox = Tower.GetTopBox();
             if (topBox == null)
             {
                 Debug.LogWarning("No box to remove");
                 return;
             }
+
+            HingeJoint hingeJoint = topBox.GetComponent<HingeJoint>();
+            if (hingeJoint == null)
+            {
+                Debug.LogWarning("Hinge joint is null");
+                return;
+            }
+
+            hingeJoint.connectedBody = null;
+            m_hinges.Remove(hingeJoint);
 
             Vector3 totalImpulse = Vector3.zero;
             if (!single)
@@ -371,9 +382,6 @@ namespace BoxSystem
             topBox.GetComponent<Rigidbody>().isKinematic = false;
             topBox.GetComponent<Rigidbody>().AddForce(totalImpulse, ForceMode.Impulse);
 
-            if (m_currentJointMode == JointMode.Hinge)
-                m_hinges.Remove(topBox.GetComponent<HingeJoint>());
-
             // TODO Remi: Do not forget to uncomment
             //if (topBox.GetComponent<AutoDestruction>().enabled) return;
 
@@ -381,127 +389,75 @@ namespace BoxSystem
             //topBox.GetComponent<AutoDestruction>().enabled = true;
         }
 
-        /// <summary> Retire le top joint de la top box et donne les valeurs top joint au joint de la nouvelle top box </summary>
-        private void MoveTopJointToNewTopBox()
-        {
-            if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
+        ///// <summary> Ajoute et configure les valeurs du join entre deux rigidbody </summary>
+        //private void AddJointBetween(Rigidbody attachedBody, Rigidbody sourceBody)
+        //{
+        //    if (m_currentJointMode == JointMode.Hinge)
+        //    {
+        //        HingeJoint hingeJoint = sourceBody.gameObject.AddComponent<HingeJoint>();
+        //        if (hingeJoint == null)
+        //        {
+        //            Debug.LogWarning("Spring joint is null");
+        //            return;
+        //        }
 
-            Box oldTopBox = Tower.GetTopBox();
+        //        hingeJoint.connectedBody = attachedBody;
 
-            if (m_currentJointMode == JointMode.Spring)
-            {
-                if (oldTopBox == null) { Debug.LogWarning("No box to remove"); return; }
-                SpringJoint oldTopSpringJoint = oldTopBox.GetComponent<SpringJoint>();
-                if (oldTopSpringJoint == null) { Debug.LogWarning("Spring joint is null"); return; }
-                if (oldTopSpringJoint != null)
-                    Destroy(oldTopSpringJoint);
+        //        BoxSetup boxSetup = sourceBody.GetComponent<BoxSetup>();
+        //        float boxWidth = boxSetup.BoxWidth;
+        //        float boxHeight = boxSetup.BoxHeight;
 
-                Box newTopBox = Tower.GetPreviousTopBox();
-                if (newTopBox == null) { Debug.LogWarning("No new top box"); return; }
-                SpringJoint newTopSpringJoint = newTopBox.GetComponent<SpringJoint>();
-                if (newTopSpringJoint == null) { Debug.LogWarning("New Spring joint is null"); return; }
-                Rigidbody newLowerBoxRB = GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
-                if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
+        //        hingeJoint.axis = new Vector3(0, 0, 1);
 
-                newTopSpringJoint.connectedBody = newLowerBoxRB;
-                newTopSpringJoint.spring = m_springStrenght;
-                newTopSpringJoint.damper = m_springDamper;
-                newTopSpringJoint.minDistance = m_springMinDistance;
-                newTopSpringJoint.maxDistance = m_springMaxDistance;
-                newTopSpringJoint.tolerance = m_springTolerance;
-                newTopSpringJoint.breakForce = m_springBreakForce;
-                newTopSpringJoint.breakTorque = m_springBreakTorque;
-                newTopSpringJoint.enableCollision = m_springEnableCollision;
-            }
-            else if (m_currentJointMode == JointMode.Hinge)
-            {
-                if (oldTopBox == null) { Debug.LogWarning("No box to remove"); return; }
-                HingeJoint oldTopSpringJoint = oldTopBox.GetComponent<HingeJoint>();
-                if (oldTopSpringJoint == null) { Debug.LogWarning("Spring joint is null"); return; }
-                if (oldTopSpringJoint != null)
-                    Destroy(oldTopSpringJoint);
-
-                Box newTopBox = Tower.GetPreviousTopBox();
-                if (newTopBox == null) { Debug.LogWarning("No new top box"); return; }
-                HingeJoint newTopHingeJoint = newTopBox.GetComponent<HingeJoint>();
-                if (newTopHingeJoint == null) { Debug.LogWarning("New Spring joint is null"); return; }
-                Rigidbody newLowerBoxRB = GetBoxUnderneath(newTopBox).GetComponent<Rigidbody>();
-                if (newLowerBoxRB == null) { Debug.LogWarning("New lower box RB is null"); return; }
-
-                newTopHingeJoint.connectedBody = newLowerBoxRB;
-                newTopHingeJoint.enableCollision = true;
-            }
-        }
-
-        /// <summary> Ajoute et configure les valeurs du join entre deux rigidbody </summary>
-        private void AddJointBetween(Rigidbody attachedBody, Rigidbody sourceBody)
-        {
-            if (m_currentJointMode == JointMode.Hinge)
-            {
-                HingeJoint hingeJoint = sourceBody.gameObject.AddComponent<HingeJoint>();
-                if (hingeJoint == null)
-                {
-                    Debug.LogWarning("Spring joint is null");
-                    return;
-                }
-
-                hingeJoint.connectedBody = attachedBody;
-
-                BoxSetup boxSetup = sourceBody.GetComponent<BoxSetup>();
-                float boxWidth = boxSetup.BoxWidth;
-                float boxHeight = boxSetup.BoxHeight;
-
-                hingeJoint.axis = new Vector3(0, 0, 1);
-
-                hingeJoint.useSpring = true;
-                JointSpring spring = hingeJoint.spring;
-                {
-                    spring.targetPosition = m_angle;
-                    spring.spring = m_springForce;
-                }
-                hingeJoint.spring = spring;
+        //        hingeJoint.useSpring = true;
+        //        JointSpring spring = hingeJoint.spring;
+        //        {
+        //            spring.targetPosition = m_angle;
+        //            spring.spring = m_springForce;
+        //        }
+        //        hingeJoint.spring = spring;
 
 
-                hingeJoint.useLimits = false;
-                JointLimits limits = hingeJoint.limits;
-                {
-                    limits.min = 0f;
-                    limits.max = 90f;
-                    limits.bounciness = 0;
-                    limits.bounceMinVelocity = 0;
-                    //limits.contactDistance = 180;
-                }
-                hingeJoint.limits = limits;
+        //        hingeJoint.useLimits = false;
+        //        JointLimits limits = hingeJoint.limits;
+        //        {
+        //            limits.min = 0f;
+        //            limits.max = 90f;
+        //            limits.bounciness = 0;
+        //            limits.bounceMinVelocity = 0;
+        //            //limits.contactDistance = 180;
+        //        }
+        //        hingeJoint.limits = limits;
 
-                m_hinges.Add(hingeJoint);
+        //        m_hinges.Add(hingeJoint);
 
-                hingeJoint.breakForce = float.PositiveInfinity;
-                hingeJoint.breakTorque = float.PositiveInfinity;
-                hingeJoint.enableCollision = true;
+        //        hingeJoint.breakForce = float.PositiveInfinity;
+        //        hingeJoint.breakTorque = float.PositiveInfinity;
+        //        hingeJoint.enableCollision = true;
 
-            }
-            else if (m_currentJointMode == JointMode.Spring)
-            {
-                SpringJoint springJoint = sourceBody.gameObject.AddComponent<SpringJoint>();
+        //    }
+        //    else if (m_currentJointMode == JointMode.Spring)
+        //    {
+        //        SpringJoint springJoint = sourceBody.gameObject.AddComponent<SpringJoint>();
 
-                springJoint.connectedBody = attachedBody;
+        //        springJoint.connectedBody = attachedBody;
 
-                springJoint.spring = m_springStrenght;
-                springJoint.damper = m_springDamper;
-                springJoint.minDistance = m_springMinDistance;
-                springJoint.maxDistance = m_springMaxDistance;
-                springJoint.tolerance = m_springTolerance;
-                springJoint.breakForce = m_springBreakForce;
-                springJoint.breakTorque = m_springBreakTorque;
-                springJoint.enableCollision = m_springEnableCollision;
+        //        springJoint.spring = m_springStrenght;
+        //        springJoint.damper = m_springDamper;
+        //        springJoint.minDistance = m_springMinDistance;
+        //        springJoint.maxDistance = m_springMaxDistance;
+        //        springJoint.tolerance = m_springTolerance;
+        //        springJoint.breakForce = m_springBreakForce;
+        //        springJoint.breakTorque = m_springBreakTorque;
+        //        springJoint.enableCollision = m_springEnableCollision;
 
-            }
-        }
+        //    }
+        //}
 
         /// <summary> Vérifie si le contenu de la tour (boite ou item) peut tomber </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
-            Box box = Tower.GetTopBox();
+            Box2 box = Tower.GetTopBox();
             if (box == null)
             {
                 Debug.LogWarning("No box to check");
@@ -514,7 +470,7 @@ namespace BoxSystem
                 RemoveItemImpulse(velocity);
         }
 
-        public Box GetBoxUnderneath(Box upperBox)
+        public Box2 GetBoxUnderneath(Box2 upperBox)
         {
             if (Tower.GetBoxCount() < 2)
                 return null;
@@ -522,9 +478,9 @@ namespace BoxSystem
             return Tower.GetAllBoxes().ToArray()[GetBoxIndex(upperBox) - 1];
         }
 
-        private int GetBoxIndex(Box box)
+        private int GetBoxIndex(Box2 box)
         {
-            Box[] boxes = Tower.GetAllBoxes().ToArray();
+            Box2[] boxes = Tower.GetAllBoxes().ToArray();
             for (int i = 0; i < boxes.Length; i++)
             {
                 if (boxes[i] == box)
@@ -532,6 +488,14 @@ namespace BoxSystem
             }
 
             return -1;
+        }
+
+        internal GameObject GetBoxPrefabFromDropableOrder()
+        {
+            if (Tower.GetBoxCount() <= m_nbOfUndroppableBoxes)
+                return m_boxNoHingePrefab;
+            else
+                return m_boxWithHingePrefab;
         }
     }
 }
