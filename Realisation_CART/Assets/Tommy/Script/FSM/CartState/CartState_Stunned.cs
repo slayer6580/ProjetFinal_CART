@@ -8,7 +8,11 @@ namespace CartControl
 	{
 		public override void OnEnter()
 		{
-			Debug.LogWarning("current state: STUNNED");
+			if (m_cartStateMachine.m_showLogStateChange)
+			{
+				Debug.LogWarning("current state: STUNNED");
+			}
+			
 		}
 
 		public override void OnUpdate()

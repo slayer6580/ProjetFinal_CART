@@ -6,7 +6,11 @@ namespace CartControl
 	{
 		public override void OnEnter()
 		{
-			Debug.LogWarning("current state: IDLE");
+			if (m_cartStateMachine.m_showLogStateChange)
+			{
+				Debug.LogWarning("current state: IDLE");
+			}
+			
 		}
 
 		public override void OnUpdate()

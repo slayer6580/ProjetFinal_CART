@@ -10,7 +10,11 @@ namespace CartControl
 
 		public override void OnEnter()
 		{
-			Debug.LogWarning("current state: DRIFTING");
+			if (m_cartStateMachine.m_showLogStateChange)
+			{
+				Debug.LogWarning("current state: DRIFTING");
+			}
+			
 
 			m_cartStateMachine.CanDrift = false;
 			m_cartStateMachine.IsDrifting = true;

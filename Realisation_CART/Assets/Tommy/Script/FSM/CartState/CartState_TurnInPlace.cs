@@ -9,7 +9,11 @@ namespace CartControl
 	{
 		public override void OnEnter()
 		{
-			Debug.LogWarning("current state: TURN IN PLACE");
+			if (m_cartStateMachine.m_showLogStateChange)
+			{
+				Debug.LogWarning("current state: TURN IN PLACE");
+			}
+			
 
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("TurnInPlace", true);
 		}

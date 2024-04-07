@@ -10,7 +10,11 @@ namespace CartControl
 
 		public override void OnEnter()
 		{
-			Debug.LogWarning("current state: STOPPED");
+			if (m_cartStateMachine.m_showLogStateChange)
+			{
+				Debug.LogWarning("current state: STOPPED");
+			}
+			
 
 			//Save the velocity
 			m_tempCartVelocity = m_cartStateMachine.CartRB.velocity;

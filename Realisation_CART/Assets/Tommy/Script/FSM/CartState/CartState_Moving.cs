@@ -9,7 +9,11 @@ namespace CartControl
 
 		public override void OnEnter()
 		{
-			Debug.LogWarning("current state: MOVING");
+			if (m_cartStateMachine.m_showLogStateChange)
+			{
+				Debug.LogWarning("current state: MOVING");
+			}
+			
 		}
 
 		public override void OnUpdate()
