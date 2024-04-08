@@ -9,7 +9,11 @@ namespace CartControl
 
 		public override void OnEnter()
 		{
-			Debug.LogWarning("current state: BOOSTING");
+			if(m_cartStateMachine.m_showLogStateChange)
+			{
+				Debug.LogWarning("current state: BOOSTING");
+			}
+			
 			m_cartStateMachine.IsBoosting = true;
 			m_cartStateMachine.CanBoost = false;
 

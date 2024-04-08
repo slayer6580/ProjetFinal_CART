@@ -67,8 +67,6 @@ namespace StatsSystem
 
         private void Awake()
         {
-
-
             m_nbCartToken = m_startingCartToken;
         }
 
@@ -90,6 +88,8 @@ namespace StatsSystem
             UpdateFillBars();
             UpdateBuyButton();
             UpdateSellButton();
+
+            DeselectAllButtons();
         }
 
         private void UpdateCost()
@@ -113,7 +113,6 @@ namespace StatsSystem
                 m_defenseCostText.text = m_upgradeCostByLevel[DefenseStat].ToString();
             else
                 m_defenseCostText.text = " ";
-
         }
 
         private void UpdateFillBars()
@@ -221,8 +220,6 @@ namespace StatsSystem
                     break;
             }
 
-            DeselectAllButtons();
-
             m_nbCartToken -= cost;
             UpdateAll();
         }
@@ -262,9 +259,7 @@ namespace StatsSystem
                     refund = 0;
                     break;
 
-            }
-
-            DeselectAllButtons();
+            }      
 
             m_nbCartToken += refund;
             UpdateAll();

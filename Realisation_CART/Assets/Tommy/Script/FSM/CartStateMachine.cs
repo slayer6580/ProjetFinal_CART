@@ -11,6 +11,8 @@ namespace CartControl
 		///
 		[field: Header("Test Value")]
 		public float velMagnitude;  //To delete
+
+		public bool m_showLogStateChange;
 		[field: SerializeField] public float ForwardPressedPercent { get; set; }	//To deserialize
 		[field: SerializeField] public float BackwardPressedPercent { get; set; }   //To deserialize
 		[field: SerializeField] public float SteeringValue { get; set; }    //To deserialize
