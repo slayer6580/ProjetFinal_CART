@@ -5,12 +5,14 @@ namespace BoxSystem
 {
     public class Shelf : MonoBehaviour
     {
-        [Header("mettre l'item que l'étagere donne ici")]
+        [Header("Put the item prefab here")]
         [SerializeField] private GameObject m_itemPrefab;
+        [Header("Put the item scriptable object here")]
         [SerializeField] private ItemData m_itemData;
-        [Header("la quantité de l'item")]
-        [SerializeField] private int m_itemQuantity;
-        [Header("mettre le debug visuel TMP ici")]
+        [Header("item max quantity to take per trip")]
+        [SerializeField] private int m_itemQuantityPerTrip;
+
+        [Header("DEBUG ONLY, Put Debug TMP Here")]
         [SerializeField] private TextMeshPro m_quantityText;
 
         private MeshRenderer m_renderer;
@@ -20,8 +22,8 @@ namespace BoxSystem
 
         private void Awake()
         {
-            m_remainingItems = m_itemQuantity;
-            m_quantityText.text = m_itemQuantity.ToString();
+            m_remainingItems = m_itemQuantityPerTrip;
+            m_quantityText.text = m_remainingItems.ToString();
             m_renderer = GetComponent<MeshRenderer>();
         }
 
@@ -31,39 +33,41 @@ namespace BoxSystem
             m_initialColor = m_renderer.material.color;
         }
 
-        /// <summary> Est ce qu'il reste un item dans l'étagère </summary>
+        /// <summary> Check if the item limit is not broken on this shelf </summary>
         public bool CanTakeItem()
         {
             return m_remainingItems > 0;
 
         }
 
-        /// <summary> Prendre une instance d'un item </summary>
+        /// <summary> Take an item from shelf </summary>
         public GameObject GetItemFromShelf()
         {
-            m_remainingItems--;
 
-            GameObject objectToSpawn = m_itemPrefab;
-            Item itemScript = objectToSpawn.GetComponent<Item>();
-            itemScript.m_data = m_itemData;
-            objectToSpawn.transform.position = transform.position;
-            GameObject instant = Instantiate(objectToSpawn);
-            GameObject graphics = Instantiate(itemScript.m_data.m_object);
-            graphics.transform.SetParent(instant.transform);
-            graphics.transform.localPosition = Vector3.zero;
+            m_remainingItems--;                                             // remove an available item count.
+
+            GameObject objectToSpawn = m_itemPrefab;                        // take the item prefab
+            Item itemScript = objectToSpawn.GetComponent<Item>();           // access his 'Item' script
+            itemScript.m_data = m_itemData;                                 // Determine what kind of item it is           
+            objectToSpawn.transform.position = transform.position;          // Set start position to the shelf
+            GameObject instant = Instantiate(objectToSpawn);                // Spawn Item Prefab
+            GameObject model = Instantiate(itemScript.m_data.m_object);     // Spawn Model
+            model.transform.SetParent(instant.transform);                   // Item prefab become parent of Model
+            model.transform.localPosition = Vector3.zero;                   // Reset Model position
 
             m_quantityText.text = m_remainingItems.ToString();
+
             return instant;
         }
 
 
         private void OnValidate()
         {
-            m_quantityText.text = m_itemQuantity.ToString();
+            m_quantityText.text = m_itemQuantityPerTrip.ToString();
         }
 
 
-        /// <summary> Change la couleur du shelf selon la grosseur de l'item </summary>
+        /// <summary> Change Color of shelf depending of item size </summary>
         private void ColorShelf()
         {
             switch (m_itemData.m_size)
@@ -84,17 +88,42 @@ namespace BoxSystem
         }
 
 
-        /// <summary> change la couleur du shelf pour montrer que c'est la choisi </summary>
+        /// <summary> change the color of the selected shelf </summary>
         public void SelectedShelf()
         {
             m_renderer.material.color = Color.black;
         }
 
-        /// <summary> change la couleur du shelf pour son originale pour montrer qu'elle n'es plu choisi </summary>
+        /// <summary> change the color of the unselected shelf </summary>
         public void UnSelectedShelf()
         {
+
+            if (m_remainingItems < 1)
+            {
+                DisabledShelf();
+                return;
+            }
+
+            m_renderer.material.color = m_initialColor;
+
+        }
+
+
+        /// <summary> Change the color of unavailable shelf </summary>
+        private void DisabledShelf()
+        {
+            m_renderer.material.color = Color.gray;
+        }
+
+        /// <summary> Reset item available on shelf and reset all colors </summary>
+        public void ResetShelf()
+        {
+            m_remainingItems = m_itemQuantityPerTrip;
+            m_quantityText.text = m_remainingItems.ToString();
             m_renderer.material.color = m_initialColor;
         }
+
+
     }
 
 

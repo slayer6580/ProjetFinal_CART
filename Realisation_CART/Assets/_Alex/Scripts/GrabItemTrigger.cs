@@ -28,7 +28,9 @@ namespace BoxSystem
 
             if (!shelf)
                 return;
+
             m_takableShelves.Add(shelf);
+            Debug.LogWarning("Detect Shelf");
         }
 
         private void OnTriggerExit(Collider other)
