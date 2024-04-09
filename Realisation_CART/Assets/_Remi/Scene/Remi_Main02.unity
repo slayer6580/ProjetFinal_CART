@@ -1138,6 +1138,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelf
       objectReference: {fileID: 0}
+    - target: {fileID: 6367491464587995437, guid: ed5add11d1f2c1c448aff8a68d891ef6,
+        type: 3}
+      propertyPath: m_text
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1359,6 +1364,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shelf (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367491464587995437, guid: ed5add11d1f2c1c448aff8a68d891ef6,
+        type: 3}
+      propertyPath: m_text
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3379,6 +3389,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shelf (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367491464587995437, guid: ed5add11d1f2c1c448aff8a68d891ef6,
+        type: 3}
+      propertyPath: m_text
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30466,6 +30481,7 @@ MonoBehaviour:
   <ForwardPressedPercent>k__BackingField: 0
   <BackwardPressedPercent>k__BackingField: 0
   <SteeringValue>k__BackingField: 0
+  <DriftSteeringValue>k__BackingField: 0
   <LocalVelocity>k__BackingField: {x: 0, y: 0, z: 0}
   <Acceleration>k__BackingField: 50
   <MaxSpeed>k__BackingField: 30
@@ -30504,6 +30520,7 @@ MonoBehaviour:
   <DriftingAcceleration>k__BackingField: 70
   <AutoDriftWhenTurning>k__BackingField: 0
   <TurningTimeBeforeDrift>k__BackingField: 2
+  <DriftPressed>k__BackingField: 0
   <BoostingAcceleration>k__BackingField: 200
   <BoostingMaxSpeed>k__BackingField: 40
   <BoostingTurnDrag>k__BackingField: 3
@@ -30519,6 +30536,7 @@ MonoBehaviour:
   <HumanAnimCtrlr>k__BackingField: {fileID: 7448206307301313200}
   <FeetOnCartRig>k__BackingField: {fileID: 4804061228143170165}
   <CartMovement>k__BackingField: {fileID: 106236916925315830}
+  <GrindVfx>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 0}
 --- !u!114 &862241199239573095
 MonoBehaviour:
@@ -31683,7 +31701,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3959612820659040669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633594, y: -1.7431841e-15, z: 4.0273412e-17, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633597, y: 0.000000029524049, z: -0.0000000040631285, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.77, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -31705,9 +31723,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 507525211374631003}
   <ItemSnapDistance>k__BackingField: 1
-  m_boxGapHeight: 0.01
+  m_boxPrefab: {fileID: 3665573428290585098, guid: 32d92434184086948a6ad0954b1d3b75,
+    type: 3}
+  <BoxGapHeight>k__BackingField: 0.001
   m_itemExpulsionForce: 0
   m_boxExpulsionForce: 0
+  m_towerPhysics: {fileID: 0}
 --- !u!23 &1089051859086016220
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40336,8 +40357,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
   <TowerBoxSystem>k__BackingField: {fileID: 0}
-  m_sideDotProductImpact: 20
-  m_distanceImpact: 4
 --- !u!4 &3820525376737748646
 Transform:
   m_ObjectHideFlags: 0
@@ -43511,7 +43530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695684694099198788}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633594, y: -1.7431841e-15, z: 4.0273412e-17, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633597, y: 0.000000029524049, z: -0.0000000040631285, w: 0.9906627}
   m_LocalPosition: {x: 0, y: 2.77, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

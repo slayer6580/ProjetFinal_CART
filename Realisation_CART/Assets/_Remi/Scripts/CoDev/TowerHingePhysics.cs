@@ -40,13 +40,6 @@ namespace BoxSystem
             {
                 RemoveBoxImpulse(Vector3.up * m_boxExpulsionForce);
             }
-            else if (Input.GetKeyDown(KeyCode.P))
-            {
-                // Remi: Debug add item
-                if (GetComponentInParent<GrabItemTrigger>() == null) Debug.LogWarning("No parent");
-                if (GetComponentInParent<GrabItemTrigger>().IsThereShelfInList())
-                    GetComponentInParent<GrabItemTrigger>().TakeItemFromShelf();
-            }
             else if (Input.GetKeyDown(KeyCode.O)) // Remove item
             {
                 if (GetTopBox() == null)

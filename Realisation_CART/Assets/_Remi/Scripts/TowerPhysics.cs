@@ -10,7 +10,7 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
-        private TowerHingePhysics _TowerBoxSystem { get; set; } = null;
+        private TowerHingePhysics _TowerHingePhysics { get; set; } = null;
         [field: SerializeField] private GrabItemTrigger GrabItemTrigger { get; set; } = null;
         private TowerBoxSystem _TowerBoxSystem { get; set; } = null;
 
@@ -60,7 +60,7 @@ namespace BoxSystem
                 m_boxesInitialPosition.Add(go.transform.localPosition);
             }
 
-            _TowerBoxSystem = GetComponent<TowerHingePhysics>();
+            _TowerHingePhysics = GetComponent<TowerHingePhysics>();
             m_side = Eside.left;
         }
 
@@ -121,7 +121,7 @@ namespace BoxSystem
 
             foreach (GameObject box in m_boxesWithHinge)
             {
-                Vector3 lockedPosition = new Vector3(box.transform.localPosition.x, box.transform.localPosition.y, _TowerBoxSystem.GetFirstBox().transform.localPosition.z);
+                Vector3 lockedPosition = new Vector3(box.transform.localPosition.x, box.transform.localPosition.y, _TowerHingePhysics.GetFirstBox().transform.localPosition.z);
                 box.transform.localPosition = lockedPosition;
             }
 
@@ -192,7 +192,7 @@ namespace BoxSystem
         {
             if (_TowerBoxSystem.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Box2 topBox = _TowerBoxSystem.GetTopBox();
+            Box2 topBox = _TowerHingePhysics.GetTopBox();
             if (topBox == null) { Debug.LogWarning("Top Box est null"); return; }
             Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
             if (topBoxRB == null) { Debug.LogWarning("Top Box Rigidbody est null"); return; }
@@ -277,7 +277,7 @@ namespace BoxSystem
 
         private void ReplaceBoxToOrigin()
         {
-            Box2 previousTopBox = _TowerBoxSystem.GetPreviousTopBox();
+            Box2 previousTopBox = _TowerHingePhysics.GetPreviousTopBox();
             previousTopBox.ReplaceBoxToOrigin();
             previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
         }
@@ -285,7 +285,7 @@ namespace BoxSystem
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
         public void RemoveItemImpulse(Vector3 velocity)
         {
-            Box2 topBox = _TowerBoxSystem.GetTopBox();
+            Box2 topBox = _TowerHingePhysics.GetTopBox();
 
             if (topBox.GetItemsInBox().Count <= 0)
             {
@@ -330,7 +330,7 @@ namespace BoxSystem
 
             //MoveTopJointToNewTopBox();
 
-            Box2 topBox = _TowerBoxSystem.GetTopBox();
+            Box2 topBox = _TowerHingePhysics.GetTopBox();
             if (topBox == null)
             {
                 Debug.LogWarning("No box to remove");
@@ -455,12 +455,12 @@ namespace BoxSystem
             if (_TowerBoxSystem.GetBoxCount() < 2)
                 return null;
 
-            return _TowerBoxSystem.GetAllBoxes().ToArray()[GetBoxIndex(upperBox) - 1];
+            return _TowerHingePhysics.GetAllBoxes().ToArray()[GetBoxIndex(upperBox) - 1];
         }
 
         private int GetBoxIndex(Box2 box)
         {
-            Box2[] boxes = _TowerBoxSystem.GetAllBoxes().ToArray();
+            Box2[] boxes = _TowerHingePhysics.GetAllBoxes().ToArray();
             for (int i = 0; i < boxes.Length; i++)
             {
                 if (boxes[i] == box)

@@ -9,7 +9,7 @@ namespace BoxSystem
         [field: SerializeField] public float ItemSlerpTime { get; private set; }
 
         [field: Header("mettre la tour du player ici")]
-        [field: SerializeField] public TowerBoxSystem2 TowerBoxSystem { get; private set; }
+        [field: SerializeField] public TowerBoxSystem TowerBoxSystem { get; private set; }
 
         [Header("Choose shelf calcul weight")]
         [SerializeField] [Range(0.0f, 30.0f)] private float m_sideDotProductImpact;
