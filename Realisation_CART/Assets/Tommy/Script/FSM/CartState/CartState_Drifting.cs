@@ -7,6 +7,7 @@ namespace CartControl
 		private float m_driftingTimer;
 		private float m_boostPercentageObtain;
 		private IState m_comingFromState;
+		private int m_driftDirection;
 
 		public override void OnEnter()
 		{
@@ -16,7 +17,7 @@ namespace CartControl
 			}
 			
 
-			m_cartStateMachine.CanDrift = false;
+			m_cartStateMachine.ForceStartDrift = false;
 			m_cartStateMachine.IsDrifting = true;
 
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("IsDrifting", true);
@@ -27,12 +28,34 @@ namespace CartControl
 			}
 			m_driftingTimer = 0;
 			m_boostPercentageObtain = 0;
+			m_driftDirection = 0;
 
 
 		}
 
 		public override void OnUpdate()
 		{
+			if(m_driftDirection == 0)
+			{
+				if(m_cartStateMachine.SteeringValue > 0 + GameConstants.DEADZONE)
+				{
+					m_driftDirection = 1;
+				}
+				else if(m_cartStateMachine.SteeringValue < 0 - GameConstants.DEADZONE)
+				{
+					m_driftDirection = -1;
+				}
+			}
+
+			if(m_driftDirection == -1)
+			{
+				m_cartStateMachine.DriftSteeringValue = Mathf.Clamp(m_cartStateMachine.SteeringValue - 1f, -1.5f,-0.5f);
+			}
+			if (m_driftDirection == 1)
+			{
+				m_cartStateMachine.DriftSteeringValue = Mathf.Clamp(m_cartStateMachine.SteeringValue + 1f, 0.5f, 1.5f);
+			}
+
 			m_driftingTimer += Time.deltaTime;
 
 			//After minimum drifting time obtain. Calculate how much boost to give
@@ -49,11 +72,6 @@ namespace CartControl
 				m_cartStateMachine.CanBoost = true;
 			}
 
-			if (Mathf.Abs(m_cartStateMachine.LocalVelocity.x) < GameConstants.DEADZONE)
-			{
-				m_cartStateMachine.IsDrifting = false;
-			}
-
 			//For animation
 				//Drift
 				//m_cartStateMachine.HumanAnimCtrlr.SetFloat("DriftingValue", Mathf.Clamp(m_cartStateMachine.LocalVelocity.x / 30, -1, 1));
@@ -63,16 +81,25 @@ namespace CartControl
 				m_cartStateMachine.FeetOnCartRig.weight = weightByTime;
 			}
 
+
+			//Exit drift condition
+			if(m_cartStateMachine.DriftPressed == 0 || m_cartStateMachine.LocalVelocity.z < m_cartStateMachine.MinimumSpeedToAllowDrift)
+			{
+				m_cartStateMachine.IsDrifting = false;
+			}
+
 		}
 
 		public override void OnFixedUpdate()
 		{
 			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.DriftingAcceleration, m_cartStateMachine.DriftingDrag, m_cartStateMachine.MaxSpeed);
-			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.DriftingRotatingSpeed + (Mathf.Abs(m_cartStateMachine.BackwardPressedPercent) * m_cartStateMachine.AddedRotatingSpeedWhenBreaking));
+			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.DriftingRotatingSpeed + (Mathf.Abs(m_cartStateMachine.BackwardPressedPercent) * m_cartStateMachine.AddedRotatingSpeedWhenBreaking), m_cartStateMachine.DriftSteeringValue);
 		}
 
 		public override void OnExit()
 		{
+			m_cartStateMachine.DriftSteeringValue = 0;
+
 			//Calculate boosting time
 			m_cartStateMachine.BoostingTime = m_cartStateMachine.MinBoostTime + (m_boostPercentageObtain * (m_cartStateMachine.MaxBoostTime - m_cartStateMachine.MinBoostTime));
 
@@ -86,18 +113,16 @@ namespace CartControl
 		{
 			m_comingFromState = currentState;
 
-			if (m_cartStateMachine.CanDrift)
+			if (m_cartStateMachine.ForceStartDrift)
 			{
 				return true;
 			}
 
-			if (m_cartStateMachine.MinimumSpeedToAllowDrift < m_cartStateMachine.CartRB.velocity.magnitude
-				&& m_cartStateMachine.BackwardPressedPercent > GameConstants.DEADZONE
-				&& Mathf.Abs(m_cartStateMachine.SteeringValue) > GameConstants.DEADZONE)
+			if(currentState is CartState_Moving)
 			{
-				return true;
+				return m_cartStateMachine.DriftPressed > 0;
 			}
-
+			
 			return false;
 		}
 

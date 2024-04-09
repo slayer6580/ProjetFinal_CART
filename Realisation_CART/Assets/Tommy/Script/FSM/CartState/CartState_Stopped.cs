@@ -35,7 +35,7 @@ namespace CartControl
 
 				if (m_comingFromState is CartState_Drifting)
 				{
-					m_cartStateMachine.CanDrift = true;
+					m_cartStateMachine.ForceStartDrift = true;
 				}
 			}
 

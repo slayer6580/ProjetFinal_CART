@@ -39,7 +39,9 @@ namespace CartControl
 
 			m_mainInputs.Cart.Pause.started += OnPause;
 
-			m_mainInputs.Cart.GrabItem.started += OnGrabItem;
+			m_mainInputs.Cart.Drift.started += OnDrift;
+			m_mainInputs.Cart.Drift.performed += OnDrift;
+			m_mainInputs.Cart.Drift.canceled += OnDrift;
 
 			m_mainInputs.Cart.MeleeAttack.started += OnMeleeAttack;
 
@@ -65,6 +67,11 @@ namespace CartControl
 		public void OnPause(InputAction.CallbackContext context)
 		{
 			m_cartStateMachine.OnPause();
+		}
+
+		public void OnDrift(InputAction.CallbackContext context)
+		{
+			m_cartStateMachine.OnDrift(context.ReadValue<float>());
 		}
 
 		public void OnGrabItem(InputAction.CallbackContext context)
