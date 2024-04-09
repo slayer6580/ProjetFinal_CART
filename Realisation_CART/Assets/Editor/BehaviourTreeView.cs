@@ -154,13 +154,12 @@ namespace BehaviourTree
 		}
 
 		//Create Right-Click menu
-		//TODO - {  ---  }  ???
 		//TODO - async
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{			
 			//Get the mouse position in the tree panel
 			Vector2 localMousePos = ElementAt(0).ChangeCoordinatesTo(ElementAt(1), evt.localMousePosition);
-			
+
 			{
 				var types = TypeCache.GetTypesDerivedFrom<LeafNode>();
 

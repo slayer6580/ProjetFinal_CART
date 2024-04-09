@@ -3,6 +3,7 @@ using DiscountDelirium;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using BoxSystem;
+using UnityEngine.VFX;
 
 namespace CartControl
 {
@@ -70,6 +71,7 @@ namespace CartControl
 		[field: SerializeField] public Animator HumanAnimCtrlr { get; private set; }
 		[field: SerializeField] public Rig FeetOnCartRig { get; private set; }
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
+		[field: SerializeField] public ManageGrindVfx GrindVfx { get; private set; }
 
 		//
 		[Space]
