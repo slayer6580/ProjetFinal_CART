@@ -82,7 +82,6 @@ namespace CartControl
 			m_rangeAttackEvent.Invoke();
 		}
 
-
 		private void OnEnable()
 		{
 			m_mainInputs.Enable();
