@@ -9,7 +9,7 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
-        private TowerBoxSystem2 _TowerBoxSystem { get; set; } = null;
+        private TowerHingePhysics _TowerBoxSystem { get; set; } = null;
 
         private List<GameObject> m_boxesWithHinge = new List<GameObject>();
         private List<Vector3> m_boxesInitialPosition = new List<Vector3>();
@@ -126,7 +126,7 @@ namespace BoxSystem
                 m_boxesInitialPosition.Add(go.transform.localPosition);
             }
 
-            _TowerBoxSystem = GetComponent<TowerBoxSystem2>();
+            _TowerBoxSystem = GetComponent<TowerHingePhysics>();
             m_side = Eside.left;
         }
 

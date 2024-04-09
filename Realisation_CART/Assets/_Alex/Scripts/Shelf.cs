@@ -37,7 +37,6 @@ namespace BoxSystem
         public bool CanTakeItem()
         {
             return m_remainingItems > 0;
-
         }
 
         /// <summary> Take an item from shelf </summary>
@@ -56,6 +55,9 @@ namespace BoxSystem
             model.transform.localPosition = Vector3.zero;                   // Reset Model position
 
             m_quantityText.text = m_remainingItems.ToString();
+
+            if (m_remainingItems < 1)
+                DisabledShelf();
 
             return instant;
         }
@@ -87,25 +89,10 @@ namespace BoxSystem
             }
         }
 
-
-        /// <summary> change the color of the selected shelf </summary>
-        public void SelectedShelf()
+        /// <summary> Get number of items available to take  </summary>
+        public int GetRemainingItems()
         {
-            m_renderer.material.color = Color.black;
-        }
-
-        /// <summary> change the color of the unselected shelf </summary>
-        public void UnSelectedShelf()
-        {
-
-            if (m_remainingItems < 1)
-            {
-                DisabledShelf();
-                return;
-            }
-
-            m_renderer.material.color = m_initialColor;
-
+            return m_remainingItems;
         }
 
 

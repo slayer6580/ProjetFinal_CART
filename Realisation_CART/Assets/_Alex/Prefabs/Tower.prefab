@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5704022285266379355}
   - component: {fileID: 9081786967971546593}
-  - component: {fileID: 6699614983112380428}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -49,16 +48,6 @@ MonoBehaviour:
   <ItemSnapDistance>k__BackingField: 1
   m_boxPrefab: {fileID: 3665573428290585098, guid: 4a9ec3d4dfd1f0c469abfa2d64000b26,
     type: 3}
-  m_boxHeight: 0.1
---- !u!114 &6699614983112380428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080024677785248160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be7a09c05e569194793fb2bf91b67146, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_boxGapHeight: 0
+  m_itemExpulsionForce: 0
+  m_boxExpulsionForce: 0

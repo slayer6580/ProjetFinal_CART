@@ -4,7 +4,7 @@ using DiscountDelirium;
 
 namespace BoxSystem
 {
-    public class TowerBoxSystem2 : MonoBehaviour
+    public class TowerHingePhysics : MonoBehaviour
     {
 
         [field: Header("Mettre le Player ici")]
@@ -81,7 +81,7 @@ namespace BoxSystem
             instant.transform.SetParent(transform);
             instant.name = "Boxe " + m_boxCount;
             Box2 instantBox = instant.GetComponent<Box2>();
-            instantBox.SetTower(this);
+           // instantBox.SetTower(this);
 
 
             // hauteur de la boite dans la tour
