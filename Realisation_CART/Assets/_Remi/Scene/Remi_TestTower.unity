@@ -2945,7 +2945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746864961}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633592, y: -0.00000001704572, z: 0.0000000023458477, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633592, y: 0.000000017045723, z: -0.0000000023458482, w: 0.9906627}
   m_LocalPosition: {x: 3.03, y: 2.12, z: -8.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8566,7 +8566,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221520797}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633592, y: -0.00000001704572, z: 0.0000000023458477, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633592, y: 0.000000017045723, z: -0.0000000023458482, w: 0.9906627}
   m_LocalPosition: {x: 3.03, y: 2.12, z: -8.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -63865,6 +63865,11 @@ PrefabInstance:
       propertyPath: <Player>k__BackingField
       value: 
       objectReference: {fileID: 269257456}
+    - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_cartokenValueMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
         type: 3}
       propertyPath: <BoxGapHeight>k__BackingField

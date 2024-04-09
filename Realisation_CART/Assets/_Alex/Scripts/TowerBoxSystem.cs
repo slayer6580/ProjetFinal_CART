@@ -26,6 +26,7 @@ namespace BoxSystem
         private List<Box> m_boxesInCart = new List<Box>();
 
         [SerializeField] private TowerHingePhysicsAlex m_towerPhysics;
+        [SerializeField] private int m_cartokenValueMultiplier = 1;
 
 
         void Start()
@@ -69,7 +70,7 @@ namespace BoxSystem
             else if (Input.GetKeyDown(KeyCode.Y))
             {
                 int[] data = EmptyCartAndGetScore();
-                Debug.Log("totalScore: " + data[0] + ",  nbOfItems: " + data[1]);
+                Debug.Log("totalScore: " + data[0] + ",  nbOfItems: " + data[1] + ", nbOfCartoken: " + data[2]);
             }
         }
 
@@ -121,7 +122,9 @@ namespace BoxSystem
         {
             int totalScore = 0;
             int nbOfItems = 0;
-            int[] data = { totalScore, nbOfItems };
+            int nbOfCartokens = 0;
+
+            int[] data = { totalScore, nbOfItems, nbOfCartokens };
 
             while (m_boxesInCart.Count > 0)
             {
@@ -131,6 +134,7 @@ namespace BoxSystem
                 for (int i = 0; i < itemsInBox.Count; i++)
                 {
                     data[1]++;
+                    data[2] = data[1] * m_cartokenValueMultiplier;
                     data[0] += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
                 }
                 RemoveBoxImpulse(m_boxExpulsionForce);

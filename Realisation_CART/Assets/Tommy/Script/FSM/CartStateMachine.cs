@@ -111,7 +111,7 @@ namespace CartControl
 
 			//Testing tower tilt with Animation
 			//TEMPORARY DEACTIVATED
-			m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
+			//m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
 		}
 
 		protected override void FixedUpdate()

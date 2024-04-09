@@ -15,6 +15,7 @@ namespace DiscountDelirium
         [HideInInspector] public bool m_isGameOver;//field
         [HideInInspector] public int m_playerScore = 0;
         [HideInInspector] public int m_nbItems = 0;
+        [HideInInspector] public int m_nbOfCartokens = 0;
 
 
         private void Awake()
@@ -58,6 +59,7 @@ namespace DiscountDelirium
         {
             m_playerScore += data[0];
             m_nbItems += data[1];
+            m_nbOfCartokens += data[2];
         }
     }
 }
