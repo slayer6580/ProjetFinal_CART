@@ -1,7 +1,4 @@
 using CartControl;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -10,15 +7,11 @@ namespace DiscountDelirium
 {
     public class MainMenuInputHandler : MonoBehaviour
     {
-        const float SPEED = 50.0f;
-
         private MainInputs m_mainInputs;
         public static MainMenuInputHandler Instance;
         [SerializeField] private UnityEvent NaviguateEvent;
         [SerializeField] private UnityEvent SelectEvent;
         [SerializeField] private UnityEvent BackEvent;
-
-        [SerializeField] private Cursor m_cursor;
 
         private Vector2 m_direction;
 
@@ -43,8 +36,7 @@ namespace DiscountDelirium
 
         private void OnNavigate(InputAction.CallbackContext context)
         {
-            m_direction = context.ReadValue<Vector2>();
-            Debug.Log(m_direction);
+            
         }
 
         private void OnSelect(InputAction.CallbackContext context) 
@@ -55,11 +47,6 @@ namespace DiscountDelirium
         private void OnBack(InputAction.CallbackContext context)
         {
             BackEvent.Invoke();
-        }
-
-        void Update()
-        {
-            m_cursor.Move(m_direction * Time.deltaTime * SPEED);
         }
 
         private void OnEnable()

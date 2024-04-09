@@ -41,7 +41,7 @@ namespace CartControl
 					//Activate the possibility to change State
 					if (m_turningTimer >= m_cartStateMachine.TurningTimeBeforeDrift)
 					{
-						m_cartStateMachine.CanDrift = true;
+						m_cartStateMachine.ForceStartDrift = true;
 					}
 				}
 			}
@@ -61,7 +61,7 @@ namespace CartControl
 		public override void OnFixedUpdate()
 		{
 			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag, m_cartStateMachine.MaxSpeed);
-			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeed);
+			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeed, m_cartStateMachine.SteeringValue);
 		}
 
 		public override void OnExit()

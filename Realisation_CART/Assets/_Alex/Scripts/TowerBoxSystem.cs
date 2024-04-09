@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DiscountDelirium;
+using Unity.VisualScripting;
 
 namespace BoxSystem
 {
@@ -15,14 +16,16 @@ namespace BoxSystem
 
         [Header("Mettre le Prefab de la boite")]
         [SerializeField] private GameObject m_boxPrefab;
-        [Header("La hauteur de placement de la boite")]
-        [SerializeField] private float m_boxGapHeight;
+        [field: Header("La hauteur de placement de la boite")]
+        [field: SerializeField] public float BoxGapHeight { get; private set; } = 0.001f;
         [Header("La force d'expulsion des boites a la caisse")]
         [SerializeField] private float m_itemExpulsionForce;
         [SerializeField] private float m_boxExpulsionForce;
 
         private int m_boxCount = 0;
         private List<Box> m_boxesInCart = new List<Box>();
+
+        [SerializeField] private TowerHingePhysicsAlex m_towerPhysics;
 
 
         void Start()
@@ -38,7 +41,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
-                RemoveBoxImpulse(Vector3.up * m_boxExpulsionForce);
+                RemoveBoxImpulse(m_boxExpulsionForce);
             }
             else if (Input.GetKeyDown(KeyCode.O)) // Remove item
             {
@@ -50,12 +53,12 @@ namespace BoxSystem
                 if (GetTopBox().IsEmpty())
                 {
                     Debug.Log("La boite est vide, on enleve la boite");
-                    RemoveBoxImpulse(Vector3.up * m_boxExpulsionForce);
+                    RemoveBoxImpulse(m_boxExpulsionForce);
                 }
 
                 if (GetTopBox() != null)
                 {
-                    RemoveItemImpulse(Vector3.up * m_itemExpulsionForce);
+                    RemoveItemImpulse(m_itemExpulsionForce);
                 }
                 else
                 {
@@ -85,7 +88,7 @@ namespace BoxSystem
 
 
             // hauteur de la boite dans la tour
-            float height = (m_boxCount - 1) * (instantBox.gameObject.GetComponent<BoxSetup>().SlotHeight + m_boxGapHeight);
+            float height = (m_boxCount - 1) * (instantBox.gameObject.GetComponent<BoxSetup>().GetBoxHeightDifference() + BoxGapHeight);
             Vector3 localPosition = new Vector3(0, height, 0);
             instant.transform.localPosition = localPosition;
             instantBox.SetInitialLocationInBox(localPosition);
@@ -93,7 +96,7 @@ namespace BoxSystem
             // ajout a la liste
             m_boxesInCart.Add(instantBox);
 
-           // m_towerPhysics.AddJointToBox();
+            m_towerPhysics.AddBoxToFakeTower();
 
         }
 
@@ -130,12 +133,11 @@ namespace BoxSystem
                     data[1]++;
                     data[0] += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
                 }
-                RemoveBoxImpulse(Vector3.up * m_boxExpulsionForce);
+                RemoveBoxImpulse(m_boxExpulsionForce);
             }
 
             return data;
         }
-
 
         /// <summary> Place toute les boites a leur origine pour placement des angrages des hinges </summary>
         public void ReplaceAllBoxToOrigin()
@@ -146,7 +148,7 @@ namespace BoxSystem
             }
         }
 
-        private void RemoveBoxImpulse(Vector3 velocity)
+        private void RemoveBoxImpulse(float force)
         {
             Box topBox = GetTopBox();
 
@@ -156,26 +158,26 @@ namespace BoxSystem
                 return;
             }
 
-            Vector3 totalImpulse = velocity;
+            Vector3 totalImpulse = topBox.transform.up * force;
 
-            Rigidbody rb = topBox.GetComponent<Rigidbody>();
-            rb.isKinematic = false;
+            Rigidbody rb = topBox.AddComponent<Rigidbody>();
             rb.AddForce(totalImpulse, ForceMode.Impulse);
             AutoDestruction destruct = topBox.GetComponent<AutoDestruction>();
             destruct.enabled = true;
             destruct.DestroyItem();
 
             RemoveLastBoxFromTower();
+            m_towerPhysics.RemoveBoxFromFakeTower();
 
         }
 
-        public void RemoveItemImpulse(Vector3 velocity)
+        public void RemoveItemImpulse(float force)
         {
             Box topBox = GetTopBox();
 
             Box.ItemInBox lastItemInBox = topBox.GetLastItem();
 
-            Vector3 totalImpulse = velocity;
+            Vector3 totalImpulse = lastItemInBox.m_item.transform.up * force;
 
             Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
             if (!rb)

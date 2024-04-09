@@ -3,6 +3,7 @@ using DiscountDelirium;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using BoxSystem;
+using UnityEngine.VFX;
 
 namespace CartControl
 {
@@ -16,6 +17,7 @@ namespace CartControl
 		[field: SerializeField] public float ForwardPressedPercent { get; set; }	//To deserialize
 		[field: SerializeField] public float BackwardPressedPercent { get; set; }   //To deserialize
 		[field: SerializeField] public float SteeringValue { get; set; }    //To deserialize
+		[field: SerializeField] public float DriftSteeringValue { get; set; }    //To deserialize
 		[field: SerializeField] public Vector3 LocalVelocity { get; set; }  //To deserialize
 
 		///
@@ -41,6 +43,7 @@ namespace CartControl
 		[field: Space]
 		[field: SerializeField] public bool AutoDriftWhenTurning { get; private set; }
 		[field: SerializeField] public float TurningTimeBeforeDrift { get; private set; }
+		[field: SerializeField] public float DriftPressed { get; private set; }
 
 		//
 		[field: Header("Boosting")]
@@ -68,6 +71,7 @@ namespace CartControl
 		[field: SerializeField] public Animator HumanAnimCtrlr { get; private set; }
 		[field: SerializeField] public Rig FeetOnCartRig { get; private set; }
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
+		[field: SerializeField] public ManageGrindVfx GrindVfx { get; private set; }
 
 		//
 		[Space]
@@ -75,7 +79,7 @@ namespace CartControl
 		public TowerBalanceAnimCtrlr m_towerCtrlr;
 
 		//
-		[HideInInspector] public bool CanDrift { get; set; }
+		[HideInInspector] public bool ForceStartDrift { get; set; }
 		[HideInInspector] public bool IsDrifting { get; set; }
 		[HideInInspector] public bool CanBoost { get; set; }
 		[HideInInspector] public bool IsBoosting { get; set; }
@@ -138,6 +142,10 @@ namespace CartControl
 		public void OnSteer(float steerValue)
 		{
 			SteeringValue = steerValue;
+		}
+		public void OnDrift(float isDrifting)
+		{
+			DriftPressed = isDrifting;
 		}
 		public void OnPause()
 		{

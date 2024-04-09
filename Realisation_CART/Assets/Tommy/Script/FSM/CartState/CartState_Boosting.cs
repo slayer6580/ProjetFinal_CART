@@ -64,7 +64,7 @@ namespace CartControl
 		public override void OnFixedUpdate()
 		{
 			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.BoostingAcceleration, m_cartStateMachine.BoostingTurnDrag, m_cartStateMachine.BoostingMaxSpeed);
-			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeed);
+			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeed, m_cartStateMachine.SteeringValue);
 		}
 
 		public override void OnExit()
@@ -78,12 +78,15 @@ namespace CartControl
 
 		public override bool CanEnter(IState currentState)
 		{
+			/*
 			if(currentState is CartState_Drifting)
 			{
 				return m_cartStateMachine.IsDrifting == false;
 			}
 			m_comingFromState = currentState;
 			return m_cartStateMachine.CanBoost;
+			*/
+			return false;
 		}
 
 		public override bool CanExit()

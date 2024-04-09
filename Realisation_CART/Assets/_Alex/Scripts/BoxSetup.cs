@@ -289,5 +289,10 @@ namespace BoxSystem
 
         #endregion
 
+        public float GetBoxHeightDifference()
+        {
+            return SlotHeight + BoxThickness;
+        }
+
     }
 }

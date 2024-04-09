@@ -10,6 +10,7 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
+        private TowerHingePhysics _TowerBoxSystem { get; set; } = null;
         [field: SerializeField] private GrabItemTrigger GrabItemTrigger { get; set; } = null;
         private TowerBoxSystem _TowerBoxSystem { get; set; } = null;
 
@@ -59,7 +60,7 @@ namespace BoxSystem
                 m_boxesInitialPosition.Add(go.transform.localPosition);
             }
 
-            _TowerBoxSystem = GetComponent<TowerBoxSystem>();
+            _TowerBoxSystem = GetComponent<TowerHingePhysics>();
             m_side = Eside.left;
         }
 
@@ -191,7 +192,7 @@ namespace BoxSystem
         {
             if (_TowerBoxSystem.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Box topBox = _TowerBoxSystem.GetTopBox();
+            Box2 topBox = _TowerBoxSystem.GetTopBox();
             if (topBox == null) { Debug.LogWarning("Top Box est null"); return; }
             Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
             if (topBoxRB == null) { Debug.LogWarning("Top Box Rigidbody est null"); return; }
@@ -276,7 +277,7 @@ namespace BoxSystem
 
         private void ReplaceBoxToOrigin()
         {
-            Box previousTopBox = _TowerBoxSystem.GetPreviousTopBox();
+            Box2 previousTopBox = _TowerBoxSystem.GetPreviousTopBox();
             previousTopBox.ReplaceBoxToOrigin();
             previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
         }
@@ -284,7 +285,7 @@ namespace BoxSystem
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
         public void RemoveItemImpulse(Vector3 velocity)
         {
-            Box topBox = _TowerBoxSystem.GetTopBox();
+            Box2 topBox = _TowerBoxSystem.GetTopBox();
 
             if (topBox.GetItemsInBox().Count <= 0)
             {
@@ -292,7 +293,7 @@ namespace BoxSystem
                 return;
             }
 
-            Box.ItemInBox lastItemInBox = topBox.GetLastItem();
+            Box2.ItemInBox lastItemInBox = topBox.GetLastItem();
             if (lastItemInBox.m_item == null)
             {
                 Debug.LogWarning("Item is null");
@@ -329,7 +330,7 @@ namespace BoxSystem
 
             //MoveTopJointToNewTopBox();
 
-            Box topBox = _TowerBoxSystem.GetTopBox();
+            Box2 topBox = _TowerBoxSystem.GetTopBox();
             if (topBox == null)
             {
                 Debug.LogWarning("No box to remove");
@@ -449,7 +450,7 @@ namespace BoxSystem
                 RemoveItemImpulse(velocity);
         }
 
-        public Box GetBoxUnderneath(Box upperBox)
+        public Box2 GetBoxUnderneath(Box2 upperBox)
         {
             if (_TowerBoxSystem.GetBoxCount() < 2)
                 return null;
@@ -457,9 +458,9 @@ namespace BoxSystem
             return _TowerBoxSystem.GetAllBoxes().ToArray()[GetBoxIndex(upperBox) - 1];
         }
 
-        private int GetBoxIndex(Box box)
+        private int GetBoxIndex(Box2 box)
         {
-            Box[] boxes = _TowerBoxSystem.GetAllBoxes().ToArray();
+            Box2[] boxes = _TowerBoxSystem.GetAllBoxes().ToArray();
             for (int i = 0; i < boxes.Length; i++)
             {
                 if (boxes[i] == box)

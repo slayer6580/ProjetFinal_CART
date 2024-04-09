@@ -38,13 +38,14 @@ namespace CartControl
 		}
 
 
-		public void UpdateOrientation(float rotationSpeed)
+		public void UpdateOrientation(float rotationSpeed, float steeringValue)
 		{
-			if (SM.SteeringValue != 0)
+		
+			if (steeringValue != 0)
 			{
 				SM.Cart.transform.Rotate(Vector3.up
 					* rotationSpeed
-					* SM.SteeringValue
+					* steeringValue
 					* Time.fixedDeltaTime);
 			}
 		}
