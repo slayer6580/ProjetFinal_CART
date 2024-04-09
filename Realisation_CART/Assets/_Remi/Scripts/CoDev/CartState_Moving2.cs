@@ -46,11 +46,11 @@ namespace CartControl
 			//Is only pressing break
 			if ((m_cartStateMachine.BackwardPressedPercent > GameConstants.DEADZONE) && (m_cartStateMachine.LocalVelocity.z > 0))
 			{
-				m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", true);
+				//m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", true);
 			}
 			else
 			{
-				m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
+				//m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
 			}
 		}
 
@@ -63,7 +63,7 @@ namespace CartControl
 		public override void OnExit()
 		{
 			//For Animation
-			m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
+			//m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
 		}
 
 		public override bool CanEnter(IState currentState)

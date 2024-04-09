@@ -36,8 +36,8 @@ namespace CartControl
 			}
 
 			//For Animation
-			m_currentStateInfo = m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0);
-			m_cartStateMachine.HumanAnimCtrlr.enabled = false;			
+			//m_currentStateInfo = m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0);
+			//m_cartStateMachine.HumanAnimCtrlr.enabled = false;			
 		}
 
 		public override void OnUpdate()

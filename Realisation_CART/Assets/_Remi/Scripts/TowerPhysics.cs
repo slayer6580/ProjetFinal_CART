@@ -1,6 +1,7 @@
 ﻿using DiscountDelirium;
 using System;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 namespace BoxSystem
@@ -9,7 +10,9 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject DebugCartPrefab { get; set; } = null;
         [field: SerializeField] private GameObject Player { get; set; } = null;
-        private TowerBoxSystem2 _TowerBoxSystem { get; set; } = null;
+        [field: SerializeField] private GrabItemTrigger GrabItemTrigger { get; set; } = null;
+        private TowerBoxSystem _TowerBoxSystem { get; set; } = null;
+
 
         private List<GameObject> m_boxesWithHinge = new List<GameObject>();
         private List<Vector3> m_boxesInitialPosition = new List<Vector3>();
@@ -29,87 +32,17 @@ namespace BoxSystem
         [SerializeField] private float m_debugCartDistance = 10.0f;
         [SerializeField] private float m_debugCartSpeed = 3.0f;
 
-        //[Header("Joint Settings")]
-        //[SerializeField] private JointMode m_currentJointMode = JointMode.Spring;
 
         [Header("Hinge Settings")]
-
         [SerializeField] private List<HingeJoint> m_hinges;
         [SerializeField] private float m_angle = 0;
         [SerializeField][Range(0.0f, 1000.0f)] private float m_springForce = 0;
         [SerializeField] private float m_angleOffset = 0.1f;
-        //[SerializeField] private Vector3 m_hingeAnchor = Vector3.zero;
-        //[SerializeField] private Vector3 m_hingeAxis = new Vector3(0, 0, 1);
-        //[SerializeField] private bool m_hingeAutoConfigConnAnchor = true;
-        //[SerializeField] private Vector3 m_hingeConnAnchor = Vector3.zero;
-        //[SerializeField] private bool m_hingeUseSpring = true;
-        //[SerializeField] private float m_hingeSpringStrenght = 100.0f;
-        //[SerializeField] private float m_hingeSpringDamper = 0;
-        //[SerializeField] private float m_hingeTargetPos = 0;
-
-        //[SerializeField] private bool m_hingeUseMotor = true;
-        //[SerializeField] private float m_hingeMotorTargetVelocity = 0;
-        //[SerializeField] private float m_hingeMotorForce = 100.0f;
-        //[SerializeField] private bool m_hingeMotorFreespin = true;
-
-        //[SerializeField] private bool m_hingUseLimits = true;
-        //[SerializeField] private float m_hingeLimitsMin = 0;
-        //[SerializeField] private float m_hingeLimitsMax = 0;
-
-        //[SerializeField] private float m_hingeLimitsBounciness = 0;
-        //[SerializeField] private float m_hingeLimitsContactDistance = 0;
-        //[SerializeField] private bool m_hingeExtendedLimits = true;
-        //[SerializeField] private bool m_hingeUseAcceleration = true;
-
-        //[SerializeField] private float m_hingeBreakForce = float.PositiveInfinity;
-        //[SerializeField] private float m_hingeBreakTorque = float.PositiveInfinity;
-        //[SerializeField] private bool m_hingeEnableCollision = true;
-
-        //[SerializeField] private bool m_hingeEnablePreprocess = true;
-        //[SerializeField] private float m_hingeMassScale = 1;
-        //[SerializeField] private float m_hingeConnectedMassScale = 1;
-
-        [Header("Top Box Spring Settings")]
-        [SerializeField] private float m_springStrenght = 100.0f;
-        [SerializeField] private float m_springDamper = 0;
-        [SerializeField] private float m_springMinDistance = 0;
-        [SerializeField] private float m_springMaxDistance = 0.2f;
-        [SerializeField] private float m_springTolerance = 0.06f;
-        [SerializeField] private bool m_springEnableCollision = true;
-        [SerializeField] private float m_springBreakForce = 100.0f;
-        [SerializeField] private float m_springBreakTorque = 100.0f;
-
-        //[SerializeField] private bool m_springAutoConfigConnAnchor = true;
-        //[SerializeField] private bool m_springEnablePreprocess = true;
-        //[SerializeField] private float m_springMassScale = 1;
-        //[SerializeField] private float m_springConnectedMassScale = 1;
-
-        //[Header("Undroppable Boxes Spring Settings")]
-        //[SerializeField] private float m_undroppableBoxesSrpingStrenght = 0.0f;
-        //[SerializeField] private float m_undroppableBoxesSpringDamper = 0;
-        //[SerializeField] private float m_undroppableBoxesSpringMinDistance = 0;
-        //[SerializeField] private float m_undroppableBoxesSpringMaxDistance = 0.2f;
-        //[SerializeField] private float m_undroppableBoxesSpringTolerance = 0.00f;
-        //[SerializeField] private bool m_undroppableBoxesSpringEnableCollision = false;
-        //[SerializeField] private float m_undroppableBoxesSpringBreakForce = 100000000.0f;
-        //[SerializeField] private float m_undroppableBoxesSpringBreakTorque = 10000000.0f;
-        //[SerializeField] private bool m_undroppableBoxesSpringAutoConfigConnAnchor = true;
-        //[SerializeField] private bool m_undroppableBoxesSpringEnablePreprocess = true;
-        //[SerializeField] private float m_undroppableBoxesSpringMassScale = 1;
-        //[SerializeField] private float m_undroppableBoxesSpringConnectedMassScale = 1;
 
         private Eside m_side;
 
         [Header("ReadOnly")]
         [SerializeField] private float m_angleRead = 0;
-
-        //public enum JointMode
-        //{
-        //    Spring,
-        //    Hinge,
-        //    None,
-        //    Count
-        //}
 
         enum Eside
         {
@@ -126,7 +59,7 @@ namespace BoxSystem
                 m_boxesInitialPosition.Add(go.transform.localPosition);
             }
 
-            _TowerBoxSystem = GetComponent<TowerBoxSystem2>();
+            _TowerBoxSystem = GetComponent<TowerBoxSystem>();
             m_side = Eside.left;
         }
 
@@ -148,6 +81,10 @@ namespace BoxSystem
                 Vector3 leftStartPosition = Player.transform.position + (leftSideOfPlayer * m_debugCartDistance);
 
                 SpawnDebugCartAtOffsetPosition(rotation, leftStartPosition);
+            }
+            else if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                GameStateMachine2.Instance.SetGameOver();
             }
 
             if (m_hinges.Count <= 0) return;
@@ -254,7 +191,7 @@ namespace BoxSystem
         {
             if (_TowerBoxSystem.GetBoxCount() <= m_nbOfUndroppableBoxes) return;
 
-            Box2 topBox = _TowerBoxSystem.GetTopBox();
+            Box topBox = _TowerBoxSystem.GetTopBox();
             if (topBox == null) { Debug.LogWarning("Top Box est null"); return; }
             Rigidbody topBoxRB = topBox.GetComponent<Rigidbody>();
             if (topBoxRB == null) { Debug.LogWarning("Top Box Rigidbody est null"); return; }
@@ -339,7 +276,7 @@ namespace BoxSystem
 
         private void ReplaceBoxToOrigin()
         {
-            Box2 previousTopBox = _TowerBoxSystem.GetPreviousTopBox();
+            Box previousTopBox = _TowerBoxSystem.GetPreviousTopBox();
             previousTopBox.ReplaceBoxToOrigin();
             previousTopBox.transform.eulerAngles = Player.transform.eulerAngles;
         }
@@ -347,7 +284,7 @@ namespace BoxSystem
         /// <summary> Retire un item avec une force provenant de l'exterieur </summary>
         public void RemoveItemImpulse(Vector3 velocity)
         {
-            Box2 topBox = _TowerBoxSystem.GetTopBox();
+            Box topBox = _TowerBoxSystem.GetTopBox();
 
             if (topBox.GetItemsInBox().Count <= 0)
             {
@@ -355,7 +292,7 @@ namespace BoxSystem
                 return;
             }
 
-            Box2.ItemInBox lastItemInBox = topBox.GetLastItem();
+            Box.ItemInBox lastItemInBox = topBox.GetLastItem();
             if (lastItemInBox.m_item == null)
             {
                 Debug.LogWarning("Item is null");
@@ -392,7 +329,7 @@ namespace BoxSystem
 
             //MoveTopJointToNewTopBox();
 
-            Box2 topBox = _TowerBoxSystem.GetTopBox();
+            Box topBox = _TowerBoxSystem.GetTopBox();
             if (topBox == null)
             {
                 Debug.LogWarning("No box to remove");
@@ -499,7 +436,7 @@ namespace BoxSystem
         /// <summary> Vérifie si le contenu de la tour (boite ou item) peut tomber </summary>
         public void CheckIfCanDropContent(Vector3 velocity)
         {
-            Box2 box = _TowerBoxSystem.GetTopBox();
+            Box box = _TowerBoxSystem.GetTopBox();
             if (box == null)
             {
                 Debug.LogWarning("No box to check");
@@ -512,7 +449,7 @@ namespace BoxSystem
                 RemoveItemImpulse(velocity);
         }
 
-        public Box2 GetBoxUnderneath(Box2 upperBox)
+        public Box GetBoxUnderneath(Box upperBox)
         {
             if (_TowerBoxSystem.GetBoxCount() < 2)
                 return null;
@@ -520,9 +457,9 @@ namespace BoxSystem
             return _TowerBoxSystem.GetAllBoxes().ToArray()[GetBoxIndex(upperBox) - 1];
         }
 
-        private int GetBoxIndex(Box2 box)
+        private int GetBoxIndex(Box box)
         {
-            Box2[] boxes = _TowerBoxSystem.GetAllBoxes().ToArray();
+            Box[] boxes = _TowerBoxSystem.GetAllBoxes().ToArray();
             for (int i = 0; i < boxes.Length; i++)
             {
                 if (boxes[i] == box)

@@ -101,7 +101,7 @@ namespace CartControl
 			TryToChangeState();
 
 			//For Animation
-			HumanAnimCtrlr.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeed);
+			//HumanAnimCtrlr.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeed);
 
 			//Testing tower tilt with Animation
 			//TEMPORARY DEACTIVATED

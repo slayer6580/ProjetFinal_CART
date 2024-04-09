@@ -136,7 +136,7 @@ namespace BoxSystem
         /// <summary> Pour mettre l'objet dans la boite selon sa taille </summary>
         public void PutItemInBox(GameObject GO, bool autoSnap = false)
         {
-            Item item = GO.GetComponent<Item>();
+            Item2 item = GO.GetComponent<Item2>();
 
             if (item.m_data.m_size == ItemData.ESize.small)
                 PutSmallItemInBox(GO, autoSnap);
@@ -167,7 +167,7 @@ namespace BoxSystem
         /// <summary> Regarde si on peut placer le multi slot item tout de suite ou réorganizer </summary>
         private void PutInBoxOrReorganize(GameObject GO, bool autoSnap)
         {
-            Item item = GO.GetComponent<Item>();
+            Item2 item = GO.GetComponent<Item2>();
             List<MultiSlots> multiSlotList = new List<MultiSlots>();
 
             multiSlotList = item.m_data.m_size == ItemData.ESize.medium ? m_doubleSlots : m_fourSlots;
@@ -229,7 +229,7 @@ namespace BoxSystem
         /// <summary> Pour mettre un objet multi slot dans la boite </summary>
         private void PutMultiSlotItemInBox(GameObject GO, MultiSlots multiSlot, bool autoSnap)
         {
-            Item item = GO.GetComponent<Item>();
+            Item2 item = GO.GetComponent<Item2>();
             int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? GameConstants.MEDIUM_SIZE : GameConstants.LARGE_SIZE;
             List<Vector3> allLocalPositions = new List<Vector3>();
 
