@@ -21,6 +21,7 @@ namespace CartControl
 			m_cartStateMachine.IsDrifting = true;
 
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("IsDrifting", true);
+			m_cartStateMachine.GrindVfx.PlayVfx();
 			//Some value must not be reset when coming from Stopped State
 			if (m_comingFromState is CartState_Stopped)
 			{
@@ -98,6 +99,7 @@ namespace CartControl
 
 		public override void OnExit()
 		{
+			m_cartStateMachine.GrindVfx.StopVfx();
 			m_cartStateMachine.DriftSteeringValue = 0;
 
 			//Calculate boosting time
@@ -120,7 +122,7 @@ namespace CartControl
 
 			if(currentState is CartState_Moving)
 			{
-				return m_cartStateMachine.DriftPressed > 0;
+				return m_cartStateMachine.DriftPressed > 0 && m_cartStateMachine.LocalVelocity.z >= m_cartStateMachine.MinimumSpeedToAllowDrift;
 			}
 			
 			return false;
