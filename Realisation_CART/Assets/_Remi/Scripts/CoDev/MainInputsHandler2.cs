@@ -39,7 +39,7 @@ namespace CartControl
 
 			m_mainInputs.Cart.Pause.started += OnPause;
 
-			m_mainInputs.Cart.GrabItem.started += OnGrabItem;
+			//m_mainInputs.Cart.GrabItem.started += OnGrabItem;
 
 			m_mainInputs.Cart.MeleeAttack.started += OnMeleeAttack;
 
