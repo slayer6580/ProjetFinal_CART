@@ -66,7 +66,7 @@ namespace CartControl
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""GrabItem"",
+                    ""name"": ""Drift"",
                     ""type"": ""Button"",
                     ""id"": ""03125146-057f-4d87-835c-6f23e97f6423"",
                     ""expectedControlType"": ""Button"",
@@ -240,11 +240,11 @@ namespace CartControl
                 {
                     ""name"": """",
                     ""id"": ""c5a71c97-a82b-4930-9933-44d8ca1dba03"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GrabItem"",
+                    ""action"": ""Drift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -255,14 +255,14 @@ namespace CartControl
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""GrabItem"",
+                    ""action"": ""Drift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""c2182888-b1d0-4dc0-9333-2e9a9191a44b"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -426,7 +426,7 @@ namespace CartControl
             m_Cart_CartBackward = m_Cart.FindAction("CartBackward", throwIfNotFound: true);
             m_Cart_Steer = m_Cart.FindAction("Steer", throwIfNotFound: true);
             m_Cart_Pause = m_Cart.FindAction("Pause", throwIfNotFound: true);
-            m_Cart_GrabItem = m_Cart.FindAction("GrabItem", throwIfNotFound: true);
+            m_Cart_Drift = m_Cart.FindAction("Drift", throwIfNotFound: true);
             m_Cart_MeleeAttack = m_Cart.FindAction("MeleeAttack", throwIfNotFound: true);
             m_Cart_RangeAttack = m_Cart.FindAction("RangeAttack", throwIfNotFound: true);
             // Menu
@@ -499,7 +499,7 @@ namespace CartControl
         private readonly InputAction m_Cart_CartBackward;
         private readonly InputAction m_Cart_Steer;
         private readonly InputAction m_Cart_Pause;
-        private readonly InputAction m_Cart_GrabItem;
+        private readonly InputAction m_Cart_Drift;
         private readonly InputAction m_Cart_MeleeAttack;
         private readonly InputAction m_Cart_RangeAttack;
         public struct CartActions
@@ -510,7 +510,7 @@ namespace CartControl
             public InputAction @CartBackward => m_Wrapper.m_Cart_CartBackward;
             public InputAction @Steer => m_Wrapper.m_Cart_Steer;
             public InputAction @Pause => m_Wrapper.m_Cart_Pause;
-            public InputAction @GrabItem => m_Wrapper.m_Cart_GrabItem;
+            public InputAction @Drift => m_Wrapper.m_Cart_Drift;
             public InputAction @MeleeAttack => m_Wrapper.m_Cart_MeleeAttack;
             public InputAction @RangeAttack => m_Wrapper.m_Cart_RangeAttack;
             public InputActionMap Get() { return m_Wrapper.m_Cart; }
@@ -534,9 +534,9 @@ namespace CartControl
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
-                @GrabItem.started += instance.OnGrabItem;
-                @GrabItem.performed += instance.OnGrabItem;
-                @GrabItem.canceled += instance.OnGrabItem;
+                @Drift.started += instance.OnDrift;
+                @Drift.performed += instance.OnDrift;
+                @Drift.canceled += instance.OnDrift;
                 @MeleeAttack.started += instance.OnMeleeAttack;
                 @MeleeAttack.performed += instance.OnMeleeAttack;
                 @MeleeAttack.canceled += instance.OnMeleeAttack;
@@ -559,9 +559,9 @@ namespace CartControl
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
-                @GrabItem.started -= instance.OnGrabItem;
-                @GrabItem.performed -= instance.OnGrabItem;
-                @GrabItem.canceled -= instance.OnGrabItem;
+                @Drift.started -= instance.OnDrift;
+                @Drift.performed -= instance.OnDrift;
+                @Drift.canceled -= instance.OnDrift;
                 @MeleeAttack.started -= instance.OnMeleeAttack;
                 @MeleeAttack.performed -= instance.OnMeleeAttack;
                 @MeleeAttack.canceled -= instance.OnMeleeAttack;
@@ -653,7 +653,7 @@ namespace CartControl
             void OnCartBackward(InputAction.CallbackContext context);
             void OnSteer(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
-            void OnGrabItem(InputAction.CallbackContext context);
+            void OnDrift(InputAction.CallbackContext context);
             void OnMeleeAttack(InputAction.CallbackContext context);
             void OnRangeAttack(InputAction.CallbackContext context);
         }

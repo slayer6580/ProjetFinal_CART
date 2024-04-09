@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "GrabItem",
+                    "name": "Drift",
                     "type": "Button",
                     "id": "03125146-057f-4d87-835c-6f23e97f6423",
                     "expectedControlType": "Button",
@@ -216,11 +216,11 @@
                 {
                     "name": "",
                     "id": "c5a71c97-a82b-4930-9933-44d8ca1dba03",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GrabItem",
+                    "action": "Drift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -231,14 +231,14 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GrabItem",
+                    "action": "Drift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "c2182888-b1d0-4dc0-9333-2e9a9191a44b",
-                    "path": "<XInputController>/buttonWest",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
