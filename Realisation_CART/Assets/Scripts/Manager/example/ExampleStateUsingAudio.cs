@@ -1,7 +1,3 @@
-using Codice.CM.Common;
-using Manager;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static Manager.AudioManager;
 
