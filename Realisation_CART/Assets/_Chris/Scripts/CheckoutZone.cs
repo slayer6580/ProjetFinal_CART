@@ -1,6 +1,5 @@
 using BoxSystem;
-using System.Collections;
-using System.Collections.Generic;
+using Manager;
 using UnityEngine;
 
 namespace DiscountDelirium
@@ -14,7 +13,7 @@ namespace DiscountDelirium
             {
                 return;
             }
-            Vector3 data = itemTrigger.TowerBoxSystem.EmptyCartAndGetScore();     
+            Vector3 data = ScoreManager.EmptyCartAndGetScore();     
             GameStateMachine.Instance.GetScoreFromCart(data);
             // data[3] = nbOfBoxes;
         }

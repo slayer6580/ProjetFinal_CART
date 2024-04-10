@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DiscountDelirium;
 using Unity.VisualScripting;
+using Manager;
 
 namespace BoxSystem
 {
@@ -26,11 +27,11 @@ namespace BoxSystem
         private List<Box> m_boxesInCart = new List<Box>();
 
         [SerializeField] private TowerHingePhysicsAlex m_towerPhysics;
-        [SerializeField] private int m_cartokenValueMultiplier = 1;
 
 
         void Start()
         {
+            ScoreManager._TowerBoxSystem = this;
             AddBoxToTower();
         }
 
@@ -42,7 +43,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
-                RemoveBoxImpulse(m_boxExpulsionForce);
+                RemoveBoxImpulse();
             }
             else if (Input.GetKeyDown(KeyCode.O)) // Remove item
             {
@@ -54,7 +55,7 @@ namespace BoxSystem
                 if (GetTopBox().IsEmpty())
                 {
                     Debug.Log("La boite est vide, on enleve la boite");
-                    RemoveBoxImpulse(m_boxExpulsionForce);
+                    RemoveBoxImpulse();
                 }
 
                 if (GetTopBox() != null)
@@ -69,7 +70,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.Y))
             {
-                Vector3 data = EmptyCartAndGetScore();
+                Vector3 data = ScoreManager.EmptyCartAndGetScore();
                 Debug.Log("totalScore: " + data.x + ",  nbOfItems: " + data.y + ", nbOfCartoken: " + data.z);
             }
         }
@@ -117,30 +118,6 @@ namespace BoxSystem
             GetTopBox().PutItemInBox(item);
         }
 
-        /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
-        public Vector3 EmptyCartAndGetScore()
-        {
-            int totalScore = 0;
-            int nbOfItems = 0;
-            int nbOfCartokens = 0;
-
-            while (m_boxesInCart.Count > 0)
-            {
-                Box topBox = GetTopBox();
-                List<Box.ItemInBox> itemsInBox = topBox.GetItemsInBox();
-
-                for (int i = 0; i < itemsInBox.Count; i++)
-                {
-                    nbOfItems++;                 
-                    totalScore += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
-                    nbOfCartokens = nbOfItems * m_cartokenValueMultiplier;
-                }
-                RemoveBoxImpulse(m_boxExpulsionForce);
-            }
-
-            return new Vector3(nbOfItems, totalScore, nbOfCartokens);
-        }
-
         /// <summary> Place toute les boites a leur origine pour placement des angrages des hinges </summary>
         public void ReplaceAllBoxToOrigin()
         {
@@ -150,7 +127,7 @@ namespace BoxSystem
             }
         }
 
-        private void RemoveBoxImpulse(float force)
+        public void RemoveBoxImpulse()
         {
             Box topBox = GetTopBox();
 
@@ -160,7 +137,7 @@ namespace BoxSystem
                 return;
             }
 
-            Vector3 totalImpulse = topBox.transform.up * force;
+            Vector3 totalImpulse = topBox.transform.up * m_boxExpulsionForce;
 
             Rigidbody rb = topBox.AddComponent<Rigidbody>();
             rb.AddForce(totalImpulse, ForceMode.Impulse);
