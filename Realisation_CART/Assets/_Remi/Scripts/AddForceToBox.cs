@@ -7,10 +7,18 @@ namespace BoxSystem
         [SerializeField] private float m_impulseForce;
         [SerializeField] private float m_constantForce;
         private TowerHingePhysicsAlex m_towerPhysics;
+        [SerializeField] private float m_forceMultiplier;
 
         private void Awake()
         {
             m_towerPhysics = GetComponent<TowerHingePhysicsAlex>();
+        }
+
+        public void AddConstantForceToBox(float force)
+        {
+            Vector3 pushDirection = force < 0.0f ? -transform.right : transform.right;
+            Vector3 pushForce = pushDirection * m_forceMultiplier;
+            m_towerPhysics.GetTopBox().GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Force);
         }
 
         private void Update()
@@ -37,7 +45,8 @@ namespace BoxSystem
                 m_towerPhysics.GetTopBox().GetComponent<Rigidbody>().AddForce(rightPush, ForceMode.Force);
             }
 
-            // DOIT AJOUTER DE LA FORCE SUR LA DERNIERE BOITE
         }
+
+      
     }
 }
