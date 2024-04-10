@@ -231,6 +231,9 @@ namespace BoxSystem
 
         public GameObject GetTopBox()
         {
+            if (m_boxCount == 0)
+                return null;
+
             return m_allBoxes[m_boxCount - 1];
         }
 

@@ -72,6 +72,7 @@ namespace CartControl
 		[field: SerializeField] public Rig FeetOnCartRig { get; private set; }
 		[field: SerializeField] public CartMovement CartMovement { get; private set; }
 		[field: SerializeField] public ManageGrindVfx GrindVfx { get; private set; }
+		[field: SerializeField] public AddForceToBox BoxForce { get; private set; }
 
 		//
 		[Space]
@@ -112,6 +113,7 @@ namespace CartControl
 			//Testing tower tilt with Animation
 			//TEMPORARY DEACTIVATED
 			//m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
+
 		}
 
 		protected override void FixedUpdate()

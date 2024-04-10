@@ -89,6 +89,11 @@ namespace CartControl
 				m_cartStateMachine.IsDrifting = false;
 			}
 
+			if (Mathf.Abs(m_cartStateMachine.LocalVelocity.x) > 1)
+			{
+				m_cartStateMachine.BoxForce.AddConstantForceToBox(m_cartStateMachine.LocalVelocity.x);
+			}
+
 		}
 
 		public override void OnFixedUpdate()
