@@ -350,10 +350,6 @@ namespace BoxSystem
             return (m_boxSetup.BoxWidth / 2) + m_boxSetup.BoxThickness;
         }
 
-        public void EnabledCollider(bool value)
-        {
-            GetComponent<BoxCollider>().enabled = value;
-        }
 
         #endregion
     }

@@ -244,13 +244,6 @@ namespace BoxSystem
         }
         #endregion
 
-        public void EnabledColliderOnBoxes(bool value)
-        {
-            foreach (Box box in m_boxesInCart)
-            {
-                box.EnabledCollider(value);
-            }
-        }
     }
 
 }
