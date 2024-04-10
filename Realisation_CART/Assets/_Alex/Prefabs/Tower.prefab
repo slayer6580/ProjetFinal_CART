@@ -46,8 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 0}
   <ItemSnapDistance>k__BackingField: 1
-  m_boxPrefab: {fileID: 3665573428290585098, guid: 4a9ec3d4dfd1f0c469abfa2d64000b26,
+  m_boxPrefab: {fileID: 3665573428290585098, guid: 32d92434184086948a6ad0954b1d3b75,
     type: 3}
-  m_boxGapHeight: 0
-  m_itemExpulsionForce: 0
-  m_boxExpulsionForce: 0
+  <BoxGapHeight>k__BackingField: 0
+  m_itemExpulsionForce: 5
+  m_boxExpulsionForce: 20
+  m_towerPhysics: {fileID: 0}
+  m_cartokenValueMultiplier: 1

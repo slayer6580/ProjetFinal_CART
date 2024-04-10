@@ -55,11 +55,11 @@ namespace DiscountDelirium
             m_possibleStates.Add(new EndGameState());
         }
 
-        public void GetScoreFromCart(int[] data) 
+        public void GetScoreFromCart(Vector3 data) 
         {
-            m_playerScore += data[0];
-            m_nbItems += data[1];
-            m_nbOfCartokens += data[2];
+            m_playerScore += (int)data.x;
+            m_nbItems += (int)data.y;
+            m_nbOfCartokens += (int)data.z;
         }
     }
 }

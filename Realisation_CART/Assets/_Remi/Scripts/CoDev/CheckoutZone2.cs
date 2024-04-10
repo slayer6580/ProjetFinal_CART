@@ -14,8 +14,8 @@ namespace DiscountDelirium
             {
                 return;
             }
-            int[] data = itemTrigger.TowerBoxSystem.EmptyCartAndGetScore();
-            GameStateMachine2.Instance.GetScoreFromCart(data);
+           // int[] data = itemTrigger.TowerBoxSystem.EmptyCartAndGetScore();
+          //  GameStateMachine2.Instance.GetScoreFromCart(data);
         }
     }
 }

@@ -9,13 +9,14 @@ namespace DiscountDelirium
     {
         private void OnTriggerEnter(Collider other)
         {
-            GrabItemTrigger itemTrigger = other.GetComponent<GrabItemTrigger>();
+            CheckOutTrigger itemTrigger = other.GetComponent<CheckOutTrigger>();
             if (itemTrigger == null) 
             {
                 return;
             }
-            int[] data = itemTrigger.TowerBoxSystem.EmptyCartAndGetScore();
+            Vector3 data = itemTrigger.TowerBoxSystem.EmptyCartAndGetScore();     
             GameStateMachine.Instance.GetScoreFromCart(data);
+            // data[3] = nbOfBoxes;
         }
     }
 }

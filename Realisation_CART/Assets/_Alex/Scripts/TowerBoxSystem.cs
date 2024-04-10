@@ -69,8 +69,8 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.Y))
             {
-                int[] data = EmptyCartAndGetScore();
-                Debug.Log("totalScore: " + data[0] + ",  nbOfItems: " + data[1] + ", nbOfCartoken: " + data[2]);
+                Vector3 data = EmptyCartAndGetScore();
+                Debug.Log("totalScore: " + data.x + ",  nbOfItems: " + data.y + ", nbOfCartoken: " + data.z);
             }
         }
 
@@ -118,13 +118,11 @@ namespace BoxSystem
         }
 
         /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
-        public int[] EmptyCartAndGetScore()
+        public Vector3 EmptyCartAndGetScore()
         {
             int totalScore = 0;
             int nbOfItems = 0;
             int nbOfCartokens = 0;
-
-            int[] data = { totalScore, nbOfItems, nbOfCartokens };
 
             while (m_boxesInCart.Count > 0)
             {
@@ -133,14 +131,14 @@ namespace BoxSystem
 
                 for (int i = 0; i < itemsInBox.Count; i++)
                 {
-                    data[1]++;
-                    data[2] = data[1] * m_cartokenValueMultiplier;
-                    data[0] += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
+                    nbOfItems++;                 
+                    totalScore += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
+                    nbOfCartokens = nbOfItems * m_cartokenValueMultiplier;
                 }
                 RemoveBoxImpulse(m_boxExpulsionForce);
             }
 
-            return data;
+            return new Vector3(nbOfItems, totalScore, nbOfCartokens);
         }
 
         /// <summary> Place toute les boites a leur origine pour placement des angrages des hinges </summary>
