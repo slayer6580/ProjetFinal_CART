@@ -27,7 +27,7 @@ namespace BoxSystem
 
         [SerializeField] private TowerHingePhysicsAlex m_towerPhysics;
         [SerializeField] private int m_cartokenValueMultiplier = 1;
-
+        [SerializeField] private ShelfManager m_shelfManager;
 
         void Start()
         {
@@ -138,7 +138,9 @@ namespace BoxSystem
                 RemoveBoxImpulse(m_boxExpulsionForce);
             }
 
-            return new Vector3(nbOfItems, totalScore, nbOfCartokens);
+            m_shelfManager.ResetAllShelves();
+
+			return new Vector3(nbOfItems, totalScore, nbOfCartokens);
         }
 
         /// <summary> Place toute les boites a leur origine pour placement des angrages des hinges </summary>

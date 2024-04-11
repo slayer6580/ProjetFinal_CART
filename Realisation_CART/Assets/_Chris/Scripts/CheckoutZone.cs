@@ -1,7 +1,9 @@
 using BoxSystem;
+using Manager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -10,13 +12,14 @@ namespace DiscountDelirium
         private void OnTriggerEnter(Collider other)
         {
             CheckOutTrigger itemTrigger = other.GetComponent<CheckOutTrigger>();
-            if (itemTrigger == null) 
-            {
-                return;
+            if (itemTrigger == null)
+			{
+				return;
             }
-            Vector3 data = itemTrigger.TowerBoxSystem.EmptyCartAndGetScore();     
+			_AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, transform.position, 1f);
+			Vector3 data = itemTrigger.TowerBoxSystem.EmptyCartAndGetScore();     
             GameStateMachine.Instance.GetScoreFromCart(data);
-            // data[3] = nbOfBoxes;
+
         }
     }
 }

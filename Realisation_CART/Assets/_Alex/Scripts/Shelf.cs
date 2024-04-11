@@ -105,14 +105,11 @@ namespace BoxSystem
         /// <summary> Reset item available on shelf and reset all colors </summary>
         public void ResetShelf()
         {
+           
             m_remainingItems = m_itemQuantityPerTrip;
-            m_quantityText.text = m_remainingItems.ToString();
-            m_renderer.material.color = m_initialColor;
+            m_quantityText.text = m_remainingItems.ToString();   
+			m_renderer.material.color = m_initialColor;
+       
         }
-
-
     }
-
-
-
 }

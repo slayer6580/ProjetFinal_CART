@@ -56,10 +56,10 @@ namespace DiscountDelirium
         }
 
         public void GetScoreFromCart(Vector3 data) 
-        {
-            m_playerScore += (int)data.x;
-            m_nbItems += (int)data.y;
-            m_nbOfCartokens += (int)data.z;
+        {         
+            m_nbItems += (int)data.x;
+			m_playerScore += (int)data.y;
+			m_nbOfCartokens += (int)data.z;
         }
     }
 }

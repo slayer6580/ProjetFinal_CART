@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace BoxSystem
 {
@@ -30,6 +31,7 @@ namespace BoxSystem
         /// <summary> Take an item from the shelf </summary>
         public void TakeItemFromShelf(Shelf shelf)
         {
+            _AudioManager.PlaySoundEffectsOneShot(ESound.GrabItem, transform.position, 0.1f);
 
             GameObject itemTaken = shelf.GetItemFromShelf();
             ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size; 

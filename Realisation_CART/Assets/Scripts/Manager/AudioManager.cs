@@ -26,9 +26,17 @@ namespace Manager
 
         public enum ESound
         {
-            Footstep,
+            CartCollision,
             CartRolling,
-            CartBanging,
+            Step01,
+            Step02,
+            Step03,
+            Step04,
+            GrabItem,
+            DriftBegin,
+            DriftLoop,
+            CashRegister,
+            Count
         }
 
         public enum ESoundModification
@@ -70,7 +78,7 @@ namespace Manager
         private void Start()
         {
             AudioManagerSource = GetComponent<AudioSource>();
-            RefreshSoundPool();
+            //RefreshSoundPool();
         }
 
         public void RefreshSoundPool()
@@ -114,16 +122,18 @@ namespace Manager
         }
 
         /// <summary> Tout les clients va jouer un son une fois </summary>
-        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition)
+        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition, float volume = 1)
         {
             AudioBox audiobox = FindAValidAudioBox();
-
+            
             if (audiobox == null)
                 return;
 
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
-            MoveAudioBox(audiobox, newPosition);
+            audiobox.GetComponent<AudioSource>().volume = volume;
+
+			MoveAudioBox(audiobox, newPosition);
             PlayClipOneShot(audiobox, sound);
             StartCoroutine(ReActivateAudioBox(audiobox, clip));
         }
@@ -131,19 +141,23 @@ namespace Manager
         /// <summary> To play a sound one shot on a transform </summary>
         public int PlaySoundEffectsLoopOnTransform(ESound sound, Transform parent)
         {
+
             if (parent == null)
             {
                 parent = transform;
             }
 
             AudioBox audiobox = FindAValidAudioBox();
+            print("Pitch: " + audiobox.GetComponent<AudioSource>().pitch);
 
-            int index = m_audioBox.IndexOf(audiobox);
+			int index = m_audioBox.IndexOf(audiobox);
 
             if (audiobox == null)
                 return -1;
 
+
             audiobox.transform.SetParent(parent);
+            audiobox.transform.localPosition = Vector3.zero;
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
             MoveAudioBox(audiobox, Vector3.zero);
@@ -171,7 +185,10 @@ namespace Manager
         public void StopSoundEffectsLoop(int index)
         {
             AudioBox audiobox = m_audioBox[index];
-            audiobox.GetComponent<AudioSource>().Stop();
+            AudioSource audioSource = audiobox.GetComponent<AudioSource>();
+            audioSource.pitch = 1;
+            audioSource.volume = 1;
+			audioSource.Stop();
             audiobox.m_isPlaying = false;
 
             if (audiobox.transform.parent != transform)

@@ -1,4 +1,6 @@
+using Manager;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace CartControl
 {
@@ -8,6 +10,7 @@ namespace CartControl
 		private float m_boostPercentageObtain;
 		private IState m_comingFromState;
 		private int m_driftDirection;
+		private int m_audioSourceIndex;
 
 		public override void OnEnter()
 		{
@@ -15,6 +18,10 @@ namespace CartControl
 			{
 				Debug.LogWarning("current state: DRIFTING");
 			}
+
+			//SFX
+			_AudioManager.PlaySoundEffectsOneShot(ESound.DriftBegin, m_cartStateMachine.transform.position, 0.25f);
+			m_audioSourceIndex = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.DriftLoop, m_cartStateMachine.transform);
 			
 
 			m_cartStateMachine.ForceStartDrift = false;
@@ -73,18 +80,11 @@ namespace CartControl
 				m_cartStateMachine.CanBoost = true;
 			}
 
-			//For animation
-				//Drift
-				//m_cartStateMachine.HumanAnimCtrlr.SetFloat("DriftingValue", Mathf.Clamp(m_cartStateMachine.LocalVelocity.x / 30, -1, 1));
-			if (m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).IsName("JumpingFeetOnCart"))
-			{
-				float weightByTime = Mathf.Clamp(m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).normalizedTime, 0, 1);
-				m_cartStateMachine.FeetOnCartRig.weight = weightByTime;
-			}
-
+			ManageAnimation();
+			ManageSfx();
 
 			//Exit drift condition
-			if(m_cartStateMachine.DriftPressed == 0 || m_cartStateMachine.LocalVelocity.z < m_cartStateMachine.MinimumSpeedToAllowDrift)
+			if (m_cartStateMachine.DriftPressed == 0 || m_cartStateMachine.LocalVelocity.z < m_cartStateMachine.MinimumSpeedToAllowDrift)
 			{
 				m_cartStateMachine.IsDrifting = false;
 			}
@@ -96,6 +96,27 @@ namespace CartControl
 
 		}
 
+		public void ManageAnimation()
+		{
+			if (m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).IsName("JumpingFeetOnCart"))
+			{
+				float weightByTime = Mathf.Clamp(m_cartStateMachine.HumanAnimCtrlr.GetCurrentAnimatorStateInfo(0).normalizedTime, 0, 1);
+				m_cartStateMachine.FeetOnCartRig.weight = weightByTime;
+			}
+		}
+		public void ManageSfx()
+		{
+			_AudioManager.ModifySound(
+				m_audioSourceIndex,
+				ESoundModification.Pitch,
+				Mathf.Lerp(0.6f, 1.45f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeed));
+
+			_AudioManager.ModifySound(
+				m_audioSourceIndex,
+				ESoundModification.Volume,
+				Mathf.Lerp(0f, 1f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeed));
+		}
+
 		public override void OnFixedUpdate()
 		{
 			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.DriftingAcceleration, m_cartStateMachine.DriftingDrag, m_cartStateMachine.MaxSpeed);
@@ -104,6 +125,8 @@ namespace CartControl
 
 		public override void OnExit()
 		{
+			_AudioManager.StopSoundEffectsLoop(m_audioSourceIndex);
+
 			m_cartStateMachine.GrindVfx.StopVfx();
 			m_cartStateMachine.DriftSteeringValue = 0;
 

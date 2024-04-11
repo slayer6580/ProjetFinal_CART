@@ -1,4 +1,6 @@
+using Manager;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace CartControl
 {
@@ -6,6 +8,7 @@ namespace CartControl
 	{
 		private float m_turningTimer;
 		private float m_steerDirection;
+		private int m_audioSourceIndex;
 
 		public override void OnEnter()
 		{
@@ -13,7 +16,7 @@ namespace CartControl
 			{
 				Debug.LogWarning("current state: MOVING");
 			}
-			
+			m_audioSourceIndex = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.CartRolling, m_cartStateMachine.transform);
 		}
 
 		public override void OnUpdate()
@@ -45,8 +48,19 @@ namespace CartControl
 					}
 				}
 			}
+			ManageAnimation();
 
-			//For animation:
+			if (Mathf.Abs(m_cartStateMachine.LocalVelocity.x) > 1)
+			{
+				m_cartStateMachine.BoxForce.AddConstantForceToBox(m_cartStateMachine.LocalVelocity.x);
+			}
+
+			
+			ManageSfx();
+		}
+
+		public void ManageAnimation()
+		{
 			//Is only pressing break
 			if ((m_cartStateMachine.BackwardPressedPercent > GameConstants.DEADZONE) && (m_cartStateMachine.LocalVelocity.z > 0))
 			{
@@ -56,13 +70,20 @@ namespace CartControl
 			{
 				m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
 			}
-
-			if (Mathf.Abs(m_cartStateMachine.LocalVelocity.x) > 1)
-			{
-				m_cartStateMachine.BoxForce.AddConstantForceToBox(m_cartStateMachine.LocalVelocity.x);
-			}
 		}
 
+		public void ManageSfx()
+		{
+			_AudioManager.ModifySound(
+				m_audioSourceIndex,
+				ESoundModification.Pitch,
+				Mathf.Lerp(0.8f, 2f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeed));
+
+			_AudioManager.ModifySound(
+				m_audioSourceIndex,
+				ESoundModification.Volume,
+				Mathf.Lerp(0f, 1f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeed));
+		}
 		public override void OnFixedUpdate()
 		{
 			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag, m_cartStateMachine.MaxSpeed);
@@ -71,6 +92,8 @@ namespace CartControl
 
 		public override void OnExit()
 		{
+			_AudioManager.StopSoundEffectsLoop(m_audioSourceIndex);
+
 			//For Animation
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
 		}
