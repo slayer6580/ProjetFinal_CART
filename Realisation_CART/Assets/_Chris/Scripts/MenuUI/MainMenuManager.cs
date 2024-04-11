@@ -41,5 +41,10 @@ namespace DiscountDelirium
             Debug.Log("QuitGame");
             Application.Quit();
         }
+
+        public void BackToMainMenu() 
+        {
+            Debug.Log("MainMenu");
+        }
     }
 }

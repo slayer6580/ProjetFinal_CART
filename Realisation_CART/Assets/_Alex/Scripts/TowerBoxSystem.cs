@@ -28,7 +28,8 @@ namespace BoxSystem
         private List<Box> m_boxesInCart = new List<Box>();
 
         [SerializeField] private TowerHingePhysicsAlex m_towerPhysics;
-
+        [SerializeField] private int m_cartokenValueMultiplier = 1;
+        [SerializeField] private ShelfManager m_shelfManager;
 
         void Start()
         {
@@ -116,6 +117,32 @@ namespace BoxSystem
         public void PutObjectInTopBox(GameObject item)
         {
             GetTopBox().PutItemInBox(item);
+        }
+
+        /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
+        public Vector3 EmptyCartAndGetScore()
+        {
+            int totalScore = 0;
+            int nbOfItems = 0;
+            int nbOfCartokens = 0;
+
+            while (m_boxesInCart.Count > 0)
+            {
+                Box topBox = GetTopBox();
+                List<Box.ItemInBox> itemsInBox = topBox.GetItemsInBox();
+
+                for (int i = 0; i < itemsInBox.Count; i++)
+                {
+                    nbOfItems++;                 
+                    totalScore += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
+                    nbOfCartokens = nbOfItems * m_cartokenValueMultiplier;
+                }
+                RemoveBoxImpulse(m_boxExpulsionForce);
+            }
+
+            m_shelfManager.ResetAllShelves();
+
+			return new Vector3(nbOfItems, totalScore, nbOfCartokens);
         }
 
         /// <summary> Place toute les boites a leur origine pour placement des angrages des hinges </summary>
