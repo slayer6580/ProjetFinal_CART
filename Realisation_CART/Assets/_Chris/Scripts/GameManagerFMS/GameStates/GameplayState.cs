@@ -41,7 +41,7 @@ namespace DiscountDelirium
 
         public override bool CanExit()
         {
-            return m_gameStateMachine.m_playerSM.IsPaused;
+            return m_gameStateMachine.m_playerSM.IsPaused || m_gameStateMachine.m_isGameOver;
         }
 
         private void GameOver() 
