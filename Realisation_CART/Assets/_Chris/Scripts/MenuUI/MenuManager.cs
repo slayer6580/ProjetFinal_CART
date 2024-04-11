@@ -64,6 +64,7 @@ namespace DiscountDelirium
 
         public void BackToMainMenu() 
         {
+            Time.timeScale = 1.0f;
             SceneManager.LoadScene("MainMenu");
         }
     }
