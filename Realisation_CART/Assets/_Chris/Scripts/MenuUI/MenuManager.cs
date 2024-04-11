@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace DiscountDelirium
 {
-    public class MainMenuManager : MonoBehaviour
+    public class MenuManager : MonoBehaviour
     {
         [Header("Menus")]
         [SerializeField] private GameObject m_mainMenu;
@@ -19,9 +17,31 @@ namespace DiscountDelirium
         [SerializeField] private float m_musicVolume;
         [SerializeField] private float m_soundVolume;
 
+        [Header("Virtual Cursor")]
+        [SerializeField] private GameObject m_cursor;
+
+        private void Awake()
+        {
+            PauseState.OnPause += OpenMainMenu;
+            PauseState.OnResume += CloseMainMenu;
+        }
+
         public void StartGame()
         {
-            Debug.Log("StartGame");
+            SceneManager.LoadScene("Main");
+        }
+
+        public void OpenMainMenu() 
+        {
+            m_mainMenu.SetActive(true);
+            m_cursor.SetActive(true);
+        }
+
+        public void CloseMainMenu()
+        {
+            m_mainMenu.SetActive(false);
+            m_optionsMenu.SetActive(false);
+            m_cursor.SetActive(false);
         }
 
         public void OptionsMenu(bool active) 
@@ -44,7 +64,7 @@ namespace DiscountDelirium
 
         public void BackToMainMenu() 
         {
-            Debug.Log("MainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

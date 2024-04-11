@@ -1,32 +1,19 @@
-using CartControl;
-using System;
-using System.Collections;
 using UnityEngine;
 
 namespace DiscountDelirium
 {
     public class GameplayState : GameState
     {
-        public static Action OnPlayerReady;
-        public static Action OnGameStarted;
-
-        private bool m_playerReady = false;
 
         public override void OnEnter()
         {
             Debug.LogWarning("GameState : GAMEPLAY");
-            StartGameTimer.OnStartingTimeEnded += StartGame;
             Timer.TimesUp += GameOver;
-            m_gameStateMachine.m_playerSM.IsPaused = true;
         }
 
         public override void OnUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !m_playerReady) //to delete eventually
-            {
-                OnPlayerReady?.Invoke();
-                m_playerReady = true;
-            }
+            
         }
 
         public override void OnFixedUpdate()
@@ -41,24 +28,26 @@ namespace DiscountDelirium
 
         public override bool CanEnter(IState currentState)
         {
+            if (currentState is GetReadyState)
+            {
+                return m_gameStateMachine.m_isGameStarted;
+            }
+            if (currentState is PauseState)
+            {
+                return !m_gameStateMachine.IsGamePaused;
+            }
             return !m_gameStateMachine.m_isGameOver;
         }
 
         public override bool CanExit()
         {
-            return m_gameStateMachine.m_isGameOver;
+            return m_gameStateMachine.m_playerSM.IsPaused;
         }
 
         private void GameOver() 
         {
             m_gameStateMachine.m_isGameOver = true;
             Debug.Log("GameOver");
-        }
-
-        private void StartGame() 
-        {
-            OnGameStarted?.Invoke();
-            m_gameStateMachine.m_playerSM.IsPaused = false;
         }
     }
 }

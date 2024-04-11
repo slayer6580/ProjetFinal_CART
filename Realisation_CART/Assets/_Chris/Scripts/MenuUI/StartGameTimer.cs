@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ namespace DiscountDelirium
         void Start()
         {
             m_timeLeft = m_startingTime;
-            GameplayState.OnPlayerReady += StartTimer;
+            GetReadyState.OnPlayerReady += StartTimer;
         }
 
         // Update is called once per frame

@@ -1,6 +1,4 @@
 using CartControl;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DiscountDelirium
@@ -10,9 +8,12 @@ namespace DiscountDelirium
         public static GameStateMachine Instance { get; private set; }
 
         public CartStateMachine m_playerSM; 
-        [SerializeField] public ScoreUI m_scoreUI; 
+        [SerializeField] public ScoreUI m_scoreUI;
+
+        [field: SerializeField] public bool IsGamePaused { get; set; }
 
         [HideInInspector] public bool m_isGameOver;//field
+        [HideInInspector] public bool m_isGameStarted;//field
         [HideInInspector] public int m_playerScore = 0;
         [HideInInspector] public int m_nbItems = 0;
         [HideInInspector] public int m_nbOfCartokens = 0;
@@ -51,7 +52,9 @@ namespace DiscountDelirium
 
         protected override void CreatePossibleStateList()
         {
+            m_possibleStates.Add(new GetReadyState());
             m_possibleStates.Add(new GameplayState());
+            m_possibleStates.Add(new PauseState());
             m_possibleStates.Add(new EndGameState());
         }
 
@@ -61,5 +64,7 @@ namespace DiscountDelirium
 			m_playerScore += (int)data.y;
 			m_nbOfCartokens += (int)data.z;
         }
+
+
     }
 }

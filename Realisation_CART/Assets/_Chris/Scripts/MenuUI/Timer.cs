@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +18,7 @@ namespace DiscountDelirium
 
         private void Awake()
         {
-            GameplayState.OnGameStarted += StartTimer;
+            GetReadyState.OnGameStarted += StartTimer;
         }
 
         private void Start () 
