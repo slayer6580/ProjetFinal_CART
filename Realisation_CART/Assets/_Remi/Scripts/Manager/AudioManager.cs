@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Manager
 {
-    /// <summary> This class is used to manage all the audio in the game via a pool of AudioBox objects </summary>
     public class AudioManager : MonoBehaviour
     {
         [field: Header("Put all audio sounds here, read the Tooltip for the sound order")]
