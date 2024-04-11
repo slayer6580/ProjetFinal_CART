@@ -27,7 +27,7 @@ namespace BoxSystem
             }
         }
 
-        private void OnEnable() // Keep then OnEnable to have the checkbox in the inspector
+        private void OnEnable() // Keep the OnEnable to have the checkbox in the inspector
         {
 
         }
