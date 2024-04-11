@@ -3,6 +3,7 @@ using UnityEngine;
 using DiscountDelirium;
 using Unity.VisualScripting;
 using Manager;
+using static Manager.ScoreManager;
 
 namespace BoxSystem
 {
@@ -31,7 +32,6 @@ namespace BoxSystem
 
         void Start()
         {
-            ScoreManager._TowerBoxSystem = this;
             AddBoxToTower();
         }
 
@@ -70,7 +70,7 @@ namespace BoxSystem
             }
             else if (Input.GetKeyDown(KeyCode.Y))
             {
-                Vector3 data = ScoreManager.EmptyCartAndGetScore();
+                Vector3 data = _ScoreManager.EmptyCartAndGetScore();
                 Debug.Log("totalScore: " + data.x + ",  nbOfItems: " + data.y + ", nbOfCartoken: " + data.z);
             }
         }

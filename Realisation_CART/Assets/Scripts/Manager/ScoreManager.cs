@@ -5,15 +5,29 @@ using Box = BoxSystem.Box;
 
 namespace Manager
 {
-    public static class ScoreManager // TODO Remi : make it monobehaviour
+    public class ScoreManager : MonoBehaviour
     {
-        public static TowerBoxSystem _TowerBoxSystem { get; set; }
+        [field: SerializeField] public TowerBoxSystem _TowerBoxSystem { get; private set; }
 
-        private static int m_cartokenValueMultiplier = 1;
-        
+        public static ScoreManager _ScoreManager { get; private set; }
+
+        [field: SerializeField] private int m_cartokenValueMultiplier = 1;
+
+        private void Awake()
+        {
+            if (_ScoreManager != null)
+            {
+                Debug.LogWarning("ScoreManager already exists.");
+                Destroy(gameObject);
+                return;
+            }
+
+            _ScoreManager = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
-        public static Vector3 EmptyCartAndGetScore()
+        public Vector3 EmptyCartAndGetScore()
         {
             CalculateCartokens();
 
@@ -37,9 +51,9 @@ namespace Manager
             return new Vector3(nbOfItems, totalScore, nbOfCartokens);
         }
 
-        private static int CalculateCartokens()
+        private int CalculateCartokens()
         {
-            return _TowerBoxSystem.GetBoxCount() * m_cartokenValueMultiplier; // TODO Remi: make exponential
+            return (int)(Mathf.Pow(_TowerBoxSystem.GetBoxCount(), m_cartokenValueMultiplier));  
         }
     }
 }
