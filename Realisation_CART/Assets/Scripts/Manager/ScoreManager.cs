@@ -5,11 +5,11 @@ using Box = BoxSystem.Box;
 
 namespace Manager
 {
-    public static class ScoreManager
+    public static class ScoreManager // TODO Remi : make it monobehaviour
     {
         public static TowerBoxSystem _TowerBoxSystem { get; set; }
 
-        [SerializeField] private static int m_cartokenValueMultiplier = 1;
+        private static int m_cartokenValueMultiplier = 1;
         
 
         /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
@@ -39,7 +39,7 @@ namespace Manager
 
         private static int CalculateCartokens()
         {
-            return _TowerBoxSystem.GetBoxCount() * m_cartokenValueMultiplier;
+            return _TowerBoxSystem.GetBoxCount() * m_cartokenValueMultiplier; // TODO Remi: make exponential
         }
     }
 }
