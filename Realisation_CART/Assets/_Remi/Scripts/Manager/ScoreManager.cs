@@ -34,6 +34,7 @@ namespace Manager
             int totalScore = 0;
             int nbOfItems = 0;
             int nbOfCartokens = CalculateCartokens();
+            Debug.Log("Cartokens: " + nbOfCartokens);
 
             while (_TowerBoxSystem.GetBoxCount() > 0)
             {

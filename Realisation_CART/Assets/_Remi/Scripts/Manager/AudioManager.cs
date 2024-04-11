@@ -82,7 +82,6 @@ namespace Manager
         private void Start()
         {
             AudioManagerSource = GetComponent<AudioSource>();
-            //RefreshSoundPool();
         }
 
         /// <summary> Modify the pitch or volume of a sound </summary>
