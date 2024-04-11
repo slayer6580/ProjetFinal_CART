@@ -2,6 +2,7 @@ using BoxSystem;
 using Manager;
 using UnityEngine;
 using static Manager.AudioManager;
+using static Manager.ScoreManager;
 
 namespace DiscountDelirium
 {
@@ -15,7 +16,7 @@ namespace DiscountDelirium
 				return;
             }
 			_AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, transform.position, 1f);    
-            Vector3 data = ScoreManager.EmptyCartAndGetScore();     
+            Vector3 data = _ScoreManager.EmptyCartAndGetScore();     
             GameStateMachine.Instance.GetScoreFromCart(data);
 
         }
