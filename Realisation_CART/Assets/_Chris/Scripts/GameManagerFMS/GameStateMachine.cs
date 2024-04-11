@@ -6,6 +6,7 @@ namespace DiscountDelirium
     public class GameStateMachine : StateMachine<GameState>
     {
         public static GameStateMachine Instance { get; private set; }
+        public static float GameLength = 60.0f;
 
         public CartStateMachine m_playerSM; 
         [SerializeField] public ScoreUI m_scoreUI;
