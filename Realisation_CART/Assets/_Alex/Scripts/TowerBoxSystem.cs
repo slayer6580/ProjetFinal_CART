@@ -61,7 +61,7 @@ namespace BoxSystem
 
                 if (GetTopBox() != null)
                 {
-                    RemoveItemImpulse(m_itemExpulsionForce);
+                    RemoveItemImpulse();
                 }
                 else
                 {
@@ -137,7 +137,7 @@ namespace BoxSystem
                     totalScore += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
                     nbOfCartokens = nbOfItems * m_cartokenValueMultiplier;
                 }
-                RemoveBoxImpulse(m_boxExpulsionForce);
+                RemoveBoxImpulse();
             }
 
             m_shelfManager.ResetAllShelves();
@@ -177,13 +177,13 @@ namespace BoxSystem
 
         }
 
-        public void RemoveItemImpulse(float force)
+        public void RemoveItemImpulse()
         {
             Box topBox = GetTopBox();
 
             Box.ItemInBox lastItemInBox = topBox.GetLastItem();
 
-            Vector3 totalImpulse = lastItemInBox.m_item.transform.up * force;
+            Vector3 totalImpulse = lastItemInBox.m_item.transform.up * m_itemExpulsionForce;
 
             Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
             if (!rb)
