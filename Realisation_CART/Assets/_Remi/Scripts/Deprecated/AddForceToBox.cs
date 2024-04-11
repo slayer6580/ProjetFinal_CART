@@ -22,6 +22,8 @@ namespace BoxSystem
             Vector3 pushDirection = force < 0.0f ? -transform.right : transform.right;
             Vector3 pushForce = pushDirection * m_forceMultiplier;
             m_towerPhysics.GetTopBox().GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Force);
+
+
         }
 
         private void Update()

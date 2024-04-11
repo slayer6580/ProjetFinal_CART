@@ -14,6 +14,7 @@ namespace BoxSystem
         private List<GameObject> m_boxesWithHinge = new List<GameObject>();
         private List<Vector3> m_boxesWithHingesInitialPosition = new List<Vector3>();
         private List<HingeJoint> m_hinges = new List<HingeJoint>();
+      
 
         [Header("Mettre les Prefabs de la boite")]
         [SerializeField] private GameObject m_boxNoHingePrefab;
@@ -23,14 +24,20 @@ namespace BoxSystem
         [SerializeField][Range(0.0f, 1000.0f)] private float m_springForce = 0;
         [SerializeField] private float m_springForceReduction = 0;
         [SerializeField] private float m_springForceMinimum = 0;
-        [SerializeField] private float m_angleOffset = 0.1f;
+        [SerializeField] private float m_minimumForceAppliedToMove;
+
+        [Header("Lose items parameters")]
+        [SerializeField] private List<Vector2> m_loseItemStats = new List<Vector2>();
+        private float m_currentTimer = 0;
+        private float m_timeBeforeLost = 0;
 
         private Eside m_side;
 
         [Header("ReadOnly")]
         [SerializeField] private float m_firstHingeAngleRead = 0;
-        [SerializeField] private float m_AllHingeAngleRead = 0;
-        private bool m_colliderIsEnabled = false;
+        [SerializeField] private float m_allHingeAngleRead = 0;
+
+
 
         enum Eside
         {
@@ -48,30 +55,15 @@ namespace BoxSystem
 
             if (m_hinges.Count == 0) return;
 
-            if ((m_hinges[0].angle > m_angleOffset && m_side == Eside.right) && !m_colliderIsEnabled)
-            {
-                ReplaceAllBoxWithHingeToOrigin();
-                EnabledColliderOnBoxes(true);
-                ChangeAllAnchors(Eside.left);
-                Debug.Log("Switch Left Side");
+            HingesBalance();
+            CopyFakeTowerToRealTower();
+            ItemLosing();
+        }
 
-            }
-            else if ((m_hinges[0].angle < -m_angleOffset && m_side == Eside.left) && !m_colliderIsEnabled)
-            {
-                ReplaceAllBoxWithHingeToOrigin();
-                EnabledColliderOnBoxes(true);
-                ChangeAllAnchors(Eside.right);
-                Debug.Log("Switch Right Side");
-            }
-            else if ((m_hinges[0].angle > -m_angleOffset && m_hinges[0].angle < m_angleOffset) && m_colliderIsEnabled)
-            {
-                EnabledColliderOnBoxes(false);
-                Debug.Log("Colliders Deactivated");
-            }
-
-            m_firstHingeAngleRead = m_hinges[0].angle;
-
+        private void ItemLosing()
+        {
             // For Futur Test
+            m_firstHingeAngleRead = m_hinges[0].angle;
             int hingeCount = m_hinges.Count;
             float allHingeAngle = 0;
             for (int i = 0; i < hingeCount; i++)
@@ -79,11 +71,68 @@ namespace BoxSystem
                 allHingeAngle += m_hinges[i].angle;
             }
 
-            m_AllHingeAngleRead = allHingeAngle;
+            m_allHingeAngleRead = allHingeAngle;
 
+            float difference = Mathf.Infinity;
+            float timeBeforeLost = 0;
 
-            CopyLocalToRealTower();
+            // regarde selon les angles des boites totale le nombre d'item a perdre par secondes
+            foreach (Vector2 stats in m_loseItemStats)
+            {
+                float closeAngleToStats = Mathf.Abs(stats.x - Mathf.Abs(m_allHingeAngleRead));
+                if (closeAngleToStats < difference)
+                {
+                    difference = closeAngleToStats;
+                    timeBeforeLost = stats.y;
+                }
+            }
 
+            if (timeBeforeLost == 0)
+                return;
+
+            Debug.Log("seconde avant de perdre un item: " + timeBeforeLost);
+
+            m_currentTimer += Time.deltaTime;
+
+            if (m_currentTimer > timeBeforeLost)
+            {
+                m_currentTimer = 0;
+                TowerBoxSystem.RemoveItemImpulse();
+            }
+        }
+
+        private void HingesBalance()
+        {
+            float topBox_XPosition = GetTopBox().transform.localPosition.x;
+            Rigidbody topBoxRb = GetTopBox().GetComponent<Rigidbody>();
+            float forceMagnitude = topBoxRb.velocity.magnitude;
+
+            if (topBox_XPosition < 0 && m_side == Eside.right)
+            {
+                ReplaceAllBoxWithHingeToOrigin();
+                ChangeAllAnchors(Eside.left);
+
+                if (forceMagnitude < m_minimumForceAppliedToMove)
+                {
+                    foreach (GameObject boxes in m_boxesWithHinge)
+                    {
+                        boxes.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    }
+                }
+            }
+            else if (topBox_XPosition > 0 && m_side == Eside.left)
+            {
+                ReplaceAllBoxWithHingeToOrigin();
+                ChangeAllAnchors(Eside.right);
+
+                if (forceMagnitude < m_minimumForceAppliedToMove)
+                {
+                    foreach (GameObject boxes in m_boxesWithHinge)
+                    {
+                        boxes.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    }
+                }
+            }
         }
 
         public void AddBoxToFakeTower()
@@ -122,7 +171,7 @@ namespace BoxSystem
             {
                 instant.transform.localPosition = initialLocalPosition;
             }
-        
+
             else
             {
                 // Box placement based on box underneath
@@ -140,10 +189,10 @@ namespace BoxSystem
 
         }
 
-        private void CopyLocalToRealTower()
+        private void CopyFakeTowerToRealTower()
         {
             List<Box> realBoxes = TowerBoxSystem.GetAllBoxes();
-            int realBoxesCount = realBoxes.Count;   
+            int realBoxesCount = realBoxes.Count;
 
             for (int i = 0; i < realBoxesCount; i++)
             {
@@ -161,7 +210,7 @@ namespace BoxSystem
             {
                 int index = m_boxesWithHinge.IndexOf(lastBox);
                 m_boxesWithHinge.Remove(lastBox);
-                m_hinges.RemoveAt(index);
+                m_hinges.RemoveAt(index);                
                 m_boxesWithHingesInitialPosition.RemoveAt(index);
             }
 
@@ -172,8 +221,6 @@ namespace BoxSystem
 
         private void EnabledColliderOnBoxes(bool value)
         {
-            m_colliderIsEnabled = value;
-
             foreach (GameObject box in m_allBoxes)
             {
                 box.GetComponent<BoxCollider>().enabled = value;
@@ -228,6 +275,7 @@ namespace BoxSystem
             hingeJoint.anchor = anchorPosition;
 
         }
+
 
         public GameObject GetTopBox()
         {

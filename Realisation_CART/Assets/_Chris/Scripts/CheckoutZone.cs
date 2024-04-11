@@ -11,12 +11,15 @@ namespace DiscountDelirium
         private void OnTriggerEnter(Collider other)
         {
             CheckOutTrigger itemTrigger = other.GetComponent<CheckOutTrigger>();
-            if (itemTrigger == null)
-			{
-				return;
-            }
-			_AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, transform.position, 1f);    
-            Vector3 data = _ScoreManager.EmptyCartAndGetScore();     
+
+            if (itemTrigger == null)            
+                return;
+            
+            if (itemTrigger.TowerBoxSystem.GetBoxCount() == 0)
+                return;
+
+            _AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, transform.position, 1f);
+            Vector3 data = _ScoreManager.EmptyCartAndGetScore();
             GameStateMachine.Instance.GetScoreFromCart(data);
 
         }

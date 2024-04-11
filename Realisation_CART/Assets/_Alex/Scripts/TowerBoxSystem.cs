@@ -119,32 +119,6 @@ namespace BoxSystem
             GetTopBox().PutItemInBox(item);
         }
 
-        /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
-        public Vector3 EmptyCartAndGetScore()
-        {
-            int totalScore = 0;
-            int nbOfItems = 0;
-            int nbOfCartokens = 0;
-
-            while (m_boxesInCart.Count > 0)
-            {
-                Box topBox = GetTopBox();
-                List<Box.ItemInBox> itemsInBox = topBox.GetItemsInBox();
-
-                for (int i = 0; i < itemsInBox.Count; i++)
-                {
-                    nbOfItems++;                 
-                    totalScore += itemsInBox[i].m_item.GetComponent<Item>().m_data.m_cost;
-                    nbOfCartokens = nbOfItems * m_cartokenValueMultiplier;
-                }
-                RemoveBoxImpulse();
-            }
-
-            m_shelfManager.ResetAllShelves();
-
-			return new Vector3(nbOfItems, totalScore, nbOfCartokens);
-        }
-
         /// <summary> Place toute les boites a leur origine pour placement des angrages des hinges </summary>
         public void ReplaceAllBoxToOrigin()
         {
@@ -164,8 +138,9 @@ namespace BoxSystem
                 return;
             }
 
-            Vector3 totalImpulse = topBox.transform.up * m_boxExpulsionForce;
+            topBox.transform.SetParent(null);
 
+            Vector3 totalImpulse = topBox.transform.up * m_boxExpulsionForce;
             Rigidbody rb = topBox.AddComponent<Rigidbody>();
             rb.AddForce(totalImpulse, ForceMode.Impulse);
             AutoDestruction destruct = topBox.GetComponent<AutoDestruction>();
@@ -179,12 +154,20 @@ namespace BoxSystem
 
         public void RemoveItemImpulse()
         {
+        
+            if (GetTopBox().IsEmpty())
+            {
+                RemoveBoxImpulse();
+                return;
+            }
+
             Box topBox = GetTopBox();
 
             Box.ItemInBox lastItemInBox = topBox.GetLastItem();
 
-            Vector3 totalImpulse = lastItemInBox.m_item.transform.up * m_itemExpulsionForce;
+            lastItemInBox.m_item.transform.SetParent(null);
 
+            Vector3 totalImpulse = lastItemInBox.m_item.transform.up * m_itemExpulsionForce;
             Rigidbody rb = lastItemInBox.m_item.GetComponent<Rigidbody>();
             if (!rb)
             {
