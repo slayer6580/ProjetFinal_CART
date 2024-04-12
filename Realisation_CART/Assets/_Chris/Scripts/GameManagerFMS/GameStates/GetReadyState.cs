@@ -13,18 +13,14 @@ namespace DiscountDelirium
         public override void OnEnter()
         {
             Debug.LogWarning("GameState : GetReady");
+            MainMenuInputHandler.SelectEvent += PlayerReady;
             StartGameTimer.OnStartingTimeEnded += StartGame;
             m_gameStateMachine.m_playerSM.IsPaused = true;
         }
 
         public override void OnUpdate()
         {
-            //Debug.Log("Player state pause: " + m_playerSM.IsPaused);
-            if (Input.GetKeyDown(KeyCode.Space) && !m_playerReady) //to delete eventually
-            {
-                OnPlayerReady?.Invoke();
-                m_playerReady = true;
-            }
+
         }
 
         public override void OnFixedUpdate()
@@ -52,6 +48,15 @@ namespace DiscountDelirium
             OnGameStarted?.Invoke();
             m_gameStateMachine.m_playerSM.IsPaused = false;
             m_gameStateMachine.m_isGameStarted = true;
+        }
+
+        private void PlayerReady() 
+        {
+            if (!m_playerReady) //to delete eventually
+            {
+                OnPlayerReady?.Invoke();
+                m_playerReady = true;
+            }
         }
     }
 }

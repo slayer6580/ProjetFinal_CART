@@ -43,8 +43,15 @@ namespace DiscountDelirium
 
         public void OpenMainMenu() 
         {
-            m_mainMenu.SetActive(true);
-            m_cursor.SetActive(true);
+            if (m_mainMenu != null) 
+            {
+                m_mainMenu.SetActive(true);
+            }
+            if (m_cursor != null)
+            {
+                m_cursor.SetActive(true);
+                return;
+            }
         }
 
         public void CloseMainMenu()
@@ -80,7 +87,13 @@ namespace DiscountDelirium
 
         public void ShowCursor() 
         {
-            m_cursor.SetActive(true);
+            if (m_cursor != null) 
+            {
+                m_cursor.SetActive(true);
+                return;
+            }
+            Debug.LogWarning("No cursor");
+            
         }
     }
 }

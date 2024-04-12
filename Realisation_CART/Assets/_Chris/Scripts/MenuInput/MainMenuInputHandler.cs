@@ -1,4 +1,5 @@
 using CartControl;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,11 +10,8 @@ namespace DiscountDelirium
     {
         private MainInputs m_mainInputs;
         public static MainMenuInputHandler Instance;
-        [SerializeField] private UnityEvent NaviguateEvent;
-        [SerializeField] private UnityEvent SelectEvent;
-        [SerializeField] private UnityEvent BackEvent;
-
-        private Vector2 m_direction;
+        public static Action SelectEvent;
+        public static Action BackEvent;
 
         private void Awake()
         {
@@ -26,22 +24,13 @@ namespace DiscountDelirium
             }
             Instance = this;
 
-            m_mainInputs.Menu.Navigate.started += OnNavigate;
-            m_mainInputs.Menu.Navigate.performed += OnNavigate;
-            m_mainInputs.Menu.Navigate.canceled += OnNavigate;
-
             m_mainInputs.Menu.Select.started += OnSelect;
             m_mainInputs.Menu.Back.started += OnBack;
         }
 
-        private void OnNavigate(InputAction.CallbackContext context)
-        {
-            
-        }
-
         private void OnSelect(InputAction.CallbackContext context) 
         {
-            NaviguateEvent.Invoke();
+            SelectEvent.Invoke();
         }
 
         private void OnBack(InputAction.CallbackContext context)
