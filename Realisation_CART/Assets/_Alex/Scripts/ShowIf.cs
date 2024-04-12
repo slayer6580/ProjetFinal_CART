@@ -3,6 +3,8 @@ using UnityEngine;
 
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property |
      AttributeTargets.Class | AttributeTargets.Struct, Inherited = true)]
+
+    // Tool who create an attributes, other script in 'editor' folder
     public class ShowIfAttribute : PropertyAttribute
     {
         // name of the bool

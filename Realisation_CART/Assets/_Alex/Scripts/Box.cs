@@ -73,32 +73,33 @@ namespace BoxSystem
         }
 
         #region (--- InitFunctions ---)
-        /// <summary> BoxSetup va nous donner les infos des slots </summary>
+
+        /// <summary> Slots info given by BoxSetup </summary>
         public void AddSlotInList(Transform slotTransform)
         {
             m_slotsList.Add(new SlotInfo(slotTransform, true));
         }
 
-        /// <summary> BoxSetup va nous donner les infos des slots double </summary>
+        /// <summary> Double slots info given by BoxSetup </summary>
         public void AddDoubleSlotInList(List<int> indexes)
         {
             m_doubleSlots.Add(new MultiSlots(indexes));
         }
 
-        /// <summary> BoxSetup va nous donner les infos des slots de 4 </summary>
+        /// <summary> Quadriple slots info given by BoxSetup </summary>
         public void AddFourSlotInList(List<int> indexes)
         {
             m_fourSlots.Add(new MultiSlots(indexes));
         }
 
-        /// <summary> BoxSetup va nous donner le nombre de slot total </summary>
+        /// <summary> Number of slots info given by BoxSetup </summary>
         public void InitAvailableSlots(int numberOfSlots)
         {
             m_totalSlots = numberOfSlots;
             m_availableSlotsLeft = m_totalSlots;
         }
 
-        /// <summary> La boite se connecte a la tour lors de sa propre création </summary>
+        /// <summary> Set parent reference </summary>
         public void SetTower(TowerBoxSystem tower)
         {
             m_tower = tower;
@@ -106,26 +107,27 @@ namespace BoxSystem
         #endregion
 
         #region (--- Bool Verification ---)
-        /// <summary> Regarde si on peut prendre l'objet selon sa taille </summary>
+
+        /// <summary> Look if box can take object, separate in two functions based on item size </summary>
         public bool CanPutItemInsideBox(ItemData.ESize size)
         {
             return size == ItemData.ESize.small ? CanPutSmallItemInBox() : CanPutMultiSlotItemInBox(size);
         }
 
-        /// <summary> Regarde si on peut prendre un petit objet </summary>
+        /// <summary> Look if box can take small object based on its size </summary>
         private bool CanPutSmallItemInBox()
         {
             return m_availableSlotsLeft > 0 ? true : false;
         }
 
-        /// <summary> Regarde si on peut prendre un objet multi slot </summary>
+        /// <summary> Look if box can take multi object based on its size </summary>
         private bool CanPutMultiSlotItemInBox(ItemData.ESize size)
         {
             int sizeInt = size == ItemData.ESize.medium ? GameConstants.MEDIUM_SIZE : GameConstants.LARGE_SIZE;
             return m_availableSlotsLeft < sizeInt ? false : true;
         }
 
-        /// <summary> Regarde si la boite est vide </summary>
+        /// <summary> Look if box is empty </summary>
         public bool IsEmpty()
         {
             return m_itemsList.Count == 0;
@@ -133,7 +135,8 @@ namespace BoxSystem
         #endregion
 
         #region (--- PutItemInsideBox ---)
-        /// <summary> Pour mettre l'objet dans la boite selon sa taille </summary>
+
+        /// <summary> Put item inside box, separate in two functions based on item size </summary>
         public void PutItemInBox(GameObject GO, bool autoSnap = false)
         {
             Item item = GO.GetComponent<Item>();
@@ -145,7 +148,7 @@ namespace BoxSystem
         }
 
 
-        /// <summary> Pour mettre un petit objet dans la boite </summary>
+        /// <summary> Put a small item inside the box </summary>
         private void PutSmallItemInBox(GameObject GO, bool autoSnap)
         {
             for (int i = 0; i < m_slotsList.Count; i++)
@@ -164,7 +167,7 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Regarde si on peut placer le multi slot item tout de suite ou réorganizer </summary>
+        /// <summary> Put a multi slot item inside the box or reorganization </summary>
         private void PutInBoxOrReorganize(GameObject GO, bool autoSnap)
         {
             Item item = GO.GetComponent<Item>();
@@ -190,14 +193,13 @@ namespace BoxSystem
             ReorganizeBox(GO);
         }
 
-        /// <summary> Pour réorganiser la boite et placer l'item à l'interieur </summary>
+        /// <summary> For box reorganization </summary>
         private void ReorganizeBox(GameObject GO)
         {
-            // Faire une nouvelle liste temporaire et ajouter le nouvel item dedans
+   
             List<GameObject> newList = new List<GameObject>();
             newList.Add(GO);
-
-            // Faire une copie de chaque item de la boite en supprimant les anciens dans notre nouvelle liste
+   
             int nbOfItemInBox = m_itemsList.Count;
             for (int i = 0; i < nbOfItemInBox; i++)
             {
@@ -208,10 +210,8 @@ namespace BoxSystem
             }
             m_itemsList.Clear();
 
-            // réorganiser le liste du plus grand object au plus petit
-            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); // précis comme ca
+            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); 
 
-            // remettre la boite a zero
             m_availableSlotsLeft = m_totalSlots;
             for (int i = 0; i < m_totalSlots; i++)
             {
@@ -219,14 +219,13 @@ namespace BoxSystem
                 m_slotsList[i] = new SlotInfo(lastTransform, true);
             }
 
-            // replacer les items du plus grand au plus petit, 100% accurate, avec le snap
             foreach (GameObject newItem in newList)
             {
                 PutItemInBox(newItem, true);
             }
         }
 
-        /// <summary> Pour mettre un objet multi slot dans la boite </summary>
+        /// <summary> Put a multi slot item inside the box </summary>
         private void PutMultiSlotItemInBox(GameObject GO, MultiSlots multiSlot, bool autoSnap)
         {
             Item item = GO.GetComponent<Item>();
@@ -241,7 +240,7 @@ namespace BoxSystem
                 m_slotsList[multiSlot.m_slotIndexes[i]] = new SlotInfo(m_slotsList[multiSlot.m_slotIndexes[i]].m_slotTransform, false);
             }
 
-            Vector3 localPosition = CreateLocalPositionForItem(allLocalPositions);
+            Vector3 localPosition = FindPositionInsideBox(allLocalPositions);
             m_itemsList.Add(new ItemInBox(GO, multiSlot.m_slotIndexes, localPosition));
 
 
@@ -257,7 +256,7 @@ namespace BoxSystem
 
         #region (--- SlerpAndSnap ---)
 
-        /// <summary> Change le scale de l'item et commence le Slerp And Snap </summary>
+        /// <summary> Start Slerp and Snap </summary>
         private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
         {
             Transform GOChild = GO.transform.GetChild(0);
@@ -272,7 +271,7 @@ namespace BoxSystem
 
         #region (--- HelpFunctions ---)
 
-        /// <summary> Regarde si une liste de bool est toute vrai </summary>
+        /// <summary> Look if bool list is all true </summary>
         private bool AllSlotIsAvailable(List<bool> slotsAvailable)
         {
             foreach (bool slotAvailable in slotsAvailable)
@@ -285,8 +284,8 @@ namespace BoxSystem
             return true;
         }
 
-        /// <summary> Trouve l'emplacement locale des objets multi slot dans la boite </summary>
-        private Vector3 CreateLocalPositionForItem(List<Vector3> slotLocalPositions)
+        /// <summary> Find local position of multi-slots item inside box </summary>
+        private Vector3 FindPositionInsideBox(List<Vector3> slotLocalPositions)
         {
             Vector3 localposition = Vector3.zero;
             int nbOfPositions = slotLocalPositions.Count;
@@ -299,13 +298,13 @@ namespace BoxSystem
             return localposition / nbOfPositions;
         }
 
-        /// <summary> Donne le dernier objet ajouter de la boite </summary>
+        /// <summary> Get last item inside box </summary>
         public ItemInBox GetLastItem()
         {
             return m_itemsList[m_itemsList.Count - 1];
         }
 
-        /// <summary> Remet les slots dans la liste comme vide </summary>
+        /// <summary> Put back item slot as available </summary>
         public void ResetSlots(ItemInBox lastItemInBox)
         {
             foreach (int itemIndex in lastItemInBox.m_slotIndex)
@@ -315,36 +314,31 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Donne tout les itemInBox de la boite </summary>
+        /// <summary> Get list of item inside box </summary>
         public List<ItemInBox> GetItemsInBox()
         {
             return m_itemsList;
         }
 
-        /// <summary> Assigne la position initial de la boite dans la tour </summary>
-        public void SetInitialLocationInBox(Vector3 localPosition)
+        /// <summary> Set initial box local position inside tower </summary>
+        public void SetBoxInitialLocalPosition(Vector3 localPosition)
         {
             m_initialLocalPositionInBox = localPosition;
         }
 
-        /// <summary> Replace la boite à sa position initial dans la tour </summary>
-        public void ReplaceBoxToOrigin()
-        {
-            transform.localPosition = m_initialLocalPositionInBox;
-            transform.localEulerAngles = Vector3.zero; // NEW
-        }
-
-        /// <summary> Donne acces à la tour reliée à la boîte </summary>
+        /// <summary> Get parent reference </summary>
         public TowerBoxSystem GetTower()
         {
             return m_tower;
         }
 
+        /// <summary> Get anchor height based on box size </summary>
         public float GetAnchorHeight()
         {
             return m_boxSetup.BoxThickness;
         }
 
+        /// <summary> Get anchor width based on box size </summary>
         public float GetAnchorWidth()
         {
             return (m_boxSetup.BoxWidth / 2) + m_boxSetup.BoxThickness;

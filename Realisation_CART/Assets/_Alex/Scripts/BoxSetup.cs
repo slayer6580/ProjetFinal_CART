@@ -61,7 +61,7 @@ namespace BoxSystem
 
         #region (--- AjustBoxGraphics ---)
 
-        /// <summary> Ajuster les dimensions de la boite selon les grandeurs donnés </summary>
+        /// <summary> Ajust box size </summary>
         private void AjustBoxGraphics()
         {
             float lenght = m_boxLength;
@@ -99,7 +99,6 @@ namespace BoxSystem
                 new Vector3(width, thickness, HeightAndThickness),
                 new Vector3(HalfLenghtAndHalfThickness, halfHeightMinusHalfThickness, 0));
 
-
             // front
             SetUpParts(m_boxFront,
                 new Vector3(width, thickness, HeightAndThickness),
@@ -117,7 +116,7 @@ namespace BoxSystem
 
         #region (--- CreateSlots ---)
 
-        /// <summary> Les calculs de positionement puis ajout dans la boite </summary>
+        /// <summary> Calculates all slots infos </summary>
         private void CreateSlots()
         {
             List<float> slotsLengthPosition = new List<float>();
@@ -130,7 +129,7 @@ namespace BoxSystem
             FindAllFourSlots();
         }
 
-        /// <summary> Trouver tout les positions de longueur </summary>
+        /// <summary> Find all length position </summary>
         private void FindLengthPositions(List<float> m_slotsLengthPosition)
         {
             float halfLengthSpacing = SlotLenght / 2;
@@ -143,7 +142,7 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Trouver tout les positions de largeur </summary>
+        /// <summary> Find all width position </summary>
         private void FindWidthPositions(List<float> slotsWidthPosition)
         {
             float halfWidthSpacing = SlotWidth / 2;
@@ -156,7 +155,7 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Ajouter les slots dans la boite selon des calculs de positionement </summary>
+        /// <summary> Add all slots to the box </summary>
         private void PlaceSlotsInBox(List<float> slotsLengthPosition, List<float> slotsWidthPosition)
         {
             for (int i = 0; i < m_nbSlotLength; i++)
@@ -172,7 +171,7 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Trouve tout les double slots de la boite </summary>
+        /// <summary> Find all double slots posibilities </summary>
         private void FindAllDoubleSlots()
         {
             int index = 0; int index2 = 0;
@@ -181,27 +180,27 @@ namespace BoxSystem
             {
                 for (int j = 0; j < m_nbSlotWidth; j++)
                 {
-                    if (i == 0) // premiere rangée
+                    if (i == 0) // first row
                     {
-                        if (index != (m_nbSlotWidth - 1)) // pas colonne de droite
+                        if (index != (m_nbSlotWidth - 1)) // no right collumn
                         {
-                            index2 = index + 1; // droite
+                            index2 = index + 1; // right
                             SendDoubleSlotToBox(index, index2);
                         }
                     }
                     else // les autres rangées
                     {
-                        if ((index + 1) % m_nbSlotWidth == 0) // colonne de droite
+                        if ((index + 1) % m_nbSlotWidth == 0) // right collumn
                         {
-                            index2 = index - m_nbSlotWidth; //haut
+                            index2 = index - m_nbSlotWidth; //up
                             SendDoubleSlotToBox(index, index2);
                         }
                         else // colonne dans le milieu
                         {
-                            index2 = index - m_nbSlotWidth; //haut
+                            index2 = index - m_nbSlotWidth; //up
                             SendDoubleSlotToBox(index, index2);
 
-                            index2 = index + 1; //droite
+                            index2 = index + 1; //right
                             SendDoubleSlotToBox(index, index2);
                         }
                     }
@@ -210,7 +209,7 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Trouve tout les four slots de la boite </summary>
+        /// <summary> Find all quadruple slots posibilities </summary>
         private void FindAllFourSlots()
         {
             int index = 0; int index2 = 0; int index3 = 0; int index4 = 0;
@@ -219,13 +218,13 @@ namespace BoxSystem
             {
                 for (int j = 0; j < m_nbSlotWidth; j++)
                 {
-                    if (i + 1 < m_nbSlotLength) // pas la derniere rangée
+                    if (i + 1 < m_nbSlotLength) // not last row
                     {
-                        if ((index + 1) % m_nbSlotWidth != 0) // pas colonne de droite
+                        if ((index + 1) % m_nbSlotWidth != 0) // no right collumn
                         {
-                            index2 = index + 1; // droite
-                            index3 = index + m_nbSlotWidth; // bas
-                            index4 = index + m_nbSlotWidth + 1; // en bas a droite
+                            index2 = index + 1; // right
+                            index3 = index + m_nbSlotWidth; // bottom
+                            index4 = index + m_nbSlotWidth + 1; // bottom right
                             SendFourSlotToBox(index, index2, index3, index4);
                         }
                     }
@@ -234,7 +233,7 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Donne les double slots au box script </summary>
+        /// <summary> Send all double slots possibilities to box </summary>
         private void SendDoubleSlotToBox(int index, int index2)
         {
             List<int> doubleSlots = new List<int>()
@@ -246,7 +245,7 @@ namespace BoxSystem
             m_box.AddDoubleSlotInList(doubleSlots);
         }
 
-        /// <summary> Donne les four slots au box script </summary>
+        /// <summary> Send all quadruple slots possibilities to box </summary>
         private void SendFourSlotToBox(int index, int index2, int index3, int index4)
         {
             List<int> fourSlots = new List<int>()
@@ -265,14 +264,14 @@ namespace BoxSystem
 
         #region (--- CalculateDimension ---)
 
-        /// <summary> Calcule la moitié des longeurs de la boite pour le point de départ du placement des slots </summary>
+        /// <summary> Calculate box half dimension </summary>
         private void CalculateBoxHalfDimension()
         {
             m_halfLength = BoxWidth / 2;
             m_halfWidth = m_boxLength / 2;
         }
 
-        /// <summary> Calcule la dimension des slots </summary>
+        /// <summary> Calculate slot dimension </summary>
         private void CalculateSlotDimension()
         {
             SlotLenght = BoxWidth / m_nbSlotWidth;
@@ -280,7 +279,7 @@ namespace BoxSystem
             SlotHeight = BoxHeight;
         }
 
-        /// <summary> Donne le nombre total de slot au Box </summary>
+        /// <summary> Give to box number of slots </summary>
         private void SetAvailableSlots()
         {
             m_totalSlots = m_nbSlotLength * m_nbSlotWidth;

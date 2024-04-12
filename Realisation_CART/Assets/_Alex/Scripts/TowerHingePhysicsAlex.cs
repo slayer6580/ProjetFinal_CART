@@ -15,8 +15,7 @@ namespace BoxSystem
         private List<Vector3> m_boxesWithHingesInitialPosition = new List<Vector3>();
         private List<HingeJoint> m_hinges = new List<HingeJoint>();
       
-
-        [Header("Mettre les Prefabs de la boite")]
+        [Header("Put prefabs boxes here")]
         [SerializeField] private GameObject m_boxNoHingePrefab;
         [SerializeField] private GameObject m_boxWithHingePrefab;
 
@@ -52,7 +51,6 @@ namespace BoxSystem
 
         private void Update()
         {
-
             if (m_hinges.Count == 0) return;
 
             HingesBalance();
@@ -60,6 +58,7 @@ namespace BoxSystem
             ItemLosing();
         }
 
+        /// <summary> Calculate item losing based on tower angle </summary>
         private void ItemLosing()
         {
             // For Futur Test
@@ -76,7 +75,6 @@ namespace BoxSystem
             float difference = Mathf.Infinity;
             float timeBeforeLost = 0;
 
-            // regarde selon les angles des boites totale le nombre d'item a perdre par secondes
             foreach (Vector2 stats in m_loseItemStats)
             {
                 float closeAngleToStats = Mathf.Abs(stats.x - Mathf.Abs(m_allHingeAngleRead));
@@ -101,6 +99,7 @@ namespace BoxSystem
             }
         }
 
+        /// <summary> Make Tower balancement with hinges </summary>
         private void HingesBalance()
         {
             float topBox_XPosition = GetTopBox().transform.localPosition.x;
@@ -135,7 +134,8 @@ namespace BoxSystem
             }
         }
 
-        public void AddBoxToFakeTower()
+        /// <summary> Add a box the the physics tower </summary>
+        public void AddBoxToPhysicsTower()
         {
             m_boxCount++;
             bool HaveHinge = false;
@@ -166,12 +166,11 @@ namespace BoxSystem
             float localHeight = (m_boxCount - 1) * (heightDifference + TowerBoxSystem.BoxGapHeight);
             Vector3 initialLocalPosition = new Vector3(0, localHeight, 0);
 
-            // TODO changer ca pour selon transform.up de la boite en dessous avec eulerAngle identique a la boite du dessous aussi pour les hinges
+           
             if (!HaveHinge)
             {
                 instant.transform.localPosition = initialLocalPosition;
             }
-
             else
             {
                 // Box placement based on box underneath
@@ -186,9 +185,9 @@ namespace BoxSystem
                 m_boxesWithHingesInitialPosition.Add(initialLocalPosition);
             }
 
-
         }
 
+        /// <summary> Copy all local transform the the scene tower </summary>
         private void CopyFakeTowerToRealTower()
         {
             List<Box> realBoxes = TowerBoxSystem.GetAllBoxes();
@@ -201,7 +200,8 @@ namespace BoxSystem
             }
         }
 
-        public void RemoveBoxFromFakeTower()
+        /// <summary> Remove top box from the physics tower </summary>
+        public void RemoveBoxFromPhysicsTower()
         {
             GameObject lastBox = GetTopBox();
             m_allBoxes.Remove(lastBox);
@@ -218,15 +218,7 @@ namespace BoxSystem
             m_boxCount--;
         }
 
-
-        private void EnabledColliderOnBoxes(bool value)
-        {
-            foreach (GameObject box in m_allBoxes)
-            {
-                box.GetComponent<BoxCollider>().enabled = value;
-            }
-        }
-
+        /// <summary> Replace all boxes to origin </summary>
         private void ReplaceAllBoxWithHingeToOrigin()
         {
             for (int i = 0; i < m_boxesWithHinge.Count; i++)
@@ -237,6 +229,7 @@ namespace BoxSystem
             }
         }
 
+        /// <summary> Change all anchor side </summary>
         private void ChangeAllAnchors(Eside wantedSide)
         {
             m_side = wantedSide;
@@ -246,13 +239,11 @@ namespace BoxSystem
             {
                 hingeJoint.anchor = anchorPosition;
             }
-
         }
 
-
+        /// <summary> Set up joint </summary>
         private void SetUpJoint(Rigidbody attachedBody, Rigidbody sourceBody)
         {
-
             HingeJoint hingeJoint = sourceBody.gameObject.GetComponent<HingeJoint>();
 
             // Hinge connection
@@ -276,7 +267,7 @@ namespace BoxSystem
 
         }
 
-
+        /// <summary> Get the top box of physics tower </summary>
         public GameObject GetTopBox()
         {
             if (m_boxCount == 0)
@@ -285,6 +276,7 @@ namespace BoxSystem
             return m_allBoxes[m_boxCount - 1];
         }
 
+        /// <summary> Get the box under the top box of physics tower </summary>
         private GameObject GetBoxUnderLast()
         {
             return m_allBoxes[m_boxCount - 2];

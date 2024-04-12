@@ -15,6 +15,7 @@ namespace BoxSystem
             }
         }
 
+        /// <summary> Reset stocks of all shelves in the array </summary>
         public void ResetAllShelves()
         {
             foreach (Shelf shelf in m_shelves)

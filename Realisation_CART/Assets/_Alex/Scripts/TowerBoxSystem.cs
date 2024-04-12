@@ -10,17 +10,19 @@ namespace BoxSystem
     public class TowerBoxSystem : MonoBehaviour
     {
 
-        [field: Header("Mettre le Player ici")]
+        [field: Header("Put main player GO here")]
         [field: SerializeField] public GameObject Player { get; private set; }
 
-        [field: Header("La distance ou un item devrait snap a la boite pendant le slerp")]
+        [field: Header("The distance of an item max before snapping inside a box")]
         [field: SerializeField] public float ItemSnapDistance { get; private set; }
 
-        [Header("Mettre le Prefab de la boite")]
+        [Header("Put box prefab here")]
         [SerializeField] private GameObject m_boxPrefab;
-        [field: Header("La hauteur de placement de la boite")]
+
+        [field: Header("height gap box placement")]
         [field: SerializeField] public float BoxGapHeight { get; private set; } = 0.001f;
-        [Header("La force d'expulsion des boites a la caisse")]
+
+        [Header("Expulsion of items and boxes")]
         [SerializeField] private float m_itemExpulsionForce;
         [SerializeField] private float m_boxExpulsionForce;
 
@@ -76,12 +78,12 @@ namespace BoxSystem
             }
         }
 
-        /// <summary> Ajoute une boite a la tour </summary>
+        /// <summary> Add a box to the tower </summary>
         public void AddBoxToTower()
         {
             m_boxCount++;
 
-            // setup de la boite
+            // box setup
             GameObject instant = Instantiate(m_boxPrefab);
             instant.transform.rotation = Player.transform.rotation;
             instant.transform.SetParent(transform);
@@ -89,21 +91,19 @@ namespace BoxSystem
             Box instantBox = instant.GetComponent<Box>();
             instantBox.SetTower(this);
 
-
-            // hauteur de la boite dans la tour
+            // height of box
             float height = (m_boxCount - 1) * (instantBox.gameObject.GetComponent<BoxSetup>().GetBoxHeightDifference() + BoxGapHeight);
             Vector3 localPosition = new Vector3(0, height, 0);
             instant.transform.localPosition = localPosition;
-            instantBox.SetInitialLocationInBox(localPosition);
+            instantBox.SetBoxInitialLocalPosition(localPosition);
 
-            // ajout a la liste
+            // add in lists
             m_boxesInCart.Add(instantBox);
-
-            m_towerPhysics.AddBoxToFakeTower();
+            m_towerPhysics.AddBoxToPhysicsTower();
 
         }
 
-        /// <summary> Regarde si la boite du dessus pourrait prendre un objet d'une certaine taille </summary>
+        /// <summary> Look if top box can take item </summary>
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
         {
             if (GetTopBox() == null)
@@ -113,21 +113,13 @@ namespace BoxSystem
             return GetTopBox().CanPutItemInsideBox(size);
         }
 
-        /// <summary> Pour donner un item a la boite du dessus </summary>
+        /// <summary> Give item to top box </summary>
         public void PutObjectInTopBox(GameObject item)
         {
             GetTopBox().PutItemInBox(item);
         }
 
-        /// <summary> Place toute les boites a leur origine pour placement des angrages des hinges </summary>
-        public void ReplaceAllBoxToOrigin()
-        {
-            for (int i = 0; i < m_boxesInCart.Count; i++)
-            {
-                m_boxesInCart.ToArray()[i].ReplaceBoxToOrigin();
-            }
-        }
-
+        /// <summary> Remove the top box with an impulse force </summary>
         public void RemoveBoxImpulse()
         {
             Box topBox = GetTopBox();
@@ -148,10 +140,11 @@ namespace BoxSystem
             destruct.DestroyItem();
 
             RemoveLastBoxFromTower();
-            m_towerPhysics.RemoveBoxFromFakeTower();
+            m_towerPhysics.RemoveBoxFromPhysicsTower();
 
         }
 
+        /// <summary> Remove the last item inside the top box with an impulse force </summary>
         public void RemoveItemImpulse()
         {
         
@@ -186,13 +179,14 @@ namespace BoxSystem
         }
 
         #region (--- Getter ---)
-        /// <summary> Donne le nombre de boites dans le panier </summary>
+
+        /// <summary> Give number of boxes in cart </summary>
         public int GetBoxCount()
         {
             return m_boxCount;
         }
 
-        /// <summary> Donne la boite du dessus </summary>
+        /// <summary> Get the top box of the tower </summary>
         public Box GetTopBox()
         {
             if (m_boxesInCart.Count == 0)
@@ -201,7 +195,7 @@ namespace BoxSystem
             return m_boxesInCart[total - 1];
         }
 
-        /// <summary> Reduit le nombre de boites dans le panier </summary>
+        /// <summary> Remove the box from the tower </summary>
         public void RemoveLastBoxFromTower()
         {
             if (m_boxesInCart.Count == 0)
@@ -215,7 +209,7 @@ namespace BoxSystem
             m_boxesInCart.RemoveAt(total - 1);
         }
 
-        /// <summary> Donne la boite en dessous de la boite du dessus </summary>
+        /// <summary> Give box under top box </summary>
         public Box GetPreviousTopBox()
         {
             if (m_boxesInCart.Count < 2)
@@ -224,7 +218,7 @@ namespace BoxSystem
             return m_boxesInCart.ToArray()[1];
         }
 
-        /// <summary> Donne le stack complet des boites </summary>
+        /// <summary> Give list of all the boxes </summary>
         public List<Box> GetAllBoxes()
         {
             return m_boxesInCart;
