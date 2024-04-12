@@ -24,6 +24,7 @@ namespace DiscountDelirium
         {
             PauseState.OnPause += OpenMainMenu;
             PauseState.OnResume += CloseMainMenu;
+            EndGameState.OnEndGame += ShowCursor;
         }
 
         public void StartGame()
@@ -66,6 +67,11 @@ namespace DiscountDelirium
         {
             Time.timeScale = 1.0f;
             SceneManager.LoadScene("MainMenu");
+        }
+
+        public void ShowCursor() 
+        {
+            m_cursor.SetActive(true);
         }
     }
 }
