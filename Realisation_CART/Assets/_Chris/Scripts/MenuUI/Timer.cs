@@ -9,7 +9,7 @@ namespace DiscountDelirium
     {
         [SerializeField] private Image m_clockImage;
         [SerializeField] private TextMeshProUGUI m_timeText;
-        private float m_timeAtStart = GameStateMachine.GameLength;
+        private float m_timeAtStart;
         private float m_timeLeft;
         private bool m_isMatchStarted;
         private bool m_timerEnded;
@@ -18,7 +18,8 @@ namespace DiscountDelirium
 
         private void Awake()
         {
-            GetReadyState.OnGameStarted += StartTimer;
+            m_timeAtStart = GameStateMachine.Instance.GameLength;
+			GetReadyState.OnGameStarted += StartTimer;
         }
 
         private void Start () 

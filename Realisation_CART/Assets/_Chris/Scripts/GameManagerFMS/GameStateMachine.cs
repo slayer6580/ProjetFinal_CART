@@ -1,4 +1,5 @@
 using CartControl;
+using StatsSystem;
 using UnityEngine;
 
 namespace DiscountDelirium
@@ -6,10 +7,12 @@ namespace DiscountDelirium
     public class GameStateMachine : StateMachine<GameState>
     {
         public static GameStateMachine Instance { get; private set; }
-        public static float GameLength = 60.0f;
+        [field:SerializeField] public float GameLength { get; private set; }
 
-        public CartStateMachine m_playerSM; 
+		public CartStateMachine m_playerSM; 
         [SerializeField] public ScoreUI m_scoreUI;
+        [SerializeField] public UpgradeManager m_upgrademanager;
+
 
         [field: SerializeField] public bool IsGamePaused { get; set; }
 
@@ -64,8 +67,8 @@ namespace DiscountDelirium
             m_nbItems += (int)data.x;
 			m_playerScore += (int)data.y;
 			m_nbOfCartokens += (int)data.z;
-        }
 
-
+            m_upgrademanager.AddMoney((int)data.z);
+		}
     }
 }

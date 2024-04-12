@@ -1,6 +1,8 @@
+using CartControl;
 using TMPro;
-
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace StatsSystem
@@ -47,6 +49,8 @@ namespace StatsSystem
         [ShowIf("m_ShowTMP", true)][SerializeField] private Image m_defenseFillBar;
 
 
+        [field:SerializeField] public CartStateMachine CartMachine { get; private set; }
+
         private int m_nbCartToken;
         public int AccelerationStat { get; private set; } = 0;
         public int MaxSpeedStat { get; private set; } = 0;
@@ -70,10 +74,11 @@ namespace StatsSystem
             m_nbCartToken = m_startingCartToken;
         }
 
+        
         private void Start() // TEST ONLY
         {
             UpdateAll();
-        }
+		}
 
         private void OnEnable()
         {
@@ -283,7 +288,12 @@ namespace StatsSystem
             m_handlingUpgrade = 0;
             m_defenseUpgrade = 0;
             UpdateAll();
-        }
+            PlayerPrefs.SetInt("Acceleration", AccelerationStat);
+            PlayerPrefs.SetInt("MaxSpeed", MaxSpeedStat);
+            PlayerPrefs.SetInt("Handling", HandlingStat);
+
+            SceneManager.LoadScene("Main");
+		}
 
         public void Restart()
         {
@@ -314,7 +324,8 @@ namespace StatsSystem
         public void AddMoney(int amount)
         {
             m_nbCartToken += amount;
-        }
+			UpdateMoney();
+		}
     }
 
 }

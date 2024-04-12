@@ -97,8 +97,20 @@ namespace CartControl
 				state.OnStart(this);
 			}
             m_currentState.OnEnter();
+
+			LoadUpgrade();
         }
 
+		private void LoadUpgrade()
+		{
+			PlayerPrefs.GetInt("Acceleration", 0);
+			PlayerPrefs.GetInt("MaxSpeed", 0);
+			PlayerPrefs.GetInt("Handling", 0);
+			//Acceleration += 
+			MaxSpeed += 40 * PlayerPrefs.GetInt("MaxSpeed", 0);
+			//MovingRotatingSpeed
+			//DriftingRotatingSpeed
+		}
 		protected override void Update()
 		{
 			//For test value
