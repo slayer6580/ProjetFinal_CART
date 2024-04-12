@@ -80,6 +80,14 @@ namespace CartControl
 		public TowerBalanceAnimCtrlr m_towerCtrlr;
 
 		//
+		//UpgradedStats
+		[field: SerializeField] public float AccelerationUpgrades { get; private set; }
+		[field: SerializeField] public float MaxSpeedUpgrades { get; private set; }
+		[field: SerializeField] public float MovingRotatingSpeedUpgrades { get; private set; }
+		[field: SerializeField] public float DriftingRotatingSpeedUpgrades { get; private set; }
+	
+
+		//
 		[HideInInspector] public bool ForceStartDrift { get; set; }
 		[HideInInspector] public bool IsDrifting { get; set; }
 		[HideInInspector] public bool CanBoost { get; set; }
@@ -106,10 +114,12 @@ namespace CartControl
 			PlayerPrefs.GetInt("Acceleration", 0);
 			PlayerPrefs.GetInt("MaxSpeed", 0);
 			PlayerPrefs.GetInt("Handling", 0);
-			//Acceleration += 
-			MaxSpeed += 40 * PlayerPrefs.GetInt("MaxSpeed", 0);
-			//MovingRotatingSpeed
-			//DriftingRotatingSpeed
+
+			AccelerationUpgrades = Acceleration + 10 * PlayerPrefs.GetInt("Acceleration", 0);
+			MaxSpeedUpgrades = MaxSpeed + 5 * PlayerPrefs.GetInt("MaxSpeed", 0);
+			MovingRotatingSpeedUpgrades = MovingRotatingSpeed + 5 * PlayerPrefs.GetInt("Handling", 0);
+			DriftingRotatingSpeedUpgrades = DriftingRotatingSpeed + 5 * PlayerPrefs.GetInt("Handling", 0);
+
 		}
 		protected override void Update()
 		{
@@ -120,7 +130,7 @@ namespace CartControl
 			TryToChangeState();
 
 			//For Animation
-			HumanAnimCtrlr.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeed);
+			HumanAnimCtrlr.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeedUpgrades);
 
 			//Testing tower tilt with Animation
 			//TEMPORARY DEACTIVATED

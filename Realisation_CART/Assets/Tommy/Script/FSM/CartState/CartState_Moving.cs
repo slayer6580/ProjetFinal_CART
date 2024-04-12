@@ -77,17 +77,17 @@ namespace CartControl
 			_AudioManager.ModifySound(
 				m_audioSourceIndex,
 				ESoundModification.Pitch,
-				Mathf.Lerp(0.8f, 2f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeed));
+				Mathf.Lerp(0.8f, 2f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeedUpgrades));
 
 			_AudioManager.ModifySound(
 				m_audioSourceIndex,
 				ESoundModification.Volume,
-				Mathf.Lerp(0f, 1f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeed));
+				Mathf.Lerp(0f, 1f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeedUpgrades));
 		}
 		public override void OnFixedUpdate()
 		{
-			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.Acceleration, m_cartStateMachine.TurningDrag, m_cartStateMachine.MaxSpeed);
-			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeed, m_cartStateMachine.SteeringValue);
+			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.AccelerationUpgrades, m_cartStateMachine.TurningDrag, m_cartStateMachine.MaxSpeedUpgrades);
+			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeedUpgrades, m_cartStateMachine.SteeringValue);
 		}
 
 		public override void OnExit()

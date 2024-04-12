@@ -64,7 +64,7 @@ namespace CartControl
 		public override void OnFixedUpdate()
 		{
 			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.BoostingAcceleration, m_cartStateMachine.BoostingTurnDrag, m_cartStateMachine.BoostingMaxSpeed);
-			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeed, m_cartStateMachine.SteeringValue);
+			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.MovingRotatingSpeedUpgrades, m_cartStateMachine.SteeringValue);
 		}
 
 		public override void OnExit()
