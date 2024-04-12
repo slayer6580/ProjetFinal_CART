@@ -23,12 +23,12 @@ namespace CartControl
 			_AudioManager.PlaySoundEffectsOneShot(ESound.DriftBegin, m_cartStateMachine.transform.position, 0.25f);
 			m_audioSourceIndex = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.DriftLoop, m_cartStateMachine.transform);
 			
-
 			m_cartStateMachine.ForceStartDrift = false;
 			m_cartStateMachine.IsDrifting = true;
 
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("IsDrifting", true);
 			m_cartStateMachine.GrindVfx.PlayVfx();
+
 			//Some value must not be reset when coming from Stopped State
 			if (m_comingFromState is CartState_Stopped)
 			{
@@ -37,7 +37,6 @@ namespace CartControl
 			m_driftingTimer = 0;
 			m_boostPercentageObtain = 0;
 			m_driftDirection = 0;
-
 
 		}
 
