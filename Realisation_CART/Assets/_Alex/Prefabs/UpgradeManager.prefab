@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: BuyUpgrade
         m_Mode: 3
@@ -812,7 +812,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: SellUpgrade
         m_Mode: 3
@@ -1582,13 +1582,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6291777661785550022}
+  - component: {fileID: 4765950433417975830}
   m_Layer: 0
   m_Name: UpgradeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6291777661785550022
 Transform:
   m_ObjectHideFlags: 0
@@ -1603,9 +1604,44 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6199290762112813313}
-  - {fileID: 1362324216713682220}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4765950433417975830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018638575534140589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698010cd1b466664882c239059fbf02c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_startingCartToken: 200
+  m_upgradeCostByLevel: 0a00000014000000280000003c000000
+  m_ShowTMP: 0
+  m_nbOfCartTokenText: {fileID: 2413088722565968981}
+  m_accelerationCostText: {fileID: 4673994979275226959}
+  m_accelerationBuyingText: {fileID: 555144851399916213}
+  m_accelerationBuyButton: {fileID: 6368151976121547269}
+  m_accelerationSellButton: {fileID: 7199984740710865219}
+  m_accelerationFillBar: {fileID: 5349489181898552192}
+  m_maxSpeedCostText: {fileID: 7791476146335720171}
+  m_maxSpeedBuyingText: {fileID: 5570802385018596537}
+  m_maxSpeedBuyButton: {fileID: 2778763199670801295}
+  m_maxSpeedSellButton: {fileID: 6113740347432577168}
+  m_maxSpeedFillBar: {fileID: 6873701223606815968}
+  m_handlingCostText: {fileID: 640736511792226090}
+  m_handlingBuyingText: {fileID: 7142927375987320957}
+  m_handlingBuyButton: {fileID: 5260301955773642361}
+  m_handlingSellButton: {fileID: 6172079442600301109}
+  m_handlingFillBar: {fileID: 2723222432276806027}
+  m_defenseCostText: {fileID: 6451300457448800504}
+  m_defenseBuyingText: {fileID: 5252009889729191623}
+  m_defenseBuyButton: {fileID: 4893008810593305602}
+  m_defenseSellButton: {fileID: 5253534450592520391}
+  m_defenseFillBar: {fileID: 1192052948511619337}
 --- !u!1 &2049111593582293335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,7 +1972,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: SellUpgrade
         m_Mode: 3
@@ -2637,7 +2673,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: SellUpgrade
         m_Mode: 3
@@ -3206,74 +3242,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &3178525507581342637
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1362324216713682220}
-  - component: {fileID: 8201646798106748355}
-  m_Layer: 0
-  m_Name: StatsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1362324216713682220
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3178525507581342637}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.518839, y: -22.588703, z: 2.322342}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6291777661785550022}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8201646798106748355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3178525507581342637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 698010cd1b466664882c239059fbf02c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_startingCartToken: 200
-  m_upgradeCostByLevel: 0a00000014000000280000003c000000
-  m_ShowTMP: 0
-  m_nbOfCartTokenText: {fileID: 2413088722565968981}
-  m_accelerationCostText: {fileID: 4673994979275226959}
-  m_accelerationBuyingText: {fileID: 555144851399916213}
-  m_accelerationBuyButton: {fileID: 6368151976121547269}
-  m_accelerationSellButton: {fileID: 7199984740710865219}
-  m_accelerationFillBar: {fileID: 5349489181898552192}
-  m_maxSpeedCostText: {fileID: 7791476146335720171}
-  m_maxSpeedBuyingText: {fileID: 5570802385018596537}
-  m_maxSpeedBuyButton: {fileID: 2778763199670801295}
-  m_maxSpeedSellButton: {fileID: 6113740347432577168}
-  m_maxSpeedFillBar: {fileID: 6873701223606815968}
-  m_handlingCostText: {fileID: 640736511792226090}
-  m_handlingBuyingText: {fileID: 7142927375987320957}
-  m_handlingBuyButton: {fileID: 5260301955773642361}
-  m_handlingSellButton: {fileID: 6172079442600301109}
-  m_handlingFillBar: {fileID: 2723222432276806027}
-  m_defenseCostText: {fileID: 6451300457448800504}
-  m_defenseBuyingText: {fileID: 5252009889729191623}
-  m_defenseBuyButton: {fileID: 4893008810593305602}
-  m_defenseSellButton: {fileID: 5253534450592520391}
-  m_defenseFillBar: {fileID: 1192052948511619337}
 --- !u!1 &3186513540899902272
 GameObject:
   m_ObjectHideFlags: 0
@@ -4039,7 +4007,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: BuyUpgrade
         m_Mode: 3
@@ -4172,7 +4140,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: SellUpgrade
         m_Mode: 3
@@ -4407,7 +4375,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
@@ -4540,7 +4508,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: BuyUpgrade
         m_Mode: 3
@@ -4922,7 +4890,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: BuyUpgrade
         m_Mode: 3
@@ -5555,7 +5523,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8201646798106748355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StatsSystem.UpgradeManager, Assembly-CSharp
         m_MethodName: AcceptUpgrade
         m_Mode: 1
