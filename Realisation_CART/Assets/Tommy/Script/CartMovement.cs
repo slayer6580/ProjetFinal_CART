@@ -6,6 +6,10 @@ namespace CartControl
 	{
 		public CartStateMachine SM { private get; set; }
 
+		private void Start()
+		{
+			
+		}
 		public void Move(float acceleration, float turnDrag, float maxSpeed)
 		{
 			//Transform default velocity (which is global) to a local velocity
@@ -18,7 +22,7 @@ namespace CartControl
 				{
 					if (maxSpeed > SM.LocalVelocity.z && -SM.MaxBackwardSpeed < SM.LocalVelocity.z)
 					{
-						SM.CartRB.GetComponent<Rigidbody>().AddForce(transform.forward
+						SM.CartRB.AddForce(transform.forward
 							* GameConstants.BASE_ADD_FORCE
 							* acceleration
 							* Time.fixedDeltaTime
