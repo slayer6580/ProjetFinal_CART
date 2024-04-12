@@ -26,15 +26,7 @@ namespace DiscountDelirium
             PauseState.OnResume += CloseMainMenu;
             EndGameState.OnEndGame += ShowCursor;
 
-            ResetPlayerPref();
         }
-
-        public void ResetPlayerPref()
-        {
-			PlayerPrefs.SetInt("Acceleration", 0);
-			PlayerPrefs.SetInt("MaxSpeed", 0);
-			PlayerPrefs.SetInt("Handling", 0);
-		}
 
 		public void StartGame()
         {
@@ -56,9 +48,12 @@ namespace DiscountDelirium
 
         public void CloseMainMenu()
         {
-            m_mainMenu.SetActive(false);
-            m_optionsMenu.SetActive(false);
-            m_cursor.SetActive(false);
+            if (m_mainMenu != null)
+            {
+                m_mainMenu.SetActive(false);
+                m_optionsMenu.SetActive(false);
+                m_cursor.SetActive(false);
+            }
         }
 
         public void OptionsMenu(bool active) 

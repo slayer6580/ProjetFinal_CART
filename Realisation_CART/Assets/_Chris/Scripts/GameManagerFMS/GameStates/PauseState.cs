@@ -10,10 +10,9 @@ namespace DiscountDelirium
         public override void OnEnter()
         {
             Debug.LogWarning("GameState : PAUSE");
-            if (OnPause != null) 
-            {
-                OnPause.Invoke();
-            }
+   
+            OnPause?.Invoke();
+            
             Time.timeScale = 0;
         }
 
@@ -30,11 +29,11 @@ namespace DiscountDelirium
         public override void OnExit()
         {
             Debug.LogWarning("GameState Exit : PAUSE");
-            if (OnResume != null) 
-            {
-                OnResume.Invoke();
-            }
-            Time.timeScale = 1;
+
+			Time.timeScale = 1;
+			OnResume?.Invoke();
+            
+            
         }
 
         public override bool CanEnter(IState currentState)

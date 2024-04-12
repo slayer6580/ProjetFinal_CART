@@ -30,12 +30,12 @@ namespace DiscountDelirium
 
         private void OnSelect(InputAction.CallbackContext context) 
         {
-            SelectEvent.Invoke();
+            SelectEvent?.Invoke();
         }
 
         private void OnBack(InputAction.CallbackContext context)
         {
-            BackEvent.Invoke();
+            BackEvent?.Invoke();
         }
 
         private void OnEnable()
