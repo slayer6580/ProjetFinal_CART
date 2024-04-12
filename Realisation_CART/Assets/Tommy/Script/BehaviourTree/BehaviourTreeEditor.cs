@@ -43,11 +43,11 @@ namespace BehaviourTree
 			VisualElement root = rootVisualElement;
 
 			//Import UXML - The UXML file define the structure and the hiereachy of the interface
-			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BehaviourTreeEditor.uxml");
+			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Tommy/Script/BehaviourTree/BehaviourTreeEditor.uxml");
 			visualTree.CloneTree(root);
 
 			//The stylesheet contains the visual appearance of UI elements
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Tommy/Script/BehaviourTree/BehaviourTreeEditor.uss");
 			root.styleSheets.Add(styleSheet);
 
 			//Q for querry, search a child from a certain type

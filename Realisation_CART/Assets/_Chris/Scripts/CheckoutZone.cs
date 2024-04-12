@@ -8,6 +8,7 @@ namespace DiscountDelirium
 {
     public class CheckoutZone : MonoBehaviour
     {
+        [SerializeField] private ShelfManager m_shelfManager;
         private void OnTriggerEnter(Collider other)
         {
             CheckOutTrigger itemTrigger = other.GetComponent<CheckOutTrigger>();
@@ -22,6 +23,9 @@ namespace DiscountDelirium
             Vector3 data = _ScoreManager.EmptyCartAndGetScore();
             GameStateMachine.Instance.GetScoreFromCart(data);
 
-        }
+            m_shelfManager.ResetAllShelves();
+
+
+		}
     }
 }

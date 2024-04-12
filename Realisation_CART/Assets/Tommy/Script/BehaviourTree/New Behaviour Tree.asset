@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6701048209183343215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c93031a9746e44290174a8b3b8a434, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 9fdb35c3f33899347b192d5b0b0df120
+  m_position: {x: 160.56, y: -10.199997}
+  m_Blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  m_description: 
+  m_child: {fileID: -4612958213727446854}
+--- !u!114 &-4612958213727446854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2e969ae28206e45bea413e1be47b96, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 43ed83c3409985a468d325a4a8b1010e
+  m_position: {x: 220, y: 185}
+  m_Blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  m_description: 
+  message: 
+--- !u!114 &-3012755029492970029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04239520c60033748a33bf303b9c5d4a, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 93e625f1e6885d147a507f6a082857f3
+  m_position: {x: 58, y: 182}
+  m_Blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  m_description: 
+  duration: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1bee280df6ef7a48a3562bda35b9161, type: 3}
+  m_Name: New Behaviour Tree
+  m_EditorClassIdentifier: 
+  m_rootNode: {fileID: -6701048209183343215}
+  m_treeState: 0
+  m_allTheNodes:
+  - {fileID: -6701048209183343215}
+  - {fileID: -3012755029492970029}
+  - {fileID: -4612958213727446854}
+  m_blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}

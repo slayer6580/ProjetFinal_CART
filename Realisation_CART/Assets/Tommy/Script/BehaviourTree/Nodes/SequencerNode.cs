@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Behaviourtree
+namespace BehaviourTree
 {
 	public class SequencerNode : CompositeNode
 	{
