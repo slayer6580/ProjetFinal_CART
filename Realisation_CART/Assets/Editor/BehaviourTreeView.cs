@@ -46,7 +46,6 @@ namespace BehaviourTree
 			return GetNodeByGuid(node.m_guid) as NodeView;
 		}
 
-		//TODO - internal?
 		//Called when we select the BehaviourTree in the Project tab to show everything
 		internal void PopulateView(BehaviourTree tree)
 		{
@@ -89,19 +88,24 @@ namespace BehaviourTree
 				}			
 			}
 		}
-
-
-		//TODO - Not sure how it works, and how/when it's called
+		
 		//Called when we try to create/connect an edge
 		//Tells which port we can attach the edge. Without this we can't connect any nodes
-		//startPort = port we click(output/input)
 		public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
 		{
-			return ports.ToList().Where(endPort =>
-			endPort.direction != startPort.direction &&
-			endPort.node != startPort.node).ToList();
-		} 
+			List<Port> compatiblePortList = new List<Port>();
 
+			foreach(Port endPort in ports)
+			{
+				if(endPort.direction != startPort.direction && endPort.node != startPort.node)
+				{
+					compatiblePortList.Add(endPort);
+				}
+			}
+
+			return compatiblePortList;
+			
+		} 
 
 		//Called everytime we modify something in the behaviourTree interface
 		private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
@@ -153,8 +157,6 @@ namespace BehaviourTree
 			return graphViewChange;
 		}
 
-		//Create Right-Click menu
-		//TODO - async
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{			
 			//Get the mouse position in the tree panel
@@ -162,7 +164,6 @@ namespace BehaviourTree
 
 			{
 				var types = TypeCache.GetTypesDerivedFrom<LeafNode>();
-
 				foreach (var type in types)
 				{			
 					evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (async) => CreateNode(type, localMousePos));

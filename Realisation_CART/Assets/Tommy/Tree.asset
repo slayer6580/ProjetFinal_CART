@@ -42,6 +42,27 @@ MonoBehaviour:
     moveToObject: {fileID: 0}
   m_description: 
   m_child: {fileID: 7395851417271902529}
+--- !u!114 &-3297136655332735059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04239520c60033748a33bf303b9c5d4a, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 9d94876d02c2b6f42bb30617bbdc2928
+  m_position: {x: 0, y: 0}
+  m_Blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  m_description: 
+  duration: 1
 --- !u!114 &-3114754151014405383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +106,7 @@ MonoBehaviour:
   - {fileID: 7395851417271902529}
   - {fileID: -7529360472708556831}
   - {fileID: 4550018105397002706}
+  - {fileID: -3297136655332735059}
   m_blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}
