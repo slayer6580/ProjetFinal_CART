@@ -1,6 +1,7 @@
+using CartControl;
 using TMPro;
-
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace StatsSystem
@@ -46,6 +47,8 @@ namespace StatsSystem
         [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_defenseSellButton;
         [ShowIf("m_ShowTMP", true)][SerializeField] private Image m_defenseFillBar;
 
+        [field: Header("Put main character here")]
+        [field: SerializeField] public CartStateMachine CartMachine { get; private set; }
 
         private int m_nbCartToken;
         public int AccelerationStat { get; private set; } = 0;
@@ -70,7 +73,7 @@ namespace StatsSystem
             m_nbCartToken = m_startingCartToken;
         }
 
-        private void Start() // TEST ONLY
+        private void Start() 
         {
             UpdateAll();
         }
@@ -92,6 +95,7 @@ namespace StatsSystem
             DeselectAllButtons();
         }
 
+        /// <summary> Update all cost of upgrade </summary>
         private void UpdateCost()
         {
             if (AccelerationStat < MAX_LEVEL)
@@ -115,6 +119,7 @@ namespace StatsSystem
                 m_defenseCostText.text = " ";
         }
 
+        /// <summary> Update all fill bars </summary>
         private void UpdateFillBars()
         {
             m_accelerationFillBar.fillAmount = (float)AccelerationStat / MAX_LEVEL;
@@ -123,6 +128,7 @@ namespace StatsSystem
             m_defenseFillBar.fillAmount = (float)DefenseStat / MAX_LEVEL;
         }
 
+        /// <summary> Update all buying cost </summary>
         private void UpdateBuyingCost()
         {
             if (m_accelerationUpgrade == 0)
@@ -147,11 +153,13 @@ namespace StatsSystem
 
         }
 
+        /// <summary> Update money left </summary>
         private void UpdateMoney()
         {
             m_nbOfCartTokenText.text = m_nbCartToken.ToString();
         }
 
+        /// <summary> Update all buy button </summary>
         public void UpdateBuyButton()
         {
             if (AccelerationStat < MAX_LEVEL)
@@ -176,6 +184,7 @@ namespace StatsSystem
 
         }
 
+        /// <summary> Update all sell button </summary>
         public void UpdateSellButton()
         {
             m_accelerationSellButton.interactable = m_accelerationUpgrade > 0;
@@ -184,6 +193,7 @@ namespace StatsSystem
             m_defenseSellButton.interactable = m_defenseUpgrade > 0;
         }
 
+        /// <summary> Buy upgrade </summary>
         public void BuyUpgrade(int statsIndex)
         {
             EStats stats = (EStats)statsIndex;
@@ -224,6 +234,7 @@ namespace StatsSystem
             UpdateAll();
         }
 
+        /// <summary> Sell upgrade </summary>
         public void SellUpgrade(int statsIndex)
         {
             EStats stats = (EStats)statsIndex;
@@ -259,18 +270,20 @@ namespace StatsSystem
                     refund = 0;
                     break;
 
-            }      
+            }
 
             m_nbCartToken += refund;
             UpdateAll();
         }
 
+        /// <summary> Deselect all button for better UI button interaction </summary>
         private void DeselectAllButtons()
         {
             GameObject myEventSystem = GameObject.Find("EventSystem");
             myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
         }
 
+        /// <summary> Accept All upgrade and change scene </summary>
         public void AcceptUpgrade()
         {
             m_accelerationBuyingCost = 0;
@@ -283,8 +296,14 @@ namespace StatsSystem
             m_handlingUpgrade = 0;
             m_defenseUpgrade = 0;
             UpdateAll();
+            PlayerPrefs.SetInt("Acceleration", AccelerationStat);
+            PlayerPrefs.SetInt("MaxSpeed", MaxSpeedStat);
+            PlayerPrefs.SetInt("Handling", HandlingStat);
+
+            SceneManager.LoadScene("Main");
         }
 
+        /// <summary> Restart all upgrade choices </summary>
         public void Restart()
         {
             int accelerationUpgrade = m_accelerationUpgrade;
@@ -311,9 +330,11 @@ namespace StatsSystem
             UpdateAll();
         }
 
+        /// <summary> Add money to spend </summary>
         public void AddMoney(int amount)
         {
             m_nbCartToken += amount;
+            UpdateMoney();
         }
     }
 
