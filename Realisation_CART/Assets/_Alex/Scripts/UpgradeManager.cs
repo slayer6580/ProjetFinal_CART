@@ -75,11 +75,13 @@ namespace StatsSystem
 
         private void Start() 
         {
+            GetSavedUpgrade();
             UpdateAll();
         }
 
         private void OnEnable()
         {
+            GetSavedUpgrade();
             UpdateAll();
         }
 
@@ -93,6 +95,13 @@ namespace StatsSystem
             UpdateSellButton();
 
             DeselectAllButtons();
+        }
+
+        private void GetSavedUpgrade()
+        {
+            AccelerationStat = PlayerPrefs.GetInt("Acceleration", 0);
+            MaxSpeedStat = PlayerPrefs.GetInt("MaxSpeed", 0);
+            HandlingStat = PlayerPrefs.GetInt("Handling", 0);
         }
 
         /// <summary> Update all cost of upgrade </summary>
