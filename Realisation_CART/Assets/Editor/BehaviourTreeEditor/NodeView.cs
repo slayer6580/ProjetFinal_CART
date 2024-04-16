@@ -15,7 +15,7 @@ namespace BehaviourTree
 		public Port m_input;
 		public Port m_output;
 
-        public NodeView(Node node) : base("Assets/Tommy/Script/BehaviourTree/NodeView.uxml")
+        public NodeView(Node node) : base("Assets/Editor/BehaviourTreeEditor/NodeView.uxml")
         {
             m_node = node;
 

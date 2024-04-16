@@ -124,7 +124,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 2997def25cfab284bb4d46d3101208fe
-  m_position: {x: 152, y: 92}
+  m_position: {x: 116, y: 98}
   m_Blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     moveToObject: {fileID: 0}

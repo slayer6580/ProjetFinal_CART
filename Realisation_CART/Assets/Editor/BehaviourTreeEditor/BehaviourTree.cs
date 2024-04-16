@@ -157,7 +157,6 @@ namespace BehaviourTree
 			return tree;
 		}
 
-
 		public void Traverse(Node node, System.Action<Node> visiter)
 		{
 			if (node)

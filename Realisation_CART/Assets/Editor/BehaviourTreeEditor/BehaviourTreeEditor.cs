@@ -2,9 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.Callbacks;
-using System;
-using UnityEditor.IMGUI.Controls;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
+
 
 namespace BehaviourTree
 {
@@ -43,11 +41,11 @@ namespace BehaviourTree
 			VisualElement root = rootVisualElement;
 
 			//Import UXML - The UXML file define the structure and the hiereachy of the interface
-			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Tommy/Script/BehaviourTree/BehaviourTreeEditor.uxml");
+			VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BehaviourTreeEditor/BehaviourTreeEditor.uxml");
 			visualTree.CloneTree(root);
 
 			//The stylesheet contains the visual appearance of UI elements
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Tommy/Script/BehaviourTree/BehaviourTreeEditor.uss");
+			StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor/BehaviourTreeEditor.uss");
 			root.styleSheets.Add(styleSheet);
 
 			//Q for querry, search a child from a certain type
@@ -67,8 +65,6 @@ namespace BehaviourTree
 				
 			};
 			
-
-
 			//Because the BehaviourTreeView don't have the inspectorView in reference we subscribe the inspector update to an Action<>
 			m_treeView.m_onNodeSelected = OnNodeSelectionChanged;
 			
