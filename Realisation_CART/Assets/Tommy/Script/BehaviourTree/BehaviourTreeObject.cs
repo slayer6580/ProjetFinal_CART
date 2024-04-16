@@ -5,12 +5,12 @@ using UnityEditor;
 namespace BehaviourTree
 {
     [CreateAssetMenu()]
-    public class BehaviourTree : ScriptableObject
+    public class BehaviourTreeObject : ScriptableObject
     {
 		public Node m_rootNode;
         public Node.State m_treeState = Node.State.Running;
         public List<Node> m_allTheNodes = new List<Node>();
-		public Blackboard m_blackboard = new Blackboard();
+		public ClientBlackboard m_blackboard = new ClientBlackboard();
 
         public Node.State Update()
         {
@@ -24,27 +24,33 @@ namespace BehaviourTree
 
         public Node CreateNode(System.Type type)
         {
-            Node node = ScriptableObject.CreateInstance(type) as Node;
-            node.name = type.Name;
-            node.m_guid = GUID.Generate().ToString();
 
+			Node node = ScriptableObject.CreateInstance(type) as Node;
+            node.name = type.Name;
+#if UNITY_EDITOR
+			node.m_guid = GUID.Generate().ToString();
 			Undo.RecordObject(this, "Behaviour Tree (CreateNode)");
+
 			m_allTheNodes.Add(node);
 
 			if (!Application.isPlaying)
 			{
+
 				AssetDatabase.AddObjectToAsset(node, this);
+
 			}
+
 
 			//Since we used the tree(this) to undo, we need to specify which parameter to specifically undo
 			Undo.RegisterCreatedObjectUndo(node, "Behaviour Tree (CreateNode)");
             AssetDatabase.SaveAssets();
-
+#endif
 			return node;
 		}
 
         public void DeleteNode(Node node)
         {
+#if UNITY_EDITOR
 			Undo.RecordObject(this, "Behaviour Tree (DeleteNode)");
             m_allTheNodes.Remove(node);
             
@@ -52,11 +58,13 @@ namespace BehaviourTree
 			//Instead of the last line, if we want the undo to work, we need to use DestroyObjectImmeditae
 			Undo.DestroyObjectImmediate(node);
             AssetDatabase.SaveAssets();
-        }
+#endif
+		}
        
 		//Children are the node that are connected from the parent's output
         public void AddChild(Node parent, Node child)
         {
+#if UNITY_EDITOR
 			CompositeNode composite = parent as CompositeNode;
 			if (composite)
 			{
@@ -83,10 +91,12 @@ namespace BehaviourTree
 				EditorUtility.SetDirty(rootNode);
 				return;
 			}
+#endif
 		}
 
 		public void RemoveChild(Node parent, Node child)
 		{
+#if UNITY_EDITOR
 			CompositeNode composite = parent as CompositeNode;
 			if (composite)
 			{
@@ -113,6 +123,7 @@ namespace BehaviourTree
 				EditorUtility.SetDirty(rootNode);
 				return;
 			}
+#endif
 		}
 
 		public List<Node> GetChildren(Node parent)
@@ -142,9 +153,9 @@ namespace BehaviourTree
 		}
 
 		//Instantiate this so we can have multiple instance of the same BehaviourTree
-		public BehaviourTree Clone()
+		public BehaviourTreeObject Clone()
 		{
-			BehaviourTree tree = Instantiate(this);
+			BehaviourTreeObject tree = Instantiate(this);
 			tree.m_rootNode = tree.m_rootNode.Clone();
 			tree.m_allTheNodes = new List<Node>();
 			
@@ -172,9 +183,10 @@ namespace BehaviourTree
 		{
 			Traverse(m_rootNode, node =>
 			{
-				node.m_Blackboard = m_blackboard;
+				node.m_blackboard = m_blackboard;
 			});
 		}
-		
+
 	}
+
 }

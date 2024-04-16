@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.Callbacks;
 
+#if UNITY_EDITOR
 
 namespace BehaviourTree
 {
@@ -27,7 +28,7 @@ namespace BehaviourTree
 		[OnOpenAsset]
 		public static bool OnOpenAsset(int instanceId, int line)
 		{
-			if(Selection.activeObject is BehaviourTree)
+			if(Selection.activeObject is BehaviourTreeObject)
 			{
 				OpenWindow();
 				return true;
@@ -41,11 +42,11 @@ namespace BehaviourTree
 			VisualElement root = rootVisualElement;
 
 			//Import UXML - The UXML file define the structure and the hiereachy of the interface
-			VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BehaviourTreeEditor/BehaviourTreeEditor.uxml");
+			VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BehaviourTreeEditor.uxml");
 			visualTree.CloneTree(root);
 
 			//The stylesheet contains the visual appearance of UI elements
-			StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor/BehaviourTreeEditor.uss");
+			StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
 			root.styleSheets.Add(styleSheet);
 
 			//Q for querry, search a child from a certain type
@@ -106,7 +107,7 @@ namespace BehaviourTree
 		public void OnSelectionChange()
 		{
 			//Check if the selected object is a BehaviourTree (A scriptable objet, not the script itself)
-			BehaviourTree tree = Selection.activeObject as BehaviourTree;
+			BehaviourTreeObject tree = Selection.activeObject as BehaviourTreeObject;
 
 			//If the BehaviourTree is not selected in Project
 			if (!tree)
@@ -153,3 +154,5 @@ namespace BehaviourTree
 		}
 	}
 }
+
+#endif

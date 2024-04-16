@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 namespace BehaviourTree
 {
 	//This class manage how the node is viewed in the UI interface
@@ -15,7 +17,7 @@ namespace BehaviourTree
 		public Port m_input;
 		public Port m_output;
 
-        public NodeView(Node node) : base("Assets/Editor/BehaviourTreeEditor/NodeView.uxml")
+        public NodeView(Node node) : base("Assets/Editor/NodeView.uxml")
         {
             m_node = node;
 
@@ -169,3 +171,5 @@ namespace BehaviourTree
 		}
 	}
 }
+
+#endif

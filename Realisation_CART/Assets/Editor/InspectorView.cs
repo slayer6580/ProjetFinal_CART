@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 namespace BehaviourTree
 {
 	//This class manage the inspector section of the tool interface
@@ -35,3 +37,5 @@ namespace BehaviourTree
 		}
     }
 }
+
+#endif
