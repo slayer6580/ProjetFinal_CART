@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db61f08a5ef804da1662bcbd8fac95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_shelfManager: {fileID: 0}
 --- !u!54 &1461900995740899593
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -832,11 +833,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde1fee560655e14bb95ffc7a13f1fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <GameLength>k__BackingField: 0
   m_playerSM: {fileID: 0}
   m_scoreUI: {fileID: 0}
+  m_upgrademanager: {fileID: 0}
+  <IsGamePaused>k__BackingField: 0
   m_isGameOver: 0
+  m_isGameStarted: 0
   m_playerScore: 0
   m_nbItems: 0
+  m_nbOfCartokens: 0
 --- !u!1 &3891360070987890584
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +896,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_clockImage: {fileID: 1690100870744366680}
   m_timeText: {fileID: 6281691808961400326}
-  m_timeAtStart: 60
 --- !u!1 &3897894567447699818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,8 +1050,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelUI: {fileID: 8808651447405060910}
+  m_panelUpgrade: {fileID: 0}
   m_textScore: {fileID: 5545186589349837060}
   m_textNbItems: {fileID: 6608020647401875395}
+  m_textNbCartoken: {fileID: 0}
 --- !u!1 &4426728320355581682
 GameObject:
   m_ObjectHideFlags: 0

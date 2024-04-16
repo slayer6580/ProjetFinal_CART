@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db61f08a5ef804da1662bcbd8fac95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_shelfManager: {fileID: 0}
 --- !u!54 &43551478
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1044,7 +1045,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -4070,8 +4072,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelUI: {fileID: 1311915744}
+  m_panelUpgrade: {fileID: 0}
   m_textScore: {fileID: 985143639}
   m_textNbItems: {fileID: 433221224}
+  m_textNbCartoken: {fileID: 0}
 --- !u!224 &1333703639
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4286,10 +4290,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde1fee560655e14bb95ffc7a13f1fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <GameLength>k__BackingField: 0
   m_playerSM: {fileID: 1016554958}
   m_scoreUI: {fileID: 1333703638}
+  m_upgrademanager: {fileID: 0}
   <IsGamePaused>k__BackingField: 0
-  IsPlayerPaused: 0
   m_isGameOver: 0
   m_isGameStarted: 0
   m_playerScore: 0
@@ -4363,7 +4368,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_clockImage: {fileID: 363894877}
   m_timeText: {fileID: 1790984103}
-  m_timeAtStart: 60
 --- !u!1001 &1567057954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4850,7 +4854,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -5102,7 +5107,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

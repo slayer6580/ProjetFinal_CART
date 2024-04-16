@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1751,6 +1751,10 @@ MonoBehaviour:
   <GrindVfx>k__BackingField: {fileID: 0}
   <BoxForce>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 0}
+  <AccelerationUpgrades>k__BackingField: 0
+  <MaxSpeedUpgrades>k__BackingField: 0
+  <MovingRotatingSpeedUpgrades>k__BackingField: 0
+  <DriftingRotatingSpeedUpgrades>k__BackingField: 0
 --- !u!43 &284967319
 Mesh:
   m_ObjectHideFlags: 0
@@ -3837,7 +3841,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -4220,6 +4225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7061a8fb5b452e24fbbbc1e68cf9b2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <_TowerBoxSystem>k__BackingField: {fileID: 0}
+  m_cartokenValueMultiplier: 1
 --- !u!1 &1027066239
 GameObject:
   m_ObjectHideFlags: 0
@@ -63893,8 +63900,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelUI: {fileID: 8808651447620747044}
+  m_panelUpgrade: {fileID: 0}
   m_textScore: {fileID: 5545186589125240078}
   m_textNbItems: {fileID: 6608020648557083593}
+  m_textNbCartoken: {fileID: 0}
 --- !u!1 &159662169418942671
 GameObject:
   m_ObjectHideFlags: 0
@@ -64332,9 +64341,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde1fee560655e14bb95ffc7a13f1fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <GameLength>k__BackingField: 0
   m_playerSM: {fileID: 269257461}
   m_scoreUI: {fileID: 37506871405475224}
+  m_upgrademanager: {fileID: 0}
+  <IsGamePaused>k__BackingField: 0
   m_isGameOver: 0
+  m_isGameStarted: 0
   m_playerScore: 0
   m_nbItems: 0
   m_nbOfCartokens: 0
@@ -64509,7 +64522,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_clockImage: {fileID: 1690100872269185618}
   m_timeText: {fileID: 6281691810087899660}
-  m_timeAtStart: 60
 --- !u!223 &4287889758566965605
 Canvas:
   m_ObjectHideFlags: 0
@@ -64945,9 +64957,10 @@ MonoBehaviour:
   m_springForce: 200
   m_springForceReduction: 25
   m_springForceMinimum: 15
-  m_angleOffset: 0.1
+  m_minimumForceAppliedToMove: 0
+  m_loseItemStats: []
   m_firstHingeAngleRead: 0
-  m_AllHingeAngleRead: 0
+  m_allHingeAngleRead: 0
 --- !u!114 &5793193118773950803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64960,7 +64973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10957a88632347a4ea6087bde9c0e45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_impulseForce: 35
   m_constantForce: 35
   m_forceMultiplier: 0
 --- !u!114 &6281691810087899660
@@ -64987,7 +64999,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -65210,7 +65223,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -65421,6 +65435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db61f08a5ef804da1662bcbd8fac95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_shelfManager: {fileID: 0}
 --- !u!114 &8380498388181545683
 MonoBehaviour:
   m_ObjectHideFlags: 0

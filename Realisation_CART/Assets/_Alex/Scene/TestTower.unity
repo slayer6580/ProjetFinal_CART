@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1739,7 +1739,12 @@ MonoBehaviour:
   <FeetOnCartRig>k__BackingField: {fileID: 1082291863}
   <CartMovement>k__BackingField: {fileID: 269257460}
   <GrindVfx>k__BackingField: {fileID: 0}
+  <BoxForce>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 0}
+  <AccelerationUpgrades>k__BackingField: 0
+  <MaxSpeedUpgrades>k__BackingField: 0
+  <MovingRotatingSpeedUpgrades>k__BackingField: 0
+  <DriftingRotatingSpeedUpgrades>k__BackingField: 0
 --- !u!43 &284967319
 Mesh:
   m_ObjectHideFlags: 0
@@ -3700,7 +3705,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8543dee3e9cc9784cab28d0634a5b0cd, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

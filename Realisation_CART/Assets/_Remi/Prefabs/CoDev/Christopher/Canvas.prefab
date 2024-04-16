@@ -723,8 +723,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelUI: {fileID: 5538055563433462314}
+  m_panelUpgrade: {fileID: 0}
   m_textScore: {fileID: 1629757313907063874}
   m_textNbItems: {fileID: 0}
+  m_textNbCartoken: {fileID: 0}
 --- !u!1 &5538055563433462314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,7 +1140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_clockImage: {fileID: 97955338509746230}
   m_timeText: {fileID: 9041275207166569194}
-  m_timeAtStart: 5
 --- !u!1 &7314626450809362985
 GameObject:
   m_ObjectHideFlags: 0

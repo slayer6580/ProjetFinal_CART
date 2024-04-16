@@ -99,7 +99,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 30
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_itemPrefab: {fileID: 9000504276230933140, guid: 636485a562efff143934db95e464347d,
     type: 3}
   m_itemData: {fileID: 11400000, guid: d808cfc7e4269ba438baf517f1c539e3, type: 2}
-  m_itemQuantity: 30
+  m_itemQuantityPerTrip: 0
   m_quantityText: {fileID: 6367491464587995437}
 --- !u!33 &4098625193968494305
 MeshFilter:

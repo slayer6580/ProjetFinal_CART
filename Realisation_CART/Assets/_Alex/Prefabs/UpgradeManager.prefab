@@ -1642,6 +1642,7 @@ MonoBehaviour:
   m_defenseBuyButton: {fileID: 4893008810593305602}
   m_defenseSellButton: {fileID: 5253534450592520391}
   m_defenseFillBar: {fileID: 1192052948511619337}
+  <CartMachine>k__BackingField: {fileID: 0}
 --- !u!1 &2049111593582293335
 GameObject:
   m_ObjectHideFlags: 0

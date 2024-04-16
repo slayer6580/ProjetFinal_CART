@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17863,6 +17863,10 @@ MonoBehaviour:
   <GrindVfx>k__BackingField: {fileID: 1954139149}
   <BoxForce>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 0}
+  <AccelerationUpgrades>k__BackingField: 0
+  <MaxSpeedUpgrades>k__BackingField: 0
+  <MovingRotatingSpeedUpgrades>k__BackingField: 0
+  <DriftingRotatingSpeedUpgrades>k__BackingField: 0
 --- !u!54 &811115960
 Rigidbody:
   m_ObjectHideFlags: 0
