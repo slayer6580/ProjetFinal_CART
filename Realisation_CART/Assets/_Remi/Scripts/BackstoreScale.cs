@@ -40,6 +40,7 @@ namespace BackstoreScale
 
             Debug.Log("Exit collision with: " + other.gameObject.name);
 
+            m_currentPlayerWeight = 0;
             m_isPlayerOnScale = false;
         }
 
@@ -76,8 +77,12 @@ namespace BackstoreScale
         {
             m_newDiegeticScale = DiegeticScaleValue.localScale;
 
-            if (m_isPlayerOnScale == false) m_newDiegeticScale.z = 0;
-            else m_newDiegeticScale.z = m_currentPlayerWeight / m_weightToOpenDoor;
+            if (m_isPlayerOnScale == false) 
+                m_newDiegeticScale.z = 0;
+            else if (m_isPlayerOnScale == true && m_currentPlayerWeight < m_weightToOpenDoor)
+                m_newDiegeticScale.z = m_currentPlayerWeight * 20 / m_weightToOpenDoor;
+            else if (m_isPlayerOnScale == true && m_currentPlayerWeight > m_weightToOpenDoor)
+                m_newDiegeticScale.z = 20;
 
             DiegeticScaleValue.localScale = math.lerp(DiegeticScaleValue.localScale, m_newDiegeticScale, Time.deltaTime);
         }

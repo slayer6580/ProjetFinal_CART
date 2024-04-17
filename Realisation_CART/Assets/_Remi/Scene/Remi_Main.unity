@@ -12144,9 +12144,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 819989924}
+  - component: {fileID: 819989927}
   - component: {fileID: 819989926}
   - component: {fileID: 819989925}
-  - component: {fileID: 819989927}
   m_Layer: 0
   m_Name: Scale
   m_TagString: Untagged
@@ -12228,7 +12228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <_TowerBoxSystem>k__BackingField: {fileID: 960188264}
   <DiegeticScaleValue>k__BackingField: {fileID: 1293464267}
-  m_weightToOpenDoor: 20
+  m_weightToOpenDoor: 200
 --- !u!1001 &822712721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17475,7 +17475,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 819989924}
-  - {fileID: 1751297172}
   - {fileID: 1597320022}
   - {fileID: 790381927}
   m_Father: {fileID: 0}
@@ -22345,6 +22344,7 @@ Transform:
   - {fileID: 533032476}
   - {fileID: 1989384924}
   - {fileID: 932523870}
+  - {fileID: 1751297172}
   m_Father: {fileID: 1212138054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1598494540
@@ -23631,7 +23631,7 @@ Transform:
   - {fileID: 861464983}
   - {fileID: 447433183}
   - {fileID: 1461494821}
-  m_Father: {fileID: 1212138054}
+  m_Father: {fileID: 1597320022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1756371248
 PrefabInstance:
