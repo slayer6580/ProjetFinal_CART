@@ -7,6 +7,7 @@ namespace BehaviourTree
 	public class HasReachedPathTarget : CompositeNode
 	{
 		private float m_targetDistance;
+		public float m_minDistanceToSetAsReached;
 		protected override void OnStart()
 		{
 		}
@@ -21,7 +22,7 @@ namespace BehaviourTree
 			var child = m_children[0];
 
 			TargetDistance();
-			if(m_targetDistance < 1)
+			if(m_targetDistance < m_minDistanceToSetAsReached)
 			{
 				child = m_children[0];
 				return child.Update();
