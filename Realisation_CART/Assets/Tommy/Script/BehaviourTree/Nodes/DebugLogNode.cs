@@ -20,8 +20,7 @@ namespace BehaviourTree
 		protected override State OnUpdate()
 		{
 			Debug.Log($"OnUpdate{message}");
-			Debug.Log($"Blackboard:{m_Blackboard.moveToPosition.x}");
-
+			
 			return State.Success;
 		}
 	}

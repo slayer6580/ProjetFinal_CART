@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+#if UNITY_EDITOR
 namespace BehaviourTree
 {
     //Class to split the ui interface between the BehaviourTree section (with the nodes)
@@ -12,3 +13,5 @@ namespace BehaviourTree
       public new class UxmlFactory : UxmlFactory<SplitView, TwoPaneSplitView.UxmlTraits> { }
     }
 }
+
+#endif

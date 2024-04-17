@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+#if UNITY_EDITOR
 namespace BehaviourTree
 {
 	//This class manage the node section of the tool interface
@@ -14,7 +15,7 @@ namespace BehaviourTree
     {
 		public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
 		public Action<NodeView> m_onNodeSelected;	
-		private BehaviourTree m_tree;
+		private BehaviourTreeObject m_tree;
 
 		public BehaviourTreeView()
 		{
@@ -27,7 +28,7 @@ namespace BehaviourTree
 			this.AddManipulator(new SelectionDragger());
 			this.AddManipulator(new RectangleSelector());
 
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor/BehaviourTreeEditor.uss");
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
 			styleSheets.Add(styleSheet);
 
 			Undo.undoRedoPerformed += OnUndoRedo;
@@ -47,7 +48,7 @@ namespace BehaviourTree
 		}
 
 		//Called when we select the BehaviourTree in the Project tab to show everything
-		internal void PopulateView(BehaviourTree tree)
+		internal void PopulateView(BehaviourTreeObject tree)
 		{
 			
 			m_tree = tree;
@@ -213,3 +214,4 @@ namespace BehaviourTree
 		}
 	}
 }
+#endif
