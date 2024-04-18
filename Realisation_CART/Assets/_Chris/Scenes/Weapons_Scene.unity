@@ -2865,8 +2865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ffe5142edba6b428e25067f719db75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Animator>k__BackingField: {fileID: 0}
-  <Speed>k__BackingField: 0
+  <Speed>k__BackingField: 1
 --- !u!136 &1725792767
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3188,12 +3187,12 @@ PrefabInstance:
     - target: {fileID: 1057385376377822303, guid: bb02efdde1dda294fb95f51a9c97b793,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017045723
+      value: -0.00000001704572
       objectReference: {fileID: 0}
     - target: {fileID: 1057385376377822303, guid: bb02efdde1dda294fb95f51a9c97b793,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000023458482
+      value: 0.0000000023458477
       objectReference: {fileID: 0}
     - target: {fileID: 1587891482159121700, guid: bb02efdde1dda294fb95f51a9c97b793,
         type: 3}
@@ -4688,12 +4687,12 @@ PrefabInstance:
     - target: {fileID: 4564874688322188350, guid: bb02efdde1dda294fb95f51a9c97b793,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017045723
+      value: -0.00000001704572
       objectReference: {fileID: 0}
     - target: {fileID: 4564874688322188350, guid: bb02efdde1dda294fb95f51a9c97b793,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000023458482
+      value: 0.0000000023458477
       objectReference: {fileID: 0}
     - target: {fileID: 4857714225327462247, guid: bb02efdde1dda294fb95f51a9c97b793,
         type: 3}
@@ -4749,6 +4748,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417590487293900811, guid: bb02efdde1dda294fb95f51a9c97b793,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7713667718556843945, guid: bb02efdde1dda294fb95f51a9c97b793,
         type: 3}
