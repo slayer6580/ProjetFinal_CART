@@ -162,7 +162,7 @@ namespace BoxSystem
 
 
             // hauteur de la boite dans la tour initial
-            float heightDifference = instantBox.gameObject.GetComponent<BoxSetup>().GetBoxHeightDifference();
+            float heightDifference = BoxManager.GetInstance().GetBoxHeightDifference();
             float localHeight = (m_boxCount - 1) * (heightDifference + TowerBoxSystem.BoxGapHeight);
             Vector3 initialLocalPosition = new Vector3(0, localHeight, 0);
 

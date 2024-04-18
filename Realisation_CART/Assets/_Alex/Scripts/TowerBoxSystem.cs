@@ -92,7 +92,7 @@ namespace BoxSystem
             instantBox.SetTower(this);
 
             // height of box
-            float height = (m_boxCount - 1) * (instantBox.gameObject.GetComponent<BoxSetup>().GetBoxHeightDifference() + BoxGapHeight);
+            float height = (m_boxCount - 1) * (BoxManager.GetInstance().GetBoxHeightDifference() + BoxGapHeight);
             Vector3 localPosition = new Vector3(0, height, 0);
             instant.transform.localPosition = localPosition;
             instantBox.SetBoxInitialLocalPosition(localPosition);
@@ -100,6 +100,8 @@ namespace BoxSystem
             // add in lists
             m_boxesInCart.Add(instantBox);
             m_towerPhysics.AddBoxToPhysicsTower();
+
+            Debug.Log("box added: " + instantBox.name);
 
         }
 
@@ -109,7 +111,7 @@ namespace BoxSystem
             if (GetTopBox() == null)
                 return false;
 
-
+            Debug.Log("Can take item: " + GetTopBox().CanPutItemInsideBox(size).ToString());
             return GetTopBox().CanPutItemInsideBox(size);
         }
 

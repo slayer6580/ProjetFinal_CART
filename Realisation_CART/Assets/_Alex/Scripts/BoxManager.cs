@@ -3,14 +3,12 @@ using UnityEngine;
 
 namespace BoxSystem
 {
-    [RequireComponent(typeof(Box))]
-
-    public class BoxSetup : MonoBehaviour
+    public class BoxManager : MonoBehaviour
     {
         [Header("Prefabs")]
         [SerializeField] private GameObject m_slotPrefab;
 
-        [field:Header("Longeur, largeur et épaisseur de la boite")]
+        [field: Header("Longeur, largeur et épaisseur de la boite")]
         [field: SerializeField] public float BoxWidth { get; private set; }
         [SerializeField] private float m_boxLength;
         [field: SerializeField] public float BoxThickness { get; private set; }
@@ -22,47 +20,43 @@ namespace BoxSystem
         [SerializeField] private int m_nbSlotWidth;
         [SerializeField] private int m_nbSlotLength;
 
-        [field: SerializeField]  public float SlotHeight { get; private set; }
+        [field: Header("ReadOnly")]
+        [field: SerializeField] public float SlotHeight { get; private set; }
         [field: SerializeField] public float SlotWidth { get; private set; }
         [field: SerializeField] public float SlotLenght { get; private set; }
 
-
-        [Header("Pour placer les parties de la boite")]
-        [SerializeField] private bool m_showBoxParts;
-        [Space]
-        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxBottom;
-        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxSideLeft;
-        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxSideRight;
-        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxFront;
-        [ShowIf("m_showBoxParts", true)][SerializeField] private GameObject m_boxBack;
+        private List<Vector3> m_slotsLocalTransform = new List<Vector3>();
+        private List<List<int>> m_doubleSlotsList = new List<List<int>>();
+        private List<List<int>> m_quadrupleSlotsList = new List<List<int>>();
 
         private float m_halfLength;
         private float m_halfWidth;
-        private Transform m_slotsParent;
-        private Box m_box;
-        private int m_totalSlots;
+
+        private static BoxManager Instance;
 
         private void Awake()
         {
-            m_box = GetComponent<Box>();
-            m_slotsParent = transform.GetChild(0);
+            if (Instance == null)
+            {
+                Instance = this;
+            }
 
-            AjustBoxGraphics();
-            SetAvailableSlots();
             CalculateBoxHalfDimension();
             CalculateSlotDimension();
             CreateSlots();
         }
 
-        private void OnValidate()
+        public static BoxManager GetInstance()
         {
-            AjustBoxGraphics();
+            return Instance;
         }
 
         #region (--- AjustBoxGraphics ---)
 
+
+
         /// <summary> Ajust box size </summary>
-        private void AjustBoxGraphics()
+        public void AjustBoxGraphics(GameObject box)
         {
             float lenght = m_boxLength;
             float width = BoxWidth;
@@ -79,38 +73,35 @@ namespace BoxSystem
             float halfHeightMinusHalfThickness = halfHeight - halfThickness;
             float HalfLenghtAndHalfThickness = halfLength + halfThickness;
 
+            Transform boxGraphics = box.transform.GetChild(1);
+
+
             // bottom
-            SetUpParts(m_boxBottom,
-                new Vector3(lenght, thickness, width),
-                new Vector3(0, -halfThickness, 0));
+            Transform boxBottom = boxGraphics.transform.GetChild(0);       
+            boxBottom.localScale = new Vector3(lenght, thickness, width);
+            boxBottom.localPosition = new Vector3(0, -halfThickness, 0);
 
             // side left
-            SetUpParts(m_boxSideLeft,
-                new Vector3(lenghtAndDoubleThickness, thickness, HeightAndThickness),
-                new Vector3(0, halfHeightMinusHalfThickness, -halfWidthAndHalfThickness));
+            Transform boxLeft = boxGraphics.transform.GetChild(1);
+            boxLeft.localScale = new Vector3(lenghtAndDoubleThickness, thickness, HeightAndThickness);
+            boxLeft.localPosition = new Vector3(0, halfHeightMinusHalfThickness, -halfWidthAndHalfThickness);
 
             // side right
-            SetUpParts(m_boxSideRight,
-                   new Vector3(lenghtAndDoubleThickness, thickness, HeightAndThickness),
-              new Vector3(0, halfHeightMinusHalfThickness, halfWidthAndHalfThickness));
+            Transform boxRight = boxGraphics.transform.GetChild(2);
+            boxRight.localScale = new Vector3(lenghtAndDoubleThickness, thickness, HeightAndThickness);
+            boxRight.localPosition = new Vector3(0, halfHeightMinusHalfThickness, halfWidthAndHalfThickness);
 
             // back
-            SetUpParts(m_boxBack,
-                new Vector3(width, thickness, HeightAndThickness),
-                new Vector3(HalfLenghtAndHalfThickness, halfHeightMinusHalfThickness, 0));
+            Transform boxBack = boxGraphics.transform.GetChild(3);
+            boxBack.localScale = new Vector3(width, thickness, HeightAndThickness);
+            boxBack.localPosition = new Vector3(HalfLenghtAndHalfThickness, halfHeightMinusHalfThickness, 0);
 
             // front
-            SetUpParts(m_boxFront,
-                new Vector3(width, thickness, HeightAndThickness),
-                new Vector3(-HalfLenghtAndHalfThickness, halfHeightMinusHalfThickness, 0));
-        }
+            Transform boxFront = boxGraphics.transform.GetChild(4);
+            boxFront.localScale = new Vector3(width, thickness, HeightAndThickness);
+            boxFront.localPosition = new Vector3(-HalfLenghtAndHalfThickness, halfHeightMinusHalfThickness, 0);
 
-        private void SetUpParts(GameObject part, Vector3 boxScale, Vector3 boxlocalPosition)
-        {
-            part.transform.localScale = boxScale;
-            part.transform.localPosition = boxlocalPosition;
         }
-
         #endregion
 
 
@@ -162,11 +153,8 @@ namespace BoxSystem
             {
                 for (int j = 0; j < m_nbSlotWidth; j++)
                 {
-                    Vector3 slotPosition = new Vector3(slotsLengthPosition[j], 0, slotsWidthPosition[i]);
-                    GameObject instant = Instantiate(m_slotPrefab, m_slotsParent);
-                    instant.transform.localPosition = slotPosition;
-                    instant.transform.localScale = new Vector3(SlotLenght, SlotHeight, SlotWidth);
-                    m_box.AddSlotInList(instant.transform);
+                    Vector3 slotLocalPosition = new Vector3(slotsLengthPosition[j], 0, slotsWidthPosition[i]);
+                    m_slotsLocalTransform.Add(slotLocalPosition);
                 }
             }
         }
@@ -242,13 +230,13 @@ namespace BoxSystem
               index2
             };
 
-            m_box.AddDoubleSlotInList(doubleSlots);
+            m_doubleSlotsList.Add(doubleSlots);
         }
 
         /// <summary> Send all quadruple slots possibilities to box </summary>
         private void SendFourSlotToBox(int index, int index2, int index3, int index4)
         {
-            List<int> fourSlots = new List<int>()
+            List<int> quadrupleSlots = new List<int>()
             {
               index,
               index2,
@@ -256,11 +244,10 @@ namespace BoxSystem
               index4
             };
 
-            m_box.AddFourSlotInList(fourSlots);
+            m_quadrupleSlotsList.Add(quadrupleSlots);
         }
 
         #endregion
-
 
         #region (--- CalculateDimension ---)
 
@@ -279,19 +266,42 @@ namespace BoxSystem
             SlotHeight = BoxHeight;
         }
 
-        /// <summary> Give to box number of slots </summary>
-        private void SetAvailableSlots()
+        #endregion
+
+        #region (--- Getter ---)
+
+        public List<List<int>> GetDoubleSlotsIndexes()
         {
-            m_totalSlots = m_nbSlotLength * m_nbSlotWidth;
-            m_box.InitAvailableSlots(m_totalSlots);
+            return m_doubleSlotsList;
         }
 
-        #endregion
+        public List<List<int>> GetQuadrupleSlotsIndexes()
+        {
+            return m_quadrupleSlotsList;
+        }
+
+        public List<Vector3> GetSlotsLocalVector()
+        {
+            return m_slotsLocalTransform;
+        }
+
+        public Vector3 GetLocalScale()
+        {
+            return new Vector3(SlotLenght, SlotHeight, SlotWidth);
+        }
+
+        public int GetTotalSLots()
+        {
+            return m_nbSlotLength * m_nbSlotWidth;
+        }
 
         public float GetBoxHeightDifference()
         {
             return SlotHeight + BoxThickness;
         }
 
+        #endregion
+
     }
 }
+
