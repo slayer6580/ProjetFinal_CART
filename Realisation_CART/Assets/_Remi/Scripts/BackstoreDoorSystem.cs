@@ -1,5 +1,4 @@
 using BoxSystem;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,12 +9,6 @@ using Item = BoxSystem.Item;
 
 namespace BackstoreScale
 {
-    [System.Serializable]
-    public class GameObjectData
-    {
-        public bool IsInsideBackRoom;
-    }
-
     public class BackstoreDoorSystem : MonoBehaviour
     {
         [field: SerializeField] private TowerBoxSystem _TowerBoxSystem { get; set; } = null;
@@ -25,34 +18,44 @@ namespace BackstoreScale
 
         [SerializeField] private float m_weightToOpenDoor = 20;
 
-        public UnityEvent<Collider> onTriggerEnter;
-        public UnityEvent<Collider> onTriggerExit;
+        public UnityEvent<Collider, bool> m_onTriggerEnter;
+        public UnityEvent<Collider, bool> m_onTriggerExit;
 
         private Vector3 m_newDiegeticScale = Vector3.zero;
         private const int PLAYER_BODY_LAYER = 3;
         private const float  PLAYER_BODY_WEIGHT = 150;
         private float  m_currentPlayerWeight = 0;
         private bool m_isPlayerOnScale = false;
-        private bool m_isPlayerCanEnter = false;
+        private bool m_isPlayerCanPass = false;
 
         private void Start()
         {
-            onTriggerEnter.AddListener(HandleTriggerEnter);
-            onTriggerExit.AddListener(HandleTriggerExit);
+            m_onTriggerEnter.AddListener(HandleTriggerEnter);
+            m_onTriggerExit.AddListener(HandleTriggerExit);
         }
 
-        private void HandleTriggerEnter(Collider other)
+        private void HandleTriggerEnter(Collider other, bool isInsideBackstore)
         {
             if (other.gameObject.layer != PLAYER_BODY_LAYER) return;
             if (m_isPlayerOnScale) return;
 
-            Debug.Log("Enter collision with: " + other.gameObject.name);
+            //Debug.Log("Enter collision with: " + other.gameObject.name);
 
             m_isPlayerOnScale = true;
-            CalculateWPlayerWeight();
+
+            if (isInsideBackstore)
+            {
+                Debug.Log("Player is inside backstore");
+s                m_isPlayerCanPass = true;
+            }
+            else
+            {
+                Debug.Log("Player is outside backstore");
+                CalculateWPlayerWeight();
+            }
         }
 
-        private void HandleTriggerExit(Collider other)
+        private void HandleTriggerExit(Collider other, bool isInsideBackstore)
         {
             if (other.gameObject.layer != PLAYER_BODY_LAYER) return;
             if (!m_isPlayerOnScale) return;
@@ -61,7 +64,7 @@ namespace BackstoreScale
 
             m_currentPlayerWeight = 0;
             m_isPlayerOnScale = false;
-            m_isPlayerCanEnter = false;
+            m_isPlayerCanPass = false;
         }
 
         private void CalculateWPlayerWeight()
@@ -97,12 +100,7 @@ namespace BackstoreScale
         {
             UpdateDiegeticScaleUI();
 
-            int doorAngle = 0;
-
-            if (m_isPlayerCanEnter == true) doorAngle = 90;
-
-            DoorOne.rotation = Quaternion.Lerp(DoorOne.rotation, Quaternion.Euler(0, -doorAngle, 0), Time.deltaTime);
-            DoorTwo.rotation = Quaternion.Lerp(DoorTwo.rotation, Quaternion.Euler(0, doorAngle, 0), Time.deltaTime);
+            UpdateDoorsRotation();
         }
 
         private void UpdateDiegeticScaleUI()
@@ -120,7 +118,18 @@ namespace BackstoreScale
 
             //Debug.Log("DiegeticScaleValue.localScale.z: " + DiegeticScaleValue.localScale.z);
             if (DiegeticScaleValue.localScale.z >= 20 - 1)
-                m_isPlayerCanEnter = true;
+                m_isPlayerCanPass = true;
+        }
+
+        private void UpdateDoorsRotation()
+        {
+            int doorAngle = 0;
+
+            if (m_isPlayerCanPass == true) doorAngle = 90;
+            //if (m_isPlayerCanPass == false)
+            //    Debug.Log("Is player can pass: " + m_isPlayerCanPass);
+            DoorOne.rotation = Quaternion.Lerp(DoorOne.rotation, Quaternion.Euler(0, -doorAngle, 0), Time.deltaTime);
+            DoorTwo.rotation = Quaternion.Lerp(DoorTwo.rotation, Quaternion.Euler(0, doorAngle, 0), Time.deltaTime);
         }
     }
 }

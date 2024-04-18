@@ -4,29 +4,26 @@ namespace BackstoreScale
 {
     public class FloorTriggerCaller : MonoBehaviour
     {
-        public BackstoreDoorSystem listener;
-        GameObjectData gameObjectData = new GameObjectData();
-        [SerializeField] private bool m_isInsideBackRoom = false;
+        public BackstoreDoorSystem m_listener;
+        [SerializeField] private bool m_isInsideBackroom = false;
 
         private void Awake()
         {
-            listener = GetComponentInParent<BackstoreDoorSystem>();
-            if (listener == null)
+            m_listener = GetComponentInParent<BackstoreDoorSystem>();
+            if (m_listener == null)
             {
                 Debug.LogError("FloorTriggerCaller: No BackstoreDoorSystem found in parent");
             }
-
-            gameObjectData.IsInsideBackRoom = m_isInsideBackRoom;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            listener.onTriggerEnter.Invoke(other);
+            m_listener.m_onTriggerEnter.Invoke(other, m_isInsideBackroom);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            listener.onTriggerExit.Invoke(other);
+            m_listener.m_onTriggerExit.Invoke(other, m_isInsideBackroom);
         }
     }
 }

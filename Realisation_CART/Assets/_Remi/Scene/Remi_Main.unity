@@ -3022,8 +3022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4310c004066464588f9909f102ab81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listener: {fileID: 819989927}
-  m_isInsideBackRoom: 0
+  m_listener: {fileID: 0}
+  m_isInsideBackroom: 0
 --- !u!1001 &244234876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12290,60 +12290,12 @@ MonoBehaviour:
   <DoorOne>k__BackingField: {fileID: 733206187}
   <DoorTwo>k__BackingField: {fileID: 1731040041}
   m_weightToOpenDoor: 200
-  onTriggerEnter:
+  m_onTriggerEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 239453179}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 239453179}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onTriggerExit:
+      m_Calls: []
+  m_onTriggerExit:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1588750299}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1588750299}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1001 &822712721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22489,8 +22441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4310c004066464588f9909f102ab81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listener: {fileID: 819989927}
-  m_isInsideBackRoom: 1
+  m_listener: {fileID: 0}
+  m_isInsideBackroom: 1
 --- !u!1 &1597320021
 GameObject:
   m_ObjectHideFlags: 0
