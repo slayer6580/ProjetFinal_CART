@@ -66,7 +66,7 @@ namespace BackstoreSystems
                 //Debug.Log("Player is outside backstore");
                 m_isScaleSystemActive = true;
                 CalculateWPlayerWeight();
-                Debug.Log("Player weight: " + m_currentPlayerWeight);
+                //Debug.Log("Player weight: " + m_currentPlayerWeight);
             }
         }
 
@@ -80,7 +80,7 @@ namespace BackstoreSystems
             if (!m_isPlayerInTriggerZone) return;
             m_isPlayerInTriggerZone = false;
 
-            Debug.Log("Exit collision with: " + other.gameObject.name);
+            //Debug.Log("Exit collision with: " + other.gameObject.name);
 
 
             if (isInsideBackstore)
@@ -162,7 +162,7 @@ namespace BackstoreSystems
             if (DiegeticScaleValue.localScale.z >= DIEGETIC_UI_MAX_SCALE - DIEGETIC_UI_THRESHOLD)
             {
                 m_isPlayerCanPass = true;
-                Debug.Log("Player can pass");
+                //Debug.Log("Player can pass");
             }
 
             //if (DiegeticScaleValue.localScale.z <= DIEGETIC_UI_MIN_SCALE + DIEGETIC_UI_SCALE_THRESHOLD && !m_isInsideBackstore)
