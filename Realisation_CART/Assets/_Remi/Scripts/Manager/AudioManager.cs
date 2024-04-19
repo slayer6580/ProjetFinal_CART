@@ -68,7 +68,6 @@ namespace Manager
             }
 
             _AudioManager = this;
-            DontDestroyOnLoad(gameObject);
 
             for (int i = 0; i < m_numberOfAudioBox; i++)
             {

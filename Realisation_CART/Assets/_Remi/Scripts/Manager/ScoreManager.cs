@@ -23,7 +23,6 @@ namespace Manager
             }
 
             _ScoreManager = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         /// <summary> Vide le panier et rend le nombre d'items de la tour et le score total </summary>
