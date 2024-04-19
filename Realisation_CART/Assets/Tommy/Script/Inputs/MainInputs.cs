@@ -284,7 +284,7 @@ namespace CartControl
                 {
                     ""name"": """",
                     ""id"": ""8937fa26-2bc3-405b-b9c3-0bd10e48c8e7"",
-                    ""path"": ""<XInputController>/buttonEast"",
+                    ""path"": ""<XInputController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -342,6 +342,17 @@ namespace CartControl
                     ""name"": """",
                     ""id"": ""c7e0989d-cf99-4f82-8dfa-9ae0021e4dde"",
                     ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17cec88e-5d2a-4ca6-93c3-74449faf8f62"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

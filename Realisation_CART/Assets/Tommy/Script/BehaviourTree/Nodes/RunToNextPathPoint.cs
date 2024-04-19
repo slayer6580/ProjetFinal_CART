@@ -20,7 +20,9 @@ namespace DiscountDelirium
 		protected override State OnUpdate()
 		{
 			//Manage acceleration
+			m_blackboard.m_cartStateMachine.OnBackward(0);
 			m_blackboard.m_cartStateMachine.OnForward(1);
+
 			return State.Success;
 		}
 

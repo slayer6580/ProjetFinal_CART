@@ -1,9 +1,11 @@
 using BehaviourTree;
 using CartControl;
+using DiscountDelirium;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace BehaviourTree
 {
@@ -13,7 +15,8 @@ namespace BehaviourTree
 		{
 			m_blackboard.m_thisClient = GameObject.Find(m_blackboard.m_name);
 			m_blackboard.m_cartStateMachine = m_blackboard.m_thisClient.GetComponent<CartStateMachine>();
-
+			m_blackboard.m_navAgent = m_blackboard.m_thisClient.GetComponentInChildren<NavMeshAgent>();
+			m_blackboard.m_possiblePathScript = m_blackboard.m_thisClient.GetComponent<ClientPathList>();
 		}
 
 		protected override void OnStop()
@@ -24,10 +27,8 @@ namespace BehaviourTree
 		{
 			if(m_blackboard.m_cartStateMachine != null)
 			{
-				Debug.Log("SUCESS");
 				return State.Success;
 			}
-			Debug.Log("FALURE");
 			return State.Failure;
 		}
 

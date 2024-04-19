@@ -1,5 +1,251 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8676831422687765912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a56d097c3e04034cb303808e10cee2a, type: 3}
+  m_Name: DisableNavMeshAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 770e2de22d6ffcd419aa8b9847cf20a2
+  m_position: {x: -561, y: 942.0001}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &-7788350962407094634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a56d097c3e04034cb303808e10cee2a, type: 3}
+  m_Name: DisableNavMeshAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 6fb0007a6c300dc448b2cef904326ecb
+  m_position: {x: -1513.9999, y: 931.0001}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &-7617442905256514074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4b094bac0d3cc40b94f42e47afd10f, type: 3}
+  m_Name: WaitToActivateNavAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: eb733f6d40959fb4b8896c0269c2de43
+  m_position: {x: -229, y: 1151}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_child: {fileID: 0}
+--- !u!114 &-7231354381679490550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06665cd1cd625d141a62bca4006ebeb3, type: 3}
+  m_Name: CreatePathNote
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: e83d83a06a395844b86b742e26cc64c4
+  m_position: {x: -35, y: 1182}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
+    type: 3}
+--- !u!114 &-6551579052589986684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4b094bac0d3cc40b94f42e47afd10f, type: 3}
+  m_Name: WaitToActivateNavAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 4fc0daedbb569c34aa55f58a80820fdb
+  m_position: {x: -808, y: 942}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_child: {fileID: 0}
+--- !u!114 &-6377631515679514838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 1c5a2c1dd98f9eb4f97ce6f255447c79
+  m_position: {x: -251.49998, y: 222}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: 5716047739387089118}
+--- !u!114 &-6222511626720041959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb88f71d99a11d4e9c934656596339e, type: 3}
+  m_Name: SetAsNotStuck
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: ec88ebbcba1a4bc46816799b300f8111
+  m_position: {x: 872, y: 1039}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &-5905641424196706287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa67ae506f7a6bf46851257cc967c1ec, type: 3}
+  m_Name: EnableNavMeshAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 7dbcfafb4344877499e9b03d8ccfaecf
+  m_position: {x: -277, y: 1292}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
 --- !u!114 &-5446233131730551066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,14 +261,52 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: f26ac3ff8dac808479b8ddead5abe086
-  m_position: {x: 115, y: 713}
+  m_position: {x: 791, y: 673}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
+--- !u!114 &-4986815811770323114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04239520c60033748a33bf303b9c5d4a, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: e2dfd518995ffbd4286ed30e5c0aa00d
+  m_position: {x: 405, y: 1041}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  duration: 1
 --- !u!114 &-4791587659610497402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,14 +322,186 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 431171bd054c9b84eb348a9a12b4be2e
-  m_position: {x: 723, y: 891}
+  m_position: {x: 1683, y: 925}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
+--- !u!114 &-4462508058658981125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032e43c50437c964fb73f350d19863fa, type: 3}
+  m_Name: CheckIfStuck
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 0bd2bac0ccb3d4f40b01d06db1fecabf
+  m_position: {x: 497, y: 677}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: -2147730505803548934}
+  m_underSpeedToCountAsStuck: 2
+  m_timeBeforeUnstuck: 1
+--- !u!114 &-3227431665639533130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06665cd1cd625d141a62bca4006ebeb3, type: 3}
+  m_Name: CreatePathNote
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 36303b30895285641936d12082c9c2d2
+  m_position: {x: -251, y: 398}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
+    type: 3}
+--- !u!114 &-3209885968485680171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4b094bac0d3cc40b94f42e47afd10f, type: 3}
+  m_Name: WaitToActivateNavAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 839e2f816d5332d43a744a8beb240724
+  m_position: {x: 810, y: 1471}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_child: {fileID: -2659307553558739768}
+--- !u!114 &-2659307553558739768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06665cd1cd625d141a62bca4006ebeb3, type: 3}
+  m_Name: CreatePathNote
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: b7babe755acb9ba4bbfd6fba8a15ab16
+  m_position: {x: 835, y: 1616.2}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
+    type: 3}
+--- !u!114 &-2147730505803548934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: b6eccfd8129254047b2e764e4b6d642f
+  m_position: {x: 497, y: 824}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: 5008585417485003999}
+  - {fileID: -4986815811770323114}
+  - {fileID: 7132910858029587245}
+  - {fileID: 9034212133386219878}
+  - {fileID: -6222511626720041959}
 --- !u!114 &-1903758984178049680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,16 +517,88 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 68f5fd09febcee4469d751c53adaf7dd
-  m_position: {x: 723, y: 688}
+  m_position: {x: 1665, y: 676}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
   m_children:
   - {fileID: -4791587659610497402}
+  m_slowReachDistance: 2
+  m_fastReachDistance: 8
+  m_minSpeedForFastDistance: 12
+--- !u!114 &-1093377420723125832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab1591fe5e2e6d4bbc088b0429386b9, type: 3}
+  m_Name: IsPathEmpty
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: c1aabd62f8edbe6438876a0bd5eb0414
+  m_position: {x: -571.5524, y: 603}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: 9187012723447751640}
+--- !u!114 &-217002694569445728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194294a7b3b62724abc333348ac6f6d2, type: 3}
+  m_Name: ClearNavMeshPath
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 342b55bc4d507c249af7c3870267424f
+  m_position: {x: -42.99996, y: 159.99998}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
 --- !u!114 &-143370764275738136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,19 +612,59 @@ MonoBehaviour:
   m_Name: SequencerNode
   m_EditorClassIdentifier: 
   m_state: 0
-  m_started: 0
+  m_started: 1
   m_guid: e5a451bb37f43c94f84eca9d942d7d03
-  m_position: {x: 17.5, y: 142.36002}
+  m_position: {x: -10, y: -19.159983}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
   m_children:
   - {fileID: 2725110216308560433}
+  - {fileID: 2725110216308560433}
+  - {fileID: 8681500071723160122}
+  - {fileID: -217002694569445728}
   - {fileID: 4965471443556820477}
+--- !u!114 &-65317594896139710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a56d097c3e04034cb303808e10cee2a, type: 3}
+  m_Name: DisableNavMeshAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: ceac215049916184089c046cd6b14bba
+  m_position: {x: 147, y: 1292}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,12 +691,119 @@ MonoBehaviour:
   - {fileID: 2381724616244566691}
   - {fileID: -1903758984178049680}
   - {fileID: -4791587659610497402}
+  - {fileID: 538548600534256174}
+  - {fileID: 6621867468774133448}
+  - {fileID: -7788350962407094634}
+  - {fileID: -4462508058658981125}
+  - {fileID: 7806122577490675638}
+  - {fileID: 5524113455789299981}
+  - {fileID: 4013316315208948425}
+  - {fileID: -5905641424196706287}
+  - {fileID: -7231354381679490550}
+  - {fileID: 7125812421849022612}
+  - {fileID: 7912012521622744507}
+  - {fileID: 8102339749280047600}
+  - {fileID: -1093377420723125832}
+  - {fileID: -6551579052589986684}
+  - {fileID: -7617442905256514074}
+  - {fileID: 5008585417485003999}
+  - {fileID: -2147730505803548934}
+  - {fileID: -4986815811770323114}
+  - {fileID: 7132910858029587245}
+  - {fileID: -6222511626720041959}
+  - {fileID: 9034212133386219878}
+  - {fileID: 7792035481318561034}
+  - {fileID: 7790241341813727045}
+  - {fileID: -2659307553558739768}
+  - {fileID: 2529133251123921599}
+  - {fileID: 7342527478280994422}
+  - {fileID: -65317594896139710}
+  - {fileID: 6485130830114669141}
+  - {fileID: 8681500071723160122}
+  - {fileID: -6377631515679514838}
+  - {fileID: 5716047739387089118}
+  - {fileID: -3227431665639533130}
+  - {fileID: -217002694569445728}
+  - {fileID: -8676831422687765912}
+  - {fileID: -3209885968485680171}
+  - {fileID: 854318849093154745}
+  - {fileID: 6016523681710864000}
   m_blackboard:
     m_name: Client_01
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+--- !u!114 &538548600534256174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: e122365f12ce9544b831af14400a0eec
+  m_position: {x: 1183, y: 662}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: 9077540666558862777}
+  - {fileID: 6621867468774133448}
+--- !u!114 &854318849093154745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a56d097c3e04034cb303808e10cee2a, type: 3}
+  m_Name: DisableNavMeshAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 7e1843e484a0f6941a2b07a3e72a926a
+  m_position: {x: 969, y: 1315}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
 --- !u!114 &2381724616244566691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,14 +819,53 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 19bf4726a4376124fa7036475e4c6843
-  m_position: {x: 335, y: 731}
+  m_position: {x: 960, y: 673}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
+--- !u!114 &2529133251123921599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa9583265622ad429b8547d9c858865, type: 3}
+  m_Name: AdjustAccordingNextTarget
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 851c530a607f049428859c08538732c2
+  m_position: {x: 1425, y: 686}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_minAngleToStartDrifting: 30
+  m_distanceToStartDriftingBeforeReachTarget: 10
 --- !u!114 &2725110216308560433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,14 +881,86 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 3202a27fef8d94b4296cf72072a78a7d
-  m_position: {x: -261.43985, y: 360}
+  m_position: {x: -455.0575, y: 160.20502}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
+--- !u!114 &3778664347256038504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72db7f89bfd6e99438b4de409222c1b9, type: 3}
+  m_Name: IsNavMeshAgentActive
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 569c7270e5b9d98428d7628fefa72303
+  m_position: {x: -793, y: 990}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: 9187012723447751640}
+  - {fileID: 545962203594276616}
+--- !u!114 &4013316315208948425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab1591fe5e2e6d4bbc088b0429386b9, type: 3}
+  m_Name: IsPathEmpty
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 0f0ef273a1c709549adbc12fe6b4a386
+  m_position: {x: -26, y: 993}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: -7231354381679490550}
 --- !u!114 &4965471443556820477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,13 +976,20 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 16ec365403b0f394e8574c4a8f835b9e
-  m_position: {x: 217, y: 336}
+  m_position: {x: 214.50027, y: 178.99998}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
   m_child: {fileID: 6395653200498369148}
 --- !u!114 &4996652543199100794
@@ -212,17 +1005,146 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   m_state: 0
-  m_started: 0
+  m_started: 1
   m_guid: d8ef4d8f37270f24ca68b43c67695c24
-  m_position: {x: 35, y: -45}
+  m_position: {x: 4.1325264, y: -159.9375}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
   m_child: {fileID: -143370764275738136}
+--- !u!114 &5008585417485003999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70adf6144cb54664d959464ce4408875, type: 3}
+  m_Name: GoBackward
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 0a379b160de116e46adf0fe890f3dde7
+  m_position: {x: 273, y: 1041}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &5524113455789299981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194294a7b3b62724abc333348ac6f6d2, type: 3}
+  m_Name: ClearNavMeshPath
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 1f4083b1f2ce5264cb2cca2e12950728
+  m_position: {x: -376, y: 1004}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &5716047739387089118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4b094bac0d3cc40b94f42e47afd10f, type: 3}
+  m_Name: WaitToActivateNavAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: bdba2bf0b6aa0154c8515eb6eeefeea5
+  m_position: {x: -262, y: 312}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_child: {fileID: -3227431665639533130}
+--- !u!114 &6016523681710864000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2e969ae28206e45bea413e1be47b96, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 8be5f3f2a3ee9444e807941417486cab
+  m_position: {x: -156, y: 993}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  message: 00101011011
 --- !u!114 &6395653200498369148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,20 +1160,404 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: d5d96799ed8f0e2428a51cf437ad70ab
-  m_position: {x: 202, y: 498}
+  m_position: {x: 198, y: 399}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
   m_children:
-  - {fileID: 9187012723447751640}
+  - {fileID: -1093377420723125832}
+  - {fileID: 8102339749280047600}
+  - {fileID: -4462508058658981125}
   - {fileID: -5446233131730551066}
   - {fileID: 2381724616244566691}
-  - {fileID: 9077540666558862777}
+  - {fileID: 538548600534256174}
   - {fileID: -1903758984178049680}
+--- !u!114 &6485130830114669141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a56d097c3e04034cb303808e10cee2a, type: 3}
+  m_Name: DisableNavMeshAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: b7ea125d2c264ca43ad20b416e1ba493
+  m_position: {x: -1576.8833, y: 1261}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &6621867468774133448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119172031a30130479da22ad4ecbdb84, type: 3}
+  m_Name: DriftIfBigAngle
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 0d98774fedcd09140ac397c7457b6862
+  m_position: {x: 1300, y: 867}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_minAngleToStartDrifting: 30
+--- !u!114 &7125812421849022612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a56d097c3e04034cb303808e10cee2a, type: 3}
+  m_Name: DisableNavMeshAgent
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 702d064f0d73e714fb23d2a35256a2c9
+  m_position: {x: -1513.811, y: 1048}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &7132910858029587245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94991300a28ffdd4cb51098ee378db82, type: 3}
+  m_Name: RunToNextPathPoint
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 7dad5df4884d4fb45bbf3bb2a08fa371
+  m_position: {x: 497, y: 1041}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &7342527478280994422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 3a2d3e2269087384daf3b9fe69a435d2
+  m_position: {x: -733, y: 786}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children: []
+--- !u!114 &7790241341813727045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab1591fe5e2e6d4bbc088b0429386b9, type: 3}
+  m_Name: IsPathEmpty
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: c8cc1548652d3bf4eace376c262aa327
+  m_position: {x: 834, y: 1311}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: -3209885968485680171}
+--- !u!114 &7792035481318561034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194294a7b3b62724abc333348ac6f6d2, type: 3}
+  m_Name: ClearNavMeshPath
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 286b8a2253420d849a0798e96af54be5
+  m_position: {x: 640, y: 1311}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &7806122577490675638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edfde649c91f3d5438987109900a797b, type: 3}
+  m_Name: TryNoUnstuck
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: f8cd720893d95734e91e9fc41762c8ad
+  m_position: {x: 323, y: 1157}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+--- !u!114 &7912012521622744507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 344bb7fa7558bda49a3d41d316ff3d10
+  m_position: {x: -206, y: 849}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: 5524113455789299981}
+  - {fileID: 6016523681710864000}
+--- !u!114 &8102339749280047600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a7f62fedac9a746976f765378dc509, type: 3}
+  m_Name: EveryXLoop
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 9549bf8b0b7d5c546979e19f1cd5576f
+  m_position: {x: -175.9999, y: 657}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_child: {fileID: 7912012521622744507}
+  m_everyXLoop: 10
+  m_loopDone: 0
+--- !u!114 &8681500071723160122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab1591fe5e2e6d4bbc088b0429386b9, type: 3}
+  m_Name: IsPathEmpty
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 5be1a2d401faa3f4880b9b2858fb84ef
+  m_position: {x: -238.50003, y: 160.00003}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: -6377631515679514838}
+--- !u!114 &9034212133386219878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 65dd88128d7c377418e9ef4f57674a37
+  m_position: {x: 726, y: 1039}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+  m_description: 
+  m_children:
+  - {fileID: 7792035481318561034}
+  - {fileID: 7790241341813727045}
 --- !u!114 &9077540666558862777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,14 +1573,22 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: dcf0238ea18715b4c971a2bf155a1ef0
-  m_position: {x: 546, y: 700}
+  m_position: {x: 1110, y: 867}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
+  m_steeringSpeed: 1
 --- !u!114 &9187012723447751640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,11 +1604,20 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: ac4684a8d4ba1814bbff8ce7b286d5ee
-  m_position: {x: -58, y: 671}
+  m_position: {x: -572, y: 755}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
     m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
     m_path: []
+    m_pathDebugBox: []
     m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
   m_description: 
+  m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
+    type: 3}

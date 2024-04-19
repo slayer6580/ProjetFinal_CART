@@ -11,21 +11,25 @@ namespace BoxSystem
         [field: Header("Put the tower Box System here")]
         [field: SerializeField] public TowerBoxSystem TowerBoxSystem { get; private set; }
 
-        private void OnTriggerEnter(Collider other)
+        [SerializeField] private float m_grabDelay;
+
+        private bool m_canGrabItem = true;
+
+        private void OnTriggerStay(Collider other)
         {
             Shelf shelf = other.GetComponent<Shelf>();
 
             if (!shelf)
                 return;
 
-            if (!shelf.CanTakeItem())
+            if (!m_canGrabItem || !shelf.CanTakeItem())
                 return;
 
-            int nbOfItemsToGrab = shelf.GetRemainingItems();
+            TakeItemFromShelf(shelf);
 
-            for (int i = 0; i < nbOfItemsToGrab; i++)            
-                TakeItemFromShelf(shelf);
-            
+            m_canGrabItem = false;
+            Invoke("ActivateGrabItem", m_grabDelay);
+
         }
 
         /// <summary> Take an item from the shelf </summary>
@@ -34,18 +38,21 @@ namespace BoxSystem
             _AudioManager.PlaySoundEffectsOneShot(ESound.GrabItem, transform.position, 0.1f);
 
             GameObject itemTaken = shelf.GetItemFromShelf();
-            ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size; 
+            ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size;
 
             if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
             {
-                Debug.Log("Need a new box to put item");
                 TowerBoxSystem.AddBoxToTower();
             }
-        
+
             TowerBoxSystem.PutObjectInTopBox(itemTaken);
 
         }
-    }
 
+        private void ActivateGrabItem()
+        {
+            m_canGrabItem = true;
+        }
+    }
 
 }

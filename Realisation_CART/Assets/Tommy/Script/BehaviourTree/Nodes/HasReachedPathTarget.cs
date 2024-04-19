@@ -7,6 +7,9 @@ namespace BehaviourTree
 	public class HasReachedPathTarget : CompositeNode
 	{
 		private float m_targetDistance;
+		public float m_slowReachDistance;
+		public float m_fastReachDistance;
+		public float m_minSpeedForFastDistance;
 		protected override void OnStart()
 		{
 		}
@@ -21,20 +24,30 @@ namespace BehaviourTree
 			var child = m_children[0];
 
 			TargetDistance();
-			if(m_targetDistance < 1)
+			
+			if(m_blackboard.m_cartStateMachine.LocalVelocity.z < m_minSpeedForFastDistance)
 			{
-				child = m_children[0];
-				return child.Update();
-			}
-			else
-			{
-				if (m_children.Count > 1)
+				if(m_targetDistance < m_slowReachDistance)
 				{
-					child = m_children[1];
+					child = m_children[0];
 					return child.Update();
 				}
-				
 			}
+            else
+            {
+				if (m_targetDistance < m_fastReachDistance)
+				{
+					child = m_children[0];
+					return child.Update();
+				}
+			}
+
+			if (m_children.Count > 1)
+			{
+				child = m_children[1];
+				return child.Update();
+			}
+			
 
 			return State.Success;
 		}

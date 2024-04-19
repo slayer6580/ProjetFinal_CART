@@ -175,8 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7803873549656776103}
-  - component: {fileID: 5196755446865760720}
-  - component: {fileID: 7277978599770623468}
+  - component: {fileID: 7654632861572135234}
   - component: {fileID: 5757727898776072923}
   - component: {fileID: 507133207294372702}
   m_Layer: 9
@@ -203,7 +202,7 @@ Transform:
   - {fileID: 6247474995554856196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5196755446865760720
+--- !u!114 &7654632861572135234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,36 +211,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3665573428290585098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee2eae84a96644a4ea76226205b4e569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_slotPrefab: {fileID: 143819864821063928, guid: 6627cabcbca284f4fbee7270cb00ba41,
-    type: 3}
-  <BoxWidth>k__BackingField: 0.392
-  m_boxLength: 0.588
-  <BoxThickness>k__BackingField: 0.02
-  <BoxHeight>k__BackingField: 0.17
-  m_nbSlotWidth: 4
-  m_nbSlotLength: 6
-  <SlotHeight>k__BackingField: 0
-  <SlotWidth>k__BackingField: 0
-  <SlotLenght>k__BackingField: 0
-  m_showBoxParts: 1
-  m_boxBottom: {fileID: 3410668156205704823}
-  m_boxSideLeft: {fileID: 1326208887701202262}
-  m_boxSideRight: {fileID: 4749397371045065519}
-  m_boxFront: {fileID: 6882044248481420249}
-  m_boxBack: {fileID: 7211819444262910313}
---- !u!114 &7277978599770623468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3665573428290585098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da745de8c2988b14984871a89fb8844c, type: 3}
+  m_Script: {fileID: 11500000, guid: f1bde429e175d8a4585098a5071a1eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &5757727898776072923

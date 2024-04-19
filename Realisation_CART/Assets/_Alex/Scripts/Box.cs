@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace BoxSystem
 {
-    [RequireComponent(typeof(BoxSetup))]
 
     public class Box : MonoBehaviour
     {
@@ -42,13 +41,13 @@ namespace BoxSystem
 
         public struct SlotInfo
         {
-            public SlotInfo(Transform slotPosition, bool isAvailable)
+            public SlotInfo(Vector3 slotPosition, bool isAvailable)
             {
                 m_slotTransform = slotPosition;
                 m_isAvailable = isAvailable;
             }
 
-            public Transform m_slotTransform;
+            public Vector3 m_slotTransform;
             public bool m_isAvailable;
         }
         #endregion
@@ -58,38 +57,65 @@ namespace BoxSystem
         private List<SlotInfo> m_slotsList = new List<SlotInfo>();
         private List<ItemInBox> m_itemsList = new List<ItemInBox>();
         private List<MultiSlots> m_doubleSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot double
-        private List<MultiSlots> m_fourSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot a quatre (2 x 2)
+        private List<MultiSlots> m_quadrupleSlots = new List<MultiSlots>(); // Coordonnés de tout les connections de slot a quatre (2 x 2)
         private int m_totalSlots;
         private int m_availableSlotsLeft;
-        private BoxSetup m_boxSetup;
         private TowerBoxSystem m_tower;
         private Vector3 m_initialLocalPositionInBox;
+        private bool m_boxInit = false;
 
         #endregion
 
-        private void Awake()
+
+        private void Start()
         {
-            m_boxSetup = GetComponent<BoxSetup>();
+            InitBox();
         }
 
         #region (--- InitFunctions ---)
 
-        /// <summary> Slots info given by BoxSetup </summary>
-        public void AddSlotInList(Transform slotTransform)
+        private void InitBox()
         {
-            m_slotsList.Add(new SlotInfo(slotTransform, true));
+            if (m_boxInit)
+                return;
+
+            BoxManager Instance = BoxManager.GetInstance();
+
+            GetSlotsList(Instance);
+            GetDoubleSLots(Instance);    
+            GetQuadrupleSlots(Instance);        
+            GetTotalSlots(Instance);       
+            Instance.AjustBoxGraphics(this.gameObject);
+
+            m_boxInit = true;
+
         }
 
-        /// <summary> Double slots info given by BoxSetup </summary>
-        public void AddDoubleSlotInList(List<int> indexes)
+        private void GetTotalSlots(BoxManager Instance)
         {
-            m_doubleSlots.Add(new MultiSlots(indexes));
+            int slotTotal = Instance.GetTotalSLots();
+            InitAvailableSlots(slotTotal);
         }
 
-        /// <summary> Quadriple slots info given by BoxSetup </summary>
-        public void AddFourSlotInList(List<int> indexes)
+        private void GetQuadrupleSlots(BoxManager Instance)
         {
-            m_fourSlots.Add(new MultiSlots(indexes));
+            List<List<int>> ListOfQuadrupleIndexes = Instance.GetQuadrupleSlotsIndexes();
+            foreach (List<int> indexes in ListOfQuadrupleIndexes)
+                m_quadrupleSlots.Add(new MultiSlots(indexes));
+        }
+
+        private void GetDoubleSLots(BoxManager Instance)
+        {
+            List<List<int>> ListOfDoubleIndexes = Instance.GetDoubleSlotsIndexes();
+            foreach (List<int> indexes in ListOfDoubleIndexes)
+                m_doubleSlots.Add(new MultiSlots(indexes));
+        }
+
+        private void GetSlotsList(BoxManager Instance)
+        {
+            List<Vector3> m_slotsLocalTransform = Instance.GetSlotsLocalVector();
+            foreach (Vector3 slot in m_slotsLocalTransform)
+                m_slotsList.Add(new SlotInfo(slot, true));
         }
 
         /// <summary> Number of slots info given by BoxSetup </summary>
@@ -111,6 +137,9 @@ namespace BoxSystem
         /// <summary> Look if box can take object, separate in two functions based on item size </summary>
         public bool CanPutItemInsideBox(ItemData.ESize size)
         {
+            if (!m_boxInit)
+                InitBox();
+
             return size == ItemData.ESize.small ? CanPutSmallItemInBox() : CanPutMultiSlotItemInBox(size);
         }
 
@@ -139,6 +168,9 @@ namespace BoxSystem
         /// <summary> Put item inside box, separate in two functions based on item size </summary>
         public void PutItemInBox(GameObject GO, bool autoSnap = false)
         {
+            if (!m_boxInit)
+                InitBox();
+
             Item item = GO.GetComponent<Item>();
 
             if (item.m_data.m_size == ItemData.ESize.small)
@@ -156,12 +188,18 @@ namespace BoxSystem
                 if (m_slotsList[i].m_isAvailable)
                 {
                     m_availableSlotsLeft--;
-                    Transform slotTransform = m_slotsList[i].m_slotTransform;
+                    Vector3 slotTransform = m_slotsList[i].m_slotTransform;
                     m_slotsList[i] = new SlotInfo(slotTransform, false);
                     List<int> allIndex = new List<int>();
                     allIndex.Add(i);
-                    m_itemsList.Add(new ItemInBox(GO, allIndex, slotTransform.localPosition));
-                    SlerpAndSnap(GO, slotTransform.localPosition, false, autoSnap);
+                    m_itemsList.Add(new ItemInBox(GO, allIndex, slotTransform));
+                    SlerpAndSnap(GO, slotTransform, false, autoSnap);
+
+                    //if (m_availableSlotsLeft == 0)
+                    //{
+                    //    m_tower.AddBoxToTower();
+                    //}
+
                     return;
                 }
             }
@@ -173,7 +211,7 @@ namespace BoxSystem
             Item item = GO.GetComponent<Item>();
             List<MultiSlots> multiSlotList = new List<MultiSlots>();
 
-            multiSlotList = item.m_data.m_size == ItemData.ESize.medium ? m_doubleSlots : m_fourSlots;
+            multiSlotList = item.m_data.m_size == ItemData.ESize.medium ? m_doubleSlots : m_quadrupleSlots;
             int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? GameConstants.MEDIUM_SIZE : GameConstants.LARGE_SIZE;
 
             foreach (MultiSlots multiSlot in multiSlotList)
@@ -187,19 +225,20 @@ namespace BoxSystem
                 if (AllSlotIsAvailable(slotsAvailable))
                 {
                     PutMultiSlotItemInBox(GO, multiSlot, autoSnap);
+                    Debug.Log("Box: " + gameObject.name + ", item: " + GO.name);
                     return;
                 }
             }
+            Debug.Log(gameObject.name + " : Box reorganization");
             ReorganizeBox(GO);
         }
 
         /// <summary> For box reorganization </summary>
         private void ReorganizeBox(GameObject GO)
         {
-   
             List<GameObject> newList = new List<GameObject>();
             newList.Add(GO);
-   
+
             int nbOfItemInBox = m_itemsList.Count;
             for (int i = 0; i < nbOfItemInBox; i++)
             {
@@ -210,12 +249,12 @@ namespace BoxSystem
             }
             m_itemsList.Clear();
 
-            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList(); 
+            newList = newList.OrderByDescending(unit => (int)unit.GetComponent<Item>().m_data.m_size).ToList();
 
             m_availableSlotsLeft = m_totalSlots;
             for (int i = 0; i < m_totalSlots; i++)
             {
-                Transform lastTransform = m_slotsList[i].m_slotTransform;
+                Vector3 lastTransform = m_slotsList[i].m_slotTransform;
                 m_slotsList[i] = new SlotInfo(lastTransform, true);
             }
 
@@ -236,7 +275,7 @@ namespace BoxSystem
 
             for (int i = 0; i < sizeInt; i++)
             {
-                allLocalPositions.Add(m_slotsList[multiSlot.m_slotIndexes[i]].m_slotTransform.localPosition);
+                allLocalPositions.Add(m_slotsList[multiSlot.m_slotIndexes[i]].m_slotTransform);
                 m_slotsList[multiSlot.m_slotIndexes[i]] = new SlotInfo(m_slotsList[multiSlot.m_slotIndexes[i]].m_slotTransform, false);
             }
 
@@ -250,6 +289,12 @@ namespace BoxSystem
                 turn90Degree = true;
             }
 
+            //if (m_availableSlotsLeft == 0)
+            //{
+            //    Debug.Log("box full, need a new box");
+            //    m_tower.AddBoxToTower();
+            //}
+
             SlerpAndSnap(GO, localPosition, turn90Degree, autoSnap);
         }
         #endregion
@@ -261,10 +306,10 @@ namespace BoxSystem
         {
             Transform GOChild = GO.transform.GetChild(0);
 
-            Vector3 itemScale = new Vector3(m_boxSetup.SlotWidth, m_boxSetup.SlotHeight, m_boxSetup.SlotLenght);
+            Vector3 itemScale = BoxManager.GetInstance().GetLocalScale();
             GO.transform.localScale = itemScale;
             GOChild.localScale = Vector3.one;
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, m_boxSetup.SlotHeight / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
+            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, itemScale.y / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
         }
 
         #endregion
@@ -309,7 +354,7 @@ namespace BoxSystem
         {
             foreach (int itemIndex in lastItemInBox.m_slotIndex)
             {
-                Transform slotTransform = m_slotsList[itemIndex].m_slotTransform;
+                Vector3 slotTransform = m_slotsList[itemIndex].m_slotTransform;
                 m_slotsList[itemIndex] = new SlotInfo(slotTransform, true);
             }
         }
@@ -335,13 +380,13 @@ namespace BoxSystem
         /// <summary> Get anchor height based on box size </summary>
         public float GetAnchorHeight()
         {
-            return m_boxSetup.BoxThickness;
+            return BoxManager.GetInstance().BoxThickness;
         }
 
         /// <summary> Get anchor width based on box size </summary>
         public float GetAnchorWidth()
         {
-            return (m_boxSetup.BoxWidth / 2) + m_boxSetup.BoxThickness;
+            return (BoxManager.GetInstance().BoxWidth / 2) + BoxManager.GetInstance().BoxThickness;
         }
 
 

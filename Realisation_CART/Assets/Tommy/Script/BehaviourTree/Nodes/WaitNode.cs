@@ -21,8 +21,9 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			if(Time.time - startTime > duration)
+			if (Time.time - startTime > duration)
 			{
+				Debug.Log("Back time:" + (Time.time - startTime));
 				return State.Success;
 			}
 			return State.Running;
