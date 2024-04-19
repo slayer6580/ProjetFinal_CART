@@ -1,31 +1,26 @@
-using BehaviourTree;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DiscountDelirium
+namespace BehaviourTree
 {
-    public class RunToNextPathPoint : LeafNode
-    {
+	public class GoBackward : LeafNode
+	{
 		protected override void OnStart()
 		{
-
+			
 		}
 
 		protected override void OnStop()
 		{
-
+		
 		}
 
 		protected override State OnUpdate()
 		{
-			//Manage acceleration
-			m_blackboard.m_cartStateMachine.OnBackward(0);
-			m_blackboard.m_cartStateMachine.OnForward(1);
-
+			m_blackboard.m_cartStateMachine.OnForward(0);
+			m_blackboard.m_cartStateMachine.OnBackward(1);
 			return State.Success;
 		}
-
-
 	}
 }

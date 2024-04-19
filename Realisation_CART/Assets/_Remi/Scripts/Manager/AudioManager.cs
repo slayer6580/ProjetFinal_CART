@@ -125,7 +125,6 @@ namespace Manager
             }
 
             AudioBox audiobox = FindAValidAudioBox();
-            print("Pitch: " + audiobox.GetComponent<AudioSource>().pitch);
 
 			int index = m_audioBox.IndexOf(audiobox);
 

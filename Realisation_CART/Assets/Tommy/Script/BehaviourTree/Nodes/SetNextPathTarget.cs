@@ -11,6 +11,7 @@ namespace BehaviourTree
 			if(m_blackboard.m_path.Count > 0)
 			{
 				m_blackboard.m_target = m_blackboard.m_path[0];
+				m_blackboard.m_pathDebugBox[0].gameObject.GetComponent<Renderer>().material.color = Color.red;
 			}
 			
 		}

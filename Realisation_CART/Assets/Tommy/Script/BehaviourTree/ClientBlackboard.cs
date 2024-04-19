@@ -24,5 +24,6 @@ namespace BehaviourTree
 
         public float m_stuckAtTime;
         public float m_timeStuck;
-    }
+
+	}
 }

@@ -7,7 +7,8 @@ namespace BehaviourTree
 {
 	public class AdjustRotation : LeafNode
 	{
-
+		private float m_steerValue = 0;
+		[Range(0.5f,10)] public float m_steeringSpeed = 1;
 		protected override void OnStart()
 		{
 
@@ -31,16 +32,20 @@ namespace BehaviourTree
 
 			if (angle > 2)
 			{
-				m_blackboard.m_cartStateMachine.OnSteer(-1);
+				m_steerValue = (m_steerValue > -1) ? (m_steerValue - 0.1f  * angle) : -1;
 			}
 			else if (angle < -2)
 			{
-				m_blackboard.m_cartStateMachine.OnSteer(1);
+
+
+				m_steerValue = (m_steerValue > 1) ? (m_steerValue + 0.1f  * angle) : 1;
 			}
 			else
 			{
-				m_blackboard.m_cartStateMachine.OnSteer(0);
+				m_steerValue = 0;				
 			}
+
+			m_blackboard.m_cartStateMachine.OnSteer(m_steerValue);
 
 			return State.Success;
 		}

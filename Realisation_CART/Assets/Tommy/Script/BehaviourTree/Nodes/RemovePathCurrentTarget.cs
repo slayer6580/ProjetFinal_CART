@@ -20,6 +20,7 @@ namespace BehaviourTree
 		{
 			if(m_blackboard.m_path.Count > 0)
 			{
+				Debug.Log("DELETE");
 				m_blackboard.m_path.RemoveAt(0);
 				Destroy(m_blackboard.m_pathDebugBox[0]);
 				m_blackboard.m_pathDebugBox.RemoveAt(0);

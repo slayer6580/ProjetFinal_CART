@@ -1,30 +1,29 @@
+using BehaviourTree;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviourTree
 {
-	public class WaitNode : LeafNode
+    public class WaitToActivateNavAgent : DecoratorNode
 	{
-		public float duration = 1f;
-		float startTime;
 
 		protected override void OnStart()
 		{
-			startTime = Time.time;
+			m_blackboard.m_navAgent.enabled = true;
 		}
 
 		protected override void OnStop()
 		{
-			
+
 		}
 
 		protected override State OnUpdate()
 		{
-			if (Time.time - startTime > duration)
+			if (m_blackboard.m_navAgent.isActiveAndEnabled)
 			{
-				Debug.Log("Back time:" + (Time.time - startTime));
-				return State.Success;
+				Debug.Log("Waiting to activate agent");
+				return m_child.Update();
 			}
 			return State.Running;
 		}

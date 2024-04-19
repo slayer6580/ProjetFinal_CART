@@ -6,6 +6,8 @@ namespace BehaviourTree
 {
 	public class CheckIfStuck : CompositeNode
 	{
+		public float m_underSpeedToCountAsStuck;
+		public float m_timeBeforeUnstuck;
 		protected override void OnStart()
 		{
 			
@@ -18,7 +20,7 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			if (m_blackboard.m_cartStateMachine.LocalVelocity.z < 5)
+			if (m_blackboard.m_cartStateMachine.LocalVelocity.z < m_underSpeedToCountAsStuck)
 			{
 				if (m_blackboard.m_stuckAtTime == 0)
 				{
@@ -38,7 +40,7 @@ namespace BehaviourTree
 			}
 
 
-			if(m_blackboard.m_timeStuck > 2)
+			if(m_blackboard.m_timeStuck > m_timeBeforeUnstuck)
 			{
 				//m_blackboard.m_timeStuck = 0;
 				return m_children[0].Update();
