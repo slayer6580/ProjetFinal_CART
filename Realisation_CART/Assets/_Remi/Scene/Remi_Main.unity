@@ -11573,7 +11573,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a775e25422f70d5409931274c15559d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SpecialItemPrefab>k__BackingField: {fileID: 0}
+  <SpecialItemPrefab>k__BackingField: {fileID: 1526402624552782, guid: 9d14a03d08cacdd48bff9e61f521a55b,
+    type: 3}
+  m_rotationSpeed: 0.25
+  m_oscillationSpan: 0.2
+  m_oscillationSpeed: 1
+  m_scale: 1.5
 --- !u!1001 &793673585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12280,6 +12285,8 @@ MonoBehaviour:
   <DiegeticScaleValue>k__BackingField: {fileID: 1293464267}
   <DoorOne>k__BackingField: {fileID: 733206187}
   <DoorTwo>k__BackingField: {fileID: 1731040041}
+  m_weightingSpeed: 5
+  m_doorsSpeed: 5
   m_weightToOpenDoor: 150
   m_onTriggerEnter:
     m_PersistentCalls:
@@ -22383,7 +22390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1576752535
 Transform:
   m_ObjectHideFlags: 0

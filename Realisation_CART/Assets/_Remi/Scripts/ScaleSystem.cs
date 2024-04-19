@@ -16,6 +16,9 @@ namespace BackstoreSystems
         [field: SerializeField] private Transform DoorOne { get; set; } = null;
         [field: SerializeField] private Transform DoorTwo { get; set; } = null;
 
+        [SerializeField] private float m_weightingSpeed = 20;
+        [SerializeField] private float m_doorsSpeed = 20;
+
         [SerializeField] private float m_weightToOpenDoor = 20;
 
         public UnityEvent<Collider, bool> m_onTriggerEnter;
@@ -154,7 +157,7 @@ namespace BackstoreSystems
                 m_newDiegeticScale.z = DIEGETIC_UI_MAX_SCALE;
             }
 
-            DiegeticScaleValue.localScale = math.lerp(DiegeticScaleValue.localScale, m_newDiegeticScale, Time.deltaTime);
+            DiegeticScaleValue.localScale = math.lerp(DiegeticScaleValue.localScale, m_newDiegeticScale, Time.deltaTime * m_weightingSpeed);
 
             if (DiegeticScaleValue.localScale.z >= DIEGETIC_UI_MAX_SCALE - DIEGETIC_UI_THRESHOLD)
             {
@@ -179,21 +182,21 @@ namespace BackstoreSystems
                 //Debug.Log("Doors are open");
             }
             
-            DoorOne.rotation = Quaternion.Lerp(DoorOne.rotation, Quaternion.Euler(0, -doorAngle, 0), Time.deltaTime);
-            DoorTwo.rotation = Quaternion.Lerp(DoorTwo.rotation, Quaternion.Euler(0, doorAngle, 0), Time.deltaTime);
+            DoorOne.rotation = Quaternion.Lerp(DoorOne.rotation, Quaternion.Euler(0, -doorAngle, 0), Time.deltaTime * m_doorsSpeed);
+            DoorTwo.rotation = Quaternion.Lerp(DoorTwo.rotation, Quaternion.Euler(0, doorAngle, 0), Time.deltaTime * m_doorsSpeed);
             //Vector3 eulerAngles = DoorTwo.transform.eulerAngles;
             //Debug.Log("DoorTwo.rotation.y: " + eulerAngles.y);
-            Debug.Log("The backstore system can be deactivated DoorTwo.rotation.y: " + DoorTwo.transform.eulerAngles.y + " <= " + (DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD));
+            //Debug.Log("The backstore system can be deactivated DoorTwo.rotation.y: " + DoorTwo.transform.eulerAngles.y + " <= " + (DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD));
 
             if (DoorTwo.transform.eulerAngles.y <= DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD && !m_isInsideBackstore)
             {
                 m_isScaleSystemActive = false;
-                Debug.Log("The backstore system can be deactivated DoorTwo.rotation.y: " + DoorTwo.transform.eulerAngles.y + " <= " + (DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD));
+                //Debug.Log("The backstore system can be deactivated DoorTwo.rotation.y: " + DoorTwo.transform.eulerAngles.y + " <= " + (DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD));
             }
             else if (DoorTwo.transform.eulerAngles.y >= DOOR_ANGLE_MIN - DOOR_ANGLE_THRESHOLD)
             {
                 m_isScaleSystemActive = true;
-                Debug.Log("The backstore system is active");
+                //Debug.Log("The backstore system is active");
             }
         }
 
