@@ -9,7 +9,7 @@ namespace DiscountDelirium
         [field: SerializeField] private GameObject SpecialItemPrefab { get; set; } = null;
         [SerializeField] private float m_rotationSpeed = 0.25f;
         [SerializeField] private float m_oscillationSpan = 0.2f;
-        [SerializeField] private float m_oscillationSpeed = 1.0f;
+        [SerializeField] private float m_oscillationHeight = 1.5f;
         [SerializeField] private float m_scale = 1.5f;
 
         private const int PLAYER_BODY_LAYER = 3;
@@ -37,7 +37,7 @@ namespace DiscountDelirium
             SpecialItemPrefab.transform.Rotate(Vector3.up, m_rotationSpeed);
 
             m_oscillationPosition = SpecialItemPrefab.transform.position;
-            m_oscillationPosition.y = Mathf.Sin(Time.time) * m_oscillationSpan + m_oscillationSpeed;
+            m_oscillationPosition.y = Mathf.Sin(Time.time) * m_oscillationSpan + m_oscillationHeight;
             SpecialItemPrefab.transform.position = m_oscillationPosition;
         }
 
