@@ -1,15 +1,15 @@
 using UnityEngine;
 
-namespace BackstoreScale
+namespace BackstoreSystems
 {
     public class FloorTriggerCaller : MonoBehaviour
     {
-        public BackstoreDoorSystem m_listener;
+        public ScaleSystem m_listener;
         [SerializeField] private bool m_isInsideBackroom = false;
 
         private void Awake()
         {
-            m_listener = GetComponentInParent<BackstoreDoorSystem>();
+            m_listener = GetComponentInParent<ScaleSystem>();
             if (m_listener == null)
             {
                 Debug.LogError("FloorTriggerCaller: No BackstoreDoorSystem found in parent");
