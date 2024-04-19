@@ -7,18 +7,23 @@ namespace BoxSystem
     public class ShelfSetup : MonoBehaviour
     {
 
-        [Tooltip("limited based on transform list size")]
-        [SerializeField] private float m_nbOfItems;
+        [Tooltip("Number of items")]
+        [SerializeField] private bool m_haveMaxItem;
+        [ShowIf("m_haveMaxItem", false)][SerializeField] private float m_nbOfItems;
 
-        [Tooltip("item multiplier size")]
+        [Tooltip("item size multiplier")]
         [SerializeField] private float m_sizeMultiplier;
 
-        [Header("Items transforms, Don't touch")]
-        [SerializeField] private List<Transform> m_itemTransform;
+        [Header("Put surfaces here")]
+        [SerializeField] private Transform m_surfaces;
 
-        [Header("Transforms Gizmos")]
-        [SerializeField] private bool m_canSeeTransformsGizmos;
-        [SerializeField] private float m_gizmosSize;
+        [Header("Gap between slots")]
+        [SerializeField][Range(0.05f, 1f)] private float m_lenghtGap;
+        [SerializeField][Range(0.05f, 1f)] private float m_depthGap;
+
+        private List<Transform> m_surfacesList = new List<Transform>();
+        private List<Vector3> m_localPositions = new List<Vector3>();
+        private Vector3 m_surfaceLocalEuler;
 
         private Shelf m_shelf;
 
@@ -29,21 +34,16 @@ namespace BoxSystem
 
         void Start()
         {
-            if (m_nbOfItems != 0)
-            PlaceItemsOnShelf();
+            if (m_surfaces == null)
+                return;
+
+            GetAllSurfaces();
+            CreateAllSlots();
+
+            if (m_nbOfItems != 0 || m_haveMaxItem)
+                PlaceItemsOnShelf();
         }
 
-
-        private void OnDrawGizmos()
-        {
-            if (m_canSeeTransformsGizmos)
-            {
-                foreach (Transform t in m_itemTransform)
-                {
-                    Gizmos.DrawSphere(t.position, m_gizmosSize);
-                }                 
-            }
-        }
 
         private GameObject SpawnItem()
         {
@@ -66,16 +66,9 @@ namespace BoxSystem
 
             BoxManager boxInstance = BoxManager.GetInstance();
 
-            if (m_itemTransform.Count <= m_nbOfItems)
+            if (m_localPositions.Count <= m_nbOfItems || m_haveMaxItem)
             {
-                foreach (Transform _transform in m_itemTransform)
-                {
-                    GameObject item = SpawnItem();
-                    item.transform.SetParent(gameObject.transform);
-                    item.transform.localScale = boxInstance.GetLocalScale() * m_sizeMultiplier;
-                    item.transform.position = _transform.position + new Vector3(0, (boxInstance.SlotHeight / 2) * m_sizeMultiplier, 0);
-                    item.transform.localEulerAngles = _transform.localEulerAngles;
-                }
+                AllSlotsHaveAnItem(boxInstance);
             }
             else
             {
@@ -85,6 +78,98 @@ namespace BoxSystem
 
         }
 
+        private void AllSlotsHaveAnItem(BoxManager boxInstance)
+        {
+            foreach (Vector3 localPosition in m_localPositions)
+            {
+                GameObject item = SpawnItem();
+                item.transform.SetParent(gameObject.transform);
+                item.transform.localScale = boxInstance.GetLocalScale() * m_sizeMultiplier;
+                item.transform.localPosition = localPosition + new Vector3(0, (boxInstance.SlotHeight / 2) * m_sizeMultiplier, 0);
+                item.transform.localEulerAngles = m_surfaceLocalEuler;
+            }
+        }
 
+        private void GetAllSurfaces()
+        {
+            if (m_surfaces == null)
+                return;
+
+            int nbOfSurfaces = m_surfaces.childCount;
+
+            for (int i = 0; i < nbOfSurfaces; i++)
+            {
+                if (i == 0)
+                    m_surfaceLocalEuler = m_surfaces.GetChild(i).localEulerAngles;
+
+                Transform surface = m_surfaces.GetChild(i);
+                m_surfacesList.Add(surface);
+            }
+        }
+
+        private void CreateAllSlots()
+        {
+            m_localPositions.Clear();
+
+            List<float> xPositions = new List<float>();
+            List<Vector2> zAndYPositions = new List<Vector2>();
+            float halfLenghtGap = m_lenghtGap / 2;
+            float halfDepthGap = m_depthGap / 2;
+
+            foreach (Transform surface in m_surfacesList)
+            {
+                Transform topZ = surface.GetChild(0);
+                Transform bottomZ = surface.GetChild(1);
+
+                // Take measurements of surface
+                float maxLenght = surface.transform.localScale.x / 2;
+                float maxDepth = surface.transform.localScale.z / 2;
+
+                //Start positions
+                float xPosition = maxLenght - halfLenghtGap;
+                float zPosition = maxDepth - halfDepthGap;
+
+                //Find all X local positions
+                while (xPosition > (-maxLenght + halfLenghtGap))
+                {
+                    xPositions.Add(xPosition);
+                    xPosition -= m_lenghtGap;
+                }
+
+                //Find all Z local positions
+                while (zPosition > (-maxDepth + halfDepthGap))
+                {
+                    float topY = topZ.position.y;
+                    float bottomY = bottomZ.position.y;
+                    float difference = topY - bottomY;
+                    float halfDifference = difference / 2;
+
+                    float depthPosition = Mathf.InverseLerp(-maxDepth, maxDepth, zPosition);
+                    float yPosition = Mathf.Lerp(halfDifference, -halfDifference, depthPosition);
+
+                    zAndYPositions.Add(new Vector2(zPosition, yPosition));
+                    zPosition -= m_depthGap;
+                }
+
+                // Place all LocalPositions here
+                for (int i = 0; i < xPositions.Count; i++)
+                {
+                    for (int j = 0; j < zAndYPositions.Count; j++)
+                    {
+                        m_localPositions.Add(new Vector3(xPositions[i] + surface.localPosition.x, surface.localPosition.y + zAndYPositions[j].y, zAndYPositions[j].x + surface.localPosition.z));
+                    }
+                }
+
+                xPositions.Clear();
+                zAndYPositions.Clear();
+
+                DisableSurfaceRenderer(surface);
+            }
+        }
+
+        private void DisableSurfaceRenderer(Transform surface)
+        {
+            surface.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
     }
 }
