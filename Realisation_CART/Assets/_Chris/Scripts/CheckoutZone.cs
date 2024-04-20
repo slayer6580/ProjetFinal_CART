@@ -20,10 +20,22 @@ namespace DiscountDelirium
                 return;
 
             _AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, transform.position, 1f);
-            Vector3 data = _ScoreManager.EmptyCartAndGetScore();
-            GameStateMachine.Instance.GetScoreFromCart(data);
 
-            m_shelfManager.ResetAllShelves();
+            bool isPlayer = other.transform.parent.name == "Character";
+            if (isPlayer)
+            {
+				Vector3 data = _ScoreManager.EmptyCartAndGetScore();
+				GameStateMachine.Instance.GetScoreFromCart(data);
+
+				m_shelfManager.ResetAllShelves();
+			}
+            else
+            {
+                _ScoreManager.RemoveAllBoxImpulse(itemTrigger.TowerBoxSystem);
+
+			}
+
+           
 
 
 		}

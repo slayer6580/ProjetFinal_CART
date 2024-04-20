@@ -1,3 +1,4 @@
+using BoxSystem;
 using CartControl;
 using DiscountDelirium;
 using System.Collections;
@@ -16,7 +17,8 @@ namespace BehaviourTree
         public NavMeshAgent m_navAgent;
         public List<GameObject> m_chosenPathListCopy;
         public ClientPathList m_possiblePathScript;
-
+        public TowerBoxSystem m_thisTower;
+        public GameObject m_cashRegister;
         public List<Vector3> m_path;
         public List<GameObject> m_pathDebugBox;
         public Vector3 m_target;
