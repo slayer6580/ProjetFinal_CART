@@ -68,8 +68,6 @@ namespace BoxSystem
 
         private void PlaceItemsOnShelf()
         {
-            ItemData.ESize size = m_shelf.ItemData.m_size;
-
             BoxManager boxInstance = BoxManager.GetInstance();
 
             if (m_allSlotsLocalPositions.Count <= m_nbOfItems || m_haveMaxItem)
