@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DiscountDelirium;
 using Unity.VisualScripting;
-using Manager;
 using static Manager.ScoreManager;
 
 namespace BoxSystem
@@ -31,7 +30,6 @@ namespace BoxSystem
 
         [SerializeField] private TowerHingePhysicsAlex m_towerPhysics;
         [SerializeField] private int m_cartokenValueMultiplier = 1;
-        [SerializeField] private ShelfManager m_shelfManager;
 
         void Start()
         {
