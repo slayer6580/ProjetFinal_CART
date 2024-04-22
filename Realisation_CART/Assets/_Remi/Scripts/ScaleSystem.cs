@@ -65,7 +65,7 @@ namespace BackstoreSystems
             {
                 //Debug.Log("Player is outside backstore");
                 m_isScaleSystemActive = true;
-                CalculateWPlayerWeight();
+                CalculatePlayerWeight();
                 //Debug.Log("Player weight: " + m_currentPlayerWeight);
             }
         }
@@ -102,12 +102,13 @@ namespace BackstoreSystems
             m_isPlayerCanPass = false;
         }
 
-        private void CalculateWPlayerWeight()
+        private void CalculatePlayerWeight()
         {
             ESize currentItemSize = ESize.small;
             m_currentPlayerWeight = PLAYER_BODY_WEIGHT; // TODO Remi: find a better place for the initial player weight
 
             List<Box> allBoxesInCart = _TowerBoxSystem.GetAllBoxes();
+
             foreach (Box box in allBoxesInCart)
             {
                 List <ItemInBox> itemsInBox = box.GetItemsInBox();
