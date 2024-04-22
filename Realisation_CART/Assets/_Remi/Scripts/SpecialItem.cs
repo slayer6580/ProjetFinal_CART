@@ -12,7 +12,7 @@ namespace DiscountDelirium
         [SerializeField] private float m_oscillationHeight = 1.5f;
         [SerializeField] private float m_scale = 1.5f;
 
-        private const int PLAYER_BODY_LAYER = 3;
+        private const int PLAYER_COLLIDER = 6;
 
         private Vector3 m_oscillationPosition = Vector3.zero;
 
@@ -43,7 +43,7 @@ namespace DiscountDelirium
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer != PLAYER_BODY_LAYER) return;
+            if (other.gameObject.layer != PLAYER_COLLIDER) return;
             // TODO: Pick up item
             Destroy(SpecialItemPrefab);
         }
