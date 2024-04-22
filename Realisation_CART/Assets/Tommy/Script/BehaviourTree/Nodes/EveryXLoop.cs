@@ -17,7 +17,6 @@ namespace BehaviourTree
 
 		protected override void OnStop()
 		{
-			Debug.Log("loop ++");
 			m_loopDone++;
 		}
 

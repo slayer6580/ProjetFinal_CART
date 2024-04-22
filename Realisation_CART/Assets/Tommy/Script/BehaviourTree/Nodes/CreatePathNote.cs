@@ -1,4 +1,5 @@
 using BehaviourTree;
+using BoxSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +16,8 @@ namespace DiscountDelirium
 
 		protected override void OnStart()
 		{
-
-			FindPremadePath();
+			EvaluateBestPath();
+			FindRandomPremadePath();
 			CheckForPath();
 
 
@@ -32,7 +33,8 @@ namespace DiscountDelirium
 
 			if (m_blackboard.m_chosenPathListCopy.Count == 0)
 			{
-				FindPremadePath();
+				EvaluateBestPath();
+				FindRandomPremadePath();
 			}
 
 			if (m_blackboard.m_path.Count == 0)
@@ -44,7 +46,7 @@ namespace DiscountDelirium
 		}
 
 
-		private void FindPremadePath()
+		private void FindRandomPremadePath()
 		{
 			int randomTarget = 0;
 
@@ -75,6 +77,40 @@ namespace DiscountDelirium
 
 			}
 		}
+
+
+		public void EvaluateBestPath()
+		{
+			for(int i =0;i < m_blackboard.m_possiblePathScript.ListOfPath.Count;i++)
+			{
+
+			}
+			int numberOfShelfInPath = 0;
+			int shelfActive = 0;
+			foreach(List<GameObject> pathList in m_blackboard.m_possiblePathScript.ListOfPath) 
+			{ 
+				foreach(GameObject pathPoint in pathList)
+				{
+					ClientPathHelper pathHelper = pathPoint.gameObject.GetComponent<ClientPathHelper>();
+					numberOfShelfInPath += pathHelper.m_closeShelfList.Count;
+					foreach(Shelf shelf in pathHelper.m_closeShelfList)
+					{
+						if (shelf.CanTakeItem())
+						{
+							shelfActive++;
+						}
+					}
+				}
+				Debug.LogWarning("nb of counted shelf: " + numberOfShelfInPath);
+				Debug.LogWarning("nb of active shelf in this path: " + shelfActive);
+				numberOfShelfInPath = 0;
+				shelfActive = 0;
+			}
+		}
+
+
+
+
 		private void CheckForPath()
 		{
 

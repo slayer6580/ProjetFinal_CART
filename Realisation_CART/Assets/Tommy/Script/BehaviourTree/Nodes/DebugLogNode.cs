@@ -6,7 +6,8 @@ namespace BehaviourTree
 {
 	public class DebugLogNode : LeafNode
 	{
-		public string message;
+		public string m_message;
+		public bool m_isWarning;
 		protected override void OnStart()
 		{
 			//Debug.Log($"OnStart{message}");
@@ -19,7 +20,15 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			Debug.Log($"OnUpdate{message}");
+			if (m_isWarning)
+			{
+				Debug.LogWarning($"OnUpdate{m_message}");
+			}
+			else
+			{
+				Debug.Log($"OnUpdate{m_message}");
+			}
+			
 			
 			return State.Success;
 		}

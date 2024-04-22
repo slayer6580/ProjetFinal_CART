@@ -24,7 +24,7 @@ namespace BehaviourTree
         {
             if (!m_started)
             {
-                OnStart();
+				OnStart();
                 m_started = true;
             }
             
@@ -32,8 +32,9 @@ namespace BehaviourTree
 
             if(m_state == State.Failure || m_state == State.Success)
             {
-                OnStop();
-                m_started = false;
+				m_started = false;
+				OnStop();
+               
             }
 
             return m_state;

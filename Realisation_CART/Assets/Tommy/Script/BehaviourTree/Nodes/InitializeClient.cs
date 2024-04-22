@@ -1,4 +1,5 @@
 using BehaviourTree;
+using BoxSystem;
 using CartControl;
 using DiscountDelirium;
 using System.Collections;
@@ -17,6 +18,8 @@ namespace BehaviourTree
 			m_blackboard.m_cartStateMachine = m_blackboard.m_thisClient.GetComponent<CartStateMachine>();
 			m_blackboard.m_navAgent = m_blackboard.m_thisClient.GetComponentInChildren<NavMeshAgent>();
 			m_blackboard.m_possiblePathScript = m_blackboard.m_thisClient.GetComponent<ClientPathList>();
+			m_blackboard.m_thisTower = m_blackboard.m_thisClient.transform.Find("Tower").GetComponent<TowerBoxSystem>();
+			m_blackboard.m_cashRegister = GameObject.Find("AiCashRegisterTarget");
 		}
 
 		protected override void OnStop()

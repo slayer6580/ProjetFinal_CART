@@ -51,6 +51,14 @@ namespace Manager
             return new Vector3(nbOfItems, totalScore, nbOfCartokens);
         }
 
+        public void RemoveAllBoxImpulse(TowerBoxSystem tower)
+        {
+			while (tower.GetBoxCount() > 0)
+			{
+				tower.RemoveBoxImpulse();
+			}
+		}
+
         private int CalculateCartokens()
         {
             return (int)(Mathf.Pow(_TowerBoxSystem.GetBoxCount(), m_cartokenValueMultiplier));  
