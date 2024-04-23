@@ -4533,36 +4533,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
-        type: 3}
-      propertyPath: m_speedLevel.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
-        type: 3}
-      propertyPath: m_speedLevel.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
-        type: 3}
-      propertyPath: m_speedLevel.Array.data[1]
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
-        type: 3}
-      propertyPath: m_speedLevel.Array.data[2]
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
-        type: 3}
-      propertyPath: m_speedLevel.Array.data[3]
-      value: 1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
-        type: 3}
-      propertyPath: m_speedLevel.Array.data[4]
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5497454816491432176, guid: 94c720f557dd56f4499e8bd594eb17f8,
         type: 3}
       propertyPath: m_Name
@@ -4630,71 +4600,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_level
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_force.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_fireRate.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_force.Array.data[0]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_force.Array.data[1]
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_force.Array.data[2]
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_force.Array.data[3]
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_force.Array.data[4]
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_fireRate.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_fireRate.Array.data[1]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_fireRate.Array.data[2]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_fireRate.Array.data[3]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
-        type: 3}
-      propertyPath: m_fireRate.Array.data[4]
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7712657334304535727, guid: e690f153d02668049af54e4f7f81fd88,
         type: 3}

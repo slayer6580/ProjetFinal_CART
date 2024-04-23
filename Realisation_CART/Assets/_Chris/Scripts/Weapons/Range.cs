@@ -10,6 +10,7 @@ namespace DiscountDelirium
         [Header("References")]
         [SerializeField] private GameObject m_projectile;
         [SerializeField] private GameObject m_pointToShoot;
+        [SerializeField] private ParticleSystem m_particleSmoke;
 
         [Header("Stats")]
         [SerializeField][Range(0, 4)] private int m_level;
@@ -34,6 +35,7 @@ namespace DiscountDelirium
         {
             Debug.Log("Range Weapon Used");
             m_canFire = false;
+            m_particleSmoke.Play();
             GameObject projectile = Instantiate(m_projectile, m_pointToShoot.transform.position, m_pointToShoot.transform.rotation);
             Vector3 force = m_pointToShoot.transform.forward * m_force[m_level];
             projectile.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);

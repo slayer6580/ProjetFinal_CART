@@ -6,8 +6,8 @@ namespace DiscountDelirium
 {
     public class Ammunition : MonoBehaviour
     {
-        [field: SerializeField] private float m_timeBeforeDestroy;
-
+        [SerializeField] private float m_timeBeforeDestroy;
+        [SerializeField] private GameObject m_model;
 
         private void Awake()
         {
@@ -17,7 +17,15 @@ namespace DiscountDelirium
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log(collision.gameObject.name);
-            Destroy(this.gameObject);
+            HideAmmo();
+        }
+
+        private void HideAmmo() 
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<SphereCollider>().enabled = false;
+            m_model.SetActive(false);
+            Destroy(this, 5f);
         }
 
     }
