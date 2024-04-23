@@ -182,8 +182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: eb4b34430692d2546a2916c1083b1089,
     type: 2}
-  m_itemQuantity: 4
-  m_timeBeforeRespawnForOneItem: 1
+  m_itemQuantity: 1
+  m_timeBeforeRespawnForOneItem: 10
   m_activateItemRespawn: 1
 --- !u!114 &4955522372124155396
 MonoBehaviour:
@@ -197,13 +197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ecd07fc7662c54e8ff980b4faf8767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_haveMaxItem: 1
-  m_nbOfItems: 1000
+  m_haveMaxItem: 0
+  m_nbOfItems: 1
   m_scaleMultiplier: {x: 3, y: 3, z: 3}
   m_surfaces: {fileID: 2721642574038892695}
   m_spawnPoints: {fileID: 7090439031253018403}
-  m_lenghtGap: 0.5
-  m_depthGap: 0.337
+  m_lenghtGap: 0.852
+  m_depthGap: 0.336
 --- !u!33 &7325693639173981787
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -271,7 +271,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 2.2603006, y: 3.288293, z: 0.720047}
   m_Center: {x: 0.00000047683716, y: 1.6441464, z: 0}
