@@ -1,4 +1,5 @@
 using CartControl;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,63 +18,45 @@ namespace StatsSystem
             defense
         }
 
+        [field: Header("Put main character here")]
+        [field: SerializeField] public CartStateMachine CartMachine { get; private set; }
+
         [Header("starting cart token to give at player")]
         [SerializeField] private int m_startingCartToken;
 
         [Header("nb of token cost depending on stat level")]
         [SerializeField] private int[] m_upgradeCostByLevel;
 
-        [Header("Mettre les TextMeshProUGUI du panel upgrade ci dessous")]
-        [SerializeField] private bool m_ShowTMP = false;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_nbOfCartTokenText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_accelerationCostText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_accelerationBuyingText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_accelerationBuyButton;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_accelerationSellButton;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Image m_accelerationFillBar;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_maxSpeedCostText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_maxSpeedBuyingText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_maxSpeedBuyButton;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_maxSpeedSellButton;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Image m_maxSpeedFillBar;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_handlingCostText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_handlingBuyingText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_handlingBuyButton;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_handlingSellButton;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Image m_handlingFillBar;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_defenseCostText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private TextMeshProUGUI m_defenseBuyingText;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_defenseBuyButton;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Button m_defenseSellButton;
-        [ShowIf("m_ShowTMP", true)][SerializeField] private Image m_defenseFillBar;
-
-        [field: Header("Put main character here")]
-        [field: SerializeField] public CartStateMachine CartMachine { get; private set; }
+        [Header("All Canvas Items")]
+        [SerializeField] private TextMeshProUGUI m_nbOfCartTokenText;
+        [Space]
+        [SerializeField] private List<TextMeshProUGUI> m_allCostText = new List<TextMeshProUGUI>();
+        [SerializeField] private List<TextMeshProUGUI> m_allBuyingText = new List<TextMeshProUGUI>();
+        [SerializeField] private List<Button> m_allBuyButton = new List<Button>();
+        [SerializeField] private List<Button> m_allSellButton = new List<Button>();
+        [SerializeField] private List<Image> m_allFillBars = new List<Image>();
 
         private int m_nbCartToken;
-        public int AccelerationStat { get; private set; } = 0;
-        public int MaxSpeedStat { get; private set; } = 0;
-        public int HandlingStat { get; private set; } = 0;
-        public int DefenseStat { get; private set; } = 0;
 
-        private int m_accelerationBuyingCost = 0;
-        private int m_maxSpeedBuyingCost = 0;
-        private int m_handlingBuyingCost = 0;
-        private int m_defenseBuyingCost = 0;
-
-        private int m_accelerationUpgrade = 0;
-        private int m_maxSpeedUpgrade = 0;
-        private int m_handlingUpgrade = 0;
-        private int m_defenseUpgrade = 0;
+        private List<int> m_allStats = new List<int>();
+        private List<int> m_allBuyingCost = new List<int>();
+        private List<int> m_allUpgrade = new List<int>();
 
         private const int MAX_LEVEL = 4;
+        private const int NB_OF_STATS = 4;
 
-        private void Awake()
+
+        private void SetUpList()
         {
-            m_nbCartToken = m_startingCartToken;
+            for (int i = 0; i < NB_OF_STATS; i++)
+            {
+                m_allStats.Add(0);
+                m_allBuyingCost.Add(0);
+                m_allUpgrade.Add(0);
+            }
         }
 
-        private void Start() 
+        private void Start()
         {
             GetSavedUpgrade();
             UpdateAll();
@@ -81,6 +64,8 @@ namespace StatsSystem
 
         private void OnEnable()
         {
+            m_nbCartToken = m_startingCartToken;
+            SetUpList();
             GetSavedUpgrade();
             UpdateAll();
         }
@@ -99,67 +84,48 @@ namespace StatsSystem
 
         private void GetSavedUpgrade()
         {
-            AccelerationStat = PlayerPrefs.GetInt("Acceleration", 0);
-            MaxSpeedStat = PlayerPrefs.GetInt("MaxSpeed", 0);
-            HandlingStat = PlayerPrefs.GetInt("Handling", 0);
+            m_allStats[0] = PlayerPrefs.GetInt("Acceleration", 0);
+            m_allStats[1] = PlayerPrefs.GetInt("MaxSpeed", 0); ;
+            m_allStats[2] = PlayerPrefs.GetInt("Handling", 0);
+            m_allStats[3] = PlayerPrefs.GetInt("Defense", 0);
         }
 
         /// <summary> Update all cost of upgrade </summary>
         private void UpdateCost()
         {
-            if (AccelerationStat < MAX_LEVEL)
-                m_accelerationCostText.text = m_upgradeCostByLevel[AccelerationStat].ToString();
-            else
-                m_accelerationCostText.text = " ";
 
-            if (MaxSpeedStat < MAX_LEVEL)
-                m_maxSpeedCostText.text = m_upgradeCostByLevel[MaxSpeedStat].ToString();
-            else
-                m_maxSpeedCostText.text = " ";
+            for (int i = 0; i < NB_OF_STATS; i++)
+            {
+                if (m_allStats[i] < MAX_LEVEL)
+                {
+                    m_allCostText[i].text = m_upgradeCostByLevel[m_allStats[i]].ToString();
+                    continue;
+                }
 
-            if (HandlingStat < MAX_LEVEL)
-                m_handlingCostText.text = m_upgradeCostByLevel[HandlingStat].ToString();
-            else
-                m_handlingCostText.text = " ";
-
-            if (DefenseStat < MAX_LEVEL)
-                m_defenseCostText.text = m_upgradeCostByLevel[DefenseStat].ToString();
-            else
-                m_defenseCostText.text = " ";
+                m_allCostText[i].text = " ";
+            }
         }
 
         /// <summary> Update all fill bars </summary>
         private void UpdateFillBars()
         {
-            m_accelerationFillBar.fillAmount = (float)AccelerationStat / MAX_LEVEL;
-            m_maxSpeedFillBar.fillAmount = (float)MaxSpeedStat / MAX_LEVEL;
-            m_handlingFillBar.fillAmount = (float)HandlingStat / MAX_LEVEL;
-            m_defenseFillBar.fillAmount = (float)DefenseStat / MAX_LEVEL;
+            for (int i = 0; i < NB_OF_STATS; i++)
+                m_allFillBars[i].fillAmount = (float)m_allStats[i] / MAX_LEVEL;
         }
 
         /// <summary> Update all buying cost </summary>
         private void UpdateBuyingCost()
         {
-            if (m_accelerationUpgrade == 0)
-                m_accelerationBuyingText.text = " ";
-            else
-                m_accelerationBuyingText.text = "- " + m_accelerationBuyingCost.ToString();
+            for (int i = 0; i < NB_OF_STATS; i++)
+            {
+                if (m_allUpgrade[i] == 0)
+                {
+                    m_allBuyingText[i].text = " ";
+                    continue;
+                }
 
-            if (m_maxSpeedUpgrade == 0)
-                m_maxSpeedBuyingText.text = " ";
-            else
-                m_maxSpeedBuyingText.text = "- " + m_maxSpeedBuyingCost.ToString();
-
-            if (m_handlingUpgrade == 0)
-                m_handlingBuyingText.text = " ";
-            else
-                m_handlingBuyingText.text = "- " + m_handlingBuyingCost.ToString();
-
-            if (m_defenseUpgrade == 0)
-                m_defenseBuyingText.text = " ";
-            else
-                m_defenseBuyingText.text = "- " + m_defenseBuyingCost.ToString();
-
+                m_allBuyingText[i].text = "- " + m_allBuyingCost[i].ToString();
+            }
         }
 
         /// <summary> Update money left </summary>
@@ -171,73 +137,36 @@ namespace StatsSystem
         /// <summary> Update all buy button </summary>
         public void UpdateBuyButton()
         {
-            if (AccelerationStat < MAX_LEVEL)
-                m_accelerationBuyButton.interactable = m_nbCartToken >= m_upgradeCostByLevel[AccelerationStat];
-            else
-                m_accelerationBuyButton.interactable = false;
+            for (int i = 0; i < NB_OF_STATS; i++)
+            {
+                if (m_allStats[i] < MAX_LEVEL)
+                {
+                    m_allBuyButton[i].interactable = m_nbCartToken >= m_upgradeCostByLevel[m_allStats[i]];
+                    continue;
+                }
 
-            if (MaxSpeedStat < MAX_LEVEL)
-                m_maxSpeedBuyButton.interactable = m_nbCartToken >= m_upgradeCostByLevel[MaxSpeedStat];
-            else
-                m_maxSpeedBuyButton.interactable = false;
+                m_allBuyButton[i].interactable = false;
 
-            if (HandlingStat < MAX_LEVEL)
-                m_handlingBuyButton.interactable = m_nbCartToken >= m_upgradeCostByLevel[HandlingStat];
-            else
-                m_handlingBuyButton.interactable = false;
-
-            if (DefenseStat < MAX_LEVEL)
-                m_defenseBuyButton.interactable = m_nbCartToken >= m_upgradeCostByLevel[DefenseStat];
-            else
-                m_defenseBuyButton.interactable = false;
+            }
 
         }
 
         /// <summary> Update all sell button </summary>
         public void UpdateSellButton()
         {
-            m_accelerationSellButton.interactable = m_accelerationUpgrade > 0;
-            m_maxSpeedSellButton.interactable = m_maxSpeedUpgrade > 0;
-            m_handlingSellButton.interactable = m_handlingUpgrade > 0;
-            m_defenseSellButton.interactable = m_defenseUpgrade > 0;
+            for (int i = 0; i < NB_OF_STATS; i++)
+                m_allSellButton[i].interactable = m_allUpgrade[i] > 0;
         }
 
         /// <summary> Buy upgrade </summary>
         public void BuyUpgrade(int statsIndex)
         {
-            EStats stats = (EStats)statsIndex;
-
             int cost;
-            switch (stats)
-            {
-                case EStats.acceleration:
-                    cost = m_upgradeCostByLevel[AccelerationStat];
-                    m_accelerationBuyingCost += cost;
-                    m_accelerationUpgrade++;
-                    AccelerationStat++;
-                    break;
-                case EStats.maxSpeed:
-                    cost = m_upgradeCostByLevel[MaxSpeedStat];
-                    m_maxSpeedBuyingCost += cost;
-                    m_maxSpeedUpgrade++;
-                    MaxSpeedStat++;
-                    break;
-                case EStats.handling:
-                    cost = m_upgradeCostByLevel[HandlingStat];
-                    m_handlingBuyingCost += cost;
-                    m_handlingUpgrade++;
-                    HandlingStat++;
-                    break;
-                case EStats.defense:
-                    cost = m_upgradeCostByLevel[DefenseStat];
-                    m_defenseBuyingCost += cost;
-                    m_defenseUpgrade++;
-                    DefenseStat++;
-                    break;
-                default:
-                    cost = int.MaxValue;
-                    break;
-            }
+
+            cost = m_upgradeCostByLevel[m_allStats[statsIndex]];
+            m_allBuyingCost[statsIndex] += cost;
+            m_allUpgrade[statsIndex]++;
+            m_allStats[statsIndex]++;
 
             m_nbCartToken -= cost;
             UpdateAll();
@@ -246,40 +175,12 @@ namespace StatsSystem
         /// <summary> Sell upgrade </summary>
         public void SellUpgrade(int statsIndex)
         {
-            EStats stats = (EStats)statsIndex;
-
             int refund;
-            switch (stats)
-            {
-                case EStats.acceleration:
-                    refund = m_upgradeCostByLevel[AccelerationStat - 1];
-                    m_accelerationBuyingCost -= refund;
-                    m_accelerationUpgrade--;
-                    AccelerationStat--;
-                    break;
-                case EStats.maxSpeed:
-                    refund = m_upgradeCostByLevel[MaxSpeedStat - 1];
-                    m_maxSpeedBuyingCost -= refund;
-                    m_maxSpeedUpgrade--;
-                    MaxSpeedStat--;
-                    break;
-                case EStats.handling:
-                    refund = m_upgradeCostByLevel[HandlingStat - 1];
-                    m_handlingBuyingCost -= refund;
-                    m_handlingUpgrade--;
-                    HandlingStat--;
-                    break;
-                case EStats.defense:
-                    refund = m_upgradeCostByLevel[DefenseStat - 1];
-                    m_defenseBuyingCost -= refund;
-                    m_defenseUpgrade--;
-                    DefenseStat--;
-                    break;
-                default:
-                    refund = 0;
-                    break;
 
-            }
+            refund = m_upgradeCostByLevel[m_allStats[statsIndex] - 1];
+            m_allBuyingCost[statsIndex] -= refund;
+            m_allUpgrade[statsIndex]--;
+            m_allStats[statsIndex]--;
 
             m_nbCartToken += refund;
             UpdateAll();
@@ -295,19 +196,18 @@ namespace StatsSystem
         /// <summary> Accept All upgrade and change scene </summary>
         public void AcceptUpgrade()
         {
-            m_accelerationBuyingCost = 0;
-            m_maxSpeedBuyingCost = 0;
-            m_handlingBuyingCost = 0;
-            m_defenseBuyingCost = 0;
+            for (int i = 0; i < NB_OF_STATS; i++)            
+                m_allBuyingCost[i] = 0;
+            
 
-            m_accelerationUpgrade = 0;
-            m_maxSpeedUpgrade = 0;
-            m_handlingUpgrade = 0;
-            m_defenseUpgrade = 0;
+            for (int i = 0; i < NB_OF_STATS; i++)            
+                m_allUpgrade[i] = 0;
+            
             UpdateAll();
-            PlayerPrefs.SetInt("Acceleration", AccelerationStat);
-            PlayerPrefs.SetInt("MaxSpeed", MaxSpeedStat);
-            PlayerPrefs.SetInt("Handling", HandlingStat);
+            PlayerPrefs.SetInt("Acceleration", m_allStats[0]);
+            PlayerPrefs.SetInt("MaxSpeed", m_allStats[1]);
+            PlayerPrefs.SetInt("Handling", m_allStats[2]);
+            PlayerPrefs.SetInt("Defense", m_allStats[3]);
 
             SceneManager.LoadScene("Main");
         }
@@ -315,25 +215,13 @@ namespace StatsSystem
         /// <summary> Restart all upgrade choices </summary>
         public void Restart()
         {
-            int accelerationUpgrade = m_accelerationUpgrade;
-            for (int i = 0; i < accelerationUpgrade; i++)
+
+            for (int i = 0; i < NB_OF_STATS; i++)
             {
-                SellUpgrade((int)EStats.acceleration);
-            }
-            int maxSpeedUpgrade = m_maxSpeedUpgrade;
-            for (int i = 0; i < maxSpeedUpgrade; i++)
-            {
-                SellUpgrade((int)EStats.maxSpeed);
-            }
-            int handlingUpgrade = m_handlingUpgrade;
-            for (int i = 0; i < handlingUpgrade; i++)
-            {
-                SellUpgrade((int)EStats.handling);
-            }
-            int defenseUpgrade = m_defenseUpgrade;
-            for (int i = 0; i < defenseUpgrade; i++)
-            {
-                SellUpgrade((int)EStats.defense);
+                int nbOfUpgrade = m_allUpgrade[i];
+
+                for (int j = 0; j < nbOfUpgrade; j++)                
+                    SellUpgrade(i);                
             }
 
             UpdateAll();
@@ -344,6 +232,11 @@ namespace StatsSystem
         {
             m_nbCartToken += amount;
             UpdateMoney();
+        }
+
+        public int GetStatLevel(EStats stats)
+        {
+            return m_allStats[(int)stats];
         }
     }
 

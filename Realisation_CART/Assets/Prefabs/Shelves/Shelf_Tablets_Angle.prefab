@@ -180,8 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemData>k__BackingField: {fileID: 11400000, guid: eb4b34430692d2546a2916c1083b1089,
     type: 2}
-  m_itemQuantity: 4
-  m_timeBeforeRespawnForOneItem: 1
+  m_itemQuantity: 1
+  m_timeBeforeRespawnForOneItem: 10
   m_activateItemRespawn: 1
 --- !u!114 &2376315546985400576
 MonoBehaviour:
@@ -195,8 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ecd07fc7662c54e8ff980b4faf8767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_haveMaxItem: 1
-  m_nbOfItems: 1000
+  m_haveMaxItem: 0
+  m_nbOfItems: 1
   m_scaleMultiplier: {x: 1.5, y: 1.5, z: 1.5}
   m_surfaces: {fileID: 5737626125285435680}
   m_spawnPoints: {fileID: 1734808668959297323}
