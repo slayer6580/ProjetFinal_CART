@@ -15,7 +15,9 @@ namespace StatsSystem
             acceleration,
             maxSpeed,
             handling,
-            defense
+            defense,
+            ranged,
+            melee
         }
 
         [field: Header("Put main character here")]
@@ -43,7 +45,7 @@ namespace StatsSystem
         private List<int> m_allUpgrade = new List<int>();
 
         private const int MAX_LEVEL = 4;
-        private const int NB_OF_STATS = 4;
+        private const int NB_OF_STATS = 6;
 
 
         private void SetUpList()
@@ -88,6 +90,8 @@ namespace StatsSystem
             m_allStats[1] = PlayerPrefs.GetInt("MaxSpeed", 0); ;
             m_allStats[2] = PlayerPrefs.GetInt("Handling", 0);
             m_allStats[3] = PlayerPrefs.GetInt("Defense", 0);
+            m_allStats[4] = PlayerPrefs.GetInt("Ranged", 0);
+            m_allStats[5] = PlayerPrefs.GetInt("Melee", 0);
         }
 
         /// <summary> Update all cost of upgrade </summary>
@@ -196,20 +200,27 @@ namespace StatsSystem
         /// <summary> Accept All upgrade and change scene </summary>
         public void AcceptUpgrade()
         {
-            for (int i = 0; i < NB_OF_STATS; i++)            
+            for (int i = 0; i < NB_OF_STATS; i++)
                 m_allBuyingCost[i] = 0;
-            
 
-            for (int i = 0; i < NB_OF_STATS; i++)            
+
+            for (int i = 0; i < NB_OF_STATS; i++)
                 m_allUpgrade[i] = 0;
-            
+
             UpdateAll();
+            SaveUpgrades();
+
+            SceneManager.LoadScene("Main");
+        }
+
+        private void SaveUpgrades()
+        {
             PlayerPrefs.SetInt("Acceleration", m_allStats[0]);
             PlayerPrefs.SetInt("MaxSpeed", m_allStats[1]);
             PlayerPrefs.SetInt("Handling", m_allStats[2]);
             PlayerPrefs.SetInt("Defense", m_allStats[3]);
-
-            SceneManager.LoadScene("Main");
+            PlayerPrefs.SetInt("Ranged", m_allStats[4]);
+            PlayerPrefs.SetInt("Melee", m_allStats[5]);
         }
 
         /// <summary> Restart all upgrade choices </summary>
