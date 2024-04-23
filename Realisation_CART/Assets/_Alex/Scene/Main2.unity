@@ -4786,7 +4786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde1fee560655e14bb95ffc7a13f1fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GameLength>k__BackingField: 1
+  <GameLength>k__BackingField: 1000
   m_playerSM: {fileID: 1016554958}
   m_scoreUI: {fileID: 1333703638}
   m_upgrademanager: {fileID: 4765950434366556113}
@@ -4981,7 +4981,7 @@ PrefabInstance:
     - target: {fileID: 2452949573761676810, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.52
+      value: -46
       objectReference: {fileID: 0}
     - target: {fileID: 2452949573761676810, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
@@ -18199,7 +18199,7 @@ Transform:
   m_GameObject: {fileID: 3959612820659040669}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0964041, y: 0.70050436, z: -0.096404105, w: 0.7005043}
-  m_LocalPosition: {x: 9.06, y: 2.8432279, z: -1.5199995}
+  m_LocalPosition: {x: 9.06, y: 2.8432279, z: -46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21094,7 +21094,7 @@ Transform:
   m_GameObject: {fileID: 1695684694099198788}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0964041, y: 0.70050436, z: -0.096404105, w: 0.7005043}
-  m_LocalPosition: {x: 9.06, y: 2.8432279, z: -1.5199995}
+  m_LocalPosition: {x: 9.06, y: 2.8432279, z: -46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
