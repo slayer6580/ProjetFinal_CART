@@ -1,9 +1,11 @@
 using CartControl;
+using Cinemachine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 namespace StatsSystem
 {
@@ -22,6 +24,15 @@ namespace StatsSystem
 
         [field: Header("Put main character here")]
         [field: SerializeField] public CartStateMachine CartMachine { get; private set; }
+
+        [Header("Put main virtual camera here")]
+        [SerializeField] private CinemachineVirtualCamera m_virtualCamera;
+
+        [Header("Put character scene position here")]
+        [SerializeField] private Transform m_scenePosition;
+
+        [Header("Rotation of player")]
+        [SerializeField] private Vector3 m_playerRotationEuler;
 
         [Header("starting cart token to give at player")]
         [SerializeField] private int m_startingCartToken;
@@ -58,19 +69,20 @@ namespace StatsSystem
             }
         }
 
-        private void Start()
-        {
-            GetSavedUpgrade();
-            UpdateAll();
-        }
-
-        private void OnEnable()
+        private void Awake()
         {
             m_nbCartToken = m_startingCartToken;
             SetUpList();
             GetSavedUpgrade();
             UpdateAll();
         }
+
+        private void Start()
+        {
+            GetSavedUpgrade();
+            UpdateAll();
+        }
+
 
         private void UpdateAll()
         {
@@ -223,6 +235,19 @@ namespace StatsSystem
             PlayerPrefs.SetInt("Melee", m_allStats[5]);
         }
 
+        public void TeleportPlayerToScene()
+        {
+            m_virtualCamera.Priority = 8;
+            Rigidbody rb = CartMachine.gameObject.GetComponent<Rigidbody>();
+
+            if (rb != null)
+                rb.useGravity = false;
+
+            CartMachine.gameObject.transform.position = m_scenePosition.position;
+            CartMachine.gameObject.transform.localEulerAngles = m_playerRotationEuler;
+        }
+
+
         /// <summary> Restart all upgrade choices </summary>
         public void Restart()
         {
@@ -231,8 +256,8 @@ namespace StatsSystem
             {
                 int nbOfUpgrade = m_allUpgrade[i];
 
-                for (int j = 0; j < nbOfUpgrade; j++)                
-                    SellUpgrade(i);                
+                for (int j = 0; j < nbOfUpgrade; j++)
+                    SellUpgrade(i);
             }
 
             UpdateAll();

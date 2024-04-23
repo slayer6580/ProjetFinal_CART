@@ -1,3 +1,4 @@
+using StatsSystem;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace DiscountDelirium
 		[SerializeField] private TextMeshProUGUI m_textScore;
         [SerializeField] private TextMeshProUGUI m_textNbItems;
         [SerializeField] private TextMeshProUGUI m_textNbCartoken;
+        [SerializeField] private UpgradeManager m_upgradeManager;
      
 
         public void EnableUI(bool show)
@@ -28,6 +30,7 @@ namespace DiscountDelirium
         {
             m_panelUI.SetActive(false);
             m_panelUpgrade.SetActive(true);
+            m_upgradeManager.TeleportPlayerToScene();
 
 		}
     }
