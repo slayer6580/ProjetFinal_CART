@@ -199,11 +199,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_haveMaxItem: 1
   m_nbOfItems: 1000
-  m_scaleMultiplier: {x: 1.5, y: 1.5, z: 1.5}
+  m_scaleMultiplier: {x: 3, y: 3, z: 3}
   m_surfaces: {fileID: 2721642574038892695}
   m_spawnPoints: {fileID: 7090439031253018403}
-  m_lenghtGap: 0.2
-  m_depthGap: 0.2
+  m_lenghtGap: 0.5
+  m_depthGap: 0.337
 --- !u!33 &7325693639173981787
 MeshFilter:
   m_ObjectHideFlags: 0
