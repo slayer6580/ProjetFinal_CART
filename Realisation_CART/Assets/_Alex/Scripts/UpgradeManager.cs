@@ -1,9 +1,11 @@
 using CartControl;
+using Cinemachine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 namespace StatsSystem
 {
@@ -15,11 +17,22 @@ namespace StatsSystem
             acceleration,
             maxSpeed,
             handling,
-            defense
+            defense,
+            ranged,
+            melee
         }
 
         [field: Header("Put main character here")]
         [field: SerializeField] public CartStateMachine CartMachine { get; private set; }
+
+        [Header("Put main virtual camera here")]
+        [SerializeField] private CinemachineVirtualCamera m_virtualCamera;
+
+        [Header("Put character scene position here")]
+        [SerializeField] private Transform m_scenePosition;
+
+        [Header("Rotation of player")]
+        [SerializeField] private Vector3 m_playerRotationEuler;
 
         [Header("starting cart token to give at player")]
         [SerializeField] private int m_startingCartToken;
@@ -43,7 +56,7 @@ namespace StatsSystem
         private List<int> m_allUpgrade = new List<int>();
 
         private const int MAX_LEVEL = 4;
-        private const int NB_OF_STATS = 4;
+        private const int NB_OF_STATS = 6;
 
 
         private void SetUpList()
@@ -56,19 +69,20 @@ namespace StatsSystem
             }
         }
 
-        private void Start()
-        {
-            GetSavedUpgrade();
-            UpdateAll();
-        }
-
-        private void OnEnable()
+        private void Awake()
         {
             m_nbCartToken = m_startingCartToken;
             SetUpList();
             GetSavedUpgrade();
             UpdateAll();
         }
+
+        private void Start()
+        {
+            GetSavedUpgrade();
+            UpdateAll();
+        }
+
 
         private void UpdateAll()
         {
@@ -88,6 +102,8 @@ namespace StatsSystem
             m_allStats[1] = PlayerPrefs.GetInt("MaxSpeed", 0); ;
             m_allStats[2] = PlayerPrefs.GetInt("Handling", 0);
             m_allStats[3] = PlayerPrefs.GetInt("Defense", 0);
+            m_allStats[4] = PlayerPrefs.GetInt("Ranged", 0);
+            m_allStats[5] = PlayerPrefs.GetInt("Melee", 0);
         }
 
         /// <summary> Update all cost of upgrade </summary>
@@ -196,21 +212,41 @@ namespace StatsSystem
         /// <summary> Accept All upgrade and change scene </summary>
         public void AcceptUpgrade()
         {
-            for (int i = 0; i < NB_OF_STATS; i++)            
+            for (int i = 0; i < NB_OF_STATS; i++)
                 m_allBuyingCost[i] = 0;
-            
 
-            for (int i = 0; i < NB_OF_STATS; i++)            
+
+            for (int i = 0; i < NB_OF_STATS; i++)
                 m_allUpgrade[i] = 0;
-            
+
             UpdateAll();
+            SaveUpgrades();
+
+            SceneManager.LoadScene("Main");
+        }
+
+        private void SaveUpgrades()
+        {
             PlayerPrefs.SetInt("Acceleration", m_allStats[0]);
             PlayerPrefs.SetInt("MaxSpeed", m_allStats[1]);
             PlayerPrefs.SetInt("Handling", m_allStats[2]);
             PlayerPrefs.SetInt("Defense", m_allStats[3]);
-
-            SceneManager.LoadScene("Main");
+            PlayerPrefs.SetInt("Ranged", m_allStats[4]);
+            PlayerPrefs.SetInt("Melee", m_allStats[5]);
         }
+
+        public void TeleportPlayerToScene()
+        {
+            m_virtualCamera.Priority = 8;
+            Rigidbody rb = CartMachine.gameObject.GetComponent<Rigidbody>();
+
+            if (rb != null)
+                rb.useGravity = false;
+
+            CartMachine.gameObject.transform.position = m_scenePosition.position;
+            CartMachine.gameObject.transform.localEulerAngles = m_playerRotationEuler;
+        }
+
 
         /// <summary> Restart all upgrade choices </summary>
         public void Restart()
@@ -220,8 +256,8 @@ namespace StatsSystem
             {
                 int nbOfUpgrade = m_allUpgrade[i];
 
-                for (int j = 0; j < nbOfUpgrade; j++)                
-                    SellUpgrade(i);                
+                for (int j = 0; j < nbOfUpgrade; j++)
+                    SellUpgrade(i);
             }
 
             UpdateAll();

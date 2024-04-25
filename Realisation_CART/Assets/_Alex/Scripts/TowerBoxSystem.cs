@@ -25,6 +25,10 @@ namespace BoxSystem
         [SerializeField] private float m_itemExpulsionForce;
         [SerializeField] private float m_boxExpulsionForce;
 
+        [Header("Destruction Time")]
+        [SerializeField] private float m_itemDestructionTime;
+        [SerializeField] private float m_boxDestructionTime;
+
         private int m_boxCount = 0;
         private List<Box> m_boxesInCart = new List<Box>();
 
@@ -135,9 +139,7 @@ namespace BoxSystem
             Vector3 totalImpulse = topBox.transform.up * m_boxExpulsionForce;
             Rigidbody rb = topBox.AddComponent<Rigidbody>();
             rb.AddForce(totalImpulse, ForceMode.Impulse);
-            AutoDestruction destruct = topBox.GetComponent<AutoDestruction>();
-            destruct.enabled = true;
-            destruct.DestroyItem();
+            Destroy(topBox.gameObject, m_boxDestructionTime);
 
             RemoveLastBoxFromTower();
             m_towerPhysics.RemoveBoxFromPhysicsTower();
@@ -169,9 +171,7 @@ namespace BoxSystem
 
             rb.AddForce(totalImpulse, ForceMode.Impulse);
 
-            AutoDestruction destruct = lastItemInBox.m_item.GetComponent<AutoDestruction>();
-            destruct.enabled = true;
-            destruct.DestroyItem();
+            Destroy(lastItemInBox.m_item.gameObject, m_itemDestructionTime);
 
             topBox.ResetSlots(lastItemInBox);
             topBox.GetItemsInBox().Remove(lastItemInBox);

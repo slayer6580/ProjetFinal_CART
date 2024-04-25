@@ -22,8 +22,8 @@ namespace CartControl
 			//Stop all movement
 			m_cartStateMachine.CartMovement.StopMovement();
 			m_cartStateMachine.CartRB.isKinematic = true;
-			m_cartStateMachine.VirtualCamera.SetActive(false);
-			m_cartStateMachine.CamBrain.enabled = false;
+			//m_cartStateMachine.VirtualCamera.SetActive(false);
+			//m_cartStateMachine.CamBrain.enabled = false;
 
 			//If wanted, depending of the coming state, reactivate variables so we can get back to these State after this one
 			if (!m_cartStateMachine.BackToIdleAfterStop)
@@ -57,8 +57,8 @@ namespace CartControl
 		public override void OnExit()
 		{
 			m_cartStateMachine.CartRB.isKinematic = false;
-			m_cartStateMachine.CamBrain.enabled = true;
-			m_cartStateMachine.VirtualCamera.SetActive(true);
+			//m_cartStateMachine.CamBrain.enabled = true;
+			//m_cartStateMachine.VirtualCamera.SetActive(true);
 
 			//Reactivate movement as they was if wanted
 			if (!m_cartStateMachine.BackToIdleAfterStop)
