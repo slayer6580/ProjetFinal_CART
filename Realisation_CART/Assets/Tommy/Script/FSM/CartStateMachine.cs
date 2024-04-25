@@ -35,7 +35,7 @@ namespace CartControl
 		///
 		[field: Header("Drifting")]
 		[field: SerializeField] public float MinimumSpeedToAllowDrift { get; private set; }
-		[field: SerializeField][field: Range(0, 3)] public float DriftingDrag { get; private set; }
+		[field: SerializeField][field: Range(0, 3)] public float DriftingDrag { get; set; }
 		[field: SerializeField] public float DriftingRotatingSpeed { get; private set; }
 		[field: SerializeField] public float AddedRotatingSpeedWhenBreaking { get; private set; }
 		[field: SerializeField] public float DriftingAcceleration { get; private set; }
