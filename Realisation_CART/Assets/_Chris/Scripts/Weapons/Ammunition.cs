@@ -8,6 +8,7 @@ namespace DiscountDelirium
     {
         [SerializeField] private float m_timeBeforeDestroy;
         [SerializeField] private GameObject m_model;
+        [SerializeField] private ParticleSystem ImpactVFX;
 
         private void Awake()
         {
@@ -17,6 +18,7 @@ namespace DiscountDelirium
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log(collision.gameObject.name);
+            ImpactVFX.Play();
             HideAmmo();
         }
 
@@ -25,7 +27,7 @@ namespace DiscountDelirium
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<SphereCollider>().enabled = false;
             m_model.SetActive(false);
-            Destroy(this, 5f);
+            Destroy(this.gameObject, 5f);
         }
 
     }
