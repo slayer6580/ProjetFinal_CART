@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4687809823889796997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4030542693024701384}
+  - component: {fileID: 5757264576861340255}
+  m_Layer: 0
+  m_Name: VisualManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4030542693024701384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4687809823889796997}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.763928, y: -4.8594666, z: 37.23971}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5757264576861340255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4687809823889796997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768d6fea888ee374a92a5b19ebd7fc30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_cartMaterials:
+  - {fileID: 2100000, guid: 9e8bc1c52d50a99409ddd36d487fcc01, type: 2}
+  - {fileID: 2100000, guid: 016787063dff07c43b8003ccd49bf7dd, type: 2}
+  - {fileID: 2100000, guid: 6628d396656bbd84986779c7d6592116, type: 2}
+  - {fileID: 2100000, guid: 3b7af91f6cee80e45aeefc107fa98f35, type: 2}
+  - {fileID: 2100000, guid: 0e9b8cf7ec275a24ba58f3a8b1d259c0, type: 2}
+  m_wheelsMaterials:
+  - {fileID: 9098992104438579253, guid: 4272f2fa4cfe72140a79cba9eb98ba88, type: 3}
+  - {fileID: 2100000, guid: 016787063dff07c43b8003ccd49bf7dd, type: 2}
+  - {fileID: 2100000, guid: 6628d396656bbd84986779c7d6592116, type: 2}
+  - {fileID: 2100000, guid: 3b7af91f6cee80e45aeefc107fa98f35, type: 2}
+  - {fileID: 2100000, guid: 0e9b8cf7ec275a24ba58f3a8b1d259c0, type: 2}
+  m_shoesMaterials: []
+  m_cartParts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_wheelParts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_shoesParts: []

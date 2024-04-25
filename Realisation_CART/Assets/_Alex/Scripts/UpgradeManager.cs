@@ -17,7 +17,7 @@ namespace StatsSystem
             acceleration,
             maxSpeed,
             handling,
-            defense,
+            balance,
             ranged,
             melee
         }
@@ -73,8 +73,6 @@ namespace StatsSystem
         {
             m_nbCartToken = m_startingCartToken;
             SetUpList();
-            GetSavedUpgrade();
-            UpdateAll();
         }
 
         private void Start()
@@ -92,6 +90,7 @@ namespace StatsSystem
             UpdateFillBars();
             UpdateBuyButton();
             UpdateSellButton();
+            VisualManager.GetInstance().UpdateAll();
 
             DeselectAllButtons();
         }
@@ -101,7 +100,7 @@ namespace StatsSystem
             m_allStats[0] = PlayerPrefs.GetInt("Acceleration", 0);
             m_allStats[1] = PlayerPrefs.GetInt("MaxSpeed", 0); ;
             m_allStats[2] = PlayerPrefs.GetInt("Handling", 0);
-            m_allStats[3] = PlayerPrefs.GetInt("Defense", 0);
+            m_allStats[3] = PlayerPrefs.GetInt("Balance", 0);
             m_allStats[4] = PlayerPrefs.GetInt("Ranged", 0);
             m_allStats[5] = PlayerPrefs.GetInt("Melee", 0);
         }
@@ -185,6 +184,7 @@ namespace StatsSystem
             m_allStats[statsIndex]++;
 
             m_nbCartToken -= cost;
+            SaveUpgrades();
             UpdateAll();
         }
 
@@ -199,6 +199,7 @@ namespace StatsSystem
             m_allStats[statsIndex]--;
 
             m_nbCartToken += refund;
+            SaveUpgrades();
             UpdateAll();
         }
 
@@ -230,7 +231,7 @@ namespace StatsSystem
             PlayerPrefs.SetInt("Acceleration", m_allStats[0]);
             PlayerPrefs.SetInt("MaxSpeed", m_allStats[1]);
             PlayerPrefs.SetInt("Handling", m_allStats[2]);
-            PlayerPrefs.SetInt("Defense", m_allStats[3]);
+            PlayerPrefs.SetInt("Balance", m_allStats[3]);
             PlayerPrefs.SetInt("Ranged", m_allStats[4]);
             PlayerPrefs.SetInt("Melee", m_allStats[5]);
         }
