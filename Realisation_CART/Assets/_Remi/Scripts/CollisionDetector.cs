@@ -6,7 +6,7 @@ namespace DynamicEnvironment
     public class CollisionDetector : MonoBehaviour
     {
         [field: SerializeField] private DynamicEnvironment _DynamicEnvironment { get; set; } = null;
-        private const int PLAYER_COLLIDER = 6;
+        private const int PLAYER_COLLIDER = 6; // TODO Remi: Repetition: Ask the team for global variable script
         private const int CLIENT_COLLIDER = 7;
 
         private bool m_isDestructionStageZero = false;
