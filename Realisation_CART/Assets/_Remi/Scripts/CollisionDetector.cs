@@ -1,100 +1,87 @@
+using System;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 namespace DynamicEnvironment
 {
     public class CollisionDetector : MonoBehaviour
     {
-        [field: SerializeField] private GameObject SpecialFXGOFireStage01 { get; set; } = null;
-        [field: SerializeField] private GameObject SpecialFXGOFireStage02 { get; set; } = null;
-        [field: SerializeField] private GameObject SpecialFXGOFireStage03 { get; set; } = null;
-        [field: SerializeField] private GameObject SpecialFXGOFireSprinklers { get; set; } = null;
-
+        [field: SerializeField] private DynamicEnvironment _DynamicEnvironment { get; set; } = null;
         private const int PLAYER_COLLIDER = 6;
         private const int CLIENT_COLLIDER = 7;
 
-        [SerializeField] private float m_max_health = 10000.0f;
-        private float m_itemHealthPoints = 10000.0f;
+        private bool m_isDestructionStageZero = false;
+        private bool m_isDestructionStageOne = false;
+        private bool m_m_isDestructionStageTwo = false;
 
-        private bool m_isStage01FireActive = false;
-        private bool m_isStage02FireActive = false;
-        private bool m_isStage03FireActive = false;
+        [SerializeField] private float m_max_health = 2500.0f;
+
+        private float m_itemHealthPoints = 2500.0f;
+        [SerializeField] private int m_id = 0;
 
         private void Awake()
         {
-            m_itemHealthPoints = m_max_health;
+            ResetItem();
         }
-
+        
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("Collision detected from layer: " + collision.gameObject.layer);
+            //Debug.Log("Collision detected from layer: " + collision.gameObject.layer);
             if (collision.gameObject.layer != PLAYER_COLLIDER
-                && collision.gameObject.layer != CLIENT_COLLIDER) 
+                && collision.gameObject.layer != CLIENT_COLLIDER)
                 return;
 
-            Debug.Log("Collision detected from player or client");
+            //Debug.Log("Collision detected from player or client");
             float velocity = collision.impulse.magnitude;
-            Debug.Log($"Velocity: {velocity}");
-
+            //Debug.Log($"Velocity: {velocity}");
             m_itemHealthPoints -= velocity;
-            Debug.Log($"Item health points: {m_itemHealthPoints}");
-
-            if (m_itemHealthPoints <= (m_max_health * 3 / 4) && !m_isStage01FireActive)
-            {
-                Debug.Log("Stage 1 fire");
-                ActivateAllPaticles(SpecialFXGOFireStage01);
-                m_isStage01FireActive = true;
-            }
-            else if (m_itemHealthPoints <= (m_max_health * 2 / 4) && !m_isStage02FireActive)
-            {
-                Debug.Log("Stage 2 fire");
-                ActivateAllPaticles(SpecialFXGOFireStage02);
-                m_isStage02FireActive = true;
-            }
-            else if (m_itemHealthPoints <= (m_max_health * 1 / 4) && !m_isStage03FireActive)
-            {
-                Debug.Log("Stage 3 fire");
-                ActivateAllPaticles(SpecialFXGOFireStage03);
-                m_isStage03FireActive = true;
-                // Delay ActivateAllPaticles(SpecialFXPrefabFireSprinklers) by 5 seconds
-                Invoke("ActivateFireSprinklers", 5.0f);
-            }
+            //Debug.Log($"Item health points: {_DynamicEnvironment.GetItemHealthPoints()}");
+            Debug.Log("Item Id: " + GetId()); 
+            _DynamicEnvironment.SetItemDestructionStage(this);
         }
 
-        private void ActivateAllPaticles(GameObject fireStage)
+        public int GetId()
         {
-            fireStage.SetActive(true);
-
-            foreach (Transform child in fireStage.transform)
-            {
-                ParticleSystem particleSystem = child.GetComponent<ParticleSystem>();
-                if (particleSystem == null) continue;
-                particleSystem.Play();
-                ParticleSystem.EmissionModule emissionModule = particleSystem.emission;
-                emissionModule.enabled = true;
-            }
+            return m_id;
         }
 
-        private void ActivateFireSprinklers()
+        public void SetId(int id)
         {
-            SpecialFXGOFireSprinklers.SetActive(true);
-
-            foreach (Transform child in SpecialFXGOFireSprinklers.transform)
-            {
-                ParticleSystem particleSystem = child.GetComponent<ParticleSystem>();
-                if (particleSystem == null) continue;
-                particleSystem.Play();
-                ParticleSystem.EmissionModule emissionModule = particleSystem.emission;
-                emissionModule.enabled = true;
-            }
+            m_id = id;
         }
 
-        public void ResetItem()
+        internal void ResetItem()
         {
             m_itemHealthPoints = m_max_health;
-            m_isStage01FireActive = false;
-            m_isStage02FireActive = false;
-            m_isStage03FireActive = false;
+            m_isDestructionStageZero = false;
+            m_isDestructionStageOne = false;
+            m_m_isDestructionStageTwo = false;
+        }
+
+        internal float GetHItemHealthPoints()
+        {
+            return m_itemHealthPoints;
+        }
+
+        internal bool GetIsStageDestructionActive(int stage)
+        {
+            if (stage == 0)
+                return m_isDestructionStageZero;
+            else if (stage == 1)
+                return m_isDestructionStageOne;
+            else if (stage == 2)
+                return m_m_isDestructionStageTwo;
+            else
+                return false;
+        }
+
+        internal void SetIsStageDestructionActive(int stage, bool value)
+        {
+            if (stage == 0)
+                m_isDestructionStageZero = value;
+            else if (stage == 1)
+                m_isDestructionStageOne = value;
+            else if (stage == 2)
+                m_m_isDestructionStageTwo = value;
         }
     }
 }
