@@ -200,8 +200,8 @@ MonoBehaviour:
   m_scaleMultiplier: {x: 1.5, y: 1.5, z: 1.5}
   m_surfaces: {fileID: 2362918736933888480}
   m_spawnPoints: {fileID: 1900150692177660370}
-  m_lenghtGap: 0.2
-  m_depthGap: 0.2
+  m_lenghtGap: 0.076
+  m_depthGap: 0.097
 --- !u!33 &8054252182708469128
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -7,16 +7,15 @@ namespace BehaviourTree
 	public class EveryXLoop : DecoratorNode
 	{
 		public int m_everyXLoop;
-		public
-			
-			int m_loopDone = 0;
+		public int m_loopDone = 5;
+
 		protected override void OnStart()
 		{
-			
 		}
 
 		protected override void OnStop()
 		{
+			Debug.Log("EVERY X");
 			m_loopDone++;
 		}
 

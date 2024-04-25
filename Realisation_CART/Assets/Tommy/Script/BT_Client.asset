@@ -31,6 +31,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
@@ -65,6 +66,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: 5716047739387089118}
@@ -99,6 +101,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &-5590988987957405943
 MonoBehaviour:
@@ -131,6 +134,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: 3326102372483472499}
@@ -167,6 +171,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &-4986815811770323114
 MonoBehaviour:
@@ -199,6 +204,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   duration: 1
 --- !u!114 &-4791587659610497402
@@ -232,6 +238,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &-4462508058658981125
 MonoBehaviour:
@@ -264,11 +271,12 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: -2147730505803548934}
   m_underSpeedToCountAsStuck: 2
-  m_timeBeforeUnstuck: 1
+  m_timeBeforeUnstuck: 0.5
 --- !u!114 &-3227431665639533130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +308,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
@@ -334,6 +343,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: Check if own tower is big enough
   m_children:
   - {fileID: -5590988987957405943}
@@ -371,6 +381,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
@@ -405,6 +416,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: 5008585417485003999}
@@ -443,6 +455,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &-1903758984178049680
 MonoBehaviour:
@@ -475,6 +488,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: -4791587659610497402}
@@ -512,6 +526,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: -3088502018567942643}
@@ -546,6 +561,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &-143370764275738136
 MonoBehaviour:
@@ -578,6 +594,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: 2725110216308560433}
@@ -655,6 +672,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 5
 --- !u!114 &538548600534256174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,6 +704,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: 9077540666558862777}
@@ -721,6 +740,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &2529133251123921599
 MonoBehaviour:
@@ -753,6 +773,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_minAngleToStartDrifting: 30
   m_distanceToStartDriftingBeforeReachTarget: 10
@@ -787,6 +808,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &3326102372483472499
 MonoBehaviour:
@@ -819,6 +841,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &3778664347256038504
 MonoBehaviour:
@@ -884,6 +907,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: -7231354381679490550}
@@ -918,6 +942,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
@@ -952,6 +977,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_child: {fileID: 6395653200498369148}
 --- !u!114 &4996652543199100794
@@ -985,6 +1011,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_child: {fileID: -143370764275738136}
 --- !u!114 &5008585417485003999
@@ -1018,6 +1045,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &5524113455789299981
 MonoBehaviour:
@@ -1050,6 +1078,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &5716047739387089118
 MonoBehaviour:
@@ -1082,6 +1111,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_child: {fileID: -3227431665639533130}
 --- !u!114 &6395653200498369148
@@ -1115,6 +1145,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: -1093377420723125832}
@@ -1155,6 +1186,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_minAngleToStartDrifting: 30
 --- !u!114 &7132910858029587245
@@ -1188,6 +1220,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &7790241341813727045
 MonoBehaviour:
@@ -1220,6 +1253,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: -2659307553558739768}
@@ -1254,6 +1288,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
 --- !u!114 &7912012521622744507
 MonoBehaviour:
@@ -1286,6 +1321,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: 5524113455789299981}
@@ -1321,10 +1357,11 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_child: {fileID: 7912012521622744507}
-  m_everyXLoop: 10
-  m_loopDone: 0
+  m_everyXLoop: 5
+  m_loopDone: 3
 --- !u!114 &8681500071723160122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1356,6 +1393,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: -6377631515679514838}
@@ -1390,6 +1428,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_children:
   - {fileID: 7792035481318561034}
@@ -1425,6 +1464,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_steeringSpeed: 1
 --- !u!114 &9187012723447751640
@@ -1458,6 +1498,7 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_wantMostActiveShelves: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
