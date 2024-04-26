@@ -1,4 +1,6 @@
+using Manager;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -28,12 +30,13 @@ namespace DiscountDelirium
 
         private void OnTriggerEnter(Collider other)
         {
-            
+            //Will be needed when we hit a client
         }
 
         public override void UseWeapon()
         {
             m_animator.SetTrigger("ActivateWeapon");
+            _AudioManager.PlaySoundEffectsOneShot(ESound.MeleeSwoosh, transform.position, 0.5f);
         }
 
         public void OnValidate()

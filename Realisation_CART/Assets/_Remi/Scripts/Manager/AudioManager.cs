@@ -37,6 +37,8 @@ namespace Manager
             DriftBegin,
             DriftLoop,
             CashRegister,
+            MeleeSwoosh,
+            CannonSound,
             Count
         }
 

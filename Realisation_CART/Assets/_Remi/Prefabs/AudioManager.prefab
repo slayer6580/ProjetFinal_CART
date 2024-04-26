@@ -55,6 +55,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d2a51115fdef52145b2a2f8e6e4c2793, type: 3}
   - {fileID: 8300000, guid: b6ea485c919563d439460716370e687a, type: 3}
   - {fileID: 8300000, guid: 05ba3a8ef0799ae45a46912eb41a0312, type: 3}
+  - {fileID: 8300000, guid: f975ec4512180f145ad7c7b2c549509f, type: 3}
+  - {fileID: 8300000, guid: 05ba3a8ef0799ae45a46912eb41a0312, type: 3}
   m_audioBoxPrefab: {fileID: 4505294473948690396, guid: 3c1558d66b0fbd644aa718b3bdcab989,
     type: 3}
   m_audioBox: []
