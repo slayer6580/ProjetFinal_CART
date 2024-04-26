@@ -220,9 +220,6 @@ namespace StatsSystem
             for (int i = 0; i < NB_OF_STATS; i++)
                 m_allUpgrade[i] = 0;
 
-            UpdateAll();
-            SaveUpgrades();
-
             SceneManager.LoadScene("Main");
         }
 
