@@ -27,7 +27,14 @@ namespace BehaviourTree
         public float m_stuckAtTime;
         public float m_timeStuck;
 
-
+        public List<GameObject> m_clientInSight;
+        public bool m_isAttacking;
+        public int m_chosenTarget;
+        [Header("Client Stats")]
         [Range(1,10)] public float m_wantMostActiveShelves;
+		[Range(5, 30)] public float m_sightRange;
+		[Range(15, 180)] public float m_sightHalfAngle;
+		[Range(1, 100)] public float m_aggressiveness;
+		[Range(1, 10)] public float m_tacticalAttack;
 	}
 }

@@ -61,10 +61,10 @@ namespace DiscountDelirium
 				m_pathCount++;
 			}
 
-			ScoreForActiveShelf();
 
-			//ADD OTHER SCORING METHOD HERE !!
-			//
+
+			//SCORING METHODS HERE
+			ScoreForActiveShelf();
 			///
 
 			//CHOOSE
@@ -165,10 +165,6 @@ namespace DiscountDelirium
 					m_blackboard.m_path.Add(m_blackboard.m_chosenPathListCopy[0].transform.position);
 					GameObject lastDebugBox = Instantiate(m_debugBox, m_blackboard.m_chosenPathListCopy[0].transform.position, Quaternion.identity);
 					m_blackboard.m_pathDebugBox.Add(lastDebugBox);
-				}
-				else
-				{
-					Debug.Log("Path incomplete");
 				}
 			}
 		}

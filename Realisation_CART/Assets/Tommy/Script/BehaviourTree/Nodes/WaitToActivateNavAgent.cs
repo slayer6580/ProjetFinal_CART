@@ -22,7 +22,6 @@ namespace BehaviourTree
 		{
 			if (m_blackboard.m_navAgent.isActiveAndEnabled)
 			{
-				Debug.Log("Waiting to activate agent");
 				return m_child.Update();
 			}
 			return State.Running;

@@ -29,7 +29,7 @@ namespace BehaviourTree
 			float angle = Vector3.SignedAngle(targetDir, forward, Vector3.up);
 			m_blackboard.m_targetAngle = angle;
 
-			float steerPercent = (Mathf.Abs(angle) / 45);
+			float steerPercent = (Mathf.Abs(angle) / 20);
 			if (angle > 2)
 			{
 				m_steerValue = -steerPercent;
