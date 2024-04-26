@@ -9,6 +9,8 @@ namespace BoxSystem
 
         [Header("number of items")]
         [SerializeField] private bool m_haveMaxItem;
+        [SerializeField] private bool m_showOneItem;
+
         [ShowIf("m_haveMaxItem", false)][SerializeField] private float m_nbOfItems;
 
         [Header("item size multiplier")]
@@ -70,7 +72,11 @@ namespace BoxSystem
         {
             BoxManager boxInstance = BoxManager.GetInstance();
 
-            if (m_allSlotsLocalPositions.Count <= m_nbOfItems || m_haveMaxItem)
+            if (m_showOneItem)            
+                m_nbOfItems = 1;
+            
+
+            if (m_allSlotsLocalPositions.Count <= m_nbOfItems || (m_haveMaxItem && !m_showOneItem))
             {
                 AllSlotsHaveAnItem(boxInstance);
             }
