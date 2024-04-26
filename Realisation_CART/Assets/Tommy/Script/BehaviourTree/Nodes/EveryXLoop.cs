@@ -15,7 +15,6 @@ namespace BehaviourTree
 
 		protected override void OnStop()
 		{
-			Debug.Log("EVERY X");
 			m_loopDone++;
 		}
 
@@ -37,7 +36,6 @@ namespace BehaviourTree
 
 				if (m_child.Update() == State.Failure)
 				{
-					Debug.Log("Return FAIlluer");
 					return State.Failure;
 				}
 				

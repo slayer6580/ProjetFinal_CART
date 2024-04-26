@@ -1,5 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9068286698100377463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 762680a4196baf8439c66bea20e3897e, type: 3}
+  m_Name: IsAttackWorthIt
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 5be04d5378adf4c4fa7e9b2c7eb0ce9e
+  m_position: {x: -514, y: 560}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+    m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+  m_description: 
+  m_children:
+  - {fileID: 5924906621977752363}
 --- !u!114 &-7231354381679490550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,7 +73,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
@@ -66,7 +115,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: 5716047739387089118}
@@ -101,7 +157,54 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+  m_description: 
+--- !u!114 &-5983034324414056853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194294a7b3b62724abc333348ac6f6d2, type: 3}
+  m_Name: ClearNavMeshPath
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 3df411916681ca84a96c8fa86209dad0
+  m_position: {x: -782, y: 813}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+    m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &-5590988987957405943
 MonoBehaviour:
@@ -118,7 +221,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: fbf1d50e45c0fa6498f8867a9671e933
-  m_position: {x: -560, y: 819}
+  m_position: {x: -499, y: 972}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -134,7 +237,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: 3326102372483472499}
@@ -171,7 +281,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &-4986815811770323114
 MonoBehaviour:
@@ -204,7 +321,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   duration: 1
 --- !u!114 &-4791587659610497402
@@ -238,7 +362,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &-4462508058658981125
 MonoBehaviour:
@@ -271,7 +402,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: -2147730505803548934}
@@ -308,7 +446,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
@@ -327,7 +472,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 36e1668021897e046b95bc194fb24691
-  m_position: {x: -435, y: 680}
+  m_position: {x: -391, y: 831}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -343,7 +488,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: Check if own tower is big enough
   m_children:
   - {fileID: -5590988987957405943}
@@ -381,7 +533,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
@@ -416,7 +575,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: 5008585417485003999}
@@ -439,7 +605,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: f8618c8047451ed4fb0e02f1ea02ded0
-  m_position: {x: -635, y: 1020}
+  m_position: {x: -511, y: 1173}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -455,7 +621,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &-1903758984178049680
 MonoBehaviour:
@@ -488,7 +661,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: -4791587659610497402}
@@ -510,7 +690,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: c1aabd62f8edbe6438876a0bd5eb0414
-  m_position: {x: -423, y: 537}
+  m_position: {x: -362, y: 689}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -526,7 +706,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: -3088502018567942643}
@@ -561,7 +748,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &-143370764275738136
 MonoBehaviour:
@@ -594,7 +788,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: 2725110216308560433}
@@ -657,6 +858,11 @@ MonoBehaviour:
   - {fileID: -1932074002190223681}
   - {fileID: 4037160766164362857}
   - {fileID: 3326102372483472499}
+  - {fileID: 9001647109918337716}
+  - {fileID: 7370802193004694683}
+  - {fileID: -5983034324414056853}
+  - {fileID: 5924906621977752363}
+  - {fileID: -9068286698100377463}
   m_blackboard:
     m_name: Client_01
     m_thisClient: {fileID: 0}
@@ -672,7 +878,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 5
+    m_sightRange: 30
+    m_sightHalfAngle: 90
+    m_aggressiveness: 100
+    m_tacticalAttack: 3
 --- !u!114 &538548600534256174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +917,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: 9077540666558862777}
@@ -740,7 +960,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &2529133251123921599
 MonoBehaviour:
@@ -773,7 +1000,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_minAngleToStartDrifting: 30
   m_distanceToStartDriftingBeforeReachTarget: 10
@@ -808,7 +1042,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &3326102372483472499
 MonoBehaviour:
@@ -825,7 +1066,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 80ae7745b95df4d4cbf8e0fc96961ccb
-  m_position: {x: -835, y: 1020}
+  m_position: {x: -694, y: 1173}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -841,7 +1082,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &3778664347256038504
 MonoBehaviour:
@@ -907,7 +1155,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: -7231354381679490550}
@@ -926,7 +1181,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: d9ad4e93be220da41994c7d3eac0944c
-  m_position: {x: -423, y: 1020}
+  m_position: {x: -299, y: 1173}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -942,7 +1197,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
@@ -977,7 +1239,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_child: {fileID: 6395653200498369148}
 --- !u!114 &4996652543199100794
@@ -1011,7 +1280,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_child: {fileID: -143370764275738136}
 --- !u!114 &5008585417485003999
@@ -1045,7 +1321,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &5524113455789299981
 MonoBehaviour:
@@ -1078,7 +1361,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &5716047739387089118
 MonoBehaviour:
@@ -1111,10 +1401,17 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_child: {fileID: -3227431665639533130}
---- !u!114 &6395653200498369148
+--- !u!114 &5924906621977752363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1128,8 +1425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_state: 0
   m_started: 0
-  m_guid: d5d96799ed8f0e2428a51cf437ad70ab
-  m_position: {x: 198, y: 399}
+  m_guid: adf2712a0d02f844bb586092c5f47f30
+  m_position: {x: -678.5, y: 689}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1145,16 +1442,67 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
-  - {fileID: -1093377420723125832}
+  - {fileID: -5983034324414056853}
+  - {fileID: 7370802193004694683}
+--- !u!114 &6395653200498369148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: d5d96799ed8f0e2428a51cf437ad70ab
+  m_position: {x: 198, y: 404}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+    m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+  m_description: 
+  m_children:
+  - {fileID: 9001647109918337716}
   - {fileID: 8102339749280047600}
   - {fileID: -4462508058658981125}
   - {fileID: -5446233131730551066}
   - {fileID: 2381724616244566691}
   - {fileID: 538548600534256174}
   - {fileID: -1903758984178049680}
+  - {fileID: -1093377420723125832}
 --- !u!114 &6621867468774133448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1186,7 +1534,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_minAngleToStartDrifting: 30
 --- !u!114 &7132910858029587245
@@ -1220,7 +1575,54 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+  m_description: 
+--- !u!114 &7370802193004694683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038050fc3ecf6fb4db23b41a68c590d1, type: 3}
+  m_Name: CreateAttackPath
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: ff8ed563998582b409aaf70fb7d3ef5a
+  m_position: {x: -599, y: 813}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+    m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &7790241341813727045
 MonoBehaviour:
@@ -1253,7 +1655,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: -2659307553558739768}
@@ -1288,7 +1697,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
 --- !u!114 &7912012521622744507
 MonoBehaviour:
@@ -1321,7 +1737,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: 5524113455789299981}
@@ -1357,7 +1780,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_child: {fileID: 7912012521622744507}
   m_everyXLoop: 5
@@ -1393,10 +1823,57 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: -6377631515679514838}
+--- !u!114 &9001647109918337716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da8e2e919e13bb4f881c2002eaf9c10, type: 3}
+  m_Name: UpdateObjectInSight
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 764df0e59aa7a88419c3dceb365d8c02
+  m_position: {x: -923, y: 546}
+  m_blackboard:
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+    m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+  m_description: 
 --- !u!114 &9034212133386219878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,7 +1905,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_children:
   - {fileID: 7792035481318561034}
@@ -1464,7 +1948,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_steeringSpeed: 1
 --- !u!114 &9187012723447751640
@@ -1482,7 +1973,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: ac4684a8d4ba1814bbff8ce7b286d5ee
-  m_position: {x: -360.5, y: 846}
+  m_position: {x: -299, y: 999}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1498,7 +1989,14 @@ MonoBehaviour:
     m_targetAngle: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
     m_wantMostActiveShelves: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
