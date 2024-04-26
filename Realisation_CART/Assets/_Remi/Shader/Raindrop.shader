@@ -140,7 +140,8 @@ Shader "Custom/Raindrop" {
 				float minBlur = 2.;
 
 				float story = 0.;
-				float heart = 0.;
+				//float heart = 0.;
+				float fadeContour = 0.;
 
 				#ifdef HAS_HEART
 				story = S(0., 70., T);
@@ -149,28 +150,38 @@ Shader "Custom/Raindrop" {
 				t = 1. - t;
 				t = (1. - t*t)*70.;
 
-				float zoom = lerp(.3, 1.2, story);		// slowly zoom out
-				uv *= zoom;
+				//float zoom = lerp(.3, 1.2, story);		// slowly zoom out
+				//uv *= zoom;
 				minBlur = 4. + S(.5, 1., story)*3.;		// more opaque glass towards the end
 				maxBlur = 6. + S(.5, 1., story)*1.5;
 
-				float2 hv = uv - float2(.0, -.1);				// build heart
-				hv.x *= .5;
-				float s = S(110., 70., T);				// heart gets smaller and fades towards the end
-				hv.y -= sqrt(abs(hv.x))*.5*s;
-				heart = length(hv);
-				heart = S(.4*s, .2*s, heart)*s;
-				rainAmount = heart;						// the rain is where the heart is
+				float2 center = float2(0.5, 0.5);
+				float radius = 0.3;
+				float dist = length(uv - center);
+				float fadingDrops = S(0.1, 0.2, dist);
+				float fadingDrops2 = S(0.1, 0.2, dist - radius);
+				fadeContour = fadingDrops - fadingDrops2;
 
-				maxBlur -= heart;							// inside the heart slighly less foggy
-				uv *= 1.5;								// zoom out a bit more
+				// float2 hv = uv - float2(.0, -.1);				// build heart
+				// hv.x *= .5;
+				// float s = S(110., 70., T);				// heart gets smaller and fades towards the end
+				// hv.y -= sqrt(abs(hv.x))*.5*s;
+				// heart = length(hv);
+				// heart = S(.4*s, .2*s, heart)*s;
+				//rainAmount = heart;						// the rain is where the heart is
+				rainAmount = fadeContour;						
+
+				//maxBlur -= heart;							// inside the heart slighly less foggy
+				//uv *= 1.5;								// zoom out a bit more
 				t *= .25;
 				#else
 				float zoom = -cos(T*.2);
 				uv *= .7 + zoom*.3;
+				uv *= .7 +*.3;
 				
 				#endif
-				UV = (UV - .5)*(.9 + zoom*.1) + .5;
+				//UV = (UV - .5)*(.9 + zoom*.1) + .5;
+				//UV = (UV - .5)*(.9 + 1) + .5;
 
 				float staticDrops = S(-.5, 1., rainAmount)*2.;
 				float layer1 = S(.25, .75, rainAmount);
@@ -212,7 +223,8 @@ Shader "Custom/Raindrop" {
 				col *= 1. - dot(UV -= .5, UV);							// vignette
 
 				#ifdef HAS_HEART
-				col = lerp(pow(col, float3(1.2, 1.2, 1.2)), col, heart);
+				//col = lerp(pow(col, float3(1.2, 1.2, 1.2)), col, heart);
+				col = lerp(pow(col, float3(1.2, 1.2, 1.2)), col, fadeContour);
 				fade *= S(102., 97., T);
 				#endif
 
