@@ -1,7 +1,4 @@
 using BehaviourTree;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace DiscountDelirium
 {
@@ -9,7 +6,6 @@ namespace DiscountDelirium
     {
 		protected override void OnStart()
 		{
-
 		}
 
 		protected override void OnStop()

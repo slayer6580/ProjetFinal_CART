@@ -1,8 +1,3 @@
-using BehaviourTree;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace BehaviourTree
 {
     public class WaitToActivateNavAgent : DecoratorNode
@@ -15,7 +10,6 @@ namespace BehaviourTree
 
 		protected override void OnStop()
 		{
-
 		}
 
 		protected override State OnUpdate()

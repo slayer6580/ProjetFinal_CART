@@ -195,11 +195,6 @@ namespace BoxSystem
                     m_itemsList.Add(new ItemInBox(GO, allIndex, slotTransform));
                     SlerpAndSnap(GO, slotTransform, false, autoSnap);
 
-                    //if (m_availableSlotsLeft == 0)
-                    //{
-                    //    m_tower.AddBoxToTower();
-                    //}
-
                     return;
                 }
             }
@@ -214,6 +209,7 @@ namespace BoxSystem
             multiSlotList = item.m_data.m_size == ItemData.ESize.medium ? m_doubleSlots : m_quadrupleSlots;
             int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? GameConstants.MEDIUM_SIZE : GameConstants.LARGE_SIZE;
 
+            // Look for box space
             foreach (MultiSlots multiSlot in multiSlotList)
             {
                 List<bool> slotsAvailable = new List<bool>();
@@ -225,11 +221,11 @@ namespace BoxSystem
                 if (AllSlotIsAvailable(slotsAvailable))
                 {
                     PutMultiSlotItemInBox(GO, multiSlot, autoSnap);
-                    //Debug.Log("Box: " + gameObject.name + ", item: " + GO.name);
                     return;
                 }
             }
-            //Debug.Log(gameObject.name + " : Box reorganization");
+
+            // if cannot enter, reorganize box
             ReorganizeBox(GO);
         }
 
@@ -288,12 +284,6 @@ namespace BoxSystem
             {
                 turn90Degree = true;
             }
-
-            //if (m_availableSlotsLeft == 0)
-            //{
-            //    Debug.Log("box full, need a new box");
-            //    m_tower.AddBoxToTower();
-            //}
 
             SlerpAndSnap(GO, localPosition, turn90Degree, autoSnap);
         }

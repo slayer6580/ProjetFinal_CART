@@ -1,5 +1,4 @@
 using BoxSystem;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,14 +8,16 @@ namespace BehaviourTree
 	{
 		private List<float> m_attackScore = new List<float>();
 		protected override void OnStart()
-		{
-			
+		{	
 		}
 
 		protected override void OnStop()
-		{
-			
+		{	
 		}
+
+		/// <summary>
+		/// Unfinished, Not used for now
+		/// </summary>
 
 		protected override State OnUpdate()
 		{
@@ -28,7 +29,6 @@ namespace BehaviourTree
 				{
 					m_attackScore.Add(0);
 				}
-
 
 				///Attack condition here (all result must be between -100 and 100)
 				CalculateTacticalAttack();

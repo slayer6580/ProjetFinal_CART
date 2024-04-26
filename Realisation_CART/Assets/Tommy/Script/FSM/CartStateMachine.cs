@@ -27,6 +27,7 @@ namespace CartControl
 		[field: SerializeField] public float MaxBackwardSpeed { get; private set; }
 		[field: SerializeField] public float IdleRotatingSpeed { get; private set; }
 		[field: SerializeField] public float MovingRotatingSpeed { get; set; }
+		[field: SerializeField] public float TowerPushForceWhenTurning { get; set; }
 		[field: SerializeField][field: Range(0, 3)] public float TurningDrag { get; set; }
 
 		[Tooltip("This will multiply Turning Drag depending of the steer value. Left side of the curve = No steer. Right side = max steer.")]
@@ -39,6 +40,7 @@ namespace CartControl
 		[field: SerializeField] public float DriftingRotatingSpeed { get; private set; }
 		[field: SerializeField] public float AddedRotatingSpeedWhenBreaking { get; private set; }
 		[field: SerializeField] public float DriftingAcceleration { get; private set; }
+		[field: SerializeField] public float TowerPushForceWhenDrifting { get; private set; }
 
 		[field: Space]
 		[field: SerializeField] public bool AutoDriftWhenTurning { get; private set; }

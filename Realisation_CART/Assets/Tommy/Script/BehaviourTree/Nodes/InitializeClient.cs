@@ -1,9 +1,6 @@
-using BehaviourTree;
 using BoxSystem;
 using CartControl;
 using DiscountDelirium;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -28,7 +25,7 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			if(m_blackboard.m_cartStateMachine != null)
+			if(m_blackboard.m_thisClient != null)
 			{
 				return State.Success;
 			}

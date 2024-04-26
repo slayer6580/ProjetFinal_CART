@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace BehaviourTree
 {
     public class DriftIfBigAngle : LeafNode
@@ -14,7 +10,6 @@ namespace BehaviourTree
 
 		protected override void OnStop()
 		{
-
 		}
 
 		protected override State OnUpdate()

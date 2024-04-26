@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace BehaviourTree
 {
 	public class RemovePathCurrentTarget : LeafNode
@@ -12,8 +8,7 @@ namespace BehaviourTree
 		}
 
 		protected override void OnStop()
-		{
-			
+		{		
 		}
 
 		protected override State OnUpdate()
@@ -21,6 +16,8 @@ namespace BehaviourTree
 			if(m_blackboard.m_path.Count > 0)
 			{
 				m_blackboard.m_path.RemoveAt(0);
+
+				//Debug
 				Destroy(m_blackboard.m_pathDebugBox[0]);
 				m_blackboard.m_pathDebugBox.RemoveAt(0);
 

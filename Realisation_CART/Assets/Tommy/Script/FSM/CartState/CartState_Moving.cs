@@ -52,7 +52,7 @@ namespace CartControl
 
 			if (Mathf.Abs(m_cartStateMachine.LocalVelocity.x) > 1)
 			{
-				m_cartStateMachine.BoxForce.AddConstantForceToBox(m_cartStateMachine.LocalVelocity.x);
+				m_cartStateMachine.BoxForce.AddConstantForceToBox(m_cartStateMachine.LocalVelocity.x * m_cartStateMachine.TowerPushForceWhenTurning);
 			}
 
 			

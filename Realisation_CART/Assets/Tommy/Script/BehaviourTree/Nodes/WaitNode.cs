@@ -15,15 +15,13 @@ namespace BehaviourTree
 		}
 
 		protected override void OnStop()
-		{
-			
+		{		
 		}
 
 		protected override State OnUpdate()
 		{
 			if (Time.time - startTime > duration)
 			{
-				Debug.Log("Back time:" + (Time.time - startTime));
 				return State.Success;
 			}
 			return State.Running;

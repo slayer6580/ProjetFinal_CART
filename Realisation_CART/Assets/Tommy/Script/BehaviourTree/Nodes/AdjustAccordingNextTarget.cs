@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviourTree
@@ -13,13 +11,18 @@ namespace BehaviourTree
 
 		protected override void OnStart()
 		{
-			
 		}
 
 		protected override void OnStop()
-		{
-			
+		{		
 		}
+
+
+		/// <summary>
+		///  NOT USED FOR NOW
+		/// </summary>
+
+
 
 		protected override State OnUpdate()
 		{
@@ -40,16 +43,13 @@ namespace BehaviourTree
 				{
 					if (angle > 5)
 					{
-						//m_blackboard.m_cartStateMachine.OnSteer(-1);
 						m_blackboard.m_cartStateMachine.OnDrift(1);
 					}
 					else if (angle < -5)
 					{
-						//m_blackboard.m_cartStateMachine.OnSteer(1);
 						m_blackboard.m_cartStateMachine.OnDrift(1);
 					}
-				}
-				
+				}			
 			}
 
 			return State.Success;

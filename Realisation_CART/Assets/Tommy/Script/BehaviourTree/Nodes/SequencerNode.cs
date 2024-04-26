@@ -1,27 +1,21 @@
-using BehaviourTree;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace BehaviourTree
 {
 	public class SequencerNode : CompositeNode
 	{
-		int current;
+		private int m_current;
 
 		protected override void OnStart()
 		{
-			current = 0;
+			m_current = 0;
 		}
 
 		protected override void OnStop()
-		{
-			
+		{		
 		}
 
 		protected override State OnUpdate()
 		{
-			var child = m_children[current];
+			var child = m_children[m_current];
 
 			switch (child.Update())
 			{
@@ -30,11 +24,11 @@ namespace BehaviourTree
 				case State.Failure:
 					return State.Failure;
 				case State.Success:
-					current++;
+					m_current++;
 					break;
 			}
 
-			return current == m_children.Count ? State.Success : State.Running;
+			return m_current == m_children.Count ? State.Success : State.Running;
 		}
 	}
 }

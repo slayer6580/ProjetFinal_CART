@@ -41,6 +41,10 @@ namespace StatsSystem
         [Header("nb of token cost depending on stat level")]
         [SerializeField] private int[] m_upgradeCostByLevel;
 
+        [Header("Melee Weapons")]
+        [SerializeField] private Melee m_melee_1;
+        [SerializeField] private Melee m_melee_2;
+
         [Header("All Canvas Items")]
         [SerializeField] private TextMeshProUGUI m_nbOfCartTokenText;
         [Space]
@@ -58,10 +62,6 @@ namespace StatsSystem
 
         private const int MAX_LEVEL = 4;
         private const int NB_OF_STATS = 6;
-
-        [Header("Weapons")]
-        [SerializeField] private Melee m_melee_1;
-        [SerializeField] private Melee m_melee_2;
 
 
         private void SetUpList()
@@ -101,6 +101,7 @@ namespace StatsSystem
             DeselectAllButtons();
         }
 
+        /// <summary> Load upgrades with PlayerPrefs </summary>
         private void GetSavedUpgrade()
         {
             m_allStats[0] = PlayerPrefs.GetInt("Acceleration", 0);
@@ -229,6 +230,8 @@ namespace StatsSystem
             SceneManager.LoadScene("Main");
         }
 
+
+        /// <summary> Save upgrades with PlayerPrefs </summary>
         private void SaveUpgrades()
         {
             PlayerPrefs.SetInt("Acceleration", m_allStats[0]);
@@ -239,7 +242,8 @@ namespace StatsSystem
             PlayerPrefs.SetInt("Melee", m_allStats[5]);
         }
 
-        public void TeleportPlayerToScene()
+        /// <summary> Teleport player at a scene for the upgrade UI scene and change caméra </summary>
+        public void TeleportPlayerToUpgradeScene()
         {
             m_virtualCamera.Priority = 8;
             Rigidbody rb = CartMachine.gameObject.GetComponent<Rigidbody>();
@@ -274,10 +278,6 @@ namespace StatsSystem
             UpdateMoney();
         }
 
-        public int GetStatLevel(EStats stats)
-        {
-            return m_allStats[(int)stats];
-        }
     }
 
 }

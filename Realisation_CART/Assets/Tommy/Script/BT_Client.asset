@@ -1385,7 +1385,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: bdba2bf0b6aa0154c8515eb6eeefeea5
-  m_position: {x: -261.99985, y: 163.87997}
+  m_position: {x: -263, y: 164}
   m_blackboard:
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1496,13 +1496,13 @@ MonoBehaviour:
   m_description: 
   m_children:
   - {fileID: 9001647109918337716}
+  - {fileID: -1093377420723125832}
   - {fileID: 8102339749280047600}
   - {fileID: -4462508058658981125}
   - {fileID: -5446233131730551066}
   - {fileID: 2381724616244566691}
   - {fileID: 538548600534256174}
   - {fileID: -1903758984178049680}
-  - {fileID: -1093377420723125832}
 --- !u!114 &6621867468774133448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1958,6 +1958,7 @@ MonoBehaviour:
     m_tacticalAttack: 0
   m_description: 
   m_steeringSpeed: 1
+  m_steerForce: 0
 --- !u!114 &9187012723447751640
 MonoBehaviour:
   m_ObjectHideFlags: 0
