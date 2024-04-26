@@ -1,13 +1,11 @@
-using System;
 using UnityEngine;
 
 namespace DynamicEnvironment
 {
+    /// <summary> Detects collision for dynamic environment's destructible items. </summary>
     public class CollisionDetector : MonoBehaviour
     {
         [field: SerializeField] private DynamicEnvironment _DynamicEnvironment { get; set; } = null;
-        private const int PLAYER_COLLIDER = 6; // TODO Remi: Repetition: Ask the team for global variable script
-        private const int CLIENT_COLLIDER = 7;
 
         private bool m_isDestructionStageZero = false;
         private bool m_isDestructionStageOne = false;
@@ -25,30 +23,16 @@ namespace DynamicEnvironment
         
         private void OnCollisionEnter(Collision collision)
         {
-            //Debug.Log("Collision detected from layer: " + collision.gameObject.layer);
-            if (collision.gameObject.layer != PLAYER_COLLIDER
-                && collision.gameObject.layer != CLIENT_COLLIDER)
+            if (collision.gameObject.layer != GameConstants.PLAYER_COLLIDER
+                && collision.gameObject.layer != GameConstants.CLIENT_COLLIDER)
                 return;
 
-            //Debug.Log("Collision detected from player or client");
             float velocity = collision.impulse.magnitude;
-            //Debug.Log($"Velocity: {velocity}");
             m_itemHealthPoints -= velocity;
-            //Debug.Log($"Item health points: {_DynamicEnvironment.GetItemHealthPoints()}");
-            Debug.Log("Item Id: " + GetId()); 
             _DynamicEnvironment.SetItemDestructionStage(this);
         }
 
-        public int GetId()
-        {
-            return m_id;
-        }
-
-        public void SetId(int id)
-        {
-            m_id = id;
-        }
-
+        /// <summary> Resets the item's health points and destruction stages </summary>
         internal void ResetItem()
         {
             m_itemHealthPoints = m_max_health;
@@ -57,11 +41,13 @@ namespace DynamicEnvironment
             m_m_isDestructionStageTwo = false;
         }
 
+        /// <summary> Returns the item's health points </summary>
         internal float GetHItemHealthPoints()
         {
             return m_itemHealthPoints;
         }
 
+        /// <summary> Retrun true if the given has already been activated </summary>
         internal bool GetIsStageDestructionActive(int stage)
         {
             if (stage == 0)
@@ -74,6 +60,7 @@ namespace DynamicEnvironment
                 return false;
         }
 
+        /// <summary> Sets the given stage to active or inactive </summary>
         internal void SetIsStageDestructionActive(int stage, bool value)
         {
             if (stage == 0)
@@ -82,6 +69,18 @@ namespace DynamicEnvironment
                 m_isDestructionStageOne = value;
             else if (stage == 2)
                 m_m_isDestructionStageTwo = value;
+        }
+
+        /// <summary> Returns the item's id </summary>
+        public int GetId()
+        {
+            return m_id;
+        }
+
+        /// <summary> Sets the item's id </summary>
+        public void SetId(int id)
+        {
+            m_id = id;
         }
     }
 }

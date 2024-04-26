@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace DiscountDelirium
 {
-    public class SpecialItem : MonoBehaviour
+    /// <summary> Special item consumable that can be picked up by the player in the backstore</summary>
+    public class SpecialItemConsumable : MonoBehaviour
     {
         [field: SerializeField] private GameObject SpecialItemPrefab { get; set; } = null;
         [SerializeField] private float m_rotationSpeed = 0.25f;
@@ -10,11 +11,8 @@ namespace DiscountDelirium
         [SerializeField] private float m_oscillationHeight = 1.5f;
         [SerializeField] private float m_scale = 1.5f;
 
-        private const int PLAYER_COLLIDER = 6;
-
         private Vector3 m_oscillationPosition = Vector3.zero;
 
-        // Start is called before the first frame update
         void Start()
         {
             if (SpecialItemPrefab == null)
@@ -26,8 +24,6 @@ namespace DiscountDelirium
             SpecialItemPrefab = Instantiate(SpecialItemPrefab, transform);
             SpecialItemPrefab.transform.localScale = new Vector3(m_scale, m_scale, m_scale);
         }
-
-        // Update is called once per frame
         void Update()
         {
             if (SpecialItemPrefab == null) return;
@@ -41,8 +37,8 @@ namespace DiscountDelirium
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer != PLAYER_COLLIDER) return;
-            // TODO: Pick up item
+            if (other.gameObject.layer != GameConstants.PLAYER_COLLIDER) return;
+
             Destroy(SpecialItemPrefab);
         }
     }

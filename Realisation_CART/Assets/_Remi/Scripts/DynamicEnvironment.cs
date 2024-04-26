@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace DynamicEnvironment
 {
+    /// <summary> Dynamic environment that handles the destruction of hazardous items </summary>
     public class DynamicEnvironment : MonoBehaviour
     {
         [field: SerializeField] private GameObject SpecialFXGOFireSprinklers { get; set; } = null;
@@ -43,7 +44,6 @@ namespace DynamicEnvironment
             for (int i = 0; i < SpecialFXGOWaterPuddles.transform.childCount; i++)
             {
                 m_waterPuddleScales.Add(SpecialFXGOWaterPuddles.transform.GetChild(i).localScale.x);
-                //Debug.Log("Water puddle scale: " + m_waterPuddleScales[i]);
                 SpecialFXGOWaterPuddles.transform.GetChild(i).localScale = new Vector3(0.1f, 0.1f, 0.1f);
             }
         }
@@ -63,9 +63,8 @@ namespace DynamicEnvironment
                 m_targetScale.x = targetScale;
                 m_targetScale.y = targetScale;
                 m_targetScale.z = targetScale;
-                //Debug.Log("Current scale: " + m_currentScale);
-                //Debug.Log("Target scale: " + m_targetScale);
                 child.localScale = Vector3.Lerp(m_currentScale, m_targetScale, Time.deltaTime * m_puddleAnimationSpeed);
+
                 if (child.localScale.x == m_targetScale.x - 0.1f)
                 {
                     m_isFireSprinklersActive = false;
@@ -73,47 +72,44 @@ namespace DynamicEnvironment
             }
         }
 
+        /// <summary> Sets the item's destruction stage </summary>
         public void SetItemDestructionStage(CollisionDetector item)
         {
             if (item.GetHItemHealthPoints() <= (m_max_health * 3 / 4) && !item.GetIsStageDestructionActive(STAGE_ZERO))
             {
-                Debug.Log("Stage 0 fire");
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ZERO, item.GetId())]);
-                Debug.Log("Item id: " + item.GetId());
                 item.SetIsStageDestructionActive(STAGE_ZERO, true);
             }
             else if (item.GetHItemHealthPoints() <= (m_max_health * 2 / 4) && !item.GetIsStageDestructionActive(STAGE_ONE))
             {
-                Debug.Log("Stage 1 fire");
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ONE, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_ONE, true);
             }
             else if (item.GetHItemHealthPoints() <= (m_max_health * 1 / 4) && !item.GetIsStageDestructionActive(STAGE_TWO))
             {
-                Debug.Log("Stage 2 fire");
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_TWO, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_TWO, true);
                 Invoke("ActivateFireSprinklers", 5.0f);
             }
         }
 
+        /// <summary> Returns the sprinkler element from the given Id and destruction stage </summary>
         private int GetSprinklerElement(int destructionStage, int itemId)
         {
-            Debug.Log("destructionStage: " + destructionStage);
-            Debug.Log("Item id: " + itemId);
             if (itemId == 0) return destructionStage;
 
             int element = destructionStage * itemId;
             element += NUMBER_OF_SPRINKLERS;
-            Debug.Log("return: " + element);
+
             return element;
         }
 
-        private void ActivateAllPaticles(GameObject fireStage)
+        /// <summary> Activates all the particles in the given hazardous item stage GameObject </summary>
+        private void ActivateAllPaticles(GameObject stage)
         {
-            fireStage.SetActive(true);
+            stage.SetActive(true);
 
-            foreach (Transform child in fireStage.transform)
+            foreach (Transform child in stage.transform)
             {
                 ParticleSystem particleSystem = child.GetComponent<ParticleSystem>();
                 if (particleSystem == null) continue;
@@ -123,6 +119,7 @@ namespace DynamicEnvironment
             }
         }
 
+        /// <summary> Activates the fire sprinklers </summary>
         private void ActivateFireSprinklers()
         {
             SpecialFXGOFireSprinklers.SetActive(true);
@@ -142,12 +139,14 @@ namespace DynamicEnvironment
             Invoke("ActivateWaterPuddles", 1.0f);
         }
 
+        /// <summary> Activates the water puddles </summary>
         private void ActivateWaterPuddles()
         {
             m_isFireSprinklersActive = true;
             SpecialFXGOWaterPuddles.SetActive(true);
         }
 
+        /// <summary> Resets the item's destruction stages </summary>
         public void ResetItem()
         {
             foreach (GameObject fireStage in SpecialFXGOFireStages)
@@ -156,6 +155,8 @@ namespace DynamicEnvironment
             }
 
             m_isFireSprinklersActive = false;
+
+            // TODO Remi: Keep in mind to disable the GameObjects when we will want to use this reset method
         }
     }
 }

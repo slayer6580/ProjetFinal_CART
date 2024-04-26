@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace DynamicEnvironment
 {
+    /// <summary> Zone that changes the characters movement to simulate a slippery floor </summary>
     public class SlipperyFloorPhysic : MonoBehaviour
     {
 
@@ -11,19 +12,17 @@ namespace DynamicEnvironment
         [field: SerializeField] private float SlipperyDriftingDrag { get; set; } = 0.5f;
 
         private List<CartStateMachine> m_currentCarts = new List<CartStateMachine>();
-        private const int PLAYER_BODY = 3;
-        private const int CLIENT_COLLIDER = 7;
+
         private float m_initialTurningDrag = 0.0f;
         private float m_initialDriftingDrag = 0.0f;
 
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer != PLAYER_BODY
-                && other.gameObject.layer != CLIENT_COLLIDER)
+            if (other.gameObject.layer != GameConstants.PLAYER_BODY
+                && other.gameObject.layer != GameConstants.CLIENT_COLLIDER)
                 return;
 
-            Debug.Log("Slippery floor entered by: " + other.gameObject.name);
             CartStateMachine cartStateMachine = other.gameObject.GetComponentInParent<CartStateMachine>();
             if (cartStateMachine == null) Debug.LogError("CartStateMachine not found in parent");
 
@@ -38,16 +37,16 @@ namespace DynamicEnvironment
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.layer != PLAYER_BODY
-                && other.gameObject.layer != CLIENT_COLLIDER)
+            if (other.gameObject.layer != GameConstants.PLAYER_BODY
+                && other.gameObject.layer != GameConstants.CLIENT_COLLIDER)
                 return;
 
             CartStateMachine cartStateMachine = other.gameObject.GetComponentInParent<CartStateMachine>();
+
             if (cartStateMachine == null) Debug.LogError("CartStateMachine not found in parent");
 
             if (!m_currentCarts.Contains(cartStateMachine))
                 return;
-
 
             CartStateMachine currentCart = other.gameObject.GetComponentInParent<CartStateMachine>();
 

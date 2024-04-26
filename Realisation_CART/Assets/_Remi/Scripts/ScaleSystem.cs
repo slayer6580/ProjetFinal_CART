@@ -26,7 +26,6 @@ namespace BackstoreSystems
 
         private Vector3 m_newDiegeticScale = Vector3.zero;
 
-        private const int PLAYER_BODY_LAYER = 3;
         private const float  PLAYER_BODY_WEIGHT = 150;
         private const float DIEGETIC_UI_THRESHOLD = 0.1f;
         private const float DOOR_ANGLE_THRESHOLD = 0.1f;
@@ -47,9 +46,16 @@ namespace BackstoreSystems
             m_onTriggerExit.AddListener(HandleTriggerExit);
         }
 
+        private void Update()
+        {
+            UpdateDiegeticScaleUI();
+            UpdateDoorsRotation();
+        }
+
+        /// <summary> Observer Pattern. Handles the player entering the trigger zone </summary>
         private void HandleTriggerEnter(Collider other, bool isInsideBackstore)
         {
-            if (other.gameObject.layer != PLAYER_BODY_LAYER) return;
+            if (other.gameObject.layer != GameConstants.PLAYER_BODY) return;
 
             m_isInsideBackstore = isInsideBackstore;
 
@@ -58,30 +64,25 @@ namespace BackstoreSystems
 
             if (isInsideBackstore)
             {
-                //Debug.Log("Player is inside backstore");
                 m_isPlayerCanPass = true;
             }
             else
             {
-                //Debug.Log("Player is outside backstore");
                 m_isScaleSystemActive = true;
                 CalculatePlayerWeight();
-                //Debug.Log("Player weight: " + m_currentPlayerWeight);
             }
         }
 
+        /// <summary> Observer Pattern. Handles the player exiting the trigger zone </summary>
         private void HandleTriggerExit(Collider other, bool isInsideBackstore)
         {
 
-            if (other.gameObject.layer != PLAYER_BODY_LAYER) return;
+            if (other.gameObject.layer != GameConstants.PLAYER_BODY) return;
 
             m_isInsideBackstore = isInsideBackstore;
 
             if (!m_isPlayerInTriggerZone) return;
             m_isPlayerInTriggerZone = false;
-
-            //Debug.Log("Exit collision with: " + other.gameObject.name);
-
 
             if (isInsideBackstore)
             {
@@ -95,6 +96,7 @@ namespace BackstoreSystems
             }
         }
 
+        /// <summary> Resets the variables that keep the doors open (closes the doors) </summary>
         private void CloseTheDoors()
         {
             m_currentPlayerWeight = 0;
@@ -102,6 +104,7 @@ namespace BackstoreSystems
             m_isPlayerCanPass = false;
         }
 
+        /// <summary> Calculates the player's weight based on the items in the cart </summary>
         private void CalculatePlayerWeight()
         {
             ESize currentItemSize = ESize.small;
@@ -132,12 +135,7 @@ namespace BackstoreSystems
             }
         }
 
-        private void Update()
-        {
-            UpdateDiegeticScaleUI();
-            UpdateDoorsRotation();
-        }
-
+        /// <summary> Updates the diegetic scale UI based on the player's weight </summary>
         private void UpdateDiegeticScaleUI()
         {
             m_newDiegeticScale = DiegeticScaleValue.localScale;
@@ -154,7 +152,6 @@ namespace BackstoreSystems
             }
             else if (m_isPlayerInTriggerZone && m_currentPlayerWeight >= m_weightToOpenDoor)
             {
-                //Debug.Log("Player is on scale and weight is more or equal to m_weightToOpenDoor");
                 m_newDiegeticScale.z = DIEGETIC_UI_MAX_SCALE;
             }
 
@@ -163,16 +160,10 @@ namespace BackstoreSystems
             if (DiegeticScaleValue.localScale.z >= DIEGETIC_UI_MAX_SCALE - DIEGETIC_UI_THRESHOLD)
             {
                 m_isPlayerCanPass = true;
-                //Debug.Log("Player can pass");
             }
-
-            //if (DiegeticScaleValue.localScale.z <= DIEGETIC_UI_MIN_SCALE + DIEGETIC_UI_SCALE_THRESHOLD && !m_isInsideBackstore)
-            //{
-            //    m_isDiegeticUIActive = false;
-            //    Debug.Log("The backstore system can be deactivated");
-            //}
         }
 
+        /// <summary> Updates the doors rotation based on the player's weight </summary>
         private void UpdateDoorsRotation()
         {
             int doorAngle = DOOR_ANGLE_MIN;
@@ -180,27 +171,22 @@ namespace BackstoreSystems
             if (m_isPlayerCanPass == true)
             {
                 doorAngle = DOOR_ANGLE_MAX;
-                //Debug.Log("Doors are open");
             }
             
             DoorOne.rotation = Quaternion.Lerp(DoorOne.rotation, Quaternion.Euler(0, -doorAngle, 0), Time.deltaTime * m_doorsSpeed);
             DoorTwo.rotation = Quaternion.Lerp(DoorTwo.rotation, Quaternion.Euler(0, doorAngle, 0), Time.deltaTime * m_doorsSpeed);
-            //Vector3 eulerAngles = DoorTwo.transform.eulerAngles;
-            //Debug.Log("DoorTwo.rotation.y: " + eulerAngles.y);
-            //Debug.Log("The backstore system can be deactivated DoorTwo.rotation.y: " + DoorTwo.transform.eulerAngles.y + " <= " + (DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD));
 
             if (DoorTwo.transform.eulerAngles.y <= DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD && !m_isInsideBackstore)
             {
                 m_isScaleSystemActive = false;
-                //Debug.Log("The backstore system can be deactivated DoorTwo.rotation.y: " + DoorTwo.transform.eulerAngles.y + " <= " + (DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD));
             }
             else if (DoorTwo.transform.eulerAngles.y >= DOOR_ANGLE_MIN - DOOR_ANGLE_THRESHOLD)
             {
                 m_isScaleSystemActive = true;
-                //Debug.Log("The backstore system is active");
             }
         }
 
+        /// <summary> Returns true if the scale system is active </summary>
         public bool GetIsScaleSystemActive()
         {
             return m_isScaleSystemActive;

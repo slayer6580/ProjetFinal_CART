@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace BackstoreSystems
 {
+    /// <summary> Collider with Observer Pattern. Triggers the backstore systems (diegetic scale and doors) when the player enters a zone </summary>
     public class FloorTriggerCaller : MonoBehaviour
     {
         public ScaleSystem m_listener;
@@ -10,10 +11,8 @@ namespace BackstoreSystems
         private void Awake()
         {
             m_listener = GetComponentInParent<ScaleSystem>();
-            if (m_listener == null)
-            {
-                Debug.LogError("FloorTriggerCaller: No BackstoreDoorSystem found in parent");
-            }
+
+            if (m_listener == null) Debug.LogError("FloorTriggerCaller: No BackstoreDoorSystem found in parent");
         }
 
         private void OnTriggerEnter(Collider other)
