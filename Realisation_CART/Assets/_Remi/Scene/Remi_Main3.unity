@@ -8835,6 +8835,31 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1466541098}
+    - target: {fileID: 4170690421405221263, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300166, guid: a890656eebef5d94ab6c86843cebd735, type: 3}
+    - target: {fileID: 4170690421405221263, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170690421405221263, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e28a6a5ddeb49b7489d7e38efe728353, type: 2}
+    - target: {fileID: 4170690421405221263, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+    - target: {fileID: 4170690421405221263, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: a70622f8a91db7f47aae551fe3a364b9, type: 2}
     - target: {fileID: 4348232085311724277, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
       propertyPath: m_Mesh
@@ -8945,6 +8970,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1999885960}
+    - target: {fileID: 7810776387658514556, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8225705120069120714, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
       propertyPath: m_Name
@@ -25810,14 +25840,14 @@ MonoBehaviour:
   m_playerRotationEuler: {x: 0, y: 0, z: 0}
   m_startingCartToken: 200
   m_upgradeCostByLevel: 0a00000014000000280000003c000000
+  m_melee_1: {fileID: 0}
+  m_melee_2: {fileID: 0}
   m_nbOfCartTokenText: {fileID: 2413088721382239122}
   m_allCostText: []
   m_allBuyingText: []
   m_allBuyButton: []
   m_allSellButton: []
   m_allFillBars: []
-  m_melee_1: {fileID: 0}
-  m_melee_2: {fileID: 0}
 --- !u!114 &4765966502803994208
 MonoBehaviour:
   m_ObjectHideFlags: 0
