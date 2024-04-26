@@ -103,7 +103,7 @@ namespace BoxSystem
             m_boxesInCart.Add(instantBox);
             m_towerPhysics.AddBoxToPhysicsTower();
 
-            Debug.Log("box added: " + instantBox.name);
+            //Debug.Log("box added: " + instantBox.name);
 
         }
 
@@ -113,7 +113,7 @@ namespace BoxSystem
             if (GetTopBox() == null)
                 return false;
 
-            Debug.Log("Can take item: " + GetTopBox().CanPutItemInsideBox(size).ToString());
+            //Debug.Log("Can take item: " + GetTopBox().CanPutItemInsideBox(size).ToString());S
             return GetTopBox().CanPutItemInsideBox(size);
         }
 

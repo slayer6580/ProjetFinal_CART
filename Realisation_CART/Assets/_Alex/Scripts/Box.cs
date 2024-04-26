@@ -225,11 +225,11 @@ namespace BoxSystem
                 if (AllSlotIsAvailable(slotsAvailable))
                 {
                     PutMultiSlotItemInBox(GO, multiSlot, autoSnap);
-                    Debug.Log("Box: " + gameObject.name + ", item: " + GO.name);
+                    //Debug.Log("Box: " + gameObject.name + ", item: " + GO.name);
                     return;
                 }
             }
-            Debug.Log(gameObject.name + " : Box reorganization");
+            //Debug.Log(gameObject.name + " : Box reorganization");
             ReorganizeBox(GO);
         }
 

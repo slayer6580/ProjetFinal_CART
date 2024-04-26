@@ -82,6 +82,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 604797240145115564}
+  - component: {fileID: 2587402362456768160}
+  - component: {fileID: 6141669317846396756}
   m_Layer: 0
   m_Name: WaterPuddles
   m_TagString: Untagged
@@ -117,6 +119,41 @@ Transform:
   - {fileID: 2881160427509329453}
   m_Father: {fileID: 7927469267373831618}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2587402362456768160
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041142658004482530}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 17.08741, y: 4.220895, z: 7.0742416}
+  m_Center: {x: 0.9132652, y: 1.6104475, z: 3.0371208}
+--- !u!114 &6141669317846396756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041142658004482530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4eb149dfc9fba340b75adbf0a518fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <SlipperyTurningDrag>k__BackingField: 0
+  <SlipperyDriftingDrag>k__BackingField: 0
 --- !u!1 &1477524592469649724
 GameObject:
   m_ObjectHideFlags: 0
