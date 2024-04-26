@@ -7041,48 +7041,13 @@ GameObject:
   - component: {fileID: 1224485028}
   - component: {fileID: 1224485027}
   - component: {fileID: 1224485026}
-  - component: {fileID: 1224485025}
   m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
+  m_Name: Raindrop Camera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1224485025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224485024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1224485026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7169,8 +7134,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60.000004
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 4.47
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7194,13 +7159,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224485024}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02461765, y: 0.97437906, z: -0.134095, w: 0.17888007}
-  m_LocalPosition: {x: -47.228706, y: 2.8432279, z: 56.285248}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -41.953, y: -8.6, z: 49.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 23.35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1242488795 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1379060712500888778, guid: 9013717ef23e51141ab67e643231a557,
@@ -9521,13 +9486,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658916379}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -5.329, z: 2.1859999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -41.95, y: -10.287001, z: 49.18}
+  m_LocalScale: {x: 9, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!64 &1658916381
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22605,7 +22570,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
+  m_CustomBlends: {fileID: 11400000, guid: 40a23d866c3a26149ae42d20ae3d3a1f, type: 2}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -23042,7 +23007,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3959612820659040669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02461765, y: 0.97437906, z: -0.134095, w: 0.17888007}
+  m_LocalRotation: {x: 0.02461765, y: 0.974379, z: -0.13409503, w: 0.17888}
   m_LocalPosition: {x: -47.228706, y: 2.8432279, z: 56.285248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23391,8 +23356,9 @@ GameObject:
   - component: {fileID: 5483835176660852978}
   - component: {fileID: 8817286104648689284}
   - component: {fileID: 498789715619754795}
+  - component: {fileID: 8817286104648689285}
   m_Layer: 0
-  m_Name: Raindrop Camera
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23436,7 +23402,6 @@ GameObject:
   - component: {fileID: 4478270852655875782}
   - component: {fileID: 5614393291771666724}
   - component: {fileID: 5248196102613214728}
-  - component: {fileID: 8784262683984035001}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -25726,7 +25691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695684694099198788}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02461765, y: 0.97437906, z: -0.134095, w: 0.17888007}
+  m_LocalRotation: {x: 0.02461765, y: 0.974379, z: -0.13409503, w: 0.17888}
   m_LocalPosition: {x: -47.228706, y: 2.8432279, z: 56.285248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -28383,23 +28348,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1057385376721805917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8784262683984035001
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725243687751827705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NoiseProfile: {fileID: 0}
-  m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1
-  m_FrequencyGain: 1
-  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &8817286104648689284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28444,6 +28392,14 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!124 &8817286104648689285
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695684694099198788}
+  m_Enabled: 1
 --- !u!1 &8821534012536680539
 GameObject:
   m_ObjectHideFlags: 0
