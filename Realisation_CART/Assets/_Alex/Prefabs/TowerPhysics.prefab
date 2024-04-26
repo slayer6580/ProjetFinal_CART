@@ -55,9 +55,10 @@ MonoBehaviour:
   m_springForce: 200
   m_springForceReduction: 25
   m_springForceMinimum: 25
-  m_angleOffset: 0.1
+  m_minimumForceAppliedToMove: 0
+  m_loseItemStats: []
   m_firstHingeAngleRead: 0
-  m_AllHingeAngleRead: 0
+  m_allHingeAngleRead: 0
 --- !u!114 &5190239306066048884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,5 +71,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10957a88632347a4ea6087bde9c0e45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_impulseForce: 35
   m_constantForce: 35
+  m_forceMultiplier: 0
