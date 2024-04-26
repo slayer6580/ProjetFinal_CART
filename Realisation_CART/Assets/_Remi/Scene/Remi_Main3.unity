@@ -8839,7 +8839,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300166, guid: a890656eebef5d94ab6c86843cebd735, type: 3}
+      objectReference: {fileID: 7479011391402983885, guid: 26e2b31255d0b754a9740052708b190b,
+        type: 3}
     - target: {fileID: 4170690421405221263, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -22983,7 +22984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3959612820659040669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02461765, y: 0.97437906, z: -0.134095, w: 0.17888007}
+  m_LocalRotation: {x: 0.02461765, y: 0.974379, z: -0.13409503, w: 0.17888}
   m_LocalPosition: {x: -47.228706, y: 2.8432279, z: 56.285248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -25667,7 +25668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695684694099198788}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02461765, y: 0.97437906, z: -0.134095, w: 0.17888007}
+  m_LocalRotation: {x: 0.02461765, y: 0.974379, z: -0.13409503, w: 0.17888}
   m_LocalPosition: {x: -47.228706, y: 2.8432279, z: 56.285248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
