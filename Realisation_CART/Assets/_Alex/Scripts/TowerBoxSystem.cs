@@ -76,7 +76,6 @@ namespace BoxSystem
             else if (Input.GetKeyDown(KeyCode.Y))
             {
                 Vector3 data = _ScoreManager.EmptyCartAndGetScore();
-                Debug.Log("totalScore: " + data.x + ",  nbOfItems: " + data.y + ", nbOfCartoken: " + data.z);
             }
         }
 
@@ -103,8 +102,6 @@ namespace BoxSystem
             m_boxesInCart.Add(instantBox);
             m_towerPhysics.AddBoxToPhysicsTower();
 
-            //Debug.Log("box added: " + instantBox.name);
-
         }
 
         /// <summary> Look if top box can take item </summary>
@@ -113,7 +110,6 @@ namespace BoxSystem
             if (GetTopBox() == null)
                 return false;
 
-            //Debug.Log("Can take item: " + GetTopBox().CanPutItemInsideBox(size).ToString());S
             return GetTopBox().CanPutItemInsideBox(size);
         }
 

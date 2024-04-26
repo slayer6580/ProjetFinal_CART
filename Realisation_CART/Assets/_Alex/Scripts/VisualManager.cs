@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace StatsSystem
@@ -32,7 +31,6 @@ namespace StatsSystem
         {
             UpdateAll();
         }
-
 
         private void UpdateWheels()
         {
