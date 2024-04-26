@@ -1,22 +1,19 @@
-using BehaviourTree;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviourTree
 {
 	public class AdjustRotation : LeafNode
 	{
+		[Range(0.5f, 10)] public float m_steeringSpeed = 1;
+		[Range(0, 89)] public float m_steerForce;
 		private float m_steerValue = 0;
-		[Range(0.5f,10)] public float m_steeringSpeed = 1;
+
 		protected override void OnStart()
 		{
-
 		}
 
 		protected override void OnStop()
-		{
-			
+		{		
 		}
 
 		protected override State OnUpdate()
@@ -29,7 +26,8 @@ namespace BehaviourTree
 			float angle = Vector3.SignedAngle(targetDir, forward, Vector3.up);
 			m_blackboard.m_targetAngle = angle;
 
-			float steerPercent = (Mathf.Abs(angle) / 20);
+			float steerPercent = (Mathf.Abs(angle) / (90 - m_steerForce));
+
 			if (angle > 2)
 			{
 				m_steerValue = -steerPercent;

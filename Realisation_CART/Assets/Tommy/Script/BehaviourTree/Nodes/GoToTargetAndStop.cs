@@ -1,6 +1,4 @@
 using BehaviourTree;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace DiscountDelirium
@@ -9,15 +7,19 @@ namespace DiscountDelirium
 	{
 		private float m_targetDistance;
 		private float m_distanceToSlowDown = 15;
+
 		protected override void OnStart()
-		{
-			
+		{		
 		}
 
 		protected override void OnStop()
-		{
-			
+		{		
 		}
+
+		/// <summary>
+		/// NOT USED FOR NOW
+		/// </summary>
+	
 
 		protected override State OnUpdate()
 		{

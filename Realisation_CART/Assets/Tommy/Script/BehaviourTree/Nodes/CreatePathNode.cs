@@ -7,29 +7,17 @@ using UnityEngine.AI;
 namespace DiscountDelirium
 {
 	public class CreatePathNode : LeafNode
-	{
+	{	
 		public GameObject m_debugBox;
 		public NavMeshPath m_creatingPath;
 		List<float> m_pathScores = new List<float>();
 		int bestPath = 0;
 		
-
 		protected override void OnStart()
 		{
-			AcvtivateMethods();
 		}
 
 		protected override State OnUpdate()
-		{
-			AcvtivateMethods();
-			return State.Success;
-		}
-
-		protected override void OnStop()
-		{
-		}
-
-		private void AcvtivateMethods()
 		{
 			//If there's no more premade points to follow from the chosen list
 			if (m_blackboard.m_chosenPathListCopy.Count == 0)
@@ -43,15 +31,17 @@ namespace DiscountDelirium
 				CreatePathWithNavMesh();
 			}
 
+			return State.Success;
+		}
+
+		protected override void OnStop()
+		{
 		}
 		
 		public void EvaluateBestPath()
 		{
 			bestPath = 0;
-
 			int loopIteration = 0;
-
-
 			int m_pathCount = 0;
 			m_pathScores.Clear();
 
@@ -62,12 +52,11 @@ namespace DiscountDelirium
 			}
 
 
-
 			//SCORING METHODS HERE
 			ScoreForActiveShelf();
 			///
 
-			//CHOOSE
+			//Choose a path, the bigger the score, the bigger the chance to pick it
 			float total = 0;
 			foreach(float score in m_pathScores)
 			{

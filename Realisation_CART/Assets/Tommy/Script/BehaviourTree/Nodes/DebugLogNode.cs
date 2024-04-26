@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviourTree
@@ -10,12 +8,10 @@ namespace BehaviourTree
 		public bool m_isWarning;
 		protected override void OnStart()
 		{
-			//Debug.Log($"OnStart{message}");
 		}
 
 		protected override void OnStop()
 		{
-			//Debug.Log($"OnStop{message}");
 		}
 
 		protected override State OnUpdate()
@@ -28,8 +24,7 @@ namespace BehaviourTree
 			{
 				Debug.Log($"OnUpdate{m_message}");
 			}
-			
-			
+						
 			return State.Success;
 		}
 	}

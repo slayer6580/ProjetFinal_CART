@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviourTree
@@ -8,14 +6,13 @@ namespace BehaviourTree
 	{
 		public float m_underSpeedToCountAsStuck;
 		public float m_timeBeforeUnstuck;
+
 		protected override void OnStart()
-		{
-			
+		{			
 		}
 
 		protected override void OnStop()
-		{
-			
+		{		
 		}
 
 		protected override State OnUpdate()
@@ -39,10 +36,8 @@ namespace BehaviourTree
 				m_blackboard.m_timeStuck = 0;
 			}
 
-
 			if(m_blackboard.m_timeStuck > m_timeBeforeUnstuck)
 			{
-				//m_blackboard.m_timeStuck = 0;
 				return m_children[0].Update();
 				
 			}

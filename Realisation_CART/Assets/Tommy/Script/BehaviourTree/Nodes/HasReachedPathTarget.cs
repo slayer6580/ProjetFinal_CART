@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviourTree
@@ -10,42 +8,37 @@ namespace BehaviourTree
 		public float m_slowReachDistance;
 		public float m_fastReachDistance;
 		public float m_minSpeedForFastDistance;
+
 		protected override void OnStart()
 		{
 		}
 
 		protected override void OnStop()
-		{
-			
+		{		
 		}
 
 		protected override State OnUpdate()
 		{
-			var child = m_children[0];
-
 			TargetDistance();
 			
 			if(m_blackboard.m_cartStateMachine.LocalVelocity.z < m_minSpeedForFastDistance)
 			{
 				if(m_targetDistance < m_slowReachDistance)
 				{
-					child = m_children[0];
-					return child.Update();
+					return m_children[0].Update();
 				}
 			}
             else
             {
 				if (m_targetDistance < m_fastReachDistance)
 				{
-					child = m_children[0];
-					return child.Update();
+					return m_children[0].Update();
 				}
 			}
 
 			if (m_children.Count > 1)
 			{
-				child = m_children[1];
-				return child.Update();
+				return m_children[1].Update();
 			}
 			
 
