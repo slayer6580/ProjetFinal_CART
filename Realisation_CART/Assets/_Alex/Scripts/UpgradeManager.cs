@@ -1,5 +1,6 @@
 using CartControl;
 using Cinemachine;
+using DiscountDelirium;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -58,6 +59,10 @@ namespace StatsSystem
         private const int MAX_LEVEL = 4;
         private const int NB_OF_STATS = 6;
 
+        [Header("Weapons")]
+        [SerializeField] private Melee m_melee_1;
+        [SerializeField] private Melee m_melee_2;
+
 
         private void SetUpList()
         {
@@ -91,7 +96,8 @@ namespace StatsSystem
             UpdateBuyButton();
             UpdateSellButton();
             VisualManager.GetInstance().UpdateAll();
-
+            m_melee_1.UpdateMeleeWeapon();
+            m_melee_2.UpdateMeleeWeapon();
             DeselectAllButtons();
         }
 

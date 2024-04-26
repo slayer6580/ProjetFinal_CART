@@ -17,15 +17,10 @@ namespace DiscountDelirium
         private int m_weaponIndex;
 
         private void Awake()
-        {
-            WeaponInputHandler.MeleeAttack += UseWeapon;
-
-            //m_animator.speed = SpeedLevel[PlayerPrefs.GetInt("Melee", 0);];
+        {       
             m_animator = GetComponent<Animator>();
-            m_animator.speed = m_speedLevel[m_level];
-
-            //m_weaponIndex = PlayerPrefs.GetInt("Melee", 0);];
-            m_weaponIndex = m_level;
+            m_animator.speed = m_speedLevel[PlayerPrefs.GetInt("Melee", 0)];
+            m_weaponIndex = PlayerPrefs.GetInt("Melee", 0);
             ChangeWeaponModel();
 
             m_trailRenderer.enabled = false;
@@ -45,8 +40,7 @@ namespace DiscountDelirium
         {
             if (m_animator != null) 
             {
-                m_animator.speed = m_speedLevel[m_level];
-                //m_animator.speed = SpeedLevel[PlayerPrefs.GetInt("Melee", 0);];
+                m_animator.speed = m_speedLevel[PlayerPrefs.GetInt("Melee", 0)];
             }
             ChangeWeaponModel();
 
@@ -65,8 +59,17 @@ namespace DiscountDelirium
         public void ChangeWeaponModel() 
         {
             m_models[m_weaponIndex].SetActive(false);
-            m_weaponIndex = m_level;
+            m_weaponIndex = PlayerPrefs.GetInt("Melee", 0);
             m_models[m_weaponIndex].SetActive(true);
+        }
+
+        public void UpdateMeleeWeapon() 
+        {
+            if (m_animator != null)
+            {
+                m_animator.speed = m_speedLevel[PlayerPrefs.GetInt("Melee", 0)];
+            }
+            ChangeWeaponModel();
         }
     }
 }
