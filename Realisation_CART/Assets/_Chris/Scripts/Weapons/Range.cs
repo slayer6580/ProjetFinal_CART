@@ -19,10 +19,6 @@ namespace DiscountDelirium
         
         private bool m_canFire = true;
 
-        private void Awake()
-        {
-            WeaponInputHandler.RangeAttack += UseWeapon;
-        }
         public override void UseWeapon()
         {
             if (m_canFire) 
@@ -37,9 +33,9 @@ namespace DiscountDelirium
             m_canFire = false;
             m_particleSmoke.Play();
             GameObject projectile = Instantiate(m_projectile, m_pointToShoot.transform.position, m_pointToShoot.transform.rotation);
-            Vector3 force = m_pointToShoot.transform.forward * m_force[m_level];
+            Vector3 force = m_pointToShoot.transform.forward * m_force[PlayerPrefs.GetInt("Ranged", 0)];
             projectile.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-            yield return new WaitForSeconds(1f / m_fireRate[m_level]);
+            yield return new WaitForSeconds(1f / m_fireRate[PlayerPrefs.GetInt("Ranged", 0)]);
             m_canFire = true;
         }
     }
