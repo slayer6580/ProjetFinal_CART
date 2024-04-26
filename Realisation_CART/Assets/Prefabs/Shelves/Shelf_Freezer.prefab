@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 6742261034904513663}
   - component: {fileID: 4945873066125915996}
   - component: {fileID: 4122154641847566561}
+  - component: {fileID: 4424229223033384543}
   m_Layer: 0
   m_Name: Shelf_Freezer
   m_TagString: Untagged
@@ -219,6 +220,27 @@ MonoBehaviour:
   m_spawnPoints: {fileID: 3197877312722073360}
   m_lenghtGap: 0.076
   m_depthGap: 0.097
+--- !u!65 &4424229223033384543
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2370659071460196846}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.87928, y: 4.5861464, z: 2.110424}
+  m_Center: {x: -3.9091578, y: 2.2930732, z: -0.8913746}
 --- !u!1 &3204757411483123448
 GameObject:
   m_ObjectHideFlags: 0
