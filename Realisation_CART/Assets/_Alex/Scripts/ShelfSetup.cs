@@ -55,19 +55,14 @@ namespace BoxSystem
         {
             GameObject objectToSpawn = m_shelf.ItemPrefab;                  // take the item prefab
             Item itemScript = objectToSpawn.GetComponent<Item>();           // access his 'Item' script
-            itemScript.m_data = m_shelf.ItemData;                           // Determine what kind of item it is                                                                                               // objectToSpawn.transform.position = transform.position;          // Set start position to the shelf
-            GameObject instant = Instantiate(objectToSpawn);                // Spawn Item Prefab
+            itemScript.m_data = m_shelf.ItemData;                           // Determine what kind of item it is  
             GameObject model = Instantiate(itemScript.m_data.m_object);     // Spawn Model
 
             BoxCollider modelCollider = model.GetComponent<BoxCollider>();
             if (modelCollider != null)
                 Destroy(modelCollider);
 
-            model.transform.SetParent(instant.transform);                   // Item prefab become parent of Model
-            model.transform.localPosition = Vector3.zero;                   // Reset Model position
-            model.transform.localScale = Vector3.one;
-
-            return instant;
+            return model;
         }
 
 
