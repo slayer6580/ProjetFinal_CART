@@ -6,9 +6,11 @@
 Shader "Custom/Raindrop" {
 	Properties {
 		iChannel0("Albedo (RGB)", 2D) = "white" {}
-		_PlayerSpeed("Player Speed", Float) = 0.01
-		_PlayerRotationPull("Player Speed", Float) = 0.01
-		_PlayerGForce("Player GForce", Vector) = (0, 0, 0)
+		_PlayerSpeed("Player Speed", Float) = 0.0
+		_PlayerRotationPull("Player Rotation Pull", Float) = 0.0
+		_RainAmount("RainAmount", Float) = 0.0
+		_IsActive("Is Active", Float) = 0.0
+		//_PlayerGForce("Player GForce", Vector) = (0, 0, 0)
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -23,7 +25,9 @@ Shader "Custom/Raindrop" {
 			sampler2D iChannel0;
 			float _PlayerSpeed;
 			float _PlayerRotationPull;
-			Vector _PlayerGForce;
+			float _RainAmount;
+			int _IsActive;
+			//Vector _PlayerGForce;
 
 			//#define S(a, b, t) smoothstep(a, b, t)
 
@@ -128,11 +132,15 @@ Shader "Custom/Raindrop" {
 			}
 
 
-			fixed4 frag(v2f_img i) : SV_Target{
-
+			fixed4 frag(v2f_img i) : SV_Target
+			{
+				if (_IsActive == 0.0f) 
+				{
+					return tex2D(iChannel0, i.uv);
+				}
+				
 				float2 uv = ((i.uv * _ScreenParams.xy) - .5*_ScreenParams.xy) / _ScreenParams.y;
 				float2 UV = i.uv.xy;
-
 				//float3 M = float3(0.0, 0.0, 0.0);
 				//float Duration = _Time.y + M.x*2.;
 				//float Duration = _Time.y;
@@ -140,7 +148,9 @@ Shader "Custom/Raindrop" {
 
 				float DurationSlown = Duration * 0.2f;
 
-				float rainAmount = 100.0f;
+				//float rainAmount = 100.0f;
+				//float rainAmount = 10.0f - (_PlayerSpeed * 50.0f);
+				float rainAmount = _RainAmount;
 
 				float maxBlur = lerp(3., 6., rainAmount);
 				float minBlur = 2.;
@@ -161,7 +171,7 @@ Shader "Custom/Raindrop" {
 				float4 texCoord = float4(UV.x + normals.x, UV.y + normals.y, 0, focus);
 				float4 lod = tex2Dlod(iChannel0, texCoord);
 				float3 col = lod.rgb;
-																	//col = vec3(heart);
+
 				return fixed4(col, 1);
 			}
 			ENDCG
