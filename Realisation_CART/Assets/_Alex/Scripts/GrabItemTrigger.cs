@@ -49,6 +49,23 @@ namespace BoxSystem
 
         }
 
+        public void StealItemFromOtherTower(TowerBoxSystem towerToSteal)
+        {
+            GameObject itemTaken = towerToSteal.GetStolenItem();
+
+            if (itemTaken == null)
+                return;
+
+            ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size;
+
+            if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
+            {
+                TowerBoxSystem.AddBoxToTower();
+            }
+
+            TowerBoxSystem.PutObjectInTopBox(itemTaken);
+        }
+
         private void ActivateGrabItem()
         {
             m_canGrabItem = true;

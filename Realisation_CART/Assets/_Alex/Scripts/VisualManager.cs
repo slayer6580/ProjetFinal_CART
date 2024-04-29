@@ -7,12 +7,14 @@ namespace StatsSystem
         [Header("All Materials")]
         [SerializeField] private Material[] m_cartMaterials;
         [SerializeField] private Material[] m_wheelsMaterials;
-        [SerializeField] private Material[] m_shoesMaterials;
+        [SerializeField] private Color32[] m_shoesColors;
+        [SerializeField] private Material[] m_rocketMaterials;
 
         [Header("All Parts")]
-        [SerializeField] MeshRenderer[] m_cartParts;
-        [SerializeField] MeshRenderer[] m_wheelParts;
-        [SerializeField] MeshRenderer[] m_shoesParts;
+        [SerializeField] private MeshRenderer[] m_cartParts;
+        [SerializeField] private MeshRenderer[] m_wheelParts;
+        [SerializeField] private MeshRenderer[] m_rocketParts;
+        [SerializeField] private SkinnedMeshRenderer m_shoePart;
 
         private static VisualManager Instance;
 
@@ -53,9 +55,16 @@ namespace StatsSystem
         private void UpdateShoes()
         {
             int shoesUpgrade = PlayerPrefs.GetInt("Acceleration", 0);
+            Material shoeMaterial = m_shoePart.materials[2];
+            shoeMaterial.color = m_shoesColors[shoesUpgrade];
+        }
 
-            foreach (var shoePart in m_shoesParts)
-                shoePart.material = m_shoesMaterials[shoesUpgrade];
+        private void UpdateRockets()
+        {
+            int rocketUpgrade = PlayerPrefs.GetInt("MaxSpeed", 0);
+
+            foreach (var rocketPart in m_rocketParts)
+                rocketPart.material = m_rocketMaterials[rocketUpgrade];
         }
 
         public void UpdateAll()
@@ -63,6 +72,7 @@ namespace StatsSystem
             UpdateCart();
             UpdateShoes();
             UpdateWheels();
+            UpdateRockets();
         }
 
     }

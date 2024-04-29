@@ -43983,12 +43983,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3932910718878733891}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5000008, y: 0.49999925, z: 0.49999928, w: 0.5000007}
-  m_LocalPosition: {x: -0.1855, y: -0.272, z: -0.891}
+  m_LocalRotation: {x: -0.5000008, y: 0.49999925, z: 0.4999993, w: 0.5000007}
+  m_LocalPosition: {x: -0.1855011, y: 0.058, z: -0.45399883}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2452949573761676810}
+  m_Father: {fileID: 4475648950564542717}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &7868104432304941408
 MeshFilter:
@@ -62378,12 +62378,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7376869259368365409}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5000008, y: 0.49999925, z: 0.49999928, w: 0.5000007}
-  m_LocalPosition: {x: 0.2031, y: -0.272, z: -0.891}
+  m_LocalRotation: {x: -0.5000008, y: 0.49999925, z: 0.4999993, w: 0.5000007}
+  m_LocalPosition: {x: 0.2030983, y: 0.058, z: -0.45399883}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2452949573761676810}
+  m_Father: {fileID: 4475648950564542717}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &4511673653757022351
 MeshFilter:
@@ -63045,6 +63045,8 @@ Transform:
   - {fileID: 1176163958578998871}
   - {fileID: 2268827275517469542}
   - {fileID: 1172396919479233018}
+  - {fileID: 3441548574014715850}
+  - {fileID: 6782301166278323963}
   m_Father: {fileID: 2452949573761676810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &495991814001108458
@@ -64073,8 +64075,6 @@ Transform:
   - {fileID: 8785293406628626056}
   - {fileID: 6863388170456126178}
   - {fileID: 303859143797529499}
-  - {fileID: 3441548574014715850}
-  - {fileID: 6782301166278323963}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5976928614607469278
@@ -64101,6 +64101,7 @@ MonoBehaviour:
   <MaxBackwardSpeed>k__BackingField: 5
   <IdleRotatingSpeed>k__BackingField: 70
   <MovingRotatingSpeed>k__BackingField: 50
+  <TowerPushForceWhenTurning>k__BackingField: 0
   <TurningDrag>k__BackingField: 2
   <TurningDragRelativeToJoystick>k__BackingField:
     serializedVersion: 2
@@ -64131,6 +64132,7 @@ MonoBehaviour:
   <DriftingRotatingSpeed>k__BackingField: 75
   <AddedRotatingSpeedWhenBreaking>k__BackingField: 30
   <DriftingAcceleration>k__BackingField: 70
+  <TowerPushForceWhenDrifting>k__BackingField: 0
   <AutoDriftWhenTurning>k__BackingField: 0
   <TurningTimeBeforeDrift>k__BackingField: 2
   <DriftPressed>k__BackingField: 0

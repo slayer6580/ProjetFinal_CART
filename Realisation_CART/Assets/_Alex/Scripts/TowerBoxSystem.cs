@@ -171,7 +171,26 @@ namespace BoxSystem
 
             topBox.ResetSlots(lastItemInBox);
             topBox.GetItemsInBox().Remove(lastItemInBox);
+        }
 
+        public GameObject GetStolenItem()
+        {
+            if (GetTopBox().IsEmpty())
+            {
+                RemoveBoxImpulse();
+                return null;
+            }
+
+            Box topBox = GetTopBox();
+
+            Box.ItemInBox lastItemInBox = topBox.GetLastItem();
+
+            lastItemInBox.m_item.transform.SetParent(null);
+
+            topBox.ResetSlots(lastItemInBox);
+            topBox.GetItemsInBox().Remove(lastItemInBox);
+
+            return lastItemInBox.m_item;
         }
 
         #region (--- Getter ---)
