@@ -28,6 +28,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
-    m_Colors: []
+    m_Floats:
+    - _PlayerDirection: -2.0987552e-14
+    - _PlayerRotationPull: 0.24070463
+    - _PlayerSpeed: 0.2269601
+    m_Colors:
+    - _PlayerGForce: {r: 1.3334107, g: -0.0000023478738, b: -0.78107977, a: 0}
   m_BuildTextureStacks: []
