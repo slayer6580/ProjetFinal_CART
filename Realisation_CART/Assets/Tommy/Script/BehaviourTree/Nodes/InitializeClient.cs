@@ -12,9 +12,12 @@ namespace BehaviourTree
 		protected override void OnStart()
 		{
 			m_blackboard.m_thisClient = GameObject.Find(m_blackboard.m_name);
-			m_blackboard.m_cartStateMachine = m_blackboard.m_thisClient.GetComponent<CartStateMachine>();
+			if (m_blackboard == null) Debug.LogError("BlackBoard not found");
+			if (m_blackboard.m_thisClient == null) Debug.LogError("Client not found");
+            m_blackboard.m_cartStateMachine = m_blackboard.m_thisClient.GetComponent<CartStateMachine>();
+			if (m_blackboard.m_cartStateMachine == null) Debug.LogError("CartStateMachine not found");
 			m_blackboard.m_navAgent = m_blackboard.m_thisClient.GetComponentInChildren<NavMeshAgent>();
-			m_blackboard.m_possiblePathScript = m_blackboard.m_thisClient.GetComponent<ClientPathList>();
+			//m_blackboard.m_possiblePathScript = m_blackboard.m_thisClient.GetComponent<ClientPathList>();
 			m_blackboard.m_thisTower = m_blackboard.m_thisClient.transform.Find("Tower").GetComponent<TowerBoxSystem>();
 			m_blackboard.m_cashRegister = GameObject.Find("AiCashRegisterTarget");
 		}
