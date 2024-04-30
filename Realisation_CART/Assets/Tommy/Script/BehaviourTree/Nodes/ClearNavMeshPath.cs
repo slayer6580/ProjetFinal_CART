@@ -2,6 +2,7 @@ namespace BehaviourTree
 {
 	public class ClearNavMeshPath : LeafNode
 	{
+		public bool m_alsoClearChosePathList;
 		protected override void OnStart()
 		{
 		}
@@ -12,6 +13,11 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
+			if (m_alsoClearChosePathList)
+			{
+				m_blackboard.m_chosenPathListCopy.Clear();
+			}
+
 			m_blackboard.m_path.Clear();
 
 			while (m_blackboard.m_pathDebugBox.Count > 0)

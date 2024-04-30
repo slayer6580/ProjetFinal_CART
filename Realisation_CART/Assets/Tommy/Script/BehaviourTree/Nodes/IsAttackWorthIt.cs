@@ -7,12 +7,19 @@ namespace BehaviourTree
 	public class IsAttackWorthIt : CompositeNode
 	{
 		private List<float> m_attackScore = new List<float>();
+		public bool m_chooseToAttack;
+		public float m_minTimeBetweenAttack;
+		private float m_lastLoopTime = 0;
+
+
 		protected override void OnStart()
-		{	
+		{
+			m_chooseToAttack = false;
 		}
 
 		protected override void OnStop()
-		{	
+		{
+
 		}
 
 		/// <summary>
@@ -21,7 +28,15 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			if(m_blackboard.m_clientInSight.Count > 0 && m_blackboard.m_isAttacking == false)
+			m_blackboard.m_lastAttackTimer += Time.time - m_lastLoopTime;
+			m_lastLoopTime = Time.time;
+
+			if (m_blackboard.m_isAttacking)
+			{
+				return State.Success;
+			}
+
+			if (m_blackboard.m_clientInSight.Count > 0 && m_chooseToAttack == false && m_blackboard.m_lastAttackTimer > m_minTimeBetweenAttack)
 			{
 				m_attackScore.Clear();
 
@@ -49,15 +64,16 @@ namespace BehaviourTree
 
 
 				int numberOfCondition = 1;  //CalculateTacticalAttack
-				int numberOfConditionModifier = 100 * numberOfCondition;
+				int numberOfConditionModifier = 100+ (100 * numberOfCondition);
 
 				float randomChanceToAttack = Random.Range(m_blackboard.m_aggressiveness, m_blackboard.m_aggressiveness + numberOfConditionModifier);
 
-				Debug.Log("ATTACK DEBUG: rng:" + randomChanceToAttack + " / targetScore:" + chosenTargetScore);
+				UnityEngine.Debug.Log("ATTACK DEBUG: rng:" + randomChanceToAttack + " / targetScore:" + chosenTargetScore);
 				//Now that the target is chosen, do we attack?
-				if (randomChanceToAttack > (100 + numberOfConditionModifier) - chosenTargetScore)
+				if (randomChanceToAttack > (numberOfConditionModifier - chosenTargetScore))
 				{
-					m_blackboard.m_isAttacking = true;
+					m_chooseToAttack = true;
+					m_blackboard.m_currentPursuitStartTime += Time.time;
 					return m_children[0].Update();
 				}
 				else
@@ -70,9 +86,9 @@ namespace BehaviourTree
 				
 
 			}
-			else if(m_blackboard.m_isAttacking == true)
+			else if (m_chooseToAttack)
 			{
-				return State.Success;
+				return m_children[0].Update();
 			}
 			else if (m_children.Count > 1)
 			{

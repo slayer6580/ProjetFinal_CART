@@ -87,9 +87,11 @@ namespace CartControl
 		[field: SerializeField] public float MaxSpeedUpgrades { get; private set; }
 		[field: SerializeField] public float MovingRotatingSpeedUpgrades { get; private set; }
 		[field: SerializeField] public float DriftingRotatingSpeedUpgrades { get; private set; }
-	
+
 
 		//
+
+		[HideInInspector] public GameObject LastClientCollisionWith { get; set; }
 		[HideInInspector] public bool ForceStartDrift { get; set; }
 		[HideInInspector] public bool IsDrifting { get; set; }
 		[HideInInspector] public bool CanBoost { get; set; }
@@ -145,6 +147,22 @@ namespace CartControl
 			m_currentState.OnFixedUpdate();		
 		}
 
+		public void OnCollisionEnter(Collision collision)
+		{
+			if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerCollider"))
+			{
+				if(collision.gameObject.GetComponent<CartStateMachine>() != null)
+				{
+					LastClientCollisionWith = collision.gameObject;
+				}
+			}
+			
+		}
+
+		public void WasAttacked()
+		{
+			LastClientCollisionWith = null;
+		}
 		protected override void CreatePossibleStateList()
 		{
 			m_possibleStates.Add(new CartState_Idle());

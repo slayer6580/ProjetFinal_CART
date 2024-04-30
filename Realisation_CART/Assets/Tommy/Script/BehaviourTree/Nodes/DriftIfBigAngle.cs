@@ -1,8 +1,11 @@
+using Unity.VisualScripting;
+
 namespace BehaviourTree
 {
     public class DriftIfBigAngle : LeafNode
 	{
 		public float m_minAngleToStartDrifting;
+		public float m_minAngleToStartBreaking;
 
 		protected override void OnStart()
 		{
@@ -21,6 +24,11 @@ namespace BehaviourTree
 			else
 			{
 				m_blackboard.m_cartStateMachine.OnDrift(0);
+			}
+
+			if (m_blackboard.m_targetAngle > m_minAngleToStartBreaking || m_blackboard.m_targetAngle < -m_minAngleToStartBreaking)
+			{
+				m_blackboard.m_cartStateMachine.OnBackward(0.5f);
 			}
 
 			return State.Success;

@@ -27,9 +27,10 @@ namespace BehaviourTree
 					m_blackboard.m_chosenPathListCopy.RemoveAt(0);
 				}
 
-				return State.Success;
+				//return State.Success;
 			}
-			return State.Failure;
+			//return State.Failure;
+			return State.Success;
 		}
 	}
 }

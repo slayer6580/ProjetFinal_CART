@@ -6,6 +6,7 @@ namespace BehaviourTree
 	{
 		[Range(0.5f, 10)] public float m_steeringSpeed = 1;
 		[Range(0, 89)] public float m_steerForce;
+		private const float MAX_STEERING = 5;
 		private float m_steerValue = 0;
 
 		protected override void OnStart()
@@ -41,6 +42,9 @@ namespace BehaviourTree
 				m_steerValue = 0;				
 			}
 
+			m_steerValue = Mathf.Clamp(m_steerValue, -MAX_STEERING, MAX_STEERING);
+
+			
 			m_blackboard.m_cartStateMachine.OnSteer(m_steerValue);
 
 			return State.Success;
