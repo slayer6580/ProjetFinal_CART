@@ -4,7 +4,6 @@ namespace DiscountDelirium
 {
     public class GameplayState : GameState
     {
-
         public override void OnEnter()
         {
             Debug.LogWarning("GameState : GAMEPLAY");

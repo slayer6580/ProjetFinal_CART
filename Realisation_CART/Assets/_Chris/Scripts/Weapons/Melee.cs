@@ -1,4 +1,3 @@
-using Manager;
 using UnityEngine;
 using static Manager.AudioManager;
 
@@ -35,8 +34,11 @@ namespace DiscountDelirium
 
         public override void UseWeapon()
         {
+            if (!m_canUseWeapon)
+            {
+                return;
+            }
             m_animator.SetTrigger("ActivateWeapon");
-            _AudioManager.PlaySoundEffectsOneShot(ESound.MeleeSwoosh, transform.position, 0.5f);
         }
 
         public void OnValidate()
@@ -46,7 +48,6 @@ namespace DiscountDelirium
                 m_animator.speed = m_speedLevel[PlayerPrefs.GetInt("Melee", 0)];
             }
             ChangeWeaponModel();
-
         }
 
         public void ActivateTrail()
@@ -73,6 +74,11 @@ namespace DiscountDelirium
                 m_animator.speed = m_speedLevel[PlayerPrefs.GetInt("Melee", 0)];
             }
             ChangeWeaponModel();
+        }
+
+        public void PlaySound() 
+        {
+            _AudioManager.PlaySoundEffectsOneShot(ESound.MeleeSwoosh, transform.position, 0.5f);
         }
     }
 }

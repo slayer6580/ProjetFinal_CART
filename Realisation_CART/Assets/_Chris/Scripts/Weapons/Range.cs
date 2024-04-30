@@ -26,6 +26,10 @@ namespace DiscountDelirium
 
         public override void UseWeapon()
         {
+            if (!m_canUseWeapon)
+            {
+                return;
+            }
             if (m_canFire) 
             {
                 _AudioManager.PlaySoundEffectsOneShot(ESound.CannonSound, transform.position, 0.25f);
