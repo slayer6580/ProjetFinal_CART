@@ -20,13 +20,11 @@ namespace BehaviourTree
 		{
 			if(m_blackboard.m_cartStateMachine.LastClientCollisionWith != null)
 			{
-				Debug.Log("Colision Occur");
 				return m_children[0].Update();
 			}
 
 			else if(m_children.Count > 1)
 			{
-				Debug.Log("No Col Occur");
 				return m_children[1].Update();
 			}
 

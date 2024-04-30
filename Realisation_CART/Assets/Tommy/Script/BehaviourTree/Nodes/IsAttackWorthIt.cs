@@ -38,6 +38,7 @@ namespace BehaviourTree
 
 			if (m_blackboard.m_clientInSight.Count > 0 && m_chooseToAttack == false && m_blackboard.m_lastAttackTimer > m_minTimeBetweenAttack)
 			{
+
 				m_attackScore.Clear();
 
 				foreach (GameObject client in m_blackboard.m_clientInSight)

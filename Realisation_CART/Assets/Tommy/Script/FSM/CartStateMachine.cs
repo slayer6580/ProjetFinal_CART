@@ -154,6 +154,7 @@ namespace CartControl
 				if(collision.gameObject.GetComponent<CartStateMachine>() != null)
 				{
 					LastClientCollisionWith = collision.gameObject;
+					Debug.Log("COLLISION");
 				}
 			}
 			

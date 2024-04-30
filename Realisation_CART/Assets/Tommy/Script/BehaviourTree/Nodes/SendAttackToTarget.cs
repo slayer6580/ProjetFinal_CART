@@ -1,3 +1,4 @@
+using BoxSystem;
 using CartControl;
 
 namespace BehaviourTree
@@ -16,8 +17,7 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			m_blackboard.m_cartStateMachine.LastClientCollisionWith = null;
-			m_blackboard.m_chosenPathListCopy[0].gameObject.GetComponent<CartStateMachine>().WasAttacked();
+			m_blackboard.m_thisClient.gameObject.GetComponentInChildren<GrabItemTrigger>().StealItemFromOtherTower(m_blackboard.m_chosenPathListCopy[0].gameObject.GetComponentInChildren<TowerBoxSystem>());
 			return State.Success;
 		}
 	}
