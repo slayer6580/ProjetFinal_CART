@@ -1787,9 +1787,6 @@ MonoBehaviour:
   <NPCPrefab>k__BackingField: {fileID: 1501343574802851277, guid: 7115279bfc98fd549b13ec9ac52793e4,
     type: 3}
   <SpawningZones>k__BackingField: {fileID: 1340236121}
-  <CamBrain>k__BackingField: {fileID: 498789715619754795}
-  <VirtualCamera>k__BackingField: {fileID: 3959612820659040669}
-  <BoxForce>k__BackingField: {fileID: 0}
 --- !u!4 &543870762
 Transform:
   m_ObjectHideFlags: 0
@@ -14628,6 +14625,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1758920714179347600, guid: 7115279bfc98fd549b13ec9ac52793e4,
+        type: 3}
+      propertyPath: m_tree
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e3750b643c936349a77b697a52d04a3,
+        type: 2}
+    - target: {fileID: 1758920714179347600, guid: 7115279bfc98fd549b13ec9ac52793e4,
+        type: 3}
+      propertyPath: m_treePrefab
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e3750b643c936349a77b697a52d04a3,
+        type: 2}
     - target: {fileID: 1770864164470131872, guid: 7115279bfc98fd549b13ec9ac52793e4,
         type: 3}
       propertyPath: m_LocalPosition.x
