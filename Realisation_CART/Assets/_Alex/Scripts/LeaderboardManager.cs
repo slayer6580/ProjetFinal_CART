@@ -11,11 +11,14 @@ namespace SavingSystem
         private const string LEADERBOARD_LOCATION = "/_Alex/LeaderBoardSave.txt";
         private Leaderboard m_leaderboard;
 
+        [Header("Top what?")]
+        [SerializeField] private int m_nbOfPlayerInLeaderboard; // once determined, transform in const
 
-        [SerializeField] private int m_nbOfPlayerInLeaderboard;
+        [Header("Debug")]
         [SerializeField] private string m_nameToAdd;
         [SerializeField] private int m_scoreToAdd;
 
+        [Header("TMP_UI here")]
         [SerializeField] private TextMeshProUGUI m_namesText;
         [SerializeField] private TextMeshProUGUI m_scoreText;
 
@@ -26,7 +29,7 @@ namespace SavingSystem
             UpdateUILeaderboard();
         }
 
-        private void Update()
+        private void Update() // TESTING
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -60,14 +63,14 @@ namespace SavingSystem
             m_leaderboard = LoadLeaderboard();
         }
 
-        public bool CanPlayerBeInLeaderboard(int score)
+        public bool CanPlayerBeInLeaderboard(int playerScore)
         {
-
-            if (m_leaderboard.m_allPlayerStats.Count < m_nbOfPlayerInLeaderboard)
+            bool freeSpaceInLeaderboard = m_leaderboard.m_allPlayerStats.Count < m_nbOfPlayerInLeaderboard;
+            if (freeSpaceInLeaderboard)
                 return true;
 
-            int minScore = m_leaderboard.m_allPlayerStats[m_nbOfPlayerInLeaderboard - 1].score;
-            return score > minScore;
+            int scoreOfLastPersonOnLeaderboard = m_leaderboard.m_allPlayerStats[m_nbOfPlayerInLeaderboard - 1].score;
+            return playerScore > scoreOfLastPersonOnLeaderboard;
         }
 
         private void UpdateUILeaderboard()
@@ -88,44 +91,44 @@ namespace SavingSystem
 
         public void AddPlayerToLeaderboard(string _name, int _score)
         {
+            bool freeSpaceInLeaderboard = m_leaderboard.m_allPlayerStats.Count < m_nbOfPlayerInLeaderboard;
 
-            if (m_leaderboard.m_allPlayerStats.Count < m_nbOfPlayerInLeaderboard)
+            if (freeSpaceInLeaderboard)
             {
                 m_leaderboard.m_allPlayerStats.Add(new PlayerStats(_name, _score));
-                Debug.Log("Added Player: " + _name + ", score: " + _score);
             }
             else
             {
-                PlayerStats oldPlayer = m_leaderboard.m_allPlayerStats[m_nbOfPlayerInLeaderboard - 1];
-                Debug.Log("Removed leaderboard: " + oldPlayer.name + ", score: " + oldPlayer.score);
-
-                m_leaderboard.m_allPlayerStats[m_nbOfPlayerInLeaderboard - 1] = new PlayerStats(_name, _score);
-                Debug.Log("New Player: " + _name + ", score: " + _score);
-
+                int lastIndex = m_nbOfPlayerInLeaderboard - 1;
+                m_leaderboard.m_allPlayerStats[lastIndex] = new PlayerStats(_name, _score);
             }
-            //TODO - Need reorganize based on score
+          
+            // put in order by descending
             m_leaderboard.m_allPlayerStats = m_leaderboard.m_allPlayerStats.OrderByDescending(unit => unit.score).ToList();
         }
 
         public void SaveLeaderboard(Leaderboard leaderboard)
         {
+            // convert gameobject in json text
             string jsonString = JsonUtility.ToJson(leaderboard);
+            // store json text in .txt
             File.WriteAllText(Application.dataPath + LEADERBOARD_LOCATION, jsonString);
-            Debug.Log("Saved json: " + jsonString);
         }
 
         public Leaderboard LoadLeaderboard()
         {
             string jsonString;
 
+            // if save dont exist, create an empty one
             if (!File.Exists(Application.dataPath + LEADERBOARD_LOCATION))
             {
                 Leaderboard leaderboard = new Leaderboard();
                 SaveLeaderboard(leaderboard);
             }
 
+            // take json text from .txt
             jsonString = File.ReadAllText(Application.dataPath + LEADERBOARD_LOCATION);
-            Debug.Log("Loaded json: " + jsonString);
+            // convert json text to gameobject
             return JsonUtility.FromJson<Leaderboard>(jsonString);
 
         }
