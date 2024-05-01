@@ -17,11 +17,6 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			//Collision has been detected and we are processing it so we can remove some value to prepare for next collision
-
-			m_blackboard.m_cartStateMachine.LastClientCollisionWith.gameObject.GetComponent<CartStateMachine>().WasAttacked();
-			m_blackboard.m_cartStateMachine.LastClientCollisionWith = null;
-
 			m_blackboard.m_lastAttackTimer = 0;
 			m_blackboard.m_isAttacking = false;
 

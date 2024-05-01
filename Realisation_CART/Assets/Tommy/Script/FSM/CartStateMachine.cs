@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using BoxSystem;
 using UnityEngine.VFX;
+using UnityEditor.Experimental.GraphView;
 
 namespace CartControl
 {
@@ -97,6 +98,7 @@ namespace CartControl
 		[HideInInspector] public bool CanBoost { get; set; }
 		[HideInInspector] public bool IsBoosting { get; set; }
 		[HideInInspector] public bool IsPaused { get; set; }
+		[HideInInspector] public Vector3 CollisionOppositeDirection { get; private set; }
 		
 
 		protected override void Start()
@@ -153,17 +155,16 @@ namespace CartControl
 			{
 				if(collision.gameObject.GetComponent<CartStateMachine>() != null)
 				{
+					CollisionOppositeDirection = collision.contacts[0].normal;
 					LastClientCollisionWith = collision.gameObject;
-					Debug.Log("COLLISION");
+					
+					
 				}
 			}
-			
 		}
 
-		public void WasAttacked()
-		{
-			LastClientCollisionWith = null;
-		}
+	
+
 		protected override void CreatePossibleStateList()
 		{
 			m_possibleStates.Add(new CartState_Idle());

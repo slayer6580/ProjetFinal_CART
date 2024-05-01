@@ -51,6 +51,9 @@ namespace BoxSystem
 
         public void StealItemFromOtherTower(TowerBoxSystem towerToSteal)
         {
+            if (towerToSteal.GetBoxCount() == 0)
+                return;
+
             GameObject itemTaken = towerToSteal.GetStolenItem();
 
             if (itemTaken == null)
