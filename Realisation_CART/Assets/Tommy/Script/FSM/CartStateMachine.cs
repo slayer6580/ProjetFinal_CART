@@ -67,6 +67,7 @@ namespace CartControl
 		///
 		[field: Header("To Set")]
 		[field: SerializeField] public GameObject Cart { get; private set; }
+		[field: SerializeField] public GameObject ParentOfAllVisual { get; private set; }
 		[field: SerializeField] public Rigidbody CartRB { get; private set; }
 		[field: SerializeField] public CinemachineBrain CamBrain { get; private set; }
 		[field: SerializeField] public GameObject VirtualCamera { get; private set; }

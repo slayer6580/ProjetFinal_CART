@@ -1,6 +1,7 @@
 using BoxSystem;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -9,27 +10,43 @@ namespace CartControl
 	
     public class CartState_Stunned : CartState
 	{
-		private const float TIME_TO_BE_STUNNED = 2;
-		private const float MIN_TIME_BETWEEN_STUN = 5;
+		private const float TIME_TO_BE_STUNNED = 1;
+		private const float MIN_TIME_BETWEEN_STUN = 2;
 
 		private Vector3 m_shakePos = Vector3.zero;
-		private float m_shakeSpeed = 20f;
-		private float m_shakeAmount = 0.05f;	
+		private float m_shakeSpeed = 10f;
+		private float m_shakeAmount = 0.05f;
 		private float m_lastStunTime = 0;
 		private float m_stunTimer;
 		private bool m_hitWithoutSteal;
 
+		private float m_startRotation;
+		private float m_endRotation;
+
 		public override void OnEnter()
 		{
-			
+			m_startRotation = m_cartStateMachine.ParentOfAllVisual.transform.eulerAngles.y;
+			m_endRotation = m_startRotation + 360;
+
 			m_hitWithoutSteal = false;
 			m_stunTimer = 0;
+
+			ManageAnimation();
 
 			if (m_cartStateMachine.m_showLogStateChange)
 			{
 				Debug.LogWarning("current state: STUNNED");
 			}
 
+			StealItems();
+
+			m_cartStateMachine.CartRB.velocity = Vector3.zero;
+			m_cartStateMachine.CartRB.AddForce(m_cartStateMachine.CollisionOppositeDirection * 500, ForceMode.Impulse);
+
+		}
+
+		public void StealItems()
+		{
 			Vector3 colliderDir = new Vector3(m_cartStateMachine.LastClientCollisionWith.transform.position.x,
 											m_cartStateMachine.gameObject.transform.position.y,
 											m_cartStateMachine.LastClientCollisionWith.transform.position.z)
@@ -42,7 +59,7 @@ namespace CartControl
 
 			if (angle < 45 && angle > -45)
 			{
-				m_cartStateMachine.CartRB.velocity = Vector3.zero;
+
 
 				//Steal more items if hit in good angle
 				nmOfItemToSteal += (int)Mathf.Lerp(1, 10, (45 - angle / 45));
@@ -60,11 +77,7 @@ namespace CartControl
 			{
 				m_hitWithoutSteal = true;
 			}
-
-			m_cartStateMachine.CartRB.AddForce(-m_cartStateMachine.CollisionOppositeDirection * 100, ForceMode.Impulse);
-
 		}
-
 		public void ManageAnimation()
 		{
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("Stun", true);
@@ -73,27 +86,35 @@ namespace CartControl
 		public override void OnUpdate()
 		{
 			m_stunTimer += Time.deltaTime;
-			ManageAnimation();
-			if (m_hitWithoutSteal)
+
+
+			if (m_hitWithoutSteal && m_cartStateMachine.LastClientCollisionWith.GetComponent<CartStateMachine>().LocalVelocity.z > 7)
 			{
 				m_shakePos = m_cartStateMachine.Cart.transform.position;
 				m_shakePos.x += Mathf.Sin(Time.time * m_shakeSpeed) * m_shakeAmount;
 				m_shakePos.z += Mathf.Sin(Time.time * m_shakeSpeed) * m_shakeAmount;
 
 				m_cartStateMachine.Cart.transform.position = m_shakePos;
-				
-			}
 
+
+				if (m_stunTimer < TIME_TO_BE_STUNNED)
+				{
+					float yRotation = Mathf.Lerp(m_startRotation, m_endRotation, m_stunTimer / TIME_TO_BE_STUNNED) % 360.0f;
+					m_cartStateMachine.ParentOfAllVisual.transform.eulerAngles = new Vector3(m_cartStateMachine.ParentOfAllVisual.transform.eulerAngles.x, yRotation, m_cartStateMachine.ParentOfAllVisual.transform.eulerAngles.z);
+	
+				}
+
+			}
 		}
 
 		public override void OnFixedUpdate()
 		{
-			m_cartStateMachine.Cart.transform.Rotate(0, 200 * Time.fixedDeltaTime,0);
-			//m_cartStateMachine.Cart.transform.rotation = Quaternion.AngleAxis(30, Vector3.up);
+		
 		}
 
 		public override void OnExit()
 		{
+			m_cartStateMachine.ParentOfAllVisual.transform.eulerAngles = new Vector3(m_cartStateMachine.ParentOfAllVisual.transform.eulerAngles.x, m_startRotation, m_cartStateMachine.ParentOfAllVisual.transform.eulerAngles.z);
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("Stun", false);
 			m_cartStateMachine.LastClientCollisionWith = null;
 			m_lastStunTime = Time.time;

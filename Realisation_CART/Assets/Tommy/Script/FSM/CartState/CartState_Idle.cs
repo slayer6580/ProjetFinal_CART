@@ -37,7 +37,12 @@ namespace CartControl
 				
 			}
 
-			if(m_cartStateMachine.CanBoost)
+			if (currentState is CartState_Stunned)
+			{
+				return true;
+			}
+
+				if (m_cartStateMachine.CanBoost)
 			{
 				return false;
 			}
