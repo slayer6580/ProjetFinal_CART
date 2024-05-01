@@ -1,5 +1,6 @@
 using CartControl;
 using StatsSystem;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DiscountDelirium
@@ -8,6 +9,7 @@ namespace DiscountDelirium
     {
         public static GameStateMachine Instance { get; private set; }
         [field:SerializeField] public float GameLength { get; private set; }
+		[field: SerializeField] public List<GameObject> ClientsList { get; private set; }
 
 		public CartStateMachine m_playerSM; 
         [SerializeField] public ScoreUI m_scoreUI;

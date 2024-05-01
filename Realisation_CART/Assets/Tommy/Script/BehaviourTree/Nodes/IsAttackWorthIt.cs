@@ -38,6 +38,7 @@ namespace BehaviourTree
 
 			if (m_blackboard.m_clientInSight.Count > 0 && m_chooseToAttack == false && m_blackboard.m_lastAttackTimer > m_minTimeBetweenAttack)
 			{
+
 				m_attackScore.Clear();
 
 				foreach (GameObject client in m_blackboard.m_clientInSight)
@@ -104,7 +105,15 @@ namespace BehaviourTree
 			
 			foreach (GameObject target in m_blackboard.m_clientInSight)
 			{
-				int targetsBoxCount = target.transform.Find("Tower").GetComponent<TowerBoxSystem>().GetBoxCount();
+				if(target.transform.Find("Parent/Tower") != null)
+				{
+					Debug.Log("FOUND TOWER");
+				}
+				else
+				{
+					Debug.Log("NO TOWER FOUND");
+				}
+				int targetsBoxCount = target.transform.Find("Parent/Tower").GetComponent<TowerBoxSystem>().GetBoxCount();
 
 
 				//Calculate a score depending of client stats.

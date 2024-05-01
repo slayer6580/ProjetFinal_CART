@@ -1,4 +1,5 @@
 using CartControl;
+using DiscountDelirium;
 using UnityEngine;
 
 namespace BehaviourTree
@@ -15,33 +16,37 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
+			int layerMask = 1 << 6;
+
 			m_blackboard.m_clientInSight.Clear();
 
-			//Create a colllider to detect surrounding
-			Collider[] hitColliders = Physics.OverlapSphere(m_blackboard.m_thisClient.transform.position, m_blackboard.m_sightRange);
-			foreach (var hitCollider in hitColliders)
+			
+			foreach(GameObject client in GameStateMachine.Instance.ClientsList)
 			{
-				//Only get the root of the client/player
-				if (hitCollider.gameObject.layer == LayerMask.NameToLayer("PlayerCollider") && hitCollider.gameObject.GetComponent<CartStateMachine>() != null)
+				if(client == m_blackboard.m_thisClient)
+					continue;
+				
+				Vector3 raycastDir = client.transform.position - m_blackboard.m_thisClient.transform.position;
+
+				RaycastHit hit;
+				if (Physics.Raycast(m_blackboard.m_thisClient.transform.position, raycastDir, out hit, m_blackboard.m_sightRange, layerMask))
 				{
-					if(hitCollider.gameObject != m_blackboard.m_thisClient)
+					//Verify if the detected client is in vision limits
+					Vector3 targetDir = new Vector3(client.transform.position.x,
+										m_blackboard.m_thisClient.transform.position.y,
+										client.transform.position.z) - m_blackboard.m_thisClient.transform.position;
+
+					Vector3 forward = m_blackboard.m_thisClient.transform.forward;
+					float angle = Vector3.SignedAngle(targetDir, forward, Vector3.up);
+
+					if (angle < m_blackboard.m_sightHalfAngle && angle > -m_blackboard.m_sightHalfAngle)
 					{
-						//Verify if the detected client is in vision limits
-						Vector3 targetDir = new Vector3(hitCollider.gameObject.transform.position.x,
-											m_blackboard.m_thisClient.transform.position.y,
-											hitCollider.gameObject.transform.position.z) - m_blackboard.m_thisClient.transform.position;
-
-						Vector3 forward = m_blackboard.m_thisClient.transform.forward;
-						float angle = Vector3.SignedAngle(targetDir, forward, Vector3.up);
-
-						if(angle < m_blackboard.m_sightHalfAngle && angle > -m_blackboard.m_sightHalfAngle)
-						{
-							m_blackboard.m_clientInSight.Add(hitCollider.gameObject);
-						}
-						
+						m_blackboard.m_clientInSight.Add(client);
 					}
-				}		
+				}
 			}
+
+		
 			return State.Success;
 		}
 	}

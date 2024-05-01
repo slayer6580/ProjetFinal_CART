@@ -54,6 +54,9 @@ namespace StatsSystem
 
         private void UpdateShoes()
         {
+            if (m_shoePart == null)
+                return;
+
             int shoesUpgrade = PlayerPrefs.GetInt("Acceleration", 0);
             Material shoeMaterial = m_shoePart.materials[2];
             shoeMaterial.color = m_shoesColors[shoesUpgrade];

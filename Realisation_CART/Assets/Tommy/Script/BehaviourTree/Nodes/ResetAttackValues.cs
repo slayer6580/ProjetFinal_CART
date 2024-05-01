@@ -1,3 +1,4 @@
+using CartControl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace BehaviourTree
 		{
 			m_blackboard.m_lastAttackTimer = 0;
 			m_blackboard.m_isAttacking = false;
+
 			return State.Success;
 		}
 	}

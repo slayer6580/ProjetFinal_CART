@@ -33,6 +33,7 @@ namespace BehaviourTree
         public Vector3 m_target;
         public float m_targetAngle;
         public float m_currentPursuitStartTime;
+        public float m_currentSpeed;    // meter/seconds
 
         public float m_stuckAtTime;
         public float m_timeStuck;

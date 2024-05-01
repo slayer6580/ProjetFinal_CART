@@ -88,8 +88,6 @@ namespace BoxSystem
             if (timeBeforeLost == 0)
                 return;
 
-            Debug.Log("seconde avant de perdre un item: " + timeBeforeLost);
-
             m_currentTimer += Time.deltaTime;
 
             if (m_currentTimer > timeBeforeLost)

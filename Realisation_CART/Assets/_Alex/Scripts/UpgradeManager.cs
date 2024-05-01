@@ -26,6 +26,9 @@ namespace StatsSystem
         [field: Header("Put main character here")]
         [field: SerializeField] public CartStateMachine CartMachine { get; private set; }
 
+        [Header("Next Scene")]
+       [SerializeField] private string m_nextSceneName;
+
         [Header("Put main virtual camera here")]
         [SerializeField] private CinemachineVirtualCamera m_virtualCamera;
 
@@ -53,6 +56,8 @@ namespace StatsSystem
         [SerializeField] private List<Button> m_allBuyButton = new List<Button>();
         [SerializeField] private List<Button> m_allSellButton = new List<Button>();
         [SerializeField] private List<Image> m_allFillBars = new List<Image>();
+
+    
 
         private int m_nbCartToken;
 
@@ -227,7 +232,7 @@ namespace StatsSystem
             for (int i = 0; i < NB_OF_STATS; i++)
                 m_allUpgrade[i] = 0;
 
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene(m_nextSceneName);
         }
 
 

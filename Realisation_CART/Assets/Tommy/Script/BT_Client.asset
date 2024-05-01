@@ -15,7 +15,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 5be04d5378adf4c4fa7e9b2c7eb0ce9e
-  m_position: {x: -1061, y: 530}
+  m_position: {x: -1059, y: 532}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -36,6 +36,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -62,7 +63,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: b82203e2905e865448deb38d76df9e41
-  m_position: {x: 1395, y: 1144}
+  m_position: {x: 1271.5, y: 1058}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -83,6 +84,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -127,6 +129,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -173,6 +176,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -218,6 +222,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -266,6 +271,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -311,6 +317,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -356,6 +363,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -378,7 +386,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 3df411916681ca84a96c8fa86209dad0
-  m_position: {x: -1275, y: 810}
+  m_position: {x: -1278.1003, y: 810.00006}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -399,6 +407,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -443,6 +452,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -490,6 +500,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -533,6 +544,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -577,6 +589,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -620,6 +633,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -667,6 +681,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -715,6 +730,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -760,6 +776,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -772,49 +789,6 @@ MonoBehaviour:
   - {fileID: 9187012723447751640}
   m_minBoxRequired: 2
   m_maxBoxRequired: 3
---- !u!114 &-3003654220272344135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdbec15e22c56b4b86fb9ce94c2ad48, type: 3}
-  m_Name: SendAttackToTarget
-  m_EditorClassIdentifier: 
-  m_state: 0
-  m_started: 0
-  m_guid: 9f09d532f4e6ff049a500818421f3abf
-  m_position: {x: 1236, y: 1144}
-  m_blackboard:
-    m_wantMostActiveShelves: 0
-    m_sightRange: 0
-    m_sightHalfAngle: 0
-    m_aggressiveness: 0
-    m_tacticalAttack: 0
-    m_pursuitTenacity: 0
-    m_name: 
-    m_thisClient: {fileID: 0}
-    m_cartStateMachine: {fileID: 0}
-    m_navAgent: {fileID: 0}
-    m_chosenPathListCopy: []
-    m_possiblePathScript: {fileID: 0}
-    m_thisTower: {fileID: 0}
-    m_cashRegister: {fileID: 0}
-    m_path: []
-    m_pathDebugBox: []
-    m_target: {x: 0, y: 0, z: 0}
-    m_targetAngle: 0
-    m_currentPursuitStartTime: 0
-    m_stuckAtTime: 0
-    m_timeStuck: 0
-    m_lastAttackTimer: 0
-    m_clientInSight: []
-    m_isAttacking: 0
-    m_chosenTarget: 0
-  m_description: 
 --- !u!114 &-2659307553558739768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,6 +825,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -896,6 +871,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -945,6 +921,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -988,6 +965,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1036,6 +1014,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1060,7 +1039,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 13af1aeb55058ab428b84cc5ffbd5a00
-  m_position: {x: -936, y: 810}
+  m_position: {x: -912, y: 810}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -1081,6 +1060,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1125,6 +1105,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1169,6 +1150,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1218,6 +1200,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1299,7 +1282,6 @@ MonoBehaviour:
   - {fileID: 687860318492330590}
   - {fileID: -7300845627064142016}
   - {fileID: 3157754513854017931}
-  - {fileID: -3003654220272344135}
   - {fileID: -4268366552067743945}
   - {fileID: -6528914078795241050}
   - {fileID: -7183775909487845448}
@@ -1327,6 +1309,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1369,6 +1352,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1415,6 +1399,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1423,8 +1408,6 @@ MonoBehaviour:
     m_chosenTarget: 0
   m_description: 
   m_children:
-  - {fileID: 3157754513854017931}
-  - {fileID: -3003654220272344135}
   - {fileID: -8527583909010379023}
   - {fileID: -4268366552067743945}
 --- !u!114 &2381724616244566691
@@ -1463,6 +1446,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1506,6 +1490,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1551,6 +1536,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1573,7 +1559,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: cdd70d68c19053148a3761dfbafef183
-  m_position: {x: 1132, y: 1082}
+  m_position: {x: 1115, y: 1051}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -1594,6 +1580,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1637,6 +1624,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1681,6 +1669,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1727,6 +1716,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1805,6 +1795,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1850,6 +1841,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1895,6 +1887,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1941,6 +1934,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -1985,6 +1979,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2029,6 +2024,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2072,6 +2068,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2097,7 +2094,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 6b845d66c77ddb74f8d6aba5a5892623
-  m_position: {x: 1621, y: 1194}
+  m_position: {x: 1656.5, y: 1206}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -2118,6 +2115,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2162,6 +2160,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2206,6 +2205,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2250,6 +2250,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2297,6 +2298,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2341,6 +2343,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2386,6 +2389,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2439,6 +2443,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2463,7 +2468,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 1222b77c4bc53d74d8a3d4a637abcb1d
-  m_position: {x: 1730, y: 1268}
+  m_position: {x: 1730, y: 1333}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -2484,6 +2489,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2527,6 +2533,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2549,7 +2556,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: ff8ed563998582b409aaf70fb7d3ef5a
-  m_position: {x: -1100, y: 822}
+  m_position: {x: -1101.25, y: 822.00006}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -2570,6 +2577,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2613,6 +2621,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2659,6 +2668,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2704,6 +2714,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2748,6 +2759,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2794,6 +2806,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2840,6 +2853,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2849,7 +2863,6 @@ MonoBehaviour:
   m_description: 
   m_children:
   - {fileID: 5229278021665654635}
-  - {fileID: 7128578255526796715}
   - {fileID: -7183775909487845448}
 --- !u!114 &8681500071723160122
 MonoBehaviour:
@@ -2887,6 +2900,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2911,7 +2925,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 764df0e59aa7a88419c3dceb365d8c02
-  m_position: {x: -1340, y: 511}
+  m_position: {x: -1329, y: 527}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_sightRange: 0
@@ -2932,6 +2946,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -2975,6 +2990,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -3021,6 +3037,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
@@ -3066,6 +3083,7 @@ MonoBehaviour:
     m_target: {x: 0, y: 0, z: 0}
     m_targetAngle: 0
     m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
     m_stuckAtTime: 0
     m_timeStuck: 0
     m_lastAttackTimer: 0
