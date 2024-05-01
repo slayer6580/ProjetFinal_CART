@@ -1915,7 +1915,7 @@ MonoBehaviour:
   <SpawningZones>k__BackingField: {fileID: 1340236121}
   m_isSpawningFromEntrance: 1
   m_spawningEntranceRandomness: 0
-  m_spawningEntranceRate: 10
+  m_spawningEntranceRate: 20
   m_currentSpawningEntranceRate: 0
 --- !u!4 &543870762
 Transform:
@@ -21618,7 +21618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3959612820659040669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633598, y: 0.000000029524049, z: -0.000000004063129, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633595, y: -3.519541e-15, z: 4.02734e-17, w: 0.9906627}
   m_LocalPosition: {x: -2.9357147, y: 3.7524343, z: -1.2951818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36798,7 +36798,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695684694099198788}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633598, y: 0.000000029524049, z: -0.000000004063129, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633595, y: -3.519541e-15, z: 4.02734e-17, w: 0.9906627}
   m_LocalPosition: {x: -2.9357147, y: 3.7524343, z: -1.2951818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

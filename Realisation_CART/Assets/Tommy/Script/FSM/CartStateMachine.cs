@@ -141,7 +141,9 @@ namespace CartControl
             GrindVfx = GetComponentInChildren<ManageGrindVfx>();
 
 			ParentOfAllVisual = transform.GetChild(0).gameObject;
-			if (ParentOfAllVisual.name != "Parent") Debug.LogWarning("Not a client or Parent not found or not named Parent. Current name: " + ParentOfAllVisual.name);
+
+            if (ParentOfAllVisual.name == "GrindVFX") return; // Vérify if Player still has GrindVFX as first child.
+            if (ParentOfAllVisual.name != "Parent") Debug.LogWarning("Not a client or Parent not found or not named Parent. Current name: " + ParentOfAllVisual.name);
 		}
 
 
