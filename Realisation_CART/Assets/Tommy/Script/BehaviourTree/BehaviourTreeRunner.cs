@@ -27,14 +27,12 @@ namespace BehaviourTree
 
                 clientPathlListGO = gameObject;
             }
+
             if (clientPathlListGO == null) Debug.LogError("ClientPathList not found");
-            else Debug.Log("ClientPathList found");
 
             m_tree.m_blackboard.m_possiblePathScript = clientPathlListGO.GetComponent<ClientPathList>();
-            //m_tree.m_blackboard.m_possiblePathScript = _ClientPathList;
 
             if (m_tree.m_blackboard.m_possiblePathScript == null) Debug.LogError("m_possiblePathScript not found");
-            else Debug.Log("m_possiblePathScript found");
         }
 
         void Update()
