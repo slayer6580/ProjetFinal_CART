@@ -3,11 +3,32 @@ using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SavingSystem
 {
+
+    [System.Serializable]
+    public struct PlayerStats
+    {
+        public PlayerStats(string _name, int _score)
+        {
+            name = _name;
+            score = _score;
+        }
+
+        public string name;
+        public int score;
+    }
+
+    public class Leaderboard
+    {
+        public List<PlayerStats> m_allPlayerStats;
+    }
+
     public class LeaderboardManager : MonoBehaviour
     {
+
         private const string LEADERBOARD_LOCATION = "/_Alex/LeaderBoardSave.txt";
         private Leaderboard m_leaderboard;
 
@@ -22,14 +43,117 @@ namespace SavingSystem
         [SerializeField] private TextMeshProUGUI m_namesText;
         [SerializeField] private TextMeshProUGUI m_scoreText;
 
+        [Header("Panels")]
+        [SerializeField] private GameObject m_rankPanel;
+        [SerializeField] private GameObject m_namePanel;
+
+        [Header("Name Letters Panel")]
+        [SerializeField] private List<Transform> m_lettersWheels = new List<Transform>();
+        [SerializeField] private Color32 m_normalBackgroundColor;
+        [SerializeField] private Color32 m_selectedBackgroundColor;
+        private int[] m_letterIndexes = { 65, 65, 65 }; // 65 == A
+        private int m_currentLetterPanel = 0;
+
+
 
         private void Awake()
         {
             m_leaderboard = LoadLeaderboard();
             UpdateUILeaderboard();
+            UpdateLettersInsideWheels();
         }
 
         private void Update() // TESTING
+        {
+            SaveAndLoadTest();
+
+            if (!m_namePanel.activeSelf)
+                return;
+
+            // change selected background color
+            for (int i = 0; i < m_lettersWheels.Count; i++)
+            {
+                if (i == m_currentLetterPanel)
+                    m_lettersWheels[i].GetChild(0).gameObject.GetComponent<Image>().color = m_selectedBackgroundColor;
+                else
+                    m_lettersWheels[i].GetChild(0).gameObject.GetComponent<Image>().color = m_normalBackgroundColor;
+            }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            {
+                int lastIndex = m_letterIndexes[m_currentLetterPanel] - 1;
+                m_letterIndexes[m_currentLetterPanel] = GetIndex(lastIndex);
+                UpdateLettersInsideWheels();
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            {
+                int lastIndex = m_letterIndexes[m_currentLetterPanel] + 1;
+                m_letterIndexes[m_currentLetterPanel] = GetIndex(lastIndex);
+                UpdateLettersInsideWheels();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            {
+                m_currentLetterPanel--;
+                if (m_currentLetterPanel < 0)
+                    m_currentLetterPanel = 0;
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            {
+                m_currentLetterPanel++;
+
+                if (m_currentLetterPanel > 2)
+                {
+                    // Name Accepted
+                    m_currentLetterPanel = 2;
+                }
+
+            }
+
+        }
+
+        private void UpdateLettersInsideWheels()
+        {
+            for (int i = 0; i < m_lettersWheels.Count; i++)
+            {
+                TextMeshProUGUI topLetter = m_lettersWheels[i].GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI midLetter = m_lettersWheels[i].GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI bottomLetter = m_lettersWheels[i].GetChild(3).gameObject.GetComponent<TextMeshProUGUI>();
+
+
+                topLetter.text = GetLetter(m_letterIndexes[i] - 1).ToString();
+                midLetter.text = GetLetter(m_letterIndexes[i]).ToString();
+                bottomLetter.text = GetLetter(m_letterIndexes[i] + 1).ToString();
+
+            }
+        }
+
+        private int GetIndex(int index)
+        {
+            if (index > 90)
+                index -= 26;
+
+            if (index < 65)
+                index += 26;
+
+            return index;
+        }
+
+        private char GetLetter(int asciiNumber)
+        {
+            if (asciiNumber > 90)
+                asciiNumber -= 26;
+
+            if (asciiNumber < 65)
+                asciiNumber += 26;
+
+            return (char)asciiNumber;
+        }
+
+
+        private void SaveAndLoadTest()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -54,7 +178,6 @@ namespace SavingSystem
             {
                 ResetLeaderboard();
             }
-
         }
 
         private void ResetLeaderboard()
@@ -102,7 +225,7 @@ namespace SavingSystem
                 int lastIndex = m_nbOfPlayerInLeaderboard - 1;
                 m_leaderboard.m_allPlayerStats[lastIndex] = new PlayerStats(_name, _score);
             }
-          
+
             // put in order by descending
             m_leaderboard.m_allPlayerStats = m_leaderboard.m_allPlayerStats.OrderByDescending(unit => unit.score).ToList();
         }
@@ -132,25 +255,10 @@ namespace SavingSystem
             return JsonUtility.FromJson<Leaderboard>(jsonString);
 
         }
+
     }
 
-    [System.Serializable]
-    public struct PlayerStats
-    {
-        public PlayerStats(string _name, int _score)
-        {
-            name = _name;
-            score = _score;
-        }
 
-        public string name;
-        public int score;
-    }
-
-    public class Leaderboard
-    {
-        public List<PlayerStats> m_allPlayerStats;
-    }
 
 
 }
