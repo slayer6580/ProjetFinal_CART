@@ -66,10 +66,8 @@ namespace CartControl
 		[field: SerializeField] public bool BackToIdleAfterStop { get; set; }
 
         ///
-        [field: Header("To Set")]
-        [field: SerializeField] public GameObject ParentOfAllVisual { get; private set; }
-
         public AddForceToBox BoxForce { get; set; }
+		public GameObject ParentOfAllVisual { get; private set; }
         public GameObject Cart { get; private set; }
         public Rigidbody CartRB { get; private set; }
         public Animator HumanAnimCtrlr { get; private set; }
@@ -141,8 +139,10 @@ namespace CartControl
             FeetOnCartRig = rig;
             CartMovement = GetComponent<CartMovement>();
             GrindVfx = GetComponentInChildren<ManageGrindVfx>();
-            //GetComponent<BehaviourTreeRunner>().m_tree.GetComponent<ClientBlackboard>().m_name = gameObject.name;
-        }
+
+			ParentOfAllVisual = transform.GetChild(0).gameObject;
+			if (ParentOfAllVisual.name != "Parent") Debug.LogWarning("Not a client or Parent not found or not named Parent. Current name: " + ParentOfAllVisual.name);
+		}
 
 
 		protected override void Start()

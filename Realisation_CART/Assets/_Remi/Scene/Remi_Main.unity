@@ -1910,7 +1910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266a62ad370be4e4e805e6ad1efcecd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <NPCPrefab>k__BackingField: {fileID: 1501343574802851277, guid: 7115279bfc98fd549b13ec9ac52793e4,
+  <NPCPrefab>k__BackingField: {fileID: 5094407173613903610, guid: a2995b16046f6b84bab1e0564dfb39e2,
     type: 3}
   <SpawningZones>k__BackingField: {fileID: 1340236121}
   m_isSpawningFromEntrance: 1
@@ -21618,7 +21618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3959612820659040669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633595, y: -3.519541e-15, z: 4.02734e-17, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633598, y: 0.000000029524049, z: -0.000000004063129, w: 0.9906627}
   m_LocalPosition: {x: -2.9357147, y: 3.7524343, z: -1.2951818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26367,6 +26367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <GameLength>k__BackingField: 500
+  <ClientsList>k__BackingField: []
   m_playerSM: {fileID: 4485474046097306577}
   m_scoreUI: {fileID: 2604202018455348782}
   m_upgrademanager: {fileID: 9115408037588955791}
@@ -36797,7 +36798,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695684694099198788}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633595, y: -3.519541e-15, z: 4.02734e-17, w: 0.9906627}
+  m_LocalRotation: {x: 0.13633598, y: 0.000000029524049, z: -0.000000004063129, w: 0.9906627}
   m_LocalPosition: {x: -2.9357147, y: 3.7524343, z: -1.2951818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -106268,6 +106269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CartMachine>k__BackingField: {fileID: 4485474046097306577}
+  m_nextSceneName: 
   m_virtualCamera: {fileID: 0}
   m_scenePosition: {fileID: 0}
   m_playerRotationEuler: {x: 0, y: 138.2, z: 0}
