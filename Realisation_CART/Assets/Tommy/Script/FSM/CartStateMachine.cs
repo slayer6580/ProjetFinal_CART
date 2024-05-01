@@ -5,6 +5,7 @@ using UnityEngine.Animations.Rigging;
 using BoxSystem;
 using UnityEngine.VFX;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.SceneManagement;
 
 namespace CartControl
 {
@@ -64,6 +65,10 @@ namespace CartControl
 		[field: Header("Stopped")]
 		[field: SerializeField] public bool BackToIdleAfterStop { get; set; }
 
+        ///
+        [field: Header("To Set")]
+        [field: SerializeField] public GameObject ParentOfAllVisual { get; private set; }
+
         public AddForceToBox BoxForce { get; set; }
         public GameObject Cart { get; private set; }
         public Rigidbody CartRB { get; private set; }
@@ -95,6 +100,7 @@ namespace CartControl
         [HideInInspector] public bool CanBoost { get; set; }
         [HideInInspector] public bool IsBoosting { get; set; }
         [HideInInspector] public bool IsPaused { get; set; }
+        [HideInInspector] public Vector3 CollisionOppositeDirection { get; private set; }
 
         private void Awake()
         {
