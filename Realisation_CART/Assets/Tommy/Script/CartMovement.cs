@@ -20,7 +20,7 @@ namespace CartControl
 			if(SM.CartRB.velocity.magnitude < maxSpeed)
 			{
                 //Check for movement input
-				if (isClient && clientID == 1 && SM.ForwardPressedPercent == 1) Debug.Log("Client : OnFixedUpdate : ClientID: " + clientID + " SM.ForwardPressedPercent: " + SM.ForwardPressedPercent);
+				//if (isClient && clientID == 1 && SM.ForwardPressedPercent == 1) Debug.Log("Client : OnFixedUpdate : ClientID: " + clientID + " SM.ForwardPressedPercent: " + SM.ForwardPressedPercent);
 				if (isClient && clientID == 2 && SM.ForwardPressedPercent == 1) Debug.Log("Client : OnFixedUpdate : ClientID: " + clientID + " SM.ForwardPressedPercent: " + SM.ForwardPressedPercent);
 				//if (isClient && clientID == 2) Debug.Log("Client : OnFixedUpdate : ClientID: " + clientID);
                 if (SM.ForwardPressedPercent > GameConstants.DEADZONE || SM.BackwardPressedPercent > GameConstants.DEADZONE)
