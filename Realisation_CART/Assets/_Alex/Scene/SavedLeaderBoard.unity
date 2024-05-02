@@ -2403,13 +2403,19 @@ MonoBehaviour:
   - {fileID: 697228541}
   - {fileID: 1293621759}
   - {fileID: 1363302739}
-  m_confirmButton: {fileID: 1451729338}
   m_normalBackgroundColor:
     serializedVersion: 2
     rgba: 4279107328
   m_selectedBackgroundColor:
     serializedVersion: 2
     rgba: 4278251775
+  m_confirmButton: {fileID: 1451729338}
+  m_normalButtonColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_selectedButtonColor:
+    serializedVersion: 2
+    rgba: 4278255610
 --- !u!1 &1356310613
 GameObject:
   m_ObjectHideFlags: 0

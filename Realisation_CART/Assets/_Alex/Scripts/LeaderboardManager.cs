@@ -48,10 +48,16 @@ namespace SavingSystem
         [SerializeField] private GameObject m_leaderboardPanel;
 
         [Header("Name Letters Panel")]
-        [SerializeField] private List<Transform> m_lettersWheels = new List<Transform>();
-        [SerializeField] private Image m_confirmButton;
+        [SerializeField] private List<Transform> m_lettersWheels = new List<Transform>();     
         [SerializeField] private Color32 m_normalBackgroundColor;
         [SerializeField] private Color32 m_selectedBackgroundColor;
+
+        [Header("Bouton")]
+        [SerializeField] private Image m_confirmButton;
+        [SerializeField] private Color32 m_normalButtonColor;
+        [SerializeField] private Color32 m_selectedButtonColor;
+
+
         private int[] m_letterIndexes = { 65, 65, 65 }; // 65 == A
         private int m_currentWheelSelected = 0;
 
@@ -112,7 +118,7 @@ namespace SavingSystem
                 if (m_currentWheelSelected < 0)
                     m_currentWheelSelected = 0;
 
-                m_confirmButton.GetComponent<Image>().color = m_normalBackgroundColor;
+                m_confirmButton.GetComponent<Image>().color = m_normalButtonColor;
                 ChangeBackGroundColorSelected();
             }
 
@@ -122,13 +128,13 @@ namespace SavingSystem
 
                 if (m_currentWheelSelected > m_lettersWheels.Count - 1)
                 {
-                    // On confirm button Button
-                    m_confirmButton.GetComponent<Image>().color = m_selectedBackgroundColor;
+                    // On confirm button
+                    m_confirmButton.GetComponent<Image>().color = m_selectedButtonColor;
                     m_currentWheelSelected = m_lettersWheels.Count;
                 }
                 else
                 {
-                    m_confirmButton.GetComponent<Image>().color = m_normalBackgroundColor;
+                    m_confirmButton.GetComponent<Image>().color = m_normalButtonColor;
                 }
 
                 ChangeBackGroundColorSelected();
@@ -148,6 +154,13 @@ namespace SavingSystem
                 else
                     m_lettersWheels[i].GetChild(0).gameObject.GetComponent<Image>().color = m_normalBackgroundColor;
             }
+
+            if (m_currentWheelSelected == m_lettersWheels.Count)
+                m_confirmButton.GetComponent<Image>().color = m_selectedButtonColor;
+            else
+                m_confirmButton.GetComponent<Image>().color = m_normalButtonColor;
+
+
         }
 
         private void UpdateLettersInsideWheels()
@@ -194,7 +207,7 @@ namespace SavingSystem
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                OpenLeaderboard();
+                OpenLeaderboardEndGame();
             }
 
             if (Input.GetKeyDown(KeyCode.N)) // Keep for test
@@ -283,7 +296,17 @@ namespace SavingSystem
 
         }
 
-        public void OpenLeaderboard()
+        // Just to see ranks in main menu
+        public void OpenRankPanel()
+        {
+            if (m_leaderboardPanel.activeSelf)
+                return;
+
+            m_leaderboardPanel.SetActive(true);
+            m_rankPanel.SetActive(true);
+        }
+
+        public void OpenLeaderboardEndGame()
         {
             if (m_leaderboardPanel.activeSelf)
                 return;
