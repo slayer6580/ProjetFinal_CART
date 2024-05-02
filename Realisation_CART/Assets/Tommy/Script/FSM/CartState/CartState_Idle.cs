@@ -6,24 +6,21 @@ namespace CartControl
 	{
 		public override void OnEnter()
 		{
-            if (m_cartStateMachine.m_showLogStateChange)
+			if (m_cartStateMachine.m_showLogStateChange)
 			{
 				Debug.LogWarning("current state: IDLE");
 			}
-	
+			
 		}
 
 		public override void OnUpdate()
 		{
-            
-        }
+
+		}
 
 		public override void OnFixedUpdate()
 		{
-			//if (m_cartStateMachine.IsClient && m_cartStateMachine.ClientID == 2)Debug.Log("Client : OnFixedUpdate : ClientID: " + m_cartStateMachine.ClientID);
-
-            m_cartStateMachine.CartMovement.Move(m_cartStateMachine.AccelerationUpgrades, m_cartStateMachine.TurningDrag, m_cartStateMachine.MaxSpeedUpgrades, m_cartStateMachine.IsClient, m_cartStateMachine.ClientID);
-            //m_cartStateMachine.CartMovement.Move(m_cartStateMachine.AccelerationUpgrades, m_cartStateMachine.TurningDrag, m_cartStateMachine.MaxSpeedUpgrades);
+			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.AccelerationUpgrades, m_cartStateMachine.TurningDrag, m_cartStateMachine.MaxSpeedUpgrades);
 			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.IdleRotatingSpeed, m_cartStateMachine.SteeringValue);
 		}
 

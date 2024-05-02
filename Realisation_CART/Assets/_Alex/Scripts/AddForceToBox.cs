@@ -5,9 +5,9 @@ namespace BoxSystem
     public class AddForceToBox : MonoBehaviour
     {
         [Header("Constant force for debug with (Q) or (E)")]
-        [SerializeField] private float m_constantForce = 350.0f;
+        [SerializeField] private float m_constantForce;
         [Header("Force multiplier for constant force")]
-        [SerializeField] private float m_forceMultiplier = 20.0f;
+        [SerializeField] private float m_forceMultiplier;
 
         private TowerHingePhysicsAlex m_towerPhysics;
 

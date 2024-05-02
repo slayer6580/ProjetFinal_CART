@@ -10,7 +10,7 @@ namespace DiscountDelirium
 
 		public List<List<GameObject>> ListOfPath = new List<List<GameObject>>();
 
-		private void Awake()
+		private void Start()
 		{
 			ListOfPath = new List<List<GameObject>>();
 			int subListCount = -1;
