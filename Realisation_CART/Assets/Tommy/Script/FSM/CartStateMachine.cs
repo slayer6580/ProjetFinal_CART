@@ -5,6 +5,8 @@ using UnityEngine.Animations.Rigging;
 using BoxSystem;
 using UnityEngine.VFX;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.SceneManagement;
+using BehaviourTree;
 
 namespace CartControl
 {
@@ -64,19 +66,16 @@ namespace CartControl
 		[field: Header("Stopped")]
 		[field: SerializeField] public bool BackToIdleAfterStop { get; set; }
 
-		///
-		[field: Header("To Set")]
-		[field: SerializeField] public GameObject Cart { get; private set; }
-		[field: SerializeField] public GameObject ParentOfAllVisual { get; private set; }
-		[field: SerializeField] public Rigidbody CartRB { get; private set; }
-		[field: SerializeField] public CinemachineBrain CamBrain { get; private set; }
-		[field: SerializeField] public GameObject VirtualCamera { get; private set; }
+        ///
+        public AddForceToBox BoxForce { get; set; }
+		public GameObject ParentOfAllVisual { get; private set; }
+        public GameObject Cart { get; private set; }
+        public Rigidbody CartRB { get; private set; }
+        public Animator HumanAnimCtrlr { get; private set; }
+        public Rig FeetOnCartRig { get; private set; }
+        public CartMovement CartMovement { get; private set; }
+        public ManageGrindVfx GrindVfx { get; private set; }
 
-		[field: SerializeField] public Animator HumanAnimCtrlr { get; private set; }
-		[field: SerializeField] public Rig FeetOnCartRig { get; private set; }
-		[field: SerializeField] public CartMovement CartMovement { get; private set; }
-		[field: SerializeField] public ManageGrindVfx GrindVfx { get; private set; }
-		[field: SerializeField] public AddForceToBox BoxForce { get; private set; }
 
 		//
 		[Space]
@@ -93,16 +92,53 @@ namespace CartControl
 
 		//
 
-		[HideInInspector] public GameObject LastClientCollisionWith { get; set; }
-		[HideInInspector] public bool ForceStartDrift { get; set; }
-		[HideInInspector] public bool IsDrifting { get; set; }
-		[HideInInspector] public bool CanBoost { get; set; }
-		[HideInInspector] public bool IsBoosting { get; set; }
-		[HideInInspector] public bool IsPaused { get; set; }
-		[HideInInspector] public Vector3 CollisionOppositeDirection { get; private set; }
-		
+        [HideInInspector] public GameObject LastClientCollisionWith { get; set; }
+        [HideInInspector] public bool ForceStartDrift { get; set; }
+        [HideInInspector] public bool IsDrifting { get; set; }
+        [HideInInspector] public bool CanBoost { get; set; }
+        [HideInInspector] public bool IsBoosting { get; set; }
+        [HideInInspector] public bool IsPaused { get; set; }
+        [HideInInspector] public Vector3 CollisionOppositeDirection { get; private set; }
 
-		protected override void Start()
+		static private int m_clientIDIterator = 0;
+		[HideInInspector] public int ClientID { get; private set; } = 0;
+
+        private void Awake()
+        {
+            InitializeVariables();
+        }
+
+        private void InitializeVariables()
+        {
+            Scene scene = gameObject.scene;
+            GameObject[] gameObjects = scene.GetRootGameObjects();
+
+            GameObject cameras = gameObjects[0];
+            if (cameras == null || cameras.name != "CameraSystem") Debug.LogError("Cameras not found");
+
+            Cart = gameObject;
+            CartRB = GetComponent<Rigidbody>();
+
+            Animator animator = GetComponentInChildren<Animator>();
+            if (animator == null || animator.gameObject.name != "SM_Chr_Kid_Adventure_01") Debug.LogError("Animator not found");
+
+            HumanAnimCtrlr = animator;
+
+            GameObject rigGO = animator.transform.GetChild(1).gameObject;
+            if (rigGO == null || rigGO.name != "FeetOnCart") Debug.LogError("FeetOnCart not found");
+            Rig rig = rigGO.GetComponent<Rig>();
+
+            FeetOnCartRig = rig;
+            CartMovement = GetComponent<CartMovement>();
+            GrindVfx = GetComponentInChildren<ManageGrindVfx>();
+
+            ParentOfAllVisual = transform.GetChild(0).gameObject;
+
+            if (ParentOfAllVisual.name == "GrindVFX") return; // Vérify if Player still has GrindVFX as first child.
+            if (ParentOfAllVisual.name != "Parent") Debug.LogWarning("Not a client or Parent not found or not named Parent. Current name: " + ParentOfAllVisual.name);
+        }
+
+        protected override void Start()
 		{
 			base.Start();
 			CartMovement.SM = this;

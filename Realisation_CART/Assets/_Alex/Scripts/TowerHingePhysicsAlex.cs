@@ -5,7 +5,7 @@ namespace BoxSystem
 {
     public class TowerHingePhysicsAlex : MonoBehaviour
     {
-        [field: SerializeField] public TowerBoxSystem TowerBoxSystem { get; private set; }
+        public TowerBoxSystem TowerBoxSystem { get; set; }
         [SerializeField] private Transform m_towerFake;
         [SerializeField] private int m_nbOfFixedBoxes;
         private int m_boxCount = 0;

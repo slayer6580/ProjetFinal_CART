@@ -3,6 +3,8 @@ using UnityEngine;
 using DiscountDelirium;
 using Unity.VisualScripting;
 using static Manager.ScoreManager;
+using UnityEngine.SceneManagement;
+using CartControl;
 
 namespace BoxSystem
 {
@@ -32,8 +34,13 @@ namespace BoxSystem
         private int m_boxCount = 0;
         private List<Box> m_boxesInCart = new List<Box>();
 
-        [SerializeField] private TowerHingePhysicsAlex m_towerPhysics;
+        private TowerHingePhysicsAlex m_towerPhysics;
         [SerializeField] private int m_cartokenValueMultiplier = 1;
+
+        private void Awake()
+        {
+            InitializeTowerPhysicsVariables();
+        }
 
         void Start()
         {
@@ -77,6 +84,26 @@ namespace BoxSystem
             {
                 Vector3 data = _ScoreManager.EmptyCartAndGetScore();
             }
+        }
+
+        private void InitializeTowerPhysicsVariables()
+        {
+            Scene scene = gameObject.scene;
+            GameObject[] gameObjects = scene.GetRootGameObjects();
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                if (gameObject.name != "TowerPhysics") continue;
+
+                GameObject TowerPhysicsGO = gameObject.GetComponent<TowerPhysicsGenerator>().GenerateTowerPhysics();
+                m_towerPhysics = TowerPhysicsGO.GetComponent<TowerHingePhysicsAlex>();
+                m_towerPhysics.TowerBoxSystem = this;
+
+                CartStateMachine cartStateMachine = GetComponentInParent<CartStateMachine>();
+                cartStateMachine.BoxForce = TowerPhysicsGO.GetComponent<AddForceToBox>();
+            }
+
+            if (m_towerPhysics == null) Debug.LogError("TowerPhysics not found");
         }
 
         /// <summary> Add a box to the tower </summary>

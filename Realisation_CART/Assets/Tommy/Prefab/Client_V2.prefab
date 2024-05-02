@@ -10020,7 +10020,6 @@ GameObject:
   - component: {fileID: 5647854930937591345}
   - component: {fileID: 5704563989220887785}
   - component: {fileID: 1758920714179347600}
-  - component: {fileID: 2232023828866163370}
   m_Layer: 6
   m_Name: Client_V2
   m_TagString: Untagged
@@ -10074,6 +10073,7 @@ MonoBehaviour:
   <MaxBackwardSpeed>k__BackingField: 5
   <IdleRotatingSpeed>k__BackingField: 70
   <MovingRotatingSpeed>k__BackingField: 50
+  <TowerPushForceWhenTurning>k__BackingField: 0
   <TurningDrag>k__BackingField: 2
   <TurningDragRelativeToJoystick>k__BackingField:
     serializedVersion: 2
@@ -10104,6 +10104,7 @@ MonoBehaviour:
   <DriftingRotatingSpeed>k__BackingField: 75
   <AddedRotatingSpeedWhenBreaking>k__BackingField: 30
   <DriftingAcceleration>k__BackingField: 70
+  <TowerPushForceWhenDrifting>k__BackingField: 0
   <AutoDriftWhenTurning>k__BackingField: 0
   <TurningTimeBeforeDrift>k__BackingField: 2
   <DriftPressed>k__BackingField: 0
@@ -10115,15 +10116,6 @@ MonoBehaviour:
   <MinBoostTime>k__BackingField: 9999
   <MaxBoostTime>k__BackingField: 9999
   <BackToIdleAfterStop>k__BackingField: 0
-  <Cart>k__BackingField: {fileID: 1501343574802851277}
-  <CartRB>k__BackingField: {fileID: 5647854930937591345}
-  <CamBrain>k__BackingField: {fileID: 0}
-  <VirtualCamera>k__BackingField: {fileID: 0}
-  <HumanAnimCtrlr>k__BackingField: {fileID: 5959502628417706577}
-  <FeetOnCartRig>k__BackingField: {fileID: 4559417175328612120}
-  <CartMovement>k__BackingField: {fileID: 833776626246596315}
-  <GrindVfx>k__BackingField: {fileID: 3321271610491534254}
-  <BoxForce>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 0}
   <AccelerationUpgrades>k__BackingField: 0
   <MaxSpeedUpgrades>k__BackingField: 0
@@ -10201,52 +10193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6923964cf4fb9c40a59b0143dad0a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tree: {fileID: 11400000, guid: 75f63dd359935324aa32a33f05ebc979, type: 2}
---- !u!114 &2232023828866163370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501343574802851277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 273d64ac04c9dec4cac97fa9739bc239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_pathList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_treePrefab: {fileID: 11400000, guid: 0e3750b643c936349a77b697a52d04a3, type: 2}
+  m_tree: {fileID: 11400000, guid: 0e3750b643c936349a77b697a52d04a3, type: 2}
 --- !u!1 &1594070926706618534
 GameObject:
   m_ObjectHideFlags: 0
