@@ -36,7 +36,6 @@ namespace SavingSystem
         [SerializeField] private int m_nbOfPlayerInLeaderboard; // once determined, transform in const
 
         [Header("Debug")]
-        [SerializeField] private string m_nameToAdd;
         [SerializeField] private int m_scoreToAdd;
 
         [Header("TMP_UI here")]
@@ -46,13 +45,15 @@ namespace SavingSystem
         [Header("Panels")]
         [SerializeField] private GameObject m_rankPanel;
         [SerializeField] private GameObject m_namePanel;
+        [SerializeField] private GameObject m_leaderboardPanel;
 
         [Header("Name Letters Panel")]
         [SerializeField] private List<Transform> m_lettersWheels = new List<Transform>();
+        [SerializeField] private Image m_confirmButton;
         [SerializeField] private Color32 m_normalBackgroundColor;
         [SerializeField] private Color32 m_selectedBackgroundColor;
         private int[] m_letterIndexes = { 65, 65, 65 }; // 65 == A
-        private int m_currentLetterPanel = 0;
+        private int m_currentWheelSelected = 0;
 
 
 
@@ -65,59 +66,95 @@ namespace SavingSystem
 
         private void Update() // TESTING
         {
-            SaveAndLoadTest();
+            DebugUpdate();
+            NamePanelInputs();
+            RankPanelInputs();
 
+        }
+
+        private void RankPanelInputs()
+        {
+            if (!m_rankPanel.activeSelf)
+                return;
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                QuitLeaderboardPanel();
+        }
+
+        private void NamePanelInputs()
+        {
             if (!m_namePanel.activeSelf)
                 return;
 
-            // change selected background color
-            for (int i = 0; i < m_lettersWheels.Count; i++)
-            {
-                if (i == m_currentLetterPanel)
-                    m_lettersWheels[i].GetChild(0).gameObject.GetComponent<Image>().color = m_selectedBackgroundColor;
-                else
-                    m_lettersWheels[i].GetChild(0).gameObject.GetComponent<Image>().color = m_normalBackgroundColor;
-            }
-
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                int lastIndex = m_letterIndexes[m_currentLetterPanel] - 1;
-                m_letterIndexes[m_currentLetterPanel] = GetIndex(lastIndex);
+                if (m_currentWheelSelected == m_lettersWheels.Count)
+                    return;
+
+                int newIndex = m_letterIndexes[m_currentWheelSelected] - 1;
+                m_letterIndexes[m_currentWheelSelected] = GetIndex(newIndex);
                 UpdateLettersInsideWheels();
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
-                int lastIndex = m_letterIndexes[m_currentLetterPanel] + 1;
-                m_letterIndexes[m_currentLetterPanel] = GetIndex(lastIndex);
+                if (m_currentWheelSelected == m_lettersWheels.Count)
+                    return;
+
+                int newIndex = m_letterIndexes[m_currentWheelSelected] + 1;
+                m_letterIndexes[m_currentWheelSelected] = GetIndex(newIndex);
                 UpdateLettersInsideWheels();
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
-                m_currentLetterPanel--;
-                if (m_currentLetterPanel < 0)
-                    m_currentLetterPanel = 0;
+                m_currentWheelSelected--;
+                if (m_currentWheelSelected < 0)
+                    m_currentWheelSelected = 0;
+
+                m_confirmButton.GetComponent<Image>().color = m_normalBackgroundColor;
+                ChangeBackGroundColorSelected();
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
-                m_currentLetterPanel++;
+                m_currentWheelSelected++;
 
-                if (m_currentLetterPanel > 2)
+                if (m_currentWheelSelected > m_lettersWheels.Count - 1)
                 {
-                    // Name Accepted
-                    m_currentLetterPanel = 2;
+                    // On confirm button Button
+                    m_confirmButton.GetComponent<Image>().color = m_selectedBackgroundColor;
+                    m_currentWheelSelected = m_lettersWheels.Count;
                 }
+                else
+                {
+                    m_confirmButton.GetComponent<Image>().color = m_normalBackgroundColor;
+                }
+
+                ChangeBackGroundColorSelected();
 
             }
 
+            if (Input.GetKeyDown(KeyCode.Return) && m_currentWheelSelected == m_lettersWheels.Count)
+                NameIsChosen_BT();
+        }
+
+        private void ChangeBackGroundColorSelected()
+        {
+            for (int i = 0; i < m_lettersWheels.Count; i++)
+            {
+                if (i == m_currentWheelSelected)
+                    m_lettersWheels[i].GetChild(0).gameObject.GetComponent<Image>().color = m_selectedBackgroundColor;
+                else
+                    m_lettersWheels[i].GetChild(0).gameObject.GetComponent<Image>().color = m_normalBackgroundColor;
+            }
         }
 
         private void UpdateLettersInsideWheels()
         {
             for (int i = 0; i < m_lettersWheels.Count; i++)
             {
+
                 TextMeshProUGUI topLetter = m_lettersWheels[i].GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
                 TextMeshProUGUI midLetter = m_lettersWheels[i].GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
                 TextMeshProUGUI bottomLetter = m_lettersWheels[i].GetChild(3).gameObject.GetComponent<TextMeshProUGUI>();
@@ -153,33 +190,20 @@ namespace SavingSystem
         }
 
 
-        private void SaveAndLoadTest()
+        private void DebugUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (CanPlayerBeInLeaderboard(m_scoreToAdd))
-                {
-                    AddPlayerToLeaderboard(m_nameToAdd, m_scoreToAdd);
-                }
+                OpenLeaderboard();
             }
 
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                SaveLeaderboard(m_leaderboard);
-            }
-
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                m_leaderboard = LoadLeaderboard();
-                UpdateUILeaderboard();
-            }
-
-            if (Input.GetKeyDown(KeyCode.N))
+            if (Input.GetKeyDown(KeyCode.N)) // Keep for test
             {
                 ResetLeaderboard();
+                Debug.Log("Leaderboard Reset");
             }
         }
-
+         
         private void ResetLeaderboard()
         {
             SaveLeaderboard(new Leaderboard());
@@ -228,6 +252,8 @@ namespace SavingSystem
 
             // put in order by descending
             m_leaderboard.m_allPlayerStats = m_leaderboard.m_allPlayerStats.OrderByDescending(unit => unit.score).ToList();
+
+            SaveLeaderboard(m_leaderboard);
         }
 
         public void SaveLeaderboard(Leaderboard leaderboard)
@@ -236,6 +262,7 @@ namespace SavingSystem
             string jsonString = JsonUtility.ToJson(leaderboard);
             // store json text in .txt
             File.WriteAllText(Application.dataPath + LEADERBOARD_LOCATION, jsonString);
+            UpdateUILeaderboard();          
         }
 
         public Leaderboard LoadLeaderboard()
@@ -256,6 +283,46 @@ namespace SavingSystem
 
         }
 
+        public void OpenLeaderboard()
+        {
+            if (m_leaderboardPanel.activeSelf)
+                return;
+
+            m_leaderboardPanel.SetActive(true);
+
+            if (CanPlayerBeInLeaderboard(m_scoreToAdd))
+            {
+                m_namePanel.SetActive(true);
+                ChangeBackGroundColorSelected();
+            }
+            else 
+            { 
+                m_rankPanel.SetActive(true);
+             
+            }
+        }
+
+        public void NameIsChosen_BT()
+        {
+            string name = "";
+
+            foreach (Transform _text in m_lettersWheels)           
+            {
+                TextMeshProUGUI midLetter = _text.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+                name += midLetter.text;
+            }
+
+            AddPlayerToLeaderboard(name, m_scoreToAdd);
+            m_rankPanel.SetActive(true);
+            m_namePanel.SetActive(false);
+        }
+
+        public void QuitLeaderboardPanel()
+        {
+            m_namePanel.SetActive(false);
+            m_rankPanel.SetActive(false);
+            m_leaderboardPanel.SetActive(false);
+        }
     }
 
 
