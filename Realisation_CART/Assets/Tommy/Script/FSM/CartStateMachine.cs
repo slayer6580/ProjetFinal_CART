@@ -6,6 +6,7 @@ using BoxSystem;
 using UnityEngine.VFX;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.SceneManagement;
+using BehaviourTree;
 
 namespace CartControl
 {
@@ -100,8 +101,19 @@ namespace CartControl
         [HideInInspector] public bool IsPaused { get; set; }
         [HideInInspector] public Vector3 CollisionOppositeDirection { get; private set; }
 
+		[HideInInspector] public bool IsClient { get; set; } = false; // Debug to remove
+		static private int m_clientIDIterator = 0;
+		[HideInInspector] public int ClientID { get; private set; } = 0;
+
         private void Awake()
         {
+			if (GetComponentInChildren<BehaviourTreeRunner>()) 
+			{
+				IsClient = true;
+                ClientID = ++m_clientIDIterator;
+
+            }
+
             Scene scene = gameObject.scene;
             GameObject[] gameObjects = scene.GetRootGameObjects();
 

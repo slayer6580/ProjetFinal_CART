@@ -10,15 +10,20 @@ namespace CartControl
 		{
 			
 		}
-		public void Move(float acceleration, float turnDrag, float maxSpeed)
+		//public void Move(float acceleration, float turnDrag, float maxSpeed)
+		public void Move(float acceleration, float turnDrag, float maxSpeed, bool isClient, int clientID)
 		{
-			//Transform default velocity (which is global) to a local velocity
-			SM.LocalVelocity = SM.Cart.transform.InverseTransformDirection(SM.CartRB.velocity);
+            //if (isClient && clientID == 2) Debug.Log("Client : OnFixedUpdate : ClientID: " + clientID);
+            //Transform default velocity (which is global) to a local velocity
+            SM.LocalVelocity = SM.Cart.transform.InverseTransformDirection(SM.CartRB.velocity);
 
 			if(SM.CartRB.velocity.magnitude < maxSpeed)
 			{
-				//Check for movement input
-				if (SM.ForwardPressedPercent > GameConstants.DEADZONE || SM.BackwardPressedPercent > GameConstants.DEADZONE)
+                //Check for movement input
+				if (isClient && clientID == 1 && SM.ForwardPressedPercent == 1) Debug.Log("Client : OnFixedUpdate : ClientID: " + clientID + " SM.ForwardPressedPercent: " + SM.ForwardPressedPercent);
+				if (isClient && clientID == 2 && SM.ForwardPressedPercent == 1) Debug.Log("Client : OnFixedUpdate : ClientID: " + clientID + " SM.ForwardPressedPercent: " + SM.ForwardPressedPercent);
+				//if (isClient && clientID == 2) Debug.Log("Client : OnFixedUpdate : ClientID: " + clientID);
+                if (SM.ForwardPressedPercent > GameConstants.DEADZONE || SM.BackwardPressedPercent > GameConstants.DEADZONE)
 				{
 					if (maxSpeed > SM.LocalVelocity.z && -SM.MaxBackwardSpeed < SM.LocalVelocity.z)
 					{
