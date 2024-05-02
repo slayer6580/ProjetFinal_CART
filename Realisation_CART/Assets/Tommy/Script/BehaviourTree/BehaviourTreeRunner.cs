@@ -12,8 +12,8 @@ namespace BehaviourTree
 		void Start()
         {
             m_tree.m_blackboard.m_thisClient = gameObject;
-           //To allow multiple instance of the same BehaviourTree to execute at the same time
-           m_tree = m_tree.Clone();
+            //To allow multiple instance of the same BehaviourTree to execute at the same time
+            m_tree = m_tree.Clone();
 
             m_tree.m_blackboard.m_name = gameObject.name;
             //Check to integrate some AiAgent here
