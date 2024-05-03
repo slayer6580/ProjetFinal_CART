@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace SavingSystem
@@ -48,7 +49,7 @@ namespace SavingSystem
         [SerializeField] private GameObject m_leaderboardPanel;
 
         [Header("Name Letters Panel")]
-        [SerializeField] private List<Transform> m_lettersWheels = new List<Transform>();     
+        [SerializeField] private List<Transform> m_lettersWheels = new List<Transform>();
         [SerializeField] private Color32 m_normalBackgroundColor;
         [SerializeField] private Color32 m_selectedBackgroundColor;
 
@@ -94,55 +95,74 @@ namespace SavingSystem
 
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                if (m_currentWheelSelected == m_lettersWheels.Count)
-                    return;
-
-                int newIndex = m_letterIndexes[m_currentWheelSelected] - 1;
-                m_letterIndexes[m_currentWheelSelected] = GetIndex(newIndex);
-                UpdateLettersInsideWheels();
+                GoUp();
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
-                if (m_currentWheelSelected == m_lettersWheels.Count)
-                    return;
-
-                int newIndex = m_letterIndexes[m_currentWheelSelected] + 1;
-                m_letterIndexes[m_currentWheelSelected] = GetIndex(newIndex);
-                UpdateLettersInsideWheels();
+                GoDown();
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
-                m_currentWheelSelected--;
-                if (m_currentWheelSelected < 0)
-                    m_currentWheelSelected = 0;
-
-                m_confirmButton.GetComponent<Image>().color = m_normalButtonColor;
-                ChangeBackGroundColorSelected();
+                GoLeft();
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
-                m_currentWheelSelected++;
-
-                if (m_currentWheelSelected > m_lettersWheels.Count - 1)
-                {
-                    // On confirm button
-                    m_confirmButton.GetComponent<Image>().color = m_selectedButtonColor;
-                    m_currentWheelSelected = m_lettersWheels.Count;
-                }
-                else
-                {
-                    m_confirmButton.GetComponent<Image>().color = m_normalButtonColor;
-                }
-
-                ChangeBackGroundColorSelected();
-
+                GoRight();
             }
 
             if (Input.GetKeyDown(KeyCode.Return) && m_currentWheelSelected == m_lettersWheels.Count)
                 NameIsChosen_BT();
+        }
+
+        private void GoUp()
+        {
+            if (m_currentWheelSelected == m_lettersWheels.Count)
+                return;
+
+            int newIndex = m_letterIndexes[m_currentWheelSelected] - 1;
+            m_letterIndexes[m_currentWheelSelected] = GetIndex(newIndex);
+            UpdateLettersInsideWheels();
+        }
+
+        private void GoDown()
+        {
+            if (m_currentWheelSelected == m_lettersWheels.Count)
+                return;
+
+            int newIndex = m_letterIndexes[m_currentWheelSelected] + 1;
+            m_letterIndexes[m_currentWheelSelected] = GetIndex(newIndex);
+            UpdateLettersInsideWheels();
+        }
+
+        private void GoLeft()
+        {
+            m_currentWheelSelected--;
+            if (m_currentWheelSelected < 0)
+                m_currentWheelSelected = 0;
+
+            m_confirmButton.GetComponent<Image>().color = m_normalButtonColor;
+            ChangeBackGroundColorSelected();
+        }
+
+        private void GoRight()
+        {
+            m_currentWheelSelected++;
+
+            if (m_currentWheelSelected > m_lettersWheels.Count - 1)
+            {
+                // On confirm button
+                m_confirmButton.GetComponent<Image>().color = m_selectedButtonColor;
+                m_currentWheelSelected = m_lettersWheels.Count;
+            }
+            else
+            {
+                m_confirmButton.GetComponent<Image>().color = m_normalButtonColor;
+            }
+
+            ChangeBackGroundColorSelected();
         }
 
         private void ChangeBackGroundColorSelected()
@@ -216,7 +236,7 @@ namespace SavingSystem
                 Debug.Log("Leaderboard Reset");
             }
         }
-         
+
         private void ResetLeaderboard()
         {
             SaveLeaderboard(new Leaderboard());
@@ -275,7 +295,7 @@ namespace SavingSystem
             string jsonString = JsonUtility.ToJson(leaderboard);
             // store json text in .txt
             File.WriteAllText(Application.dataPath + LEADERBOARD_LOCATION, jsonString);
-            UpdateUILeaderboard();          
+            UpdateUILeaderboard();
         }
 
         public Leaderboard LoadLeaderboard()
@@ -318,10 +338,10 @@ namespace SavingSystem
                 m_namePanel.SetActive(true);
                 ChangeBackGroundColorSelected();
             }
-            else 
-            { 
+            else
+            {
                 m_rankPanel.SetActive(true);
-             
+
             }
         }
 
@@ -329,7 +349,7 @@ namespace SavingSystem
         {
             string name = "";
 
-            foreach (Transform _text in m_lettersWheels)           
+            foreach (Transform _text in m_lettersWheels)
             {
                 TextMeshProUGUI midLetter = _text.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
                 name += midLetter.text;
@@ -346,6 +366,48 @@ namespace SavingSystem
             m_rankPanel.SetActive(false);
             m_leaderboardPanel.SetActive(false);
         }
+
+        public void OnNavigate(Vector2 pressValue)
+        {
+
+            if (!m_namePanel.activeSelf)
+                return;
+
+            if (pressValue.x > 0.7)
+            {
+                GoRight();
+            }
+            else if (pressValue.x < -0.7)
+            {
+                GoLeft();
+            }
+            else if (pressValue.y == 1)
+            {
+                GoUp();
+            }
+            else if (pressValue.y == -1)
+            {
+                GoDown();
+            }
+
+        }
+
+        public void OnAccept()
+        {
+            if (!m_namePanel.activeSelf)
+                return;
+
+            if (m_currentWheelSelected == m_lettersWheels.Count)
+                NameIsChosen_BT();
+        }
+        public void OnDecline()
+        {
+            if (!m_rankPanel.activeSelf)
+                return;
+
+            QuitLeaderboardPanel();
+        }
+
     }
 
 
