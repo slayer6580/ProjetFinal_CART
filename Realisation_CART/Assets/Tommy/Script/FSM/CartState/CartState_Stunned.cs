@@ -47,19 +47,24 @@ namespace CartControl
 
 		public void StealItems()
 		{
+			/*
 			Vector3 colliderDir = new Vector3(m_cartStateMachine.LastClientCollisionWith.transform.position.x,
-											m_cartStateMachine.gameObject.transform.position.y,
+											m_cartStateMachine.ParentOfAllVisual.gameObject.transform.position.y,
 											m_cartStateMachine.LastClientCollisionWith.transform.position.z)
 				- m_cartStateMachine.gameObject.transform.position;
 
-			Vector3 forward = m_cartStateMachine.gameObject.transform.forward;
+			Vector3 forward = m_cartStateMachine.ParentOfAllVisual.gameObject.transform.forward;
 			float angle = Vector3.SignedAngle(colliderDir, forward, Vector3.up);
-
+			*/
+			float angle = Vector3.Dot(m_cartStateMachine.LastClientCollisionWith.transform.forward, m_cartStateMachine.transform.forward);
+			//if 1 == regarde meme direction
+			//if 0 == 90' degré
+			//if -1 == 180' degré
 			int nmOfItemToSteal = 0;
 
-			if (angle < 45 && angle > -45)
+			Debug.Log(" Angle: " + angle);
+			if (angle < 0.707 && angle > -0.707)
 			{
-
 
 				//Steal more items if hit in good angle
 				nmOfItemToSteal += (int)Mathf.Lerp(1, 10, (45 - angle / 45));
@@ -67,6 +72,7 @@ namespace CartControl
 				//Steal more items depending of speed collision
 				nmOfItemToSteal += (int)Mathf.Lerp(1, 10, (m_cartStateMachine.LocalVelocity.z / 10));
 
+				Debug.Log(m_cartStateMachine.gameObject.transform.name + " steal: " + nmOfItemToSteal);
 
 				for (int i = 0; i < nmOfItemToSteal; i++)
 				{

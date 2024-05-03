@@ -196,8 +196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_haveMaxItem: 0
+  m_showOneItem: 0
   m_nbOfItems: 1
-  m_scaleMultiplier: {x: 1.5, y: 1.5, z: 1.5}
+  <ScaleMultiplier>k__BackingField: {x: 3, y: 3, z: 3}
   m_surfaces: {fileID: 7400565087806992301}
   m_spawnPoints: {fileID: 8304370466605932660}
   m_lenghtGap: 0.076
