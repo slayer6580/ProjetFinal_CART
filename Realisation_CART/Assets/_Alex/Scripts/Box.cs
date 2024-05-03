@@ -297,7 +297,7 @@ namespace BoxSystem
             Transform GOChild = GO.transform.GetChild(0);
 
             Vector3 itemScale = BoxManager.GetInstance().GetLocalScale();
-            GO.transform.localScale = itemScale;
+            //GO.transform.localScale = itemScale; //888888888888888888888888888888888888888888888888888888888888888888888888888888888888
             GOChild.localScale = Vector3.one;
             GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, itemScale.y / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
         }

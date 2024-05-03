@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static Manager.AudioManager;
 
@@ -10,6 +11,9 @@ namespace BoxSystem
 
         [field: Header("Put the tower Box System here")]
         [field: SerializeField] public TowerBoxSystem TowerBoxSystem { get; private set; }
+
+        [Header("Stole animation time")]
+        [SerializeField] public float m_animationTime;
 
         [SerializeField] private float m_grabDelay;
 
@@ -40,13 +44,7 @@ namespace BoxSystem
             GameObject itemTaken = shelf.GetItemFromShelf();
             ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size;
 
-            if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
-            {
-                TowerBoxSystem.AddBoxToTower();
-            }
-
-            TowerBoxSystem.PutObjectInTopBox(itemTaken);
-
+            TakeItem(itemTaken, size);
         }
 
         public void StealItemFromOtherTower(TowerBoxSystem towerToSteal)
@@ -61,6 +59,17 @@ namespace BoxSystem
 
             ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size;
 
+            StartCoroutine(WaitForAnimation(itemTaken, size));
+        }
+
+        IEnumerator WaitForAnimation(GameObject itemTaken, ItemData.ESize size)
+        {
+            yield return new WaitForSeconds(m_animationTime);
+            TakeItem(itemTaken, size);
+        }
+
+        private void TakeItem(GameObject itemTaken, ItemData.ESize size)
+        {
             if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
             {
                 TowerBoxSystem.AddBoxToTower();

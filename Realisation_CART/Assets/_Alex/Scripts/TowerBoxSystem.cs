@@ -27,6 +27,10 @@ namespace BoxSystem
         [SerializeField] private float m_itemExpulsionForce;
         [SerializeField] private float m_boxExpulsionForce;
 
+        [Header("Contact variables")]
+        [SerializeField] private float m_contactExpulsionForce;
+        [SerializeField] private float m_scaleMultiplier;
+
         [Header("Destruction Time")]
         [SerializeField] private float m_itemDestructionTime;
         [SerializeField] private float m_boxDestructionTime;
@@ -200,6 +204,19 @@ namespace BoxSystem
             topBox.GetItemsInBox().Remove(lastItemInBox);
         }
 
+        private void ItemStolenAnimation(GameObject item)
+        {
+            Vector3 totalImpulse = Vector3.up * m_contactExpulsionForce;
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+            if (!rb)
+            {
+                rb = item.gameObject.AddComponent<Rigidbody>();
+            }
+
+            rb.AddForce(totalImpulse, ForceMode.Impulse);
+            item.transform.localScale *= m_scaleMultiplier; 
+        }
+
         public GameObject GetStolenItem()
         {
             if (GetTopBox().IsEmpty())
@@ -213,7 +230,7 @@ namespace BoxSystem
             Box.ItemInBox lastItemInBox = topBox.GetLastItem();
 
             lastItemInBox.m_item.transform.SetParent(null);
-
+            ItemStolenAnimation(lastItemInBox.m_item); // 88888888888888888888888888888888888
             topBox.ResetSlots(lastItemInBox);
             topBox.GetItemsInBox().Remove(lastItemInBox);
 

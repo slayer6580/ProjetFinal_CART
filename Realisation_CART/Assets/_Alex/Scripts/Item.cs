@@ -18,10 +18,17 @@ namespace BoxSystem
         private float m_slerpTime;
         private bool m_isMoving = false;
         private bool m_turn90Degree = false;
+        private Vector3 m_initialScale = Vector3.zero;
+        private Vector3 m_targetedScale = Vector3.zero;
 
         private void Awake()
         {
-            gameObject.name = m_data.name;
+            gameObject.name = m_data.name;         
+        }
+
+        private void Start()
+        {
+            m_targetedScale = BoxManager.GetInstance().GetLocalScale();
         }
 
         private void Update()
@@ -37,6 +44,7 @@ namespace BoxSystem
             m_targetLocalPosition = localPosition;
             m_startPosition = transform.position;
             m_box = box;
+            m_initialScale = transform.localScale;
             m_boxTransform = box.transform;
             m_slerpTime = player.GetComponentInChildren<GrabItemTrigger>().ItemSlerpTime;
             if (autoSnap) // apres un reorganize
@@ -54,6 +62,7 @@ namespace BoxSystem
         {
             transform.SetParent(m_boxTransform);
             transform.localPosition = m_targetLocalPosition;
+            transform.localScale = m_targetedScale;  
             Vector3 eulerOfCart = m_playerTransform.rotation.eulerAngles;
             Vector3 localEulerOfBox = m_boxTransform.transform.localRotation.eulerAngles;
 
@@ -85,6 +94,7 @@ namespace BoxSystem
             Vector3 boxLocalPosition = m_box.transform.position + m_targetLocalPosition;
 
             transform.position = Vector3.Slerp(m_startPosition, boxLocalPosition, slerpTime);
+            transform.localScale = Vector3.Slerp(m_initialScale, m_targetedScale, slerpTime);
             float targetDistance = Mathf.Abs(Vector3.Distance(transform.position, boxLocalPosition));
 
             if (targetDistance < m_distanceSnap)

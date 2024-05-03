@@ -13,8 +13,8 @@ namespace BoxSystem
 
         [ShowIf("m_haveMaxItem", false)][SerializeField] private float m_nbOfItems;
 
-        [Header("item size multiplier")]
-        [SerializeField] private Vector3 m_scaleMultiplier;
+        [field: Header("item size multiplier")]
+        [field: SerializeField] public Vector3 ScaleMultiplier { get; set; }
 
         [Header("put surfaces here")]
         [SerializeField] private Transform m_surfaces;
@@ -96,8 +96,8 @@ namespace BoxSystem
                     GameObject item = SpawnItem();
                     item.transform.SetParent(gameObject.transform);
                     Vector3 boxScale = boxInstance.GetLocalScale();
-                    item.transform.localScale = new Vector3(boxScale.x * m_scaleMultiplier.x, boxScale.y * m_scaleMultiplier.y, boxScale.z * m_scaleMultiplier.z);
-                    item.transform.localPosition = m_slotsLocalPositionsPerSurface[i][j] + new Vector3(0, (boxInstance.SlotHeight / 2) * m_scaleMultiplier.y, 0);
+                    item.transform.localScale = new Vector3(boxScale.x * ScaleMultiplier.x, boxScale.y * ScaleMultiplier.y, boxScale.z * ScaleMultiplier.z);
+                    item.transform.localPosition = m_slotsLocalPositionsPerSurface[i][j] + new Vector3(0, (boxInstance.SlotHeight / 2) * ScaleMultiplier.y, 0);
                     item.transform.localEulerAngles = m_surfaceLocalEulers[i];
                 }
             }
@@ -142,8 +142,8 @@ namespace BoxSystem
                     GameObject item = SpawnItem();
                     item.transform.SetParent(gameObject.transform);
                     Vector3 boxScale = boxInstance.GetLocalScale();
-                    item.transform.localScale = new Vector3(boxScale.x * m_scaleMultiplier.x, boxScale.y * m_scaleMultiplier.y, boxScale.z * m_scaleMultiplier.z);
-                    item.transform.localPosition = m_slotsLocalPositionsPerSurface[j][indexOfLocalPosition] + new Vector3(0, (boxInstance.SlotHeight / 2) * m_scaleMultiplier.y, 0);
+                    item.transform.localScale = new Vector3(boxScale.x * ScaleMultiplier.x, boxScale.y * ScaleMultiplier.y, boxScale.z * ScaleMultiplier.z);
+                    item.transform.localPosition = m_slotsLocalPositionsPerSurface[j][indexOfLocalPosition] + new Vector3(0, (boxInstance.SlotHeight / 2) * ScaleMultiplier.y, 0);
                     item.transform.localEulerAngles = m_surfaceLocalEulers[j];
                     break;
                 }
