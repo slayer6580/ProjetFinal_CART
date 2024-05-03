@@ -241,7 +241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db61f08a5ef804da1662bcbd8fac95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shelfManager: {fileID: 0}
 --- !u!1 &83925434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1290,7 @@ MonoBehaviour:
   m_textScore: {fileID: 219102781}
   m_textNbItems: {fileID: 0}
   m_textNbCartoken: {fileID: 0}
+  m_upgradeManager: {fileID: 0}
 --- !u!224 &1333703639
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1341,6 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <GameLength>k__BackingField: 0
+  <ClientsList>k__BackingField: []
   m_playerSM: {fileID: 0}
   m_scoreUI: {fileID: 1333703638}
   m_upgrademanager: {fileID: 0}

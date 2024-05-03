@@ -32,7 +32,8 @@ namespace Spawner
 
         [field: Header("Entrance of the level :                       Rate = Spawn per minutes")]
         [SerializeField] private bool m_isSpawningFromEntrance = false;
-        //[SerializeField] private int m_numberOfNPCFromEntrance = 1;
+        [SerializeField] private bool m_isOneShot = true;
+        [SerializeField] private int m_numberOfNPCFromEntrance = 1;
         [SerializeField] private float m_spawningEntranceRandomness = 0.0f;
         [SerializeField] private float m_spawningEntranceRate = 0.0f; // 0 for one shot spawning
         [SerializeField] private float m_currentSpawningEntranceRate = 0.0f;
@@ -72,7 +73,7 @@ namespace Spawner
         private List<GameObject> BackLeftSpawningSpots { get; set; } = new List<GameObject>();
         private List<GameObject> BackRightSpawningSpots { get; set; } = new List<GameObject>();
 
-        private const float ONE_SHOT_DONE = -10000;
+        //private const float ONE_SHOT_DONE = -10000;
 
         private void Awake()
         {
@@ -246,7 +247,7 @@ namespace Spawner
                         break;
                     case e_spawningZone.FromEntrance:
                         //Debug.Log("m_currentSpawningEntranceRate: " + m_currentSpawningEntranceRate);
-                        SpawnNPCs(e_spawningZone.FromEntrance, m_isSpawningFromEntrance/*, m_numberOfNPCFromEntrance*/, m_spawningEntranceRandomness, ref m_currentSpawningEntranceRate);
+                        SpawnNPCs(e_spawningZone.FromEntrance, m_isSpawningFromEntrance, ref m_numberOfNPCFromEntrance, m_spawningEntranceRandomness, ref m_currentSpawningEntranceRate, m_currentSpawningEntranceRate);
                         break;
                     case e_spawningZone.FromFrontLeft:
                         //SpawnNPCs((SpawningType)i, m_isSpawningFromFrontLeft, m_numberOfNPCsFromFrontLeft, m_spawningFrontLeftRate, ref m_currentSpawningFrontLeftRate);
@@ -267,36 +268,53 @@ namespace Spawner
             }
         }
 
-        private void SpawnNPCs(e_spawningZone spawnType, bool isSpawningFromZone/*, int numberOfNPCs*/, float spawningEntranceRandomness, ref float currentSpawningRate)
+        private void SpawnNPCs(e_spawningZone spawnType, bool isSpawningFromZone, ref int numberOfNPCs, float spawningEntranceRandomness, ref float currentSpawningRate, float originalSpawningRate)
         {
             if (!isSpawningFromZone /*|| numberOfNPCs <= 0*/) return;
 
-            if (currentSpawningRate == 0)
+            if (m_isOneShot)
             {
+                if (numberOfNPCs <= 0) return;
                 //for (int i = 0; i < numberOfNPCs; i++)
                 //{
                     Debug.Log("spawningRate 0: " + currentSpawningRate);
-                    var randomSpot = UnityEngine.Random.Range(0, GetZoneGOList(spawnType).Count);
-                    Instantiate(NPCPrefab, GetZoneGOList(spawnType)[randomSpot].transform.position, Quaternion.identity);
-                    currentSpawningRate = ONE_SHOT_DONE; // -10000 To indicate that the one shot has been done
+                    Spawn(spawnType);
+                    Debug.Log("NPC spawned 1");
+                    numberOfNPCs--;
                 //}
             }
             else
             {
+
+                if (currentSpawningRate == originalSpawningRate)
+                {
+                    Spawn(spawnType);
+                    Debug.Log("NPC spawned 2");
+                    ResetRate(spawnType, spawningEntranceRandomness);
+                    currentSpawningRate--;
+                }
+
                 //Debug.Log("spawningRate -= Time Before: " + currentSpawningRate);
-                if (currentSpawningRate == ONE_SHOT_DONE) return;
                 currentSpawningRate -= Time.deltaTime;
                 //Debug.Log("spawningRate -= Time After: " + currentSpawningRate);
 
-                if (currentSpawningRate < ONE_SHOT_DONE && currentSpawningRate < 1) currentSpawningRate = 1;
-                if (currentSpawningRate <= 0)
+                //if (currentSpawningRate < 1) 
+                //    currentSpawningRate = 1;
+                /*else*/ if (currentSpawningRate <= 0)
                 {
                     //Debug.Log("spawningRate !0: " + currentSpawningRate);
-                    var randomSpot = UnityEngine.Random.Range(0, GetZoneGOList(spawnType).Count);
-                    Instantiate(NPCPrefab, GetZoneGOList(spawnType)[randomSpot].transform.position, Quaternion.identity);
+                    Spawn(spawnType);
+                    Debug.Log("NPC spawned 3");
                     ResetRate(spawnType, spawningEntranceRandomness);
                 }
             }
+        }
+
+        private void Spawn(e_spawningZone spawnType)
+        {
+            var randomSpot = UnityEngine.Random.Range(0, GetZoneGOList(spawnType).Count);
+            GameObject newNPC = Instantiate(NPCPrefab, GetZoneGOList(spawnType)[randomSpot].transform.position, Quaternion.identity);
+            Transform[] bodyparts = newNPC.GetComponentsInChildren<Transform>();
         }
 
         private List<GameObject> GetZoneGOList(e_spawningZone spawnType)
@@ -329,7 +347,7 @@ namespace Spawner
                 GenerateRandomRates(zoneToReset); 
                 return; 
             }
-            else if (spawningRate != ONE_SHOT_DONE)
+            else if (m_isOneShot)
                 AssignRates(zoneToReset);
         }
     }

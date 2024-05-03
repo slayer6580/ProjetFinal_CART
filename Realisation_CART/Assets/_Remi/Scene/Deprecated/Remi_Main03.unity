@@ -2910,6 +2910,7 @@ MonoBehaviour:
   m_textScore: {fileID: 985143639}
   m_textNbItems: {fileID: 433221224}
   m_textNbCartoken: {fileID: 0}
+  m_upgradeManager: {fileID: 0}
 --- !u!224 &1333703639
 RectTransform:
   m_ObjectHideFlags: 0

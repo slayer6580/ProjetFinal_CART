@@ -67338,6 +67338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
   <TowerBoxSystem>k__BackingField: {fileID: 0}
+  m_grabDelay: 0
 --- !u!4 &3820525376737748646
 Transform:
   m_ObjectHideFlags: 0

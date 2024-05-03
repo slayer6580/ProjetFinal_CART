@@ -727,6 +727,7 @@ MonoBehaviour:
   m_textScore: {fileID: 1629757313907063874}
   m_textNbItems: {fileID: 0}
   m_textNbCartoken: {fileID: 0}
+  m_upgradeManager: {fileID: 0}
 --- !u!1 &5538055563433462314
 GameObject:
   m_ObjectHideFlags: 0

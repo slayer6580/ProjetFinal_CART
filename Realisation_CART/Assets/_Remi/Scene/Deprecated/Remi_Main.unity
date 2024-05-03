@@ -22032,6 +22032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
   <TowerBoxSystem>k__BackingField: {fileID: 0}
+  m_grabDelay: 0
 --- !u!137 &1311423763287469921
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

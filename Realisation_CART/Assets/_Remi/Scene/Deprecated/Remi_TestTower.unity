@@ -883,12 +883,6 @@ MonoBehaviour:
   - m_Rig: {fileID: 27479446}
     m_Active: 1
   m_Effectors: []
---- !u!95 &112360074 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3460278577312166371, guid: 395dd9c9138664d498a4547dbfac4c62,
-    type: 3}
-  m_PrefabInstance: {fileID: 112360055}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &138299536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1694,7 @@ MonoBehaviour:
   <MaxBackwardSpeed>k__BackingField: 5
   <IdleRotatingSpeed>k__BackingField: 70
   <MovingRotatingSpeed>k__BackingField: 50
+  <TowerPushForceWhenTurning>k__BackingField: 0
   <TurningDrag>k__BackingField: 2
   <TurningDragRelativeToJoystick>k__BackingField:
     serializedVersion: 2
@@ -1730,6 +1725,7 @@ MonoBehaviour:
   <DriftingRotatingSpeed>k__BackingField: 75
   <AddedRotatingSpeedWhenBreaking>k__BackingField: 30
   <DriftingAcceleration>k__BackingField: 70
+  <TowerPushForceWhenDrifting>k__BackingField: 0
   <AutoDriftWhenTurning>k__BackingField: 0
   <TurningTimeBeforeDrift>k__BackingField: 2
   <DriftPressed>k__BackingField: 0
@@ -1741,15 +1737,6 @@ MonoBehaviour:
   <MinBoostTime>k__BackingField: 1
   <MaxBoostTime>k__BackingField: 3
   <BackToIdleAfterStop>k__BackingField: 0
-  <Cart>k__BackingField: {fileID: 269257456}
-  <CartRB>k__BackingField: {fileID: 269257458}
-  <CamBrain>k__BackingField: {fileID: 1221520798}
-  <VirtualCamera>k__BackingField: {fileID: 746864961}
-  <HumanAnimCtrlr>k__BackingField: {fileID: 112360074}
-  <FeetOnCartRig>k__BackingField: {fileID: 1082291863}
-  <CartMovement>k__BackingField: {fileID: 269257460}
-  <GrindVfx>k__BackingField: {fileID: 0}
-  <BoxForce>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 0}
   <AccelerationUpgrades>k__BackingField: 0
   <MaxSpeedUpgrades>k__BackingField: 0
@@ -3321,6 +3308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
   <TowerBoxSystem>k__BackingField: {fileID: 1750706378}
+  m_grabDelay: 0
 --- !u!135 &812918144
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -63904,6 +63892,7 @@ MonoBehaviour:
   m_textScore: {fileID: 5545186589125240078}
   m_textNbItems: {fileID: 6608020648557083593}
   m_textNbCartoken: {fileID: 0}
+  m_upgradeManager: {fileID: 0}
 --- !u!1 &159662169418942671
 GameObject:
   m_ObjectHideFlags: 0
@@ -64342,6 +64331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <GameLength>k__BackingField: 0
+  <ClientsList>k__BackingField: []
   m_playerSM: {fileID: 269257461}
   m_scoreUI: {fileID: 37506871405475224}
   m_upgrademanager: {fileID: 0}
@@ -64947,7 +64937,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e959029d258f3542a7bc30eaf3de350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <TowerBoxSystem>k__BackingField: {fileID: 1750706378}
   m_towerFake: {fileID: 1274598711330044586}
   m_nbOfFixedBoxes: 5
   m_boxNoHingePrefab: {fileID: 3665573428290585098, guid: 32fc50c95ab1f0a4290d48e6ed28a3f6,
@@ -65435,7 +65424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db61f08a5ef804da1662bcbd8fac95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shelfManager: {fileID: 0}
 --- !u!114 &8380498388181545683
 MonoBehaviour:
   m_ObjectHideFlags: 0

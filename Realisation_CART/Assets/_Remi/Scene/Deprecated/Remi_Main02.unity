@@ -242,7 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db61f08a5ef804da1662bcbd8fac95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shelfManager: {fileID: 0}
 --- !u!54 &43551478
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3586,6 +3585,7 @@ MonoBehaviour:
   m_textScore: {fileID: 985143639}
   m_textNbItems: {fileID: 433221224}
   m_textNbCartoken: {fileID: 0}
+  m_upgradeManager: {fileID: 0}
 --- !u!224 &1333703639
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3636,6 +3636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <GameLength>k__BackingField: 0
+  <ClientsList>k__BackingField: []
   m_playerSM: {fileID: 822227941142337370}
   m_scoreUI: {fileID: 1333703638}
   m_upgrademanager: {fileID: 0}
@@ -30497,6 +30498,7 @@ MonoBehaviour:
   <MaxBackwardSpeed>k__BackingField: 5
   <IdleRotatingSpeed>k__BackingField: 70
   <MovingRotatingSpeed>k__BackingField: 50
+  <TowerPushForceWhenTurning>k__BackingField: 0
   <TurningDrag>k__BackingField: 2
   <TurningDragRelativeToJoystick>k__BackingField:
     serializedVersion: 2
@@ -30527,6 +30529,7 @@ MonoBehaviour:
   <DriftingRotatingSpeed>k__BackingField: 75
   <AddedRotatingSpeedWhenBreaking>k__BackingField: 30
   <DriftingAcceleration>k__BackingField: 70
+  <TowerPushForceWhenDrifting>k__BackingField: 0
   <AutoDriftWhenTurning>k__BackingField: 0
   <TurningTimeBeforeDrift>k__BackingField: 2
   <DriftPressed>k__BackingField: 0
@@ -30538,15 +30541,6 @@ MonoBehaviour:
   <MinBoostTime>k__BackingField: 1
   <MaxBoostTime>k__BackingField: 3
   <BackToIdleAfterStop>k__BackingField: 0
-  <Cart>k__BackingField: {fileID: 507525211374631003}
-  <CartRB>k__BackingField: {fileID: 5448709337560588465}
-  <CamBrain>k__BackingField: {fileID: 498789715619754795}
-  <VirtualCamera>k__BackingField: {fileID: 3959612820659040669}
-  <HumanAnimCtrlr>k__BackingField: {fileID: 7448206307301313200}
-  <FeetOnCartRig>k__BackingField: {fileID: 4804061228143170165}
-  <CartMovement>k__BackingField: {fileID: 106236916925315830}
-  <GrindVfx>k__BackingField: {fileID: 0}
-  <BoxForce>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 0}
   <AccelerationUpgrades>k__BackingField: 0
   <MaxSpeedUpgrades>k__BackingField: 0
@@ -31742,9 +31736,9 @@ MonoBehaviour:
   <BoxGapHeight>k__BackingField: 0.001
   m_itemExpulsionForce: 0
   m_boxExpulsionForce: 0
-  m_towerPhysics: {fileID: 0}
+  m_itemDestructionTime: 0
+  m_boxDestructionTime: 0
   m_cartokenValueMultiplier: 1
-  m_shelfManager: {fileID: 0}
 --- !u!23 &1089051859086016220
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40373,6 +40367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
   <TowerBoxSystem>k__BackingField: {fileID: 0}
+  m_grabDelay: 0
 --- !u!4 &3820525376737748646
 Transform:
   m_ObjectHideFlags: 0
