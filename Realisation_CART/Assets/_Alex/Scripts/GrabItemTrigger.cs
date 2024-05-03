@@ -15,6 +15,7 @@ namespace BoxSystem
         [Header("Stole animation time")]
         [SerializeField] public float m_animationTime;
 
+        [Header("Shelf grab delay")]
         [SerializeField] private float m_grabDelay;
 
         private bool m_canGrabItem = true;
@@ -70,6 +71,12 @@ namespace BoxSystem
 
         private void TakeItem(GameObject itemTaken, ItemData.ESize size)
         {
+            Rigidbody rb = itemTaken.GetComponent<Rigidbody>();
+            if (rb)
+            {
+                Destroy(rb);
+            }
+
             if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
             {
                 TowerBoxSystem.AddBoxToTower();

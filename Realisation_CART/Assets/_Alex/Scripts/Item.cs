@@ -100,6 +100,7 @@ namespace BoxSystem
             if (targetDistance < m_distanceSnap)
             {
                 m_isMoving = false;
+                m_timer = 0;
                 SnapToBox();
                 return;
             }
