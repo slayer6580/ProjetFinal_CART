@@ -2206,6 +2206,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPCSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
+        type: 3}
+      propertyPath: m_isOneShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
+        type: 3}
+      propertyPath: m_spawningEntranceRate
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1711842777266915499, guid: 15f1c338bfe81624ebecb93be8514642,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3617,17 +3627,17 @@ PrefabInstance:
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13633598
+      value: 0.13633597
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000085228615
+      value: -0.00000000852286
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000011729243
+      value: 0.000000001172924
       objectReference: {fileID: 0}
     - target: {fileID: 5807787597716368242, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -3647,17 +3657,17 @@ PrefabInstance:
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13633598
+      value: 0.13633597
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000085228615
+      value: -0.00000000852286
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000011729243
+      value: 0.000000001172924
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3885,6 +3895,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2958385157174625250, guid: ba1c7afe998d80c4bb378667a7f6dfdb,
+        type: 3}
+      propertyPath: <TowerPhysicsOffset>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2958385157174625250, guid: ba1c7afe998d80c4bb378667a7f6dfdb,
         type: 3}
       propertyPath: <TowerPhysicsPrefab>k__BackingField

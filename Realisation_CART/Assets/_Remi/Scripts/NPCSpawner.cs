@@ -289,7 +289,7 @@ namespace Spawner
                 if (currentSpawningRate == originalSpawningRate)
                 {
                     Spawn(spawnType);
-                    Debug.Log("NPC spawned 2");
+                    //Debug.Log("NPC spawned 2");
                     ResetRate(spawnType, spawningEntranceRandomness);
                     currentSpawningRate--;
                 }
@@ -304,7 +304,7 @@ namespace Spawner
                 {
                     //Debug.Log("spawningRate !0: " + currentSpawningRate);
                     Spawn(spawnType);
-                    Debug.Log("NPC spawned 3");
+                    //Debug.Log("NPC spawned 3");
                     ResetRate(spawnType, spawningEntranceRandomness);
                 }
             }
