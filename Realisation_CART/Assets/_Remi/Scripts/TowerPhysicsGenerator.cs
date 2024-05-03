@@ -6,11 +6,6 @@ namespace BoxSystem
     {
         [field: SerializeField] private GameObject TowerPhysicsPrefab { get;  set; } = null;
 
-        void Start()
-        {
-
-        }
-
         public GameObject GenerateTowerPhysics()
         {
             if (TowerPhysicsPrefab == null)

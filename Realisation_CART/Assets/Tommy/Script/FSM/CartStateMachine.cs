@@ -75,8 +75,7 @@ namespace CartControl
         public Rig FeetOnCartRig { get; private set; }
         public CartMovement CartMovement { get; private set; }
         public ManageGrindVfx GrindVfx { get; private set; }
-        private CinemachineBrain CamBrain { get; set; }
-        private GameObject VirtualCamera { get; set; }
+
 
 		//
 		[Space]
@@ -101,40 +100,21 @@ namespace CartControl
         [HideInInspector] public bool IsPaused { get; set; }
         [HideInInspector] public Vector3 CollisionOppositeDirection { get; private set; }
 
-		[HideInInspector] public bool IsClient { get; set; } = false; // Debug to remove
 		static private int m_clientIDIterator = 0;
 		[HideInInspector] public int ClientID { get; private set; } = 0;
 
         private void Awake()
         {
-			if (GetComponentInChildren<BehaviourTreeRunner>()) 
-			{
-				IsClient = true;
-                ClientID = ++m_clientIDIterator;
+            InitializeVariables();
+        }
 
-            }
-
+        private void InitializeVariables()
+        {
             Scene scene = gameObject.scene;
             GameObject[] gameObjects = scene.GetRootGameObjects();
 
             GameObject cameras = gameObjects[0];
             if (cameras == null || cameras.name != "CameraSystem") Debug.LogError("Cameras not found");
-
-            foreach (Transform child in cameras.transform)
-            {
-                if (child.name == "Virtual Camera")
-                {
-                    VirtualCamera = child.gameObject;
-                }
-                else if (child.name == "Main Camera")
-                {
-                    CamBrain = child.GetComponent<CinemachineBrain>();
-                }
-                else
-                {
-                    continue;
-                }
-            }
 
             Cart = gameObject;
             CartRB = GetComponent<Rigidbody>();
@@ -152,14 +132,13 @@ namespace CartControl
             CartMovement = GetComponent<CartMovement>();
             GrindVfx = GetComponentInChildren<ManageGrindVfx>();
 
-			ParentOfAllVisual = transform.GetChild(0).gameObject;
+            ParentOfAllVisual = transform.GetChild(0).gameObject;
 
             if (ParentOfAllVisual.name == "GrindVFX") return; // Vérify if Player still has GrindVFX as first child.
             if (ParentOfAllVisual.name != "Parent") Debug.LogWarning("Not a client or Parent not found or not named Parent. Current name: " + ParentOfAllVisual.name);
-		}
+        }
 
-
-		protected override void Start()
+        protected override void Start()
 		{
 			base.Start();
 			CartMovement.SM = this;

@@ -45,8 +45,6 @@ namespace DiscountDelirium
 			int m_pathCount = 0;
 			m_pathScores.Clear();
 
-			if (m_blackboard == null) Debug.LogError("BlackBoard not found");
-			if (m_blackboard.m_possiblePathScript == null) Debug.LogError("ClientPathList not found");
 			foreach (List<GameObject> pathList in m_blackboard.m_possiblePathScript.ListOfPath)
 			{
 				m_pathScores.Add(0);

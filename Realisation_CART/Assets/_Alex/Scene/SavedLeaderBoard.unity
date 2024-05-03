@@ -2358,6 +2358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1327676619}
   - component: {fileID: 1327676620}
+  - component: {fileID: 1327676621}
   m_Layer: 0
   m_Name: LeaderboardManager
   m_TagString: Untagged
@@ -2393,7 +2394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nbOfPlayerInLeaderboard: 10
-  m_scoreToAdd: 100
+  m_scoreToAdd: 2
   m_namesText: {fileID: 344065993}
   m_scoreText: {fileID: 1018155640}
   m_rankPanel: {fileID: 417584842}
@@ -2416,6 +2417,18 @@ MonoBehaviour:
   m_selectedButtonColor:
     serializedVersion: 2
     rgba: 4278255610
+--- !u!114 &1327676621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327676618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32acdddfc2e1afb49bbd7a1e27e5041d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1356310613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,7 +2486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press escape to quit
+  m_text: Press escape or (B) to quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2792,7 +2805,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.97404873, g: 1, b: 0, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3532,7 +3545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '(press enter)
+  m_text: '<size=30>press (Enter) or (A) </size>
 
     Confirm name'
   m_isRightToLeft: 0
