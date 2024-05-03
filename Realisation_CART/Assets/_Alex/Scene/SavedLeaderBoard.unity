@@ -2394,7 +2394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nbOfPlayerInLeaderboard: 10
-  m_scoreToAdd: 10
+  m_scoreToAdd: 2
   m_namesText: {fileID: 344065993}
   m_scoreText: {fileID: 1018155640}
   m_rankPanel: {fileID: 417584842}

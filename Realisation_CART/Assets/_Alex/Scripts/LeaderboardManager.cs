@@ -90,6 +90,7 @@ namespace SavingSystem
 
         private void NamePanelInputs()
         {
+
             if (!m_namePanel.activeSelf)
                 return;
 
@@ -184,7 +185,7 @@ namespace SavingSystem
         }
 
         private void UpdateLettersInsideWheels()
-        {
+        {            
             for (int i = 0; i < m_lettersWheels.Count; i++)
             {
 
@@ -362,7 +363,14 @@ namespace SavingSystem
 
         public void QuitLeaderboardPanel()
         {
+            // End of game
             m_namePanel.SetActive(false);
+            m_rankPanel.SetActive(false);
+            m_leaderboardPanel.SetActive(false);
+        }
+
+        public void BackToMainMenu()
+        {
             m_rankPanel.SetActive(false);
             m_leaderboardPanel.SetActive(false);
         }
