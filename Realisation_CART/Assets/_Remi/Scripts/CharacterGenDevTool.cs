@@ -45,6 +45,11 @@ namespace Spawner
             {
                 characterBodyParts.GiveMeBob();
             }
+
+            if (UnityEngine.GUILayout.Button("Give me Bob with custom boots!"))
+            {
+                characterBodyParts.GiveMeBob(true);
+            }
         }
     }
 }

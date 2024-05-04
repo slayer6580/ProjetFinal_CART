@@ -570,7 +570,7 @@ namespace Spawner
             }
         }
 
-        internal void GiveMeBob()
+        internal void GiveMeBob(bool hasCustomBoots = false)
         {
             Debug.Log("Give Me Bob");
 
@@ -587,17 +587,13 @@ namespace Spawner
                 VerifyMaterialIntegrity();
                 Material newSkinMat = new Material(m_skin_Mat);
                 Material newClothesMat = new Material(m_polygonKids_Material_01_A);
-                // delete skinnedMeshRenderer
-                //DestroyImmediate(skinnedMeshRenderer);
-                //skinnedMeshRenderer = new SkinnedMeshRenderer();
-                //skinnedMeshRenderer.material = newMaterial;
-                //skinnedMeshRenderer.materials[0] = newSkinMat;
-                //skinnedMeshRenderer.materials[1] = newClothesMat;
-                //skinnedMeshRenderer.materials[2] = newClothesMat;
-                skinnedMeshRenderer.materials = new Material[] { newSkinMat, newClothesMat, newClothesMat };
-                //skinnedMeshRenderer.sharedMaterials[0] = newSkinMat;
-                //skinnedMeshRenderer.sharedMaterials[1] = newClothesMat;
-                //skinnedMeshRenderer.sharedMaterials[2] = newClothesMat;
+                Material newShoesMat = new Material(m_polygonKids_Material_01_A);
+
+                if (hasCustomBoots)
+                    newShoesMat = new Material(m_shoes_Mat);
+
+                skinnedMeshRenderer.materials = new Material[] { newSkinMat, newClothesMat, newShoesMat };
+
 
                 skinnedMeshRenderer.sharedMaterials[0].color = new Color32(184, 145, 107, 255);
             }
