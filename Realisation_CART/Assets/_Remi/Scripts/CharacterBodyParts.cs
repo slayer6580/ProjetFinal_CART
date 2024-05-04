@@ -66,6 +66,7 @@ namespace Spawner
             m_eyesMale = transform.Find("SM_Chr_Eyes_Male_01");
             m_humanFullBodies.Add(transform.Find("SM_Chr_Kid_Adventure_01"));
             m_humanFullBodies.Add(transform.Find("SM_Chr_Kid_Ballerina_01"));
+            m_humanFullBodies.Add(transform.Find("SM_Chr_Kid_CargoShorts_01"));
             m_humanFullBodies.Add(transform.Find("SM_Chr_Kid_Casual_04"));
             m_humanFullBodies.Add(transform.Find("SM_Chr_Kid_Doctor_01"));
             m_humanFullBodies.Add(transform.Find("SM_Chr_Kid_Cheerleader_01"));
@@ -140,6 +141,7 @@ namespace Spawner
                 else if (m_eyesMale == null && childGO.name == "SM_Chr_Eyes_Male_01") { m_eyesMale = childGO; return; }
                 else if (childGO.name == "SM_Chr_Kid_Adventure_01") { m_humanFullBodies.Add(childGO); return; } // casual human full bodies
                 else if (childGO.name == "SM_Chr_Kid_Ballerina_01") { m_humanFullBodies.Add(childGO); return; }
+                else if (childGO.name == "SM_Chr_Kid_CargoShorts_01") { m_humanFullBodies.Add(childGO); return; }
                 else if (childGO.name == "SM_Chr_Kid_Casual_04") { m_humanFullBodies.Add(childGO); return; }
                 else if (childGO.name == "SM_Chr_Kid_Doctor_01") { m_humanFullBodies.Add(childGO); return; }
                 else if (childGO.name == "SM_Chr_Kid_Cheerleader_01") { m_humanFullBodies.Add(childGO); return; }
@@ -415,10 +417,10 @@ namespace Spawner
         private void GetMaterials()
         {
             Debug.Log("GetMaterials");
-            string materialPath01 = "Assets/PolygonKids/Materials/PolygonKids_Material_01_A.mat";
-            string materialPath02 = "Assets/PolygonKids/Materials/PolygonKids_Material_02_A.mat";
-            string materialPath03 = "Assets/PolygonKids/Materials/PolygonKids_Material_03_A.mat";
-            string materialPath04 = "Assets/PolygonKids/Materials/PolygonKids_Material_04_A.mat";
+            string materialPath01 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_01_A.mat";
+            string materialPath02 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_02_A.mat";
+            string materialPath03 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_03_A.mat";
+            string materialPath04 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_04_A.mat";
             string materialPath05 = "Assets/_Remi/Materials/Skin.mat";
             string materialPath06 = "Assets/_Remi/Materials/Shoes.mat";
 
@@ -506,6 +508,7 @@ namespace Spawner
             if (m_eyebrows.gameObject.activeSelf) m_eyebrows.gameObject.SetActive(false);
             if (m_eyesFemale.gameObject) m_eyesFemale.gameObject.SetActive(false);
             if (m_eyesMale.gameObject) m_eyesMale.gameObject.SetActive(false);
+            if (m_robotFaceGO.gameObject.activeSelf) m_robotFaceGO.gameObject.SetActive(false);
         }
 
         internal void RandomizeFace()
