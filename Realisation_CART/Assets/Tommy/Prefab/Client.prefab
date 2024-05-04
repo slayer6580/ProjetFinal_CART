@@ -60808,16 +60808,6 @@ MonoBehaviour:
   <MinBoostTime>k__BackingField: 9999
   <MaxBoostTime>k__BackingField: 9999
   <BackToIdleAfterStop>k__BackingField: 0
-  <Cart>k__BackingField: {fileID: 5094407173613903610}
-  <ParentOfAllVisual>k__BackingField: {fileID: 0}
-  <CartRB>k__BackingField: {fileID: 8550883599423599101}
-  <CamBrain>k__BackingField: {fileID: 0}
-  <VirtualCamera>k__BackingField: {fileID: 0}
-  <HumanAnimCtrlr>k__BackingField: {fileID: 3055388987219288640}
-  <FeetOnCartRig>k__BackingField: {fileID: 6650571825298312732}
-  <CartMovement>k__BackingField: {fileID: 3341273960309738010}
-  <GrindVfx>k__BackingField: {fileID: 177055539129644272}
-  <BoxForce>k__BackingField: {fileID: 0}
   m_towerCtrlr: {fileID: 0}
   <AccelerationUpgrades>k__BackingField: 0
   <MaxSpeedUpgrades>k__BackingField: 0
@@ -74361,9 +74351,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
         type: 3}
+      propertyPath: m_scaleMultiplier
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
       propertyPath: <Player>k__BackingField
       value: 
       objectReference: {fileID: 5094407173613903610}
+    - target: {fileID: 9081786967971546593, guid: 2b2abbfa91512c84dbc464f9c8f8749b,
+        type: 3}
+      propertyPath: m_contactExpulsionForce
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74528,6 +74528,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GrabTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479313186865770351, guid: bb008109ce8013447884e18be9a089dd,
+        type: 3}
+      propertyPath: m_animationTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7479313186865770351, guid: bb008109ce8013447884e18be9a089dd,
         type: 3}
