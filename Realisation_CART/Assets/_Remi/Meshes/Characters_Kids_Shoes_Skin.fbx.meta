@@ -3,9 +3,39 @@ guid: 26e2b31255d0b754a9740052708b190b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Freckels
+    second: {fileID: 2100000, guid: 7be77723b1f62184384b3e9b4ba55a27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KIds
+    second: {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RobotFace
+    second: {fileID: 2100000, guid: a520ceb968990fe4297e9aa8a81849e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes
+    second: {fileID: 2100000, guid: a70622f8a91db7f47aae551fe3a364b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: e28a6a5ddeb49b7489d7e38efe728353, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TextureWithAlpha
+    second: {fileID: 2100000, guid: 7be77723b1f62184384b3e9b4ba55a27, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

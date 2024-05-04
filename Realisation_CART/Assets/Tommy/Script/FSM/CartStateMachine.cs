@@ -100,8 +100,6 @@ namespace CartControl
         [HideInInspector] public bool IsPaused { get; set; }
         [HideInInspector] public Vector3 CollisionOppositeDirection { get; private set; }
 
-		static private int m_clientIDIterator = 0;
-		[HideInInspector] public int ClientID { get; private set; } = 0;
 
         private void Awake()
         {
