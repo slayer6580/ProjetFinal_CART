@@ -49,6 +49,8 @@ namespace Spawner
             //if (m_handOnCartGO != null) return;
             //InitializeVariables();
             VerifyIntegrityOfVariables();
+            RandomizeFace();
+            RandomizeFullBody();
         }
 
         private void OnEnable() // Keep the OnEnable to have the checkbox in the inspector
@@ -447,7 +449,7 @@ namespace Spawner
 
         internal void VerifyIntegrityOfVariables()
         {
-            Debug.Log("VerifyIntegrityOfVariables");
+            //Debug.Log("VerifyIntegrityOfVariables");
 
             if (m_polygonKids_Material_01_A == null) // One missing variable is too many
             {
@@ -502,22 +504,22 @@ namespace Spawner
 
         private void DisableFullBodyParts()
         {
-            Debug.Log("Disable Full Body Parts");
+            //Debug.Log("Disable Full Body Parts");
             //VerifyIntegrityOfVariables();
 
             foreach (Transform humanFullBody in m_humanFullBodies)
             {
-                if (humanFullBody.gameObject.activeSelf) humanFullBody.gameObject.SetActive(false); Debug.Log("Human full body deactivated");
+                if (humanFullBody.gameObject.activeSelf) humanFullBody.gameObject.SetActive(false); //Debug.Log("Human full body deactivated");
             }
 
             foreach (Transform humanInCostumeFullBody in m_humanInCostumeFullBodies)
             {
-                if (humanInCostumeFullBody.gameObject.activeSelf) humanInCostumeFullBody.gameObject.SetActive(false); Debug.Log("Human in costume full body deactivated");
+                if (humanInCostumeFullBody.gameObject.activeSelf) humanInCostumeFullBody.gameObject.SetActive(false); //Debug.Log("Human in costume full body deactivated");
             }
 
             foreach (Transform nonHumanFullBody in m_nonHumanFullBodies)
             {
-                if (nonHumanFullBody.gameObject.activeSelf) nonHumanFullBody.gameObject.SetActive(false); Debug.Log("Non-human full body deactivated");
+                if (nonHumanFullBody.gameObject.activeSelf) nonHumanFullBody.gameObject.SetActive(false); //Debug.Log("Non-human full body deactivated");
             }
         }
 
@@ -534,7 +536,7 @@ namespace Spawner
 
         internal void RandomizeFace()
         {
-            Debug.Log("Randomize Face");
+            //Debug.Log("Randomize Face");
 
             DisableFaceParts();
 
@@ -542,7 +544,7 @@ namespace Spawner
             int randomFreckles = UnityEngine.Random.Range(0, 2);
             int randomEyeBrows = UnityEngine.Random.Range(0, 2);
             int maleOrFemale = UnityEngine.Random.Range(0, 2);
-            int hasEyes = UnityEngine.Random.Range(0, 2);
+            //int hasEyes = UnityEngine.Random.Range(0, 2);
 
             if (randomFace == 0) m_faceMatParentsGO.gameObject.SetActive(true);
             else m_faceMatParentsGO.gameObject.SetActive(false);
@@ -555,20 +557,24 @@ namespace Spawner
 
             if (maleOrFemale == 0)
             {
-                if (hasEyes == 0) m_eyesFemale.gameObject.SetActive(true);
-                else m_eyesFemale.gameObject.SetActive(false);
+                //if (hasEyes == 0) m_eyesFemale.gameObject.SetActive(true);
+                //else m_eyesFemale.gameObject.SetActive(false);
+
+                m_eyesFemale.gameObject.SetActive(true);
             }
             else
             {
-                if (hasEyes == 0) m_eyesMale.gameObject.SetActive(true);
-                else m_eyesMale.gameObject.SetActive(false);
+                //if (hasEyes == 0) m_eyesMale.gameObject.SetActive(true);
+                //else m_eyesMale.gameObject.SetActive(false);
+
+                m_eyesMale.gameObject.SetActive(true);
             }
 
         }
 
         internal void RandomizeFullBody()
         {
-            Debug.Log("Randomize Full Body");
+            //Debug.Log("Randomize Full Body");
 
             DisableFullBodyParts();
 
@@ -593,7 +599,7 @@ namespace Spawner
 
         internal void GiveMeBob(bool hasCustomBoots = false)
         {
-            Debug.Log("Give Me Bob");
+            //Debug.Log("Give Me Bob");
 
             DisableAllbodyParts();
 

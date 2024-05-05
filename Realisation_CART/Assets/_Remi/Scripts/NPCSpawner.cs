@@ -7,8 +7,8 @@ namespace Spawner
 {
     public class NPCSpawner : MonoBehaviour
     {
-        [field: SerializeField] private GameObject NPCPrefab { get;  set; } = null;
-        [field: SerializeField] private GameObject SpawningZones { get;  set; } = null;
+        [field: SerializeField] private GameObject NPCPrefab { get; set; } = null;
+        [field: SerializeField] private GameObject SpawningZones { get; set; } = null;
 
         private enum e_spawningZone
         {
@@ -34,9 +34,10 @@ namespace Spawner
         [SerializeField] private bool m_isSpawningFromEntrance = false;
         [SerializeField] private bool m_isOneShot = true;
         [SerializeField] private int m_numberOfNPCFromEntrance = 1;
+        [SerializeField] private bool m_isRateRandom = false;
         [SerializeField] private float m_spawningEntranceRandomness = 0.0f;
-        [SerializeField] private float m_spawningEntranceRate = 0.0f; // 0 for one shot spawning
-        [SerializeField] private float m_currentSpawningEntranceRate = 0.0f;
+        [SerializeField] private float m_spawningEntranceRate = 0.0f;
+        [SerializeField] private float m_secondsUntilNextSpawn = 0.0f;
 
         //[field: Header("Front-Left of the level")]
         //[SerializeField] private bool m_isSpawningFromFrontLeft = false;
@@ -72,14 +73,16 @@ namespace Spawner
         private List<GameObject> FrontRightSpawningSpots { get; set; } = new List<GameObject>();
         private List<GameObject> BackLeftSpawningSpots { get; set; } = new List<GameObject>();
         private List<GameObject> BackRightSpawningSpots { get; set; } = new List<GameObject>();
+        public const float SIXTY_SECONDES = 60.0f;
 
         //private const float ONE_SHOT_DONE = -10000;
 
         private void Awake()
         {
-            //Debug.Log("Awake");
+            Debug.Log("Awake");
             GetSpotGameObjects();
-            GenerateRandomRates(e_spawningZone.FromEntrance); // TODO Remi: Focus on EntranceZone only
+            if (m_isRateRandom)
+                GenerateRandomRates(e_spawningZone.FromEntrance); // TODO Remi: Focus on EntranceZone only
             AssignRates(e_spawningZone.FromEntrance);// TODO Remi: Focus on EntranceZone only
         }
 
@@ -132,8 +135,8 @@ namespace Spawner
 
         private void GenerateRandomRates(e_spawningZone spawningZone)
         {
-            //Debug.Log("GenerateRandomRates");
-            
+            Debug.Log("GenerateRandomRates");
+
             switch (spawningZone)
             {
                 case e_spawningZone.FromAllZones:
@@ -141,7 +144,8 @@ namespace Spawner
                     //m_currentSpawningRate = GenerateRandomRate(m_isSpawningFromAllZones, m_spawningRate, m_spawningRandomness);
                     break;
                 case e_spawningZone.FromEntrance:
-                    m_currentSpawningEntranceRate = GenerateRandomRate(m_isSpawningFromEntrance, m_spawningEntranceRate, m_spawningEntranceRandomness);
+                    m_secondsUntilNextSpawn = GenerateRandomRate(m_isSpawningFromEntrance, m_spawningEntranceRate, m_spawningEntranceRandomness);
+                    Debug.Log("set m_currentSpawningEntranceRate: " + m_secondsUntilNextSpawn);
                     break;
                 case e_spawningZone.FromFrontLeft:
                     //m_currentSpawningFrontLeftRate = GenerateRandomRate(m_isSpawningFromFrontLeft, m_spawningFrontLeftRate, m_spawningFrontLeftRandomness);
@@ -184,7 +188,7 @@ namespace Spawner
 
         private void AssignRates(e_spawningZone spawningZone)
         {
-            //Debug.Log("AssignRates");
+            Debug.Log("AssignRates");
             if (m_spawningEntranceRandomness != 0) return;
 
             switch (spawningZone)
@@ -194,12 +198,14 @@ namespace Spawner
                     //m_currentSpawningRate = GenerateRandomRate(m_isSpawningFromAllZones, m_spawningRate, m_spawningRandomness);
                     break;
                 case e_spawningZone.FromEntrance:
-                    if (m_spawningEntranceRate == 0) 
-                        m_currentSpawningEntranceRate = 0;
+                    //Debug.Log("m_spawningEntranceRate: " + m_spawningEntranceRate);
+                    //Debug.Log("m_secondsUntilNextSpawn: " + m_secondsUntilNextSpawn);
+                    if (m_spawningEntranceRate == 0)
+                        {m_secondsUntilNextSpawn = 0; Debug.Log("m_secondsUntilNextSpawn: " + m_secondsUntilNextSpawn); }
                     else
-                        m_currentSpawningEntranceRate = (m_spawningEntranceRate * 60) / Mathf.Pow(m_spawningEntranceRate, 2);
+                        {m_secondsUntilNextSpawn = (m_spawningEntranceRate * SIXTY_SECONDES) / Mathf.Pow(m_spawningEntranceRate, 2); Debug.Log("m_secondsUntilNextSpawn: " + m_secondsUntilNextSpawn); }
 
-                    //Debug.Log("(m_spawningEntranceRate * 60): " + (m_spawningEntranceRate * 60) + " / " + "math.exp2(m_spawningEntranceRate): " + Mathf.Pow(m_spawningEntranceRate, 2));
+                    //Debug.Log("(m_spawningEntranceRate * SIXTY_SECONDES): " + (m_spawningEntranceRate * SIXTY_SECONDES) + " / " + "math.exp2(m_spawningEntranceRate): " + Mathf.Pow(m_spawningEntranceRate, 2));
                     //Debug.Log("m_currentSpawningEntranceRate: " + m_currentSpawningEntranceRate);
 
                     break;
@@ -247,7 +253,7 @@ namespace Spawner
                         break;
                     case e_spawningZone.FromEntrance:
                         //Debug.Log("m_currentSpawningEntranceRate: " + m_currentSpawningEntranceRate);
-                        SpawnNPCs(e_spawningZone.FromEntrance, m_isSpawningFromEntrance, ref m_numberOfNPCFromEntrance, m_spawningEntranceRandomness, ref m_currentSpawningEntranceRate, m_currentSpawningEntranceRate);
+                        SpawnNPCs(e_spawningZone.FromEntrance, m_isSpawningFromEntrance, ref m_numberOfNPCFromEntrance, m_spawningEntranceRandomness, ref m_secondsUntilNextSpawn, m_spawningEntranceRate);
                         break;
                     case e_spawningZone.FromFrontLeft:
                         //SpawnNPCs((SpawningType)i, m_isSpawningFromFrontLeft, m_numberOfNPCsFromFrontLeft, m_spawningFrontLeftRate, ref m_currentSpawningFrontLeftRate);
@@ -277,37 +283,55 @@ namespace Spawner
                 if (numberOfNPCs <= 0) return;
                 //for (int i = 0; i < numberOfNPCs; i++)
                 //{
-                    Debug.Log("spawningRate 0: " + currentSpawningRate);
-                    Spawn(spawnType);
-                    Debug.Log("NPC spawned 1");
-                    numberOfNPCs--;
+                Debug.Log("spawningRate 1: " + currentSpawningRate);
+                Spawn(spawnType);
+                Debug.Log("NPC spawned 1");
+                numberOfNPCs--;
                 //}
             }
             else
             {
+                // m_spawningEntranceRate = 1 then 1 npc every 1 minute
+                // m_spawningEntranceRate = 0.5 then 1 npc every 2 minutes
+                // m_spawningEntranceRate = 10 then 1 npc every 6 seconds
+                
 
-                if (currentSpawningRate == originalSpawningRate)
-                {
-                    Spawn(spawnType);
-                    //Debug.Log("NPC spawned 2");
-                    ResetRate(spawnType, spawningEntranceRandomness);
-                    currentSpawningRate--;
-                }
+                //if (currentSpawningRate <= 0)
+                //{
+                //    Debug.Log("spawningRate 2: " + currentSpawningRate);
+                //    //Spawn(spawnType);
+                //    Debug.Log("NPC spawned 2");
+                //    ResetRate(spawnType, originalSpawningRate);
+                //    return;
+                //}
 
-                //Debug.Log("spawningRate -= Time Before: " + currentSpawningRate);
-                currentSpawningRate -= Time.deltaTime;
-                //Debug.Log("spawningRate -= Time After: " + currentSpawningRate);
-
-                //if (currentSpawningRate < 1) 
-                //    currentSpawningRate = 1;
-                /*else*/ if (currentSpawningRate <= 0)
-                {
-                    //Debug.Log("spawningRate !0: " + currentSpawningRate);
-                    Spawn(spawnType);
-                    //Debug.Log("NPC spawned 3");
-                    ResetRate(spawnType, spawningEntranceRandomness);
-                }
+                //Debug.Log("spawningRate 3: " + currentSpawningRate);
+                // Spawn the first NPC and start the spawning countdown
+                Debug.Log("currentSpawningRate: " + currentSpawningRate);
+                int currentSpawningRateInt = Mathf.CeilToInt((SIXTY_SECONDES / currentSpawningRate));
+                int originalSpawningRateInt = (int)originalSpawningRate;
+                //(m_spawningEntranceRate * SIXTY_SECONDES) / Mathf.Pow(m_spawningEntranceRate, 2)
+                //if (currentSpawningRateInt == originalSpawningRateInt)
+                //{
+                //    Spawn(spawnType);
+                //    Debug.Log("NPC spawned 3");
+                //    //if (currentSpawningRate - 1 > 0)
+                //    //    currentSpawningRate -= 1;
+                //}
+                //else
+                //{
+                    Debug.Log("ScurrentSpawningRateInt: " + currentSpawningRateInt + "== originalSpawningRateInt: " + originalSpawningRateInt + " = " + (currentSpawningRateInt == originalSpawningRateInt));
+                    currentSpawningRate -= Time.deltaTime;
+                //}
             }
+
+            if (currentSpawningRate <= 0)
+            {
+                Debug.Log("ResetRate currentSpawningRate: " + currentSpawningRate);
+                ResetRate(spawnType, originalSpawningRate);
+                Spawn(spawnType);
+            }
+
         }
 
         private void Spawn(e_spawningZone spawnType)
@@ -341,13 +365,13 @@ namespace Spawner
 
         private void ResetRate(e_spawningZone zoneToReset, float spawningRate)
         {
-            //Debug.Log("ResetRate");
-            if (spawningRate > 0)
-            { 
-                GenerateRandomRates(zoneToReset); 
-                return; 
+            Debug.Log("ResetRate");
+            if (m_isRateRandom)
+            {
+                GenerateRandomRates(zoneToReset);
+                return;
             }
-            else if (m_isOneShot)
+            else/* if (m_isOneShot)*/
                 AssignRates(zoneToReset);
         }
     }
