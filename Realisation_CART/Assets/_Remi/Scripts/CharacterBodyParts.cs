@@ -17,7 +17,7 @@ namespace Spawner
 
         [SerializeField] private Transform m_handOnCartGO = null;
         [SerializeField] private Transform m_feetOnCartGO = null;
-        [SerializeField] private Transform m_hiptGO = null;
+        [SerializeField] private Transform m_hipGO = null;
 
         [SerializeField] private Transform m_rootGO = null;
 
@@ -59,7 +59,7 @@ namespace Spawner
 
             m_handOnCartGO = transform.Find("HandOnCart");
             m_feetOnCartGO = transform.Find("FeetOnCart");
-            m_hiptGO = transform.Find("Hip");
+            m_hipGO = transform.Find("Hip");
             m_rootGO = transform.Find("Root");
             m_eyebrows = transform.Find("SM_Chr_Eyebrows_01");
             m_eyesFemale = transform.Find("SM_Chr_Eyes_Female_01");
@@ -134,7 +134,7 @@ namespace Spawner
 
                 if (m_handOnCartGO == null && childGO.name == "HandOnCart") { m_handOnCartGO = childGO; return; }
                 else if (m_feetOnCartGO == null && childGO.name == "FeetOnCart") { m_feetOnCartGO = childGO; return; }
-                else if (m_hiptGO == null && childGO.name == "Hip") { m_hiptGO = childGO; return; }
+                else if (m_hipGO == null && childGO.name == "Hip") { m_hipGO = childGO; return; }
                 else if (m_rootGO == null && childGO.name == "Root") { m_rootGO = childGO; return; }
                 else if (m_eyebrows == null && childGO.name == "SM_Chr_Eyebrows_01") { m_eyebrows = childGO; return; }// Face parts
                 else if (m_eyesFemale == null && childGO.name == "SM_Chr_Eyes_Female_01") { m_eyesFemale = childGO; return; }
@@ -417,6 +417,9 @@ namespace Spawner
         private void GetMaterials()
         {
             Debug.Log("GetMaterials");
+
+            EmptyAllVariables();
+
             string materialPath01 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_01_A.mat";
             string materialPath02 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_02_A.mat";
             string materialPath03 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_03_A.mat";
@@ -462,7 +465,7 @@ namespace Spawner
             m_eyesMale = null;
             m_handOnCartGO = null;
             m_feetOnCartGO = null;
-            m_hiptGO = null;
+            m_hipGO = null;
             m_rootGO = null;
             m_faceMatParentsGO = null;
             m_frecklesGO = null;
@@ -578,7 +581,6 @@ namespace Spawner
 
             GameObject adventurer = m_humanFullBodies[0].gameObject;
             adventurer.SetActive(true);
-            //adventurer.GetComponent<SkinnedMeshRenderer>().materials[0].color = new Color32(184, 145, 107, 255);
 
             SkinnedMeshRenderer skinnedMeshRenderer = adventurer.GetComponent<SkinnedMeshRenderer>();
             if (adventurer != null && skinnedMeshRenderer.sharedMaterials.Length > 0)
