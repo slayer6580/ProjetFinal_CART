@@ -40217,7 +40217,7 @@ MonoBehaviour:
   m_skin_Mat: {fileID: 0}
   m_handOnCartGO: {fileID: 0}
   m_feetOnCartGO: {fileID: 0}
-  m_hiptGO: {fileID: 0}
+  m_hipGO: {fileID: 0}
   m_rootGO: {fileID: 0}
   m_faceMatParentsGO: {fileID: 0}
   m_frecklesGO: {fileID: 0}
@@ -45071,7 +45071,7 @@ MonoBehaviour:
   m_skin_Mat: {fileID: 2100000, guid: e28a6a5ddeb49b7489d7e38efe728353, type: 2}
   m_handOnCartGO: {fileID: 0}
   m_feetOnCartGO: {fileID: 0}
-  m_hiptGO: {fileID: 0}
+  m_hipGO: {fileID: 0}
   m_rootGO: {fileID: 0}
   m_faceMatParentsGO: {fileID: 0}
   m_frecklesGO: {fileID: 0}

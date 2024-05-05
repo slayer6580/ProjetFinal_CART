@@ -46,8 +46,9 @@ namespace Spawner
 
         private void Start()
         {
-            if (m_handOnCartGO != null) return;
-            InitializeVariables();
+            //if (m_handOnCartGO != null) return;
+            //InitializeVariables();
+            VerifyIntegrityOfVariables();
         }
 
         private void OnEnable() // Keep the OnEnable to have the checkbox in the inspector
@@ -396,6 +397,7 @@ namespace Spawner
 
         internal void InitializeVariables()
         {
+            Debug.Log("InitializeVariables");
             if (gameObject.name != "CharacterBuilder") Debug.LogWarning("CharacterBuilder is not the name of the current GameObject.");
 
             GetMaterials();
@@ -418,7 +420,9 @@ namespace Spawner
         {
             Debug.Log("GetMaterials");
 
-            EmptyAllVariables();
+            //EmptyAllVariables();
+            //VerifyIntegrityOfVariables(); // Create recursing loop when called from
+            //                                 The initialize var button in editor
 
             string materialPath01 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_01_A.mat";
             string materialPath02 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_02_A.mat";
@@ -439,6 +443,18 @@ namespace Spawner
             //PolygonKids_Material_03_A = Resources.Load<Material>("Assets/PolygonKids/Materials/PolygonKids_Material_03_A");
             //PolygonKids_Material_04_A = Resources.Load<Material>("Assets/PolygonKids/Materials/PolygonKids_Material_04_A");
             //PolygonKids_Material_02_A = Resources.Load<Material>("Assets/PolygonKids/Materials/PolygonKids_Material_02_A");
+        }
+
+        internal void VerifyIntegrityOfVariables()
+        {
+            Debug.Log("VerifyIntegrityOfVariables");
+
+            if (m_polygonKids_Material_01_A == null) // One missing variable is too many
+            {
+                Debug.Log("One or more materials are missing. Initializing variables.");
+                EmptyAllVariables();
+                InitializeVariables();
+            }
         }
 
         private void VerifyMaterialIntegrity()
@@ -486,26 +502,28 @@ namespace Spawner
 
         private void DisableFullBodyParts()
         {
-            InitializeVariables();
+            Debug.Log("Disable Full Body Parts");
+            //VerifyIntegrityOfVariables();
+
             foreach (Transform humanFullBody in m_humanFullBodies)
             {
-                if (humanFullBody.gameObject.activeSelf) humanFullBody.gameObject.SetActive(false);
+                if (humanFullBody.gameObject.activeSelf) humanFullBody.gameObject.SetActive(false); Debug.Log("Human full body deactivated");
             }
 
             foreach (Transform humanInCostumeFullBody in m_humanInCostumeFullBodies)
             {
-                if (humanInCostumeFullBody.gameObject.activeSelf) humanInCostumeFullBody.gameObject.SetActive(false);
+                if (humanInCostumeFullBody.gameObject.activeSelf) humanInCostumeFullBody.gameObject.SetActive(false); Debug.Log("Human in costume full body deactivated");
             }
 
             foreach (Transform nonHumanFullBody in m_nonHumanFullBodies)
             {
-                if (nonHumanFullBody.gameObject.activeSelf) nonHumanFullBody.gameObject.SetActive(false);
+                if (nonHumanFullBody.gameObject.activeSelf) nonHumanFullBody.gameObject.SetActive(false); Debug.Log("Non-human full body deactivated");
             }
         }
 
         private void DisableFaceParts()
         {
-            InitializeVariables();
+            //InitializeVariables();
             if (m_frecklesGO.gameObject.activeSelf) m_frecklesGO.gameObject.SetActive(false);
             if (m_faceMatParentsGO.gameObject.activeSelf) m_faceMatParentsGO.gameObject.SetActive(false);
             if (m_eyebrows.gameObject.activeSelf) m_eyebrows.gameObject.SetActive(false);

@@ -16,14 +16,14 @@ namespace Spawner
 
             CharacterBodyParts characterBodyParts = (CharacterBodyParts)target;
 
-            if (UnityEngine.GUILayout.Button("Initialize variables"))
-            {
-                characterBodyParts.InitializeVariables();
-            }
-
             if (UnityEngine.GUILayout.Button("Empty all variables"))
             {
                 characterBodyParts.EmptyAllVariables();
+            }
+
+            if (UnityEngine.GUILayout.Button("Initialize variables"))
+            {
+                characterBodyParts.VerifyIntegrityOfVariables();
             }
 
             if (UnityEngine.GUILayout.Button("Disable all body parts"))
