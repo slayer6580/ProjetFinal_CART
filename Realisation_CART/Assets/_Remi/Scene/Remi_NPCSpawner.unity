@@ -15285,7 +15285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &2109208848613685685
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18488,7 +18488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2765480510477862119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25700,7 +25700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!137 &4017274253491593608
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -72141,12 +72141,17 @@ PrefabInstance:
     - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
         type: 3}
       propertyPath: m_isOneShot
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
+        type: 3}
+      propertyPath: m_isRateRandom
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
         type: 3}
       propertyPath: m_spawningEntranceRate
-      value: 2
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
         type: 3}
@@ -72156,7 +72161,7 @@ PrefabInstance:
     - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
         type: 3}
       propertyPath: m_numberOfNPCFromEntrance
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
         type: 3}
