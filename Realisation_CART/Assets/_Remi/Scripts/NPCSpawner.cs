@@ -79,7 +79,7 @@ namespace Spawner
 
         private void Awake()
         {
-            Debug.Log("Awake");
+            //Debug.Log("Awake");
             GetSpotGameObjects();
             if (m_isRateRandom)
                 GenerateRandomRates(e_spawningZone.FromEntrance); // TODO Remi: Focus on EntranceZone only
