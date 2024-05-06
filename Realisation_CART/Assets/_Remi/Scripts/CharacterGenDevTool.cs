@@ -20,33 +20,31 @@ namespace Spawner
             {
                 characterBodyParts.EmptyAllVariables();
             }
-
-            if (UnityEngine.GUILayout.Button("Initialize variables"))
+            else if (UnityEngine.GUILayout.Button("Initialize variables"))
             {
                 characterBodyParts.VerifyIntegrityOfVariables();
             }
-
-            if (UnityEngine.GUILayout.Button("Disable all body parts"))
+            else if (UnityEngine.GUILayout.Button("Disable all body parts"))
             {
                 characterBodyParts.DisableAllbodyParts();
             }
-
-            if (UnityEngine.GUILayout.Button("Randomize face"))
+            else if (UnityEngine.GUILayout.Button("Randomize face"))
             {
                 characterBodyParts.RandomizeFace();
             }
-
-            if (UnityEngine.GUILayout.Button("Randomize Full body"))
+            else if (UnityEngine.GUILayout.Button("Randomize body"))
             {
-                characterBodyParts.RandomizeFullBody();
+                characterBodyParts.RandomizeBody();
             }
-
-            if (UnityEngine.GUILayout.Button("Give me Bob!"))
+            else if (UnityEngine.GUILayout.Button("Randomize materials"))
+            {
+                characterBodyParts.RandomizeBodyMaterial();
+            }
+            else if (UnityEngine.GUILayout.Button("Give me Bob!"))
             {
                 characterBodyParts.GiveMeBob();
             }
-
-            if (UnityEngine.GUILayout.Button("Give me Bob with custom boots!"))
+            else  if (UnityEngine.GUILayout.Button("Give me Bob with custom boots!"))
             {
                 characterBodyParts.GiveMeBob(true);
             }

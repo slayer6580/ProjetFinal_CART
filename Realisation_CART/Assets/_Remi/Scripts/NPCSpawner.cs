@@ -135,7 +135,7 @@ namespace Spawner
 
         private void GenerateRandomRates(e_spawningZone spawningZone)
         {
-            Debug.Log("GenerateRandomRates");
+            //Debug.Log("GenerateRandomRates");
 
             switch (spawningZone)
             {
@@ -170,7 +170,7 @@ namespace Spawner
 
         private void GenerateRateForEveryZone()
         {
-            Debug.Log("GenerateRateForEveryZone");
+            //Debug.Log("GenerateRateForEveryZone");
             for (int j = 0; j < (int)e_spawningZone.count; j++)
             {
                 GenerateRandomRates((e_spawningZone)j);
@@ -179,7 +179,7 @@ namespace Spawner
 
         private void AssignRateForEveryZone()
         {
-            Debug.Log("AssignRateForEveryZone");
+            //Debug.Log("AssignRateForEveryZone");
             for (int i = 0; i < (int)e_spawningZone.count; i++)
             {
                 AssignRates((e_spawningZone)i);
@@ -188,7 +188,7 @@ namespace Spawner
 
         private void AssignRates(e_spawningZone spawningZone)
         {
-            Debug.Log("AssignRates");
+            //Debug.Log("AssignRates");
             if (m_spawningEntranceRandomness != 0) return;
 
             switch (spawningZone)
@@ -203,7 +203,7 @@ namespace Spawner
                     if (m_spawningEntranceRate == 0)
                         {m_secondsUntilNextSpawn = 0; Debug.Log("m_secondsUntilNextSpawn: " + m_secondsUntilNextSpawn); }
                     else
-                        {m_secondsUntilNextSpawn = (m_spawningEntranceRate * SIXTY_SECONDES) / Mathf.Pow(m_spawningEntranceRate, 2); Debug.Log("m_secondsUntilNextSpawn: " + m_secondsUntilNextSpawn); }
+                        {m_secondsUntilNextSpawn = (m_spawningEntranceRate * SIXTY_SECONDES) / Mathf.Pow(m_spawningEntranceRate, 2); /*Debug.Log("m_secondsUntilNextSpawn: " + m_secondsUntilNextSpawn);*/ }
 
                     //Debug.Log("(m_spawningEntranceRate * SIXTY_SECONDES): " + (m_spawningEntranceRate * SIXTY_SECONDES) + " / " + "math.exp2(m_spawningEntranceRate): " + Mathf.Pow(m_spawningEntranceRate, 2));
                     //Debug.Log("m_currentSpawningEntranceRate: " + m_currentSpawningEntranceRate);
@@ -307,7 +307,7 @@ namespace Spawner
 
                 //Debug.Log("spawningRate 3: " + currentSpawningRate);
                 // Spawn the first NPC and start the spawning countdown
-                Debug.Log("currentSpawningRate: " + currentSpawningRate);
+                //Debug.Log("currentSpawningRate: " + currentSpawningRate);
                 int currentSpawningRateInt = Mathf.CeilToInt((SIXTY_SECONDES / currentSpawningRate));
                 int originalSpawningRateInt = (int)originalSpawningRate;
                 //(m_spawningEntranceRate * SIXTY_SECONDES) / Mathf.Pow(m_spawningEntranceRate, 2)
@@ -320,14 +320,14 @@ namespace Spawner
                 //}
                 //else
                 //{
-                    Debug.Log("ScurrentSpawningRateInt: " + currentSpawningRateInt + "== originalSpawningRateInt: " + originalSpawningRateInt + " = " + (currentSpawningRateInt == originalSpawningRateInt));
+                    //Debug.Log("ScurrentSpawningRateInt: " + currentSpawningRateInt + "== originalSpawningRateInt: " + originalSpawningRateInt + " = " + (currentSpawningRateInt == originalSpawningRateInt));
                     currentSpawningRate -= Time.deltaTime;
                 //}
             }
 
             if (currentSpawningRate <= 0)
             {
-                Debug.Log("ResetRate currentSpawningRate: " + currentSpawningRate);
+                //Debug.Log("ResetRate currentSpawningRate: " + currentSpawningRate);
                 ResetRate(spawnType, originalSpawningRate);
                 Spawn(spawnType);
             }
@@ -365,7 +365,7 @@ namespace Spawner
 
         private void ResetRate(e_spawningZone zoneToReset, float spawningRate)
         {
-            Debug.Log("ResetRate");
+            //Debug.Log("ResetRate");
             if (m_isRateRandom)
             {
                 GenerateRandomRates(zoneToReset);
