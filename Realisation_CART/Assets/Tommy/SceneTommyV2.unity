@@ -589,12 +589,22 @@ PrefabInstance:
     - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
       propertyPath: m_scaleMultiplier
-      value: 7
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_boxDestructionTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_itemDestructionTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
       propertyPath: m_contactExpulsionForce
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4883361243485391484, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
