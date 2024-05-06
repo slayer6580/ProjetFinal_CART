@@ -118,7 +118,8 @@ namespace CartControl
             CartRB = GetComponent<Rigidbody>();
 
             Animator animator = GetComponentInChildren<Animator>();
-            if (animator == null || animator.gameObject.name != "SM_Chr_Kid_Adventure_01") Debug.LogError("Animator not found");
+            if ((animator.gameObject.name == "CharacterBuilder" || animator.gameObject.name == "SM_Chr_Kid_Adventure_01") == false) Debug.LogError("Animator not found or renamed. Current GameObject is: " + animator.gameObject.name);
+            if (animator == null) Debug.LogError("Animator not found");
 
             HumanAnimCtrlr = animator;
 
