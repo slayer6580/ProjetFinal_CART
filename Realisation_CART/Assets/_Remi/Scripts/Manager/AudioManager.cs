@@ -87,6 +87,12 @@ namespace Manager
         /// <summary> Modify the pitch or volume of a sound </summary>
         public void ModifySound(int index, ESoundModification modif, float value)
         {
+            if (index < 0 || index >= m_audioBox.Count)
+            {
+                Debug.LogWarning("No more audio box available");
+                return;
+            }
+
             AudioSource audioSource = m_audioBox[index]._AudioSource;
 
             if (modif == ESoundModification.Pitch)
@@ -161,6 +167,12 @@ namespace Manager
         /// <summary> Stop a sound effect </summary>
         public void StopSoundEffectsLoop(int index)
         {
+            if (index < 0 || index >= m_audioBox.Count)
+            {
+                Debug.LogWarning("No more audio box available");
+                return;
+            }
+
             AudioBox audiobox = m_audioBox[index];
             AudioSource audioSource = audiobox.GetComponent<AudioSource>();
             audioSource.pitch = 1;
