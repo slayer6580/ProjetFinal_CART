@@ -21,7 +21,7 @@ namespace BehaviourTree
 
 			if(m_blackboard.m_currentPursuitStartTime < Time.time - m_blackboard.m_pursuitTenacity)
 			{
-				Debug.Log("PURSUIT TIME OVER");
+				//Debug.Log("PURSUIT TIME OVER");
 				return m_children[0].Update();
 			}
 			else if(m_children.Count > 1)

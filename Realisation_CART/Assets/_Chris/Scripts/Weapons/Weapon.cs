@@ -19,12 +19,12 @@ namespace DiscountDelirium
         private void EnableWeapon() 
         {
             m_canUseWeapon = true;
-            Debug.LogWarning("Weapon Enabled");
+            //Debug.LogWarning("Weapon Enabled");
         }
         private void DisableWeapon() 
         {
             m_canUseWeapon = false;
-            Debug.Log("Weapon Disabled");
+            //Debug.Log("Weapon Disabled");
         }
 
         protected bool CanUseWeapon() 

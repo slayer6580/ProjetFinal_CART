@@ -8,10 +8,12 @@ namespace Shader
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer != GameConstants.PLAYER_COLLIDER)
-                return;
+            //Debug.Log("Collider : " + other.gameObject.name);
+            Debug.Log("Collider tag : " + other.gameObject.tag);
+            //if (other.gameObject.tag != "MainCamera") return;
+            if (other.gameObject.layer != 17) return;
 
-            Debug.Log("Player entered raindrop area");
+            Debug.Log("Camera entered raindrop area");
             _RaidropShaderUpdater.ActivateRaindrops();
         }
     }

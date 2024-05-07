@@ -82,6 +82,7 @@ namespace Shader
 
         public void ActivateRaindrops()
         {
+            Debug.Log("Activate Raindrops");
             m_isRaindropActive = 1.0f;
             m_raindropMaterial.SetFloat(m_isActivePropertyName, m_isRaindropActive);
             m_rainamount = 1.0f;

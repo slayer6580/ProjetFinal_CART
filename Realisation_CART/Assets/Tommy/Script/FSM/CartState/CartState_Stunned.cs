@@ -62,7 +62,7 @@ namespace CartControl
 			//if -1 == 180' degré
 			int nmOfItemToSteal = 0;
 
-			Debug.Log(" Angle: " + angle);
+			//Debug.Log(" Angle: " + angle);
 			if (angle < 0.707 && angle > -0.707)
 			{
 

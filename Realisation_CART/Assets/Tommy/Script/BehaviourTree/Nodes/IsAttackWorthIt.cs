@@ -69,7 +69,7 @@ namespace BehaviourTree
 
 				float randomChanceToAttack = Random.Range(m_blackboard.m_aggressiveness, m_blackboard.m_aggressiveness + numberOfConditionModifier);
 
-				UnityEngine.Debug.Log("ATTACK DEBUG: rng:" + randomChanceToAttack + " / targetScore:" + chosenTargetScore);
+				//UnityEngine.Debug.Log("ATTACK DEBUG: rng:" + randomChanceToAttack + " / targetScore:" + chosenTargetScore);
 				//Now that the target is chosen, do we attack?
 				if (randomChanceToAttack > (numberOfConditionModifier - chosenTargetScore))
 				{
@@ -107,7 +107,7 @@ namespace BehaviourTree
 			{
 				if(target.transform.Find("Parent/Tower") != null)
 				{
-					Debug.Log("FOUND TOWER");
+					//Debug.Log("FOUND TOWER");
 				}
 				else
 				{
