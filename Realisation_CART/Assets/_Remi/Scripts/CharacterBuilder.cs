@@ -17,8 +17,6 @@ namespace Spawner
 
         [SerializeField] private Transform m_handOnCartTransform = null;
         [SerializeField] private Transform m_feetOnCartTransform = null;
-        [SerializeField] private Transform m_hipGOTransform = null;
-
         [SerializeField] private Transform m_rootTransform = null;
         [SerializeField] private Transform m_headTransform = null;
 
@@ -73,76 +71,73 @@ namespace Spawner
         {
             Debug.Log("GetBodyPartsGO");
 
-            Transform bodyParts = transform.GetChild(4);
-            if (bodyParts.name != "BodyParts") Debug.LogError("BodyParts has been moved or renamed. Name: " + bodyParts.name);
+            if (transform.GetChild(3).name != "SM_Chr_Eyebrows_01") Debug.LogError("SM_Chr_Eyebrows_01 has been moved or renamed. Name: " + transform.GetChild(3).name);
+            else m_eyebrowsTransform = transform.GetChild(3);
 
-            if (bodyParts.GetChild(0).name != "SM_Chr_Eyebrows_01") Debug.LogError("SM_Chr_Eyebrows_01 has been moved or renamed. Name: " + bodyParts.GetChild(0).name);
-            else m_eyebrowsTransform = bodyParts.GetChild(0);
+            if (transform.GetChild(4).name != "SM_Chr_Eyes_Female_01") Debug.LogError("SM_Chr_Eyes_Female_01 has been moved or renamed. Name: " + transform.GetChild(4).name);
+            else m_eyesFemaleTransform = transform.GetChild(4);
 
-            if (bodyParts.GetChild(1).name != "SM_Chr_Eyes_Female_01") Debug.LogError("SM_Chr_Eyes_Female_01 has been moved or renamed. Name: " + bodyParts.GetChild(1).name);
-            else m_eyesFemaleTransform = bodyParts.GetChild(1);
+            if (transform.GetChild(5).name != "SM_Chr_Eyes_Male_01") Debug.LogError("SM_Chr_Eyes_Male_01 has been moved or renamed. Name: " + transform.GetChild(5).name);
+            else m_eyesMaleTransform = transform.GetChild(5);
 
-            if (bodyParts.GetChild(2).name != "SM_Chr_Eyes_Male_01") Debug.LogError("SM_Chr_Eyes_Male_01 has been moved or renamed. Name: " + bodyParts.GetChild(2).name);
-            else m_eyesMaleTransform = bodyParts.GetChild(2);
-
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Adventure_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Ballerina_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_CargoShorts_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Casual_04"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Doctor_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Cheerleader_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Dress_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Eastern_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Eastern_Skirt_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Exercise_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Exercise_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Farmer_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Fat_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Fat_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Hoodie_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Hoodie_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Hoodie_03"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Nerd_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Overalls_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Overalls_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Overalls_Dress_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_PlaidShirt_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_PoliceOfficer_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_PufferVest_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Punk_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Raincoat_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Raincoat_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Robber_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Schoolboy_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Schoolboy_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Schoolgirl_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Schoolgirl_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Scout_Shorts_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Scout_Skirt_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_ShirtDress_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Skater_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_SnowJacket_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Summer_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Sweater_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Sweater_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Sweater_Dress_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Trucker_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_WinterCoat_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Explorer_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Cowboy_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Cowboy_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Footballer_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Karate_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Ninja_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Pajamas_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Pilot_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Survivor_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Survivor_Vest_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Swimwear_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Swimwear_02"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Tracksuit_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Viking_01"));
-            m_humanFullBodyTransforms.Add(bodyParts.Find("SM_Chr_Kid_Wizard_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Adventure_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Ballerina_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_CargoShorts_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Casual_04"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Doctor_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Cheerleader_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Dress_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Eastern_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Eastern_Skirt_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Exercise_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Exercise_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Farmer_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Fat_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Fat_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Hoodie_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Hoodie_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Hoodie_03"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Nerd_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Overalls_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Overalls_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Overalls_Dress_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_PlaidShirt_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_PoliceOfficer_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_PufferVest_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Punk_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Raincoat_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Raincoat_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Robber_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Schoolboy_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Schoolboy_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Schoolgirl_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Schoolgirl_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Scout_Shorts_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Scout_Skirt_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_ShirtDress_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Skater_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_SnowJacket_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Summer_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Sweater_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Sweater_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Sweater_Dress_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Trucker_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_WinterCoat_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Explorer_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Cowboy_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Cowboy_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Footballer_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Karate_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Ninja_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Pajamas_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Pilot_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Survivor_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Survivor_Vest_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Swimwear_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Swimwear_02"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Tracksuit_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Viking_01"));
+            m_humanFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Wizard_01"));
 
             //if (bodyParts.GetChild(3).name != "SM_Chr_Kid_Adventure_01") Debug.LogError("SM_Chr_Hair_01 has been moved or renamed. Name: " + bodyParts.GetChild(3).name);
             //else m_humanFullBodyTransforms.Add(bodyParts.GetChild(3));
@@ -321,17 +316,14 @@ namespace Spawner
 
         private void GetIKTransforms()
         {
-            m_hipGOTransform = transform.GetChild(0);
-            if (m_hipGOTransform.name != "Hip") Debug.LogError("Hip has been moved or renamed.");
+            m_feetOnCartTransform = transform.GetChild(0);
+            if (m_feetOnCartTransform.name != "FeetOnCart") Debug.LogError("FeetOnCart has been moved or renamed. Name is: " + m_feetOnCartTransform.name);
 
-            m_feetOnCartTransform = transform.GetChild(1);
-            if (m_feetOnCartTransform.name != "FeetOnCart") Debug.LogError("FeetOnCart has been moved or renamed.");
+            m_handOnCartTransform = transform.GetChild(1);
+            if (m_handOnCartTransform.name != "HandOnCart") Debug.LogError("HandOnCart has been moved or renamed. Name is: " + m_handOnCartTransform.name);
 
-            m_handOnCartTransform = transform.GetChild(2);
-            if (m_handOnCartTransform.name != "HandOnCart") Debug.LogError("HandOnCart has been moved or renamed.");
-
-            m_rootTransform = transform.GetChild(3);
-            if (m_rootTransform.name != "Root") Debug.LogError("Root has been moved or renamed.");
+            m_rootTransform = transform.GetChild(2);
+            if (m_rootTransform.name != "Root") Debug.LogError("Root has been moved or renamed. Name is: " + m_rootTransform.name);
         }
 
         private void VerifyIntegrityOfFullBodyPartsGO()
@@ -479,9 +471,9 @@ namespace Spawner
             // the NPC could be initialized in a pool before the game starts
             Debug.Log("GetHeadGO");
             Debug.Log("Current transform is: " + transform.name);
-            if (m_rootTransform == null) m_rootTransform = transform.GetChild(3);
+            if (m_rootTransform == null) GetIKTransforms();
 
-            if (m_rootTransform.name != "Root") Debug.LogError("Root has been moved or renamed. Name is: " + m_rootTransform.name);
+            if (m_rootTransform.name != "Root") Debug.LogError("Root has been moved or renamed. Name is: " + transform.GetChild(2).name);
 
             Transform hips = m_rootTransform.transform.GetChild(0);
             if (hips.name != "Hips") Debug.LogError("Hips has been moved or renamed. Name is: " + hips.name);
@@ -691,10 +683,10 @@ namespace Spawner
             m_eyesMaleTransform = null;
             m_handOnCartTransform = null;
             m_feetOnCartTransform = null;
-            m_hipGOTransform = null;
             m_rootTransform = null;
             m_headTransform = null;
             m_hairTransform = null;
+            m_accessoriesTransform = null;
             m_faceMatParentsTransform = null;
             m_frecklesTransform = null;
             m_robotFaceTransform = null;
