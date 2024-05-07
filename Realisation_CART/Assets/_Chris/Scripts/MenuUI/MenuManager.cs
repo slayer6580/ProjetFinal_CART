@@ -30,7 +30,7 @@ namespace DiscountDelirium
 		public void StartGame()
         {
             PlayerPrefs.SetInt("Score", 0);
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Tutorial");
         }
 
         public void OpenMainMenu() 
