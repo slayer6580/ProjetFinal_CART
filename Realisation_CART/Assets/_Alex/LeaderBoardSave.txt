@@ -1,1 +1,1 @@
-{"m_allPlayerStats":[]}
+{"m_allPlayerStats":[{"name":"UXZ","score":0}]}

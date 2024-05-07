@@ -76,7 +76,7 @@ namespace SavingSystem
 
         private void Update() // TESTING
         {
-            DebugUpdate();
+           // DebugUpdate();
             NamePanelInputs();
             RankPanelInputs();
 

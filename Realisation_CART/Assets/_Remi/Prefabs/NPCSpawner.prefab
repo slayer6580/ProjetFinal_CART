@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NPCPrefab>k__BackingField: {fileID: 5094407173613903610, guid: d40b904b2b817094ebb7c8afceab8766,
     type: 3}
-  <SpawningZones>k__BackingField: {fileID: 0}
+  <SpawningZones>k__BackingField: {fileID: 2690386999530547945}
   m_isSpawningFromEntrance: 1
   m_isOneShot: 1
   m_numberOfNPCFromEntrance: 1
