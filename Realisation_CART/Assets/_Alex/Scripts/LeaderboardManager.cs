@@ -37,9 +37,6 @@ namespace SavingSystem
         [Header("Top what?")]
         [SerializeField] private int m_nbOfPlayerInLeaderboard; // once determined, transform in const
 
-        [Header("Debug")]
-        [SerializeField] private int m_scoreToAdd;
-
         [Header("TMP_UI here")]
         [SerializeField] private TextMeshProUGUI m_namesText;
         [SerializeField] private TextMeshProUGUI m_scoreText;
@@ -362,7 +359,7 @@ namespace SavingSystem
                 name += midLetter.text;
             }
 
-            AddPlayerToLeaderboard(name, m_scoreToAdd);
+            AddPlayerToLeaderboard(name, PlayerPrefs.GetInt("Score", 0));
             m_rankPanel.SetActive(true);
             m_namePanel.SetActive(false);
         }
