@@ -4,12 +4,17 @@ namespace BoxSystem
 {
     public class AddForceToBox : MonoBehaviour
     {
-        [Header("Constant force for debug with (Q) or (E)")]
-        [SerializeField] private float m_constantForce;
         [Header("Force multiplier for constant force")]
         [SerializeField] private float m_forceMultiplier;
 
+        [Header("Force multiplier for constant force")]
+        [SerializeField] [Range(1, 10)] private float m_forceOverTimeReduction;
+
         private TowerHingePhysicsAlex m_towerPhysics;
+        private bool m_pushIsActivated = false;
+        private Vector3 m_pushForce = Vector3.zero;
+        private float m_timeMultiplier = 0;
+        private float m_debugForce;
 
         private void Awake()
         {
@@ -17,34 +22,58 @@ namespace BoxSystem
         }
 
         /// <summary> Add constant force to the top box of TowerPhysics </summary>
-        public void AddConstantForceToBox(float force)
+        public void AddConstantForceToBox(float force, float towerPushForceWhenMoving)
         {
             if (m_towerPhysics.GetTopBox() == null)
                 return;
 
-            Vector3 pushDirection = force < 0.0f ? -transform.right : transform.right;
-            Vector3 pushForce = pushDirection * m_forceMultiplier;
-            m_towerPhysics.GetTopBox().GetComponent<Rigidbody>().AddForce(pushForce, ForceMode.Force);
+            bool left = force < 0.0f;
+            m_debugForce = force;
+
+            if (Mathf.Abs(force) < 1)
+            {
+                m_pushIsActivated = false;
+                m_timeMultiplier = 0;
+                m_pushForce = Vector3.zero;
+                return;
+            }
+            Vector3 pushDirection = left ? -transform.right : transform.right;
+            m_pushIsActivated = true;
+            m_timeMultiplier += Time.deltaTime / m_forceOverTimeReduction;
+           
+            float totalForce = force * towerPushForceWhenMoving;
+           
+            Debug.Log(pushDirection);
+            Vector3 pushForce = pushDirection * totalForce * m_forceMultiplier * m_timeMultiplier;
+            m_pushForce = pushForce;
         }
 
+
+        private void AddForce()
+        {
+            if (m_towerPhysics.GetTopBox() == null)
+                return;
+
+            if (m_pushIsActivated)
+            {
+                Rigidbody body = m_towerPhysics.GetTopBox().GetComponent<Rigidbody>();
+                if (body == null)
+                    return;
+
+                body.AddForce(m_pushForce, ForceMode.Force);
+                Debug.LogWarning("Pushed");
+            }
+            else
+            {
+                Debug.LogWarning("Not Pushed");
+            }
+           
+        }
         private void Update()
         {
-            DebugConstantForce();
+            AddForce();
+     
         }
 
-        /// <summary> For constant force debugging </summary>
-        private void DebugConstantForce()
-        {
-            if (Input.GetKey(KeyCode.Q))
-            {
-                Vector3 leftPush = -transform.right * m_constantForce;
-                m_towerPhysics.GetTopBox().GetComponent<Rigidbody>().AddForce(leftPush, ForceMode.Force);
-            }
-            else if (Input.GetKey(KeyCode.E))
-            {
-                Vector3 rightPush = transform.right * m_constantForce;
-                m_towerPhysics.GetTopBox().GetComponent<Rigidbody>().AddForce(rightPush, ForceMode.Force);
-            }
-        }
     }
 }

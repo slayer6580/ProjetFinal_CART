@@ -174,11 +174,25 @@ namespace CartControl
 			//For Animation
 			HumanAnimCtrlr.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeedUpgrades);
 
-			//Testing tower tilt with Animation
-			//TEMPORARY DEACTIVATED
-			//m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
+            //Testing tower tilt with Animation
+            //TEMPORARY DEACTIVATED
+            //m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
+			if (m_currentState is CartState_Moving)
+			{
+                BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenTurning);
+            }
+			else if(m_currentState is CartState_Drifting)
+			{
+                BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenDrifting);
+            }
+			else
+			{
+                BoxForce.AddConstantForceToBox(0, 0);
+            }
+        
+           
 
-		}
+        }
 
 		protected override void FixedUpdate()
 		{

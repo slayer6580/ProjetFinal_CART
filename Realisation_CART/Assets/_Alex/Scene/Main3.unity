@@ -1134,7 +1134,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_virtualCamera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1111670505}
     - target: {fileID: 9200766481717125295, guid: bb53f8cad9d1dac419e6ef98457733a7,
         type: 3}
       propertyPath: m_nbOfCartTokenText
@@ -3621,8 +3621,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -113.10872
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.7524335
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.2951818
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -3651,8 +3661,18 @@ PrefabInstance:
       objectReference: {fileID: 984629183}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -113.10872
+      objectReference: {fileID: 0}
+    - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.7524335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.2951818
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -4559,7 +4579,7 @@ PrefabInstance:
     - target: {fileID: 2452949573761676810, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.873
+      value: -90.3
       objectReference: {fileID: 0}
     - target: {fileID: 2452949573761676810, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
@@ -4731,6 +4751,16 @@ PrefabInstance:
         type: 3}
       propertyPath: <VirtualCamera>k__BackingField
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976928614607469278, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: <TowerPushForceWhenTurning>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976928614607469278, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: <TowerPushForceWhenDrifting>k__BackingField
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6130772522460340266, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
@@ -5366,6 +5396,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1147697803}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1111670505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5807787597716368242, guid: 731bb1051f369864db64ecaeac25e95e,
+    type: 3}
+  m_PrefabInstance: {fileID: 574279663}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1125305095
 GameObject:
   m_ObjectHideFlags: 0
@@ -7301,6 +7343,7 @@ MonoBehaviour:
   m_textNbItems: {fileID: 433221224}
   m_textNbCartoken: {fileID: 1142057084}
   m_upgradeManager: {fileID: 265525966}
+  m_leaderboardManager: {fileID: 0}
 --- !u!224 &1333703639
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7358,7 +7401,6 @@ MonoBehaviour:
   <IsGamePaused>k__BackingField: 0
   m_isGameOver: 0
   m_isGameStarted: 0
-  m_playerScore: 0
   m_nbItems: 0
   m_nbOfCartokens: 0
 --- !u!4 &1371056655

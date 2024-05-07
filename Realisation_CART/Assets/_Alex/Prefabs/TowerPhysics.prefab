@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e959029d258f3542a7bc30eaf3de350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <TowerBoxSystem>k__BackingField: {fileID: 0}
   m_towerFake: {fileID: 6133222877556246851}
-  m_nbOfFixedBoxes: 5
+  m_nbOfFixedBoxes: 2
   m_boxNoHingePrefab: {fileID: 3665573428290585098, guid: 32fc50c95ab1f0a4290d48e6ed28a3f6,
     type: 3}
   m_boxWithHingePrefab: {fileID: 3665573428290585098, guid: 13db18f67fbd5984a89d6e7b2591c97e,
@@ -55,7 +54,7 @@ MonoBehaviour:
   m_springForce: 200
   m_springForceReduction: 25
   m_springForceMinimum: 25
-  m_minimumForceAppliedToMove: 0
+  m_minimumForceAppliedToMove: 1.2
   m_loseItemStats: []
   m_firstHingeAngleRead: 0
   m_allHingeAngleRead: 0
@@ -71,5 +70,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10957a88632347a4ea6087bde9c0e45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_constantForce: 35
-  m_forceMultiplier: 0
+  m_forceMultiplier: 1.5
+  m_forceOverTimeReduction: 1.5
