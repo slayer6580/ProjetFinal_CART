@@ -123,7 +123,7 @@ namespace CartControl
 
             HumanAnimCtrlr = animator;
 
-            GameObject rigGO = animator.transform.GetChild(1).gameObject;
+            GameObject rigGO = animator.transform.GetChild(0).gameObject;
             if (rigGO == null || rigGO.name != "FeetOnCart") Debug.LogError("FeetOnCart not found");
             Rig rig = rigGO.GetComponent<Rig>();
 

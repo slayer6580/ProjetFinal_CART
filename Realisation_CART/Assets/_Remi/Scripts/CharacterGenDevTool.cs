@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace Spawner
 {
-    [CustomEditor(typeof(CharacterBodyParts))]
+    [CustomEditor(typeof(CharacterBuilder))]
     public class MyComponentEditor : Editor
     {
-        CharacterBodyParts characterBodyParts;
+        CharacterBuilder characterBodyParts;
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            CharacterBodyParts characterBodyParts = (CharacterBodyParts)target;
+            CharacterBuilder characterBodyParts = (CharacterBuilder)target;
 
             if (UnityEngine.GUILayout.Button("Empty all variables"))
             {
