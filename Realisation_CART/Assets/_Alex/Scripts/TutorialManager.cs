@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ namespace DiscountDelirium
         [SerializeField] private GameObject m_loadingScreen;
         [SerializeField] private Color32 m_sectionSelectedColor;
         [SerializeField] private Color32 m_sectionNotSelectedColor;
+        [SerializeField] private TextMeshProUGUI m_AButtonText;
+        [SerializeField] private GameObject m_backPanel;
         private int m_currentPage = 0;
         private int m_nbOfPages = 0;
 
@@ -27,6 +30,16 @@ namespace DiscountDelirium
 
         private void UpdatePage()
         {
+            if ( (m_currentPage == 0))            
+                m_backPanel.SetActive(false);            
+            else
+                m_backPanel.SetActive(true);
+
+            if (m_currentPage == m_pages.Count - 1)
+                m_AButtonText.text = "Start Game";
+            else
+                m_AButtonText.text = "Next Page";
+
             for (int i = 0; i < m_nbOfPages; i++)
             {
                 if (i == m_currentPage)
@@ -66,6 +79,7 @@ namespace DiscountDelirium
                 return;
 
             m_currentPage--;
+
             UpdatePage();
         }
     }
