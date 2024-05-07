@@ -51,11 +51,16 @@ MonoBehaviour:
     type: 3}
   m_boxWithHingePrefab: {fileID: 3665573428290585098, guid: 13db18f67fbd5984a89d6e7b2591c97e,
     type: 3}
-  m_springForce: 200
+  m_springForce: 300
   m_springForceReduction: 25
-  m_springForceMinimum: 25
+  m_springForceMinimum: 200
   m_minimumForceAppliedToMove: 1.2
-  m_loseItemStats: []
+  m_loseItemStats:
+  - {x: 0, y: 0}
+  - {x: 50, y: 0.5}
+  - {x: 60, y: 0.3}
+  - {x: 70, y: 0.2}
+  - {x: 80, y: 0.1}
   m_firstHingeAngleRead: 0
   m_allHingeAngleRead: 0
 --- !u!114 &5190239306066048884
@@ -71,4 +76,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_forceMultiplier: 1.5
-  m_forceOverTimeReduction: 1.5
+  m_forceOverTimeReduction: 1

@@ -8,12 +8,12 @@ namespace BoxSystem
         [SerializeField] private float m_forceMultiplier;
 
         [Header("Force multiplier for constant force")]
-        [SerializeField] [Range(1, 10)] private float m_forceOverTimeReduction;
+        [SerializeField][Range(1, 10)] private float m_forceOverTimeReduction;
 
         private TowerHingePhysicsAlex m_towerPhysics;
         private bool m_pushIsActivated = false;
         private Vector3 m_pushForce = Vector3.zero;
-        private float m_timeMultiplier = 0;
+        private float m_timeMultiplier = 1;
         private float m_debugForce;
 
         private void Awake()
@@ -27,25 +27,20 @@ namespace BoxSystem
             if (m_towerPhysics.GetTopBox() == null)
                 return;
 
-            bool left = force < 0.0f;
-            m_debugForce = force;
-
             if (Mathf.Abs(force) < 1)
             {
                 m_pushIsActivated = false;
-                m_timeMultiplier = 0;
+                m_timeMultiplier = 1;
                 m_pushForce = Vector3.zero;
                 return;
             }
-            Vector3 pushDirection = left ? -transform.right : transform.right;
+
             m_pushIsActivated = true;
             m_timeMultiplier += Time.deltaTime / m_forceOverTimeReduction;
-           
+
             float totalForce = force * towerPushForceWhenMoving;
-           
-            Debug.Log(pushDirection);
-            Vector3 pushForce = pushDirection * totalForce * m_forceMultiplier * m_timeMultiplier;
-            m_pushForce = pushForce;
+            m_pushForce = transform.right * totalForce * m_forceMultiplier * m_timeMultiplier;
+
         }
 
 
@@ -67,12 +62,12 @@ namespace BoxSystem
             {
                 Debug.LogWarning("Not Pushed");
             }
-           
+
         }
         private void Update()
         {
             AddForce();
-     
+
         }
 
     }
