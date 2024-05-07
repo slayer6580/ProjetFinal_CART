@@ -10,6 +10,7 @@ namespace DiscountDelirium
     {
         [SerializeField] private List<GameObject> m_sections = new List<GameObject>();
         [SerializeField] private List<GameObject> m_pages = new List<GameObject>();
+        [SerializeField] private GameObject m_loadingScreen;
         [SerializeField] private Color32 m_sectionSelectedColor;
         [SerializeField] private Color32 m_sectionNotSelectedColor;
         private int m_currentPage = 0;
@@ -48,6 +49,7 @@ namespace DiscountDelirium
 
         private void TutorialFinish()
         {
+            m_loadingScreen.SetActive(true);
             SceneManager.LoadScene("Main");
         }
 
