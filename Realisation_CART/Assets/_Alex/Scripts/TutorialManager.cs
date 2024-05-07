@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,15 +17,13 @@ namespace DiscountDelirium
 
         private void Awake()
         {
-            m_nbOfPages = m_pages.Count;
-    
+            m_nbOfPages = m_pages.Count;    
         }
 
         private void Start()
         {
             UpdatePage();
         }
-
 
         private void UpdatePage()
         {
@@ -41,19 +38,14 @@ namespace DiscountDelirium
 
                 m_pages[i].SetActive(false);
                 m_sections[i].GetComponent<Image>().color = m_sectionNotSelectedColor;
-
             }
-
         }
-
 
         private void TutorialFinish()
         {
             m_loadingScreen.SetActive(true);
             SceneManager.LoadScene("Main");
         }
-
-
 
         public void OnAccept()
         {
@@ -66,9 +58,8 @@ namespace DiscountDelirium
             }
 
             UpdatePage();
-
-
         }
+
         public void OnDecline()
         {
             if (m_currentPage == 0)
@@ -77,7 +68,5 @@ namespace DiscountDelirium
             m_currentPage--;
             UpdatePage();
         }
-
-
     }
 }

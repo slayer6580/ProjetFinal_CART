@@ -1,6 +1,3 @@
-using SavingSystem;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,8 +27,6 @@ namespace DiscountDelirium
         {
             m_manager.OnDecline();
         }
-
-
 
         private void OnEnable()
         {
