@@ -20,7 +20,6 @@ namespace DiscountDelirium
 
         [HideInInspector] public bool m_isGameOver;//field
         [HideInInspector] public bool m_isGameStarted;//field
-        [HideInInspector] public int m_playerScore = 0;
         [HideInInspector] public int m_nbItems = 0;
         [HideInInspector] public int m_nbOfCartokens = 0;
 
@@ -67,10 +66,12 @@ namespace DiscountDelirium
         public void GetScoreFromCart(Vector3 data) 
         {         
             m_nbItems += (int)data.x;
-			m_playerScore += (int)data.y;
+            PlayerPrefs.SetInt("Score", (int)data.y);
 			m_nbOfCartokens += (int)data.z;
 
             m_upgrademanager.AddMoney((int)data.z);
 		}
+
+
     }
 }

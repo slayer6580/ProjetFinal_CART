@@ -25,11 +25,11 @@ namespace DiscountDelirium
             PauseState.OnPause += OpenMainMenu;
             PauseState.OnResume += CloseMainMenu;
             EndGameState.OnEndGame += ShowCursor;
-
         }
 
 		public void StartGame()
         {
+            PlayerPrefs.SetInt("Score", 0);
             SceneManager.LoadScene("Main");
         }
 
