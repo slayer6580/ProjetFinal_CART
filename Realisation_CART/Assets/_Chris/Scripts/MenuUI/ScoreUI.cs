@@ -31,7 +31,6 @@ namespace DiscountDelirium
             m_panelUI.SetActive(false);
             m_panelUpgrade.SetActive(true);
             m_upgradeManager.TeleportPlayerToUpgradeScene();
-
 		}
     }
 }

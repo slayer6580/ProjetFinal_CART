@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace DiscountDelirium
@@ -5,7 +6,7 @@ namespace DiscountDelirium
     public abstract class Weapon : MonoBehaviour
     {
         protected bool m_canUseWeapon;
-        private void Start()
+        protected void Start()
         {
             PauseState.OnPause += DisableWeapon;
             PauseState.OnResume += EnableWeapon;
@@ -18,7 +19,7 @@ namespace DiscountDelirium
         private void EnableWeapon() 
         {
             m_canUseWeapon = true;
-            Debug.Log("Weapon Enabled");
+            Debug.LogWarning("Weapon Enabled");
         }
         private void DisableWeapon() 
         {

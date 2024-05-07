@@ -19,9 +19,9 @@ TagManager:
   - ShelfCollider
   - Destructables
   - RaindropScreen
-  - 
-  - 
-  - 
+  - Projectile
+  - AmmoStash
+  - RangeWeapon
   - 
   - 
   - 

@@ -4592,7 +4592,7 @@ GameObject:
   - component: {fileID: 5992149283933122502}
   - component: {fileID: 1376425896819160372}
   - component: {fileID: 8674243671505923391}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PotatoAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4677,7 +4677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cafd4e477cb77004fb3e4b190a79fbb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_timeBeforeDestroy: 8
+  m_timeBeforeDeactivate: 5
   m_model: {fileID: 9209778346844059600}
   ImpactVFX: {fileID: 680176582864441094}
 --- !u!1 &8722345932714229150

@@ -1,6 +1,6 @@
 using CartControl;
-using Manager;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using static Manager.AudioManager;
 
@@ -9,31 +9,50 @@ namespace DiscountDelirium
     public class Range : Weapon
     {
         [Header("References")]
-        [SerializeField] private GameObject m_projectile;
         [SerializeField] private GameObject m_pointToShoot;
         [SerializeField] private ParticleSystem m_particleSmoke;
         [SerializeField] private CartStateMachine m_cartStateMachine;
+        [SerializeField] private TextMeshProUGUI m_text;
 
         [Header("Stats")]
         [SerializeField][Range(0, 4)] private int m_level;
+        [SerializeField] private int m_maxAmmo;
         [SerializeField] private float[] m_force;
         [SerializeField] private float[] m_fireRate;
 
         [Header("Test")]
         [SerializeField] private float LocalVelocity_Y;
 
+        [SerializeField] private int m_actualAmmo;
         private bool m_canFire = true;
+
+        private void Start()
+        {
+            base.Start();
+            m_actualAmmo = m_maxAmmo;
+            m_text.text = m_actualAmmo.ToString();
+        }
 
         public override void UseWeapon()
         {
             if (!m_canUseWeapon)
             {
+                Debug.LogWarning("Range Weapon unabled");
                 return;
             }
-            if (m_canFire) 
+            if (m_canFire && m_actualAmmo > 0) 
             {
+                if (AmmoPool.instance == null) 
+                {
+                    Debug.LogError("Ta pas d'instance");
+                }
+                GameObject ammo = AmmoPool.instance.GetPooledAmmo();
+                if (ammo == null)
+                {
+                    return;
+                }
                 _AudioManager.PlaySoundEffectsOneShot(ESound.CannonSound, transform.position, 0.25f);
-                StartCoroutine("Fire"); 
+                StartCoroutine("Fire", ammo); 
             }
         }
 
@@ -42,19 +61,33 @@ namespace DiscountDelirium
             LocalVelocity_Y = m_cartStateMachine.LocalVelocity.y;
         }
 
-        IEnumerator Fire()
+        IEnumerator Fire(GameObject ammo)
         {
             Debug.Log("Range Weapon Used");
             m_canFire = false;
+            m_actualAmmo--;
+            m_text.text = m_actualAmmo.ToString();
             m_particleSmoke.Play();
 
-            GameObject projectile = Instantiate(m_projectile, m_pointToShoot.transform.position, m_pointToShoot.transform.rotation);
+            ammo.transform.position = m_pointToShoot.transform.position;
+            ammo.transform.rotation = m_pointToShoot.transform.rotation;
+            ammo.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            ammo.SetActive(true);
             Vector3 force = m_pointToShoot.transform.forward * m_force[PlayerPrefs.GetInt("Ranged", 0)];
-            force *= 1 + m_cartStateMachine.LocalVelocity.z * 0.08f;
-            projectile.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            force *= 1 + m_cartStateMachine.LocalVelocity.z * 0.1f;
+            ammo.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
             yield return new WaitForSeconds(1f / m_fireRate[PlayerPrefs.GetInt("Ranged", 0)]);
             m_canFire = true;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("AmmoStash")) 
+            {
+                m_actualAmmo = m_maxAmmo;
+                m_text.text = m_actualAmmo.ToString();
+            }
         }
     }
 }
