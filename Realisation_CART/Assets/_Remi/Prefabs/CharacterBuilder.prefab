@@ -3984,8 +3984,8 @@ Transform:
   m_LocalScale: {x: 1.601, y: 1.601, z: 1.601}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6770873293501016627}
   - {fileID: 3308008847996802301}
+  - {fileID: 6770873293501016627}
   - {fileID: 5536186134238536117}
   - {fileID: 1706852038594274078}
   - {fileID: 7447179520413910755}
@@ -4114,19 +4114,18 @@ MonoBehaviour:
     type: 2}
   m_shoes_Mat: {fileID: 2100000, guid: a70622f8a91db7f47aae551fe3a364b9, type: 2}
   m_skin_Mat: {fileID: 2100000, guid: e28a6a5ddeb49b7489d7e38efe728353, type: 2}
-  m_handOnCartTransform: {fileID: 5536186134238536117}
-  m_feetOnCartTransform: {fileID: 3308008847996802301}
-  m_hipGOTransform: {fileID: 6770873293501016627}
+  m_handOnCartTransform: {fileID: 3308008847996802301}
+  m_feetOnCartTransform: {fileID: 6770873293501016627}
   m_rootTransform: {fileID: 5536186134238536117}
   m_headTransform: {fileID: 53812517398489479}
   m_faceMatParentsTransform: {fileID: 4459538601816595407}
   m_frecklesTransform: {fileID: 1012658408410566682}
   m_robotFaceTransform: {fileID: 6329435592137126273}
-  m_hairTransform: {fileID: 0}
-  m_accessoriesTransform: {fileID: 0}
-  m_eyebrowsTransform: {fileID: 0}
-  m_eyesFemaleTransform: {fileID: 0}
-  m_eyesMaleTransform: {fileID: 0}
+  m_hairTransform: {fileID: 4863140079890564368}
+  m_accessoriesTransform: {fileID: 8391576452406662606}
+  m_eyebrowsTransform: {fileID: 1706852038594274078}
+  m_eyesFemaleTransform: {fileID: 7447179520413910755}
+  m_eyesMaleTransform: {fileID: 4139251549774095969}
   m_hairPartTransforms: []
   m_humanFullBodyTransforms:
   - {fileID: 7480190621521338525}
@@ -4231,8 +4230,18 @@ MonoBehaviour:
   - {fileID: 5969671386202651797}
   - {fileID: 103096806520473942}
   - {fileID: 5220692127007687880}
-  m_maleHairTransforms: []
-  m_femaleHairTransforms: []
+  m_maleHairTransforms:
+  - {fileID: 240815614488082132}
+  - {fileID: 1085633611161010274}
+  - {fileID: 5797667822392637278}
+  - {fileID: 2060478175169898715}
+  - {fileID: 2811360186223322615}
+  - {fileID: 3244145725684262367}
+  m_femaleHairTransforms:
+  - {fileID: 6723679456424259218}
+  - {fileID: 3071615737764093163}
+  - {fileID: 3844568486092746283}
+  - {fileID: 8982145395422108232}
   m_accessoryTransforms: []
   m_bodyPartType: 0
 --- !u!95 &4999018571851096058
@@ -5797,7 +5806,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4139251549774095969
 Transform:
   m_ObjectHideFlags: 0
@@ -6069,7 +6078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9185941060797421083
 Transform:
   m_ObjectHideFlags: 0
@@ -7127,7 +7136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7447179520413910755
 Transform:
   m_ObjectHideFlags: 0
@@ -8483,7 +8492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3203545298156395480
 Transform:
   m_ObjectHideFlags: 0
@@ -8519,7 +8528,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9160,7 +9169,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15338,7 +15347,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

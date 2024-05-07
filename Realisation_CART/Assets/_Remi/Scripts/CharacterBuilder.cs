@@ -316,11 +316,11 @@ namespace Spawner
 
         private void GetIKTransforms()
         {
-            m_feetOnCartTransform = transform.GetChild(0);
-            if (m_feetOnCartTransform.name != "FeetOnCart") Debug.LogError("FeetOnCart has been moved or renamed. Name is: " + m_feetOnCartTransform.name);
+            m_handOnCartTransform = transform.GetChild(0);
+            if (m_handOnCartTransform.name != "HandOnCart") Debug.LogError("HandOnCart has been moved or renamed. Name is: " + transform.GetChild(0).name);
 
-            m_handOnCartTransform = transform.GetChild(1);
-            if (m_handOnCartTransform.name != "HandOnCart") Debug.LogError("HandOnCart has been moved or renamed. Name is: " + m_handOnCartTransform.name);
+            m_feetOnCartTransform = transform.GetChild(1);
+            if (m_feetOnCartTransform.name != "FeetOnCart") Debug.LogError("FeetOnCart has been moved or renamed. Name is: " + transform.GetChild(1).name);
 
             m_rootTransform = transform.GetChild(2);
             if (m_rootTransform.name != "Root") Debug.LogError("Root has been moved or renamed. Name is: " + m_rootTransform.name);
