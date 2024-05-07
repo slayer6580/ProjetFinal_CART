@@ -57,7 +57,7 @@ namespace DiscountDelirium
         private void TutorialFinish()
         {
             m_loadingScreen.SetActive(true);
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Level01");
         }
 
         public void OnAccept()

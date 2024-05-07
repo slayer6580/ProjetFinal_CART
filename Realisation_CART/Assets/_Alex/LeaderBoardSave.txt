@@ -1,1 +1,1 @@
-{"m_allPlayerStats":[{"name":"REM","score":666},{"name":"AFL","score":60},{"name":"ABD","score":25},{"name":"ALX","score":3},{"name":"TOM","score":3},{"name":"CHR","score":2}]}
+{"m_allPlayerStats":[]}

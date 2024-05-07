@@ -1,3 +1,4 @@
+using SavingSystem;
 using StatsSystem;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace DiscountDelirium
         [SerializeField] private TextMeshProUGUI m_textNbItems;
         [SerializeField] private TextMeshProUGUI m_textNbCartoken;
         [SerializeField] private UpgradeManager m_upgradeManager;
+        [SerializeField] private LeaderboardManager m_leaderboardManager;
      
 
         public void EnableUI(bool show)
@@ -32,5 +34,10 @@ namespace DiscountDelirium
             m_panelUpgrade.SetActive(true);
             m_upgradeManager.TeleportPlayerToUpgradeScene();
 		}
+
+        public void GoToLeaderboard()
+        {
+            m_leaderboardManager.OpenLeaderboardEndGame();
+        }
     }
 }

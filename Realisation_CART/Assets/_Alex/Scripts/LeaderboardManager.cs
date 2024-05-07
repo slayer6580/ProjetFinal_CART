@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace SavingSystem
@@ -67,6 +68,11 @@ namespace SavingSystem
         private void Awake()
         {
             m_leaderboard = LoadLeaderboard();
+
+        }
+
+        private void Start()
+        {
             UpdateUILeaderboard();
             UpdateLettersInsideWheels();
         }
@@ -334,7 +340,7 @@ namespace SavingSystem
 
             m_leaderboardPanel.SetActive(true);
 
-            if (CanPlayerBeInLeaderboard(m_scoreToAdd))
+            if (CanPlayerBeInLeaderboard(PlayerPrefs.GetInt("Score", 0)))
             {
                 m_namePanel.SetActive(true);
                 ChangeBackGroundColorSelected();
@@ -367,6 +373,7 @@ namespace SavingSystem
             m_namePanel.SetActive(false);
             m_rankPanel.SetActive(false);
             m_leaderboardPanel.SetActive(false);
+            SceneManager.LoadScene("MainMenu");
         }
 
         public void BackToMainMenu()
