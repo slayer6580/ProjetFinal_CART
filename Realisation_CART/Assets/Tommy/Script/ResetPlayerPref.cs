@@ -17,7 +17,10 @@ namespace Manager
 			PlayerPrefs.SetInt("Acceleration", 0);
 			PlayerPrefs.SetInt("MaxSpeed", 0);
 			PlayerPrefs.SetInt("Handling", 0);
-			PlayerPrefs.SetInt("Score", 0);
+			PlayerPrefs.SetInt("Balance", 0);
+            PlayerPrefs.SetInt("Melee", 0);
+            PlayerPrefs.SetInt("Ranged", 0);
+            PlayerPrefs.SetInt("Score", 0);
 		}
 	}
 }
