@@ -1,3 +1,4 @@
+using DiscountDelirium;
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -92,7 +93,6 @@ namespace Spawner
 
             if (m_isOneShot)
             {
-                //Debug.Log("m_isOneShot");
                 if (numberOfNPCs <= 0) return;
                 Spawn();
                 numberOfNPCs--;
@@ -109,7 +109,6 @@ namespace Spawner
 
                 if (currentSpawningRate <= 0)
                 {
-                    //Debug.Log("currentSpawningRate <= 0");
                     ResetRate(originalSpawningRate);
                     Spawn();
                 }
@@ -118,7 +117,6 @@ namespace Spawner
 
         private void Spawn()
         {
-            //Debug.Log("Spawning NPC");
             if (EntranceSpawningSpots.Count == 0) return;
 
             var randomSpot = UnityEngine.Random.Range(0, GetZoneGOList().Count);
@@ -135,9 +133,10 @@ namespace Spawner
 
             if (EntranceSpawningSpots.Contains(GetZoneGOList()[randomSpot]))
             {
-                //Debug.Log("NPC spawned at entrance");
                 Instantiate(NPCPrefab, GetZoneGOList()[randomSpot].transform.position, Quaternion.identity);
                 EntranceSpawningSpots.Remove(GetZoneGOList()[randomSpot]);
+
+                GameStateMachine.Instance.ClientsList.Add(NPCPrefab);
             }
         }
 

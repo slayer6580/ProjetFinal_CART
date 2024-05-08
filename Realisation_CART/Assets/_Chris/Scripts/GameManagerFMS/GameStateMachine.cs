@@ -72,7 +72,5 @@ namespace DiscountDelirium
 
             m_upgrademanager.AddMoney((int)data.z);
 		}
-
-
     }
 }
