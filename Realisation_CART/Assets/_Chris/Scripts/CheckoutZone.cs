@@ -19,7 +19,7 @@ namespace DiscountDelirium
 
             _AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, transform.position, 1f);
 
-            bool isPlayer = other.transform.parent.name == "Character";
+            bool isPlayer = other.transform.parent.parent.name == "Character";
             if (isPlayer)
             {
 				Vector3 data = _ScoreManager.EmptyCartAndGetScore();
