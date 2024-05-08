@@ -66,7 +66,8 @@ namespace DiscountDelirium
         public void GetScoreFromCart(Vector3 data) 
         {         
             m_nbItems += (int)data.x;
-            PlayerPrefs.SetInt("Score", (int)data.y);
+            int lastScore = PlayerPrefs.GetInt("Score", 0);
+            PlayerPrefs.SetInt("Score", lastScore + (int)data.y);
 			m_nbOfCartokens += (int)data.z;
 
             m_upgrademanager.AddMoney((int)data.z);
