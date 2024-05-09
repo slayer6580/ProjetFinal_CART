@@ -4592,6 +4592,7 @@ GameObject:
   - component: {fileID: 5992149283933122502}
   - component: {fileID: 1376425896819160372}
   - component: {fileID: 8674243671505923391}
+  - component: {fileID: 7895942059382321017}
   m_Layer: 14
   m_Name: PotatoAmmo
   m_TagString: Untagged
@@ -4657,7 +4658,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 259071
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -4680,6 +4681,32 @@ MonoBehaviour:
   m_timeBeforeDeactivate: 5
   m_model: {fileID: 9209778346844059600}
   ImpactVFX: {fileID: 680176582864441094}
+  AmmunitionCollider: {fileID: 5992149283933122502}
+  SphereTrigger: {fileID: 7895942059382321017}
+  m_speed: 0
+  m_rotateSpeed: 10
+  m_target: {fileID: 0}
+--- !u!135 &7895942059382321017
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5610228422600707311}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8722345932714229150
 GameObject:
   m_ObjectHideFlags: 0

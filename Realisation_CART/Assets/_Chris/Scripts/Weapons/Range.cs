@@ -71,8 +71,9 @@ namespace DiscountDelirium
 
             ammo.transform.position = m_pointToShoot.transform.position;
             ammo.transform.rotation = m_pointToShoot.transform.rotation;
-            ammo.GetComponent<Rigidbody>().velocity = Vector3.zero;
             ammo.SetActive(true);
+            ammo.GetComponent<Ammunition>().ShowAmmo();
+
             Vector3 force = m_pointToShoot.transform.forward * m_force[PlayerPrefs.GetInt("Ranged", 0)];
             force *= 1 + m_cartStateMachine.LocalVelocity.z * 0.1f;
             ammo.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
