@@ -7,18 +7,21 @@ namespace BoxSystem
         [Header("Force multiplier for constant force")]
         [SerializeField] private float m_forceMultiplier;
 
-        [Header("Force multiplier for constant force")]
+        [Header("Reduce forceMultiplier over time")]
         [SerializeField][Range(1, 10)] private float m_forceOverTimeReduction;
+
+        [Header("Starting multiplier")]
+        [SerializeField] private float m_startingTimeMultiplier;
 
         private TowerHingePhysicsAlex m_towerPhysics;
         private bool m_pushIsActivated = false;
         private Vector3 m_pushForce = Vector3.zero;
-        private float m_timeMultiplier = 1;
-        private float m_debugForce;
+        private float m_timeMultiplier;
 
         private void Awake()
         {
             m_towerPhysics = GetComponent<TowerHingePhysicsAlex>();
+            m_timeMultiplier = m_startingTimeMultiplier;
         }
 
         /// <summary> Add constant force to the top box of TowerPhysics </summary>
@@ -30,7 +33,7 @@ namespace BoxSystem
             if (Mathf.Abs(force) < 1)
             {
                 m_pushIsActivated = false;
-                m_timeMultiplier = 1;
+                m_timeMultiplier = m_startingTimeMultiplier;
                 m_pushForce = Vector3.zero;
                 return;
             }
@@ -56,12 +59,8 @@ namespace BoxSystem
                     return;
 
                 body.AddForce(m_pushForce, ForceMode.Force);
-                Debug.LogWarning("Pushed");
             }
-            else
-            {
-                Debug.LogWarning("Not Pushed");
-            }
+
 
         }
         private void Update()

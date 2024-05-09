@@ -279,5 +279,10 @@ namespace BoxSystem
         {
             return m_allBoxes[m_boxCount - 2];
         }
+
+        public int GetNbOfFixedBoxes()
+        {
+            return m_nbOfFixedBoxes;
+        }
     }
 }

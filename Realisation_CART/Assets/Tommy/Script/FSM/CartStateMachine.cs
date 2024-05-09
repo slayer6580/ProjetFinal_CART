@@ -164,37 +164,39 @@ namespace CartControl
 
 		}
 		protected override void Update()
-		{
-			//For test value
-			velMagnitude = CartRB.velocity.magnitude;
+        {
+            //For test value
+            velMagnitude = CartRB.velocity.magnitude;
 
-			m_currentState.OnUpdate();
-			TryToChangeState();
+            m_currentState.OnUpdate();
+            TryToChangeState();
 
-			//For Animation
-			HumanAnimCtrlr.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeedUpgrades);
+            //For Animation
+            HumanAnimCtrlr.SetFloat("RunningSpeed", LocalVelocity.z / MaxSpeedUpgrades);
 
             //Testing tower tilt with Animation
             //TEMPORARY DEACTIVATED
             //m_towerCtrlr.SetTowerTilt(Mathf.Round(LocalVelocity.x));
-			if (m_currentState is CartState_Moving)
-			{
-                BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenTurning);
-            }
-			else if(m_currentState is CartState_Drifting)
-			{
-                BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenDrifting);
-            }
-			else
-			{
-                BoxForce.AddConstantForceToBox(0, 0);
-            }
-        
-           
+            AddForceToTowerPhysics();
+
+			
 
         }
 
-		protected override void FixedUpdate()
+        private void AddForceToTowerPhysics()
+        {
+            if (m_currentState is CartState_Moving)            
+                BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenTurning);
+            
+            else if (m_currentState is CartState_Drifting)           
+                BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenDrifting);            
+            else            
+                BoxForce.AddConstantForceToBox(0, 0);
+            
+        }
+
+
+        protected override void FixedUpdate()
 		{
 			m_currentState.OnFixedUpdate();		
 		}

@@ -77,3 +77,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_forceMultiplier: 1.5
   m_forceOverTimeReduction: 1
+  m_startingTimeMultiplier: 1

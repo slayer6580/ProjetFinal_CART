@@ -1382,7 +1382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 15, y: -14.999878}
+  m_AnchoredPosition: {x: 15, y: -15}
   m_SizeDelta: {x: 934.5, y: 346.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &282040017
@@ -3637,17 +3637,17 @@ PrefabInstance:
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13633597
+      value: 0.13633598
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000000852286
+      value: 0.0000000085228615
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000001172924
+      value: -0.0000000011729243
       objectReference: {fileID: 0}
     - target: {fileID: 5807787597716368242, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -3677,17 +3677,17 @@ PrefabInstance:
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13633597
+      value: 0.13633598
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000000852286
+      value: 0.0000000085228615
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000001172924
+      value: -0.0000000011729243
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4689,6 +4689,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4436524539922547677, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
+      propertyPath: m_animationTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436524539922547677, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
       propertyPath: <TowerBoxSystem>k__BackingField
       value: 
       objectReference: {fileID: 984629182}
@@ -4704,6 +4709,16 @@ PrefabInstance:
       objectReference: {fileID: 1236601745}
     - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}
+      propertyPath: m_maxForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
       propertyPath: m_shelfManager
       value: 
       objectReference: {fileID: 0}
@@ -4711,6 +4726,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_towerPhysics
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_minForceToMove
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_forceMultiplier
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744102259174695568, guid: 6cb0203a764e46249bf79ecf5a681950,
+        type: 3}
+      propertyPath: m_maxGapDifference
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4883361243485391484, guid: 6cb0203a764e46249bf79ecf5a681950,
         type: 3}

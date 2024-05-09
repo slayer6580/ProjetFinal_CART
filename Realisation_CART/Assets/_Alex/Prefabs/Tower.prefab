@@ -51,5 +51,11 @@ MonoBehaviour:
   <BoxGapHeight>k__BackingField: 0
   m_itemExpulsionForce: 5
   m_boxExpulsionForce: 20
-  m_towerPhysics: {fileID: 0}
+  m_contactExpulsionForce: 0
+  m_scaleMultiplier: 0
+  m_itemDestructionTime: 0
+  m_boxDestructionTime: 0
+  m_maxGapDifference: 0.05
+  m_forceMultiplier: 0.003
+  m_minForceToMove: 0.9
   m_cartokenValueMultiplier: 1

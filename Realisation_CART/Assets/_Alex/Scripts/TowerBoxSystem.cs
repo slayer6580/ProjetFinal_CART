@@ -27,7 +27,7 @@ namespace BoxSystem
         [SerializeField] private float m_itemExpulsionForce;
         [SerializeField] private float m_boxExpulsionForce;
 
-        [Header("Contact variables")]
+        [Header("Customers Contact variables")]
         [SerializeField] private float m_contactExpulsionForce;
         [SerializeField] private float m_scaleMultiplier;
 
@@ -35,15 +35,26 @@ namespace BoxSystem
         [SerializeField] private float m_itemDestructionTime;
         [SerializeField] private float m_boxDestructionTime;
 
+        [Header("boxes movement forward and backward")]
+        [SerializeField] private float m_maxGapDifference;
+        [SerializeField] private float m_forceMultiplier;
+        [SerializeField] private float m_minForceToMove;
+        private Rigidbody m_playerRb;
+ 
+
+        [Header("Cart token")]
+        [SerializeField] private int m_cartokenValueMultiplier = 1;
+
         private int m_boxCount = 0;
         private List<Box> m_boxesInCart = new List<Box>();
 
         private TowerHingePhysicsAlex m_towerPhysics;
-        [SerializeField] private int m_cartokenValueMultiplier = 1;
+
 
         private void Awake()
         {
             InitializeTowerPhysicsVariables();
+            m_playerRb = Player.GetComponent<Rigidbody>();
         }
 
         void Start()
@@ -53,6 +64,13 @@ namespace BoxSystem
 
         private void Update()
         {
+            KeyboardDebug();
+            BoxMovement();
+        }
+
+        private void KeyboardDebug()
+        {
+
             if (Input.GetKeyDown(KeyCode.KeypadPlus))
             {
                 AddBoxToTower();
@@ -176,7 +194,7 @@ namespace BoxSystem
         /// <summary> Remove the last item inside the top box with an impulse force </summary>
         public void RemoveItemImpulse()
         {
-        
+
             if (GetTopBox().IsEmpty())
             {
                 RemoveBoxImpulse();
@@ -214,7 +232,7 @@ namespace BoxSystem
             }
 
             rb.AddForce(totalImpulse, ForceMode.Impulse);
-            item.transform.localScale *= m_scaleMultiplier; 
+            item.transform.localScale *= m_scaleMultiplier;
         }
 
         public GameObject GetStolenItem()
@@ -235,6 +253,49 @@ namespace BoxSystem
             topBox.GetItemsInBox().Remove(lastItemInBox);
 
             return lastItemInBox.m_item;
+        }
+
+        public void BoxMovement()
+        {
+            int nbOfFixedBoxes = m_towerPhysics.GetNbOfFixedBoxes();
+            int boxesToMove = m_boxCount - nbOfFixedBoxes;
+            float force = Vector3.Dot(-Player.transform.forward, m_playerRb.velocity.normalized) * m_playerRb.velocity.magnitude;
+
+            if (boxesToMove == 0)
+            {
+                return;
+            }
+            
+            if (Mathf.Abs(force) < m_minForceToMove)
+            {
+                return;
+            }
+          
+            int lastIndex = m_boxesInCart.Count - 1;
+            float distanceZ = force * m_forceMultiplier;
+
+            if ((Mathf.Abs(distanceZ) > m_maxGapDifference))
+            {
+                if (distanceZ > 0)
+                {
+                    distanceZ = m_maxGapDifference;
+                }
+                else
+                {
+                    distanceZ = -m_maxGapDifference;
+                }
+            }
+
+            for (int i = lastIndex; i > (nbOfFixedBoxes - 1); i--)
+            {
+                Transform boxGraphics = m_boxesInCart[i].transform.GetChild(1);
+                boxGraphics.localPosition = new Vector3(0,
+                                                        0,
+                                                        distanceZ * boxesToMove);
+                boxesToMove--;
+            }
+
+
         }
 
         #region (--- Getter ---)
