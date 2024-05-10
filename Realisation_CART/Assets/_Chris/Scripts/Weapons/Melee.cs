@@ -1,3 +1,5 @@
+using BoxSystem;
+using System.Collections;
 using UnityEngine;
 using static Manager.AudioManager;
 
@@ -7,12 +9,10 @@ namespace DiscountDelirium
     {
         [Header("References")]
         private Animator m_animator;
-        [SerializeField] TrailRenderer m_trailRenderer;
+        [SerializeField] private TrailRenderer m_trailRenderer;
 
         [Header("Stats")]
-        [SerializeField][Range(0, 4)] private int m_level;//temporary
         [SerializeField] private float[] m_speedLevel;
-        [SerializeField] private float[] m_forceLevel;
         [SerializeField] private GameObject[] m_models;
 
         private int m_weaponIndex;
@@ -29,7 +29,11 @@ namespace DiscountDelirium
 
         private void OnTriggerEnter(Collider other)
         {
-            //Will be needed when we hit a client
+            Debug.LogWarning("Melee hitted target");
+            if (other.gameObject.layer == LayerMask.NameToLayer("Target")) 
+            {
+                StealItems(other.gameObject.GetComponent<Target>().GetTower());
+            }
         }
 
         public override void UseWeapon()
@@ -39,15 +43,6 @@ namespace DiscountDelirium
                 return;
             }
             m_animator.SetTrigger("ActivateWeapon");
-        }
-
-        public void OnValidate()
-        {
-            if (m_animator != null) 
-            {
-                m_animator.speed = m_speedLevel[PlayerPrefs.GetInt("Melee", 0)];
-            }
-            ChangeWeaponModel();
         }
 
         public void ActivateTrail()
@@ -62,7 +57,10 @@ namespace DiscountDelirium
 
         public void ChangeWeaponModel() 
         {
-            m_models[m_weaponIndex].SetActive(false);
+            foreach (var model in m_models) 
+            {
+                model.SetActive(false);
+            }
             m_weaponIndex = PlayerPrefs.GetInt("Melee", 0);
             m_models[m_weaponIndex].SetActive(true);
         }
@@ -79,6 +77,12 @@ namespace DiscountDelirium
         public void PlaySound() 
         {
             _AudioManager.PlaySoundEffectsOneShot(ESound.MeleeSwoosh, transform.position, 0.5f);
+        }
+
+        public void StealItems(TowerBoxSystem clientTower)
+        {
+            Debug.LogWarning("STEAL WITH MELEE");
+            base.StealItems(clientTower, PlayerPrefs.GetInt("Melee", 0));
         }
     }
 }

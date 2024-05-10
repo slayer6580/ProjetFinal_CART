@@ -13,7 +13,7 @@ namespace DiscountDelirium
         [Header("Preference")]
         [SerializeField] private int m_amountOfAmmo;
         private List<GameObject> m_pooledAmmo = new List<GameObject>();
-        [SerializeField] private GameObject m_ammoPrefab;
+        private GameObject m_ammoPrefab;
 
         private void Awake()
         {
@@ -22,6 +22,7 @@ namespace DiscountDelirium
                 instance = this;
             }
         }
+
 
         private void Start()
         {
@@ -43,6 +44,14 @@ namespace DiscountDelirium
                 }
             }
             return null;
+        }
+
+        public void SetAmmo(GameObject prefab)
+        {
+            if (m_ammoPrefab == null) 
+            {
+                m_ammoPrefab = prefab;
+            }
         }
     }
 }

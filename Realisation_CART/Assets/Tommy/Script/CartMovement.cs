@@ -45,7 +45,7 @@ namespace CartControl
 
 		public void UpdateOrientation(float rotationSpeed, float steeringValue)
 		{
-			if(SM.LocalVelocity.z < 0f)
+			if(SM.LocalVelocity.z < 0f - GameConstants.DEADZONE)
 			{
 				steeringValue = -steeringValue;
 			}

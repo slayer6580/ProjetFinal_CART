@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 9035993350194354087}
   - component: {fileID: 1576832022794284536}
   - component: {fileID: 168012645000807454}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,6 +107,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ffe5142edba6b428e25067f719db75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerTower: {fileID: 0}
+  m_animationTime: 0
+  m_itemsToStealLevel:
+  - 3
+  - 6
+  - 9
+  - 10
+  - 12
   m_trailRenderer: {fileID: 5398363909236523938}
   m_level: 0
   m_speedLevel:
@@ -464,7 +472,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 471f79d8a96bfde4f9e1a293e7f7361d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -654,7 +662,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6f134cfb520af5e488d04b87152f729e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

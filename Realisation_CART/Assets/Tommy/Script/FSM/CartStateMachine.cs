@@ -21,6 +21,7 @@ namespace CartControl
 
 		///
 		[field: Header("Stats")]
+		[field: SerializeField] public bool IsClient { get; set; }
 		[field: SerializeField] public float Acceleration { get; set; }
 		[field: SerializeField] public float MaxSpeed { get; set; }
 		[field: SerializeField] public float MaxBackwardSpeed { get; private set; }
@@ -149,10 +150,14 @@ namespace CartControl
 
 		private void LoadUpgrade()
 		{
-			PlayerPrefs.GetInt("Acceleration", 0);
-			PlayerPrefs.GetInt("MaxSpeed", 0);
-			PlayerPrefs.GetInt("Handling", 0);
-
+			if (IsClient)
+			{
+				AccelerationUpgrades = Acceleration;
+				MaxSpeedUpgrades = MaxSpeed;
+				MovingRotatingSpeedUpgrades = MovingRotatingSpeed;
+				DriftingRotatingSpeedUpgrades = DriftingRotatingSpeed;
+			}
+			
 			AccelerationUpgrades = Acceleration + 10 * PlayerPrefs.GetInt("Acceleration", 0);
 			MaxSpeedUpgrades = MaxSpeed + 5 * PlayerPrefs.GetInt("MaxSpeed", 0);
 			MovingRotatingSpeedUpgrades = MovingRotatingSpeed + 5 * PlayerPrefs.GetInt("Handling", 0);

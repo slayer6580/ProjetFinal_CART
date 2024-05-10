@@ -1,3 +1,4 @@
+using BoxSystem;
 using CartControl;
 using System.Collections;
 using TMPro;
@@ -14,17 +15,23 @@ namespace DiscountDelirium
         [SerializeField] private CartStateMachine m_cartStateMachine;
         [SerializeField] private TextMeshProUGUI m_text;
 
+        [Header("Ammo")]
+        [SerializeField] private GameObject m_ammoPrebab;
+        [SerializeField] private GameObject m_ammoPoolPrefab;
+
         [Header("Stats")]
-        [SerializeField][Range(0, 4)] private int m_level;
         [SerializeField] private int m_maxAmmo;
         [SerializeField] private float[] m_force;
         [SerializeField] private float[] m_fireRate;
 
-        [Header("Test")]
-        [SerializeField] private float LocalVelocity_Y;
-
-        [SerializeField] private int m_actualAmmo;
+        private int m_actualAmmo;
         private bool m_canFire = true;
+
+        private void Awake()
+        {
+            GameObject pool = Instantiate(m_ammoPoolPrefab);
+            pool.GetComponent<AmmoPool>().SetAmmo(m_ammoPrebab);
+        }
 
         private void Start()
         {
@@ -44,7 +51,7 @@ namespace DiscountDelirium
             {
                 if (AmmoPool.instance == null) 
                 {
-                    Debug.LogError("Ta pas d'instance");
+                    Debug.LogError("No instance");
                 }
                 GameObject ammo = AmmoPool.instance.GetPooledAmmo();
                 if (ammo == null)
@@ -54,11 +61,6 @@ namespace DiscountDelirium
                 _AudioManager.PlaySoundEffectsOneShot(ESound.CannonSound, transform.position, 0.25f);
                 StartCoroutine("Fire", ammo); 
             }
-        }
-
-        private void Update()
-        {
-            LocalVelocity_Y = m_cartStateMachine.LocalVelocity.y;
         }
 
         IEnumerator Fire(GameObject ammo)
@@ -90,5 +92,10 @@ namespace DiscountDelirium
                 m_text.text = m_actualAmmo.ToString();
             }
         }
+        public void StealItems(TowerBoxSystem clientTower)
+        {
+            base.StealItems(clientTower, PlayerPrefs.GetInt("Range", 0));
+        }
+
     }
 }
