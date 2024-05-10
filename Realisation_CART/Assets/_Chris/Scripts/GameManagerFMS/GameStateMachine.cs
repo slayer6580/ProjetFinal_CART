@@ -11,7 +11,7 @@ namespace DiscountDelirium
         [field:SerializeField] public float GameLength { get; private set; }
 		[field: SerializeField] public List<GameObject> ClientsList { get; private set; }
 
-        public int Score { get; private set; }
+        public int Score { get; private set; } = 0;
 
 		public CartStateMachine m_playerSM; 
         [SerializeField] public ScoreUI m_scoreUI;
@@ -71,8 +71,8 @@ namespace DiscountDelirium
         {         
             m_nbItems += (int)data.x;
             int lastScore = PlayerPrefs.GetInt("Score", 0);
-            Score = (int)data.y;
-            PlayerPrefs.SetInt("Score", lastScore + (int)data.y);
+            Score += (int)data.y;
+            PlayerPrefs.SetInt("Score", lastScore + Score);
 			m_nbOfCartokens += (int)data.z;
 
             m_upgrademanager.AddMoney((int)data.z);
