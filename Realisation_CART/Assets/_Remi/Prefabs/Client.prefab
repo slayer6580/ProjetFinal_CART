@@ -51107,6 +51107,7 @@ MonoBehaviour:
   <SteeringValue>k__BackingField: 0
   <DriftSteeringValue>k__BackingField: 0
   <LocalVelocity>k__BackingField: {x: 0, y: 0, z: 0}
+  <IsClient>k__BackingField: 1
   <Acceleration>k__BackingField: 40
   <MaxSpeed>k__BackingField: 15
   <MaxBackwardSpeed>k__BackingField: 5
