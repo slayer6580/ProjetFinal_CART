@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Camera
 {
+    /// <summary> Automatically sets the virtual camera to follow the character </summary>
     [ExecuteInEditMode]
     public class CameraSystem : MonoBehaviour
     {
