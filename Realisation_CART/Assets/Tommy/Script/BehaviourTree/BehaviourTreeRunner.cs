@@ -22,10 +22,11 @@ namespace BehaviourTree
             Scene scene = gameObject.scene;
             GameObject[] gameObjects = scene.GetRootGameObjects();
             GameObject clientPathlListGO = null;
+
             foreach (GameObject gameObject in gameObjects)
             {
                 if (gameObject.GetComponent<ClientPathList>() == null) continue;
-
+                if (gameObject.name != "ListOfPath") Debug.LogError("ClientPathList not found");
                 clientPathlListGO = gameObject;
             }
 
