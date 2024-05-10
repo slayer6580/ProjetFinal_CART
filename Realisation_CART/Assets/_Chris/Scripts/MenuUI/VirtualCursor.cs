@@ -14,6 +14,11 @@ namespace DiscountDelirium
             m_virtualMouseInput = GetComponent<FakeCursor>();
         }
 
+        private void OnEnable() 
+        {
+            //transform
+        }
+
         private void Update()
         {
             //transform.localScale = Vector3.one * (1.0f / canvasRectTransform.localScale.x);

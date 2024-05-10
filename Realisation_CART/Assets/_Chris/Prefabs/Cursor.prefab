@@ -85,7 +85,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8144971903727694791}
   - component: {fileID: 3131683181568802879}
-  - component: {fileID: 6143123381568648334}
   - component: {fileID: 7134744812861887538}
   m_Layer: 5
   m_Name: Cursor
@@ -93,7 +92,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8144971903727694791
 RectTransform:
   m_ObjectHideFlags: 0
@@ -122,19 +121,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6094376280663931386}
   m_CullTransparentMesh: 1
---- !u!114 &6143123381568648334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6094376280663931386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24fc7f814e8a3c64cae3924613250c00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasRectTransform: {fileID: 0}
 --- !u!114 &7134744812861887538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +137,8 @@ MonoBehaviour:
   m_CursorGraphic: {fileID: 8287235738246418179}
   m_CursorTransform: {fileID: 8144971903727694791}
   m_canvasRectTransform: {fileID: 0}
-  m_CursorSpeed: 600
+  m_CursorSpeed: 500
+  m_basedResolution: {x: 1920, y: 1080}
   m_ScrollSpeed: 45
   m_StickAction:
     m_UseReference: 1
