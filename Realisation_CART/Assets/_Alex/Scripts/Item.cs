@@ -95,7 +95,7 @@ namespace BoxSystem
             float slerpTime = m_timer / m_slerpTime;
             m_timer += Time.deltaTime;
 
-            if (m_box == null) 
+            if (m_box.transform.position == null) 
             { 
                 Destroy(this.gameObject);
             }
