@@ -42,11 +42,6 @@ namespace CartControl
 				return true;
 			}
 
-				if (m_cartStateMachine.CanBoost)
-			{
-				return false;
-			}
-
 			return (m_cartStateMachine.ForwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.BackwardPressedPercent < GameConstants.DEADZONE
 				&& m_cartStateMachine.CartRB.velocity.magnitude < GameConstants.DEADZONE);

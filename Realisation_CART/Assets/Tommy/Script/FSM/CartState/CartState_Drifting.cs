@@ -65,19 +65,7 @@ namespace CartControl
 
 			m_driftingTimer += Time.deltaTime;
 
-			//After minimum drifting time obtain. Calculate how much boost to give
-			if(m_driftingTimer >= m_cartStateMachine.DriftTimeToEarnMinBoost)
-			{
-				if(m_boostPercentageObtain < 1)
-				{
-					m_boostPercentageObtain = (m_driftingTimer - m_cartStateMachine.MinBoostTime) / (m_cartStateMachine.MaxBoostTime - m_cartStateMachine.MinBoostTime);			
-				}
-				else
-				{
-					m_boostPercentageObtain = 1;
-				}
-				m_cartStateMachine.CanBoost = true;
-			}
+			
 
 			ManageAnimation();
 			ManageSfx();

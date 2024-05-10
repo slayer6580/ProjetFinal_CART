@@ -68,10 +68,7 @@ namespace CartControl
 
 		public override bool CanEnter(IState currentState)
 		{		
-			if(currentState is CartState_Boosting)
-			{
-				return m_cartStateMachine.IsBoosting == false;
-			}
+			
 			if (currentState is CartState_Drifting)
 			{
 				return m_cartStateMachine.IsDrifting == false;
