@@ -73,14 +73,14 @@ namespace CartControl
 
 		public void ManageSfx()
 		{
-			_AudioManager.ModifySound(
+			_AudioManager.ModifyAudio(
 				m_audioSourceIndex,
-				ESoundModification.Pitch,
+				EAudioModification.SoundPitch,
 				Mathf.Lerp(0.8f, 2f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeedUpgrades));
 
-			_AudioManager.ModifySound(
+			_AudioManager.ModifyAudio(
 				m_audioSourceIndex,
-				ESoundModification.Volume,
+				EAudioModification.SoundVolume,
 				Mathf.Lerp(0f, 1f, m_cartStateMachine.LocalVelocity.magnitude / m_cartStateMachine.MaxSpeedUpgrades));
 		}
 		public override void OnFixedUpdate()

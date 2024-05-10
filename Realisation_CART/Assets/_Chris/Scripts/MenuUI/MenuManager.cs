@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -10,21 +11,25 @@ namespace DiscountDelirium
         [SerializeField] private GameObject m_mainMenu;
         [SerializeField] private GameObject m_optionsMenu;
 
+        [Header("Virtual Cursor")]
+        [SerializeField] private GameObject m_cursor;
+
         [Header("Volume Sliders")]
+        [SerializeField] private Slider m_masterSlider;
         [SerializeField] private Slider m_musicSlider;
         [SerializeField] private Slider m_soundSlider;
 
-        [SerializeField] private float m_musicVolume;
-        [SerializeField] private float m_soundVolume;
-
-        [Header("Virtual Cursor")]
-        [SerializeField] private GameObject m_cursor;
+        [field: SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
+        private int m_audioSourceIndex;
 
         private void Awake()
         {
             PauseState.OnPause += OpenMainMenu;
             PauseState.OnResume += CloseMainMenu;
             EndGameState.OnEndGame += ShowCursor;
+
+            _AudioManager.SetMainMenuMusic(MainMenuMusic);
+            m_audioSourceIndex = _AudioManager.StartCurrentSceneMusic();
         }
 
 		public void StartGame()
@@ -62,12 +67,6 @@ namespace DiscountDelirium
             m_optionsMenu.SetActive(active);
         }
 
-        public void SetVolume() 
-        {
-            m_musicVolume = m_musicSlider.value;
-            m_soundVolume = m_soundSlider.value;
-        }
-
         public void QuitGame() 
         {
             Debug.Log("QuitGame");
@@ -89,6 +88,24 @@ namespace DiscountDelirium
             }
             Debug.LogWarning("No cursor");
             
+        }
+
+        public void SetMasterVolume()
+        {
+            Debug.Log("Master Volume: " + m_masterSlider.value);
+            _AudioManager.SetVolume(m_audioSourceIndex, m_masterSlider.value, "MasterVolume");
+        }
+
+        public void SetMusicVolume()
+        {
+            Debug.Log("Music Volume: " + m_musicSlider.value);
+            _AudioManager.SetVolume(m_audioSourceIndex, m_musicSlider.value, "MusicVolume");
+        }
+
+        public void SetSoundVolume()
+        {
+            Debug.Log("Sound Volume: " + m_soundSlider.value);
+            _AudioManager.SetVolume(m_audioSourceIndex, m_soundSlider.value, "SoundVolume");
         }
     }
 }
