@@ -95,8 +95,8 @@ namespace CartControl
         [HideInInspector] public GameObject LastClientCollisionWith { get; set; }
         [HideInInspector] public bool ForceStartDrift { get; set; }
         [HideInInspector] public bool IsDrifting { get; set; }
-        [HideInInspector] public bool CanBoost { get; set; }
-        [HideInInspector] public bool IsBoosting { get; set; }
+        //[HideInInspector] public bool CanBoost { get; set; }
+       // [HideInInspector] public bool IsBoosting { get; set; }
         [HideInInspector] public bool IsPaused { get; set; }
         [HideInInspector] public Vector3 CollisionOppositeDirection { get; private set; }
 
@@ -222,7 +222,6 @@ namespace CartControl
 			m_possibleStates.Add(new CartState_Idle());
 			m_possibleStates.Add(new CartState_Moving());
 			m_possibleStates.Add(new CartState_Drifting());
-			m_possibleStates.Add(new CartState_Boosting());
 			m_possibleStates.Add(new CartState_Stopped());
 			m_possibleStates.Add(new CartState_TurnInPlace());
 			m_possibleStates.Add(new CartState_Stunned());

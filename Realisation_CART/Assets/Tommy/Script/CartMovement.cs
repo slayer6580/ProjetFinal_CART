@@ -12,6 +12,7 @@ namespace CartControl
 		}
 		public void Move(float acceleration, float turnDrag, float maxSpeed)
 		{
+			
 			//Transform default velocity (which is global) to a local velocity
 			SM.LocalVelocity = SM.Cart.transform.InverseTransformDirection(SM.CartRB.velocity);
 
@@ -44,7 +45,11 @@ namespace CartControl
 
 		public void UpdateOrientation(float rotationSpeed, float steeringValue)
 		{
-		
+			if(SM.LocalVelocity.z < 0f)
+			{
+				steeringValue = -steeringValue;
+			}
+
 			if (steeringValue != 0)
 			{
 				SM.Cart.transform.Rotate(Vector3.up

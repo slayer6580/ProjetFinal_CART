@@ -28,11 +28,6 @@ namespace CartControl
 			//If wanted, depending of the coming state, reactivate variables so we can get back to these State after this one
 			if (!m_cartStateMachine.BackToIdleAfterStop)
 			{
-				if (m_comingFromState is CartState_Boosting)
-				{
-					m_cartStateMachine.CanBoost = true;
-				}
-
 				if (m_comingFromState is CartState_Drifting)
 				{
 					m_cartStateMachine.ForceStartDrift = true;
