@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8144971903727694791}
   - component: {fileID: 3131683181568802879}
   - component: {fileID: 6143123381568648334}
-  - component: {fileID: 9039002752409150005}
+  - component: {fileID: 7134744812861887538}
   m_Layer: 5
   m_Name: Cursor
   m_TagString: Untagged
@@ -109,8 +109,8 @@ RectTransform:
   - {fileID: 6380406581089952085}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasRectTransform: {fileID: 0}
---- !u!114 &9039002752409150005
+--- !u!114 &7134744812861887538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,12 +144,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6094376280663931386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424b6720ff5999446843ba414e58a907, type: 3}
+  m_Script: {fileID: 11500000, guid: 90c226fc52b044c469d8b7371b3c68dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_CursorMode: 0
   m_CursorGraphic: {fileID: 8287235738246418179}
   m_CursorTransform: {fileID: 8144971903727694791}
+  m_canvasRectTransform: {fileID: 0}
   m_CursorSpeed: 600
   m_ScrollSpeed: 45
   m_StickAction:
@@ -158,7 +159,7 @@ MonoBehaviour:
       m_Name: Stick
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 97cbe676-472f-4b81-a059-583ea17d39f4
+      m_Id: de520e30-60d6-43b0-a9f8-73492baf1323
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -171,7 +172,7 @@ MonoBehaviour:
       m_Name: Left Button
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 4a957333-eb42-4f0f-9db3-85f9767b8cc9
+      m_Id: 08c3295a-5e52-4ad1-af64-8f4104bf7224
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -184,7 +185,7 @@ MonoBehaviour:
       m_Name: Middle Button
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 036aefe4-9a43-4f6e-9779-49486b543ec4
+      m_Id: 47717864-47c8-49e8-a3e9-9681ffe6968d
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -197,7 +198,7 @@ MonoBehaviour:
       m_Name: Right Button
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 9769161b-a546-4e89-a1c4-bc9725372439
+      m_Id: d7d9d076-5aa5-46bd-9627-fd0303fdd51b
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -210,7 +211,7 @@ MonoBehaviour:
       m_Name: Forward Button
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 3bd5e7a3-ed69-407d-9539-44e1708dda81
+      m_Id: 534b8546-aeec-43ed-8376-7c3ce2a567eb
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -223,7 +224,7 @@ MonoBehaviour:
       m_Name: Back Button
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: d866d04c-2672-48c5-8763-f9aa9b45d318
+      m_Id: 0ad28b2f-2eba-4a70-bd66-656f4bc68c3b
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -236,7 +237,7 @@ MonoBehaviour:
       m_Name: Scroll Wheel
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 01aa600b-68aa-43ff-9ad0-ecfc6d59b728
+      m_Id: 9262e88c-421c-4719-8853-f61f7bcc7c95
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []

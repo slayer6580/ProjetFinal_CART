@@ -1,8 +1,6 @@
-using System;
+using BoxSystem;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using UnityEngine.PlayerLoop;
 
 namespace DiscountDelirium
 {
@@ -15,6 +13,7 @@ namespace DiscountDelirium
         [SerializeField] private SphereCollider AmmunitionCollider;
         [SerializeField] private SphereCollider SphereTrigger;
         private Rigidbody m_rb;
+        [SerializeField] private Range m_rangeWeapon;
 
         [Header("Stats")]
         [SerializeField] float m_speed;
@@ -22,6 +21,7 @@ namespace DiscountDelirium
 
         [Header("Target")]
         [SerializeField] private GameObject m_target;
+        [SerializeField] private float m_minimumDistance;
         private bool m_hasTarget;
 
         private void Awake()
@@ -36,12 +36,6 @@ namespace DiscountDelirium
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.layer == LayerMask.NameToLayer("Target") ||
-                collision.gameObject.layer == LayerMask.NameToLayer("PlayerCollider"))
-            {
-                //do damage
-                Debug.LogWarning("JAI TOUCHER MA CIBLE : " + collision.gameObject.name);
-            }
             HideAmmo();
         }
 
@@ -57,6 +51,11 @@ namespace DiscountDelirium
                     m_target = other.gameObject;
                 }
             }
+        }
+
+        private void Update()
+        {
+            CheckDistanceWithTarget();
         }
 
         private void FixedUpdate() 
@@ -103,7 +102,20 @@ namespace DiscountDelirium
         IEnumerator DeactivateAmmo() 
         {
             yield return new WaitForSeconds(m_timeBeforeDeactivate);
+            HideAmmo();
             this.gameObject.SetActive(false);
+        }
+
+        private void CheckDistanceWithTarget() 
+        {
+            if (m_target != null)
+            {
+                if ((m_target.transform.position - transform.position).magnitude < m_minimumDistance)
+                {
+                    m_rangeWeapon.StealItems(m_target.GetComponent<Target>().GetTower());
+                    HideAmmo();
+                }
+            }
         }
 
     }

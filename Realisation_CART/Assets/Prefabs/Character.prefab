@@ -63094,6 +63094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4475648950564542717}
   - component: {fileID: 495991814001108458}
+  - component: {fileID: 8650396772120584812}
   m_Layer: 6
   m_Name: Cart
   m_TagString: Untagged
@@ -63146,6 +63147,29 @@ CapsuleCollider:
   m_Height: 1.75
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!136 &8650396772120584812
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7674176411844083907}
+  m_Material: {fileID: 13400000, guid: 5cf5114a315417943af337d66dc34900, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.21
+  m_Height: 1.83
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.98, z: -1.06}
 --- !u!1 &7687404334636296198
 GameObject:
   m_ObjectHideFlags: 0
@@ -67346,6 +67370,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
+        type: 3}
+      propertyPath: m_playerTower
+      value: 
+      objectReference: {fileID: 4744102259174695568}
     - target: {fileID: 5497454816491432176, guid: 94c720f557dd56f4499e8bd594eb17f8,
         type: 3}
       propertyPath: m_Name
@@ -67643,6 +67672,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
         type: 3}
+      propertyPath: m_playerTower
+      value: 
+      objectReference: {fileID: 4744102259174695568}
+    - target: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
+        type: 3}
       propertyPath: m_cartStateMachine
       value: 
       objectReference: {fileID: 5976928614607469278}
@@ -67740,6 +67774,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
+        type: 3}
+      propertyPath: m_playerTower
+      value: 
+      objectReference: {fileID: 4744102259174695568}
     - target: {fileID: 5497454816491432176, guid: 94c720f557dd56f4499e8bd594eb17f8,
         type: 3}
       propertyPath: m_Name

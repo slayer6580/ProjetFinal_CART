@@ -4658,7 +4658,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 259071
+    m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -4686,6 +4686,7 @@ MonoBehaviour:
   m_speed: 0
   m_rotateSpeed: 10
   m_target: {fileID: 0}
+  m_minimumDistance: 1.5
 --- !u!135 &7895942059382321017
 SphereCollider:
   m_ObjectHideFlags: 0
