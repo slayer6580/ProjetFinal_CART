@@ -10,7 +10,7 @@ namespace DiscountDelirium
         {
             Debug.LogWarning("GameState : EndGame");
             m_gameStateMachine.m_scoreUI.EnableUI(true);
-            m_gameStateMachine.m_scoreUI.ShowScore(PlayerPrefs.GetInt("Score", 0), m_gameStateMachine.m_nbItems, m_gameStateMachine.m_nbOfCartokens);
+            m_gameStateMachine.m_scoreUI.ShowScore(PlayerPrefs.GetInt("Score", 0), m_gameStateMachine.m_nbItems, m_gameStateMachine.m_nbOfCartokens, m_gameStateMachine.Score);
             m_gameStateMachine.m_playerSM.IsPaused = true;
             OnEndGame.Invoke();
         }

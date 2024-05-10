@@ -9,6 +9,7 @@ namespace DiscountDelirium
     {
         [SerializeField] private GameObject m_panelUI;
 		[SerializeField] private GameObject m_panelUpgrade;
+		[SerializeField] private TextMeshProUGUI m_textTotalScore;
 		[SerializeField] private TextMeshProUGUI m_textScore;
         [SerializeField] private TextMeshProUGUI m_textNbItems;
         [SerializeField] private TextMeshProUGUI m_textNbCartoken;
@@ -21,9 +22,10 @@ namespace DiscountDelirium
             m_panelUI.SetActive(show);
         }
 
-        public void ShowScore(int score, int nbItem, int nbCartoken)
+        public void ShowScore(int totalScore, int nbItem, int nbCartoken, int score)
         {
             m_textScore.text = "Your score: " + score.ToString();
+            m_textTotalScore.text = "Your total score: " + totalScore.ToString();  
             m_textNbItems.text = "Number of items: " + nbItem.ToString();
 			m_textNbCartoken.text = "Number of cartokens: " + nbCartoken.ToString();
         }
