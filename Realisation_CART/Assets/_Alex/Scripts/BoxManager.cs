@@ -73,8 +73,7 @@ namespace BoxSystem
             float halfHeightMinusHalfThickness = halfHeight - halfThickness;
             float HalfLenghtAndHalfThickness = halfLength + halfThickness;
 
-            Transform boxGraphics = box.transform.GetChild(1);
-
+            Transform boxGraphics = box.transform.GetChild(1).transform.GetChild(0);
 
             // bottom
             Transform boxBottom = boxGraphics.transform.GetChild(0);       

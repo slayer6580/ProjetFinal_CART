@@ -61,7 +61,9 @@ namespace BoxSystem
         private void SnapToBox()
         {
             // set le parent comm étaant le graphique
-            transform.SetParent(m_boxTransform);
+            Transform allGraphics = m_boxTransform.GetChild(1);
+            transform.SetParent(allGraphics);
+           // transform.SetParent(m_boxTransform);
 
             transform.localPosition = m_targetLocalPosition;
             transform.localScale = m_targetedScale;  
@@ -92,6 +94,11 @@ namespace BoxSystem
 
             float slerpTime = m_timer / m_slerpTime;
             m_timer += Time.deltaTime;
+
+            if (m_box == null) 
+            { 
+                Destroy(this.gameObject);
+            }
 
             Vector3 boxLocalPosition = m_box.transform.position + m_targetLocalPosition;
 
