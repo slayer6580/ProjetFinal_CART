@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -16,6 +17,7 @@ namespace DiscountDelirium
             MainMenuInputHandler.SelectEvent += PlayerReady;
             StartGameTimer.OnStartingTimeEnded += StartGame;
             m_gameStateMachine.m_playerSM.IsPaused = true;
+            _AudioManager.StartCurrentSceneMusic();
         }
 
         public override void OnUpdate()

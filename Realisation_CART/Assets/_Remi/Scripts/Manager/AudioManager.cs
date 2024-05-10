@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 namespace Manager
@@ -22,10 +23,10 @@ namespace Manager
         private AudioSource MusicAudioSource { get; set; }
         public static AudioManager _AudioManager { get; private set; }
 
-        [SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
-        [SerializeField] public EMusic LevelOneMusic { get; private set; } = EMusic.Cart_Song_01;
-        [SerializeField] public EMusic LevelTwoMusic { get; private set; } = EMusic.Cart_Song_02;
-        [SerializeField] public EMusic WaitingRoomMusic { get; private set; } = EMusic.WaitingRoomMusic;
+        [field: SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
+        [field: SerializeField] public EMusic LevelOneMusic { get; private set; } = EMusic.Cart_Song_01;
+        [field: SerializeField] public EMusic LevelTwoMusic { get; private set; } = EMusic.Cart_Song_02;
+        [field: SerializeField] public EMusic TutorialMusic { get; private set; } = EMusic.WaitingRoomMusic;
 
         [SerializeField] private int m_numberOfAudioBox = 10;
         [SerializeField] private bool m_isClientSoundEnabled = true;
@@ -216,7 +217,7 @@ namespace Manager
             else if (sceneName == "Tutorial")
             { 
                 Debug.Log("Playing WaitingRoomMusic");
-                PlayMusic(_AudioManager.WaitingRoomMusic);
+                PlayMusic(_AudioManager.TutorialMusic);
             }
             else if (sceneName == "Level01")
             {
@@ -296,6 +297,16 @@ namespace Manager
         private void DesactivateMusic()
         {
             GetComponent<AudioSource>().Stop();
+        }
+
+        public void SetTutorialMusic(EMusic newSong)
+        {
+            TutorialMusic = newSong;
+        }
+
+        public void SetMainMenuMusic(EMusic newSong)
+        {
+            MainMenuMusic = newSong;
         }
     }
 }
