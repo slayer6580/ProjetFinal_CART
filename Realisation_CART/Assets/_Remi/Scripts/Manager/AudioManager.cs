@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Manager
 {
@@ -60,10 +61,12 @@ namespace Manager
         }
 
         /// <summary> This enum is used to store all the sound modifications in the game </summary>
-        public enum ESoundModification
+        public enum EAudioModification
         {
-            Pitch,
-            Volume,
+            SoundPitch,
+            SoundVolume,
+            MusicPitch,
+            MusicVolume,
             Count
         }
 
@@ -100,8 +103,8 @@ namespace Manager
             if (MusicAudioSource == null) Debug.LogError("No AudioSource on AudioManager");
         }
 
-        /// <summary> Modify the pitch or volume of a sound </summary>
-        public void ModifySound(int index, ESoundModification modif, float value)
+        /// <summary> Modify the pitch or volume of a sound of a music </summary>
+        public void ModifyAudio(int index, EAudioModification modif, float value)
         {
             if (index < 0 || index >= m_audioBox.Count)
             {
@@ -111,13 +114,21 @@ namespace Manager
 
             AudioSource audioSource = m_audioBox[index]._AudioSource;
 
-            if (modif == ESoundModification.Pitch)
+            if (modif == EAudioModification.SoundPitch)
             {
                 audioSource.pitch = value;
             }
-            else if (modif == ESoundModification.Volume)
+            else if (modif == EAudioModification.SoundVolume)
             {
                 audioSource.volume = value;
+            }
+            else if (modif == EAudioModification.MusicPitch)
+            {
+                MusicAudioSource.pitch = value;
+            }
+            else if (modif == EAudioModification.MusicVolume)
+            {
+                MusicAudioSource.volume = value;
             }
         }
 
@@ -203,32 +214,35 @@ namespace Manager
         }
 
         /// <summary> Start the music of the current scene </summary>
-        public void StartCurrentSceneMusic()
+        public int StartCurrentSceneMusic()
         {
             Debug.Log("StartCurrentSceneMusic");
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
+            int index = -1;
 
             if (sceneName == "MainMenu")
             {
                 Debug.Log("Playing MainMenuMusic");
-                PlayMusic(_AudioManager.MainMenuMusic);
+                index = PlayMusic(_AudioManager.MainMenuMusic);
             }
             else if (sceneName == "Tutorial")
             { 
                 Debug.Log("Playing WaitingRoomMusic");
-                PlayMusic(_AudioManager.TutorialMusic);
+                index = PlayMusic(_AudioManager.TutorialMusic);
             }
             else if (sceneName == "Level01")
             {
                 Debug.Log("Playing LevelOneMusic");
-                PlayMusic(_AudioManager.LevelOneMusic); 
+                index = PlayMusic(_AudioManager.LevelOneMusic); 
             }
             else if (sceneName == "Level02")
             { 
                 Debug.Log("Playing LevelTwoMusic");
-                PlayMusic(_AudioManager.LevelTwoMusic);
+                index = PlayMusic(_AudioManager.LevelTwoMusic);
             }
+
+            return index;
         }
 
         /// <summary> Play a music </summary>
@@ -307,6 +321,13 @@ namespace Manager
         public void SetMainMenuMusic(EMusic newSong)
         {
             MainMenuMusic = newSong;
+        }
+
+        public void SetVolume(int audioBoxIndex, float sliderValue, string playerPrefValue)
+        {
+            Debug.Log("SetVolume");
+            ModifyAudio(audioBoxIndex, EAudioModification.SoundVolume, sliderValue);
+            PlayerPrefs.SetFloat(playerPrefValue, sliderValue);
         }
     }
 }
