@@ -303,9 +303,11 @@ namespace UnityEngine.InputSystem.UI
             // Set initial cursor position.
             if (m_CursorTransform != null)
             {
-                var position = m_CursorTransform.anchoredPosition;
-                InputState.Change(m_VirtualMouse.position, position);
-                m_SystemMouse?.WarpCursorPosition(position);
+                var middlePosition = new Vector2(Screen.width / 2, Screen.height / 2);
+
+                //var position = m_CursorTransform.anchoredPosition;
+                InputState.Change(m_VirtualMouse.position, middlePosition);
+                m_SystemMouse?.WarpCursorPosition(middlePosition);
             }
 
             // Hook into input update.
@@ -438,7 +440,8 @@ namespace UnityEngine.InputSystem.UI
 
                 // Compute delta.
                 var deltaTime = (float)(currentTime - m_LastTime);
-                var delta = new Vector2(m_CursorSpeed * stickValue.x * deltaTime, m_CursorSpeed * stickValue.y * deltaTime);
+                var newSpeed = m_CursorSpeed * Screen.width / m_basedResolution.x;
+                var delta = new Vector2(newSpeed * stickValue.x * deltaTime, newSpeed * stickValue.y * deltaTime);
 
                 // Update position.
                 var currentPosition = m_VirtualMouse.position.value;
@@ -496,11 +499,13 @@ namespace UnityEngine.InputSystem.UI
         [Header("Our stuff")]
         [Tooltip("Should fix")]
         [SerializeField] private RectTransform m_canvasRectTransform;
-        
+
 
         [Header("Motion")]
         [Tooltip("Speed in pixels per second with which to move the cursor. Scaled by the input from 'Stick Action'.")]
         [SerializeField] private float m_CursorSpeed = 400;
+        [Tooltip("Speed in pixels per second with which to move the cursor. Scaled by the input from 'Stick Action'.")]
+        [SerializeField] private Vector2 m_basedResolution = new Vector2(1920, 1080);
         [Tooltip("Scale factor to apply to 'Scroll Wheel Action' when setting the mouse 'scrollWheel' control.")]
         [SerializeField] private float m_ScrollSpeed = 45;
 
