@@ -7,7 +7,7 @@ namespace StatsSystem
         [Header("All Materials")]
         [SerializeField] private Material[] m_cartMaterials;
         [SerializeField] private Material[] m_wheelsMaterials;
-        [SerializeField] private Color32[] m_shoesColors;
+        [SerializeField] private Material[] m_shoesMaterials;
         [SerializeField] private Material[] m_rocketMaterials;
 
         [Header("All Parts")]
@@ -54,12 +54,10 @@ namespace StatsSystem
 
         private void UpdateShoes()
         {
-            if (m_shoePart == null)
-                return;
-
             int shoesUpgrade = PlayerPrefs.GetInt("Acceleration", 0);
+
             Material shoeMaterial = m_shoePart.materials[2];
-            shoeMaterial.color = m_shoesColors[shoesUpgrade];
+            shoeMaterial = m_shoesMaterials[shoesUpgrade];
         }
 
         private void UpdateRockets()
