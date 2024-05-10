@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Manager
 {
@@ -9,20 +10,25 @@ namespace Manager
     {
         [field: Header("Put all audio sounds here, read the Tooltip for the sound order")]
         [Tooltip("CartCollision\nCartRolling\nStep01\nStep02\nStep03\nStep04\nGrabItem\nDriftBegin\nDriftLoop\nCashRegister")]
-        [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[2];
+        [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[12];
+        [Tooltip("ThemeMusic\nCart_Song_01\nCart_Song_02\nWaitingRoomMusic")]
+        [SerializeField] private AudioClip[] m_musicPool = new AudioClip[4];
 
         [SerializeField] private GameObject m_audioBoxPrefab;
 
         [Header("Put all AudioBox here")]
         [SerializeField] private List<AudioBox> m_audioBox;
 
-        private AudioSource AudioManagerSource { get; set;}
-
-        private Dictionary<ESoundType, AudioClip[]> m_soundsByType = new Dictionary<ESoundType, AudioClip[]>();
-
+        private AudioSource MusicAudioSource { get; set; }
         public static AudioManager _AudioManager { get; private set; }
 
+        [SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
+        [SerializeField] public EMusic LevelOneMusic { get; private set; } = EMusic.Cart_Song_01;
+        [SerializeField] public EMusic LevelTwoMusic { get; private set; } = EMusic.Cart_Song_02;
+        [SerializeField] public EMusic WaitingRoomMusic { get; private set; } = EMusic.WaitingRoomMusic;
+
         [SerializeField] private int m_numberOfAudioBox = 10;
+        [SerializeField] private bool m_isClientSoundEnabled = true;
 
         /// <summary> This enum is used to store all the sounds in the game </summary>
         public enum ESound
@@ -39,6 +45,16 @@ namespace Manager
             CashRegister,
             MeleeSwoosh,
             CannonSound,
+            Count
+        }
+
+        /// <summary> This enum is used to store all the music in the game </summary>
+        public enum EMusic
+        {
+            ThemeMusic,
+            Cart_Song_01,
+            Cart_Song_02,
+            WaitingRoomMusic,
             Count
         }
 
@@ -62,6 +78,7 @@ namespace Manager
 
         private void Awake()
         {
+            Debug.Log("AudioManager Awake");
             if (_AudioManager != null)
             {
                 Debug.LogWarning("AudioManager already exists.");
@@ -77,11 +94,9 @@ namespace Manager
                 m_audioBox.Add(audioBox.GetComponent<AudioBox>());
                 audioBox.transform.SetParent(transform);
             }
-        }
 
-        private void Start()
-        {
-            AudioManagerSource = GetComponent<AudioSource>();
+            MusicAudioSource = GetComponent<AudioSource>();
+            if (MusicAudioSource == null) Debug.LogError("No AudioSource on AudioManager");
         }
 
         /// <summary> Modify the pitch or volume of a sound </summary>
@@ -106,10 +121,10 @@ namespace Manager
         }
 
         /// <summary> Play a sound effect one shot </summary>
-        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition, float volume = 1)
+        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition, float volume = 1, bool isPlayer = false)
         {
             AudioBox audiobox = FindAValidAudioBox();
-            
+
             if (audiobox == null)
                 return;
 
@@ -117,7 +132,7 @@ namespace Manager
             audiobox.m_isPlaying = true;
             audiobox.GetComponent<AudioSource>().volume = volume;
 
-			MoveAudioBox(audiobox, newPosition);
+            MoveAudioBox(audiobox, newPosition);
             PlayClipOneShot(audiobox, sound);
             StartCoroutine(ReActivateAudioBox(audiobox, clip));
         }
@@ -133,7 +148,7 @@ namespace Manager
 
             AudioBox audiobox = FindAValidAudioBox();
 
-			int index = m_audioBox.IndexOf(audiobox);
+            int index = m_audioBox.IndexOf(audiobox);
 
             if (audiobox == null)
                 return -1;
@@ -149,7 +164,7 @@ namespace Manager
         }
 
         /// <summary> Play a sound one shot at a position </summary>
-        public int PlaySoundEffectsLoop(ESound sound,  Vector3 newPosition)
+        public int PlaySoundEffectsLoop(ESound sound, Vector3 newPosition)
         {
             AudioBox audiobox = FindAValidAudioBox();
             int index = m_audioBox.IndexOf(audiobox);
@@ -177,7 +192,7 @@ namespace Manager
             AudioSource audioSource = audiobox.GetComponent<AudioSource>();
             audioSource.pitch = 1;
             audioSource.volume = 1;
-			audioSource.Stop();
+            audioSource.Stop();
             audiobox.m_isPlaying = false;
 
             if (audiobox.transform.parent != transform)
@@ -185,6 +200,52 @@ namespace Manager
                 audiobox.transform.SetParent(transform);
             }
         }
+
+        /// <summary> Start the music of the current scene </summary>
+        public void StartCurrentSceneMusic()
+        {
+            Debug.Log("StartCurrentSceneMusic");
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+
+            if (sceneName == "MainMenu")
+            {
+                Debug.Log("Playing MainMenuMusic");
+                PlayMusic(_AudioManager.MainMenuMusic);
+            }
+            else if (sceneName == "Tutorial")
+            { 
+                Debug.Log("Playing WaitingRoomMusic");
+                PlayMusic(_AudioManager.WaitingRoomMusic);
+            }
+            else if (sceneName == "Level01")
+            {
+                Debug.Log("Playing LevelOneMusic");
+                PlayMusic(_AudioManager.LevelOneMusic); 
+            }
+            else if (sceneName == "Level02")
+            { 
+                Debug.Log("Playing LevelTwoMusic");
+                PlayMusic(_AudioManager.LevelTwoMusic);
+            }
+        }
+
+        /// <summary> Play a music </summary>
+        public int PlayMusic(EMusic music)
+        {
+            AudioBox audiobox = FindAValidAudioBox();
+            int index = m_audioBox.IndexOf(audiobox);
+
+            if (audiobox == null)
+                return -1;
+
+            audiobox.m_isPlaying = true;
+            MusicAudioSource.clip = m_musicPool[(int)music];
+            MusicAudioSource.volume = PlayerPrefs.GetFloat("MusicVolume", 1);
+            MusicAudioSource.Play();
+            return index;
+        }
+
 
         /// <summary> Find an audioBox in the audiobox pool </summary>
         private AudioBox FindAValidAudioBox()

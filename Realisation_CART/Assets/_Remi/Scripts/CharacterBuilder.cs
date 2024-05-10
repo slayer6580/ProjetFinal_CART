@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
+using System.Collections.Generic;
 
 namespace Spawner
 {
@@ -633,12 +632,12 @@ namespace Spawner
             string materialPath05 = "Assets/_Remi/Materials/Skin.mat";
             string materialPath06 = "Assets/_Remi/Materials/Shoes.mat";
 
-            m_polygonKids_Material_01_A = (Material)AssetDatabase.LoadAssetAtPath(materialPath01, typeof(Material));
-            m_polygonKids_Material_02_A = (Material)AssetDatabase.LoadAssetAtPath(materialPath02, typeof(Material));
-            m_polygonKids_Material_03_A = (Material)AssetDatabase.LoadAssetAtPath(materialPath03, typeof(Material));
-            m_polygonKids_Material_04_A = (Material)AssetDatabase.LoadAssetAtPath(materialPath04, typeof(Material));
-            m_skin_Mat = (Material)AssetDatabase.LoadAssetAtPath(materialPath05, typeof(Material));
-            m_shoes_Mat = (Material)AssetDatabase.LoadAssetAtPath(materialPath06, typeof(Material));
+            m_polygonKids_Material_01_A = Resources.Load<Material>(materialPath01);
+            m_polygonKids_Material_02_A = Resources.Load<Material>(materialPath02);
+            m_polygonKids_Material_03_A = Resources.Load<Material>(materialPath03);
+            m_polygonKids_Material_04_A = Resources.Load<Material>(materialPath04);
+            m_skin_Mat = Resources.Load<Material>(materialPath05);
+            m_shoes_Mat = Resources.Load<Material>(materialPath06);
 
 
             //PolygonKids_Material_01_A = Resources.Load<Material>("Assets/PolygonKids/Materials/PolygonKids_Material_01_A");
