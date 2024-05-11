@@ -18,6 +18,7 @@ MonoBehaviour:
   m_position: {x: -1059, y: 532}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -66,6 +67,7 @@ MonoBehaviour:
   m_position: {x: 1271.5, y: 1058}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -93,6 +95,56 @@ MonoBehaviour:
     m_chosenTarget: 0
   m_description: 
   m_alsoClearChosePathList: 1
+--- !u!114 &-7623184281317339678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: e33567377b3ed954dbfcc23023faea75
+  m_position: {x: 876, y: 600}
+  m_blackboard:
+    m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+    m_pursuitTenacity: 0
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_lastAttackTimer: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+  m_description: 
+  m_children:
+  - {fileID: -5446233131730551066}
+  - {fileID: 2381724616244566691}
+  - {fileID: 9077540666558862777}
+  - {fileID: 6621867468774133448}
 --- !u!114 &-7300845627064142016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +163,7 @@ MonoBehaviour:
   m_position: {x: 1527, y: 749}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -155,9 +208,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: e83d83a06a395844b86b742e26cc64c4
-  m_position: {x: 158, y: 1168}
+  m_position: {x: 100.50006, y: 1168.0001}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -186,6 +240,8 @@ MonoBehaviour:
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
+  m_pathScores: []
+  m_allClosestDistance: []
 --- !u!114 &-7183775909487845448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +260,7 @@ MonoBehaviour:
   m_position: {x: 1880, y: 1182}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -253,6 +310,7 @@ MonoBehaviour:
   m_position: {x: 1743, y: 867}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -299,6 +357,7 @@ MonoBehaviour:
   m_position: {x: -250.99986, y: 73.880005}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -342,9 +401,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: ec88ebbcba1a4bc46816799b300f8111
-  m_position: {x: 878, y: 908}
+  m_position: {x: 830.49994, y: 910.0001}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -389,6 +449,7 @@ MonoBehaviour:
   m_position: {x: -1278.1003, y: 810.00006}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -431,9 +492,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: fbf1d50e45c0fa6498f8867a9671e933
-  m_position: {x: -587.6075, y: 1169}
+  m_position: {x: -601.0001, y: 1292.05}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -479,9 +541,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: f26ac3ff8dac808479b8ddead5abe086
-  m_position: {x: 697.0001, y: 603}
+  m_position: {x: 713, y: 724}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -523,9 +586,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: e2dfd518995ffbd4286ed30e5c0aa00d
-  m_position: {x: 411, y: 910}
+  m_position: {x: 363.49982, y: 912.0001}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -571,6 +635,7 @@ MonoBehaviour:
   m_position: {x: 2056, y: 1020}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -612,9 +677,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 0bd2bac0ccb3d4f40b01d06db1fecabf
-  m_position: {x: 497, y: 603}
+  m_position: {x: 516.99994, y: 545.99994}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -643,6 +709,7 @@ MonoBehaviour:
   m_description: 
   m_children:
   - {fileID: -2147730505803548934}
+  - {fileID: -7623184281317339678}
   m_underSpeedToCountAsStuck: 2
   m_timeBeforeUnstuck: 0.5
 --- !u!114 &-4268366552067743945
@@ -663,6 +730,7 @@ MonoBehaviour:
   m_position: {x: 1468.5, y: 1058}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -712,6 +780,7 @@ MonoBehaviour:
   m_position: {x: -250.99986, y: 249.88}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -740,6 +809,8 @@ MonoBehaviour:
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
+  m_pathScores: []
+  m_allClosestDistance: []
 --- !u!114 &-3088502018567942643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,9 +826,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 36e1668021897e046b95bc194fb24691
-  m_position: {x: -449.60754, y: 1015}
+  m_position: {x: -480.0001, y: 1089}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -804,9 +876,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: b7babe755acb9ba4bbfd6fba8a15ab16
-  m_position: {x: 622, y: 1204}
+  m_position: {x: 574.4999, y: 1206}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -835,6 +908,8 @@ MonoBehaviour:
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
+  m_pathScores: []
+  m_allClosestDistance: []
 --- !u!114 &-2147730505803548934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,6 +928,7 @@ MonoBehaviour:
   m_position: {x: 497, y: 755}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -900,9 +976,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: f8618c8047451ed4fb0e02f1ea02ded0
-  m_position: {x: -599.6075, y: 1370}
+  m_position: {x: -613.0002, y: 1493.05}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -947,6 +1024,7 @@ MonoBehaviour:
   m_position: {x: 1906, y: 697}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -975,9 +1053,9 @@ MonoBehaviour:
   m_description: 
   m_children:
   - {fileID: -98252233047386408}
-  m_slowReachDistance: 2
+  m_slowReachDistance: 4
   m_fastReachDistance: 8
-  m_minSpeedForFastDistance: 12
+  m_minSpeedForFastDistance: 6
 --- !u!114 &-1093377420723125832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,6 +1074,7 @@ MonoBehaviour:
   m_position: {x: -428.60754, y: 798}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1023,7 +1102,7 @@ MonoBehaviour:
     m_chosenTarget: 0
   m_description: 
   m_children:
-  - {fileID: -3088502018567942643}
+  - {fileID: 2918553551819896199}
 --- !u!114 &-841617667201203911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,6 +1121,7 @@ MonoBehaviour:
   m_position: {x: -912, y: 810}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1087,6 +1167,7 @@ MonoBehaviour:
   m_position: {x: -42.99985, y: 11.88002}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1132,6 +1213,7 @@ MonoBehaviour:
   m_position: {x: -9.9999075, y: -167.12}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1182,6 +1264,7 @@ MonoBehaviour:
   m_position: {x: 1993.5, y: 859}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1236,7 +1319,6 @@ MonoBehaviour:
   - {fileID: 2381724616244566691}
   - {fileID: -1903758984178049680}
   - {fileID: -4791587659610497402}
-  - {fileID: 538548600534256174}
   - {fileID: 6621867468774133448}
   - {fileID: -4462508058658981125}
   - {fileID: 5524113455789299981}
@@ -1289,8 +1371,11 @@ MonoBehaviour:
   - {fileID: -8527583909010379023}
   - {fileID: 5229278021665654635}
   - {fileID: 8134765450560944155}
+  - {fileID: -7623184281317339678}
+  - {fileID: 2918553551819896199}
   m_blackboard:
     m_wantMostActiveShelves: 5
+    m_wantClosestPath: 5
     m_sightRange: 30
     m_sightHalfAngle: 90
     m_aggressiveness: 40
@@ -1316,53 +1401,6 @@ MonoBehaviour:
     m_clientInSight: []
     m_isAttacking: 0
     m_chosenTarget: 0
---- !u!114 &538548600534256174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d556fc0ad1c5494c96eb9c88e18fc9b, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  m_state: 0
-  m_started: 0
-  m_guid: e122365f12ce9544b831af14400a0eec
-  m_position: {x: 1115.3003, y: 602.99994}
-  m_blackboard:
-    m_wantMostActiveShelves: 0
-    m_sightRange: 0
-    m_sightHalfAngle: 0
-    m_aggressiveness: 0
-    m_tacticalAttack: 0
-    m_pursuitTenacity: 0
-    m_name: 
-    m_thisClient: {fileID: 0}
-    m_cartStateMachine: {fileID: 0}
-    m_navAgent: {fileID: 0}
-    m_chosenPathListCopy: []
-    m_possiblePathScript: {fileID: 0}
-    m_thisTower: {fileID: 0}
-    m_cashRegister: {fileID: 0}
-    m_path: []
-    m_pathDebugBox: []
-    m_target: {x: 0, y: 0, z: 0}
-    m_targetAngle: 0
-    m_currentPursuitStartTime: 0
-    m_currentSpeed: 0
-    m_stuckAtTime: 0
-    m_timeStuck: 0
-    m_lastAttackTimer: 0
-    m_clientInSight: []
-    m_isAttacking: 0
-    m_chosenTarget: 0
-  m_description: 
-  m_children:
-  - {fileID: 9077540666558862777}
-  - {fileID: 6621867468774133448}
 --- !u!114 &687860318492330590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,6 +1419,7 @@ MonoBehaviour:
   m_position: {x: 1385.5, y: 867}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1425,9 +1464,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 19bf4726a4376124fa7036475e4c6843
-  m_position: {x: 890.0001, y: 603}
+  m_position: {x: 828, y: 786}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1469,9 +1509,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 851c530a607f049428859c08538732c2
-  m_position: {x: 1297.8503, y: 678}
+  m_position: {x: 1152, y: 749}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1518,6 +1559,7 @@ MonoBehaviour:
   m_position: {x: -454.99985, y: 11.88002}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1544,6 +1586,53 @@ MonoBehaviour:
     m_isAttacking: 0
     m_chosenTarget: 0
   m_description: 
+--- !u!114 &2918553551819896199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869dadc4dadef45408467521146e52d5, type: 3}
+  m_Name: IsChosenPathEmpty
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 0e3926826cbcf0148b884fe4ef70473c
+  m_position: {x: -448.05023, y: 953}
+  m_blackboard:
+    m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+    m_pursuitTenacity: 0
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_lastAttackTimer: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+  m_description: 
+  m_children:
+  - {fileID: -3088502018567942643}
 --- !u!114 &3157754513854017931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1562,6 +1651,7 @@ MonoBehaviour:
   m_position: {x: 1115, y: 1051}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1603,9 +1693,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 80ae7745b95df4d4cbf8e0fc96961ccb
-  m_position: {x: -796.60754, y: 1401}
+  m_position: {x: -810.0001, y: 1524.05}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1651,6 +1742,7 @@ MonoBehaviour:
   m_position: {x: -507.60754, y: 589}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1698,6 +1790,7 @@ MonoBehaviour:
   m_position: {x: -614.60754, y: 953}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1726,6 +1819,8 @@ MonoBehaviour:
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
+  m_pathScores: []
+  m_allClosestDistance: []
 --- !u!114 &3778664347256038504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1774,9 +1869,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 0f0ef273a1c709549adbc12fe6b4a386
-  m_position: {x: 158, y: 1027}
+  m_position: {x: 100.50006, y: 1027.0001}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1820,9 +1916,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: d9ad4e93be220da41994c7d3eac0944c
-  m_position: {x: -387.60754, y: 1370}
+  m_position: {x: -401.00012, y: 1493.05}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1851,6 +1948,8 @@ MonoBehaviour:
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
+  m_pathScores: []
+  m_allClosestDistance: []
 --- !u!114 &4054390637786178586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1869,6 +1968,7 @@ MonoBehaviour:
   m_position: {x: -715.60754, y: 767}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1916,6 +2016,7 @@ MonoBehaviour:
   m_position: {x: 198.0001, y: 12.000015}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -1961,6 +2062,7 @@ MonoBehaviour:
   m_position: {x: 4.0001564, y: -308.12}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2003,9 +2105,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 0a379b160de116e46adf0fe890f3dde7
-  m_position: {x: 279, y: 910}
+  m_position: {x: 231.49991, y: 912.0001}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2047,9 +2150,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: a7fee66af73ea524db8c2c9ac14fb94f
-  m_position: {x: -42, y: 732}
+  m_position: {x: -99.5, y: 732.00006}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2097,6 +2201,7 @@ MonoBehaviour:
   m_position: {x: 1656.5, y: 1206}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2139,9 +2244,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 1f4083b1f2ce5264cb2cca2e12950728
-  m_position: {x: -68, y: 1027}
+  m_position: {x: -125.50001, y: 1027.0001}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2187,6 +2293,7 @@ MonoBehaviour:
   m_position: {x: -263, y: 164}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2232,6 +2339,7 @@ MonoBehaviour:
   m_position: {x: -1061, y: 682}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2280,6 +2388,7 @@ MonoBehaviour:
   m_position: {x: -838.60754, y: 953}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2322,9 +2431,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: b69b943e2f96fa34f8f2de713579dfb0
-  m_position: {x: -150, y: 879}
+  m_position: {x: -207.49998, y: 879.00006}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2353,6 +2463,8 @@ MonoBehaviour:
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
+  m_pathScores: []
+  m_allClosestDistance: []
 --- !u!114 &6395653200498369148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2371,6 +2483,7 @@ MonoBehaviour:
   m_position: {x: 198, y: 404}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2403,9 +2516,6 @@ MonoBehaviour:
   - {fileID: 3470082787392812884}
   - {fileID: 8102339749280047600}
   - {fileID: -4462508058658981125}
-  - {fileID: -5446233131730551066}
-  - {fileID: 2381724616244566691}
-  - {fileID: 538548600534256174}
   - {fileID: 7605722226867609731}
 --- !u!114 &6621867468774133448
 MonoBehaviour:
@@ -2422,9 +2532,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 0d98774fedcd09140ac397c7457b6862
-  m_position: {x: 1230, y: 797}
+  m_position: {x: 1025, y: 786}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2471,6 +2582,7 @@ MonoBehaviour:
   m_position: {x: 1730, y: 1333}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2512,9 +2624,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 7dad5df4884d4fb45bbf3bb2a08fa371
-  m_position: {x: 695, y: 910}
+  m_position: {x: 647.4999, y: 912.0001}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2559,6 +2672,7 @@ MonoBehaviour:
   m_position: {x: -1101.25, y: 822.00006}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2603,6 +2717,7 @@ MonoBehaviour:
   m_position: {x: 1579, y: 579}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2647,9 +2762,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: c8cc1548652d3bf4eace376c262aa327
-  m_position: {x: 630, y: 1051}
+  m_position: {x: 582.4999, y: 1053.0002}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2693,9 +2809,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 286b8a2253420d849a0798e96af54be5
-  m_position: {x: 436, y: 1051}
+  m_position: {x: 388.49985, y: 1053.0002}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2738,9 +2855,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 344bb7fa7558bda49a3d41d316ff3d10
-  m_position: {x: 49, y: 872}
+  m_position: {x: -8.499992, y: 872.00006}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2785,9 +2903,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 9549bf8b0b7d5c546979e19f1cd5576f
-  m_position: {x: -42, y: 589}
+  m_position: {x: -99.5, y: 589}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2816,7 +2935,7 @@ MonoBehaviour:
   m_description: 
   m_child: {fileID: 5146433837548686172}
   m_everyXLoop: 5
-  m_loopDone: 3
+  m_loopDone: 0
 --- !u!114 &8134765450560944155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2835,6 +2954,7 @@ MonoBehaviour:
   m_position: {x: 1768, y: 996}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2882,6 +3002,7 @@ MonoBehaviour:
   m_position: {x: -237.99991, y: 11.88002}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2928,6 +3049,7 @@ MonoBehaviour:
   m_position: {x: -1329, y: 527}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -2969,9 +3091,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 65dd88128d7c377418e9ef4f57674a37
-  m_position: {x: 530.5, y: 905}
+  m_position: {x: 483.49994, y: 907.0001}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -3016,9 +3139,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: dcf0238ea18715b4c971a2bf155a1ef0
-  m_position: {x: 1040.0002, y: 797}
+  m_position: {x: 943, y: 724}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -3062,9 +3186,10 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: ac4684a8d4ba1814bbff8ce7b286d5ee
-  m_position: {x: -299.60754, y: 1173}
+  m_position: {x: -313.00012, y: 1296.05}
   m_blackboard:
     m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
     m_sightRange: 0
     m_sightHalfAngle: 0
     m_aggressiveness: 0
@@ -3093,3 +3218,5 @@ MonoBehaviour:
   m_description: 
   m_debugBox: {fileID: 3347680828441984461, guid: db903d04169552a4ba371f525ec0ab8b,
     type: 3}
+  m_pathScores: []
+  m_allClosestDistance: []

@@ -9,6 +9,10 @@ namespace BehaviourTree
 		private const float MAX_STEERING = 5;
 		private float m_steerValue = 0;
 
+		private Vector3 m_targetDir;
+		private Vector3 m_forward;
+		private float m_angle;
+		private float m_steerPercent;
 		protected override void OnStart()
 		{
 		}
@@ -19,23 +23,23 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			Vector3 targetDir = new Vector3(m_blackboard.m_target.x,
+			m_targetDir = new Vector3(m_blackboard.m_target.x,
 											m_blackboard.m_thisClient.transform.position.y,
 											m_blackboard.m_target.z) - m_blackboard.m_thisClient.transform.position;
 
-			Vector3 forward = m_blackboard.m_thisClient.transform.forward;
-			float angle = Vector3.SignedAngle(targetDir, forward, Vector3.up);
-			m_blackboard.m_targetAngle = angle;
+			m_forward = m_blackboard.m_thisClient.transform.forward;
+			m_angle = Vector3.SignedAngle(m_targetDir, m_forward, Vector3.up);
+			m_blackboard.m_targetAngle = m_angle;
 
-			float steerPercent = (Mathf.Abs(angle) / (90 - m_steerForce));
+			m_steerPercent = (Mathf.Abs(m_angle) / (90 - m_steerForce));
 
-			if (angle > 2)
+			if (m_angle > 2)
 			{
-				m_steerValue = -steerPercent;
+				m_steerValue = -m_steerPercent;
 			}
-			else if (angle < -2)
+			else if (m_angle < -2)
 			{
-				m_steerValue = steerPercent;
+				m_steerValue = m_steerPercent;
 			}
 			else
 			{

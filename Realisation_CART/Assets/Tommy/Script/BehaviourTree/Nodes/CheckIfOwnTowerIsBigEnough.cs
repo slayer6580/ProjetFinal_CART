@@ -20,7 +20,7 @@ namespace BehaviourTree
 
 		protected override State OnUpdate()
 		{
-			if(m_blackboard.m_thisTower.GetBoxCount() >= boxNeeded)
+			if(m_blackboard.m_thisTower.GetBoxCount() >= boxNeeded && m_blackboard.m_chosenPathListCopy.Count == 0)
 			{
 				return m_children[0].Update();
 			}

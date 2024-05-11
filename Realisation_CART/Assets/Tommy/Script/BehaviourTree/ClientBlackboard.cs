@@ -13,6 +13,7 @@ namespace BehaviourTree
     {
 		[Header("Client Stats")]
 		[Range(1, 10)] public float m_wantMostActiveShelves;
+		[Range(1, 10)] public float m_wantClosestPath;
 		[Range(5, 30)] public float m_sightRange;
 		[Range(15, 180)] public float m_sightHalfAngle;
 		[Range(1, 100)] public float m_aggressiveness;

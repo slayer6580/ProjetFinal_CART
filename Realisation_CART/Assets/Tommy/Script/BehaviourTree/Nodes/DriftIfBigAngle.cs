@@ -26,11 +26,6 @@ namespace BehaviourTree
 				m_blackboard.m_cartStateMachine.OnDrift(0);
 			}
 
-			if (m_blackboard.m_targetAngle > m_minAngleToStartBreaking || m_blackboard.m_targetAngle < -m_minAngleToStartBreaking)
-			{
-				m_blackboard.m_cartStateMachine.OnBackward(0.5f);
-			}
-
 			return State.Success;
 		}
 	}

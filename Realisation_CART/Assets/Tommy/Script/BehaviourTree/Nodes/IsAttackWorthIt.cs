@@ -6,10 +6,13 @@ namespace BehaviourTree
 {
 	public class IsAttackWorthIt : CompositeNode
 	{
-		private List<float> m_attackScore = new List<float>();
+		private List<float> m_attackScores = new List<float>();
 		public bool m_chooseToAttack;
 		public float m_minTimeBetweenAttack;
 		private float m_lastLoopTime = 0;
+		private int m_targetsBoxCount;
+		private int m_boxCountDif;
+		private float m_attackScore;
 
 
 		protected override void OnStart()
@@ -21,10 +24,6 @@ namespace BehaviourTree
 		{
 
 		}
-
-		/// <summary>
-		/// Unfinished, Not used for now
-		/// </summary>
 
 		protected override State OnUpdate()
 		{
@@ -39,11 +38,11 @@ namespace BehaviourTree
 			if (m_blackboard.m_clientInSight.Count > 0 && m_chooseToAttack == false && m_blackboard.m_lastAttackTimer > m_minTimeBetweenAttack)
 			{
 
-				m_attackScore.Clear();
+				m_attackScores.Clear();
 
 				foreach (GameObject client in m_blackboard.m_clientInSight)
 				{
-					m_attackScore.Add(0);
+					m_attackScores.Add(0);
 				}
 
 				///Attack condition here (all result must be between -100 and 100)
@@ -51,9 +50,9 @@ namespace BehaviourTree
 				///
 
 				//Get best target
-				float chosenTargetScore = -9999999;
+				float chosenTargetScore = Mathf.NegativeInfinity;
 				int loopIteration = 0;
-				foreach (float clientScore in m_attackScore)
+				foreach (float clientScore in m_attackScores)
 				{
 					if (clientScore > chosenTargetScore)
 					{
@@ -69,7 +68,6 @@ namespace BehaviourTree
 
 				float randomChanceToAttack = Random.Range(m_blackboard.m_aggressiveness, m_blackboard.m_aggressiveness + numberOfConditionModifier);
 
-				//UnityEngine.Debug.Log("ATTACK DEBUG: rng:" + randomChanceToAttack + " / targetScore:" + chosenTargetScore);
 				//Now that the target is chosen, do we attack?
 				if (randomChanceToAttack > (numberOfConditionModifier - chosenTargetScore))
 				{
@@ -84,8 +82,6 @@ namespace BehaviourTree
 						return m_children[1].Update();
 					}				
 				}
-				
-
 			}
 			else if (m_chooseToAttack)
 			{
@@ -105,23 +101,18 @@ namespace BehaviourTree
 			
 			foreach (GameObject target in m_blackboard.m_clientInSight)
 			{
-				if(target.transform.Find("Parent/Tower") != null)
+				if(target.transform.Find("Parent/Tower") == null)
 				{
-					//Debug.Log("FOUND TOWER");
+					Debug.LogWarning("NO TOWER FOUND");
 				}
-				else
-				{
-					Debug.Log("NO TOWER FOUND");
-				}
-				int targetsBoxCount = target.transform.Find("Parent/Tower").GetComponent<TowerBoxSystem>().GetBoxCount();
-
+				m_targetsBoxCount = target.transform.Find("Parent/Tower").GetComponent<TowerBoxSystem>().GetBoxCount();
 
 				//Calculate a score depending of client stats.
-				int boxCountDif = targetsBoxCount - m_blackboard.m_thisTower.GetBoxCount();
-				float attackScore = Mathf.Clamp((boxCountDif * m_blackboard.m_tacticalAttack) , - 100.0f,100.0f);
+				m_boxCountDif = m_targetsBoxCount - m_blackboard.m_thisTower.GetBoxCount();
+				m_attackScore = Mathf.Clamp((m_boxCountDif * m_blackboard.m_tacticalAttack) , - 100.0f,100.0f);
 
 				//Add the score to the list of path score
-				m_attackScore[loopIteration] = attackScore;
+				this.m_attackScores[loopIteration] = m_attackScore;
 				loopIteration++;
 			}
 		}
