@@ -65,8 +65,8 @@ namespace Manager
         {
             SoundPitch,
             SoundVolume,
-            MusicPitch,
             MusicVolume,
+            MasterVolume,
             Count
         }
 
@@ -104,7 +104,7 @@ namespace Manager
         }
 
         /// <summary> Modify the pitch or volume of a sound of a music </summary>
-        public void ModifyAudio(int index, EAudioModification modif, float value)
+        public void ModifyAudio(int index, EAudioModification modif, float value = 0)
         {
             if (index < 0 || index >= m_audioBox.Count)
             {
@@ -120,15 +120,18 @@ namespace Manager
             }
             else if (modif == EAudioModification.SoundVolume)
             {
-                audioSource.volume = value;
-            }
-            else if (modif == EAudioModification.MusicPitch)
-            {
-                MusicAudioSource.pitch = value;
+                float currentVolume = PlayerPrefs.GetFloat("SoundVolume", 1);
+                audioSource.volume = currentVolume * value;
             }
             else if (modif == EAudioModification.MusicVolume)
             {
-                MusicAudioSource.volume = value;
+                float currentVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
+                MusicAudioSource.volume = currentVolume;
+            }
+            else if (modif == EAudioModification.MasterVolume)
+            {
+                float currentVolume = PlayerPrefs.GetFloat("MasterVolume", 1);
+                MusicAudioSource.volume = currentVolume;
             }
         }
 
@@ -323,11 +326,9 @@ namespace Manager
             MainMenuMusic = newSong;
         }
 
-        public void SetVolume(int audioBoxIndex, float sliderValue, string playerPrefValue)
+        public List<AudioBox> GetAudioBox()
         {
-            Debug.Log("SetVolume");
-            ModifyAudio(audioBoxIndex, EAudioModification.SoundVolume, sliderValue);
-            PlayerPrefs.SetFloat(playerPrefValue, sliderValue);
+            return m_audioBox;
         }
     }
 }

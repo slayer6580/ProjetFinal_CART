@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015412348375657366}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -22.518839, y: -18.678703, z: 2.322342}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -59,12 +59,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f975ec4512180f145ad7c7b2c549509f, type: 3}
   - {fileID: 8300000, guid: 05ba3a8ef0799ae45a46912eb41a0312, type: 3}
   m_musicPool:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 6c5d9f9fe6f2fd64ab994c5e0c11286b, type: 3}
+  - {fileID: 8300000, guid: 41aebfe3e376c6740a2e3c716ca87fa4, type: 3}
+  - {fileID: 8300000, guid: baab972e31af7fd4fb4e95cc64d4c309, type: 3}
+  - {fileID: 8300000, guid: 21ecd5559fc781d439a4e4fa229c0b4d, type: 3}
   m_audioBoxPrefab: {fileID: 4505294473948690396, guid: 3c1558d66b0fbd644aa718b3bdcab989,
     type: 3}
   m_audioBox: []
+  <MainMenuMusic>k__BackingField: 0
+  <LevelOneMusic>k__BackingField: 1
+  <LevelTwoMusic>k__BackingField: 2
+  <TutorialMusic>k__BackingField: 3
   m_numberOfAudioBox: 50
   m_isClientSoundEnabled: 1
 --- !u!82 &4887366737420598696

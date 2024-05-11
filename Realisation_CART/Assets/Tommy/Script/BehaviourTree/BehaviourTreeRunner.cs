@@ -21,15 +21,10 @@ namespace BehaviourTree
 
             Scene scene = gameObject.scene;
             GameObject[] gameObjects = scene.GetRootGameObjects();
-            GameObject clientPathlListGO = null;
-
-            foreach (GameObject gameObject in gameObjects)
-            {
-                if (gameObject.GetComponent<ClientPathList>() == null) continue;
-                if (gameObject.name != "ListOfPath") Debug.LogError("ClientPathList not found");
-                clientPathlListGO = gameObject;
-            }
-
+            GameObject clientPathlListGO = gameObjects[1].gameObject;
+            if (clientPathlListGO.name != "Level_V2") Debug.LogError("Level_V2 has been moved or renamed. Name is: " + clientPathlListGO.name);
+            if (clientPathlListGO.transform.GetChild(12).name != "ListOfPath") Debug.LogError("ListOfPath has been moved or renamed. Name is: " + clientPathlListGO.transform.GetChild(12).name);
+            clientPathlListGO = clientPathlListGO.transform.GetChild(12).gameObject;
             if (clientPathlListGO == null) Debug.LogError("ClientPathList not found");
 
             m_tree.m_blackboard.m_possiblePathScript = clientPathlListGO.GetComponent<ClientPathList>();

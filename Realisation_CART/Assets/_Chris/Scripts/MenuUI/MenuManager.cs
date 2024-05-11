@@ -1,3 +1,5 @@
+using Manager;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -30,6 +32,10 @@ namespace DiscountDelirium
 
             _AudioManager.SetMainMenuMusic(MainMenuMusic);
             m_audioSourceIndex = _AudioManager.StartCurrentSceneMusic();
+
+            m_masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
+            m_musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+            m_soundSlider.value = PlayerPrefs.GetFloat("SoundVolume", 1.0f);
         }
 
 		public void StartGame()
@@ -92,20 +98,26 @@ namespace DiscountDelirium
 
         public void SetMasterVolume()
         {
-            Debug.Log("Master Volume: " + m_masterSlider.value);
-            _AudioManager.SetVolume(m_audioSourceIndex, m_masterSlider.value, "MasterVolume");
+            //Debug.Log("Master Volume: " + m_masterSlider.value);
+            PlayerPrefs.SetFloat("MasterVolume", m_masterSlider.value);
+            _AudioManager.ModifyAudio(0, EAudioModification.MasterVolume);
         }
 
         public void SetMusicVolume()
         {
-            Debug.Log("Music Volume: " + m_musicSlider.value);
-            _AudioManager.SetVolume(m_audioSourceIndex, m_musicSlider.value, "MusicVolume");
+            //Debug.Log("Music Volume: " + m_musicSlider.value);
+            PlayerPrefs.SetFloat("MusicVolume", m_musicSlider.value);
+            _AudioManager.ModifyAudio(m_audioSourceIndex, EAudioModification.MusicVolume);
         }
 
         public void SetSoundVolume()
         {
-            Debug.Log("Sound Volume: " + m_soundSlider.value);
-            _AudioManager.SetVolume(m_audioSourceIndex, m_soundSlider.value, "SoundVolume");
+            //Debug.Log("Sound Volume: " + m_soundSlider.value);
+            PlayerPrefs.SetFloat("SoundVolume", m_soundSlider.value);
+            for (int i = 0; i < _AudioManager.GetAudioBox().Count; i++)
+            {
+                _AudioManager.ModifyAudio(i, EAudioModification.SoundVolume);
+            }
         }
     }
 }
