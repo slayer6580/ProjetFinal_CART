@@ -12,6 +12,7 @@ namespace DiscountDelirium
 
 		private void Start()
 		{
+			Debug.Log("TESTffff" + this.gameObject.name);
 			ListOfPath = new List<List<GameObject>>();
 			int subListCount = -1;
 			for (int i = 0; i < m_pathList.Count; i++)

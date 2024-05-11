@@ -787,8 +787,8 @@ MonoBehaviour:
   m_children:
   - {fileID: -5590988987957405943}
   - {fileID: 9187012723447751640}
-  m_minBoxRequired: 2
-  m_maxBoxRequired: 3
+  m_minBoxRequired: 7
+  m_maxBoxRequired: 9
 --- !u!114 &-2659307553558739768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,7 +1293,7 @@ MonoBehaviour:
     m_wantMostActiveShelves: 5
     m_sightRange: 30
     m_sightHalfAngle: 90
-    m_aggressiveness: 100
+    m_aggressiveness: 40
     m_tacticalAttack: 4
     m_pursuitTenacity: 8
     m_name: Client_01
