@@ -20,7 +20,9 @@ namespace Manager
 			PlayerPrefs.SetInt("Balance", 0);
             PlayerPrefs.SetInt("Melee", 0);
             PlayerPrefs.SetInt("Ranged", 0);
+
             PlayerPrefs.SetInt("Score", 0);
-		}
+            PlayerPrefs.SetInt("Money", 0);
+        }
 	}
 }

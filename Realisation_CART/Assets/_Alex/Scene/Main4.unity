@@ -17495,7 +17495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde1fee560655e14bb95ffc7a13f1fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GameLength>k__BackingField: 20
+  <GameLength>k__BackingField: 60
   <ClientsList>k__BackingField:
   - {fileID: 253715849}
   - {fileID: 1359528451}
@@ -17875,17 +17875,17 @@ PrefabInstance:
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13633594
+      value: 0.13633597
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 3.4863681e-15
+      value: -0.000000029524049
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -8.0546825e-17
+      value: 0.0000000040631285
       objectReference: {fileID: 0}
     - target: {fileID: 5807787597716368242, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -17900,17 +17900,17 @@ PrefabInstance:
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13633594
+      value: 0.13633597
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 3.4863681e-15
+      value: -0.000000029524049
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -8.0546825e-17
+      value: 0.0000000040631285
       objectReference: {fileID: 0}
     - target: {fileID: 8438745796277218329, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -19232,7 +19232,7 @@ PrefabInstance:
     - target: {fileID: 754166854452942479, guid: 15f1c338bfe81624ebecb93be8514642,
         type: 3}
       propertyPath: m_numberOfNPCFromEntrance
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1711842777266915499, guid: 15f1c338bfe81624ebecb93be8514642,
         type: 3}

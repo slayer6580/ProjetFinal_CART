@@ -27,7 +27,7 @@ namespace StatsSystem
         [field: SerializeField] public CartStateMachine CartMachine { get; private set; }
 
         [Header("Next Scene")]
-       [SerializeField] private string m_nextSceneName;
+        [SerializeField] private string m_nextSceneName;
 
         [Header("Put main virtual camera here")]
         [SerializeField] private CinemachineVirtualCamera m_virtualCamera;
@@ -57,10 +57,6 @@ namespace StatsSystem
         [SerializeField] private List<Button> m_allSellButton = new List<Button>();
         [SerializeField] private List<Image> m_allFillBars = new List<Image>();
 
-    
-
-        private int m_nbCartToken;
-
         private List<int> m_allStats = new List<int>();
         private List<int> m_allBuyingCost = new List<int>();
         private List<int> m_allUpgrade = new List<int>();
@@ -81,7 +77,7 @@ namespace StatsSystem
 
         private void Awake()
         {
-            m_nbCartToken = m_startingCartToken;
+            AddMoney(m_startingCartToken);
             SetUpList();
         }
 
@@ -158,17 +154,19 @@ namespace StatsSystem
         /// <summary> Update money left </summary>
         private void UpdateMoney()
         {
-            m_nbOfCartTokenText.text = m_nbCartToken.ToString();
+            m_nbOfCartTokenText.text = PlayerPrefs.GetInt("Money", 0).ToString();
         }
 
         /// <summary> Update all buy button </summary>
         public void UpdateBuyButton()
         {
+            int money = PlayerPrefs.GetInt("Money", 0);
+
             for (int i = 0; i < NB_OF_STATS; i++)
             {
                 if (m_allStats[i] < MAX_LEVEL)
                 {
-                    m_allBuyButton[i].interactable = m_nbCartToken >= m_upgradeCostByLevel[m_allStats[i]];
+                    m_allBuyButton[i].interactable = money >= m_upgradeCostByLevel[m_allStats[i]];
                     continue;
                 }
 
@@ -195,7 +193,10 @@ namespace StatsSystem
             m_allUpgrade[statsIndex]++;
             m_allStats[statsIndex]++;
 
-            m_nbCartToken -= cost;
+            int money = PlayerPrefs.GetInt("Money", 0);
+            money -= cost;
+            PlayerPrefs.SetInt("Money", money);
+
             SaveUpgrades();
             UpdateAll();
         }
@@ -210,7 +211,10 @@ namespace StatsSystem
             m_allUpgrade[statsIndex]--;
             m_allStats[statsIndex]--;
 
-            m_nbCartToken += refund;
+            int money = PlayerPrefs.GetInt("Money", 0);
+            money += refund;
+            PlayerPrefs.SetInt("Money", money);
+
             SaveUpgrades();
             UpdateAll();
         }
@@ -279,7 +283,9 @@ namespace StatsSystem
         /// <summary> Add money to spend </summary>
         public void AddMoney(int amount)
         {
-            m_nbCartToken += amount;
+            int money = PlayerPrefs.GetInt("Money", 0);
+            money += amount;
+            PlayerPrefs.SetInt("Money", money);
             UpdateMoney();
         }
 
