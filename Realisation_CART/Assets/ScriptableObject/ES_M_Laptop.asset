@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ef3f0db4d29b44e86996c864e2bfa9, type: 3}
+  m_Name: ES_M_Laptop
+  m_EditorClassIdentifier: 
+  m_name: Laptop
+  m_cost: 25
+  m_size: 1
+  m_object: {fileID: 1224009154537782, guid: f2fa2992c94ba4549b5c5362226c3eef, type: 3}

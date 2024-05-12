@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23724917503717790}
   - component: {fileID: 64536695995655826}
   m_Layer: 0
-  m_Name: SM_Prop_Computer_Laptop_01
+  m_Name: SM_Prop_Computer_Laptop_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
