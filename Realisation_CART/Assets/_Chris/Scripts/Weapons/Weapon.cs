@@ -86,7 +86,7 @@ namespace DiscountDelirium
                 m_playerTower.AddBoxToTower();
             }
 
-            m_playerTower.PutObjectInTopBox(itemTaken);
+            //m_playerTower.PutObjectInTopBox(itemTaken);
             Debug.LogWarning("nom de l'objet pris: " + itemTaken.gameObject.name);
         }
     }

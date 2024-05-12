@@ -111,7 +111,7 @@ namespace BoxSystem
                 TowerBoxSystem.AddBoxToTower();
             }
         
-            TowerBoxSystem.PutObjectInTopBox(itemTaken);
+            //TowerBoxSystem.PutObjectInTopBox(itemTaken);
 
         }
 

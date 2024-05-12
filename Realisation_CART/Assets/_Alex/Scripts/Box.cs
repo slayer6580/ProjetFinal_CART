@@ -166,22 +166,22 @@ namespace BoxSystem
         #region (--- PutItemInsideBox ---)
 
         /// <summary> Put item inside box, separate in two functions based on item size </summary>
-        public void PutItemInBox(GameObject GO, bool autoSnap = false)
+        public void PutItemInBox(GameObject item)
         {
             if (!m_boxInit)
                 InitBox();
 
-            Item item = GO.GetComponent<Item>();
+            Item itemScript = item.GetComponent<Item>();
 
-            if (item.m_data.m_size == ItemData.ESize.small)
-                PutSmallItemInBox(GO, autoSnap);
+            if (itemScript.m_data.m_size == ItemData.ESize.small)
+                PutSmallItemInBox(itemScript.gameObject);
             else
-                PutInBoxOrReorganize(GO, autoSnap);
+                PutInBoxOrReorganize(itemScript.gameObject);
         }
 
 
         /// <summary> Put a small item inside the box </summary>
-        private void PutSmallItemInBox(GameObject GO, bool autoSnap)
+        private void PutSmallItemInBox(GameObject GO)
         {
             for (int i = 0; i < m_slotsList.Count; i++)
             {
@@ -193,7 +193,7 @@ namespace BoxSystem
                     List<int> allIndex = new List<int>();
                     allIndex.Add(i);
                     m_itemsList.Add(new ItemInBox(GO, allIndex, slotTransform));
-                    SlerpAndSnap(GO, slotTransform, false, autoSnap);
+                    SnapInBox(GO, slotTransform, false);
 
                     return;
                 }
@@ -201,7 +201,7 @@ namespace BoxSystem
         }
 
         /// <summary> Put a multi slot item inside the box or reorganization </summary>
-        private void PutInBoxOrReorganize(GameObject GO, bool autoSnap)
+        private void PutInBoxOrReorganize(GameObject GO)
         {
             Item item = GO.GetComponent<Item>();
             List<MultiSlots> multiSlotList = new List<MultiSlots>();
@@ -220,7 +220,7 @@ namespace BoxSystem
 
                 if (AllSlotIsAvailable(slotsAvailable))
                 {
-                    PutMultiSlotItemInBox(GO, multiSlot, autoSnap);
+                    PutMultiSlotItemInBox(GO, multiSlot);
                     return;
                 }
             }
@@ -256,12 +256,12 @@ namespace BoxSystem
 
             foreach (GameObject newItem in newList)
             {
-                PutItemInBox(newItem, true);
+                PutItemInBox(newItem);
             }
         }
 
         /// <summary> Put a multi slot item inside the box </summary>
-        private void PutMultiSlotItemInBox(GameObject GO, MultiSlots multiSlot, bool autoSnap)
+        private void PutMultiSlotItemInBox(GameObject GO, MultiSlots multiSlot)
         {
             Item item = GO.GetComponent<Item>();
             int sizeInt = item.m_data.m_size == ItemData.ESize.medium ? GameConstants.MEDIUM_SIZE : GameConstants.LARGE_SIZE;
@@ -285,22 +285,39 @@ namespace BoxSystem
                 turn90Degree = true;
             }
 
-            SlerpAndSnap(GO, localPosition, turn90Degree, autoSnap);
+            SnapInBox(GO, localPosition, turn90Degree);
         }
         #endregion
 
         #region (--- SlerpAndSnap ---)
 
         /// <summary> Start Slerp and Snap </summary>
-        private void SlerpAndSnap(GameObject GO, Vector3 localPosition, bool turn90Degree, bool autoSnap = false)
+        private void SnapInBox(GameObject item, Vector3 localPosition, bool turn90Degree)
         {
-            Transform GOChild = GO.transform.GetChild(0);
+            // set le parent comme étant le graphique
+            Transform allGraphics = transform.GetChild(1);
+            item.transform.SetParent(allGraphics);
+            // transform.SetParent(m_boxTransform);
 
             Vector3 itemScale = BoxManager.GetInstance().GetLocalScale();
-            //GO.transform.localScale = itemScale; //888888888888888888888888888888888888888888888888888888888888888888888888888888888888
-            GOChild.localScale = Vector3.one;
-            GO.GetComponent<Item>().StartSlerpAndSnap(this, localPosition + new Vector3(0, itemScale.y / 2, 0), m_tower.Player, turn90Degree, m_tower.ItemSnapDistance, autoSnap);
+            item.transform.localPosition = localPosition + new Vector3(0, itemScale.y / 2, 0);
+            item.transform.localScale = itemScale;
+
+            Vector3 eulerOfCart = m_tower.Player.transform.rotation.eulerAngles;
+            Vector3 localEulerOfBox = transform.localRotation.eulerAngles;
+
+            item.transform.eulerAngles = Vector3.zero;
+            item.transform.eulerAngles += eulerOfCart;
+            item.transform.eulerAngles += localEulerOfBox;
+
+            if (turn90Degree)           
+                item.transform.eulerAngles += new Vector3(0, 90, 0);
+            
+
+            Transform model = item.transform.GetChild(0);
+            model.localScale = Vector3.one;
         }
+         
 
         #endregion
 

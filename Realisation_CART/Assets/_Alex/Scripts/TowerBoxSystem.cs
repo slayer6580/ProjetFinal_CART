@@ -59,7 +59,7 @@ namespace BoxSystem
 
         void Start()
         {
-            AddBoxToTower();
+           AddBoxToTower();
         }
 
         private void Update()
@@ -153,6 +153,29 @@ namespace BoxSystem
 
         }
 
+        //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888//
+        public void AddItemToTower(GameObject item)
+        {
+
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+            if (rb)
+            {
+                Destroy(rb);
+            }
+
+            Item itemScript = item.GetComponent<Item>();    
+            ItemData.ESize size = itemScript.m_data.m_size;
+
+            if (!CanTakeObjectInTheActualBox(size))
+            {
+                AddBoxToTower();
+            }
+
+            PutObjectInTopBox(item);
+            Debug.LogError("item to put in box: " + item.name);
+
+        }
+        //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888//
         /// <summary> Look if top box can take item </summary>
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
         {
