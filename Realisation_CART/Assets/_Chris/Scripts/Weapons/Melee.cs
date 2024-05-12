@@ -29,7 +29,7 @@ namespace DiscountDelirium
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.LogWarning("Melee hitted target");
+            //Debug.LogWarning("Melee hitted target");
             if (other.gameObject.layer == LayerMask.NameToLayer("Target")) 
             {
                 StealItems(other.gameObject.GetComponent<Target>().GetTower());
@@ -81,7 +81,7 @@ namespace DiscountDelirium
 
         public void StealItems(TowerBoxSystem clientTower)
         {
-            Debug.LogWarning("STEAL WITH MELEE");
+            //Debug.LogWarning("STEAL WITH MELEE");
             base.StealItems(clientTower, PlayerPrefs.GetInt("Melee", 0));
         }
     }

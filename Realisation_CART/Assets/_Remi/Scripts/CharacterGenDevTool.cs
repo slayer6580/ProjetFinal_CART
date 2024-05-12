@@ -1,4 +1,4 @@
-#define IDontNeedToBuild
+//#define IDontNeedToBuild
 
 #if IDontNeedToBuild
 using UnityEditor;

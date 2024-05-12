@@ -72,7 +72,7 @@ namespace CartControl
 				//Steal more items depending of speed collision
 				nmOfItemToSteal += (int)Mathf.Lerp(1, 10, (m_cartStateMachine.LocalVelocity.z / 10));
 
-				Debug.Log(m_cartStateMachine.gameObject.transform.name + " steal: " + nmOfItemToSteal);
+				//Debug.Log(m_cartStateMachine.gameObject.transform.name + " steal: " + nmOfItemToSteal);
 
 				for (int i = 0; i < nmOfItemToSteal; i++)
 				{

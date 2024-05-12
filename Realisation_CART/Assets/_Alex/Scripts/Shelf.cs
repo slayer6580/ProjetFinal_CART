@@ -77,7 +77,9 @@ namespace BoxSystem
             GameObject model = Instantiate(itemScript.m_data.m_object);                      // Spawn Model
             model.transform.SetParent(instant.transform);
             Vector3 boxScale = BoxManager.GetInstance().GetLocalScale();
-            instant.transform.localScale = new Vector3(boxScale.x * m_shelfSetup.ScaleMultiplier.x, boxScale.y * m_shelfSetup.ScaleMultiplier.y, boxScale.z * m_shelfSetup.ScaleMultiplier.z);// Item prefab become parent of Model
+            instant.transform.localScale = new Vector3(boxScale.x * m_shelfSetup.ScaleMultiplier.x, 
+                                                       boxScale.y * m_shelfSetup.ScaleMultiplier.y, 
+                                                       boxScale.z * m_shelfSetup.ScaleMultiplier.z);// Item prefab become parent of Model
             model.transform.localPosition = Vector3.zero;                                    // Reset Model position
 
             if (m_remainingItems < 1)

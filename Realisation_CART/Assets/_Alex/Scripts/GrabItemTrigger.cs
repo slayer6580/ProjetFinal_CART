@@ -31,10 +31,14 @@ namespace BoxSystem
                 return;
 
             TakeItemFromShelf(shelf);
+            GrabDelay();
 
+        }
+
+        private void GrabDelay()
+        {
             m_canGrabItem = false;
             Invoke("ActivateGrabItem", m_grabDelay);
-
         }
 
         /// <summary> Take an item from the shelf </summary>
@@ -43,9 +47,15 @@ namespace BoxSystem
             _AudioManager.PlaySoundEffectsOneShot(ESound.GrabItem, transform.position, 0.1f);
 
             GameObject itemTaken = shelf.GetItemFromShelf();
-            ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size;
+            Item itemScript = itemTaken.GetComponent<Item>();
+          // ItemData.ESize size = itemScript.m_data.m_size;
 
-            TakeItem(itemTaken, size);
+            // TODO commencer le slerp vers le joueur
+
+            itemScript.StartSlerpTowardTower(TowerBoxSystem.gameObject, TowerBoxSystem.ItemSnapDistance, ItemSlerpTime);
+
+
+          //  TakeItem(itemTaken, size); //OLD
         }
 
         public void StealItemFromOtherTower(TowerBoxSystem towerToSteal)
@@ -66,24 +76,27 @@ namespace BoxSystem
         IEnumerator WaitForAnimation(GameObject itemTaken, ItemData.ESize size)
         {
             yield return new WaitForSeconds(m_animationTime);
-            TakeItem(itemTaken, size);
+
+            Item itemScript = itemTaken.GetComponent<Item>();
+            itemScript.StartSlerpTowardTower(TowerBoxSystem.gameObject, TowerBoxSystem.ItemSnapDistance, ItemSlerpTime);
+    
         }
 
-        private void TakeItem(GameObject itemTaken, ItemData.ESize size)
-        {
-            Rigidbody rb = itemTaken.GetComponent<Rigidbody>();
-            if (rb)
-            {
-                Destroy(rb);
-            }
+        //private void TakeItem(GameObject itemTaken, ItemData.ESize size)
+        //{
+        //    Rigidbody rb = itemTaken.GetComponent<Rigidbody>();
+        //    if (rb)
+        //    {
+        //        Destroy(rb);
+        //    }
 
-            if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
-            {
-                TowerBoxSystem.AddBoxToTower();
-            }
+        //    if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
+        //    {
+        //        TowerBoxSystem.AddBoxToTower();
+        //    }
 
-            TowerBoxSystem.PutObjectInTopBox(itemTaken);
-        }
+        //    TowerBoxSystem.PutObjectInTopBox(itemTaken);
+        //}
 
         private void ActivateGrabItem()
         {
