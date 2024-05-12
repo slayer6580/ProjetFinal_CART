@@ -172,7 +172,7 @@ namespace BoxSystem
             }
 
             PutObjectInTopBox(item);
-            Debug.LogError("item to put in box: " + item.name);
+            //Debug.LogError("item to put in box: " + item.name);
 
         }
         //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888//
