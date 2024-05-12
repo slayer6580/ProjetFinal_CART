@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Propane
   m_cost: 25
   m_size: 1
-  m_object: {fileID: 1047958662806832, guid: b22ad20f98d13844d8b5be05b9130dc9, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 21b530a38699c1949b51da582b0c0182,
+    type: 3}

@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Dumbbell
   m_cost: 25
   m_size: 1
-  m_object: {fileID: 1381837024069400, guid: eb65b3cf9bf1ffa428b5f55df18d2f65, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: be866313ddc850547ace5723dbf73ab6,
+    type: 3}

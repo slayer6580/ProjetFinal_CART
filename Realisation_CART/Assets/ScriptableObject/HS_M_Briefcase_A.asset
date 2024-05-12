@@ -15,5 +15,5 @@ MonoBehaviour:
   m_name: Briefcase
   m_cost: 25
   m_size: 1
-  m_object: {fileID: 1134162025243624237, guid: be866313ddc850547ace5723dbf73ab6,
+  m_object: {fileID: 1134162025243624237, guid: aff44687a5c0664498f55bcbd0b7e341,
     type: 3}
