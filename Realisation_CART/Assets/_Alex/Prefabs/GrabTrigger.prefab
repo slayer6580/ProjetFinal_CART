@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 388944584891416144}
   - component: {fileID: 7479313186865770351}
   - component: {fileID: 5202187097709406194}
-  m_Layer: 6
+  m_Layer: 20
   m_Name: GrabTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemSlerpTime>k__BackingField: 1
   <TowerBoxSystem>k__BackingField: {fileID: 0}
+  m_animationTime: 0
+  m_grabDelay: 0
 --- !u!135 &5202187097709406194
 SphereCollider:
   m_ObjectHideFlags: 0

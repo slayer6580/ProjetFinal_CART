@@ -132,6 +132,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23013355001666540, guid: bfe143bf4bed4f74abeae83b700709ad,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23390511640316142, guid: bfe143bf4bed4f74abeae83b700709ad,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23537092355488596, guid: bfe143bf4bed4f74abeae83b700709ad,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23747762814585172, guid: bfe143bf4bed4f74abeae83b700709ad,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23857369275011194, guid: bfe143bf4bed4f74abeae83b700709ad,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64495407199550448, guid: bfe143bf4bed4f74abeae83b700709ad, type: 3}
     m_RemovedGameObjects: []

@@ -19,10 +19,12 @@ namespace BoxSystem
         [SerializeField] private float m_grabDelay;
 
         private bool m_canGrabItem = true;
+        private Shelf shelf;
 
-        private void OnTriggerStay(Collider other)
+
+		private void OnTriggerEnter(Collider other)
         {
-            Shelf shelf = other.GetComponent<Shelf>();
+			shelf = other.GetComponent<Shelf>();
 
             if (!shelf)
                 return;
@@ -30,16 +32,14 @@ namespace BoxSystem
             if (!m_canGrabItem || !shelf.CanTakeItem())
                 return;
 
-            TakeItemFromShelf(shelf);
-            GrabDelay();
-
+            for(int i = 0; i < shelf.GetItemRemaining(); i++)
+            {
+				TakeItemFromShelf(shelf);
+			}
+           
+          
         }
 
-        private void GrabDelay()
-        {
-            m_canGrabItem = false;
-            Invoke("ActivateGrabItem", m_grabDelay);
-        }
 
         /// <summary> Take an item from the shelf </summary>
         public void TakeItemFromShelf(Shelf shelf)

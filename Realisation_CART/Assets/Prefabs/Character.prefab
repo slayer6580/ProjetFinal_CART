@@ -64288,7 +64288,7 @@ MonoBehaviour:
   m_meleeAttackEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3674822013774826443}
         m_TargetAssemblyTypeName: DiscountDelirium.Melee, Assembly-CSharp
         m_MethodName: UseWeapon
         m_Mode: 1
@@ -64300,7 +64300,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6636269743264622368}
         m_TargetAssemblyTypeName: DiscountDelirium.Melee, Assembly-CSharp
         m_MethodName: UseWeapon
         m_Mode: 1
@@ -64315,7 +64315,7 @@ MonoBehaviour:
   m_rangeAttackEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1815364793589519107}
         m_TargetAssemblyTypeName: DiscountDelirium.Range, Assembly-CSharp
         m_MethodName: UseWeapon
         m_Mode: 1
@@ -67375,6 +67375,11 @@ PrefabInstance:
       propertyPath: m_playerTower
       value: 
       objectReference: {fileID: 4744102259174695568}
+    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
+        type: 3}
+      propertyPath: m_playerGrabTrigger
+      value: 
+      objectReference: {fileID: 4436524539922547677}
     - target: {fileID: 5497454816491432176, guid: 94c720f557dd56f4499e8bd594eb17f8,
         type: 3}
       propertyPath: m_Name
@@ -67396,6 +67401,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2818584279729612339}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3674822013774826443 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2818584279729612339}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ffe5142edba6b428e25067f719db75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4525554245747502538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67690,6 +67707,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e690f153d02668049af54e4f7f81fd88, type: 3}
+--- !u!114 &1815364793589519107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6463602966303632947, guid: e690f153d02668049af54e4f7f81fd88,
+    type: 3}
+  m_PrefabInstance: {fileID: 4648326211223108912}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5e95b01cf27f04f90665994176c8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6309790776643980535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1662616923536470471, guid: e690f153d02668049af54e4f7f81fd88,
@@ -67779,6 +67808,11 @@ PrefabInstance:
       propertyPath: m_playerTower
       value: 
       objectReference: {fileID: 4744102259174695568}
+    - target: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
+        type: 3}
+      propertyPath: m_playerGrabTrigger
+      value: 
+      objectReference: {fileID: 4436524539922547677}
     - target: {fileID: 5497454816491432176, guid: 94c720f557dd56f4499e8bd594eb17f8,
         type: 3}
       propertyPath: m_Name
@@ -67800,6 +67834,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5330797911928785624}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6636269743264622368 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1576832022794284536, guid: 94c720f557dd56f4499e8bd594eb17f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5330797911928785624}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ffe5142edba6b428e25067f719db75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5354683767533586684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68082,6 +68128,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb008109ce8013447884e18be9a089dd, type: 3}
+--- !u!114 &4436524539922547677 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7479313186865770351, guid: bb008109ce8013447884e18be9a089dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 6510630729446354098}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8de55f375f09e45a402ed10752278b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6863388170456126178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 388944584891416144, guid: bb008109ce8013447884e18be9a089dd,

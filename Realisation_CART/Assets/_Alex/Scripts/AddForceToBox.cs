@@ -17,6 +17,7 @@ namespace BoxSystem
         private bool m_pushIsActivated = false;
         private Vector3 m_pushForce = Vector3.zero;
         private float m_timeMultiplier;
+        public bool m_pushIsStop = false;
 
         private void Awake()
         {
@@ -25,20 +26,22 @@ namespace BoxSystem
         }
 
         /// <summary> Add constant force to the top box of TowerPhysics </summary>
-        public void AddConstantForceToBox(float force, float towerPushForceWhenMoving)
+        public void AddConstantForceToBox(float force, float towerPushForceWhenMoving, float limit)
         {
             if (m_towerPhysics.GetTopBox() == null)
                 return;
 
-            if (Mathf.Abs(force) < 1)
+            if (Mathf.Abs(force) < limit)
             {
-                m_pushIsActivated = false;
+                m_pushIsStop = true;
+				m_pushIsActivated = false;
                 m_timeMultiplier = m_startingTimeMultiplier;
                 m_pushForce = Vector3.zero;
                 return;
             }
+			m_pushIsStop = false;
 
-            m_pushIsActivated = true;
+			m_pushIsActivated = true;
             m_timeMultiplier += Time.deltaTime / m_forceOverTimeReduction;
 
             float totalForce = force * towerPushForceWhenMoving;
@@ -46,6 +49,13 @@ namespace BoxSystem
 
         }
 
+        public void StopForce()
+        {
+			m_pushIsStop = true;
+			m_pushIsActivated = false;
+			m_timeMultiplier = m_startingTimeMultiplier;
+			m_pushForce = Vector3.zero;
+		}
 
         private void AddForce()
         {

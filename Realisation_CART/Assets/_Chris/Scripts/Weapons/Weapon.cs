@@ -7,7 +7,7 @@ namespace DiscountDelirium
     public abstract class Weapon : MonoBehaviour
     {
         [Header("Tower Reference")]
-        [SerializeField] protected TowerBoxSystem m_playerTower;
+        [SerializeField] protected GrabItemTrigger m_playerGrabTrigger;
 
         [Header("Parameters")]
         [SerializeField] protected float m_animationTime = 1;
@@ -16,6 +16,7 @@ namespace DiscountDelirium
         [SerializeField] private int[] m_itemsToStealLevel;
 
         protected bool m_canUseWeapon;
+        protected bool m_isWeaponActive;
         protected void Start()
         {
             PauseState.OnPause += DisableWeapon;
@@ -46,48 +47,12 @@ namespace DiscountDelirium
 
         public void StealItems(TowerBoxSystem clientTower, int nbsItem)
         {
-            int itemsStolen = 0;
             int itemToSteal = m_itemsToStealLevel[nbsItem];
-            for (int i = 0; i < itemToSteal; i++)
-            {   
-                if (clientTower.GetBoxCount() == 0)
-                    return;
 
-                GameObject itemTaken = clientTower.GetStolenItem();
-
-                if (itemTaken == null)
-                    return;
-
-                ItemData.ESize size = itemTaken.GetComponent<Item>().m_data.m_size;
-
-                StartCoroutine(WaitForAnimation(itemTaken, size));
-                itemsStolen++;
-            }
-            Debug.LogWarning("stole: " + itemsStolen);
-
-        }
-
-        IEnumerator WaitForAnimation(GameObject itemTaken, ItemData.ESize size)
-        {
-            yield return new WaitForSeconds(m_animationTime);
-            TakeItem(itemTaken, size);
-        }
-
-        private void TakeItem(GameObject itemTaken, ItemData.ESize size)
-        {
-            Rigidbody rb = itemTaken.GetComponent<Rigidbody>();
-            if (rb)
+            for(int i = 0; i < itemToSteal; i++)
             {
-                Destroy(rb);
-            }
-
-            if (!m_playerTower.CanTakeObjectInTheActualBox(size))
-            {
-                m_playerTower.AddBoxToTower();
-            }
-
-            //m_playerTower.PutObjectInTopBox(itemTaken);
-            Debug.LogWarning("nom de l'objet pris: " + itemTaken.gameObject.name);
-        }
+                m_playerGrabTrigger.StealItemFromOtherTower(clientTower);
+			}
+		}   
     }
 }

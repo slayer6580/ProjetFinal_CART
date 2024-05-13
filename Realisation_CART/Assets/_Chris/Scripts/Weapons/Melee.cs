@@ -29,8 +29,13 @@ namespace DiscountDelirium
 
         private void OnTriggerEnter(Collider other)
         {
-            //Debug.LogWarning("Melee hitted target");
-            if (other.gameObject.layer == LayerMask.NameToLayer("Target")) 
+            if (!m_isWeaponActive)
+            {
+                return;
+            }
+
+			//Debug.LogWarning("Melee hitted target");
+			if (other.gameObject.layer == LayerMask.NameToLayer("Target")) 
             {
                 StealItems(other.gameObject.GetComponent<Target>().GetTower());
             }
@@ -42,17 +47,20 @@ namespace DiscountDelirium
             {
                 return;
             }
-            m_animator.SetTrigger("ActivateWeapon");
+     
+			m_animator.SetTrigger("ActivateWeapon");
         }
 
         public void ActivateTrail()
         {
-            m_trailRenderer.enabled = true;
+			m_isWeaponActive = true;
+			m_trailRenderer.enabled = true;
         }
 
         public void DeactivateTrail()
         {
-            m_trailRenderer.enabled = false;
+			m_isWeaponActive = false;
+			m_trailRenderer.enabled = false;
         }
 
         public void ChangeWeaponModel() 

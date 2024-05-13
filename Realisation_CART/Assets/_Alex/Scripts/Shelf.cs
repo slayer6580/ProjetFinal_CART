@@ -38,6 +38,7 @@ namespace BoxSystem
             m_initialColor = m_renderer.material.color;
         }
 
+
         private void Update()
         {
             ItemAutoRespawn();
@@ -110,6 +111,11 @@ namespace BoxSystem
         private void ResetTimer()
         {
             m_currentTimer = 0;
+        }
+
+        public int GetItemRemaining()
+        {
+            return m_remainingItems;
         }
     }
 }
