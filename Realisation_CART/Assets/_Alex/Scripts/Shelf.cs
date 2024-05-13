@@ -83,6 +83,13 @@ namespace BoxSystem
                                                        boxScale.z * m_shelfSetup.ScaleMultiplier.z);// Item prefab become parent of Model
             model.transform.localPosition = Vector3.zero;                                    // Reset Model position
 
+            BoxCollider modelCollider = model.GetComponent<BoxCollider>();
+
+            if (modelCollider != null) 
+            {
+                modelCollider.enabled = false;
+            }
+            
             if (m_remainingItems < 1)
                 DisabledShelf();
 

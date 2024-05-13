@@ -237,6 +237,13 @@ namespace BoxSystem
                 rb = lastItemInBox.m_item.gameObject.AddComponent<Rigidbody>();
             }
 
+            BoxCollider modelCollider = lastItemInBox.m_item.transform.GetChild(0).GetComponent<BoxCollider>();
+
+            if (modelCollider != false)
+            {
+                modelCollider.enabled = true;
+            }
+
             rb.AddForce(totalImpulse, ForceMode.Impulse);
 
             Destroy(lastItemInBox.m_item.gameObject, m_itemDestructionTime);
@@ -252,6 +259,13 @@ namespace BoxSystem
             if (!rb)
             {
                 rb = item.gameObject.AddComponent<Rigidbody>();
+            }
+
+            BoxCollider modelCollider = item.transform.GetChild(0).GetComponent<BoxCollider>();
+
+            if (modelCollider != false)
+            {
+                modelCollider.enabled = true;
             }
 
             rb.AddForce(totalImpulse, ForceMode.Impulse);

@@ -78,6 +78,14 @@ namespace BoxSystem
             yield return new WaitForSeconds(m_animationTime);
 
             Item itemScript = itemTaken.GetComponent<Item>();
+
+            BoxCollider modelCollider = itemTaken.transform.GetChild(0).GetComponent<BoxCollider>();
+
+            if (modelCollider != false)
+            {
+                modelCollider.enabled = false;
+            }
+
             itemScript.StartSlerpTowardTower(TowerBoxSystem.gameObject, TowerBoxSystem.ItemSnapDistance, ItemSlerpTime);
     
         }
