@@ -88,6 +88,7 @@ namespace DiscountDelirium
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("AmmoStash")) 
             {
+                other.gameObject.transform.parent.gameObject.GetComponent<AmmoCollectAnimCtrlr>().ActivateCollect();
                 m_actualAmmo = m_maxAmmo;
                 m_text.text = m_actualAmmo.ToString();
             }
