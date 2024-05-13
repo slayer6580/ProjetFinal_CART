@@ -10,7 +10,7 @@ namespace DiscountDelirium
 
 		private IEnumerator Start()
 		{
-			Application.targetFrameRate = 60;
+			//Application.targetFrameRate = 60;
 
 			GUI.depth = 2;
 			while (true)
