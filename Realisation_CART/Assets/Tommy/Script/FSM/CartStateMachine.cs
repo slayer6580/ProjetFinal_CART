@@ -183,23 +183,18 @@ namespace CartControl
 			{
 				AddForceToTowerPhysics();
 			}
-           
-
-			
-
+ 
         }
 
         private void AddForceToTowerPhysics()
         {
             if (m_currentState is CartState_Moving)
 			{
-				Debug.Log("AA");
 				BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenTurning, 4f);
 			}          
                     
             else if (m_currentState is CartState_Drifting)
 			{
-				Debug.Log("BB");
 				BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenDrifting, 1);
 			}      
                      

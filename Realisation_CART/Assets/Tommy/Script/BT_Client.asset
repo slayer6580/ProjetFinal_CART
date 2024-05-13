@@ -859,8 +859,8 @@ MonoBehaviour:
   m_children:
   - {fileID: -5590988987957405943}
   - {fileID: 9187012723447751640}
-  m_minBoxRequired: 7
-  m_maxBoxRequired: 9
+  m_minBoxRequired: 20
+  m_maxBoxRequired: 25
 --- !u!114 &-2659307553558739768
 MonoBehaviour:
   m_ObjectHideFlags: 0
