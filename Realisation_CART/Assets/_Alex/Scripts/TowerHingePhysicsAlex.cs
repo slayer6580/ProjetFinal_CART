@@ -61,7 +61,7 @@ namespace BoxSystem
         /// <summary> Calculate item losing based on tower angle </summary>
         private void ItemLosing()
         {
-            // For Futur Test
+            
             m_firstHingeAngleRead = m_hinges[0].angle;
             int hingeCount = m_hinges.Count;
             float allHingeAngle = 0;
@@ -71,6 +71,9 @@ namespace BoxSystem
             }
 
             m_allHingeAngleRead = allHingeAngle;
+
+            if (Mathf.Abs(m_allHingeAngleRead) < m_loseItemStats[1].x)
+                return;
 
             float difference = Mathf.Infinity;
             float timeBeforeLost = 0;
@@ -188,13 +191,11 @@ namespace BoxSystem
         /// <summary> Copy all local transform the the scene tower </summary>
         private void CopyFakeTowerToRealTower()
         {
-            List<Box> realBoxes = TowerBoxSystem.GetAllBoxes();
-            int realBoxesCount = realBoxes.Count;
+            int boxesCount = m_allBoxes.Count;
 
-            for (int i = 0; i < realBoxesCount; i++)
+            for (int i = 0; i < boxesCount; i++)
             {
-                realBoxes[i].transform.localPosition = m_allBoxes[i].transform.localPosition;
-                realBoxes[i].transform.localEulerAngles = m_allBoxes[i].transform.localEulerAngles;
+                TowerBoxSystem.SetBoxesTransformInCart(i, m_allBoxes[i].transform.localPosition, m_allBoxes[i].transform.localEulerAngles);
             }
         }
 
@@ -221,7 +222,6 @@ namespace BoxSystem
         {
             for (int i = 0; i < m_boxesWithHinge.Count; i++)
             {
-                Debug.Log("Origin Boxes Places");
                 m_boxesWithHinge[i].transform.localPosition = m_boxesWithHingesInitialPosition[i];
                 m_boxesWithHinge[i].transform.localEulerAngles = Vector3.zero;
             }

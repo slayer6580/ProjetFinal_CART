@@ -335,6 +335,12 @@ namespace BoxSystem
 
         }
 
+        public void SetBoxesTransformInCart(int index, Vector3 localPosition, Vector3 localEulerAngles)
+        {
+            m_boxesInCart[index].transform.localPosition = localPosition;
+            m_boxesInCart[index].transform.localEulerAngles = localEulerAngles;
+        }
+
         #region (--- Getter ---)
 
         /// <summary> Give number of boxes in cart </summary>
