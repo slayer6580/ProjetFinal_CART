@@ -254,6 +254,7 @@ namespace StatsSystem
         /// <summary> Teleport player at a scene for the upgrade UI scene and change caméra </summary>
         public void TeleportPlayerToUpgradeScene()
         {
+            UpdateAll();
             m_virtualCamera.Priority = 8;
             Rigidbody rb = CartMachine.gameObject.GetComponent<Rigidbody>();
 
