@@ -51,7 +51,7 @@ namespace BoxSystem
 
             m_currentTimer += Time.deltaTime;
 
-            if (m_currentTimer > m_timeBeforeRespawnForOneItem * m_itemQuantity)
+            if (m_currentTimer > m_timeBeforeRespawnForOneItem)
             {
                 ResetShelf();
                 ResetTimer();

@@ -226,8 +226,8 @@ namespace SavingSystem
             return (char)asciiNumber;
         }
 
-
-        private void DebugUpdate()
+	
+		private void DebugUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -241,7 +241,8 @@ namespace SavingSystem
             }
         }
 
-        private void ResetLeaderboard()
+		[ContextMenu("Reset Leadderboard")]
+		private void ResetLeaderboard()
         {
             SaveLeaderboard(new Leaderboard());
             m_leaderboard = LoadLeaderboard();

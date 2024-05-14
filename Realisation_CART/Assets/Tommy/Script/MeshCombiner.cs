@@ -14,6 +14,7 @@ namespace DiscountDelirium
             CombineMesh();
 		}
 
+        [ContextMenu("Combine Mesh")]
 		private void CombineMesh()
         {
             var combine = new CombineInstance[m_sourceMeshFilters.Count];
