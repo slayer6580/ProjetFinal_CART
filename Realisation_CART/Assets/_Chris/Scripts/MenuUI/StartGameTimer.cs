@@ -16,15 +16,12 @@ namespace DiscountDelirium
 
         private float m_timeLeft;
         private bool m_timerEnded;
-        private bool m_isPlayerReady;
 
         void Start()
         {
             m_timeLeft = m_startingTime;
-            GetReadyState.OnPlayerReady += StartTimer;
         }
 
-        // Update is called once per frame
         void Update()
         {
             DecrementTimer();
@@ -33,7 +30,7 @@ namespace DiscountDelirium
 
         private void DecrementTimer()
         {
-            if (m_isPlayerReady && m_timeLeft >= 0)
+            if (m_timeLeft >= 0)
             {
                 m_timeLeft -= Time.deltaTime;
             }
@@ -48,16 +45,11 @@ namespace DiscountDelirium
 
         private void UpdateUI()
         {
-            if (!m_timerEnded && m_isPlayerReady) 
+            if (!m_timerEnded) 
             {
                 m_timeText.text = Mathf.Ceil(m_timeLeft).ToString();
             }
             
-        }
-
-        private void StartTimer() 
-        {
-            m_isPlayerReady = true;
         }
 
         IEnumerator ShowTextAfterTimer() 

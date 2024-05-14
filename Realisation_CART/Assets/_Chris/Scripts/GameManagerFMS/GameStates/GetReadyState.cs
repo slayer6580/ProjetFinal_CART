@@ -9,12 +9,9 @@ namespace DiscountDelirium
         public static Action OnPlayerReady;
         public static Action OnGameStarted;
 
-        private bool m_playerReady = false;
-
         public override void OnEnter()
         {
             Debug.LogWarning("GameState : GetReady");
-            MainMenuInputHandler.SelectEvent += PlayerReady;
             StartGameTimer.OnStartingTimeEnded += StartGame;
             m_gameStateMachine.m_playerSM.IsPaused = true;
             _AudioManager.StartCurrentSceneMusic();
@@ -50,15 +47,6 @@ namespace DiscountDelirium
             OnGameStarted?.Invoke();
             m_gameStateMachine.m_playerSM.IsPaused = false;
             m_gameStateMachine.m_isGameStarted = true;
-        }
-
-        private void PlayerReady() 
-        {
-            if (!m_playerReady) //to delete eventually
-            {
-                OnPlayerReady?.Invoke();
-                m_playerReady = true;
-            }
         }
     }
 }
