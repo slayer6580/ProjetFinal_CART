@@ -105,7 +105,7 @@ namespace CartControl
 
 		public override void OnFixedUpdate()
 		{
-			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.DriftingAcceleration, m_cartStateMachine.DriftingDrag, m_cartStateMachine.MaxSpeedUpgrades);
+			m_cartStateMachine.CartMovement.Move(m_cartStateMachine.DriftingAccelerationUpgrades, m_cartStateMachine.DriftingDrag, m_cartStateMachine.MaxSpeedUpgrades);
 			m_cartStateMachine.CartMovement.UpdateOrientation(m_cartStateMachine.DriftingRotatingSpeedUpgrades + (Mathf.Abs(m_cartStateMachine.BackwardPressedPercent) * m_cartStateMachine.AddedRotatingSpeedWhenBreaking), m_cartStateMachine.DriftSteeringValue);
 		}
 
@@ -115,6 +115,8 @@ namespace CartControl
 
 			m_cartStateMachine.GrindVfx.StopVfx();
 			m_cartStateMachine.DriftSteeringValue = 0;
+
+			m_cartStateMachine.BoxForce.StopForce(true);
 
 			//Calculate boosting time
 			m_cartStateMachine.BoostingTime = m_cartStateMachine.MinBoostTime + (m_boostPercentageObtain * (m_cartStateMachine.MaxBoostTime - m_cartStateMachine.MinBoostTime));

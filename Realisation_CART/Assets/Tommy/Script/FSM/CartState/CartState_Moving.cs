@@ -93,6 +93,8 @@ namespace CartControl
 		{
 			_AudioManager.StopSoundEffectsLoop(m_audioSourceIndex);
 
+			m_cartStateMachine.BoxForce.StopForce();
+
 			//For Animation
 			m_cartStateMachine.HumanAnimCtrlr.SetBool("Breaking", false);
 		}

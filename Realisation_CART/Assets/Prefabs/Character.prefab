@@ -64193,12 +64193,12 @@ MonoBehaviour:
   <DriftSteeringValue>k__BackingField: 0
   <LocalVelocity>k__BackingField: {x: 0, y: 0, z: 0}
   <IsClient>k__BackingField: 0
-  <Acceleration>k__BackingField: 40
-  <MaxSpeed>k__BackingField: 15
+  <Acceleration>k__BackingField: 25
+  <MaxSpeed>k__BackingField: 11
   <MaxBackwardSpeed>k__BackingField: 5
   <IdleRotatingSpeed>k__BackingField: 135
-  <MovingRotatingSpeed>k__BackingField: 50
-  <TowerPushForceWhenTurning>k__BackingField: 2
+  <MovingRotatingSpeed>k__BackingField: 40
+  <TowerPushForceWhenTurning>k__BackingField: 10
   <TurningDrag>k__BackingField: 2
   <TurningDragRelativeToJoystick>k__BackingField:
     serializedVersion: 2
@@ -64226,10 +64226,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   <MinimumSpeedToAllowDrift>k__BackingField: 3
   <DriftingDrag>k__BackingField: 1
-  <DriftingRotatingSpeed>k__BackingField: 75
+  <DriftingRotatingSpeed>k__BackingField: 55
   <AddedRotatingSpeedWhenBreaking>k__BackingField: 30
-  <DriftingAcceleration>k__BackingField: 70
-  <TowerPushForceWhenDrifting>k__BackingField: 2
+  <DriftingAcceleration>k__BackingField: 50
+  <TowerPushForceWhenDrifting>k__BackingField: 2.5
   <AutoDriftWhenTurning>k__BackingField: 0
   <TurningTimeBeforeDrift>k__BackingField: 2
   <DriftPressed>k__BackingField: 0
@@ -64246,6 +64246,7 @@ MonoBehaviour:
   <MaxSpeedUpgrades>k__BackingField: 0
   <MovingRotatingSpeedUpgrades>k__BackingField: 0
   <DriftingRotatingSpeedUpgrades>k__BackingField: 0
+  <DriftingAccelerationUpgrades>k__BackingField: 0
 --- !u!114 &2194159890535579625
 MonoBehaviour:
   m_ObjectHideFlags: 0

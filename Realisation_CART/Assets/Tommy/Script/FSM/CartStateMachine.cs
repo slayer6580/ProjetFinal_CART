@@ -85,11 +85,12 @@ namespace CartControl
 		[field: SerializeField] public float MaxSpeedUpgrades { get; private set; }
 		[field: SerializeField] public float MovingRotatingSpeedUpgrades { get; private set; }
 		[field: SerializeField] public float DriftingRotatingSpeedUpgrades { get; private set; }
-
+		
+		[field: SerializeField] public float DriftingAccelerationUpgrades { get; private set; }
 
 		//
 
-        [HideInInspector] public GameObject LastClientCollisionWith { get; set; }
+		[HideInInspector] public GameObject LastClientCollisionWith { get; set; }
         [HideInInspector] public bool ForceStartDrift { get; set; }
         [HideInInspector] public bool IsDrifting { get; set; }
         //[HideInInspector] public bool CanBoost { get; set; }
@@ -156,12 +157,14 @@ namespace CartControl
 				MaxSpeedUpgrades = MaxSpeed;
 				MovingRotatingSpeedUpgrades = MovingRotatingSpeed;
 				DriftingRotatingSpeedUpgrades = DriftingRotatingSpeed;
+				DriftingAccelerationUpgrades = DriftingAcceleration;
 			}
 			
-			AccelerationUpgrades = Acceleration + 10 * PlayerPrefs.GetInt("Acceleration", 0);
-			MaxSpeedUpgrades = MaxSpeed + 5 * PlayerPrefs.GetInt("MaxSpeed", 0);
+			AccelerationUpgrades = Acceleration + 8.75f * PlayerPrefs.GetInt("Acceleration", 0);
+			DriftingAccelerationUpgrades = DriftingAcceleration + 7.5f * PlayerPrefs.GetInt("Acceleration", 0);
+			MaxSpeedUpgrades = MaxSpeed + 2.25f * PlayerPrefs.GetInt("MaxSpeed", 0);
 			MovingRotatingSpeedUpgrades = MovingRotatingSpeed + 5 * PlayerPrefs.GetInt("Handling", 0);
-			DriftingRotatingSpeedUpgrades = DriftingRotatingSpeed + 5 * PlayerPrefs.GetInt("Handling", 0);
+			DriftingRotatingSpeedUpgrades = DriftingRotatingSpeed + 7.5f * PlayerPrefs.GetInt("Handling", 0);
 
 		}
 		protected override void Update()
@@ -188,9 +191,10 @@ namespace CartControl
 
         private void AddForceToTowerPhysics()
         {
+
             if (m_currentState is CartState_Moving)
 			{
-				BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenTurning, 4f);
+				BoxForce.AddConstantForceToBox(LocalVelocity.x, TowerPushForceWhenTurning, 0.1f);
 			}          
                     
             else if (m_currentState is CartState_Drifting)

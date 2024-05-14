@@ -48,12 +48,19 @@ namespace BoxSystem
             m_pushForce = transform.right * totalForce * m_forceMultiplier * m_timeMultiplier;
 
         }
-
-        public void StopForce()
+  
+        public void StopForce(bool zeroMultiplier = false)
         {
 			m_pushIsStop = true;
 			m_pushIsActivated = false;
-			m_timeMultiplier = m_startingTimeMultiplier;
+            if (zeroMultiplier)
+            {
+                m_timeMultiplier = 0f;
+			}
+            else
+            {
+				m_timeMultiplier = m_startingTimeMultiplier;
+			}			
 			m_pushForce = Vector3.zero;
 		}
 
