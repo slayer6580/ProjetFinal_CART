@@ -93,10 +93,6 @@ namespace DiscountDelirium
                 m_text.text = m_actualAmmo.ToString();
             }
         }
-        public void StealItems(TowerBoxSystem clientTower)
-        {
-            base.StealItems(clientTower, PlayerPrefs.GetInt("Range", 0));
-        }
 
     }
 }

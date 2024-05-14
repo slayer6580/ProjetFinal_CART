@@ -4683,8 +4683,9 @@ MonoBehaviour:
   ImpactVFX: {fileID: 680176582864441094}
   AmmunitionCollider: {fileID: 5992149283933122502}
   SphereTrigger: {fileID: 7895942059382321017}
+  m_rangeWeapon: {fileID: 0}
   m_speed: 0
-  m_rotateSpeed: 10
+  m_rotateSpeed: 1
   m_target: {fileID: 0}
   m_minimumDistance: 1.5
 --- !u!135 &7895942059382321017

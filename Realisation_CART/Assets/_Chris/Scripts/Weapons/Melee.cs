@@ -7,6 +7,11 @@ namespace DiscountDelirium
 {
     public class Melee : Weapon
     {
+        [Header("Tower References and parameters")]
+        [SerializeField] private GrabItemTrigger m_playerGrabTrigger;
+        [SerializeField] protected float m_animationTime = 1;
+        [SerializeField] private int[] m_itemsToStealLevel;
+
         [Header("References")]
         private Animator m_animator;
         [SerializeField] private TrailRenderer m_trailRenderer;
@@ -47,7 +52,6 @@ namespace DiscountDelirium
             {
                 return;
             }
-     
 			m_animator.SetTrigger("ActivateWeapon");
         }
 
@@ -87,10 +91,13 @@ namespace DiscountDelirium
             _AudioManager.PlaySoundEffectsOneShot(ESound.MeleeSwoosh, transform.position, 0.5f);
         }
 
+        //-----------------Stealing-----------------//
         public void StealItems(TowerBoxSystem clientTower)
         {
-            //Debug.LogWarning("STEAL WITH MELEE");
-            base.StealItems(clientTower, PlayerPrefs.GetInt("Melee", 0));
+            for (int i = 0; i < m_itemsToStealLevel[PlayerPrefs.GetInt("Melee", 0)]; i++)
+            {
+                m_playerGrabTrigger.StealItemFromOtherTower(clientTower);
+            }
         }
     }
 }

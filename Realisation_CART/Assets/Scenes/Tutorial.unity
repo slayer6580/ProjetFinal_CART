@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OR USE THE POTATO LAUNCHER TO MAKE THEM LOSE ITEMS FROM FAR AWAY
+  m_text: OR USE THE POTATO LAUNCHER TO MAKE THEM STOP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2940,6 +2940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78b788d103aaee4f8244dbe574af75c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TutorialMusic>k__BackingField: 3
 --- !u!1 &660322410
 GameObject:
   m_ObjectHideFlags: 0

@@ -88,4 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc06e36090232d047bd8920012175ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_stopCount: 4
+  m_delayBetweenStop: 0.25
   m_towerBoxSystem: {fileID: 0}
+  m_rigidbody: {fileID: 0}

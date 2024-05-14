@@ -57642,7 +57642,7 @@ PrefabInstance:
     - target: {fileID: 3458037205827474096, guid: d998aab905264ac458a387351811a017,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4186764821357706005, guid: d998aab905264ac458a387351811a017,
         type: 3}
@@ -57654,15 +57654,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7778136938459650145, guid: d998aab905264ac458a387351811a017,
+    - target: {fileID: 6683847770845502576, guid: d998aab905264ac458a387351811a017,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778136938459650145, guid: d998aab905264ac458a387351811a017,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8472910947336650121, guid: d998aab905264ac458a387351811a017,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850935052309102207, guid: d998aab905264ac458a387351811a017,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -57939,6 +57949,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target
       objectReference: {fileID: 0}
+    - target: {fileID: 6860926957819299773, guid: 21420811efee1b541935f185e5144fe4,
+        type: 3}
+      propertyPath: m_rigidbody
+      value: 
+      objectReference: {fileID: 8550883599423599101}
     - target: {fileID: 6860926957819299773, guid: 21420811efee1b541935f185e5144fe4,
         type: 3}
       propertyPath: m_towerBoxSystem

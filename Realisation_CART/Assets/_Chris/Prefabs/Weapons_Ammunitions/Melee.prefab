@@ -107,28 +107,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ffe5142edba6b428e25067f719db75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerTower: {fileID: 0}
-  m_animationTime: 0
-  m_itemsToStealLevel:
-  - 3
-  - 6
-  - 9
-  - 10
-  - 12
+  m_playerGrabTrigger: {fileID: 0}
+  m_animationTime: 1
+  m_itemsToStealLevel: 0300000006000000090000000a0000000c000000
   m_trailRenderer: {fileID: 5398363909236523938}
-  m_level: 0
   m_speedLevel:
   - 1
   - 1.25
   - 1.5
   - 1.75
   - 2
-  m_forceLevel:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
   m_models:
   - {fileID: 7084357911744704143}
   - {fileID: 8493251761311330336}

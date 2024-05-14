@@ -47,7 +47,6 @@ namespace DiscountDelirium
                 {
                     m_speed = m_rb.velocity.magnitude;
                     m_hasTarget = true;
-                    //m_target = other.transform.parent.gameObject;
                     m_target = other.gameObject;
                 }
             }
@@ -112,10 +111,15 @@ namespace DiscountDelirium
             {
                 if ((m_target.transform.position - transform.position).magnitude < m_minimumDistance)
                 {
-                    m_rangeWeapon.StealItems(m_target.GetComponent<Target>().GetTower());
+                    StopTarget();
                     HideAmmo();
                 }
             }
+        }
+
+        private void StopTarget() 
+        {
+            m_target.GetComponent<Target>().StopMovement();
         }
 
     }
