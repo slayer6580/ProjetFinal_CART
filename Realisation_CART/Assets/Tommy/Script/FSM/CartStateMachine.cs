@@ -106,11 +106,15 @@ namespace CartControl
 
         private void InitializeVariables()
         {
+			/*
             Scene scene = gameObject.scene;
             GameObject[] gameObjects = scene.GetRootGameObjects();
 
             GameObject cameras = gameObjects[0];
-            if (cameras == null || cameras.name != "CameraSystem") Debug.LogError("Cameras not found");
+			*/
+			GameObject cameras = GameObject.Find("CameraSystem");
+
+			if (cameras == null || cameras.name != "CameraSystem") Debug.LogError("Cameras not found");
 
             Cart = gameObject;
             CartRB = GetComponent<Rigidbody>();

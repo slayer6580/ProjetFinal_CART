@@ -18,13 +18,14 @@ namespace DiscountDelirium
 
         private void Awake()
         {
-            m_timeAtStart = GameStateMachine.Instance.GameLength;
-			GetReadyState.OnGameStarted += StartTimer;
+           
         }
 
         private void Start () 
         {
-            m_timeLeft = m_timeAtStart;
+			m_timeAtStart = GameStateMachine.Instance.GameLength;
+			GetReadyState.OnGameStarted += StartTimer;
+			m_timeLeft = m_timeAtStart;
         }
 
         public void StartTimer() 
