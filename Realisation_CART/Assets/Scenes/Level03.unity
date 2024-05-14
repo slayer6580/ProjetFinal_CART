@@ -4948,9 +4948,9 @@ RectTransform:
   - {fileID: 282040016}
   - {fileID: 20914873}
   - {fileID: 1044657597}
-  - {fileID: 403681371}
   - {fileID: 468694974}
   - {fileID: 1074187305}
+  - {fileID: 403681371}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6529,12 +6529,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1448771540}
     - target: {fileID: 5807787597716368242, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1448771540}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9648,6 +9648,12 @@ Mesh:
 --- !u!1 &1448771539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8225705120069120714, guid: 6cb0203a764e46249bf79ecf5a681950,
+    type: 3}
+  m_PrefabInstance: {fileID: 871537552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1448771540 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2452949573761676810, guid: 6cb0203a764e46249bf79ecf5a681950,
     type: 3}
   m_PrefabInstance: {fileID: 871537552}
   m_PrefabAsset: {fileID: 0}
