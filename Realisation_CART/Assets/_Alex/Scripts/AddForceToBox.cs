@@ -8,7 +8,7 @@ namespace BoxSystem
         [Header("Force multiplier for constant force by balance level")]
         [SerializeField] private float[] m_forceMultiplier;
 
-        [Header("Reduce forceMultiplier over time")]
+        [Header("Reduce force multiplier over time")]
         [SerializeField][Range(1, 10)] private float m_forceOverTimeReduction;
 
         [Header("Starting multiplier")]
