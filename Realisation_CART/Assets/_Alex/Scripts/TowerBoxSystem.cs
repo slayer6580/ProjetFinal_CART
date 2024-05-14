@@ -69,7 +69,7 @@ namespace BoxSystem
 
         private void Update()
         {
-            KeyboardDebug();
+           // KeyboardDebug();
             BoxMovement();
             CollisionAnimation();
         }
