@@ -39,8 +39,13 @@ namespace BoxSystem
         [SerializeField] private float m_maxGapDifference;
         [SerializeField] private float m_forceMultiplier;
         [SerializeField] private float m_minForceToMove;
+        [SerializeField] private float m_collisionMultiplier;
+        [SerializeField] private float m_collisionAnimationTime;
+        private float m_currentAnimationTime = 0;
+        private float m_collisionForce = 0;
         private Rigidbody m_playerRb;
- 
+        private bool m_collisionAnimation = false;
+
 
         [Header("Cart token")]
         [SerializeField] private int m_cartokenValueMultiplier = 1;
@@ -59,14 +64,17 @@ namespace BoxSystem
 
         void Start()
         {
-           AddBoxToTower();
+            AddBoxToTower();
         }
 
         private void Update()
         {
             KeyboardDebug();
             BoxMovement();
+            CollisionAnimation();
         }
+
+
 
         private void KeyboardDebug()
         {
@@ -153,7 +161,7 @@ namespace BoxSystem
 
         }
 
-        //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888//
+
         public void AddItemToTower(GameObject item)
         {
 
@@ -163,7 +171,7 @@ namespace BoxSystem
                 Destroy(rb);
             }
 
-            Item itemScript = item.GetComponent<Item>();    
+            Item itemScript = item.GetComponent<Item>();
             ItemData.ESize size = itemScript.m_data.m_size;
 
             if (!CanTakeObjectInTheActualBox(size))
@@ -175,7 +183,7 @@ namespace BoxSystem
             //Debug.LogError("item to put in box: " + item.name);
 
         }
-        //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888//
+
         /// <summary> Look if top box can take item </summary>
         public bool CanTakeObjectInTheActualBox(ItemData.ESize size)
         {
@@ -292,8 +300,81 @@ namespace BoxSystem
             return lastItemInBox.m_item;
         }
 
+        public void ActivateCollisionAnimation(float force)
+        {
+            if (m_collisionAnimation)
+                return;
+
+            m_collisionForce = force * m_collisionMultiplier;
+            m_currentAnimationTime = 0;
+            m_collisionAnimation = true;
+        }
+
+        public void CollisionAnimation()
+        {
+            if (!m_collisionAnimation)
+                return;
+
+            int nbOfFixedBoxes = m_towerPhysics.GetNbOfFixedBoxes();
+            int boxesToMove = m_boxCount - nbOfFixedBoxes;
+
+
+            if (boxesToMove == 0)
+            {
+                return;
+            }
+
+            int lastIndex = m_boxesInCart.Count - 1;
+
+            if ((Mathf.Abs(m_collisionForce) > m_maxGapDifference))
+            {
+                if (m_collisionForce > 0)
+                {
+                    m_collisionForce = m_maxGapDifference;
+                }
+                else
+                {
+                    m_collisionForce = -m_maxGapDifference;
+                }
+            }
+            float HalfAnimationTime = m_collisionAnimationTime / 2;
+
+            m_currentAnimationTime += Time.deltaTime;
+            bool comeBack = m_currentAnimationTime > HalfAnimationTime;
+
+
+            float lerpingTime;
+            if (comeBack)
+                lerpingTime = 1 - ((m_currentAnimationTime - HalfAnimationTime) / HalfAnimationTime);
+            else
+                lerpingTime = m_currentAnimationTime / HalfAnimationTime;
+
+
+            for (int i = lastIndex; i > (nbOfFixedBoxes - 1); i--)
+            {
+                Transform boxGraphics = m_boxesInCart[i].transform.GetChild(1);
+
+
+                boxGraphics.localPosition = Vector3.Lerp(Vector3.zero, new Vector3(0, 0, m_collisionForce * boxesToMove), lerpingTime);
+
+
+                boxesToMove--;
+            }         
+
+            if (m_currentAnimationTime > m_collisionAnimationTime)
+            {
+                m_collisionAnimation = false;
+            }
+
+
+        }
+
         public void BoxMovement()
         {
+
+            if (m_collisionAnimation)
+                return;
+
             int nbOfFixedBoxes = m_towerPhysics.GetNbOfFixedBoxes();
             int boxesToMove = m_boxCount - nbOfFixedBoxes;
             float force = Vector3.Dot(-Player.transform.forward, m_playerRb.velocity.normalized) * m_playerRb.velocity.magnitude;
@@ -302,12 +383,12 @@ namespace BoxSystem
             {
                 return;
             }
-            
+
             if (Mathf.Abs(force) < m_minForceToMove)
             {
                 return;
             }
-          
+
             int lastIndex = m_boxesInCart.Count - 1;
             float distanceZ = force * m_forceMultiplier;
 

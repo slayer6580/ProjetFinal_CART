@@ -58,4 +58,6 @@ MonoBehaviour:
   m_maxGapDifference: 0.05
   m_forceMultiplier: 0.003
   m_minForceToMove: 0.9
+  m_collisionMultiplier: 10
+  m_collisionAnimationTime: 0.5
   m_cartokenValueMultiplier: 1
