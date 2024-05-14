@@ -1396,8 +1396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_haveMaxItem: 0
+  m_showOneItem: 0
   m_nbOfItems: 0
-  m_scaleMultiplier: {x: 1.5, y: 1.5, z: 1.5}
+  <ScaleMultiplier>k__BackingField: {x: 0, y: 0, z: 0}
   m_surfaces: {fileID: 137047853647022876}
   m_spawnPoints: {fileID: 6283386202134389293}
   m_lenghtGap: 0.2
@@ -2478,7 +2479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <BackstoreSystemsGO>k__BackingField: {fileID: 1755552842370089017}
-  <_BackstoreDoorSystem>k__BackingField: {fileID: 5642824088077390210}
+  <_ScaleSystem>k__BackingField: {fileID: 0}
 --- !u!65 &7543933174041617035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3223,7 +3224,6 @@ Transform:
   - {fileID: 502424126035019232}
   - {fileID: 858539320975570552}
   - {fileID: 8470104999562748849}
-  - {fileID: 514394219203048576}
   - {fileID: 965550783678942683}
   - {fileID: 7856317763411109194}
   - {fileID: 2697750913642818230}
@@ -3232,6 +3232,7 @@ Transform:
   - {fileID: 4918936581006350121}
   - {fileID: 6178087846132847515}
   - {fileID: 2009664273811551095}
+  - {fileID: 514394219203048576}
   - {fileID: 6893341656159390443}
   - {fileID: 3082204780693855999}
   m_Father: {fileID: 1349371833829556386}
