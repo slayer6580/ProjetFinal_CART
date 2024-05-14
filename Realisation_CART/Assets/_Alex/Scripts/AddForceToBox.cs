@@ -4,8 +4,9 @@ namespace BoxSystem
 {
     public class AddForceToBox : MonoBehaviour
     {
-        [Header("Force multiplier for constant force")]
-        [SerializeField] private float m_forceMultiplier;
+
+        [Header("Force multiplier for constant force by balance level")]
+        [SerializeField] private float[] m_forceMultiplier;
 
         [Header("Reduce forceMultiplier over time")]
         [SerializeField][Range(1, 10)] private float m_forceOverTimeReduction;
@@ -45,7 +46,7 @@ namespace BoxSystem
             m_timeMultiplier += Time.deltaTime / m_forceOverTimeReduction;
 
             float totalForce = force * towerPushForceWhenMoving;
-            m_pushForce = transform.right * totalForce * m_forceMultiplier * m_timeMultiplier;
+            m_pushForce = transform.right * totalForce * m_forceMultiplier[PlayerPrefs.GetInt("Balance",0)] * m_timeMultiplier;
 
         }
   

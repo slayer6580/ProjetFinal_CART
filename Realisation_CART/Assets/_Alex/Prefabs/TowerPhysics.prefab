@@ -75,7 +75,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10957a88632347a4ea6087bde9c0e45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_forceMultiplier: 1.5
+  m_forceMultiplier:
+  - 1.5
+  - 1.35
+  - 1.2
+  - 1.05
+  - 0.9
   m_forceOverTimeReduction: 1
   m_startingTimeMultiplier: 1
   m_pushIsStop: 0
