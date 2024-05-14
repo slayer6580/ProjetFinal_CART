@@ -76,11 +76,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_forceMultiplier:
-  - 1.5
-  - 1.35
+  - 1.8
+  - 1.6
+  - 1.4
   - 1.2
-  - 1.05
-  - 0.9
+  - 1
   m_forceOverTimeReduction: 1
   m_startingTimeMultiplier: 1
   m_pushIsStop: 0

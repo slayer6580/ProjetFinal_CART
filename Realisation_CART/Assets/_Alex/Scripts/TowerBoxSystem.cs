@@ -64,7 +64,7 @@ namespace BoxSystem
 
         void Start()
         {
-            AddBoxToTower();
+           // AddBoxToTower();
         }
 
         private void Update()
