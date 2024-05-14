@@ -13571,7 +13571,7 @@ MonoBehaviour:
   <SpawningZones>k__BackingField: {fileID: 2690386999521778428}
   m_isSpawningFromEntrance: 1
   m_isOneShot: 1
-  m_numberOfNPCFromEntrance: 100
+  m_numberOfNPCFromEntrance: 12
   m_isRateRandom: 0
   m_spawningEntranceRandomness: 0
   m_spawningEntranceRate: 0

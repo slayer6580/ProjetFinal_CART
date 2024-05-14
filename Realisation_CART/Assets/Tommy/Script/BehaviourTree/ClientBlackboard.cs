@@ -36,7 +36,9 @@ namespace BehaviourTree
         public float m_currentPursuitStartTime;
         public float m_currentSpeed;    // meter/seconds
 
-        public float m_stuckAtTime;
+        public bool m_isGameStarted = false;
+
+		public float m_stuckAtTime;
         public float m_timeStuck;
         public float m_lastAttackTimer;
 		public List<GameObject> m_clientInSight;

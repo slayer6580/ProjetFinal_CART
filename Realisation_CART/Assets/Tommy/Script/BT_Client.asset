@@ -1149,6 +1149,97 @@ MonoBehaviour:
     m_chosenTarget: 0
   m_description: 
   m_isAttacking: 1
+--- !u!114 &-623155257482467785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751090291edba18449907c4f871d62c7, type: 3}
+  m_Name: WaitForGameStart
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: b0e967f6650ef9646bbfe65eab2545dc
+  m_position: {x: -406, y: 12}
+  m_blackboard:
+    m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+    m_pursuitTenacity: 0
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_lastAttackTimer: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+  m_description: 
+--- !u!114 &-592002658389422890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04239520c60033748a33bf303b9c5d4a, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: f1e3edc09344d7a4795f8ed4886fe7b8
+  m_position: {x: 0, y: 0}
+  m_blackboard:
+    m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+    m_pursuitTenacity: 0
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_lastAttackTimer: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+  m_description: 
+  duration: 1
 --- !u!114 &-217002694569445728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,6 +1337,7 @@ MonoBehaviour:
   - {fileID: 8681500071723160122}
   - {fileID: -217002694569445728}
   - {fileID: 4965471443556820477}
+  - {fileID: -623155257482467785}
 --- !u!114 &-98252233047386408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,6 +1465,8 @@ MonoBehaviour:
   - {fileID: 8134765450560944155}
   - {fileID: -7623184281317339678}
   - {fileID: 2918553551819896199}
+  - {fileID: -623155257482467785}
+  - {fileID: -592002658389422890}
   m_blackboard:
     m_wantMostActiveShelves: 5
     m_wantClosestPath: 5
@@ -1556,7 +1650,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 3202a27fef8d94b4296cf72072a78a7d
-  m_position: {x: -454.99985, y: 11.88002}
+  m_position: {x: -551, y: 12}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_wantClosestPath: 0
