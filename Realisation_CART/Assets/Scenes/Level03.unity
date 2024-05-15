@@ -4949,8 +4949,8 @@ RectTransform:
   - {fileID: 20914873}
   - {fileID: 1044657597}
   - {fileID: 468694974}
-  - {fileID: 1074187305}
   - {fileID: 403681371}
+  - {fileID: 1074187305}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9037,7 +9037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde1fee560655e14bb95ffc7a13f1fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GameLength>k__BackingField: 180
+  <GameLength>k__BackingField: 5
   <ClientsList>k__BackingField:
   - {fileID: 1345955963}
   - {fileID: 1448771539}
