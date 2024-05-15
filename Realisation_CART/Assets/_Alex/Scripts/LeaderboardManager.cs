@@ -31,7 +31,7 @@ namespace SavingSystem
     public class LeaderboardManager : MonoBehaviour
     {
 
-        private const string LEADERBOARD_LOCATION = "/_Alex/LeaderBoardSave.txt";
+        private const string LEADERBOARD_LOCATION = "/Json/LeaderBoardSave.txt";
         private Leaderboard m_leaderboard;
 
         [Header("Top what?")]
@@ -299,14 +299,20 @@ namespace SavingSystem
             // convert gameobject in json text
             string jsonString = JsonUtility.ToJson(leaderboard);
             // store json text in .txt
+#if UNITY_EDITOR
             File.WriteAllText(Application.dataPath + LEADERBOARD_LOCATION, jsonString);
+
+#elif UNITY_STANDALONE_WIN
+            File.WriteAllText(Application.streamingAssetsPath + LEADERBOARD_LOCATION, jsonString);
+#endif
+
             UpdateUILeaderboard();
         }
 
         public Leaderboard LoadLeaderboard()
         {
             string jsonString;
-
+#if UNITY_EDITOR
             // if save dont exist, create an empty one
             if (!File.Exists(Application.dataPath + LEADERBOARD_LOCATION))
             {
@@ -315,7 +321,24 @@ namespace SavingSystem
             }
 
             // take json text from .txt
+
             jsonString = File.ReadAllText(Application.dataPath + LEADERBOARD_LOCATION);
+
+
+#elif UNITY_STANDALONE_WIN
+
+            if (!File.Exists(Application.streamingAssetsPath + LEADERBOARD_LOCATION))
+            {
+                Leaderboard leaderboard = new Leaderboard();
+                SaveLeaderboard(leaderboard);
+            }
+
+            // take json text from .txt
+
+            jsonString = File.ReadAllText(Application.streamingAssetsPath + LEADERBOARD_LOCATION);
+#endif
+
+
             // convert json text to gameobject
             return JsonUtility.FromJson<Leaderboard>(jsonString);
 
