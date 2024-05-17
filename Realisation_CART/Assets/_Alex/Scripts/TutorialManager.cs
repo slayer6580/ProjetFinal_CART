@@ -60,6 +60,12 @@ namespace DiscountDelirium
             SceneManager.LoadScene("Level01");
         }
 
+        public void ButtonClick(int index)
+        {
+            m_currentPage = index;
+            UpdatePage();
+        }
+
         public void OnAccept()
         {
             m_currentPage++;
