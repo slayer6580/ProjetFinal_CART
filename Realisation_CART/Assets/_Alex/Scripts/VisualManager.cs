@@ -20,8 +20,8 @@ namespace StatsSystem
 
         private void Awake()
         {
-            if (Instance == null)            
-                Instance = this;            
+            if (Instance == null)
+                Instance = this;
         }
 
         public static VisualManager GetInstance()
@@ -37,7 +37,7 @@ namespace StatsSystem
         private void UpdateWheels()
         {
             int wheelUpgrade = PlayerPrefs.GetInt("Handling", 0);
-        
+
             foreach (var wheelPart in m_wheelParts)
                 wheelPart.material = m_wheelsMaterials[wheelUpgrade];
 
@@ -56,8 +56,9 @@ namespace StatsSystem
         {
             int shoesUpgrade = PlayerPrefs.GetInt("Acceleration", 0);
 
-            Material shoeMaterial = m_shoePart.materials[2];
-            shoeMaterial = m_shoesMaterials[shoesUpgrade];
+            Material[] materials = m_shoePart.materials;
+            materials[2] = m_shoesMaterials[shoesUpgrade];
+            m_shoePart.sharedMaterials = materials;                                           
         }
 
         private void UpdateRockets()
