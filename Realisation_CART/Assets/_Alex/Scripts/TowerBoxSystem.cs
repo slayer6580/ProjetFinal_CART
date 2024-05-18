@@ -200,7 +200,7 @@ namespace BoxSystem
         }
 
         /// <summary> Remove the top box with an impulse force </summary>
-        public void RemoveBoxImpulse()
+        public void RemoveBoxImpulse(bool willDestroy = true)
         {
             Box topBox = GetTopBox();
 
@@ -215,7 +215,9 @@ namespace BoxSystem
             Vector3 totalImpulse = topBox.transform.up * m_boxExpulsionForce;
             Rigidbody rb = topBox.AddComponent<Rigidbody>();
             rb.AddForce(totalImpulse, ForceMode.Impulse);
-            Destroy(topBox.gameObject, m_boxDestructionTime);
+
+            if(willDestroy)
+                Destroy(topBox.gameObject, m_boxDestructionTime);
 
             RemoveLastBoxFromTower();
             m_towerPhysics.RemoveBoxFromPhysicsTower();
@@ -469,6 +471,7 @@ namespace BoxSystem
         }
         #endregion
 
-    }
+
+	}
 
 }
