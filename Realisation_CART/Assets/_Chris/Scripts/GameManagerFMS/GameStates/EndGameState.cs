@@ -32,11 +32,12 @@ namespace DiscountDelirium
 
         public override bool CanEnter(IState currentState)
         {
-            if (currentState is GameplayState)
+            if (currentState is GameplayState || currentState is GameCheckoutState)
             {
                 return m_gameStateMachine.m_isGameOver;
             }
-            return false;
+
+			return false;
         }
 
         public override bool CanExit()

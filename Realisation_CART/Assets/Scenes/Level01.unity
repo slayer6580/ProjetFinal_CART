@@ -2976,6 +2976,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <_TowerBoxSystem>k__BackingField: {fileID: 960188264}
   m_cartokenValueMultiplier: 2
+  m_timeBetweenBoxFall: 0.25
+  m_restTimeAfterAllBoxOnCounter: 0.5
+  m_showBoxGoesUpTime: 0.5
 --- !u!1 &371105975
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,11 +5336,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 503907642887369859, guid: d500f85ef0374b34ca38b9e1ac161f67,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 503907642887369859, guid: d500f85ef0374b34ca38b9e1ac161f67,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 503907642887369859, guid: d500f85ef0374b34ca38b9e1ac161f67,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 734065018147665381, guid: d500f85ef0374b34ca38b9e1ac161f67,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 572889103}
+    - target: {fileID: 1091652457220783597, guid: d500f85ef0374b34ca38b9e1ac161f67,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1490230497818347004, guid: d500f85ef0374b34ca38b9e1ac161f67,
         type: 3}
       propertyPath: m_Mesh
@@ -5383,6 +5406,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1647762708}
+    - target: {fileID: 6099849018938946919, guid: d500f85ef0374b34ca38b9e1ac161f67,
+        type: 3}
+      propertyPath: m_itemQuantity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7152306663591928880, guid: d500f85ef0374b34ca38b9e1ac161f67,
         type: 3}
       propertyPath: m_Mesh
@@ -8892,25 +8920,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2564965126335948513, guid: 731bb1051f369864db64ecaeac25e95e,
-        type: 3}
-      propertyPath: m_CameraType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2986245385748925224, guid: 731bb1051f369864db64ecaeac25e95e,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3352114451367141702, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_Name
       value: CameraSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11.109182
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -8937,11 +8950,6 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1016554959}
-    - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11.109182
-      objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -9311,13 +9319,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde1fee560655e14bb95ffc7a13f1fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GameLength>k__BackingField: 5
+  <GameLength>k__BackingField: 180
   <ClientsList>k__BackingField:
   - {fileID: 253715849}
   m_playerSM: {fileID: 1016554958}
   m_scoreUI: {fileID: 1333703638}
   m_upgrademanager: {fileID: 265525966}
   <IsGamePaused>k__BackingField: 0
+  <IsCheckingOut>k__BackingField: 0
   m_isGameOver: 0
   m_isGameStarted: 0
   m_nbItems: 0

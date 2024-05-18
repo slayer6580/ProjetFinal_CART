@@ -9,6 +9,7 @@ namespace DiscountDelirium
 		public override void OnEnter()
 		{
 			Debug.LogWarning("GameState : CHECKOUT");
+			Timer.TimesUp += GameOver;
 		}
 
 		public override void OnExit()
@@ -37,6 +38,12 @@ namespace DiscountDelirium
 		public override bool CanExit()
 		{
 			return !m_gameStateMachine.IsCheckingOut;
+		}
+
+		private void GameOver()
+		{
+			m_gameStateMachine.m_isGameOver = true;
+			Debug.Log("GameOver");
 		}
 
 	}
