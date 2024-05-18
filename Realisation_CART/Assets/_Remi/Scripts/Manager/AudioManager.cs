@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -133,7 +134,7 @@ namespace Manager
         }
 
         /// <summary> Play a sound effect one shot </summary>
-        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition, float volume = 1, bool isPlayer = false)
+        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition, float volume = 1, float pitch = 1)
         {
             AudioBox audiobox = FindAValidAudioBox();
 
@@ -143,6 +144,7 @@ namespace Manager
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
             audiobox.GetComponent<AudioSource>().volume = volume;
+            audiobox.GetComponent<AudioSource>().pitch = pitch;
 
             MoveAudioBox(audiobox, newPosition);
             PlayClipOneShot(audiobox, sound);

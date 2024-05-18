@@ -60815,6 +60815,7 @@ MonoBehaviour:
   <MaxSpeedUpgrades>k__BackingField: 0
   <MovingRotatingSpeedUpgrades>k__BackingField: 0
   <DriftingRotatingSpeedUpgrades>k__BackingField: 0
+  <DriftingAccelerationUpgrades>k__BackingField: 0
 --- !u!114 &3341273960309738010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68789,6 +68790,7 @@ GameObject:
   - component: {fileID: 220962646872052811}
   - component: {fileID: 3055388987219288640}
   - component: {fileID: 783729673216168679}
+  - component: {fileID: 903051674144625884}
   m_Layer: 0
   m_Name: SM_Chr_Kid_Adventure_01
   m_TagString: Untagged
@@ -68958,6 +68960,18 @@ MonoBehaviour:
   - m_Rig: {fileID: 0}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &903051674144625884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025649484556602954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868c4822b9a89e749a5b03db6b87376b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7178404788154443044
 GameObject:
   m_ObjectHideFlags: 0

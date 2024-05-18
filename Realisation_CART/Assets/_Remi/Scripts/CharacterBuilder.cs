@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using UnityEngine.Experimental.AI;
 
 namespace Spawner
 {
@@ -624,13 +625,17 @@ namespace Spawner
             //EmptyAllVariables();
             //VerifyIntegrityOfVariables(); // Create recursing loop when called from
             //                                 The initialize var button in editor
+            //string materialPath01 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_01_A.mat";
+            //string materialPath02 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_02_A.mat";
+            //string materialPath03 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_03_A.mat";
+            //string materialPath04 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_04_A.mat";
+            string materialPath01 = "Materials/PolygonKids_Material_01_A";
+            string materialPath02 = "Materials/PolygonKids_Material_02_A";
+            string materialPath03 = "Materials/PolygonKids_Material_03_A";
+            string materialPath04 = "Materials/PolygonKids_Material_04_A";
 
-            string materialPath01 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_01_A.mat";
-            string materialPath02 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_02_A.mat";
-            string materialPath03 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_03_A.mat";
-            string materialPath04 = "Assets/AllPolyPack/PolygonKids/Materials/PolygonKids_Material_04_A.mat";
-            string materialPath05 = "Assets/_Remi/Materials/Skin.mat";
-            string materialPath06 = "Assets/_Remi/Materials/Shoes.mat";
+            string materialPath05 = "Materials/Skin";
+            string materialPath06 = "Materials/Shoes";
 
             m_polygonKids_Material_01_A = Resources.Load<Material>(materialPath01);
             m_polygonKids_Material_02_A = Resources.Load<Material>(materialPath02);
@@ -640,10 +645,10 @@ namespace Spawner
             m_shoes_Mat = Resources.Load<Material>(materialPath06);
 
 
-            //PolygonKids_Material_01_A = Resources.Load<Material>("Assets/PolygonKids/Materials/PolygonKids_Material_01_A");
-            //PolygonKids_Material_03_A = Resources.Load<Material>("Assets/PolygonKids/Materials/PolygonKids_Material_03_A");
-            //PolygonKids_Material_04_A = Resources.Load<Material>("Assets/PolygonKids/Materials/PolygonKids_Material_04_A");
-            //PolygonKids_Material_02_A = Resources.Load<Material>("Assets/PolygonKids/Materials/PolygonKids_Material_02_A");
+        //    m_polygonKids_Material_01_A = Resources.Load<Material>("Assets/Resources/Materials/PolygonKids_Material_01_A.mat");
+        //    m_polygonKids_Material_02_A = Resources.Load<Material>("Assets/Resources/Materials/PolygonKids_Material_02_A.mat");
+        //    m_polygonKids_Material_03_A = Resources.Load<Material>("Assets/Resources/Materials/PolygonKids_Material_03_A.mat");
+        //    m_polygonKids_Material_04_A = Resources.Load<Material>("Assets/Resources/Materials/PolygonKids_Material_04_A.mat");
         }
 
         internal void VerifyIntegrityOfVariables()
@@ -801,6 +806,13 @@ namespace Spawner
             {
                 m_humanInCostumeFullBodyTransforms[randomHumanInCostumeFullBody].gameObject.SetActive(true);
                 m_currentHumanInCostumeFullBodyIndex = randomHumanInCostumeFullBody;
+
+
+                // TODO: Remi: This is a temporary solution so that the SM_Chr_Kid_Adventure_01 has all the materials on his body parts
+                if (m_humanInCostumeFullBodyTransforms[randomHumanInCostumeFullBody].name != "SM_Chr_Kid_Adventure_01")
+                    return;
+
+                GiveMeBob();
             }
             else if (m_bodyPartType == BodyPartType.NonHuman)
             {
@@ -863,12 +875,12 @@ namespace Spawner
 
         internal void GiveMeBob(bool hasCustomBoots = false)
         {
-            //Debug.Log("Give Me Bob");
+            Debug.Log("Give Me Bob");
 
             DisableAllbodyParts();
 
             GameObject adventurer = m_humanFullBodyTransforms[0].gameObject;
-            if (adventurer.name != "SM_Chr_Kid_Explorer_01") Debug.LogError("The game object has been moved or renamed.");
+            if (adventurer.name != "SM_Chr_Kid_Adventure_01") Debug.LogError("SM_Chr_Kid_Adventure_01 has been moved or renamed. Current name is: " + adventurer.name);
 
             adventurer.SetActive(true);
 
