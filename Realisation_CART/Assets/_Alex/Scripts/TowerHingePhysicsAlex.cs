@@ -28,11 +28,10 @@ namespace BoxSystem
         [Header("Lose items parameters")]
         [SerializeField] private List<Vector2> m_loseItemStats = new List<Vector2>();
         private float m_currentTimer = 0;
-        private float m_timeBeforeLost = 0;
 
         private Eside m_side;
 
-        [Header("ReadOnly")]
+        [Header("Read Only")]
         [SerializeField] private float m_firstHingeAngleRead = 0;
         [SerializeField] private float m_allHingeAngleRead = 0;
 

@@ -14,11 +14,14 @@ namespace BoxSystem
         [Header("Starting multiplier")]
         [SerializeField] private float m_startingTimeMultiplier;
 
+        [Header("READ ONLY")]
+        public bool m_pushIsStop = false;
+
         private TowerHingePhysicsAlex m_towerPhysics;
         private bool m_pushIsActivated = false;
         private Vector3 m_pushForce = Vector3.zero;
         private float m_timeMultiplier;
-        public bool m_pushIsStop = false;
+    
 
         private void Awake()
         {
