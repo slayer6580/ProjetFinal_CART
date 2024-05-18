@@ -19,6 +19,7 @@ namespace DiscountDelirium
 
 
         [field: SerializeField] public bool IsGamePaused { get; set; }
+        [field: SerializeField] public bool IsCheckingOut { get; set; }
 
         [HideInInspector] public bool m_isGameOver;//field
         [HideInInspector] public bool m_isGameStarted;//field
@@ -65,6 +66,7 @@ namespace DiscountDelirium
             m_possibleStates.Add(new GameplayState());
             m_possibleStates.Add(new PauseState());
             m_possibleStates.Add(new EndGameState());
+            m_possibleStates.Add(new GameCheckoutState());
         }
 
         public void GetScoreFromCart(Vector3 data) 
