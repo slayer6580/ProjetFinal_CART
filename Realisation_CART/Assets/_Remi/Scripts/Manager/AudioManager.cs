@@ -81,7 +81,7 @@ namespace Manager
 
         private void Awake()
         {
-            Debug.Log("AudioManager Awake");
+            //Debug.Log("AudioManager Awake");
             if (_AudioManager != null)
             {
                 Debug.LogWarning("AudioManager already exists.");
@@ -244,7 +244,7 @@ namespace Manager
         /// <summary> Start the music of the current scene </summary>
         public int StartCurrentSceneMusic()
         {
-            Debug.Log("StartCurrentSceneMusic");
+            //Debug.Log("StartCurrentSceneMusic");
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
             int index = -1;
@@ -268,6 +268,11 @@ namespace Manager
             { 
                 Debug.Log("Playing LevelTwoMusic");
                 index = PlayMusic(_AudioManager.LevelTwoMusic);
+            }
+            else if (sceneName == "Level03")
+            {
+                Debug.Log("Playing LevelTwoMusic");
+                index = PlayMusic(_AudioManager.MainMenuMusic);
             }
 
             return index;

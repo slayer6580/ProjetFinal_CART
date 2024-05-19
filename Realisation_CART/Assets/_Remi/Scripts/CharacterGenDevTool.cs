@@ -36,6 +36,10 @@ namespace Spawner
             {
                 characterBodyParts.RandomizeBody();
             }
+            else if (UnityEngine.GUILayout.Button("Randomize hair"))
+            {
+                characterBodyParts.RandomizeHair();
+            }
             else if (UnityEngine.GUILayout.Button("Randomize materials"))
             {
                 characterBodyParts.RandomizeBodyMaterial();
