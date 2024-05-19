@@ -789,7 +789,7 @@ namespace Spawner
 
         internal void RandomizeBody()
         {
-            //Debug.Log("Randomize Full Body");
+            Debug.Log("Randomize Full Body");
 
             DisableFullBodyParts();
             
@@ -799,40 +799,73 @@ namespace Spawner
 
             if (m_bodyPartType == BodyPartType.Human)
             {
+                Debug.Log("Human");
                 m_humanFullBodyTransforms[randomHumanFullBody].gameObject.SetActive(true);
                 m_currentHumanFullBodyIndex = randomHumanFullBody;
+
+                CheckIfIsBob(m_humanFullBodyTransforms, randomHumanFullBody);
             }
             else if (m_bodyPartType == BodyPartType.HumanInCostume)
             {
+                Debug.Log("Human in costume");
                 m_humanInCostumeFullBodyTransforms[randomHumanInCostumeFullBody].gameObject.SetActive(true);
                 m_currentHumanInCostumeFullBodyIndex = randomHumanInCostumeFullBody;
-
-
-                // TODO: Remi: This is a temporary solution so that the SM_Chr_Kid_Adventure_01 has all the materials on his body parts
-                if (m_humanInCostumeFullBodyTransforms[randomHumanInCostumeFullBody].name != "SM_Chr_Kid_Adventure_01")
-                    return;
-
-                GiveMeBob();
             }
             else if (m_bodyPartType == BodyPartType.NonHuman)
             {
+                Debug.Log("Non-human");
                 m_nonHumanFullBodyTransforms[randomNonHumanFullBody].gameObject.SetActive(true);
                 m_currentNonHumanFullBodyIndex = randomNonHumanFullBody;
             }
             else if (m_bodyPartType == BodyPartType.AllBodyParts)
             {
-                int randomBodyPartType = UnityEngine.Random.Range(0, 3);
-                if (randomBodyPartType == 0) m_humanFullBodyTransforms[randomHumanFullBody].gameObject.SetActive(true);
-                else if (randomBodyPartType == 1) m_humanInCostumeFullBodyTransforms[randomHumanInCostumeFullBody].gameObject.SetActive(true);
-                else m_nonHumanFullBodyTransforms[randomNonHumanFullBody].gameObject.SetActive(true);
+                Debug.Log("All body parts");
+                int randomBodyPartType = RandomizeAllBodyParts(randomNonHumanFullBody, randomHumanFullBody, randomHumanInCostumeFullBody);
                 m_currentBodyPartTypeIndex = randomBodyPartType;
             }
 
             RandomizeBodyMaterial();
         }
 
+        private int RandomizeAllBodyParts(int randomNonHumanFullBody, int randomHumanFullBody, int randomHumanInCostumeFullBody)
+        {
+            int randomBodyPartType = UnityEngine.Random.Range(0, 3);
+
+            if (randomBodyPartType == 0)
+            {
+                m_humanFullBodyTransforms[randomHumanFullBody].gameObject.SetActive(true);
+                CheckIfIsBob(m_humanFullBodyTransforms, randomHumanFullBody);
+            }
+            else if (randomBodyPartType == 1)
+            {
+                m_humanInCostumeFullBodyTransforms[randomHumanInCostumeFullBody].gameObject.SetActive(true);
+                CheckIfIsBob(m_humanInCostumeFullBodyTransforms, randomHumanInCostumeFullBody);
+            }
+            else
+            {
+                m_nonHumanFullBodyTransforms[randomNonHumanFullBody].gameObject.SetActive(true);
+                CheckIfIsBob(m_nonHumanFullBodyTransforms, randomNonHumanFullBody);
+            }
+
+            return randomBodyPartType;
+        }
+
+        private void CheckIfIsBob(List<Transform> listOfBodies, int randomHumanInCostumeFullBody)
+        {
+            // TODO: Remi: This is a temporary solution so that the SM_Chr_Kid_Adventure_01 has all the materials on his body parts
+            if (listOfBodies[randomHumanInCostumeFullBody].name != "SM_Chr_Kid_Adventure_01")
+            {
+                Debug.Log("Not Bob");
+                RandomizeBodyMaterial();
+                return;
+            }
+
+            GiveMeBob();
+        }
+
         internal void RandomizeBodyMaterial()
         {
+            Debug.Log("Randomize Body Material");
             int randomMaterial = UnityEngine.Random.Range(0, 4);
             Material material = null;
 
@@ -853,6 +886,10 @@ namespace Spawner
                 material = new Material(m_polygonKids_Material_04_A);
             }
 
+            if (material == null) Debug.LogError("Material is null");
+
+            Debug.Log("Material is: " + material.name);
+
             m_humanFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
         }
 
@@ -868,7 +905,7 @@ namespace Spawner
                 return m_currentBodyPartTypeIndex;
             else 
             {
-                Debug.LogError("No body part type selected or no body part index found.");
+                Debug.LogError("No body part type selected or no body part index found. Current body part type is: " + m_bodyPartType);
                 return -1; 
             }
         }

@@ -11,20 +11,17 @@ namespace Manager
         [SerializeField] private float m_timeBetweenFootsteps = 0.5f;
         private float m_currentTimeBetweenFootsteps = 0.5f;
         [SerializeField] private bool m_isFootstepPlaying = false;
-        [SerializeField] private Rigidbody m_playerRB = null;
+        private Rigidbody m_playerRB = null;
 
         private void Start()
         {
             m_playerRB = transform.parent.GetComponentInParent<Rigidbody>();
-            if (m_playerRB == null)
-            {
-                Debug.LogError("Player Rigidbody not found");
-            }
+            if (m_playerRB == null) Debug.LogError("Player Rigidbody not found");
         }
 
         public void PlayFootstep()
         {
-            Debug.Log("PlayFootstep");
+            //Debug.Log("PlayFootstep");
 
             if (m_isFootstepPlaying) return;
 

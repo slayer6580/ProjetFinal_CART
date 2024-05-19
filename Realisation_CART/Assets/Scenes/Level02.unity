@@ -890,6 +890,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 351325731319636661, guid: 4f7c989117f91164f905c87f068115e0,
         type: 3}
+      propertyPath: m_numberOfAudioBox
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 351325731319636661, guid: 4f7c989117f91164f905c87f068115e0,
+        type: 3}
       propertyPath: m_musicPool.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -2716,6 +2721,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <_TowerBoxSystem>k__BackingField: {fileID: 871537553}
   m_cartokenValueMultiplier: 2
+  m_timeBetweenBoxFall: 0
+  m_restTimeAfterAllBoxOnCounter: 0
+  m_showBoxGoesUpTime: 0
 --- !u!1 &358740135
 GameObject:
   m_ObjectHideFlags: 0
@@ -9540,6 +9548,7 @@ MonoBehaviour:
   m_scoreUI: {fileID: 3032914007388662774}
   m_upgrademanager: {fileID: 265525966}
   <IsGamePaused>k__BackingField: 0
+  <IsCheckingOut>k__BackingField: 0
   m_isGameOver: 0
   m_isGameStarted: 0
   m_nbItems: 0

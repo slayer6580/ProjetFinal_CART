@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -131,6 +132,31 @@ namespace Manager
                 float currentVolume = PlayerPrefs.GetFloat("MasterVolume", 1);
                 MusicAudioSource.volume = currentVolume;
             }
+        }
+
+        /// <summary> Modify the pitch or volume of a sound of a one shot sound based on an object speed </summary>
+        public float ModifyAudioBasedOnBodySpeed(float speed, EAudioModification modif, float valueToModify)
+        {
+            if (modif == EAudioModification.SoundPitch)
+            {
+                return valueToModify * (speed / 2);
+            }
+            else if (modif == EAudioModification.SoundVolume)
+            {
+                return valueToModify * (speed / 2);
+            }
+            else if (modif == EAudioModification.MusicVolume)
+            {
+                Debug.LogWarning("MusicVolume is not a valid modification for this function");
+                return 0;
+            }
+            else if (modif == EAudioModification.MasterVolume)
+            {
+                Debug.LogWarning("MasterVolume is not a valid modification for this function");
+                return 0;
+            }
+
+            return 0;
         }
 
         /// <summary> Play a sound effect one shot </summary>
@@ -328,6 +354,16 @@ namespace Manager
         public List<AudioBox> GetAudioBox()
         {
             return m_audioBox;
+        }
+
+        internal void PlayCollisionAudio(Vector3 position, float speed, float volume, float pitch)
+        {
+            float collisionVolume = volume;
+            float collisionPitch = pitch;
+            collisionVolume = ModifyAudioBasedOnBodySpeed(speed, EAudioModification.SoundVolume, collisionVolume);
+            collisionPitch = ModifyAudioBasedOnBodySpeed(speed, EAudioModification.SoundPitch, collisionPitch);
+            //Debug.Log("CollisionVolume: " + collisionVolume + " CollisionPitch: " + collisionPitch);
+            _AudioManager.PlaySoundEffectsOneShot(ESound.CartCollision, position, collisionVolume, collisionPitch);
         }
     }
 }
