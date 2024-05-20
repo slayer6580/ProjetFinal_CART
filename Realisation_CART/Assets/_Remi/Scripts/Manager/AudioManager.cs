@@ -10,8 +10,8 @@ namespace Manager
     public class AudioManager : MonoBehaviour
     {
         [field: Header("Put all audio sounds here, read the Tooltip for the sound order")]
-        [Tooltip("CartCollision\nCartRolling\nStep01\nStep02\nStep03\nStep04\nGrabItem\nDriftBegin\nDriftLoop\nCashRegister\nMeleeSwoosh\nCannonSound\nUIHover\nUIClick\nUIBack")]
-        [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[16];
+        [Tooltip("CartCollision\nCartRolling\nStep01\nStep02\nStep03\nStep04\nGrabItem\nDriftBegin\nDriftLoop\nCashRegister\nMeleeSwoosh\nCannonSound\nHit\nUIHover\nUIClick\nUIBack\nUIScroll")]
+        [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[17];
         [Tooltip("ThemeMusic\nCart_Song_01\nCart_Song_02\nWaitingRoomMusic")]
         [SerializeField] private AudioClip[] m_musicPool = new AudioClip[4];
 
@@ -41,7 +41,7 @@ namespace Manager
             GrabItem,
             DriftBegin, DriftLoop,
             CashRegister,
-            MeleeSwoosh, CannonSound,
+            MeleeSwoosh, CannonSound, Hit
             UIHover, UIClick, UIBack, UIScroll,
             Count
         }
