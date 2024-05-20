@@ -63,12 +63,6 @@ namespace DiscountDelirium
 			m_animator.SetFloat("ArrowSpeed", totalCompassPercentEmergency);
 			m_textAnimator.SetFloat("TextSpeed", totalCompassPercentEmergency);
 
-			//Look at
-			m_newRotation.SetLookRotation((m_compassTarget.position - this.transform.position), Vector3.up);
-            m_newRotation.x = 0;
-            m_newRotation.z = 0;
-			this.transform.rotation = m_newRotation;
-
 		}
     }
 }

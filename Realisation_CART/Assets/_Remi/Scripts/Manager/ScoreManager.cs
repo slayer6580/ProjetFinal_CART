@@ -5,6 +5,7 @@ using Box = BoxSystem.Box;
 using DiscountDelirium;
 using Unity.VisualScripting;
 using Cinemachine;
+using static Manager.AudioManager;
 
 namespace Manager
 {
@@ -18,7 +19,7 @@ namespace Manager
 
         private bool m_isCheckingOut;
 		private List<Box> m_boxList = new List<Box>();
-        private Vector3 m_counterPos;
+        private Transform m_counterPos;
         private float m_checkoutTimer;
         private int m_boxCheckoutActivated;
         private int m_boxCheckoutIsDone;
@@ -26,10 +27,13 @@ namespace Manager
         private CheckoutZone m_currentCheckoutZone;
         private List<GameObject> m_bonusText = new List<GameObject>();
 		private const float BOX_FALL_HEIGHT = 3;
+
 		[Header("Checkout Settings")]
-		public float m_timeBetweenBoxFall;
-		public float m_restTimeAfterAllBoxOnCounter;
-		public float m_showBoxGoesUpTime;
+		[field: SerializeField] private float m_timeBetweenBoxFall;
+		[field: SerializeField] private float m_restTimeAfterAllBoxOnCounter;
+		[field: SerializeField] private float m_showBoxGoesUpTime;
+		[field: SerializeField] private AudioClip m_boxOnCounterSfx;
+		private bool m_checkOutEnding = false;
 
 
 		private void Awake()
@@ -81,20 +85,26 @@ namespace Manager
 					//Do only once by box
 					if (m_boxCheckoutActivated <= i && m_checkoutTimer > m_timeBetweenBoxFall * i )
                     {
-						m_boxList[i].transform.position = new Vector3(m_counterPos.x, m_counterPos.y + BOX_FALL_HEIGHT, m_counterPos.z);
+						m_boxList[i].transform.position = new Vector3(m_counterPos.position.x, m_counterPos.position.y + BOX_FALL_HEIGHT, m_counterPos.position.z);
+						m_boxList[i].transform.rotation = m_counterPos.transform.rotation;
 						m_boxList[i].GetComponent<Rigidbody>().isKinematic = false;
                         m_boxCheckoutActivated++;	
 					}
 
 					//Once a box reach its desired position on the counter
-					if (m_boxList[i].transform.position.y <= m_counterPos.y + (i * BoxManager.GetInstance().BoxHeight))
+					if (m_boxList[i].transform.position.y <= m_counterPos.position.y + (i * BoxManager.GetInstance().BoxHeight))
                     {
+						
+						
 						//Stop it from falling
-						m_boxList[i].transform.position = new Vector3(m_counterPos.x, m_counterPos.y + (i * BoxManager.GetInstance().BoxHeight), m_counterPos.z);
+						m_boxList[i].transform.position = new Vector3(m_counterPos.position.x, m_counterPos.position.y + (i * BoxManager.GetInstance().BoxHeight), m_counterPos.position.z);
 
 						//m_boxCheckoutIsDone is used to do this section only once by box
 						if (m_boxCheckoutIsDone <= i)
                         {
+							_AudioManager.PlaySoundEffectsOneShot(ESound.BoxDropOnCounter, transform.position);
+							_AudioManager.PlaySoundEffectsOneShot(ESound.BoxDropSpecial, transform.position, 1f, 0.5f + (i * 0.05f));
+
 							//Spawn a text to show obtained bonus
 							GameObject bonusText = Instantiate(m_currentCheckoutZone.BonusText, new Vector3(
                                                                                                 m_currentCheckoutZone.BonusText.transform.position.x,
@@ -120,10 +130,20 @@ namespace Manager
 
                 if(m_checkoutTimer > fallingBoxOverTime + m_restTimeAfterAllBoxOnCounter)
                 {
+					
+					if (m_checkOutEnding == false)
+					{
+						_AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, transform.position, 1f);
+						m_checkOutEnding = true;
+						foreach (Box box in m_boxList)
+						{
+							m_currentCheckoutZone.CashExplosion(box.transform.position);				
+						}						
+					}
 
 					foreach (Box box in m_boxList)
                     {
-                        box.transform.Translate(Vector3.up * 2);
+                        box.transform.Translate(Vector3.up * 0.5f);
                     }
 
 					//Reset everything and stop checkout
@@ -143,14 +163,16 @@ namespace Manager
 						m_bonusText.Clear();
 						m_isCheckingOut = false;
 						m_currentCheckoutZone.CheckoutDone();
+						
 					}        
 				}
 			}
 		}
 
-		public Vector3 EmptyCartAndGetScoreV2(Vector3 counterPos, CheckoutZone checkZone)
+		public Vector3 EmptyCartAndGetScoreV2(Transform counterPos, CheckoutZone checkZone)
 		{
             m_currentCheckoutZone = checkZone;
+			m_checkOutEnding = false;
 			m_counterPos = counterPos;
             m_checkoutTimer = 0;
             m_boxCheckoutActivated = 0;
@@ -184,7 +206,7 @@ namespace Manager
 			//Replace everybox in the sky over the counter
 			for (int i = 0; i < m_boxList.Count; i++)
 			{			
-				m_boxList[i].transform.position = new Vector3(m_counterPos.x, m_counterPos.y + 3 + i, m_counterPos.z);
+				m_boxList[i].transform.position = new Vector3(m_counterPos.position.x, m_counterPos.position.y + 3 + i, m_counterPos.position.z);
 				m_boxList[i].GetComponent<Rigidbody>().isKinematic = true;
 			}
 			//m_isCheckingOut will activate the animation in Update()

@@ -40,7 +40,7 @@ namespace Manager
             Step01, Step02, Step03, Step04,
             GrabItem,
             DriftBegin, DriftLoop,
-            CashRegister,
+            CashRegister, BoxDropOnCounter, BoxDropSpecial,
             MeleeSwoosh, CannonSound, Hit,
             UIHover, UIClick, UIBack, UIScroll,
             Count

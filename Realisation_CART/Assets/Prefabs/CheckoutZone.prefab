@@ -127,6 +127,8 @@ MonoBehaviour:
   <CheckoutCamera>k__BackingField: {fileID: 4264036427060273752}
   m_counter: {fileID: 3990753077185159602}
   m_playerDirection: {fileID: 371761692977693932}
+  m_moneyVfx: {fileID: 1530339630390668, guid: aa8bfed7e0410cf4696a3a39e2a1476d, type: 3}
+  m_coinsVfx: {fileID: 1919543859444104, guid: 0796b331004a84744a609063dc845137, type: 3}
   <BonusText>k__BackingField: {fileID: 1680117391891714969}
   <ThisAnimatior>k__BackingField: {fileID: 8819217212977891876}
 --- !u!95 &8819217212977891876
@@ -309,7 +311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5084569020030176007}
-  - component: {fileID: 656499711590593112}
+  - component: {fileID: 6941837982300069982}
   m_Layer: 0
   m_Name: CheckoutText
   m_TagString: Untagged
@@ -333,26 +335,19 @@ Transform:
   - {fileID: 3578979973569323277}
   m_Father: {fileID: 1134739209859979079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1183024399 &656499711590593112
-LookAtConstraint:
+--- !u!114 &6941837982300069982
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3017501599985841452}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 90, z: 0}
-  m_Roll: 0
-  m_WorldUpObject: {fileID: 0}
-  m_UseUpObject: 0
-  m_Active: 1
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04a70df5525afa4d8f6e5bc1ead104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_target: {fileID: 0}
 --- !u!1 &3104999768619741884
 GameObject:
   m_ObjectHideFlags: 0
