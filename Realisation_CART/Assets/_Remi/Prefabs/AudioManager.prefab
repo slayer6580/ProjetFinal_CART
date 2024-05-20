@@ -58,6 +58,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 05ba3a8ef0799ae45a46912eb41a0312, type: 3}
   - {fileID: 8300000, guid: f975ec4512180f145ad7c7b2c549509f, type: 3}
   - {fileID: 8300000, guid: 9c989b8fe57a94c4e8888da6c5a79612, type: 3}
+  - {fileID: 8300000, guid: 7085ab252f4049a4f9bd2b68a61bd7f0, type: 3}
+  - {fileID: 8300000, guid: 023b9da8d94b9324ba71ccf6d6452984, type: 3}
+  - {fileID: 8300000, guid: 7c9d886dd977804428181c498d14424e, type: 3}
+  - {fileID: 8300000, guid: b5b1f288be0e0e34e8a4a28ad9fe7d35, type: 3}
+  - {fileID: 8300000, guid: a1fe93b504c8b344996daa72b3472b30, type: 3}
   m_musicPool:
   - {fileID: 8300000, guid: 6c5d9f9fe6f2fd64ab994c5e0c11286b, type: 3}
   - {fileID: 8300000, guid: 41aebfe3e376c6740a2e3c716ca87fa4, type: 3}

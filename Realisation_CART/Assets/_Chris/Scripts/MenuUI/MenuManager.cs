@@ -46,6 +46,8 @@ namespace DiscountDelirium
 
         public void OpenMainMenu() 
         {
+            _AudioManager.PlayUIClickSound();
+
             if (m_mainMenu != null) 
             {
                 m_mainMenu.SetActive(true);

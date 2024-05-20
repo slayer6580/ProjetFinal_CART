@@ -41,7 +41,7 @@ namespace Manager
             GrabItem,
             DriftBegin, DriftLoop,
             CashRegister,
-            MeleeSwoosh, CannonSound, Hit
+            MeleeSwoosh, CannonSound, Hit,
             UIHover, UIClick, UIBack, UIScroll,
             Count
         }
