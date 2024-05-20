@@ -15,6 +15,7 @@ namespace DiscountDelirium
         [Header("References")]
         private Animator m_animator;
         [SerializeField] private TrailRenderer m_trailRenderer;
+        [SerializeField] private VFXPool m_VFXPool;
 
         [Header("Stats")]
         [SerializeField] private float[] m_speedLevel;
@@ -42,6 +43,7 @@ namespace DiscountDelirium
 			//Debug.LogWarning("Melee hitted target");
 			if (other.gameObject.layer == LayerMask.NameToLayer("Target")) 
             {
+                PlayVFX(other.ClosestPoint(transform.position));
                 StealItems(other.gameObject.GetComponent<Target>().GetTower());
             }
         }
@@ -89,6 +91,17 @@ namespace DiscountDelirium
         public void PlaySound() 
         {
             _AudioManager.PlaySoundEffectsOneShot(ESound.MeleeSwoosh, transform.position, 0.5f);
+        }
+
+        private void PlayVFX(Vector3 pos) 
+        {
+            GameObject vfx = m_VFXPool.GetPooledVFX();
+            if (vfx != null)
+            {
+                vfx.transform.position = pos;
+                vfx.GetComponent<ParticleSystem>().Play();
+                _AudioManager.PlaySoundEffectsOneShot(ESound.Hit, transform.position, 1f);
+            }
         }
 
         //-----------------Stealing-----------------//

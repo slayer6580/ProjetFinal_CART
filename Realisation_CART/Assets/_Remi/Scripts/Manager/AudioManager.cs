@@ -46,6 +46,7 @@ namespace Manager
             CashRegister,
             MeleeSwoosh,
             CannonSound,
+            Hit,
             Count
         }
 

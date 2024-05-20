@@ -18,6 +18,7 @@ namespace DiscountDelirium
         [Header("Stats")]
         [SerializeField] float m_speed;
         [SerializeField] float m_rotateSpeed;
+        [SerializeField] private float[] m_timeBeforeFalling;
 
         [Header("Target")]
         [SerializeField] private GameObject m_target;
@@ -32,6 +33,7 @@ namespace DiscountDelirium
         private void OnEnable()
         {
             StartCoroutine("DeactivateAmmo");
+            StartCoroutine("ActivateGravity");
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -43,7 +45,7 @@ namespace DiscountDelirium
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Target"))
             {
-                if (m_target == null) 
+                if (m_target == null)
                 {
                     m_speed = m_rb.velocity.magnitude;
                     m_hasTarget = true;
@@ -57,9 +59,9 @@ namespace DiscountDelirium
             CheckDistanceWithTarget();
         }
 
-        private void FixedUpdate() 
+        private void FixedUpdate()
         {
-            if (m_hasTarget == true) 
+            if (m_hasTarget == true)
             {
                 HomingToTarget();
             }
@@ -77,7 +79,7 @@ namespace DiscountDelirium
             m_rb.velocity = transform.forward * m_speed;
         }
 
-        private void HideAmmo() 
+        private void HideAmmo()
         {
             ImpactVFX.Play();
             m_target = null;
@@ -94,18 +96,19 @@ namespace DiscountDelirium
             m_model.SetActive(true);
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
             AmmunitionCollider.enabled = true;
             SphereTrigger.enabled = true;
         }
 
-        IEnumerator DeactivateAmmo() 
+        IEnumerator DeactivateAmmo()
         {
             yield return new WaitForSeconds(m_timeBeforeDeactivate);
             HideAmmo();
             this.gameObject.SetActive(false);
         }
 
-        private void CheckDistanceWithTarget() 
+        private void CheckDistanceWithTarget()
         {
             if (m_target != null)
             {
@@ -116,10 +119,15 @@ namespace DiscountDelirium
                 }
             }
         }
-
-        private void StopTarget() 
+        private void StopTarget()
         {
             m_target.GetComponent<Target>().StopMovement();
+        }
+
+        IEnumerator ActivateGravity()
+        {
+            yield return new WaitForSeconds(m_timeBeforeFalling[PlayerPrefs.GetInt("Range", 0)]);
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
 
     }
