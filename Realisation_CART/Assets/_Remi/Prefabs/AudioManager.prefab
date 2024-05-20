@@ -58,6 +58,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 05ba3a8ef0799ae45a46912eb41a0312, type: 3}
   - {fileID: 8300000, guid: f975ec4512180f145ad7c7b2c549509f, type: 3}
   - {fileID: 8300000, guid: 9c989b8fe57a94c4e8888da6c5a79612, type: 3}
+  - {fileID: 8300000, guid: 15aca9d221e4a3f40a1253785f51a18d, type: 3}
+  - {fileID: 8300000, guid: 7c9d886dd977804428181c498d14424e, type: 3}
+  - {fileID: 8300000, guid: 7b7c607ba65e0e848a19753d18bc19b4, type: 3}
+  - {fileID: 8300000, guid: b9d58aa0949abd34ca7a92b0984d0c62, type: 3}
   m_musicPool:
   - {fileID: 8300000, guid: 6c5d9f9fe6f2fd64ab994c5e0c11286b, type: 3}
   - {fileID: 8300000, guid: 41aebfe3e376c6740a2e3c716ca87fa4, type: 3}
@@ -69,6 +73,7 @@ MonoBehaviour:
   <MainMenuMusic>k__BackingField: 0
   <LevelOneMusic>k__BackingField: 1
   <LevelTwoMusic>k__BackingField: 2
+  <LevelThreeMusic>k__BackingField: 0
   <TutorialMusic>k__BackingField: 3
   m_numberOfAudioBox: 50
   m_isClientSoundEnabled: 1
