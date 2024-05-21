@@ -389,7 +389,6 @@ namespace SavingSystem
 
         public void QuitLeaderboardPanel()
         {
-            // End of game
             m_namePanel.SetActive(false);
             m_rankPanel.SetActive(false);
             m_leaderboardPanel.SetActive(false);

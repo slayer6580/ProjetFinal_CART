@@ -36,8 +36,6 @@ namespace DiscountDelirium
             m_manager.OnDecline();
         }
 
-
-
         private void OnEnable()
         {
             m_mainInputs.Enable();
