@@ -9,42 +9,53 @@ namespace DynamicEnvironment
 
         private bool m_isDestructionStageZero = false;
         private bool m_isDestructionStageOne = false;
-        private bool m_m_isDestructionStageTwo = false;
+        private bool m_isDestructionStageTwo = false;
 
-        [SerializeField] private float m_max_health = 2500.0f;
+        private float m_maxHealth = 500.0f;
+        private float m_currentHealth = 0.0f;
 
-        private float m_itemHealthPoints = 2500.0f;
         [SerializeField] private int m_id = 0;
 
         private void Awake()
         {
             ResetItem();
         }
-        
+
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.layer != GameConstants.PLAYER_COLLIDER
-                && collision.gameObject.layer != GameConstants.CLIENT_COLLIDER)
-                return;
-
-            float velocity = collision.impulse.magnitude;
-            m_itemHealthPoints -= velocity;
-            _DynamicEnvironment.SetItemDestructionStage(this);
+            if (collision.gameObject.layer == GameConstants.PLAYER_COLLIDER)
+            {
+                float velocity = collision.impulse.magnitude;
+                m_currentHealth -= velocity;
+                _DynamicEnvironment.SetItemDestructionStage(this);
+            }
+            else if (collision.gameObject.layer == GameConstants.CLIENT_COLLIDER)
+            {
+                float velocity = collision.impulse.magnitude;
+                m_currentHealth -= (velocity / 3);
+                _DynamicEnvironment.SetItemDestructionStage(this);
+            }
         }
 
         /// <summary> Resets the item's health points and destruction stages </summary>
         internal void ResetItem()
         {
-            m_itemHealthPoints = m_max_health;
+            m_currentHealth = m_maxHealth;
             m_isDestructionStageZero = false;
             m_isDestructionStageOne = false;
-            m_m_isDestructionStageTwo = false;
+            m_isDestructionStageTwo = false;
         }
 
         /// <summary> Returns the item's health points </summary>
-        internal float GetHItemHealthPoints()
+        internal float GetHItemCurrentHealth()
         {
-            return m_itemHealthPoints;
+            return m_currentHealth;
+        }
+
+        /// <summary> Returns the item's max health points </summary>
+        internal float GetMaxHealth()
+        {
+            return m_maxHealth;
         }
 
         /// <summary> Retrun true if the given has already been activated </summary>
@@ -55,7 +66,7 @@ namespace DynamicEnvironment
             else if (stage == 1)
                 return m_isDestructionStageOne;
             else if (stage == 2)
-                return m_m_isDestructionStageTwo;
+                return m_isDestructionStageTwo;
             else
                 return false;
         }
@@ -68,7 +79,7 @@ namespace DynamicEnvironment
             else if (stage == 1)
                 m_isDestructionStageOne = value;
             else if (stage == 2)
-                m_m_isDestructionStageTwo = value;
+                m_isDestructionStageTwo = value;
         }
 
         /// <summary> Returns the item's id </summary>

@@ -3906,15 +3906,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.73
       objectReference: {fileID: 0}
+    - target: {fileID: 655463515469207124, guid: 05e91b395207479449059befef694054,
+        type: 3}
+      propertyPath: <_RaidropShaderUpdater>k__BackingField
+      value: 
+      objectReference: {fileID: 1407988822}
     - target: {fileID: 1041142658004482530, guid: 05e91b395207479449059befef694054,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1477524592469649724, guid: 05e91b395207479449059befef694054,
         type: 3}
       propertyPath: m_Name
       value: FireHazard (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669153612367892702, guid: 05e91b395207479449059befef694054,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3042506110264348398, guid: 05e91b395207479449059befef694054,
         type: 3}
@@ -3936,10 +3946,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5319003617737148906, guid: 05e91b395207479449059befef694054,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6223559365110368883, guid: 05e91b395207479449059befef694054,
         type: 3}
       propertyPath: m_max_health
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067400345966618070, guid: 05e91b395207479449059befef694054,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7927469267373831618, guid: 05e91b395207479449059befef694054,
         type: 3}
@@ -3989,6 +4009,11 @@ PrefabInstance:
     - target: {fileID: 7927469267373831618, guid: 05e91b395207479449059befef694054,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049817739406561374, guid: 05e91b395207479449059befef694054,
+        type: 3}
+      propertyPath: EmissionModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9131361255825739605, guid: 05e91b395207479449059befef694054,
@@ -9203,6 +9228,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 655463515469207124, guid: 05e91b395207479449059befef694054,
+        type: 3}
+      propertyPath: <_RaidropShaderUpdater>k__BackingField
+      value: 
+      objectReference: {fileID: 1407988822}
     - target: {fileID: 1041142658004482530, guid: 05e91b395207479449059befef694054,
         type: 3}
       propertyPath: m_IsActive
@@ -9583,17 +9613,17 @@ PrefabInstance:
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13633592
+      value: 0.13633595
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -8.533095e-16
+      value: -0.00000003300889
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.1313156e-15
+      value: 0.000000004542715
       objectReference: {fileID: 0}
     - target: {fileID: 4236233393686768846, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -9618,17 +9648,17 @@ PrefabInstance:
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13633592
+      value: 0.13633595
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -8.533095e-16
+      value: -0.00000003300889
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.1313156e-15
+      value: 0.000000004542715
       objectReference: {fileID: 0}
     - target: {fileID: 8369926174501392212, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -9680,6 +9710,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1407988822 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8438745796277218329, guid: 731bb1051f369864db64ecaeac25e95e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1407988820}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9129ff86ec82f14aad7a032b4f6cdcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1437327466

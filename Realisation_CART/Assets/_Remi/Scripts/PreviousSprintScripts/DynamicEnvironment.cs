@@ -21,9 +21,6 @@ namespace DynamicEnvironment
         private const int STAGE_ONE = 1;
         private const int STAGE_TWO = 2;
 
-
-        private float m_max_health = 500.0f;
-
         private bool m_isFireSprinklersActive = false;
 
         private void Awake()
@@ -75,17 +72,17 @@ namespace DynamicEnvironment
         /// <summary> Sets the item's destruction stage </summary>
         public void SetItemDestructionStage(CollisionDetector item)
         {
-            if (item.GetHItemHealthPoints() <= (m_max_health * 3 / 4) && !item.GetIsStageDestructionActive(STAGE_ZERO))
+            if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 3 / 4) && !item.GetIsStageDestructionActive(STAGE_ZERO))
             {
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ZERO, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_ZERO, true);
             }
-            else if (item.GetHItemHealthPoints() <= (m_max_health * 2 / 4) && !item.GetIsStageDestructionActive(STAGE_ONE))
+            else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 2 / 4) && !item.GetIsStageDestructionActive(STAGE_ONE))
             {
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ONE, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_ONE, true);
             }
-            else if (item.GetHItemHealthPoints() <= (m_max_health * 1 / 4) && !item.GetIsStageDestructionActive(STAGE_TWO))
+            else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 1 / 4) && !item.GetIsStageDestructionActive(STAGE_TWO))
             {
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_TWO, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_TWO, true);
