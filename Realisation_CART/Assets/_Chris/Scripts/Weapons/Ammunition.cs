@@ -1,6 +1,8 @@
 using BoxSystem;
+using Manager;
 using System.Collections;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -121,6 +123,7 @@ namespace DiscountDelirium
         }
         private void StopTarget()
         {
+            _AudioManager.PlaySoundEffectsOneShot(ESound.Splat, transform.position, 0.5f);
             m_target.GetComponent<Target>().StopMovement();
         }
 

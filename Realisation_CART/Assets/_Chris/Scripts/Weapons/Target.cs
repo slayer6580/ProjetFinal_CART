@@ -1,15 +1,18 @@
 using BoxSystem;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DiscountDelirium
 {
     public class Target : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] float m_stopCount;
         [SerializeField] float m_delayBetweenStop;
         [SerializeField] private TowerBoxSystem m_towerBoxSystem;
         [SerializeField] private Rigidbody m_rigidbody;
+        [SerializeField] private GameObject m_VFX;
 
         private float m_delayCount;
         public TowerBoxSystem GetTower() 
@@ -24,6 +27,7 @@ namespace DiscountDelirium
 
         public void StopMovement() 
         {
+            m_VFX.SetActive(true);
             m_delayCount = 0;
             StartCoroutine("Delay");
         }
@@ -38,7 +42,10 @@ namespace DiscountDelirium
                 m_delayCount++;
                 StartCoroutine("Delay");
             }
-            
+            else 
+            {
+                m_VFX.SetActive(false);
+            }
         }
     }
 }

@@ -32,6 +32,8 @@ namespace DiscountDelirium
 
         private void UpdatePage()
         {
+            DeselectAllButtons();
+
             if ( (m_currentPage == 0))            
                 m_backPanel.SetActive(false);            
             else
@@ -93,6 +95,12 @@ namespace DiscountDelirium
             UpdatePage();
 
             _AudioManager.PlayUIBackSound();
+        }
+
+        private void DeselectAllButtons()
+        {
+            GameObject myEventSystem = GameObject.Find("EventSystem");
+            myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
         }
     }
 }
