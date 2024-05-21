@@ -1,6 +1,5 @@
-#define IDontNeedToBuild
 
-#if IDontNeedToBuild
+#if UNITY_EDITOR
 using UnityEditor;
 
 namespace Spawner
