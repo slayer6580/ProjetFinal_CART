@@ -1184,7 +1184,7 @@ namespace Spawner
 
         internal void RandomizeBody()
         {
-            Debug.Log("Randomize Full Body");
+            //Debug.Log("Randomize Full Body");
 
             DisableFullBodyParts();
 
@@ -1192,7 +1192,7 @@ namespace Spawner
             {
                 if (m_isMale)
                 {
-                    Debug.Log("Human male");
+                    //Debug.Log("Human male");
                     int randomHumanFullBody = UnityEngine.Random.Range(0, m_humanMaleFullBodyTransforms.Count);
                     m_humanMaleFullBodyTransforms[randomHumanFullBody].gameObject.SetActive(true);
                     m_currentMaleHumanFullBodyIndex = randomHumanFullBody;
@@ -1364,13 +1364,13 @@ namespace Spawner
             {
                 if (m_isMale)
                 {
-                    Debug.Log("Human male GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
+                    //Debug.Log("Human male GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
                     m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }
                 else
                 {
-                    Debug.Log("Human female GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
+                    //Debug.Log("Human female GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
                     m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }
@@ -1495,7 +1495,7 @@ namespace Spawner
 
             if (material == null) Debug.LogError("Material is null");
 
-            Debug.Log("Material is: " + material.name);
+            //Debug.Log("Material is: " + material.name);
             m_accessoryHairSlotTransforms[GetCurrentAccessoryIndex()].GetComponent<MeshRenderer>().materials = new Material[] { material };
         }
 

@@ -38,7 +38,7 @@ namespace DiscountDelirium
            
             //Calculate boxes count
             float boxCountPercent = m_boxSystem.GetBoxCount() / (float)m_nbBoxesForMaxArrowSpeed;
-			print("Box count percent: " + boxCountPercent);
+			//print("Box count percent: " + boxCountPercent);
 			float totalCompassPercentEmergency = Mathf.Clamp((gameAdvancementPercent + boxCountPercent) /2, 0,1);
 
             if(distance > m_minDistanceToShowCompass)
