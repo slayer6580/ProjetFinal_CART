@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using DiscountDelirium;
 using Unity.VisualScripting;
 using static Manager.ScoreManager;
 using UnityEngine.SceneManagement;
@@ -60,11 +59,6 @@ namespace BoxSystem
         {
             InitializeTowerPhysicsVariables();
             m_playerRb = Player.GetComponent<Rigidbody>();
-        }
-
-        void Start()
-        {
-            //AddBoxToTower();
         }
 
         private void Update()

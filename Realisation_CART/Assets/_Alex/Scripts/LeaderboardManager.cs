@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -390,7 +389,6 @@ namespace SavingSystem
 
         public void QuitLeaderboardPanel()
         {
-            // End of game
             m_namePanel.SetActive(false);
             m_rankPanel.SetActive(false);
             m_leaderboardPanel.SetActive(false);
