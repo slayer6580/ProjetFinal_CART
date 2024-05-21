@@ -47,26 +47,6 @@ namespace BoxSystem
             enabled = true;
         }
 
-        /// <summary> Pour que l'objet Snap dans la boite avec la rotation du joueur et la rotation locale de la boite </summary>
-        //private void SnapToBox()
-        //{
-        //    // set le parent comm étaant le graphique
-
-        //    transform.SetParent(allGraphics);
-        //   // transform.SetParent(m_boxTransform);
-
-        //    transform.localPosition = m_targetLocalPosition;
-        //    transform.localScale = m_targetedScale;  
-        //    Vector3 eulerOfCart = m_towerTransform.rotation.eulerAngles;
-        //    Vector3 localEulerOfBox = m_boxTransform.transform.localRotation.eulerAngles;
-
-        //    transform.eulerAngles = Vector3.zero;
-        //    transform.eulerAngles += eulerOfCart;
-        //    transform.eulerAngles += localEulerOfBox;
-
-        //    EndSlerp();
-        //}
-
         /// <summary> Pour désactiver l'update de la classe </summary>
         private void EndSlerp()
         {

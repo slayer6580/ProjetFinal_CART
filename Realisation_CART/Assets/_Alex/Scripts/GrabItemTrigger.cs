@@ -40,7 +40,6 @@ namespace BoxSystem
           
         }
 
-
         /// <summary> Take an item from the shelf </summary>
         public void TakeItemFromShelf(Shelf shelf)
         {
@@ -48,14 +47,8 @@ namespace BoxSystem
 
             GameObject itemTaken = shelf.GetItemFromShelf();
             Item itemScript = itemTaken.GetComponent<Item>();
-          // ItemData.ESize size = itemScript.m_data.m_size;
-
-            // TODO commencer le slerp vers le joueur
 
             itemScript.StartSlerpTowardTower(TowerBoxSystem.gameObject, TowerBoxSystem.ItemSnapDistance, ItemSlerpTime);
-
-
-          //  TakeItem(itemTaken, size); //OLD
         }
 
         public void StealItemFromOtherTower(TowerBoxSystem towerToSteal)
@@ -90,26 +83,6 @@ namespace BoxSystem
     
         }
 
-        //private void TakeItem(GameObject itemTaken, ItemData.ESize size)
-        //{
-        //    Rigidbody rb = itemTaken.GetComponent<Rigidbody>();
-        //    if (rb)
-        //    {
-        //        Destroy(rb);
-        //    }
-
-        //    if (!TowerBoxSystem.CanTakeObjectInTheActualBox(size))
-        //    {
-        //        TowerBoxSystem.AddBoxToTower();
-        //    }
-
-        //    TowerBoxSystem.PutObjectInTopBox(itemTaken);
-        //}
-
-        private void ActivateGrabItem()
-        {
-            m_canGrabItem = true;
-        }
     }
 
 }
