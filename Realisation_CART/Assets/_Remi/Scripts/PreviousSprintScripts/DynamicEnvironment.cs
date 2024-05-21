@@ -22,7 +22,7 @@ namespace DynamicEnvironment
         private const int STAGE_TWO = 2;
 
 
-        [SerializeField] private float m_max_health = 2500.0f;
+        private float m_max_health = 500.0f;
 
         private bool m_isFireSprinklersActive = false;
 
