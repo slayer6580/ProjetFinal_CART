@@ -104,10 +104,7 @@ namespace BoxSystem
                 }
 
             }
-            else if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Vector3 data = _ScoreManager.EmptyCartAndGetScore();
-            }
+
         }
 
         private void InitializeTowerPhysicsVariables()

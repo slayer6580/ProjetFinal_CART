@@ -1,7 +1,6 @@
 using BoxSystem;
 using CartControl;
 using UnityEngine;
-using static Manager.AudioManager;
 using static Manager.ScoreManager;
 
 namespace DiscountDelirium
@@ -15,6 +14,8 @@ namespace DiscountDelirium
         [SerializeField] private GameObject m_coinsVfx;
         [field: SerializeField] public GameObject BonusText { get; private set; }
 		[field: SerializeField] public Animator ThisAnimatior { get; private set; }
+
+        [SerializeField] private ScoreUI m_scoreUI;
 
 
 		private GameObject m_player;
@@ -36,6 +37,8 @@ namespace DiscountDelirium
             if (isPlayer)
             {
                 m_player = other.transform.parent.parent.gameObject;
+
+                m_scoreUI.AddItemsInformationsInGameOverPanel();
 				Vector3 data = _ScoreManager.EmptyCartAndGetScoreV2(m_counter.transform, this);
 				GameStateMachine.Instance.GetScoreFromCart(data);
 

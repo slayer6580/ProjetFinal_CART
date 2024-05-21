@@ -12,6 +12,7 @@ namespace DiscountDelirium
 		[field: SerializeField] public List<GameObject> ClientsList { get; private set; }
 
         public int Score { get; private set; } = 0;
+        private int m_lastScore;
 
 		public CartStateMachine m_playerSM; 
         [SerializeField] public ScoreUI m_scoreUI;
@@ -37,6 +38,8 @@ namespace DiscountDelirium
                 return;
             }       
             Instance = this;
+
+            m_lastScore = PlayerPrefs.GetInt("Score", 0);
         }
 
         protected override void Start()
@@ -72,9 +75,8 @@ namespace DiscountDelirium
         public void GetScoreFromCart(Vector3 data) 
         {         
             m_nbItems += (int)data.x;
-            int lastScore = PlayerPrefs.GetInt("Score", 0);
             Score += (int)data.y;
-            PlayerPrefs.SetInt("Score", lastScore + Score);
+            PlayerPrefs.SetInt("Score", m_lastScore + Score);
 			m_nbOfCartokens += (int)data.z;
 
             m_upgrademanager.AddMoney((int)data.z);
