@@ -3054,7 +3054,6 @@ MonoBehaviour:
   m_timeBetweenBoxFall: 0.25
   m_restTimeAfterAllBoxOnCounter: 0.5
   m_showBoxGoesUpTime: 0.5
-  m_boxOnCounterSfx: {fileID: 8300000, guid: 6a078b30c3f313345a7f0bd54de4ce0d, type: 3}
 --- !u!1 &371105975
 GameObject:
   m_ObjectHideFlags: 0
@@ -9608,6 +9607,11 @@ PrefabInstance:
       objectReference: {fileID: 2128001840}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13633592
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: -8.533095e-16
       objectReference: {fileID: 0}
@@ -9636,6 +9640,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 803190487}
+    - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13633592
+      objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -15307,11 +15316,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2459283124284752929, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3032914007244755578, guid: b5c3b0093e9391d4d82e827de1611a45,
         type: 3}
       propertyPath: m_panelUpgrade
       value: 
       objectReference: {fileID: 468694971}
+    - target: {fileID: 3032914007244755578, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_towerBoxSystem
+      value: 
+      objectReference: {fileID: 960188264}
     - target: {fileID: 3032914007244755578, guid: b5c3b0093e9391d4d82e827de1611a45,
         type: 3}
       propertyPath: m_upgradeManager
@@ -15326,6 +15345,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameOverScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288125410899458680, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288125410899458680, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288125410899458680, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6288125410899458680, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300420297601081986, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300420297601081986, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207375476379856806, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207375476379856806, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9080920373513367601, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9080920373513367601, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
