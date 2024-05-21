@@ -1635,7 +1635,7 @@ PrefabInstance:
     - target: {fileID: 9200766481717125295, guid: bb53f8cad9d1dac419e6ef98457733a7,
         type: 3}
       propertyPath: m_startingCartToken
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9200766481717125295, guid: bb53f8cad9d1dac419e6ef98457733a7,
         type: 3}
@@ -2822,6 +2822,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbe532d2e52a72e4c989adf81bbe0011, type: 3}
+--- !u!23 &335661438 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3049507040342758032, guid: e3c1ca5eba5731d4181574ab52f58fb3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1567057954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &344898562 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8566555178713246829, guid: e8f665735e1652e42b48edb9d0411a1a,
@@ -8385,6 +8391,11 @@ PrefabInstance:
       objectReference: {fileID: 1815412662}
     - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
         type: 3}
+      propertyPath: m_canonPart
+      value: 
+      objectReference: {fileID: 335661438}
+    - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
+        type: 3}
       propertyPath: m_cartParts.Array.size
       value: 10
       objectReference: {fileID: 0}
@@ -8485,6 +8496,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
         type: 3}
+      propertyPath: m_canonMaterials.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
+        type: 3}
       propertyPath: m_rocketParts.Array.data[0]
       value: 
       objectReference: {fileID: 1567057958}
@@ -8513,6 +8529,31 @@ PrefabInstance:
       propertyPath: m_rocketMaterials.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
+        type: 3}
+      propertyPath: m_canonMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 250730f8007cb31438736bc691ee20fd, type: 2}
+    - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
+        type: 3}
+      propertyPath: m_canonMaterials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27015b3cf71167540b5d9d34c3e504a7, type: 2}
+    - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
+        type: 3}
+      propertyPath: m_canonMaterials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 704044498fbabf545b6b775963dd869a, type: 2}
+    - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
+        type: 3}
+      propertyPath: m_canonMaterials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b2f08d317472674e89ca5ec275338fc, type: 2}
+    - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
+        type: 3}
+      propertyPath: m_canonMaterials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 710ffe3be0d409c4e8d33c6cd3efde85, type: 2}
     - target: {fileID: 5757264576861340255, guid: db2537338106ead4abccf664fa6326f7,
         type: 3}
       propertyPath: m_shoesMaterials.Array.data[0]
@@ -9541,13 +9582,18 @@ PrefabInstance:
       objectReference: {fileID: 2128001840}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13633592
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
+        type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000003300889
+      value: -8.533095e-16
       objectReference: {fileID: 0}
     - target: {fileID: 3836790772869881498, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000004542715
+      value: 1.1313156e-15
       objectReference: {fileID: 0}
     - target: {fileID: 4236233393686768846, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -9571,13 +9617,18 @@ PrefabInstance:
       objectReference: {fileID: 803190487}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13633592
+      objectReference: {fileID: 0}
+    - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
+        type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000003300889
+      value: -8.533095e-16
       objectReference: {fileID: 0}
     - target: {fileID: 7963226728520590533, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000004542715
+      value: 1.1313156e-15
       objectReference: {fileID: 0}
     - target: {fileID: 8369926174501392212, guid: 731bb1051f369864db64ecaeac25e95e,
         type: 3}
@@ -10299,7 +10350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde1fee560655e14bb95ffc7a13f1fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GameLength>k__BackingField: 60
+  <GameLength>k__BackingField: 180
   <ClientsList>k__BackingField:
   - {fileID: 253715849}
   m_playerSM: {fileID: 1016554958}
