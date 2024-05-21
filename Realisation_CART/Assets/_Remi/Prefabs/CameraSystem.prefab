@@ -296,7 +296,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 350
+  m_VersionIndex: 353
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -330,8 +330,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275019085250610158}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633598, y: -1e-45, z: -0, w: 0.9906627}
-  m_LocalPosition: {x: -28.818714, y: 3.7414336, z: -4.3091817}
+  m_LocalRotation: {x: 0.13633592, y: 8.533095e-16, z: -1.1313156e-15, w: 0.9906627}
+  m_LocalPosition: {x: -2.5487137, y: 3.7296615, z: -10.909182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -793,7 +793,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 398
+  m_VersionIndex: 401
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 510
+  m_VersionIndex: 513
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1838,8 +1838,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7426025809621154100}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13633598, y: -1e-45, z: -0, w: 0.9906627}
-  m_LocalPosition: {x: -28.818714, y: 3.7414336, z: -4.3091817}
+  m_LocalRotation: {x: 0.13633592, y: 8.533095e-16, z: -1.1313156e-15, w: 0.9906627}
+  m_LocalPosition: {x: -2.5487137, y: 3.7296615, z: -10.909182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
