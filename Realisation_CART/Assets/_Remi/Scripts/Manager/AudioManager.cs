@@ -32,6 +32,8 @@ namespace Manager
         [SerializeField] private int m_numberOfAudioBox = 10;
         [SerializeField] private bool m_isClientSoundEnabled = true;
         private int m_scrollAudioBox;
+        private bool m_isLevelMusicPlaying = false;
+        private int m_sceneMusicIndex = -1;
 
         /// <summary> This enum is used to store all the sounds in the game </summary>
         public enum ESound
@@ -273,6 +275,8 @@ namespace Manager
         /// <summary> Start the music of the current scene </summary>
         public int StartCurrentSceneMusic()
         {
+            if (m_isLevelMusicPlaying) return m_sceneMusicIndex;
+          
             //Debug.Log("StartCurrentSceneMusic");
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
@@ -302,6 +306,12 @@ namespace Manager
             {
                 Debug.Log("Playing LevelThreeMusic");
                 index = PlayMusic(_AudioManager.LevelThreeMusic);
+            }
+
+            if (index != -1)
+            { 
+                m_isLevelMusicPlaying = true; 
+                m_sceneMusicIndex = index;
             }
 
             return index;

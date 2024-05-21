@@ -32,7 +32,11 @@ namespace DynamicEnvironment
             else if (collision.gameObject.layer == GameConstants.CLIENT_COLLIDER)
             {
                 float velocity = collision.impulse.magnitude;
-                m_currentHealth -= (velocity / 3);
+                //if (velocity > 40.0f) velocity = 20; // NPCs are stronger in the five first seconds of the game
+                m_currentHealth -= (velocity / 4); // NPCs are weaker than the player
+                //Debug.Log("impact: " + (velocity /  1.5f));
+                //Debug.Log("velocity: " + velocity);
+                Debug.Log("Current health: " + m_currentHealth);
                 _DynamicEnvironment.SetItemDestructionStage(this);
             }
         }
@@ -40,6 +44,7 @@ namespace DynamicEnvironment
         /// <summary> Resets the item's health points and destruction stages </summary>
         internal void ResetItem()
         {
+            Debug.Log("Resetting item");
             m_currentHealth = m_maxHealth;
             m_isDestructionStageZero = false;
             m_isDestructionStageOne = false;
@@ -50,6 +55,12 @@ namespace DynamicEnvironment
         internal float GetHItemCurrentHealth()
         {
             return m_currentHealth;
+        }
+
+        internal void ResetItemCurrentHealth()
+        {
+            Debug.Log("Resetting item health");
+            m_currentHealth = m_maxHealth;
         }
 
         /// <summary> Returns the item's max health points </summary>
