@@ -122,9 +122,9 @@ namespace BoxSystem
             m_currentTimer = 0;
         }
 
-        public int GetItemRemaining()
+        public int GetItemQuantity()
         {
-            return m_remainingItems;
+            return m_itemQuantity;
         }
     }
 }

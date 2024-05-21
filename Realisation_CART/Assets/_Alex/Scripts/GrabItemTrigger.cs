@@ -32,7 +32,7 @@ namespace BoxSystem
             if (!m_canGrabItem || !shelf.CanTakeItem())
                 return;
 
-            for(int i = 0; i < shelf.GetItemRemaining(); i++)
+            for(int i = 0; i < shelf.GetItemQuantity(); i++)
             {
 				TakeItemFromShelf(shelf);
 			}
