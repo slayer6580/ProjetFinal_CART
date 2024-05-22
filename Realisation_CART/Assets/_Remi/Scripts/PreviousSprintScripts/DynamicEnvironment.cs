@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace DynamicEnvironment
 {
@@ -21,18 +22,27 @@ namespace DynamicEnvironment
         private const int STAGE_ONE = 1;
         private const int STAGE_TWO = 2;
 
-        private bool m_isFireSprinklersActive = false;
         private float m_currentTimer;
         private CollisionDetector m_currentItem;
 
+        private Transform m_fireTransform = null;
+        private Transform m_sprinklersTransform = null;
+        private bool m_isFireSprinklersActive = false;
+        private int m_fireAudioboxId = 0;
+        private int m_sprinflersAudioboxId = 0;
+
         private void Awake()
         {
+            //m_firePosition = SpecialFXGOFireStages.transform.position;
             CollisionDetector[] collisionDetectors = GetComponentsInChildren<CollisionDetector>();
             int iterator = 0;
             foreach (CollisionDetector collisionDetector in collisionDetectors)
             {
                 collisionDetector.SetId(iterator);
-                SpecialFXGOFireStages.Add(collisionDetector.transform.GetChild(0).gameObject);
+                GameObject StageOne = collisionDetector.transform.GetChild(0).gameObject;
+                m_fireTransform = StageOne.transform.GetChild(0).transform;
+                SpecialFXGOFireStages.Add(StageOne);
+
                 SpecialFXGOFireStages.Add(collisionDetector.transform.GetChild(1).gameObject);
                 SpecialFXGOFireStages.Add(collisionDetector.transform.GetChild(2).gameObject);
                 if (collisionDetector.transform.GetChild(0).gameObject.name != "Stage01") Debug.LogError("Stage01 not found");
@@ -45,6 +55,8 @@ namespace DynamicEnvironment
                 m_waterPuddleScales.Add(SpecialFXGOWaterPuddles.transform.GetChild(i).localScale.x);
                 SpecialFXGOWaterPuddles.transform.GetChild(i).localScale = new Vector3(0.1f, 0.1f, 0.1f);
             }
+
+            m_sprinklersTransform = SpecialFXGOFireSprinklers.transform.GetChild(0);
         }
 
         private void Update()
@@ -81,6 +93,10 @@ namespace DynamicEnvironment
         private void ResetDynamicEnvironement()
         {
             Debug.Log("Reset everything");
+            _AudioManager.StopSoundEffectsLoop(m_fireAudioboxId);
+            m_fireAudioboxId = 0;
+            _AudioManager.StopSoundEffectsLoop(m_sprinflersAudioboxId);
+            m_sprinflersAudioboxId = 0;
             m_currentItem.ResetItemCurrentHealth();
             ResetItensInEveryStages();
             DeactivateWaterPuddles();
@@ -111,6 +127,9 @@ namespace DynamicEnvironment
                 m_currentTimer = 10.0f;
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ZERO, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_ZERO, true);
+                _AudioManager.PlaySoundEffectsOneShot(ESound.FireStart, m_fireTransform.position);
+                m_fireAudioboxId = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.FireLoop, m_fireTransform);
+
             }
             else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 2 / 4) && !item.GetIsStageDestructionActive(STAGE_ONE))
             {
@@ -184,7 +203,8 @@ namespace DynamicEnvironment
                 emissionModule.enabled = true;
                 particleSystem.Play();
             }
-
+            m_sprinflersAudioboxId = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.Sprinklers, m_sprinklersTransform);
+            _AudioManager.ModifyAudio(m_sprinflersAudioboxId, EAudioModification.SoundVolume, 1.0f);
             Invoke("ActivateWaterPuddles", 1.0f);
         }
 

@@ -11,7 +11,7 @@ namespace Manager
     {
         [field: Header("Put all audio sounds here, read the Tooltip for the sound order")]
         [Tooltip("CartCollision\nCartRolling\nStep01\nStep02\nStep03\nStep04\nGrabItem\nDriftBegin\nDriftLoop\nCashRegister\nMeleeSwoosh\nCannonSound\nHit\nUIHover\nUIClick\nUIBack\nUIScroll")]
-        [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[17];
+        [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[23];
         [Tooltip("ThemeMusic\nCart_Song_01\nCart_Song_02\nWaitingRoomMusic")]
         [SerializeField] private AudioClip[] m_musicPool = new AudioClip[4];
 
@@ -45,6 +45,7 @@ namespace Manager
             CashRegister, BoxDropOnCounter, BoxDropSpecial,
             MeleeSwoosh, CannonSound, Hit, Splat,
             UIHover, UIClick, UIBack, UIScroll,
+            FireStart, FireLoop, Sprinklers,
             Count
         }
 
@@ -145,21 +146,21 @@ namespace Manager
             else if (modif == EAudioModification.SoundVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("SoundVolume", 1);
-                audioSource.volume = currentVolume;
+                audioSource.volume = Mathf.Min(value, currentVolume);
             }
             else if (modif == EAudioModification.MusicVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
-                MusicAudioSource.volume = currentVolume;
+                MusicAudioSource.volume = Mathf.Min(value, currentVolume);
             }
             else if (modif == EAudioModification.MasterVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MasterVolume", 1);
-                MusicAudioSource.volume = currentVolume;
+                MusicAudioSource.volume = Mathf.Min(value, currentVolume);
 
                 for (int i = 0; i < m_audioBox.Count; i++)
                 {
-                    m_audioBox[i]._AudioSource.volume = currentVolume;
+                    m_audioBox[i]._AudioSource.volume = Mathf.Min(value, currentVolume);
                 }
             }
         }
