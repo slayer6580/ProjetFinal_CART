@@ -16,13 +16,17 @@ namespace DynamicEnvironment
         private float m_initialTurningDrag = 0.0f;
         private float m_initialDriftingDrag = 0.0f;
 
+        private bool m_isSlippery = false;
+
 
         private void OnTriggerEnter(Collider other)
         {
+            if (m_isSlippery) return;
+
             if (other.gameObject.layer != GameConstants.PLAYER_BODY
                 && other.gameObject.layer != GameConstants.CLIENT_COLLIDER)
                 return;
-
+            //Debug.Log("Character Enter Slippery Floor");
             CartStateMachine cartStateMachine = other.gameObject.GetComponentInParent<CartStateMachine>();
             if (cartStateMachine == null) Debug.LogError("CartStateMachine not found in parent");
 
@@ -33,14 +37,17 @@ namespace DynamicEnvironment
 
             lastAddedCart.TurningDrag = SlipperyTurningDrag;
             lastAddedCart.DriftingDrag = SlipperyDriftingDrag;
+            m_isSlippery = true;
         }
 
         private void OnTriggerExit(Collider other)
         {
+            if (!m_isSlippery) return;
             if (other.gameObject.layer != GameConstants.PLAYER_BODY
                 && other.gameObject.layer != GameConstants.CLIENT_COLLIDER)
                 return;
 
+            //Debug.Log("Character Exit Slippery Floor");
             CartStateMachine cartStateMachine = other.gameObject.GetComponentInParent<CartStateMachine>();
 
             if (cartStateMachine == null) Debug.LogError("CartStateMachine not found in parent");
@@ -53,6 +60,8 @@ namespace DynamicEnvironment
             currentCart.TurningDrag = m_initialTurningDrag;
             currentCart.DriftingDrag = m_initialDriftingDrag;
             m_currentCarts.Remove(currentCart);
+
+            m_isSlippery = false;
 
             // TODO Remi: Ask Tommy if clients and player have the same Turning and Drifting values
         }

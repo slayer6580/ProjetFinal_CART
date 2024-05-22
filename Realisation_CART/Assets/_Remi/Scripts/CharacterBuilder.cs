@@ -1265,7 +1265,7 @@ namespace Spawner
 
             if (randomHasHair)
             {
-                Debug.Log("Random has hair");
+                //Debug.Log("Random has hair");
                 if (m_isMale)
                 {
                     int randomHair = UnityEngine.Random.Range(0, m_maleHairTransforms.Count);
@@ -1287,7 +1287,7 @@ namespace Spawner
 
             if (randomHasAccessory)
             {
-                Debug.Log("Random has accessory");
+                //Debug.Log("Random has accessory");
 
                 int randomAccessory = UnityEngine.Random.Range(0, m_accessoryHairSlotTransforms.Count);
                 if (m_isMale) m_currentMaleHairIndex = randomAccessory;
@@ -1440,7 +1440,7 @@ namespace Spawner
 
         internal void RandomizeHairMaterial()
         {
-            Debug.Log("Randomize Hair Material");
+            //Debug.Log("Randomize Hair Material");
             int randomMaterial = UnityEngine.Random.Range(0, 4);
             Material material = null;
 
@@ -1473,7 +1473,7 @@ namespace Spawner
 
         private void RandomizeAccessoryMaterial()
         {
-            Debug.Log("Randomize Accessory Material");
+            //Debug.Log("Randomize Accessory Material");
             int randomMaterial = UnityEngine.Random.Range(0, 4);
             Material material = null;
 

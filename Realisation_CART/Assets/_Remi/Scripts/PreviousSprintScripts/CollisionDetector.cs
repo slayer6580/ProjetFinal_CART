@@ -36,7 +36,7 @@ namespace DynamicEnvironment
                 m_currentHealth -= (velocity / 4); // NPCs are weaker than the player
                 //Debug.Log("impact: " + (velocity /  1.5f));
                 //Debug.Log("velocity: " + velocity);
-                Debug.Log("Current health: " + m_currentHealth);
+                //Debug.Log("Current health: " + m_currentHealth);
                 _DynamicEnvironment.SetItemDestructionStage(this);
             }
         }

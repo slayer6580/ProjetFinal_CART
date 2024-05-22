@@ -151,12 +151,10 @@ namespace Manager
             else if (modif == EAudioModification.MusicVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
-                Debug.Log("currentVolume: " + currentVolume);
-                Debug.Log("value: " + value);
-                if (value == 0) 
-                    Debug.LogWarning("MusicVolume is set to 0");
+                //Debug.Log("currentVolume: " + currentVolume);
+                //Debug.Log("value: " + value);
                 MusicAudioSource.volume = Mathf.Min(value, currentVolume);
-                Debug.Log("MusicAudioSource.volume: " + MusicAudioSource.volume);
+                //Debug.Log("MusicAudioSource.volume: " + MusicAudioSource.volume);
             }
             else if (modif == EAudioModification.MasterVolume)
             {
