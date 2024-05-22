@@ -119,27 +119,26 @@ namespace DynamicEnvironment
         /// <summary> Sets the item's destruction stage </summary>
         public void SetItemDestructionStage(CollisionDetector item)
         {
-            Debug.Log("!item.GetIsStageDestructionActive(STAGE_ZERO): " + item.GetIsStageDestructionActive(STAGE_ZERO));
+            //Debug.Log("!item.GetIsStageDestructionActive(STAGE_ZERO): " + item.GetIsStageDestructionActive(STAGE_ZERO));
             m_currentItem = item;
             if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 3 / 4) && !item.GetIsStageDestructionActive(STAGE_ZERO))
             {
-                Debug.Log("Set fist Item DestructionStage (stage zero)");
+                //Debug.Log("Set fist Item DestructionStage (stage zero)");
                 m_currentTimer = 10.0f;
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ZERO, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_ZERO, true);
                 _AudioManager.PlaySoundEffectsOneShot(ESound.FireStart, m_fireTransform.position);
                 m_fireAudioboxId = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.FireLoop, m_fireTransform);
-
             }
             else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 2 / 4) && !item.GetIsStageDestructionActive(STAGE_ONE))
             {
-                Debug.Log("Set second ItemDestruction Stage  (stage one)");
+                //Debug.Log("Set second ItemDestruction Stage  (stage one)");
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ONE, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_ONE, true);
             }
             else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 1 / 4) && !item.GetIsStageDestructionActive(STAGE_TWO))
             {
-                Debug.Log("Set third ItemDestruction Stage  (stage two)");
+                //Debug.Log("Set third ItemDestruction Stage  (stage two)");
                 ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_TWO, item.GetId())]);
                 item.SetIsStageDestructionActive(STAGE_TWO, true);
                 Invoke("ActivateFireSprinklers", 5.0f);
@@ -240,7 +239,7 @@ namespace DynamicEnvironment
         /// <summary> Resets the item's destruction stages </summary>
         public void ResetItensInEveryStages()
         {
-            Debug.Log("ResetItensInEveryStages");
+            //Debug.Log("ResetItensInEveryStages");
 
             SpecialFXGOFireStages[0].GetComponentInParent<CollisionDetector>().ResetItem();
         }

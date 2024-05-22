@@ -151,7 +151,12 @@ namespace Manager
             else if (modif == EAudioModification.MusicVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
+                Debug.Log("currentVolume: " + currentVolume);
+                Debug.Log("value: " + value);
+                if (value == 0) 
+                    Debug.LogWarning("MusicVolume is set to 0");
                 MusicAudioSource.volume = Mathf.Min(value, currentVolume);
+                Debug.Log("MusicAudioSource.volume: " + MusicAudioSource.volume);
             }
             else if (modif == EAudioModification.MasterVolume)
             {
@@ -287,26 +292,31 @@ namespace Manager
             {
                 Debug.Log("Playing MainMenuMusic");
                 index = PlayMusic(_AudioManager.MainMenuMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Tutorial")
             { 
                 Debug.Log("Playing WaitingRoomMusic");
                 index = PlayMusic(_AudioManager.TutorialMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Level01")
             {
                 Debug.Log("Playing LevelOneMusic");
-                index = PlayMusic(_AudioManager.LevelOneMusic); 
+                index = PlayMusic(_AudioManager.LevelOneMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Level02")
             { 
                 Debug.Log("Playing LevelTwoMusic");
                 index = PlayMusic(_AudioManager.LevelTwoMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Level03")
             {
                 Debug.Log("Playing LevelThreeMusic");
                 index = PlayMusic(_AudioManager.LevelThreeMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
 
             if (index != -1)

@@ -44,7 +44,7 @@ namespace DynamicEnvironment
         /// <summary> Resets the item's health points and destruction stages </summary>
         internal void ResetItem()
         {
-            Debug.Log("Resetting item");
+            //Debug.Log("Resetting item");
             m_currentHealth = m_maxHealth;
             m_isDestructionStageZero = false;
             m_isDestructionStageOne = false;
@@ -59,7 +59,7 @@ namespace DynamicEnvironment
 
         internal void ResetItemCurrentHealth()
         {
-            Debug.Log("Resetting item health");
+            //Debug.Log("Resetting item health");
             m_currentHealth = m_maxHealth;
         }
 

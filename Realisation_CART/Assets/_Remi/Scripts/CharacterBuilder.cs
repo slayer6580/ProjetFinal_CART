@@ -1365,7 +1365,8 @@ namespace Spawner
                 if (m_isMale)
                 {
                     //Debug.Log("Human male GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
-                    m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
+                    if (GetCurrentBodyIndex() < m_humanMaleFullBodyTransforms.Count)
+                        m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }
                 else
