@@ -34,7 +34,8 @@ namespace DiscountDelirium
 
         IEnumerator Delay() 
         {
-            m_rigidbody.velocity = Vector3.zero;
+            //m_rigidbody.velocity = Vector3.zero;
+            m_rigidbody.drag = 7;
             yield return new WaitForSeconds(m_delayBetweenStop);
 
             if (m_delayCount < m_stopCount) 
@@ -45,6 +46,7 @@ namespace DiscountDelirium
             else 
             {
                 m_VFX.SetActive(false);
+                m_rigidbody.drag = 0;
             }
         }
     }
