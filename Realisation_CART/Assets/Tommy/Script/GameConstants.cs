@@ -17,6 +17,7 @@ public static class GameConstants
     public const int CLIENT_COLLIDER = 7;
     public const int GROUND_COLLIDER = 10;
     public const int SHELF_COLLIDER = 11;
+    public const int RAINDROPSCREEN_COLLIDER = 13;
     public const int CAMERA = 17;
 }
 
