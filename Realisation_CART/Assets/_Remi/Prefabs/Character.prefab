@@ -49206,7 +49206,7 @@ MonoBehaviour:
   <Acceleration>k__BackingField: 25
   <MaxSpeed>k__BackingField: 11
   <MaxBackwardSpeed>k__BackingField: 5
-  <IdleRotatingSpeed>k__BackingField: 135
+  <IdleRotatingSpeed>k__BackingField: 115
   <MovingRotatingSpeed>k__BackingField: 40
   <TowerPushForceWhenTurning>k__BackingField: 10
   <TurningDrag>k__BackingField: 2

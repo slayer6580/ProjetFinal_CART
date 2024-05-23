@@ -45,11 +45,10 @@ namespace CartControl
 
 		public void UpdateOrientation(float rotationSpeed, float steeringValue)
 		{
-			if(SM.LocalVelocity.z < 0f - GameConstants.DEADZONE)
-			{
-				steeringValue = -steeringValue;
-			}
+			float speedPercent = Mathf.Clamp(SM.LocalVelocity.z / SM.MaxSpeedUpgrades, 0,1) ;
 
+
+			rotationSpeed = Mathf.Lerp(SM.IdleRotatingSpeed, rotationSpeed, speedPercent);
 			if (steeringValue != 0)
 			{
 				SM.Cart.transform.Rotate(Vector3.up

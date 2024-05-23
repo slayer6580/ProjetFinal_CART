@@ -133,6 +133,7 @@ namespace CartControl
             CartMovement = GetComponent<CartMovement>();
             GrindVfx = GetComponentInChildren<ManageGrindVfx>();
 
+
             ParentOfAllVisual = transform.GetChild(0).gameObject;
 
             if (ParentOfAllVisual.name == "GrindVFX") return; // Vérify if Player still has GrindVFX as first child.
@@ -219,7 +220,7 @@ namespace CartControl
 
 		public void OnCollisionEnter(Collision collision)
 		{
-			if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerCollider"))
+			if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerCollider") || collision.gameObject.layer == LayerMask.NameToLayer("ClientCollider"))
 			{
 				if(collision.gameObject.GetComponent<CartStateMachine>() != null)
 				{
