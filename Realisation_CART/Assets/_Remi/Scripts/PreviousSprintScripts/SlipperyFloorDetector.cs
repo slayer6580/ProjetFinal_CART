@@ -5,17 +5,10 @@ using UnityEngine;
 namespace DynamicEnvironment
 {
     /// <summary> Zone that changes the characters movement to simulate a slippery floor </summary>
-    public class SlipperyFloorPhysic : MonoBehaviour
+    public class SlipperyFloorDetector : MonoBehaviour
     {
 
-        [field: SerializeField] private float SlipperyTurningDrag { get; set; } = 0.5f;
-        [field: SerializeField] private float SlipperyDriftingDrag { get; set; } = 0.5f;
-
         private List<CartStateMachine> m_currentCarts = new List<CartStateMachine>();
-
-        private float m_initialTurningDrag = 0.0f;
-        private float m_initialDriftingDrag = 0.0f;
-
         private bool m_isSlippery = false;
 
 
@@ -23,31 +16,30 @@ namespace DynamicEnvironment
         {
             if (m_isSlippery) return;
 
-            if (other.gameObject.layer != GameConstants.PLAYER_BODY
+            if (other.gameObject.layer != GameConstants.PLAYER_COLLIDER
                 && other.gameObject.layer != GameConstants.CLIENT_COLLIDER)
                 return;
+
             //Debug.Log("Character Enter Slippery Floor");
             CartStateMachine cartStateMachine = other.gameObject.GetComponentInParent<CartStateMachine>();
             if (cartStateMachine == null) Debug.LogError("CartStateMachine not found in parent");
 
             m_currentCarts.Add(cartStateMachine);
-            CartStateMachine lastAddedCart = m_currentCarts.ToArray()[m_currentCarts.Count - 1];
-            m_initialTurningDrag = lastAddedCart.TurningDrag;
-            m_initialDriftingDrag = lastAddedCart.DriftingDrag;
 
-            lastAddedCart.TurningDrag = SlipperyTurningDrag;
-            lastAddedCart.DriftingDrag = SlipperyDriftingDrag;
+            cartStateMachine.TurningDrag = cartStateMachine._CartPhysicsPresets.SlipperyTurningDrag;
+            cartStateMachine.DriftingDrag = cartStateMachine._CartPhysicsPresets.SlipperyDriftingDrag;
+
             m_isSlippery = true;
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (!m_isSlippery) return;
-            if (other.gameObject.layer != GameConstants.PLAYER_BODY
+            if (other.gameObject.layer != GameConstants.PLAYER_COLLIDER
                 && other.gameObject.layer != GameConstants.CLIENT_COLLIDER)
                 return;
 
-            //Debug.Log("Character Exit Slippery Floor");
+            Debug.Log("Character Exit Slippery Floor");
             CartStateMachine cartStateMachine = other.gameObject.GetComponentInParent<CartStateMachine>();
 
             if (cartStateMachine == null) Debug.LogError("CartStateMachine not found in parent");
@@ -56,14 +48,30 @@ namespace DynamicEnvironment
                 return;
 
             CartStateMachine currentCart = other.gameObject.GetComponentInParent<CartStateMachine>();
+            RemoveSlipperyEffect(currentCart);
 
-            currentCart.TurningDrag = m_initialTurningDrag;
-            currentCart.DriftingDrag = m_initialDriftingDrag;
+            // TODO Remi: Ask Tommy if clients and player have the same Turning and Drifting values
+        }
+
+        private void RemoveSlipperyEffect(CartStateMachine currentCart)
+        {
+            currentCart.TurningDrag = currentCart._CartPhysicsPresets.NormalDriftingDrag;
+            currentCart.DriftingDrag = currentCart._CartPhysicsPresets.NormalDriftingDrag;
+
             m_currentCarts.Remove(currentCart);
 
             m_isSlippery = false;
+        }
 
-            // TODO Remi: Ask Tommy if clients and player have the same Turning and Drifting values
+        public void RemoveSlipperyFromAllCharacters()
+        {
+            foreach (CartStateMachine cart in m_currentCarts)
+            {
+                RemoveSlipperyEffect(cart);
+            }
+
+            m_currentCarts.Clear();
+            m_isSlippery = false;
         }
     }
 }

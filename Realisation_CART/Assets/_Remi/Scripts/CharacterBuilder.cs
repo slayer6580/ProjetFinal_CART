@@ -52,7 +52,7 @@ namespace Spawner
 
         private bool m_isMale = true;
 
-        enum BodyPartType
+        private enum BodyPartType
         {
             Human,
             HumanInCostume,

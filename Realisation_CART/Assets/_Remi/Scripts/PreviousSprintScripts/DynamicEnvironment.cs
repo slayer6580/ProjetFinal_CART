@@ -25,6 +25,7 @@ namespace DynamicEnvironment
         private float m_currentTimer;
         private CollisionDetector m_currentItem;
 
+        private SlipperyFloorDetector[] m_slipperyFloorPhysics;
         private Transform m_fireTransform = null;
         private Transform m_sprinklersTransform = null;
         private bool m_isFireSprinklersActive = false;
@@ -57,6 +58,8 @@ namespace DynamicEnvironment
             }
 
             m_sprinklersTransform = SpecialFXGOFireSprinklers.transform.GetChild(0);
+
+            m_slipperyFloorPhysics = FindObjectsOfType<SlipperyFloorDetector>();
         }
 
         private void Update()
@@ -114,6 +117,11 @@ namespace DynamicEnvironment
             }
 
             m_isFireSprinklersActive = false;
+
+            foreach (SlipperyFloorDetector slipperyFloorPhysic in m_slipperyFloorPhysics)
+            {
+                slipperyFloorPhysic.RemoveSlipperyFromAllCharacters();
+            }
         }
 
         /// <summary> Sets the item's destruction stage </summary>

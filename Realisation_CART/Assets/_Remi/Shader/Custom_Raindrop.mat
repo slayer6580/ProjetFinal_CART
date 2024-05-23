@@ -31,9 +31,9 @@ Material:
     m_Floats:
     - _IsActive: 0
     - _PlayerDirection: -2.0987552e-14
-    - _PlayerRotationPull: 0.863197
-    - _PlayerSpeed: 1.0338763
-    - _RainAmount: 0.23890339
+    - _PlayerRotationPull: 0.80438995
+    - _PlayerSpeed: 0.06308048
+    - _RainAmount: 0.08301688
     m_Colors:
     - _PlayerGForce: {r: 1.3334107, g: -0.0000023478738, b: -0.78107977, a: 0}
   m_BuildTextureStacks: []

@@ -15,21 +15,43 @@ namespace DynamicEnvironment
         private float m_currentHealth = 0.0f;
 
         [SerializeField] private int m_id = 0;
+        private bool m_isBeingHit = false;
+        private float m_maxTimeBetweenHits = 2.0f;
+        private float m_timeSinceLastHit = 0.0f;
 
         private void Awake()
         {
             ResetItem();
+            m_timeSinceLastHit = m_maxTimeBetweenHits;
+        }
+
+        private void Update()
+        {
+            if (m_isBeingHit)
+            {
+                m_timeSinceLastHit -= Time.deltaTime;
+                Debug.Log("m_timeSinceLastHit: " + m_timeSinceLastHit);
+                if (m_timeSinceLastHit >= 0)
+                {
+                    m_isBeingHit = false;
+                    m_timeSinceLastHit = m_maxTimeBetweenHits;
+                }
+            }
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.layer == GameConstants.PLAYER_COLLIDER)
+            if (collision.gameObject.layer == GameConstants.PLAYER_COLLIDER && m_isBeingHit == false)
             {
+                Debug.Log("m_isBeingHit: " + m_isBeingHit + " Parent fame object: " + gameObject.transform.parent.gameObject.name);
+                Debug.Log("Player collision: " + collision.gameObject.name);
                 float velocity = collision.impulse.magnitude;
                 m_currentHealth -= velocity;
                 _DynamicEnvironment.SetItemDestructionStage(this);
+                m_isBeingHit = true;
+                Debug.Log("m_isBeingHit: " + m_isBeingHit);
             }
-            else if (collision.gameObject.layer == GameConstants.CLIENT_COLLIDER)
+            else if (collision.gameObject.layer == GameConstants.CLIENT_COLLIDER && m_isBeingHit == false)
             {
                 float velocity = collision.impulse.magnitude;
                 //if (velocity > 40.0f) velocity = 20; // NPCs are stronger in the five first seconds of the game
@@ -38,6 +60,7 @@ namespace DynamicEnvironment
                 //Debug.Log("velocity: " + velocity);
                 //Debug.Log("Current health: " + m_currentHealth);
                 _DynamicEnvironment.SetItemDestructionStage(this);
+                m_isBeingHit = true;
             }
         }
 
@@ -103,6 +126,11 @@ namespace DynamicEnvironment
         public void SetId(int id)
         {
             m_id = id;
+        }
+
+        public void SetIsBeingHit(bool value)
+        {
+            m_isBeingHit = value;
         }
     }
 }

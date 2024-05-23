@@ -17,7 +17,9 @@ namespace Shader
                 gameObject.AddComponent<Rigidbody>();
                 GetComponent<Rigidbody>().isKinematic = true;
             }
-           
+
+            _RaidropShaderUpdater = FindObjectOfType<RaidropShaderUpdater>();
+            if (_RaidropShaderUpdater == null) Debug.LogError("RaindropDectection: _RaidropShaderUpdater not found");
         }
 
         private void OnTriggerEnter(Collider other)
