@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ef3f0db4d29b44e86996c864e2bfa9, type: 3}
   m_Name: Donut2 (S)
   m_EditorClassIdentifier: 
-  m_name: Donut2
+  m_name: Strawberry Donut
   m_cost: 10
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: c6a4c7dd741b33445807fd8d27ab9de6,

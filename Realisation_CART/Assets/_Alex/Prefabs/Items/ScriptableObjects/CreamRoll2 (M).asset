@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CreamRoll2 (M)
   m_EditorClassIdentifier: 
   m_name: Cream roll chocolate
-  m_cost: 10
+  m_cost: 20
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 4cc74a21bda1e9248a1b144d24c61913,
     type: 3}

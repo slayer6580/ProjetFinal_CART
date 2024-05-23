@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ef3f0db4d29b44e86996c864e2bfa9, type: 3}
   m_Name: Cookie2 (S)
   m_EditorClassIdentifier: 
-  m_name: Chocale cookie
+  m_name: Chocolate cookie
   m_cost: 10
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 21f17121e7155cc45bd6ca3559787d40,
