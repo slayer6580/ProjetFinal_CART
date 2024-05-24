@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Manager.AudioManager;
@@ -9,7 +10,13 @@ namespace DynamicEnvironment
     {
         [field: SerializeField] private GameObject SpecialFXGOFireSprinklers { get; set; } = null;
         [field: SerializeField] private GameObject SpecialFXGOWaterPuddles { get; set; } = null;
-        [field: SerializeField] private List<GameObject> SpecialFXGOFireStages { get; set; } = new List<GameObject>();
+        [field: SerializeField] private List<GameObject> SpecialFXGOFireStagesGO { get; set; } = new List<GameObject>();
+        //private List<GameObject> StageOneEffectsGO { get; set; } = new List<GameObject>();
+        private List<ParticleSystem> StageOneParticleSystems { get; set; } = new List<ParticleSystem>();
+        // private List<GameObject> StageTwoEffects { get; set; } = new List<GameObject>();
+        private List<ParticleSystem> StageTwoParticleSystems { get; set; } = new List<ParticleSystem>();
+        //private List<GameObject> StageThreeEffects { get; set; } = new List<GameObject>();
+        private List<ParticleSystem> StageThreeParticleSystems { get; set; } = new List<ParticleSystem>();
 
 
         private List<float> m_waterPuddleScales = new List<float>();
@@ -18,9 +25,6 @@ namespace DynamicEnvironment
         [SerializeField] private float m_puddleAnimationSpeed = 0.1f;
 
         private const int NUMBER_OF_SPRINKLERS = 3;
-        private const int STAGE_ZERO = 0;
-        private const int STAGE_ONE = 1;
-        private const int STAGE_TWO = 2;
 
         private float m_currentTimer;
         private CollisionDetector m_currentItem;
@@ -32,6 +36,13 @@ namespace DynamicEnvironment
         private int m_fireAudioboxId = 0;
         private int m_sprinflersAudioboxId = 0;
 
+        public enum DestructionStage
+        {
+            One,
+            Two,
+            Three
+        }
+
         private void Awake()
         {
             //m_firePosition = SpecialFXGOFireStages.transform.position;
@@ -41,14 +52,29 @@ namespace DynamicEnvironment
             {
                 collisionDetector.SetId(iterator);
                 GameObject StageOne = collisionDetector.transform.GetChild(0).gameObject;
-                m_fireTransform = StageOne.transform.GetChild(0).transform;
-                SpecialFXGOFireStages.Add(StageOne);
+                m_fireTransform = StageOne.transform.GetChild(0);
+                SpecialFXGOFireStagesGO.Add(StageOne);
+                //StageOneEffectsGO.Add(StageOne.transform.GetChild(0).gameObject);
+                StageOneParticleSystems.Add(StageOne.transform.GetChild(0).GetComponent<ParticleSystem>());
+                //StageOneEffectsGO.Add(StageOne.transform.GetChild(1).gameObject);
+                StageOneParticleSystems.Add(StageOne.transform.GetChild(1).GetComponent<ParticleSystem>());
 
-                SpecialFXGOFireStages.Add(collisionDetector.transform.GetChild(1).gameObject);
-                SpecialFXGOFireStages.Add(collisionDetector.transform.GetChild(2).gameObject);
+                GameObject StageTwo = collisionDetector.transform.GetChild(1).gameObject;
+                SpecialFXGOFireStagesGO.Add(StageTwo.gameObject);
+                //StageTwoEffects.Add(StageTwo.transform.GetChild(0).gameObject);
+                StageTwoParticleSystems.Add(StageTwo.transform.GetChild(0).GetComponent<ParticleSystem>());
+                //StageTwoEffects.Add(StageTwo.transform.GetChild(1).gameObject);
+                StageTwoParticleSystems.Add(StageTwo.transform.GetChild(1).GetComponent<ParticleSystem>());
+
+                GameObject StageThree = collisionDetector.transform.GetChild(2).gameObject;
+                SpecialFXGOFireStagesGO.Add(StageThree.gameObject);
+                //StageThreeEffects.Add(StageThree.transform.GetChild(0).gameObject);
+                StageThreeParticleSystems.Add(StageThree.transform.GetChild(0).GetComponent<ParticleSystem>());
+                //StageThreeEffects.Add(StageThree.transform.GetChild(1).gameObject);
+                StageThreeParticleSystems.Add(StageThree.transform.GetChild(1).GetComponent<ParticleSystem>());
+
                 if (collisionDetector.transform.GetChild(0).gameObject.name != "Stage01") Debug.LogError("Stage01 not found");
                 iterator++;
-
             }
 
             for (int i = 0; i < SpecialFXGOWaterPuddles.transform.childCount; i++)
@@ -104,14 +130,14 @@ namespace DynamicEnvironment
             ResetItensInEveryStages();
             DeactivateWaterPuddles();
 
-            foreach (GameObject fireStage in SpecialFXGOFireStages)
+            foreach (GameObject fireStage in SpecialFXGOFireStagesGO)
             {
                 DeactivateAllParticles(fireStage);
             }
 
             DeactivateFireSprinklers();
 
-            foreach (GameObject fireStage in SpecialFXGOFireStages)
+            foreach (GameObject fireStage in SpecialFXGOFireStagesGO)
             {
                 fireStage.SetActive(false);
             }
@@ -127,30 +153,36 @@ namespace DynamicEnvironment
         /// <summary> Sets the item's destruction stage </summary>
         public void SetItemDestructionStage(CollisionDetector item)
         {
-            //Debug.Log("!item.GetIsStageDestructionActive(STAGE_ZERO): " + item.GetIsStageDestructionActive(STAGE_ZERO));
+            //debug.log("!item.getisstagedestructionactive(stage_zero): " + item.getisstagedestructionactive(stage_zero));
             m_currentItem = item;
-            if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 3 / 4) && !item.GetIsStageDestructionActive(STAGE_ZERO))
+            if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 3 / 4) && !item.GetIsStageDestructionActive(DestructionStage.One))
             {
                 //Debug.Log("Set fist Item DestructionStage (stage zero)");
                 m_currentTimer = 10.0f;
-                ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ZERO, item.GetId())]);
-                item.SetIsStageDestructionActive(STAGE_ZERO, true);
-                _AudioManager.PlaySoundEffectsOneShot(ESound.FireStart, m_fireTransform.position);
-                m_fireAudioboxId = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.FireLoop, m_fireTransform);
+                ActivateAllPaticles(DestructionStage.One);
+                item.SetIsStageDestructionActive(DestructionStage.One, true);
+                Invoke("PlayFireSound", 0.25f);
+
             }
-            else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 2 / 4) && !item.GetIsStageDestructionActive(STAGE_ONE))
+            else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 2 / 4) && !item.GetIsStageDestructionActive(DestructionStage.Two))
             {
-                //Debug.Log("Set second ItemDestruction Stage  (stage one)");
-                ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_ONE, item.GetId())]);
-                item.SetIsStageDestructionActive(STAGE_ONE, true);
+                Debug.Log("Set second ItemDestruction Stage  (stage one)");
+                ActivateAllPaticles(DestructionStage.Two);
+                item.SetIsStageDestructionActive(DestructionStage.Two, true);
             }
-            else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 1 / 4) && !item.GetIsStageDestructionActive(STAGE_TWO))
+            else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 1 / 4) && !item.GetIsStageDestructionActive(DestructionStage.Three))
             {
-                //Debug.Log("Set third ItemDestruction Stage  (stage two)");
-                ActivateAllPaticles(SpecialFXGOFireStages[GetSprinklerElement(STAGE_TWO, item.GetId())]);
-                item.SetIsStageDestructionActive(STAGE_TWO, true);
+                Debug.Log("Set third ItemDestruction Stage  (stage two)");
+                ActivateAllPaticles(DestructionStage.Three);
+                item.SetIsStageDestructionActive(DestructionStage.Three, true);
                 Invoke("ActivateFireSprinklers", 5.0f);
             }
+        }
+
+        private void PlayFireSound()
+        {
+            _AudioManager.PlaySoundEffectsOneShot(ESound.FireStart, m_fireTransform.position);
+            m_fireAudioboxId = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.FireLoop, m_fireTransform);
         }
 
         /// <summary> Returns the sprinkler element from the given Id and destruction stage </summary>
@@ -165,13 +197,56 @@ namespace DynamicEnvironment
         }
 
         /// <summary> Activates all the particles in the given hazardous item stage GameObject </summary>
-        private void ActivateAllPaticles(GameObject stage)
+        private void ActivateAllPaticles(DestructionStage stageNumber)
         {
-            stage.SetActive(true);
+            GetStage(stageNumber).SetActive(true);
 
-            foreach (Transform child in stage.transform)
+            if (stageNumber == DestructionStage.One)
             {
-                ParticleSystem particleSystem = child.GetComponent<ParticleSystem>();
+                ActivateAllPaticles(StageOneParticleSystems);
+            }
+            else if (stageNumber == DestructionStage.Two)
+            {
+                ActivateAllPaticles(StageTwoParticleSystems);
+            }
+            else if (stageNumber == DestructionStage.Three)
+            {
+                ActivateAllPaticles(StageThreeParticleSystems);
+            }
+            //stage.SetActive(true);
+
+            //foreach (Transform child in stage.transform)
+            //{
+            //    Debug.Log("child.name: " + child.name);
+            //    ParticleSystem particleSystem = child.GetComponent<ParticleSystem>();
+            //    if (particleSystem == null) continue;
+            //    ParticleSystem.EmissionModule emissionModule = particleSystem.emission;
+            //    particleSystem.Play();
+            //    emissionModule.enabled = true;
+            //}
+        }
+
+        private GameObject GetStage(DestructionStage stageNumber)
+        {
+            if (stageNumber == DestructionStage.One)
+            {
+                return SpecialFXGOFireStagesGO[0];
+            }
+            else if (stageNumber == DestructionStage.Two)
+            {
+                return SpecialFXGOFireStagesGO[1];
+            }
+            else if (stageNumber == DestructionStage.Three)
+            {
+                return SpecialFXGOFireStagesGO[2];
+            }
+            return null;
+        }
+
+        private void ActivateAllPaticles(List<ParticleSystem> particleSystems)
+        {
+            foreach (ParticleSystem particleSystem in particleSystems)
+            {
                 if (particleSystem == null) continue;
                 ParticleSystem.EmissionModule emissionModule = particleSystem.emission;
                 particleSystem.Play();
@@ -249,7 +324,7 @@ namespace DynamicEnvironment
         {
             //Debug.Log("ResetItensInEveryStages");
 
-            SpecialFXGOFireStages[0].GetComponentInParent<CollisionDetector>().ResetItem();
+            SpecialFXGOFireStagesGO[0].GetComponentInParent<CollisionDetector>().ResetItem();
         }
     }
 }

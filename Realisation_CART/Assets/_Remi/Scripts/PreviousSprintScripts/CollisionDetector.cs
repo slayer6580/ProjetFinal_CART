@@ -1,4 +1,5 @@
 using UnityEngine;
+using static DynamicEnvironment.DynamicEnvironment;
 
 namespace DynamicEnvironment
 {
@@ -16,7 +17,7 @@ namespace DynamicEnvironment
 
         [SerializeField] private int m_id = 0;
         private bool m_isBeingHit = false;
-        private float m_maxTimeBetweenHits = 2.0f;
+        private float m_maxTimeBetweenHits = 1f;
         private float m_timeSinceLastHit = 0.0f;
 
         private void Awake()
@@ -30,9 +31,10 @@ namespace DynamicEnvironment
             if (m_isBeingHit)
             {
                 m_timeSinceLastHit -= Time.deltaTime;
-                Debug.Log("m_timeSinceLastHit: " + m_timeSinceLastHit);
-                if (m_timeSinceLastHit >= 0)
+                //Debug.Log("m_timeSinceLastHit: " + m_timeSinceLastHit);
+                if (m_timeSinceLastHit <= 0)
                 {
+                    //Debug.Log("Resetting m_isBeingHit");
                     m_isBeingHit = false;
                     m_timeSinceLastHit = m_maxTimeBetweenHits;
                 }
@@ -41,15 +43,17 @@ namespace DynamicEnvironment
 
         private void OnCollisionEnter(Collision collision)
         {
+            //Debug.Log("Collision name: " + collision + " m_isBeingHit: " + m_isBeingHit);
             if (collision.gameObject.layer == GameConstants.PLAYER_COLLIDER && m_isBeingHit == false)
             {
-                Debug.Log("m_isBeingHit: " + m_isBeingHit + " Parent fame object: " + gameObject.transform.parent.gameObject.name);
-                Debug.Log("Player collision: " + collision.gameObject.name);
+                //Debug.Log("m_isBeingHit: " + m_isBeingHit + " Parent fame object: " + gameObject.transform.parent.gameObject.name);
+                //Debug.Log("Player collision: " + collision.gameObject.name);
                 float velocity = collision.impulse.magnitude;
                 m_currentHealth -= velocity;
                 _DynamicEnvironment.SetItemDestructionStage(this);
                 m_isBeingHit = true;
-                Debug.Log("m_isBeingHit: " + m_isBeingHit);
+                //Debug.Log("m_isBeingHit: " + m_isBeingHit);
+                return;
             }
             else if (collision.gameObject.layer == GameConstants.CLIENT_COLLIDER && m_isBeingHit == false)
             {
@@ -61,6 +65,7 @@ namespace DynamicEnvironment
                 //Debug.Log("Current health: " + m_currentHealth);
                 _DynamicEnvironment.SetItemDestructionStage(this);
                 m_isBeingHit = true;
+                return;
             }
         }
 
@@ -93,26 +98,26 @@ namespace DynamicEnvironment
         }
 
         /// <summary> Retrun true if the given has already been activated </summary>
-        internal bool GetIsStageDestructionActive(int stage)
+        internal bool GetIsStageDestructionActive(DestructionStage stage)
         {
-            if (stage == 0)
+            if (stage == DestructionStage.One)
                 return m_isDestructionStageZero;
-            else if (stage == 1)
+            else if (stage == DestructionStage.Two)
                 return m_isDestructionStageOne;
-            else if (stage == 2)
+            else if (stage == DestructionStage.Three)
                 return m_isDestructionStageTwo;
             else
                 return false;
         }
 
         /// <summary> Sets the given stage to active or inactive </summary>
-        internal void SetIsStageDestructionActive(int stage, bool value)
+        internal void SetIsStageDestructionActive(DestructionStage stage, bool value)
         {
-            if (stage == 0)
+            if (stage == DestructionStage.One)
                 m_isDestructionStageZero = value;
-            else if (stage == 1)
+            else if (stage == DestructionStage.Two)
                 m_isDestructionStageOne = value;
-            else if (stage == 2)
+            else if (stage == DestructionStage.Three)
                 m_isDestructionStageTwo = value;
         }
 
@@ -126,11 +131,6 @@ namespace DynamicEnvironment
         public void SetId(int id)
         {
             m_id = id;
-        }
-
-        public void SetIsBeingHit(bool value)
-        {
-            m_isBeingHit = value;
         }
     }
 }
