@@ -1365,13 +1365,16 @@ namespace Spawner
                 if (m_isMale)
                 {
                     //Debug.Log("Human male GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
-                    if (GetCurrentBodyIndex() < m_humanMaleFullBodyTransforms.Count)
-                        m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
+                    if (GetCurrentBodyIndex() > m_humanMaleFullBodyTransforms.Count) return;
+                    if (m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
+                    m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material }; 
                     CheckMatIntegrity(m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }
                 else
                 {
                     //Debug.Log("Human female GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
+                    if (GetCurrentBodyIndex() > m_humanFemaleFullBodyTransforms.Count) return;
+                    if (m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }
@@ -1380,11 +1383,15 @@ namespace Spawner
             {
                 if (m_isMale)
                 {
+                    if (GetCurrentBodyIndex() > m_humanMaleInCostumeFullBodyTransforms.Count) return;
+                    if (m_humanMaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_humanMaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanMaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }
                 else
                 {
+                    if (GetCurrentBodyIndex() > m_humanFemaleInCostumeFullBodyTransforms.Count) return;
+                    if (m_humanFemaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_humanFemaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanFemaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material });
                 }
@@ -1393,11 +1400,15 @@ namespace Spawner
             {
                 if (m_isMale)
                 {
+                    if (GetCurrentBodyIndex() > m_nonHumanMaleFullBodyTransforms.Count) return;
+                    if (m_nonHumanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_nonHumanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_nonHumanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material });
                 }
                 else
                 {
+                    if (GetCurrentBodyIndex() > m_nonHumanFemaleFullBodyTransforms.Count) return;
+                    if (m_nonHumanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_nonHumanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_nonHumanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }
@@ -1406,19 +1417,35 @@ namespace Spawner
             {
                 if (m_isMale)
                 {
+                    if (GetCurrentBodyIndex() > m_humanMaleFullBodyTransforms.Count) return;
+                    if (m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
+
+                    if (GetCurrentBodyIndex() > m_humanMaleInCostumeFullBodyTransforms.Count) return;
+                    if (m_humanMaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_humanMaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanMaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
+                    
+                    if (GetCurrentBodyIndex() > m_nonHumanMaleFullBodyTransforms.Count) return;
+                    if (m_nonHumanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_nonHumanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_nonHumanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }
                 else
                 {
+                    if (GetCurrentBodyIndex() > m_humanFemaleFullBodyTransforms.Count) return;
+                    if (m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
+                    
+                    if (GetCurrentBodyIndex() > m_humanFemaleInCostumeFullBodyTransforms.Count) return;
+                    if (m_humanFemaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_humanFemaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_humanFemaleInCostumeFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
+                    
+                    if (GetCurrentBodyIndex() > m_nonHumanFemaleFullBodyTransforms.Count) return;
+                    if (m_nonHumanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
                     m_nonHumanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
                     CheckMatIntegrity(m_nonHumanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
                 }

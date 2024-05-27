@@ -204,8 +204,8 @@ namespace Manager
             //Debug.Log("Playing sound: " + sound + " at element : " + (int)sound + " max elements: " + m_soundsPool.Length);
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
-            audiobox.GetComponent<AudioSource>().volume = volume;
-            audiobox.GetComponent<AudioSource>().pitch = pitch;
+            audiobox._AudioSource.volume = volume;
+            audiobox._AudioSource.pitch = pitch;
 
             MoveAudioBox(audiobox, newPosition);
             PlayClipOneShot(audiobox, sound);
@@ -215,9 +215,9 @@ namespace Manager
         /// <summary> Play a sound one shot on a transform </summary>
         public int PlaySoundEffectsLoopOnTransform(ESound sound, Transform parent)
         {
-
             if (parent == null)
             {
+                Debug.LogWarning("Parent is null, playing sound on AudioManager");
                 parent = transform;
             }
 
@@ -228,9 +228,12 @@ namespace Manager
             if (audiobox == null)
                 return -1;
 
+            //Debug.Log("Playing sound: " + sound + " at element : " + (int)sound + " max elements: " + m_soundsPool.Length);
 
-            audiobox.transform.SetParent(parent);
             audiobox.transform.localPosition = Vector3.zero;
+            audiobox.transform.SetParent(parent, false);
+            audiobox.transform.localPosition = Vector3.zero;
+
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
             MoveAudioBox(audiobox, Vector3.zero);
@@ -367,7 +370,7 @@ namespace Manager
         /// <summary> Move an audioBox at a position </summary>
         private void MoveAudioBox(AudioBox audioBox, Vector3 newPosition)
         {
-            audioBox.transform.position = newPosition;
+            audioBox.transform.localPosition = newPosition;
         }
 
         /// <summary> Make an audioBox play an audioclip one shot</summary>
