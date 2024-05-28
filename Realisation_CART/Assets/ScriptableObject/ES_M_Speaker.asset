@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Speaker
   m_cost: 25
   m_size: 1
-  m_object: {fileID: 1644379824432052, guid: 2f4a6771dc126d14abec474e5b0c4e7d, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 8747b22453ebf6245b0fdeccfd01d0df,
+    type: 3}

@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: VR Headset
   m_cost: 10
   m_size: 0
-  m_object: {fileID: 1923758745062150, guid: 781783f5d55b96841a8efd922183fe69, type: 3}
+  m_object: {fileID: 9000504276230933140, guid: 8fe4966445dd2a64aa6f362b950a74e6,
+    type: 3}

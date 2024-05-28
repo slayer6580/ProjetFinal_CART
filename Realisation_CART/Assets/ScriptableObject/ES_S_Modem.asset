@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Modem
   m_cost: 10
   m_size: 0
-  m_object: {fileID: 1070352218929540, guid: b2facf05938949c4ab73537a084651b1, type: 3}
+  m_object: {fileID: 9000504276230933140, guid: cd1852f7c9300ec4fbae4e5fcbf7a59d,
+    type: 3}

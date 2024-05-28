@@ -157,11 +157,12 @@ namespace DynamicEnvironment
             m_currentItem = item;
             if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 3 / 4) && !item.GetIsStageDestructionActive(DestructionStage.One))
             {
-                //Debug.Log("Set fist Item DestructionStage (stage zero)");
+                Debug.Log("Set fist Item DestructionStage (stage zero)");
                 m_currentTimer = 10.0f;
                 ActivateAllPaticles(DestructionStage.One);
                 item.SetIsStageDestructionActive(DestructionStage.One, true);
-                Invoke("PlayFireSound", 0.25f);
+                Invoke("PlayFireSoundOneShot", 0.1f);
+                Invoke("PlayFireSoundLoop", 1.0f);
 
             }
             else if (item.GetHItemCurrentHealth() <= (item.GetMaxHealth() * 2 / 4) && !item.GetIsStageDestructionActive(DestructionStage.Two))
@@ -179,9 +180,13 @@ namespace DynamicEnvironment
             }
         }
 
-        private void PlayFireSound()
+        private void PlayFireSoundOneShot()
         {
             _AudioManager.PlaySoundEffectsOneShot(ESound.FireStart, m_fireTransform.position);
+        }
+
+        private void PlayFireSoundLoop()
+        {
             m_fireAudioboxId = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.FireLoop, m_fireTransform);
         }
 
