@@ -82,6 +82,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bakery_Waffle
       objectReference: {fileID: 0}
+    - target: {fileID: 150536, guid: 089dbd555223fb64f82571b761026926, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 428644, guid: 089dbd555223fb64f82571b761026926, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.096
@@ -157,6 +161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bakery_Waffle (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 150536, guid: 089dbd555223fb64f82571b761026926, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 428644, guid: 089dbd555223fb64f82571b761026926, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.096
@@ -231,6 +239,10 @@ PrefabInstance:
     - target: {fileID: 150536, guid: 089dbd555223fb64f82571b761026926, type: 3}
       propertyPath: m_Name
       value: SI_Food_Bakery_Waffle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 150536, guid: 089dbd555223fb64f82571b761026926, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 428644, guid: 089dbd555223fb64f82571b761026926, type: 3}
       propertyPath: m_LocalScale.x

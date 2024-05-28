@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Organic_Pineapple
       objectReference: {fileID: 0}
+    - target: {fileID: 100986, guid: edba34ad1d8761f4387aa7305499a38b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 465904, guid: edba34ad1d8761f4387aa7305499a38b, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.5317

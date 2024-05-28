@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Sport_GolfBag_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1834106128118128, guid: 9f131297de60b03419946d855de6b98c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4145394697059644, guid: 9f131297de60b03419946d855de6b98c, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.290575

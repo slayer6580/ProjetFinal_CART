@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Computer_Printer_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1955542856381338, guid: b2661b3d28c873a4badf837c5318e5be, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4512971640011548, guid: b2661b3d28c873a4badf837c5318e5be, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.9778235

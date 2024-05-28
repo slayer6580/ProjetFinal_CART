@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 4112591448873217714}
   - component: {fileID: 4137585674173242228}
   - component: {fileID: 4127747875001459770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Music_Saxophone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

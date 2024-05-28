@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 4858819247804154504}
   - component: {fileID: 4830231670908844896}
   - component: {fileID: 4840341853590098812}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Radio_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

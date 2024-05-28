@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5435306681486267830}
   - component: {fileID: 5406884744781506874}
   - component: {fileID: 5416800386780152986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_VR_Headset_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

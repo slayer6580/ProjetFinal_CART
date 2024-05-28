@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Sport_Gridiron_Ball_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1293137003950692, guid: 13919a4ca2672c145a1367cfe500135f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4600085327580662, guid: 13919a4ca2672c145a1367cfe500135f, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.4299994

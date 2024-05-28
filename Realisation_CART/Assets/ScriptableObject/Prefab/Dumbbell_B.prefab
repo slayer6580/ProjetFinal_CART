@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Dumbbell_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1095621745424758, guid: 8e134b678dcc57044b1bcb72dfaec929, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4904761589967472, guid: 8e134b678dcc57044b1bcb72dfaec929, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.6521046

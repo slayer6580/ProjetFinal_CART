@@ -76,9 +76,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5209666830917344921}
     m_Modifications:
+    - target: {fileID: 1422337456353496, guid: cf542ccd33aee0b4d8be95b4414e1352, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1996138439020052, guid: cf542ccd33aee0b4d8be95b4414e1352, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Microwave_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996138439020052, guid: cf542ccd33aee0b4d8be95b4414e1352, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4516909087156348, guid: cf542ccd33aee0b4d8be95b4414e1352, type: 3}
       propertyPath: m_LocalScale.x

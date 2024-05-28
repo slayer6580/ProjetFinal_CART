@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 8210190884700030988}
   - component: {fileID: 8184743283893381292}
   - component: {fileID: 8193258986361310396}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Electronics_Boombox_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Hunting_Fish_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1111048411972552, guid: 9e2f43949ee3d5444b83c982ffb47b53, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4985616900505452, guid: 9e2f43949ee3d5444b83c982ffb47b53, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.01

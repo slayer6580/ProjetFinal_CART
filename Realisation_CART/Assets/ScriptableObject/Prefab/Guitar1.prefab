@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1973232737630946177}
   - component: {fileID: 1953279656881166211}
   - component: {fileID: 1963387863258444261}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Music_Acoustic_Guitar_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

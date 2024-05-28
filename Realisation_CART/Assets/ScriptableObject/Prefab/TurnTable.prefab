@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3819240816734581430}
   - component: {fileID: 3848208395782560974}
   - component: {fileID: 3838008470243408570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Music_Turntable_01_Arm_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3819368939557134476}
   - component: {fileID: 3847983465158346102}
   - component: {fileID: 3838652234598864258}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Music_Turntable_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

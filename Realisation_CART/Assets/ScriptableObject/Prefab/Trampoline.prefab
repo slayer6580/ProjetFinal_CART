@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gym_Fitness_Tampoline_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1936900250853076, guid: 0f44b020d0801584f81f2165cfa79e7b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4065415320650492, guid: 0f44b020d0801584f81f2165cfa79e7b, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6013998

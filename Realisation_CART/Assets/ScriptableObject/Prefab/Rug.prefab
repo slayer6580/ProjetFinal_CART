@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Rug_Rolls_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1242132439620404, guid: 74eacc887c675b3448457081189d6b9b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4304000447362636, guid: 74eacc887c675b3448457081189d6b9b, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.91846

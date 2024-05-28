@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bakery_Croissant
       objectReference: {fileID: 0}
+    - target: {fileID: 158136, guid: 36ff5bf416a398e42b1c8605bde31deb, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 468788, guid: 36ff5bf416a398e42b1c8605bde31deb, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.8485

@@ -81,6 +81,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Product_Preset_42 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1526402624552782, guid: 9d14a03d08cacdd48bff9e61f521a55b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4537625403067006, guid: 9d14a03d08cacdd48bff9e61f521a55b, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.26
@@ -160,6 +164,10 @@ PrefabInstance:
     - target: {fileID: 1526402624552782, guid: 9d14a03d08cacdd48bff9e61f521a55b, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Product_Preset_42
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526402624552782, guid: 9d14a03d08cacdd48bff9e61f521a55b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4537625403067006, guid: 9d14a03d08cacdd48bff9e61f521a55b, type: 3}
       propertyPath: m_LocalScale.x

@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Sport_Soccer_Ball_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1781991154432006, guid: c36b947ff7187264daf43bf5dabc50b7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4434163461748138, guid: c36b947ff7187264daf43bf5dabc50b7, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.2793033

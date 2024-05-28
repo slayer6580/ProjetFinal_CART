@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 408671301305589978}
   - component: {fileID: 415435556103489420}
   - component: {fileID: 427789004199075080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Camera_Small_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}

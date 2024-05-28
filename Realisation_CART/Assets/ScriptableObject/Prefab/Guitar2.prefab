@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 4072447990031572033}
   - component: {fileID: 4099023548828332581}
   - component: {fileID: 4091148549145792689}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Music_Electric_Guitar_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

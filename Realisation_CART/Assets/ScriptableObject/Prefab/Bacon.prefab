@@ -82,6 +82,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bacon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 185894, guid: d658b852cfbc122429f288dfcecc9a19, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 469114, guid: d658b852cfbc122429f288dfcecc9a19, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.4645011
@@ -157,6 +161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bacon (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 185894, guid: d658b852cfbc122429f288dfcecc9a19, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 469114, guid: d658b852cfbc122429f288dfcecc9a19, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.4645011
@@ -231,6 +239,10 @@ PrefabInstance:
     - target: {fileID: 185894, guid: d658b852cfbc122429f288dfcecc9a19, type: 3}
       propertyPath: m_Name
       value: SI_Food_Bacon
+      objectReference: {fileID: 0}
+    - target: {fileID: 185894, guid: d658b852cfbc122429f288dfcecc9a19, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 469114, guid: d658b852cfbc122429f288dfcecc9a19, type: 3}
       propertyPath: m_LocalScale.x

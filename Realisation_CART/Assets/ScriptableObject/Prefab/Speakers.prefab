@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 7361136661953777738}
   - component: {fileID: 7372596869634540296}
   - component: {fileID: 7382802650440392456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Electronics_Speaker_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

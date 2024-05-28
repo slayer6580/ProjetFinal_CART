@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Badminton_Shuttle_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1700716781353588, guid: 8867dc6ccdd210c4b872ab2d1cdc7704, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4305910736125710, guid: 8867dc6ccdd210c4b872ab2d1cdc7704, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.5855355

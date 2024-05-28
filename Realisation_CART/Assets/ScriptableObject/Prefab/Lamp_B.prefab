@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Lamp_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1033321329164702, guid: 5ca962953760fea4d844df5aae943ae7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4692893571781904, guid: 5ca962953760fea4d844df5aae943ae7, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.1887624

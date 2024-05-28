@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Meat_Chicken
       objectReference: {fileID: 0}
+    - target: {fileID: 116220, guid: 2fc8d29b99a385544b31b81696deafa5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 448170, guid: 2fc8d29b99a385544b31b81696deafa5, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.009701

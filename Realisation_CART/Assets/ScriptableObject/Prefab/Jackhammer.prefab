@@ -76,9 +76,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 39218039315098345}
     m_Modifications:
+    - target: {fileID: 1495667939635636, guid: b0199629e54589844937019cd09a94ad, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1817814196998184, guid: b0199629e54589844937019cd09a94ad, type: 3}
       propertyPath: m_Name
       value: SM_Tool_Concrete_Breaker_Jackhammer_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817814196998184, guid: b0199629e54589844937019cd09a94ad, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4284123676299472, guid: b0199629e54589844937019cd09a94ad, type: 3}
       propertyPath: m_LocalScale.x
