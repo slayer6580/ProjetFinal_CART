@@ -13,6 +13,7 @@ namespace BackstoreSystems
     {
         [field: SerializeField] private TowerBoxSystem _TowerBoxSystem { get; set; } = null;
         [field: SerializeField] private Transform DiegeticScaleValue { get; set; } = null;
+        [field: SerializeField] private GameObject Camera { get; set; } = null;
         [field: SerializeField] private Transform DoorOne { get; set; } = null;
         [field: SerializeField] private Transform DoorTwo { get; set; } = null;
 
@@ -32,7 +33,7 @@ namespace BackstoreSystems
         private const int DIEGETIC_UI_MIN_SCALE = 0;
         private const int DIEGETIC_UI_MAX_SCALE = 20;
         private const int DOOR_ANGLE_MIN = 0;
-        private const int DOOR_ANGLE_MAX = 90;
+        private const int DOOR_ANGLE_MAX = -90;
 
         private float  m_currentPlayerWeight = 0;
         private bool m_isPlayerInTriggerZone = false;
@@ -55,20 +56,26 @@ namespace BackstoreSystems
         /// <summary> Observer Pattern. Handles the player entering the trigger zone </summary>
         private void HandleTriggerEnter(Collider other, bool isInsideBackstore)
         {
+            
             if (other.gameObject.layer != GameConstants.PLAYER_BODY) return;
 
-            m_isInsideBackstore = isInsideBackstore;
+            if (other.gameObject.transform.parent.parent.name != "Character") return;
+			
+
+			m_isInsideBackstore = isInsideBackstore;
 
             if (m_isPlayerInTriggerZone) return;
             m_isPlayerInTriggerZone = true;
+			
 
-            if (isInsideBackstore)
+			if (isInsideBackstore)
             {
                 m_isPlayerCanPass = true;
             }
             else
             {
-                m_isScaleSystemActive = true;
+				Camera.SetActive(true);
+				m_isScaleSystemActive = true;
                 CalculatePlayerWeight();
             }
         }
@@ -79,12 +86,15 @@ namespace BackstoreSystems
 
             if (other.gameObject.layer != GameConstants.PLAYER_BODY) return;
 
-            m_isInsideBackstore = isInsideBackstore;
+			if (other.gameObject.transform.parent.parent.name != "Character") return;
+			Camera.SetActive(false);
+			m_isInsideBackstore = isInsideBackstore;
 
             if (!m_isPlayerInTriggerZone) return;
             m_isPlayerInTriggerZone = false;
+			
 
-            if (isInsideBackstore)
+			if (isInsideBackstore)
             {
                 // The mechanism has to wait so that the doors do not close on the player
                 // while he is leaving the trigger carpet when inside the backstore
@@ -92,8 +102,9 @@ namespace BackstoreSystems
             }
             else
             {
-                CloseTheDoors();
-            }
+				// CloseTheDoors();
+				Invoke("CloseTheDoors", 2f);
+			}
         }
 
         /// <summary> Resets the variables that keep the doors open (closes the doors) </summary>
@@ -172,8 +183,9 @@ namespace BackstoreSystems
             {
                 doorAngle = DOOR_ANGLE_MAX;
             }
-            
-            DoorOne.rotation = Quaternion.Lerp(DoorOne.rotation, Quaternion.Euler(0, -doorAngle, 0), Time.deltaTime * m_doorsSpeed);
+
+
+				DoorOne.rotation = Quaternion.Lerp(DoorOne.rotation, Quaternion.Euler(0, -doorAngle, 0), Time.deltaTime * m_doorsSpeed);
             DoorTwo.rotation = Quaternion.Lerp(DoorTwo.rotation, Quaternion.Euler(0, doorAngle, 0), Time.deltaTime * m_doorsSpeed);
 
             if (DoorTwo.transform.eulerAngles.y <= DOOR_ANGLE_MIN + DOOR_ANGLE_THRESHOLD && !m_isInsideBackstore)
