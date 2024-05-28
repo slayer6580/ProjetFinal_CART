@@ -69,16 +69,6 @@ namespace Manager
             Count
         }
 
-        /// <summary> This enum is used to store all the sound types in the game </summary>
-        public enum ESoundType
-        {
-            Client,
-            Environment,
-            GameEvent,
-            UI,
-            Count
-        }
-
         private void Awake()
         {
             //Debug.Log("AudioManager Awake");
@@ -119,14 +109,13 @@ namespace Manager
 
         public void PlayUIScrollSound()
         {
-            m_scrollAudioBox = PlaySoundEffectsLoop(ESound.UIScroll, Vector3.zero);
+            m_scrollAudioBox = MusicOptionSliderEffect(ESound.UIScroll, Vector3.zero);
         }
 
         public void StopUIScrollSound()
         {
             StopSoundEffectsLoop(m_scrollAudioBox);
         }
-
 
         /// <summary> Modify the pitch or volume of a sound of a music </summary>
         public void ModifyAudio(int index, EAudioModification modif, float value = 0)
@@ -207,7 +196,7 @@ namespace Manager
             audiobox._AudioSource.volume = volume;
             audiobox._AudioSource.pitch = pitch;
 
-            MoveAudioBox(audiobox, newPosition);
+            MoveAudioBoxLocal(audiobox, newPosition);
             PlayClipOneShot(audiobox, sound);
             StartCoroutine(ReActivateAudioBox(audiobox, clip));
         }
@@ -228,18 +217,21 @@ namespace Manager
             if (audiobox == null)
                 return -1;
 
+            audiobox._AudioSource.pitch = 1;
+            audiobox._AudioSource.volume = 1;
+
             audiobox.transform.SetParent(parent, false);
             audiobox.transform.localPosition = Vector3.zero;
 
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
-            MoveAudioBox(audiobox, Vector3.zero);
+            MoveAudioBoxLocal(audiobox, Vector3.zero);
             PlayClipLoop(audiobox, sound);
             return index;
         }
 
-        /// <summary> Play a sound one shot at a position </summary>
-        public int PlaySoundEffectsLoop(ESound sound, Vector3 newPosition)
+        /// <summary> Play UI on loop </summary>
+        public int MusicOptionSliderEffect(ESound sound, Vector3 newPosition)
         {
             AudioBox audiobox = FindAValidAudioBox();
             int index = m_audioBox.IndexOf(audiobox);
@@ -249,7 +241,7 @@ namespace Manager
 
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
-            MoveAudioBox(audiobox, newPosition);
+            MoveAudioBoxLocal(audiobox, newPosition);
             PlayClipLoop(audiobox, sound);
             return index;
         }
@@ -365,9 +357,15 @@ namespace Manager
         }
 
         /// <summary> Move an audioBox at a position </summary>
-        private void MoveAudioBox(AudioBox audioBox, Vector3 newPosition)
+        private void MoveAudioBoxLocal(AudioBox audioBox, Vector3 newPosition)
         {
             audioBox.transform.localPosition = newPosition;
+        }
+
+        /// <summary> Move an audioBox at a position </summary>
+        private void MoveAudioBoxWorld(AudioBox audioBox, Vector3 newPosition)
+        {
+            audioBox.transform.position = newPosition;
         }
 
         /// <summary> Make an audioBox play an audioclip one shot</summary>
