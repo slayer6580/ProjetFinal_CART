@@ -23,6 +23,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -73,6 +74,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -97,6 +99,53 @@ MonoBehaviour:
     m_chosenTarget: 0
   m_description: 
   m_alsoClearChosePathList: 1
+--- !u!114 &-8330204130755322239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb88f71d99a11d4e9c934656596339e, type: 3}
+  m_Name: SetAsNotStuck
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: cd2779ee96e1e8848a7bd1319a2d79d5
+  m_position: {x: 169.99998, y: 12}
+  m_blackboard:
+    m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
+    m_pursuitTenacity: 0
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
+    m_isGameStarted: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_lastAttackTimer: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+  m_description: 
 --- !u!114 &-7623184281317339678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +169,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -171,6 +221,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -220,6 +271,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -270,6 +322,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -321,6 +374,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -369,6 +423,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -417,6 +472,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -463,6 +519,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -510,6 +567,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -552,7 +610,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 0e97b1536bcf7e1419c859bbc57b1953
-  m_position: {x: -99, y: 12}
+  m_position: {x: -112.999985, y: 12.000001}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_wantClosestPath: 0
@@ -560,6 +618,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -591,6 +650,8 @@ MonoBehaviour:
   m_maxAggressive: 80
   m_minTacticalAtk: 2
   m_maxTacticalAtk: 8
+  m_minBoxWantedForCheckout: 3
+  m_maxBoxWantedForCheckout: 10
 --- !u!114 &-5446233131730551066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,6 +675,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -660,6 +722,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -707,6 +770,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -745,7 +809,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 0bd2bac0ccb3d4f40b01d06db1fecabf
-  m_position: {x: 516.99994, y: 545.99994}
+  m_position: {x: 517, y: 546}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_wantClosestPath: 0
@@ -753,6 +817,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -804,6 +869,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -855,6 +921,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -905,6 +972,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -956,6 +1024,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1006,6 +1075,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1058,6 +1128,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1104,6 +1175,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1155,6 +1227,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1203,6 +1276,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1250,6 +1324,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1288,7 +1363,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 342b55bc4d507c249af7c3870267424f
-  m_position: {x: 61, y: 12}
+  m_position: {x: 23.049992, y: 12.000001}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_wantClosestPath: 0
@@ -1296,6 +1371,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1343,6 +1419,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1372,6 +1449,7 @@ MonoBehaviour:
   - {fileID: 8681500071723160122}
   - {fileID: -5537151101605958155}
   - {fileID: -217002694569445728}
+  - {fileID: -8330204130755322239}
   - {fileID: 4965471443556820477}
 --- !u!114 &-98252233047386408
 MonoBehaviour:
@@ -1396,6 +1474,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1503,6 +1582,7 @@ MonoBehaviour:
   - {fileID: 2918553551819896199}
   - {fileID: -623155257482467785}
   - {fileID: -5537151101605958155}
+  - {fileID: -8330204130755322239}
   m_blackboard:
     m_wantMostActiveShelves: 5
     m_wantClosestPath: 5
@@ -1510,6 +1590,7 @@ MonoBehaviour:
     m_sightHalfAngle: 90
     m_aggressiveness: 40
     m_tacticalAttack: 4
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 8
     m_name: Client_01
     m_thisClient: {fileID: 0}
@@ -1555,6 +1636,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1604,6 +1686,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1650,6 +1733,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1698,6 +1782,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1744,6 +1829,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1792,6 +1878,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1838,6 +1925,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1885,6 +1973,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -1934,6 +2023,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2017,6 +2107,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2065,6 +2156,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2115,6 +2207,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2156,7 +2249,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 16ec365403b0f394e8574c4a8f835b9e
-  m_position: {x: 238, y: 12}
+  m_position: {x: 290.90005, y: 12.000001}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_wantClosestPath: 0
@@ -2164,6 +2257,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2211,6 +2305,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2258,6 +2353,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2304,6 +2400,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2353,6 +2450,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2400,6 +2498,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2447,6 +2546,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2494,6 +2594,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2544,6 +2645,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2591,6 +2693,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2641,6 +2744,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2694,6 +2798,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2742,6 +2847,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2788,6 +2894,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2834,6 +2941,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2880,6 +2988,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2929,6 +3038,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -2977,6 +3087,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -3024,6 +3135,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -3073,6 +3185,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -3122,6 +3235,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -3171,6 +3285,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -3219,6 +3334,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -3265,6 +3381,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -3314,6 +3431,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}
@@ -3362,6 +3480,7 @@ MonoBehaviour:
     m_sightHalfAngle: 0
     m_aggressiveness: 0
     m_tacticalAttack: 0
+    m_boxBeforeCheckout: 0
     m_pursuitTenacity: 0
     m_name: 
     m_thisClient: {fileID: 0}

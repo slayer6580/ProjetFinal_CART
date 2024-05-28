@@ -18,6 +18,8 @@ namespace BehaviourTree
 		[Range(15, 180)] public float m_sightHalfAngle;
 		[Range(1, 100)] public float m_aggressiveness;
 		[Range(1, 10)] public float m_tacticalAttack;
+		[Range(3, 10)] public int m_boxBeforeCheckout;
+
 		public float m_pursuitTenacity;
 
 		[Header("Don't touch")]
