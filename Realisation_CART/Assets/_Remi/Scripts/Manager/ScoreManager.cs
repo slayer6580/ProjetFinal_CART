@@ -194,6 +194,13 @@ namespace Manager
             }
         }
 
+        /// <summary> Deselect all button for better UI button interaction </summary>
+        public void DeselectAllButtons()
+        {
+            GameObject myEventSystem = GameObject.Find("EventSystem");
+            myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+        }
+
         private int CalculateCartokens()
         {
             return (int)(Mathf.Pow(_TowerBoxSystem.GetBoxCount(), m_cartokenValueMultiplier));
