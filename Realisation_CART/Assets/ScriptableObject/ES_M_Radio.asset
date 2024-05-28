@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Radio
   m_cost: 25
   m_size: 1
-  m_object: {fileID: 1678294757573668, guid: 60deb90dcc7ed5c4da554886e2e85984, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: ad6dacab3cbfb194184b7d9b39a6966c,
+    type: 3}

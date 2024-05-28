@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Keyboard
   m_cost: 25
   m_size: 1
-  m_object: {fileID: 1389358732500554, guid: 6bcf4ddc47466bc4ba17a086465bf3c2, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 455238d842ea91a4c883de990d6ae0e1,
+    type: 3}

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ef3f0db4d29b44e86996c864e2bfa9, type: 3}
   m_Name: ES_S_Mouse_B
   m_EditorClassIdentifier: 
-  m_name: Standard Mouse
+  m_name: Mouse
   m_cost: 10
   m_size: 0
-  m_object: {fileID: 1529305882726918, guid: 31b702c2f496cbe4c95e8582704ba05f, type: 3}
+  m_object: {fileID: 9000504276230933140, guid: 9c4e3a230929a4e4aa05b5d80dde41d8,
+    type: 3}
