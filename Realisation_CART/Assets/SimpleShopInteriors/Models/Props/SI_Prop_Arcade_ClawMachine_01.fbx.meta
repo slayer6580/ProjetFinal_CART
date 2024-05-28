@@ -1,76 +1,189 @@
 fileFormatVersion: 2
 guid: 110f7d97645c14f498f2a8e14109b17e
-timeCreated: 1462231726
-licenseType: Store
 ModelImporter:
-  serializedVersion: 18
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: SI_Prop_ClawMachine_ArmLine
-    100004: SI_Prop_ClawMachine_ArmTop
-    100006: SI_Prop_ClawMachine_Claw_01
-    100008: SI_Prop_ClawMachine_Claw_02
-    100010: SI_Prop_ClawMachine_Claw_03
-    100012: SI_Prop_ClawMachine_ClawBody
-    100014: SI_Prop_ClawMachine_Topbar_01
-    100016: SI_Prop_ClawMachine_Topbar_02
-    100018: SI_Prop_ClawMachine_Toys
-    400000: //RootNode
-    400002: SI_Prop_ClawMachine_ArmLine
-    400004: SI_Prop_ClawMachine_ArmTop
-    400006: SI_Prop_ClawMachine_Claw_01
-    400008: SI_Prop_ClawMachine_Claw_02
-    400010: SI_Prop_ClawMachine_Claw_03
-    400012: SI_Prop_ClawMachine_ClawBody
-    400014: SI_Prop_ClawMachine_Topbar_01
-    400016: SI_Prop_ClawMachine_Topbar_02
-    400018: SI_Prop_ClawMachine_Toys
-    2300000: //RootNode
-    2300002: SI_Prop_ClawMachine_ArmLine
-    2300004: SI_Prop_ClawMachine_ArmTop
-    2300006: SI_Prop_ClawMachine_Claw_01
-    2300008: SI_Prop_ClawMachine_Claw_02
-    2300010: SI_Prop_ClawMachine_Claw_03
-    2300012: SI_Prop_ClawMachine_ClawBody
-    2300014: SI_Prop_ClawMachine_Topbar_01
-    2300016: SI_Prop_ClawMachine_Topbar_02
-    2300018: SI_Prop_ClawMachine_Toys
-    3300000: //RootNode
-    3300002: SI_Prop_ClawMachine_ArmLine
-    3300004: SI_Prop_ClawMachine_ArmTop
-    3300006: SI_Prop_ClawMachine_Claw_01
-    3300008: SI_Prop_ClawMachine_Claw_02
-    3300010: SI_Prop_ClawMachine_Claw_03
-    3300012: SI_Prop_ClawMachine_ClawBody
-    3300014: SI_Prop_ClawMachine_Topbar_01
-    3300016: SI_Prop_ClawMachine_Topbar_02
-    3300018: SI_Prop_ClawMachine_Toys
-    4300000: SI_Prop_ClawMachine_01
-    4300002: SI_Prop_ClawMachine_Toys
-    4300004: SI_Prop_ClawMachine_Topbar_01
-    4300006: SI_Prop_ClawMachine_Topbar_02
-    4300008: SI_Prop_ClawMachine_ArmTop
-    4300010: SI_Prop_ClawMachine_ArmLine
-    4300012: SI_Prop_ClawMachine_ClawBody
-    4300014: SI_Prop_ClawMachine_Claw_01
-    4300016: SI_Prop_ClawMachine_Claw_02
-    4300018: SI_Prop_ClawMachine_Claw_03
-    9500000: //RootNode
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: SI_Prop_ClawMachine_ArmLine
+  - first:
+      1: 100004
+    second: SI_Prop_ClawMachine_ArmTop
+  - first:
+      1: 100006
+    second: SI_Prop_ClawMachine_Claw_01
+  - first:
+      1: 100008
+    second: SI_Prop_ClawMachine_Claw_02
+  - first:
+      1: 100010
+    second: SI_Prop_ClawMachine_Claw_03
+  - first:
+      1: 100012
+    second: SI_Prop_ClawMachine_ClawBody
+  - first:
+      1: 100014
+    second: SI_Prop_ClawMachine_Topbar_01
+  - first:
+      1: 100016
+    second: SI_Prop_ClawMachine_Topbar_02
+  - first:
+      1: 100018
+    second: SI_Prop_ClawMachine_Toys
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: SI_Prop_ClawMachine_ArmLine
+  - first:
+      4: 400004
+    second: SI_Prop_ClawMachine_ArmTop
+  - first:
+      4: 400006
+    second: SI_Prop_ClawMachine_Claw_01
+  - first:
+      4: 400008
+    second: SI_Prop_ClawMachine_Claw_02
+  - first:
+      4: 400010
+    second: SI_Prop_ClawMachine_Claw_03
+  - first:
+      4: 400012
+    second: SI_Prop_ClawMachine_ClawBody
+  - first:
+      4: 400014
+    second: SI_Prop_ClawMachine_Topbar_01
+  - first:
+      4: 400016
+    second: SI_Prop_ClawMachine_Topbar_02
+  - first:
+      4: 400018
+    second: SI_Prop_ClawMachine_Toys
+  - first:
+      23: 2300000
+    second: //RootNode
+  - first:
+      23: 2300002
+    second: SI_Prop_ClawMachine_ArmLine
+  - first:
+      23: 2300004
+    second: SI_Prop_ClawMachine_ArmTop
+  - first:
+      23: 2300006
+    second: SI_Prop_ClawMachine_Claw_01
+  - first:
+      23: 2300008
+    second: SI_Prop_ClawMachine_Claw_02
+  - first:
+      23: 2300010
+    second: SI_Prop_ClawMachine_Claw_03
+  - first:
+      23: 2300012
+    second: SI_Prop_ClawMachine_ClawBody
+  - first:
+      23: 2300014
+    second: SI_Prop_ClawMachine_Topbar_01
+  - first:
+      23: 2300016
+    second: SI_Prop_ClawMachine_Topbar_02
+  - first:
+      23: 2300018
+    second: SI_Prop_ClawMachine_Toys
+  - first:
+      33: 3300000
+    second: //RootNode
+  - first:
+      33: 3300002
+    second: SI_Prop_ClawMachine_ArmLine
+  - first:
+      33: 3300004
+    second: SI_Prop_ClawMachine_ArmTop
+  - first:
+      33: 3300006
+    second: SI_Prop_ClawMachine_Claw_01
+  - first:
+      33: 3300008
+    second: SI_Prop_ClawMachine_Claw_02
+  - first:
+      33: 3300010
+    second: SI_Prop_ClawMachine_Claw_03
+  - first:
+      33: 3300012
+    second: SI_Prop_ClawMachine_ClawBody
+  - first:
+      33: 3300014
+    second: SI_Prop_ClawMachine_Topbar_01
+  - first:
+      33: 3300016
+    second: SI_Prop_ClawMachine_Topbar_02
+  - first:
+      33: 3300018
+    second: SI_Prop_ClawMachine_Toys
+  - first:
+      43: 4300000
+    second: SI_Prop_ClawMachine_01
+  - first:
+      43: 4300002
+    second: SI_Prop_ClawMachine_Toys
+  - first:
+      43: 4300004
+    second: SI_Prop_ClawMachine_Topbar_01
+  - first:
+      43: 4300006
+    second: SI_Prop_ClawMachine_Topbar_02
+  - first:
+      43: 4300008
+    second: SI_Prop_ClawMachine_ArmTop
+  - first:
+      43: 4300010
+    second: SI_Prop_ClawMachine_ArmLine
+  - first:
+      43: 4300012
+    second: SI_Prop_ClawMachine_ClawBody
+  - first:
+      43: 4300014
+    second: SI_Prop_ClawMachine_Claw_01
+  - first:
+      43: 4300016
+    second: SI_Prop_ClawMachine_Claw_02
+  - first:
+      43: 4300018
+    second: SI_Prop_ClawMachine_Claw_03
+  - first:
+      95: 9500000
+    second: //RootNode
+  externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 0
   meshes:
@@ -78,38 +191,71 @@ ModelImporter:
     globalScale: 100
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 15
-    splitTangentsAcrossUV: 0
     normalImportMode: 1
     tangentImportMode: 1
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 0
-  copyAvatar: 0
   humanDescription:
+    serializedVersion: 3
     human: []
     skeleton: []
-    armTwist: .5
-    foreArmTwist: .5
-    upperLegTwist: .5
-    legTwist: .5
-    armStretch: .0500000007
-    legStretch: .0500000007
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
     feetSpacing: 0
+    globalScale: 100
     rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
