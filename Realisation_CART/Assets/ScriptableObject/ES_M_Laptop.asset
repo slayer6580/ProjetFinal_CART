@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Laptop
   m_cost: 25
   m_size: 1
-  m_object: {fileID: 1224009154537782, guid: f2fa2992c94ba4549b5c5362226c3eef, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 6430f0c9efcd7ad46b9ac233b9c24670,
+    type: 3}

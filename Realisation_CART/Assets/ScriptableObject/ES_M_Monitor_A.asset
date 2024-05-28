@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Monitor
   m_cost: 25
   m_size: 1
-  m_object: {fileID: 1841562042176740, guid: 87a029b0d7bf9cb4dab02a59d5a34e58, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 46e73efd635ef174ea718cc3df87912c,
+    type: 3}

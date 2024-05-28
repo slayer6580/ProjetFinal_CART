@@ -15,4 +15,5 @@ MonoBehaviour:
   m_name: Boombox
   m_cost: 10
   m_size: 1
-  m_object: {fileID: 1622228565411384, guid: 32984ca9a5ca92948a80a442a15c707c, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 2a307f5590e9bc24d820c004e8afe485,
+    type: 3}

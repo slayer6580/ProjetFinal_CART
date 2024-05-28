@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ef3f0db4d29b44e86996c864e2bfa9, type: 3}
+  m_Name: GS_M_Creamroll1
+  m_EditorClassIdentifier: 
+  m_name: Cream roll raspberry
+  m_cost: 20
+  m_size: 1
+  m_object: {fileID: 1134162025243624237, guid: 194c049bf7b30be4d9a6534aca22cba8,
+    type: 3}
