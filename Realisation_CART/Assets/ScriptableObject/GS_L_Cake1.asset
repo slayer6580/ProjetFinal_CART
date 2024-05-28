@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_L_Cake1
   m_EditorClassIdentifier: 
   m_name: Chocolate Cake
-  m_cost: 60
+  m_cost: 45
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: 05f839d110acd9541bad03153577344f,
     type: 3}

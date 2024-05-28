@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_M_Keyboard_B
   m_EditorClassIdentifier: 
   m_name: Keyboard
-  m_cost: 25
+  m_cost: 55
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 6db30dda910c44d49ac899822dc480c3,
     type: 3}

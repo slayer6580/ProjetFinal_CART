@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_S_Donut2
   m_EditorClassIdentifier: 
   m_name: Strawberry Donut
-  m_cost: 10
+  m_cost: 7
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: c6a4c7dd741b33445807fd8d27ab9de6,
     type: 3}

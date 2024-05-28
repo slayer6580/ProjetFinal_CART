@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_CircularSaw
   m_EditorClassIdentifier: 
   m_name: Circular Saw
-  m_cost: 25
+  m_cost: 30
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 95ab7f8622259864395acb799066bc64,
     type: 3}

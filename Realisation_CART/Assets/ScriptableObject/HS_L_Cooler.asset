@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_L_Cooler
   m_EditorClassIdentifier: 
   m_name: Cooler
-  m_cost: 25
+  m_cost: 120
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: 26960f0de27d08248888a4955c50da37,
     type: 3}

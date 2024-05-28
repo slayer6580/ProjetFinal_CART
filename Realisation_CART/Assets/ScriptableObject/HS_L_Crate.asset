@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_L_Crate
   m_EditorClassIdentifier: 
   m_name: Crate
-  m_cost: 60
+  m_cost: 100
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: 43022331b5268cd4f8803f1c85fbc5a2,
     type: 3}

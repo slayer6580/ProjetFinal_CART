@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_L_Cake3
   m_EditorClassIdentifier: 
   m_name: Marble Cake
-  m_cost: 60
+  m_cost: 45
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: 2f63598e59cd4fa4598671ae4963527b,
     type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Wrench
   m_EditorClassIdentifier: 
   m_name: Wrench
-  m_cost: 10
+  m_cost: 17
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: de20216efe47c8b4bb8e07295c42e2df,
     type: 3}

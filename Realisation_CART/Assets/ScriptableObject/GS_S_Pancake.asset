@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_S_Pancake
   m_EditorClassIdentifier: 
   m_name: Pancake
-  m_cost: 10
+  m_cost: 8
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 2ebcdd5d94919a740878edb396d947ce,
     type: 3}

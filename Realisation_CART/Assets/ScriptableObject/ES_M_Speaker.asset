@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_M_Speaker
   m_EditorClassIdentifier: 
   m_name: Speaker
-  m_cost: 25
+  m_cost: 55
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 8747b22453ebf6245b0fdeccfd01d0df,
     type: 3}

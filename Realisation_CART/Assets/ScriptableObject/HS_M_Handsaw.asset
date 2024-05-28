@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_Handsaw
   m_EditorClassIdentifier: 
   m_name: Handsaw
-  m_cost: 10
+  m_cost: 60
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 3f526efc2ae1e7f45b0f105b753f2cd3,
     type: 3}

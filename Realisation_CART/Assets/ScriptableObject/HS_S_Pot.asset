@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Pot
   m_EditorClassIdentifier: 
   m_name: Pot
-  m_cost: 60
+  m_cost: 15
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 25c0c6a9eb8402f41940dba1b65f88ef,
     type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Clock
   m_EditorClassIdentifier: 
   m_name: Clock
-  m_cost: 10
+  m_cost: 18
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: e4bd552144c91c94c9d8e529b5e41a1f,
     type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_DuffleBag
   m_EditorClassIdentifier: 
   m_name: DuffleBag
-  m_cost: 60
+  m_cost: 50
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 05b16d7378aee20469749c1f57a2c3a8,
     type: 3}

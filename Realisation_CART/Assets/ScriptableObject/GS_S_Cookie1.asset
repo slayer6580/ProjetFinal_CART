@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_S_Cookie1
   m_EditorClassIdentifier: 
   m_name: Chocolate chips cookie
-  m_cost: 10
+  m_cost: 8
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 703e1b2250d3fe24899e2b42141da2a9,
     type: 3}

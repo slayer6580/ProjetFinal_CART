@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_KnifeButcher
   m_EditorClassIdentifier: 
   m_name: Butcher Knife
-  m_cost: 10
+  m_cost: 18
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: d57bf2f8120adf44e9e0d013b1ee20bc,
     type: 3}

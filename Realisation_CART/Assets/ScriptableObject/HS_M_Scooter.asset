@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_Scooter
   m_EditorClassIdentifier: 
   m_name: Scooter
-  m_cost: 25
+  m_cost: 70
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 9f6fcc9228106ae4e868f93870146ced,
     type: 3}

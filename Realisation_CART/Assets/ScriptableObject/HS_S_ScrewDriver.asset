@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_ScrewDriver
   m_EditorClassIdentifier: 
   m_name: ScrewDriver
-  m_cost: 10
+  m_cost: 16
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: c9c4e7529433e59409e0ba6181df8e9f,
     type: 3}

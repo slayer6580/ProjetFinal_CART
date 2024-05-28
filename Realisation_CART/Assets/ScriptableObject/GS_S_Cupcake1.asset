@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_S_Cupcake1
   m_EditorClassIdentifier: 
   m_name: Vanilla Cupcake
-  m_cost: 10
+  m_cost: 11
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: cfa504df7e8118b41b23e574afe4f517,
     type: 3}

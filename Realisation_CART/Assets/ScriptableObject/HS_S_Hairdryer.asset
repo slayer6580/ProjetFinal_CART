@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Hairdryer
   m_EditorClassIdentifier: 
   m_name: Hair Dryer
-  m_cost: 25
+  m_cost: 27
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: b5b4ed29c1f45344ea38bc946a9299b2,
     type: 3}

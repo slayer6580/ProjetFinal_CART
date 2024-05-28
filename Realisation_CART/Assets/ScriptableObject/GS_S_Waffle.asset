@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_S_Waffle
   m_EditorClassIdentifier: 
   m_name: Waffles
-  m_cost: 10
+  m_cost: 11
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: df655c9d4a58d5e4cbab28b2f1a3181d,
     type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_L_TV
   m_EditorClassIdentifier: 
   m_name: TV
-  m_cost: 60
+  m_cost: 200
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: 14c46c84275bd8c45b57be8bd6d324d2,
     type: 3}

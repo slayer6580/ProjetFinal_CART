@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_M_Saxophone
   m_EditorClassIdentifier: 
   m_name: Saxophone
-  m_cost: 25
+  m_cost: 80
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 3106f484b9d3f544b8c3599dd39a978f,
     type: 3}

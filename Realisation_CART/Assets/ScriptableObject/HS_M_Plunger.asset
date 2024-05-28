@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_Plunger
   m_EditorClassIdentifier: 
   m_name: Plunger
-  m_cost: 25
+  m_cost: 40
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 6fcb347cf9345654ca1eeec0a5059f24,
     type: 3}

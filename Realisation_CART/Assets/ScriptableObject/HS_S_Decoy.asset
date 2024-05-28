@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Decoy
   m_EditorClassIdentifier: 
   m_name: Decoy
-  m_cost: 10
+  m_cost: 17
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: a2c3c195c2ac00649aab172eba45e4c9,
     type: 3}
