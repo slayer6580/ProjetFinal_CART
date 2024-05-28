@@ -64194,10 +64194,10 @@ MonoBehaviour:
   <LocalVelocity>k__BackingField: {x: 0, y: 0, z: 0}
   <IsClient>k__BackingField: 0
   <Acceleration>k__BackingField: 25
-  <MaxSpeed>k__BackingField: 11
+  <MaxSpeed>k__BackingField: 13
   <MaxBackwardSpeed>k__BackingField: 5
   <IdleRotatingSpeed>k__BackingField: 135
-  <MovingRotatingSpeed>k__BackingField: 40
+  <MovingRotatingSpeed>k__BackingField: 44
   <TowerPushForceWhenTurning>k__BackingField: 10
   <TurningDrag>k__BackingField: 2
   <TurningDragRelativeToJoystick>k__BackingField:
@@ -64226,7 +64226,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   <MinimumSpeedToAllowDrift>k__BackingField: 3
   <DriftingDrag>k__BackingField: 1
-  <DriftingRotatingSpeed>k__BackingField: 55
+  <DriftingRotatingSpeed>k__BackingField: 58
   <AddedRotatingSpeedWhenBreaking>k__BackingField: 30
   <DriftingAcceleration>k__BackingField: 50
   <TowerPushForceWhenDrifting>k__BackingField: 2.5

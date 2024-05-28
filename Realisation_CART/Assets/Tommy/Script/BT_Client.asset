@@ -537,6 +537,60 @@ MonoBehaviour:
   - {fileID: 3326102372483472499}
   - {fileID: -1932074002190223681}
   - {fileID: 4037160766164362857}
+--- !u!114 &-5537151101605958155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f6727e0b3c24c4896cd4fd248c1fb8, type: 3}
+  m_Name: RandomizeStats
+  m_EditorClassIdentifier: 
+  m_state: 0
+  m_started: 0
+  m_guid: 0e97b1536bcf7e1419c859bbc57b1953
+  m_position: {x: -99, y: 12}
+  m_blackboard:
+    m_wantMostActiveShelves: 0
+    m_wantClosestPath: 0
+    m_sightRange: 0
+    m_sightHalfAngle: 0
+    m_aggressiveness: 0
+    m_tacticalAttack: 0
+    m_pursuitTenacity: 0
+    m_name: 
+    m_thisClient: {fileID: 0}
+    m_cartStateMachine: {fileID: 0}
+    m_navAgent: {fileID: 0}
+    m_chosenPathListCopy: []
+    m_possiblePathScript: {fileID: 0}
+    m_thisTower: {fileID: 0}
+    m_cashRegister: {fileID: 0}
+    m_path: []
+    m_pathDebugBox: []
+    m_target: {x: 0, y: 0, z: 0}
+    m_targetAngle: 0
+    m_currentPursuitStartTime: 0
+    m_currentSpeed: 0
+    m_isGameStarted: 0
+    m_stuckAtTime: 0
+    m_timeStuck: 0
+    m_lastAttackTimer: 0
+    m_clientInSight: []
+    m_isAttacking: 0
+    m_chosenTarget: 0
+  m_description: 
+  m_minActive: 2
+  m_maxActive: 8
+  m_minClosest: 2
+  m_maxClosest: 8
+  m_minAggressive: 10
+  m_maxAggressive: 80
+  m_minTacticalAtk: 2
+  m_maxTacticalAtk: 8
 --- !u!114 &-5446233131730551066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,7 +1288,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 342b55bc4d507c249af7c3870267424f
-  m_position: {x: -42.99985, y: 11.88002}
+  m_position: {x: 61, y: 12}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_wantClosestPath: 0
@@ -1316,6 +1370,7 @@ MonoBehaviour:
   - {fileID: 2725110216308560433}
   - {fileID: -623155257482467785}
   - {fileID: 8681500071723160122}
+  - {fileID: -5537151101605958155}
   - {fileID: -217002694569445728}
   - {fileID: 4965471443556820477}
 --- !u!114 &-98252233047386408
@@ -1447,6 +1502,7 @@ MonoBehaviour:
   - {fileID: -7623184281317339678}
   - {fileID: 2918553551819896199}
   - {fileID: -623155257482467785}
+  - {fileID: -5537151101605958155}
   m_blackboard:
     m_wantMostActiveShelves: 5
     m_wantClosestPath: 5
@@ -2100,7 +2156,7 @@ MonoBehaviour:
   m_state: 0
   m_started: 0
   m_guid: 16ec365403b0f394e8574c4a8f835b9e
-  m_position: {x: 198.0001, y: 12.000015}
+  m_position: {x: 238, y: 12}
   m_blackboard:
     m_wantMostActiveShelves: 0
     m_wantClosestPath: 0
