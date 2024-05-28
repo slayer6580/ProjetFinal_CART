@@ -1365,7 +1365,7 @@ namespace Spawner
                 if (m_isMale)
                 {
                     //Debug.Log("Human male GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
-                    if (GetCurrentBodyIndex() > m_humanMaleFullBodyTransforms.Count) return;
+                    if (GetCurrentBodyIndex() >= m_humanMaleFullBodyTransforms.Count || GetCurrentBodyIndex() < 0) return;
                     Transform humanMaleBody = m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()];
                     if (humanMaleBody != null) return;
                     if (humanMaleBody.GetComponent<SkinnedMeshRenderer>() == null) return;
