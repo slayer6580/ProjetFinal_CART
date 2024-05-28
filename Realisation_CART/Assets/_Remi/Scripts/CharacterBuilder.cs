@@ -1366,17 +1366,23 @@ namespace Spawner
                 {
                     //Debug.Log("Human male GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
                     if (GetCurrentBodyIndex() > m_humanMaleFullBodyTransforms.Count) return;
-                    if (m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
-                    m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material }; 
-                    CheckMatIntegrity(m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
+                    Transform humanMaleBody = m_humanMaleFullBodyTransforms[GetCurrentBodyIndex()];
+                    if (humanMaleBody != null) return;
+                    if (humanMaleBody.GetComponent<SkinnedMeshRenderer>() == null) return;
+                    humanMaleBody.GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material }; 
+                    if (humanMaleBody.GetComponent<SkinnedMeshRenderer>().materials == null) Debug.LogError("Materials is null");
+                    CheckMatIntegrity(humanMaleBody.GetComponent<SkinnedMeshRenderer>().materials);
                 }
                 else
                 {
                     //Debug.Log("Human female GetCurrentBodyIndex(): " + GetCurrentBodyIndex());
                     if (GetCurrentBodyIndex() > m_humanFemaleFullBodyTransforms.Count) return;
-                    if (m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>() == null) return;
-                    m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
-                    CheckMatIntegrity(m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()].GetComponent<SkinnedMeshRenderer>().materials);
+                    Transform humanFemaleFullBody = m_humanFemaleFullBodyTransforms[GetCurrentBodyIndex()];
+                    if (humanFemaleFullBody != null) return;
+                    if (humanFemaleFullBody.GetComponent<SkinnedMeshRenderer>() == null) return;
+                    humanFemaleFullBody.GetComponent<SkinnedMeshRenderer>().materials = new Material[] { material };
+                    if (humanFemaleFullBody.GetComponent<SkinnedMeshRenderer>().materials == null) Debug.LogError("Materials is null");
+                    CheckMatIntegrity(humanFemaleFullBody.GetComponent<SkinnedMeshRenderer>().materials);
                 }
             }
             else if (m_bodyPartType == BodyPartType.HumanInCostume)
@@ -1467,7 +1473,7 @@ namespace Spawner
 
         internal void RandomizeHairMaterial()
         {
-            //Debug.Log("Randomize Hair Material");
+            Debug.Log("Randomize Hair Material");
             int randomMaterial = UnityEngine.Random.Range(0, 4);
             Material material = null;
 
@@ -1489,6 +1495,7 @@ namespace Spawner
             }
 
             if (material == null) Debug.LogError("Material is null");
+
 
             //Debug.Log("Material is: " + material.name);
 

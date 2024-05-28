@@ -27,6 +27,7 @@ namespace Manager
         [field: SerializeField] public EMusic LevelOneMusic { get; private set; } = EMusic.Cart_Song_01;
         [field: SerializeField] public EMusic LevelTwoMusic { get; private set; } = EMusic.Cart_Song_02;
         [field: SerializeField] public EMusic LevelThreeMusic { get; private set; } = EMusic.ThemeMusic;
+        [field: SerializeField] public EMusic LevelFourMusic { get; private set; } = EMusic.ThemeMusic;
         [field: SerializeField] public EMusic TutorialMusic { get; private set; } = EMusic.WaitingRoomMusic;
 
         [SerializeField] private int m_numberOfAudioBox = 10;
@@ -151,10 +152,7 @@ namespace Manager
             else if (modif == EAudioModification.MusicVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
-                //Debug.Log("currentVolume: " + currentVolume);
-                //Debug.Log("value: " + value);
                 MusicAudioSource.volume = Mathf.Min(value, currentVolume);
-                //Debug.Log("MusicAudioSource.volume: " + MusicAudioSource.volume);
             }
             else if (modif == EAudioModification.MasterVolume)
             {
@@ -314,6 +312,12 @@ namespace Manager
             {
                 Debug.Log("Playing LevelThreeMusic");
                 index = PlayMusic(_AudioManager.LevelThreeMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
+            }
+            else if (sceneName == "Level04")
+            {
+                Debug.Log("Playing LevelFourMusic");
+                index = PlayMusic(_AudioManager.LevelFourMusic);
                 ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
 
