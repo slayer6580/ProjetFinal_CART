@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_Rug
   m_EditorClassIdentifier: 
   m_name: Rug
-  m_cost: 25
+  m_cost: 45
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 0e9a9f5a401031e4680d12a8b8156bcf,
     type: 3}

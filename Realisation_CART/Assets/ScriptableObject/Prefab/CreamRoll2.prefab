@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bakery_CreamRoll_02
       objectReference: {fileID: 0}
+    - target: {fileID: 184588, guid: ce52012961e7a6248bce014891f37e8b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 431492, guid: ce52012961e7a6248bce014891f37e8b, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.4140697

@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Item_Flask_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1586084045050458, guid: a660123e83c055b47bd3c9e30da61055, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4829644130794704, guid: a660123e83c055b47bd3c9e30da61055, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.3841505

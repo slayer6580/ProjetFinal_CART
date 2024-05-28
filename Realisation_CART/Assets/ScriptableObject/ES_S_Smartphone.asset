@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ES_S_Smartphone
   m_EditorClassIdentifier: 
   m_name: Smartphone
-  m_cost: 25
+  m_cost: 50
   m_size: 1
-  m_object: {fileID: 1836399194532270, guid: 55df446729213374f90a9f55bca8ec18, type: 3}
+  m_object: {fileID: 9000504276230933140, guid: 7f354a296c343b74eb60c4c3a5281079,
+    type: 3}

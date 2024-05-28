@@ -80,6 +80,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Sport_Skateboard_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1774616496579340, guid: bfe143bf4bed4f74abeae83b700709ad, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775098851453906, guid: bfe143bf4bed4f74abeae83b700709ad, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942072563262006, guid: bfe143bf4bed4f74abeae83b700709ad, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1942998101639796, guid: bfe143bf4bed4f74abeae83b700709ad, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995978279763796, guid: bfe143bf4bed4f74abeae83b700709ad, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4224202248346074, guid: bfe143bf4bed4f74abeae83b700709ad, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.0867295

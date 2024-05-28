@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bakery_BlueberryCream
       objectReference: {fileID: 0}
+    - target: {fileID: 136278, guid: ee63a12ff79db15439ec612c1293f4a2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 461706, guid: ee63a12ff79db15439ec612c1293f4a2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2995875

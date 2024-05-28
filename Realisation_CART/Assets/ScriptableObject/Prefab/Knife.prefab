@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Kitchen_Knife_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1247418644084676, guid: 13740546050bd2440b3361465b667991, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4552788070787936, guid: 13740546050bd2440b3361465b667991, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.7513

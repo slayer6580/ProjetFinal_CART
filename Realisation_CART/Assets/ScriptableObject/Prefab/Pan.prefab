@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Kitchen_Pan_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1566959593490572, guid: 5907ff664a0c6ec4aaae4ff7c48f8f45, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4164219155831538, guid: 5907ff664a0c6ec4aaae4ff7c48f8f45, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5224152

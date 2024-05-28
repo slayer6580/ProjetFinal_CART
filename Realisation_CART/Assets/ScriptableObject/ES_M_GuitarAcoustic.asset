@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ES_M_GuitarAcoustic
   m_EditorClassIdentifier: 
   m_name: Acoustic Guitar
-  m_cost: 25
+  m_cost: 65
   m_size: 1
-  m_object: {fileID: 1690120943321838, guid: a09ef4030545b654baf6cb51be368032, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 8b7cb5266482f9c4ba7de125d2b7c33f,
+    type: 3}

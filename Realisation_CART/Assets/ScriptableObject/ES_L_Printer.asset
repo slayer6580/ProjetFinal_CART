@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_L_Printer
   m_EditorClassIdentifier: 
   m_name: Printer
-  m_cost: 25
+  m_cost: 180
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: c3e0579877b967a479755629d73e48d4,
     type: 3}

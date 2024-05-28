@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Item_SunGlasses_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1921064714958946, guid: c3361d82170f8fb429ef308387e43dd1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4149660261675258, guid: c3361d82170f8fb429ef308387e43dd1, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.127502

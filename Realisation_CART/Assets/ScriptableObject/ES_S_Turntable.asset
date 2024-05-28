@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ES_S_Turntable
   m_EditorClassIdentifier: 
   m_name: Turntable
-  m_cost: 10
+  m_cost: 45
   m_size: 0
-  m_object: {fileID: 1444730301179578, guid: 5f9edf7f56fdae4408e3adfdd1d8e870, type: 3}
+  m_object: {fileID: 9000504276230933140, guid: fb8ce1f6cb1f8174bb00fe54dd7c4121,
+    type: 3}

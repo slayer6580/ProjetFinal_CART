@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ef3f0db4d29b44e86996c864e2bfa9, type: 3}
   m_Name: ES_S_Robot
   m_EditorClassIdentifier: 
-  m_name: Wirecutter
-  m_cost: 10
+  m_name: Robot
+  m_cost: 40
   m_size: 0
-  m_object: {fileID: 1092783430733304, guid: 55a327f0f406cfc4696a41c532200292, type: 3}
+  m_object: {fileID: 9000504276230933140, guid: 0b35186780d29cb4a85ddb10d4a6b7ac,
+    type: 3}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GS_S_Toothpaste
   m_EditorClassIdentifier: 
   m_name: Toothpaste
-  m_cost: 10
+  m_cost: 11
   m_size: 0
   m_object: {fileID: 1313563210962000, guid: ee21d0d5ed254fe4f8cd8e81b5a7edba, type: 3}

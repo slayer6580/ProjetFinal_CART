@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_FootballHelmet
   m_EditorClassIdentifier: 
   m_name: Football Helmet
-  m_cost: 10
+  m_cost: 26
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: b5a7c8cf3b6e0bb46abaa9a6f2cd4a45,
     type: 3}

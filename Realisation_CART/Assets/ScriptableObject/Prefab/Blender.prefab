@@ -80,6 +80,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Blender_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1071258367217308, guid: 64bb2734a62974b45ae4c97e55157187, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244200131943442, guid: 64bb2734a62974b45ae4c97e55157187, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1992772557782542, guid: 64bb2734a62974b45ae4c97e55157187, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4951210426350692, guid: 64bb2734a62974b45ae4c97e55157187, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.4371343

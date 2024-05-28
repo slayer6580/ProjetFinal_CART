@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GS_S_Product_C
   m_EditorClassIdentifier: 
   m_name: Food box
-  m_cost: 10
+  m_cost: 8
   m_size: 0
   m_object: {fileID: 1262468518852934, guid: 6049f02539b894b4eb6749b8a997f37f, type: 3}

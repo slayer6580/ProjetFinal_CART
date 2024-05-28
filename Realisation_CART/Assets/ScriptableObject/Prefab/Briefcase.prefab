@@ -80,6 +80,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Item_Briefcase_01
       objectReference: {fileID: 0}
+    - target: {fileID: 116546, guid: b29a89688caf38949ac61d241124b820, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 160186, guid: b29a89688caf38949ac61d241124b820, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 161076, guid: b29a89688caf38949ac61d241124b820, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 490360, guid: b29a89688caf38949ac61d241124b820, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.9161923

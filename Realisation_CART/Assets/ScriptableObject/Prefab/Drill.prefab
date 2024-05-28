@@ -76,9 +76,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8826783567124161175}
     m_Modifications:
+    - target: {fileID: 1223983312666676, guid: 5a5fd050065361048a83a1ecbdcb6822, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1279791024063292, guid: 5a5fd050065361048a83a1ecbdcb6822, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322777460229970, guid: 5a5fd050065361048a83a1ecbdcb6822, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586996270880088, guid: 5a5fd050065361048a83a1ecbdcb6822, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1697759386745872, guid: 5a5fd050065361048a83a1ecbdcb6822, type: 3}
       propertyPath: m_Name
       value: SM_Tool_Drill_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697759386745872, guid: 5a5fd050065361048a83a1ecbdcb6822, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4107150578162042, guid: 5a5fd050065361048a83a1ecbdcb6822, type: 3}
       propertyPath: m_LocalScale.x

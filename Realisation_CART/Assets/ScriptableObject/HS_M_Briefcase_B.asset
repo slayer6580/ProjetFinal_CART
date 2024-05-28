@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_Briefcase_B
   m_EditorClassIdentifier: 
   m_name: Case
-  m_cost: 25
+  m_cost: 40
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 24aac53241702b44a83cd1879c978072,
     type: 3}

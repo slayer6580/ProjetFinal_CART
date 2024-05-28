@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ES_M_Monitor_B
   m_EditorClassIdentifier: 
   m_name: Monitor
-  m_cost: 25
+  m_cost: 90
   m_size: 1
-  m_object: {fileID: 1320391203945816, guid: 5fbb796f5eb26c248ba94bee5321cd1b, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 3b39ec3b9d57fc3428255eda084c856a,
+    type: 3}

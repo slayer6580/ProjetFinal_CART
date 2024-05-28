@@ -76,9 +76,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 39218039315098345}
     m_Modifications:
+    - target: {fileID: 1002689223565982, guid: d8a2027ccede94341ad284143617f829, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1443798412524764, guid: d8a2027ccede94341ad284143617f829, type: 3}
       propertyPath: m_Name
       value: SM_Tool_Buffer_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443798412524764, guid: d8a2027ccede94341ad284143617f829, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767642720200058, guid: d8a2027ccede94341ad284143617f829, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778889797284112, guid: d8a2027ccede94341ad284143617f829, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4446645070265754, guid: d8a2027ccede94341ad284143617f829, type: 3}
       propertyPath: m_LocalScale.x

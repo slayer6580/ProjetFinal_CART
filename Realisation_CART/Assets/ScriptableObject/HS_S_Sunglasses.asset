@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Sunglasses
   m_EditorClassIdentifier: 
   m_name: Sunglasses
-  m_cost: 10
+  m_cost: 17
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 628b1df1eb8be15448162bc83252700a,
     type: 3}

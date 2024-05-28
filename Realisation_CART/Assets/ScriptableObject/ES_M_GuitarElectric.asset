@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ES_M_GuitarElectric
   m_EditorClassIdentifier: 
   m_name: Electric Guitar
-  m_cost: 25
+  m_cost: 65
   m_size: 1
-  m_object: {fileID: 1973175269348534, guid: 7febb619367642c4e8678f1b2dde9443, type: 3}
+  m_object: {fileID: 1134162025243624237, guid: 4ace24ddc9b6c7a42a2ce0818d364ea3,
+    type: 3}

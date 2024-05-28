@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Hunting_Decoy_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1025790861183046, guid: b609c6ee7d22af24b8a8da7124037e69, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4441211232154788, guid: b609c6ee7d22af24b8a8da7124037e69, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.0796309

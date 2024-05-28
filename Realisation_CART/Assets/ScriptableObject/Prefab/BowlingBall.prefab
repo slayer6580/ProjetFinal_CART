@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Bowling_Ball_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1684666484987002, guid: 5823a7871a03a2d409f4deeb2a476cf5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4667476121487102, guid: 5823a7871a03a2d409f4deeb2a476cf5, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.7589

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_FishMount
   m_EditorClassIdentifier: 
   m_name: Fish
-  m_cost: 10
+  m_cost: 19
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 06e7f709bbf6e30408478e38e3958078,
     type: 3}

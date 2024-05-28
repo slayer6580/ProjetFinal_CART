@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Backpack
   m_EditorClassIdentifier: 
   m_name: Backpack
-  m_cost: 25
+  m_cost: 30
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 54c723d301db5bf4692a23ca92f816cc,
     type: 3}

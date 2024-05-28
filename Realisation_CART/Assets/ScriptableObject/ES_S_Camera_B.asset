@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ES_S_Camera_B
   m_EditorClassIdentifier: 
   m_name: Camera
-  m_cost: 10
+  m_cost: 45
   m_size: 0
-  m_object: {fileID: 1527143629638400, guid: 42bbf734750459548ac9c7e0e723fc31, type: 3}
+  m_object: {fileID: 9000504276230933140, guid: 5ea971a659e017f4fa048abb69766a6e,
+    type: 3}

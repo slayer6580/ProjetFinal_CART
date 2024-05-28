@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Fish_Raw
       objectReference: {fileID: 0}
+    - target: {fileID: 114134, guid: 5ce2c139145ea9449b567e607afa128f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 459060, guid: 5ce2c139145ea9449b567e607afa128f, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.8019

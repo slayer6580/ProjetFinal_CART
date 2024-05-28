@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_M_Plant_B
   m_EditorClassIdentifier: 
   m_name: Plant
-  m_cost: 25
+  m_cost: 40
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 41425e4626105634c905e90c01e0c5af,
     type: 3}

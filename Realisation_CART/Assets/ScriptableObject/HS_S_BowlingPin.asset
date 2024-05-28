@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_BowlingPin
   m_EditorClassIdentifier: 
   m_name: Bowling Pin
-  m_cost: 25
+  m_cost: 20
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 8cd6709af2089044c8246cb460c71c12,
     type: 3}

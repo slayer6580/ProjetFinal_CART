@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Tool_Wrench_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1432678126960132, guid: a8993f89cec527c48b5d6babcc73af45, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4254964341871390, guid: a8993f89cec527c48b5d6babcc73af45, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2144432
