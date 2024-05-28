@@ -10,6 +10,7 @@ namespace DiscountDelirium
 
         private void Awake()
         {
+            Cursor.visible = true;
             m_mainInputs = new TutorialInputs();
             m_manager = GetComponent<TutorialManager>();
 

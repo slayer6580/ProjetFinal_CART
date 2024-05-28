@@ -1,57 +1,43 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 
 namespace DiscountDelirium
 {
     public class GamepadDetection : MonoBehaviour
     {
-        [Header("Cursor")]
-        [SerializeField] private GameObject m_cursor;
-        [SerializeField] private bool m_isActive;
+        [Header("Cursor references")]
+        [SerializeField] private FakeCursor m_cursor;
+        [SerializeField] private Image m_image;
 
         private void Awake()
         {
-            InputSystem.onActionChange += ChangeDevice;
+            Cursor.visible = true;
+        }
+        void Start() 
+        {
+            MainMenuInputHandler.MouseSelected += ShowMouse;
+            MainMenuInputHandler.ControllerSelected += ShowVirtualCursor;
         }
 
-        public void ActivateCursor(bool state) 
+        private void ShowMouse() 
         {
-            m_isActive = state;
+            if (m_cursor != null && m_image != null) 
+            {
+                m_cursor.enabled = false;
+                m_image.enabled = false;
+            }
+            Cursor.visible = true;
         }
 
-        private void ChangeDevice(object arg1, InputActionChange inputActionChange)
+        private void ShowVirtualCursor() 
         {
-            if (!m_isActive) 
+            if (m_cursor != null && m_image != null)
             {
-                m_cursor.SetActive(false);
-                return;
+                m_cursor.enabled = true;
+                m_image.enabled = true;
             }
-
-            if (inputActionChange == InputActionChange.ActionPerformed && arg1 is InputAction) 
-            {
-                InputAction inputAction = arg1 as InputAction;
-                if (inputAction.activeControl.device.displayName == "VirtualMouse") 
-                {
-                    // Ignore virtual mouse
-                    return;
-                }
-                if (inputAction.activeControl.device is Gamepad) 
-                {
-                    if (m_cursor != null)
-                    {
-                        m_cursor.SetActive(true);
-                        Cursor.visible = false;
-                    }
-                }
-                else 
-                {
-                    if (m_cursor != null) 
-                    {
-                        m_cursor.SetActive(false);
-                        Cursor.visible = true;
-                    }
-                }
-            }
+            Cursor.visible = false;
         }
 
     }
