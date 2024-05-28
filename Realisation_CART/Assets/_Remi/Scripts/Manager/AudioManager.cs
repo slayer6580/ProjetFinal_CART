@@ -228,9 +228,6 @@ namespace Manager
             if (audiobox == null)
                 return -1;
 
-            //Debug.Log("Playing sound: " + sound + " at element : " + (int)sound + " max elements: " + m_soundsPool.Length);
-
-            audiobox.transform.localPosition = Vector3.zero;
             audiobox.transform.SetParent(parent, false);
             audiobox.transform.localPosition = Vector3.zero;
 
