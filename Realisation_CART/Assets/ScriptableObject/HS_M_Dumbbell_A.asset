@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_Dumbbell_A
   m_EditorClassIdentifier: 
   m_name: Dumbbell
-  m_cost: 25
+  m_cost: 55
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: be866313ddc850547ace5723dbf73ab6,
     type: 3}

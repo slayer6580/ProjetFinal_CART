@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 2842815428186687512}
   - component: {fileID: 2813523252356341356}
   - component: {fileID: 2823698656463001564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Laptop_Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 2842356264784003704}
   - component: {fileID: 2813279044081350534}
   - component: {fileID: 2823505910057286020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Laptop_03_Screen_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

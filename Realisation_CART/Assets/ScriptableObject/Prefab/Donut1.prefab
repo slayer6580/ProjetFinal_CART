@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bakery_Donut_01
       objectReference: {fileID: 0}
+    - target: {fileID: 179404, guid: 9bf4884fdc9f19048885b359049a4275, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 443992, guid: 9bf4884fdc9f19048885b359049a4275, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2286

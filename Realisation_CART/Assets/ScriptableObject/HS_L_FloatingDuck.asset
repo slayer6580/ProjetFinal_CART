@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_L_FloatingDuck
   m_EditorClassIdentifier: 
   m_name: Inflatable Duck
-  m_cost: 10
+  m_cost: 95
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: 018e9dc052573a54f8e4fb61328f1fe4,
     type: 3}

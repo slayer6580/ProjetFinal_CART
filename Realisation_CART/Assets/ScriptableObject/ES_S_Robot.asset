@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_S_Robot
   m_EditorClassIdentifier: 
   m_name: Robot
-  m_cost: 10
+  m_cost: 40
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 0b35186780d29cb4a85ddb10d4a6b7ac,
     type: 3}

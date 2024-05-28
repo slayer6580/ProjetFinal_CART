@@ -5126,6 +5126,16 @@ PrefabInstance:
       propertyPath: m_leaderboardManager
       value: 
       objectReference: {fileID: 1995388103}
+    - target: {fileID: 3333672717264370528, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 353399318}
+    - target: {fileID: 3333672717264370528, guid: b5c3b0093e9391d4d82e827de1611a45,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DeselectAllButtons
+      objectReference: {fileID: 0}
     - target: {fileID: 4239383544512614906, guid: b5c3b0093e9391d4d82e827de1611a45,
         type: 3}
       propertyPath: m_IsActive

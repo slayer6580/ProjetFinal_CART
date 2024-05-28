@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7782931232704142381}
   - component: {fileID: 7816370906523840291}
   - component: {fileID: 7807050517872651125}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Mouse_Box_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}

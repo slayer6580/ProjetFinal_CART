@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_ToyTrain
   m_EditorClassIdentifier: 
   m_name: Toy Train
-  m_cost: 10
+  m_cost: 22
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 5ac72ceb89e5290428c5d35091cb0e8e,
     type: 3}

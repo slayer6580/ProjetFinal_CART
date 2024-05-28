@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GS_S_Milk_A
   m_EditorClassIdentifier: 
   m_name: Milk
-  m_cost: 10
+  m_cost: 13
   m_size: 0
   m_object: {fileID: 1157446235144764, guid: 1e8853c2fa9fcc74f9f268b2167360de, type: 3}

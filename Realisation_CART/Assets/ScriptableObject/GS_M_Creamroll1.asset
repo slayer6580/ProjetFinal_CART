@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GS_M_Creamroll1
   m_EditorClassIdentifier: 
   m_name: Cream roll raspberry
-  m_cost: 20
+  m_cost: 30
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 194c049bf7b30be4d9a6534aca22cba8,
     type: 3}

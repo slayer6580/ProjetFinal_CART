@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_S_VrHeadset
   m_EditorClassIdentifier: 
   m_name: VR Headset
-  m_cost: 10
+  m_cost: 60
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 8fe4966445dd2a64aa6f362b950a74e6,
     type: 3}

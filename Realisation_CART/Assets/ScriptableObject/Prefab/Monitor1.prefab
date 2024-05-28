@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 4641631312763851324}
   - component: {fileID: 4612275108951046322}
   - component: {fileID: 4623196894870890592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Monitor_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

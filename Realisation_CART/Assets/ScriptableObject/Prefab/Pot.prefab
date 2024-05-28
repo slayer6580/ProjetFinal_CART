@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Pot_03
       objectReference: {fileID: 0}
+    - target: {fileID: 1425846451188526, guid: c44ac5e0418b57646bf03b04b0c93211, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4735980518970812, guid: c44ac5e0418b57646bf03b04b0c93211, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5834

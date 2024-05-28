@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_GolfBag
   m_EditorClassIdentifier: 
   m_name: Golf Bag
-  m_cost: 25
+  m_cost: 70
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 7f6c78bce276d294c95b41398249a895,
     type: 3}

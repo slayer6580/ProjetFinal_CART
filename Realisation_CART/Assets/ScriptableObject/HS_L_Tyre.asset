@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_L_Tyre
   m_EditorClassIdentifier: 
   m_name: Tyre
-  m_cost: 60
+  m_cost: 110
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: 530faeff5898a0f46bfeddd32aba5f33,
     type: 3}

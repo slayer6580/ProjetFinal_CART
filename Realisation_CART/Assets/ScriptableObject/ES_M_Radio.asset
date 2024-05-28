@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_M_Radio
   m_EditorClassIdentifier: 
   m_name: Radio
-  m_cost: 25
+  m_cost: 75
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: ad6dacab3cbfb194184b7d9b39a6966c,
     type: 3}

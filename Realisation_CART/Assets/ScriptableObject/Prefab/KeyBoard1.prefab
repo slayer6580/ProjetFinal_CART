@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 60519576031999967}
   - component: {fileID: 49314769936592823}
   - component: {fileID: 39200111048898887}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Keyboard_Box_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

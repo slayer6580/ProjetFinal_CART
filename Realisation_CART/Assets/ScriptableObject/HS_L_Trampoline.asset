@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_L_Trampoline
   m_EditorClassIdentifier: 
   m_name: Trampoline
-  m_cost: 60
+  m_cost: 140
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: e6b7b6ab235943a4faaa14a2392b1577,
     type: 3}

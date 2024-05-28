@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Item_Binoculars_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1910211974120218, guid: ca5203123c78c734e841eed8465fcd8b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4592793101873218, guid: ca5203123c78c734e841eed8465fcd8b, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.4231

@@ -80,6 +80,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Floor_Polisher_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1101560790626708, guid: 483f817c20f7e71419f6a209e44fc186, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165052959834832, guid: 483f817c20f7e71419f6a209e44fc186, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281054130941198, guid: 483f817c20f7e71419f6a209e44fc186, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407789158715518, guid: 483f817c20f7e71419f6a209e44fc186, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4967982582047090, guid: 483f817c20f7e71419f6a209e44fc186, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2698363

@@ -51,9 +51,9 @@ MonoBehaviour:
     type: 3}
   m_boxWithHingePrefab: {fileID: 3665573428290585098, guid: 13db18f67fbd5984a89d6e7b2591c97e,
     type: 3}
-  m_springForce: 300
-  m_springForceReduction: 25
-  m_springForceMinimum: 200
+  m_springForce: 200
+  m_springForceReduction: 20
+  m_springForceMinimum: 100
   m_minimumForceAppliedToMove: 1.2
   m_loseItemStats:
   - {x: 0, y: 0}

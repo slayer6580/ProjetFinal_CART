@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Item_Wirecutter_01
       objectReference: {fileID: 0}
+    - target: {fileID: 174198, guid: 3b1b2e2807805d84989b41a6908f713b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 486196, guid: 3b1b2e2807805d84989b41a6908f713b, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.0528657

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6062014089211958044}
   - component: {fileID: 6073237837018288874}
   - component: {fileID: 6081079792621254716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Arcade_Robot_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_ToyTrain_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1833029274597888, guid: 026878404178b344c96052daf649d6e5, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4598727979988708, guid: 026878404178b344c96052daf649d6e5, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.051171

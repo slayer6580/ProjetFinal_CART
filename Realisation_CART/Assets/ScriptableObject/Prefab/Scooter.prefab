@@ -76,9 +76,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 39218039315098345}
     m_Modifications:
+    - target: {fileID: 1121307557990210, guid: 2bcc02076d250034c84d8c8ff777113f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398685317227704, guid: 2bcc02076d250034c84d8c8ff777113f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1564691843071606, guid: 2bcc02076d250034c84d8c8ff777113f, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Sport_Scooter_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564691843071606, guid: 2bcc02076d250034c84d8c8ff777113f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902092264823808, guid: 2bcc02076d250034c84d8c8ff777113f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935211688533668, guid: 2bcc02076d250034c84d8c8ff777113f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964917181924228, guid: 2bcc02076d250034c84d8c8ff777113f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4082160988470698, guid: 2bcc02076d250034c84d8c8ff777113f, type: 3}
       propertyPath: m_LocalScale.y

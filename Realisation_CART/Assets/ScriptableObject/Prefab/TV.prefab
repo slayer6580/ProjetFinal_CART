@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 9054767507646200837}
   - component: {fileID: 9066281248388023515}
   - component: {fileID: 9076245743526313609}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_TV_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

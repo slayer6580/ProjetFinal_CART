@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Binoculars
   m_EditorClassIdentifier: 
   m_name: Binoculars
-  m_cost: 10
+  m_cost: 23
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 1b86139e8c1949340ac4372d0dbf3436,
     type: 3}

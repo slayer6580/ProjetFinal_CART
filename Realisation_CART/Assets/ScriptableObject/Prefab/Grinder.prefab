@@ -76,9 +76,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8826783567124161175}
     m_Modifications:
+    - target: {fileID: 1062245977773774, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132522242656360, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717104728623676, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1795986531283018, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_Name
       value: SM_Tool_Angle_Grinder_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795986531283018, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalScale.x

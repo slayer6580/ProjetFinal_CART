@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_BoxingGloves
   m_EditorClassIdentifier: 
   m_name: Boxing Glove
-  m_cost: 10
+  m_cost: 25
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: cc60fe6c01610124a994a26244bbcab3,
     type: 3}

@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Tool_Handsaw_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1171243984914164, guid: 70f58bddb3eddf940ac2327ae4bdf245, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4081813097417878, guid: 70f58bddb3eddf940ac2327ae4bdf245, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.2655768

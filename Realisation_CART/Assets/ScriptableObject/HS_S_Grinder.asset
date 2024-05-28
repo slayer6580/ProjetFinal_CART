@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Grinder
   m_EditorClassIdentifier: 
   m_name: Grinder
-  m_cost: 25
+  m_cost: 29
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 7ea0b50c51dece84db9b2069c0bd3253,
     type: 3}

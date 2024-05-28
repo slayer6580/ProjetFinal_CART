@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ToiletPaper (Special)
   m_EditorClassIdentifier: 
   m_name: Toilet paper
-  m_cost: 200
+  m_cost: 5000
   m_size: 2
   m_object: {fileID: 4706838220764009022, guid: 49a29db0cd32d6b4187051a241f8cfb8,
     type: 3}

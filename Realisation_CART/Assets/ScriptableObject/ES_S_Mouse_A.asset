@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ES_S_Mouse_A
   m_EditorClassIdentifier: 
   m_name: Mouse
-  m_cost: 10
+  m_cost: 30
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 941252450de3a3d4e8c96455b52cc257,
     type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5740317913456601865}
   - component: {fileID: 5755267577524001009}
   - component: {fileID: 5761619789654715989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Smartphone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

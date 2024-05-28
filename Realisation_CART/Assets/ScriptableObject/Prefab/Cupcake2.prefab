@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Food_Bakery_Cupcake_02
       objectReference: {fileID: 0}
+    - target: {fileID: 126094, guid: 059ffcfd8bce06444a13d0496b149bc0, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 492130, guid: 059ffcfd8bce06444a13d0496b149bc0, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.5633

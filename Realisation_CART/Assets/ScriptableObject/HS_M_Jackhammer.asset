@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_Jackhammer
   m_EditorClassIdentifier: 
   m_name: Jackhammer
-  m_cost: 25
+  m_cost: 80
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 987cade530b429746bb914744f3a6978,
     type: 3}

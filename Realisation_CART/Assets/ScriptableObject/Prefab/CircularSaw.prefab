@@ -80,6 +80,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Tool_Circular_Saw_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1105013166305406, guid: 7a327ed1e26dac745a8ed6890e8d456d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1216877324485148, guid: 7a327ed1e26dac745a8ed6890e8d456d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269786245962994, guid: 7a327ed1e26dac745a8ed6890e8d456d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708546206300894, guid: 7a327ed1e26dac745a8ed6890e8d456d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4625721326170558, guid: 7a327ed1e26dac745a8ed6890e8d456d, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.0960672

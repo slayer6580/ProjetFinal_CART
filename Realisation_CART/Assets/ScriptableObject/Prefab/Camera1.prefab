@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3959367890411280929}
   - component: {fileID: 3933138748855606449}
   - component: {fileID: 3940719537123943325}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Camera_Mirrorless_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

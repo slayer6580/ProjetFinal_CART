@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4116439973199365869}
   - component: {fileID: 4132484570149700009}
   - component: {fileID: 4142240145002913795}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Prop_Computer_Modem_Box_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Knife
   m_EditorClassIdentifier: 
   m_name: Knife
-  m_cost: 10
+  m_cost: 16
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 221d70dbe2757d049a4cbf4f96c70796,
     type: 3}

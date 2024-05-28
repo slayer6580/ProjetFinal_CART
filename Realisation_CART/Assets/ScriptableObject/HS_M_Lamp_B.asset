@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_M_Lamp_B
   m_EditorClassIdentifier: 
   m_name: Lamp
-  m_cost: 25
+  m_cost: 35
   m_size: 1
   m_object: {fileID: 1134162025243624237, guid: 12ef6d30a3fac2b4f9872cc7e02204d3,
     type: 3}

@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Sport_Helmet_Football_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1552070473941296, guid: a15ea07b05f67274f8ac01175cd4f6cc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4478770940992772, guid: a15ea07b05f67274f8ac01175cd4f6cc, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.3978958

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HS_S_Pan
   m_EditorClassIdentifier: 
   m_name: Pan
-  m_cost: 10
+  m_cost: 18
   m_size: 0
   m_object: {fileID: 9000504276230933140, guid: 0871beafa49d7814986505914a4a664b,
     type: 3}

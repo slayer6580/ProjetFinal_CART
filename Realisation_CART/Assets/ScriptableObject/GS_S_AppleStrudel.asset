@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GS_S_AppleStrudel
   m_EditorClassIdentifier: 
   m_name: Appel Strudel
-  m_cost: 10
+  m_cost: 12
   m_size: 0
   m_object: {fileID: 1344993973222732, guid: 6a3e764e4e6bca341b5b6c371fc3af43, type: 3}
