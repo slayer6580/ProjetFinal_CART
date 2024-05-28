@@ -66,6 +66,7 @@ Transform:
   m_Children:
   - {fileID: 897034053816765434}
   - {fileID: 630692022765873904}
+  - {fileID: 803429297761618328}
   - {fileID: 3597859483702950456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,6 +81,10 @@ PrefabInstance:
     - target: {fileID: 1375370094894312, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Base_Floor_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375370094894312, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalScale.x
@@ -212,6 +217,69 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 630692022766260236}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &803429297761979334
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7439164582721391751}
+    m_Modifications:
+    - target: {fileID: 143932, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_Name
+      value: SI_Env_Floor_07
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: da42d48c4926dbb47be970ec9830078d, type: 3}
+--- !u!4 &803429297761618328 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 492126, guid: da42d48c4926dbb47be970ec9830078d,
+    type: 3}
+  m_PrefabInstance: {fileID: 803429297761979334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &897034053816627126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,6 +369,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Base_Floor_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1375370094894312, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -377,6 +449,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Base_Floor_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1375370094894312, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -452,6 +528,10 @@ PrefabInstance:
     - target: {fileID: 1375370094894312, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Base_Floor_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375370094894312, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalScale.x
