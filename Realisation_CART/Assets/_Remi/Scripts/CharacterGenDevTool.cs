@@ -1,6 +1,5 @@
-//#define IDontNeedToBuild
 
-#if IDontNeedToBuild
+#if UNITY_EDITOR
 using UnityEditor;
 
 namespace Spawner
@@ -35,6 +34,10 @@ namespace Spawner
             else if (UnityEngine.GUILayout.Button("Randomize body"))
             {
                 characterBodyParts.RandomizeBody();
+            }
+            else if (UnityEngine.GUILayout.Button("Randomize hair"))
+            {
+                characterBodyParts.RandomizeHair();
             }
             else if (UnityEngine.GUILayout.Button("Randomize materials"))
             {

@@ -46,6 +46,8 @@ namespace DiscountDelirium
 
         public void OpenMainMenu() 
         {
+            _AudioManager.PlayUIClickSound();
+
             if (m_mainMenu != null) 
             {
                 m_mainMenu.SetActive(true);
@@ -100,23 +102,23 @@ namespace DiscountDelirium
         {
             //Debug.Log("Master Volume: " + m_masterSlider.value);
             PlayerPrefs.SetFloat("MasterVolume", m_masterSlider.value);
-            _AudioManager.ModifyAudio(0, EAudioModification.MasterVolume);
+            _AudioManager.ModifyAudio(0, EAudioModification.MasterVolume, m_masterSlider.value);
         }
 
         public void SetMusicVolume()
         {
             //Debug.Log("Music Volume: " + m_musicSlider.value);
             PlayerPrefs.SetFloat("MusicVolume", m_musicSlider.value);
-            _AudioManager.ModifyAudio(m_audioSourceIndex, EAudioModification.MusicVolume);
+            _AudioManager.ModifyAudio(m_audioSourceIndex, EAudioModification.MusicVolume, m_musicSlider.value);
         }
 
         public void SetSoundVolume()
         {
-            //Debug.Log("Sound Volume: " + m_soundSlider.value);
+            Debug.Log("Sound Volume: " + m_soundSlider.value);
             PlayerPrefs.SetFloat("SoundVolume", m_soundSlider.value);
             for (int i = 0; i < _AudioManager.GetAudioBox().Count; i++)
             {
-                _AudioManager.ModifyAudio(i, EAudioModification.SoundVolume);
+                _AudioManager.ModifyAudio(i, EAudioModification.SoundVolume, m_soundSlider.value);
             }
         }
     }

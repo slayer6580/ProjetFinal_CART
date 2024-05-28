@@ -50,11 +50,6 @@ namespace CartControl
 			}
 			ManageAnimation();
 
-		
-			
-
-
-			
 			ManageSfx();
 		}
 

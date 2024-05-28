@@ -103,6 +103,7 @@ namespace BoxSystem
                 m_itemIsRespawning = true;
 
             m_renderer.material.color = Color.black;
+            m_shelfSetup.AllItemsEnabled(false);
 
         }
 
@@ -113,6 +114,7 @@ namespace BoxSystem
 
             m_remainingItems = m_itemQuantity;
             m_renderer.material.color = m_initialColor;
+            m_shelfSetup.AllItemsEnabled(true);
         }
 
         private void ResetTimer()
@@ -120,9 +122,9 @@ namespace BoxSystem
             m_currentTimer = 0;
         }
 
-        public int GetItemRemaining()
+        public int GetItemQuantity()
         {
-            return m_remainingItems;
+            return m_itemQuantity;
         }
     }
 }

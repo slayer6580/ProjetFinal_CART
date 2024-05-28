@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,8 +10,8 @@ namespace Manager
     public class AudioManager : MonoBehaviour
     {
         [field: Header("Put all audio sounds here, read the Tooltip for the sound order")]
-        [Tooltip("CartCollision\nCartRolling\nStep01\nStep02\nStep03\nStep04\nGrabItem\nDriftBegin\nDriftLoop\nCashRegister")]
-        [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[12];
+        [Tooltip("CartCollision\nCartRolling\nStep01\nStep02\nStep03\nStep04\nGrabItem\nDriftBegin\nDriftLoop\nCashRegister\nMeleeSwoosh\nCannonSound\nHit\nUIHover\nUIClick\nUIBack\nUIScroll")]
+        [SerializeField] private AudioClip[] m_soundsPool = new AudioClip[23];
         [Tooltip("ThemeMusic\nCart_Song_01\nCart_Song_02\nWaitingRoomMusic")]
         [SerializeField] private AudioClip[] m_musicPool = new AudioClip[4];
 
@@ -24,26 +26,26 @@ namespace Manager
         [field: SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
         [field: SerializeField] public EMusic LevelOneMusic { get; private set; } = EMusic.Cart_Song_01;
         [field: SerializeField] public EMusic LevelTwoMusic { get; private set; } = EMusic.Cart_Song_02;
+        [field: SerializeField] public EMusic LevelThreeMusic { get; private set; } = EMusic.ThemeMusic;
         [field: SerializeField] public EMusic TutorialMusic { get; private set; } = EMusic.WaitingRoomMusic;
 
         [SerializeField] private int m_numberOfAudioBox = 10;
         [SerializeField] private bool m_isClientSoundEnabled = true;
+        private int m_scrollAudioBox;
+        private bool m_isLevelMusicPlaying = false;
+        private int m_sceneMusicIndex = -1;
 
         /// <summary> This enum is used to store all the sounds in the game </summary>
         public enum ESound
         {
-            CartCollision,
-            CartRolling,
-            Step01,
-            Step02,
-            Step03,
-            Step04,
+            CartCollision, CartRolling,
+            Step01, Step02, Step03, Step04,
             GrabItem,
-            DriftBegin,
-            DriftLoop,
-            CashRegister,
-            MeleeSwoosh,
-            CannonSound,
+            DriftBegin, DriftLoop,
+            CashRegister, BoxDropOnCounter, BoxDropSpecial,
+            MeleeSwoosh, CannonSound, Hit, Splat,
+            UIHover, UIClick, UIBack, UIScroll,
+            FireStart, FireLoop, Sprinklers,
             Count
         }
 
@@ -79,7 +81,7 @@ namespace Manager
 
         private void Awake()
         {
-            Debug.Log("AudioManager Awake");
+            //Debug.Log("AudioManager Awake");
             if (_AudioManager != null)
             {
                 Debug.LogWarning("AudioManager already exists.");
@@ -100,6 +102,32 @@ namespace Manager
             if (MusicAudioSource == null) Debug.LogError("No AudioSource on AudioManager");
         }
 
+        public void PlayUIHoverSound()
+        {
+            PlaySoundEffectsOneShot(ESound.UIHover, Vector3.zero);
+        }
+
+        public void PlayUIClickSound()
+        {
+            PlaySoundEffectsOneShot(ESound.UIClick, Vector3.zero);
+        }
+
+        public void PlayUIBackSound()
+        {
+            PlaySoundEffectsOneShot(ESound.UIBack, Vector3.zero);
+        }
+
+        public void PlayUIScrollSound()
+        {
+            m_scrollAudioBox = PlaySoundEffectsLoop(ESound.UIScroll, Vector3.zero);
+        }
+
+        public void StopUIScrollSound()
+        {
+            StopSoundEffectsLoop(m_scrollAudioBox);
+        }
+
+
         /// <summary> Modify the pitch or volume of a sound of a music </summary>
         public void ModifyAudio(int index, EAudioModification modif, float value = 0)
         {
@@ -118,31 +146,66 @@ namespace Manager
             else if (modif == EAudioModification.SoundVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("SoundVolume", 1);
-                audioSource.volume = currentVolume * value;
+                audioSource.volume = Mathf.Min(value, currentVolume);
             }
             else if (modif == EAudioModification.MusicVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
-                MusicAudioSource.volume = currentVolume;
+                //Debug.Log("currentVolume: " + currentVolume);
+                //Debug.Log("value: " + value);
+                MusicAudioSource.volume = Mathf.Min(value, currentVolume);
+                //Debug.Log("MusicAudioSource.volume: " + MusicAudioSource.volume);
             }
             else if (modif == EAudioModification.MasterVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MasterVolume", 1);
-                MusicAudioSource.volume = currentVolume;
+                MusicAudioSource.volume = Mathf.Min(value, currentVolume);
+
+                for (int i = 0; i < m_audioBox.Count; i++)
+                {
+                    m_audioBox[i]._AudioSource.volume = Mathf.Min(value, currentVolume);
+                }
             }
         }
 
+        /// <summary> Modify the pitch or volume of a sound of a one shot sound based on an object speed </summary>
+        public float ModifyAudioBasedOnBodySpeed(float speed, EAudioModification modif, float valueToModify)
+        {
+            if (modif == EAudioModification.SoundPitch)
+            {
+                return valueToModify * (speed / 2);
+            }
+            else if (modif == EAudioModification.SoundVolume)
+            {
+                return valueToModify * (speed / 2);
+            }
+            else if (modif == EAudioModification.MusicVolume)
+            {
+                Debug.LogWarning("MusicVolume is not a valid modification for this function");
+                return 0;
+            }
+            else if (modif == EAudioModification.MasterVolume)
+            {
+                Debug.LogWarning("MasterVolume is not a valid modification for this function");
+                return 0;
+            }
+
+            return 0;
+        }
+
         /// <summary> Play a sound effect one shot </summary>
-        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition, float volume = 1, bool isPlayer = false)
+        public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition, float volume = 1, float pitch = 1)
         {
             AudioBox audiobox = FindAValidAudioBox();
 
             if (audiobox == null)
                 return;
 
+            //Debug.Log("Playing sound: " + sound + " at element : " + (int)sound + " max elements: " + m_soundsPool.Length);
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
-            audiobox.GetComponent<AudioSource>().volume = volume;
+            audiobox._AudioSource.volume = volume;
+            audiobox._AudioSource.pitch = pitch;
 
             MoveAudioBox(audiobox, newPosition);
             PlayClipOneShot(audiobox, sound);
@@ -152,9 +215,9 @@ namespace Manager
         /// <summary> Play a sound one shot on a transform </summary>
         public int PlaySoundEffectsLoopOnTransform(ESound sound, Transform parent)
         {
-
             if (parent == null)
             {
+                Debug.LogWarning("Parent is null, playing sound on AudioManager");
                 parent = transform;
             }
 
@@ -165,9 +228,9 @@ namespace Manager
             if (audiobox == null)
                 return -1;
 
-
-            audiobox.transform.SetParent(parent);
+            audiobox.transform.SetParent(parent, false);
             audiobox.transform.localPosition = Vector3.zero;
+
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
             MoveAudioBox(audiobox, Vector3.zero);
@@ -216,7 +279,9 @@ namespace Manager
         /// <summary> Start the music of the current scene </summary>
         public int StartCurrentSceneMusic()
         {
-            Debug.Log("StartCurrentSceneMusic");
+            if (m_isLevelMusicPlaying) return m_sceneMusicIndex;
+          
+            //Debug.Log("StartCurrentSceneMusic");
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
             int index = -1;
@@ -225,21 +290,37 @@ namespace Manager
             {
                 Debug.Log("Playing MainMenuMusic");
                 index = PlayMusic(_AudioManager.MainMenuMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Tutorial")
             { 
                 Debug.Log("Playing WaitingRoomMusic");
                 index = PlayMusic(_AudioManager.TutorialMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Level01")
             {
                 Debug.Log("Playing LevelOneMusic");
-                index = PlayMusic(_AudioManager.LevelOneMusic); 
+                index = PlayMusic(_AudioManager.LevelOneMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Level02")
             { 
                 Debug.Log("Playing LevelTwoMusic");
                 index = PlayMusic(_AudioManager.LevelTwoMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
+            }
+            else if (sceneName == "Level03")
+            {
+                Debug.Log("Playing LevelThreeMusic");
+                index = PlayMusic(_AudioManager.LevelThreeMusic);
+                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
+            }
+
+            if (index != -1)
+            { 
+                m_isLevelMusicPlaying = true; 
+                m_sceneMusicIndex = index;
             }
 
             return index;
@@ -286,7 +367,7 @@ namespace Manager
         /// <summary> Move an audioBox at a position </summary>
         private void MoveAudioBox(AudioBox audioBox, Vector3 newPosition)
         {
-            audioBox.transform.position = newPosition;
+            audioBox.transform.localPosition = newPosition;
         }
 
         /// <summary> Make an audioBox play an audioclip one shot</summary>
@@ -326,6 +407,16 @@ namespace Manager
         public List<AudioBox> GetAudioBox()
         {
             return m_audioBox;
+        }
+
+        internal void PlayCollisionAudio(Vector3 position, float speed, float volume, float pitch)
+        {
+            float collisionVolume = volume;
+            float collisionPitch = pitch;
+            collisionVolume = ModifyAudioBasedOnBodySpeed(speed, EAudioModification.SoundVolume, collisionVolume);
+            collisionPitch = ModifyAudioBasedOnBodySpeed(speed, EAudioModification.SoundPitch, collisionPitch);
+            //Debug.Log("CollisionVolume: " + collisionVolume + " CollisionPitch: " + collisionPitch);
+            _AudioManager.PlaySoundEffectsOneShot(ESound.CartCollision, position, collisionVolume, collisionPitch);
         }
     }
 }

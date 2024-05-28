@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5971196546390224582}
   - component: {fileID: 4740991788292468456}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Alien_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8250083837068462921}
   - component: {fileID: 4649007276284936964}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Pig_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 709472762967983934}
   - component: {fileID: 632621811747377417}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Schoolgirl_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -540,7 +540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920769695784432737}
   - component: {fileID: 7181618638405439751}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Karate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2251609932628466197}
   - component: {fileID: 5376926018066165202}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Cowboy_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,7 +750,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -844,7 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8430109729215564960}
   - component: {fileID: 7126539612850110667}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Footballer_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,7 +980,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8338099918625647702}
   - component: {fileID: 7514054020722197990}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_PlaidShirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4459538601816595407
 Transform:
   m_ObjectHideFlags: 0
@@ -1231,7 +1231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2608002548257607618}
   - component: {fileID: 128934485501437525}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Sweater_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1367,7 +1367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6856344889050126814}
   - component: {fileID: 2779276188173502484}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Trucker_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1503,7 +1503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 432250900867252132}
   - component: {fileID: 1530061245081633263}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Viking_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1639,7 +1639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7377421487481788296}
   - component: {fileID: 5674817976087223566}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Cardboard_Robot_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1775,7 +1775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1902198639436327553}
   - component: {fileID: 3261864439640015820}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Samurai_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1911,7 +1911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426516269419430898}
   - component: {fileID: 420503898125690118}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Summer_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2047,7 +2047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6273845057694796245}
   - component: {fileID: 3573871732954247094}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Maid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2215,7 +2215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3225929616581497182}
   - component: {fileID: 6837818809540477705}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Robber_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2383,7 +2383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2360231426815593777}
   - component: {fileID: 756379693799493707}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Geisha_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2519,7 +2519,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2117996604808413575}
   - component: {fileID: 6400843393119944496}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Sweater_Dress_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2812,7 +2812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8295889094677146953}
   - component: {fileID: 1240392429569836277}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Pirate_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2948,7 +2948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1673366080218758209}
   - component: {fileID: 418997089381163189}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Onesie_Tiger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3084,7 +3084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2056911773639275755}
   - component: {fileID: 2304141883769566825}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Nerd_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3282,7 +3282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4632322175796409107}
   - component: {fileID: 1355942121242147305}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_CargoShorts_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3418,7 +3418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6299943486773065133}
   - component: {fileID: 1997927361692740176}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Prince_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3554,7 +3554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1430148375298916607}
   - component: {fileID: 715038990113847834}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_WinterCoat_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3690,7 +3690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7614445397039352521}
   - component: {fileID: 7631304311364280319}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Robot_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3826,7 +3826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 887881259175505673}
   - component: {fileID: 3991312455662318042}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Sweater_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3964,6 +3964,7 @@ GameObject:
   - component: {fileID: 5676236596519043621}
   - component: {fileID: 4999018571851096058}
   - component: {fileID: 5054091105575963102}
+  - component: {fileID: 4081925768502075093}
   m_Layer: 0
   m_Name: CharacterBuilder
   m_TagString: Untagged
@@ -4126,17 +4127,12 @@ MonoBehaviour:
   m_eyebrowsTransform: {fileID: 1706852038594274078}
   m_eyesFemaleTransform: {fileID: 7447179520413910755}
   m_eyesMaleTransform: {fileID: 4139251549774095969}
-  m_hairPartTransforms: []
-  m_humanFullBodyTransforms:
+  m_humanMaleFullBodyTransforms:
   - {fileID: 7480190621521338525}
-  - {fileID: 1511425817357356343}
   - {fileID: 4632322175796409107}
   - {fileID: 1467289706490118309}
   - {fileID: 2906277013599820520}
-  - {fileID: 4091332854800900865}
-  - {fileID: 7629708512902127881}
   - {fileID: 6605765300571053590}
-  - {fileID: 1807401085878193186}
   - {fileID: 9126113325341588425}
   - {fileID: 3203545298156395480}
   - {fileID: 9208909102198501028}
@@ -4147,28 +4143,18 @@ MonoBehaviour:
   - {fileID: 8602634918596369529}
   - {fileID: 2056911773639275755}
   - {fileID: 6265573155661525749}
-  - {fileID: 5103923677075304159}
-  - {fileID: 9115799058496236959}
   - {fileID: 8338099918625647702}
   - {fileID: 4674617372423143283}
   - {fileID: 5151940235649565838}
-  - {fileID: 6746846639304732000}
-  - {fileID: 6090869593720325871}
-  - {fileID: 6395054780760834376}
   - {fileID: 3225929616581497182}
   - {fileID: 9035383316634315650}
   - {fileID: 6722652284277637846}
-  - {fileID: 8262766822510141892}
-  - {fileID: 709472762967983934}
   - {fileID: 8740957091643874699}
-  - {fileID: 4060609153859852597}
-  - {fileID: 5560029064259851681}
   - {fileID: 4763642365975425914}
   - {fileID: 6455687538904379449}
   - {fileID: 426516269419430898}
   - {fileID: 887881259175505673}
   - {fileID: 2608002548257607618}
-  - {fileID: 2117996604808413575}
   - {fileID: 6856344889050126814}
   - {fileID: 1430148375298916607}
   - {fileID: 1331555564287352556}
@@ -4182,20 +4168,34 @@ MonoBehaviour:
   - {fileID: 841000485936816311}
   - {fileID: 1214510073773391790}
   - {fileID: 1167028003552647296}
-  - {fileID: 9185941060797421083}
   - {fileID: 571300517122006830}
   - {fileID: 348274266058387775}
   - {fileID: 7621647857007097417}
-  m_humanInCostumeFullBodyTransforms:
+  m_humanFemaleFullBodyTransforms:
+  - {fileID: 1511425817357356343}
+  - {fileID: 4091332854800900865}
+  - {fileID: 7629708512902127881}
+  - {fileID: 1807401085878193186}
+  - {fileID: 5103923677075304159}
+  - {fileID: 9115799058496236959}
+  - {fileID: 6746846639304732000}
+  - {fileID: 6395054780760834376}
+  - {fileID: 8262766822510141892}
+  - {fileID: 709472762967983934}
+  - {fileID: 4060609153859852597}
+  - {fileID: 5560029064259851681}
+  - {fileID: 2117996604808413575}
+  - {fileID: 9185941060797421083}
+  m_humanFemaleFullBodyHeadCoveredTransforms:
+  - {fileID: 6090869593720325871}
+  m_humanMaleInCostumeFullBodyTransforms:
   - {fileID: 7377421487481788296}
   - {fileID: 2418370831211316783}
-  - {fileID: 2360231426815593777}
   - {fileID: 2150762875117186568}
   - {fileID: 8029883071578253968}
   - {fileID: 6416626253062557276}
   - {fileID: 229034526964743163}
   - {fileID: 20253434434730982}
-  - {fileID: 6273845057694796245}
   - {fileID: 6641774442011109126}
   - {fileID: 2909275485990719118}
   - {fileID: 8006197315963056617}
@@ -4205,31 +4205,35 @@ MonoBehaviour:
   - {fileID: 8295889094677146953}
   - {fileID: 3172051717902070498}
   - {fileID: 6299943486773065133}
-  - {fileID: 5663593564483677182}
   - {fileID: 1902198639436327553}
   - {fileID: 5006311720476260803}
   - {fileID: 7098811911349133484}
   - {fileID: 1937418856140790255}
   - {fileID: 7096028389092735909}
-  - {fileID: 4393415422436893489}
   - {fileID: 4065079385065238432}
   - {fileID: 432250900867252132}
   - {fileID: 659790713402819931}
   - {fileID: 8700793893055298036}
+  m_humanFemaleInCostumeFullBodyTransforms:
+  - {fileID: 2360231426815593777}
+  - {fileID: 5663593564483677182}
+  - {fileID: 6273845057694796245}
+  - {fileID: 4393415422436893489}
   - {fileID: 1624005266666996238}
-  m_nonHumanFullBodyTransforms:
+  m_nonHumanMaleFullBodyTransforms:
   - {fileID: 5230944650534109215}
   - {fileID: 5971196546390224582}
   - {fileID: 5123907476860743830}
   - {fileID: 5986209130466604017}
   - {fileID: 4817745978841570857}
-  - {fileID: 6476059500988615088}
   - {fileID: 8250083837068462921}
   - {fileID: 7614445397039352521}
   - {fileID: 6322577423131353397}
   - {fileID: 5969671386202651797}
   - {fileID: 103096806520473942}
+  m_nonHumanFemaleFullBodyTransforms:
   - {fileID: 5220692127007687880}
+  - {fileID: 6476059500988615088}
   m_maleHairTransforms:
   - {fileID: 240815614488082132}
   - {fileID: 1085633611161010274}
@@ -4237,12 +4241,192 @@ MonoBehaviour:
   - {fileID: 2060478175169898715}
   - {fileID: 2811360186223322615}
   - {fileID: 3244145725684262367}
+  - {fileID: 8248548151553752112}
+  - {fileID: 2808937493938836343}
+  - {fileID: 1209083022701623746}
+  - {fileID: 6027028303158472825}
+  - {fileID: 8236182550724870482}
+  - {fileID: 4454631006313378984}
+  - {fileID: 5206421872770182645}
+  - {fileID: 6843171561458690712}
+  - {fileID: 3016484843079369567}
+  - {fileID: 3710758592315643114}
+  - {fileID: 6371898531418412575}
+  - {fileID: 8473309593727489486}
+  - {fileID: 965558598370823133}
+  - {fileID: 6066904669031009468}
+  - {fileID: 1273831599774780274}
+  - {fileID: 2549124297783664526}
+  - {fileID: 8668482645478153151}
+  - {fileID: 7747441285915746873}
+  - {fileID: 498503156065794109}
+  - {fileID: 8629669464532370731}
+  - {fileID: 8982145395422108232}
+  - {fileID: 2868790955263340792}
+  - {fileID: 8196391130926844121}
+  - {fileID: 6994880902287603144}
+  - {fileID: 6860150728031285130}
+  - {fileID: 7522662960103160223}
+  - {fileID: 4181253087068905646}
+  - {fileID: 3016484843079369567}
+  - {fileID: 2223269358902430396}
+  - {fileID: 1660007645691996822}
+  - {fileID: 2186025449091196993}
+  - {fileID: 8602127013881831144}
+  - {fileID: 7703241897130523764}
+  - {fileID: 6643883090624345798}
+  - {fileID: 578755467755975557}
+  - {fileID: 4920673664951338373}
+  - {fileID: 3522307846967989783}
+  - {fileID: 4933247305643940816}
+  - {fileID: 4900639928728257651}
   m_femaleHairTransforms:
   - {fileID: 6723679456424259218}
   - {fileID: 3071615737764093163}
   - {fileID: 3844568486092746283}
   - {fileID: 8982145395422108232}
-  m_accessoryTransforms: []
+  - {fileID: 8869661540382540615}
+  - {fileID: 7754964534030436558}
+  - {fileID: 2023201180975628900}
+  - {fileID: 1486152378538699157}
+  - {fileID: 3832914955276204238}
+  - {fileID: 417772488797295456}
+  - {fileID: 232127751447826279}
+  - {fileID: 7657261723288457786}
+  - {fileID: 8326729041141703222}
+  - {fileID: 4584684373916280311}
+  - {fileID: 3412952159182549622}
+  - {fileID: 8982145395422108232}
+  - {fileID: 2868790955263340792}
+  - {fileID: 8196391130926844121}
+  - {fileID: 6994880902287603144}
+  - {fileID: 6860150728031285130}
+  - {fileID: 7522662960103160223}
+  - {fileID: 4181253087068905646}
+  - {fileID: 3016484843079369567}
+  - {fileID: 2223269358902430396}
+  - {fileID: 1660007645691996822}
+  - {fileID: 2186025449091196993}
+  - {fileID: 8602127013881831144}
+  - {fileID: 7703241897130523764}
+  - {fileID: 6643883090624345798}
+  - {fileID: 578755467755975557}
+  - {fileID: 4920673664951338373}
+  - {fileID: 3522307846967989783}
+  - {fileID: 4933247305643940816}
+  - {fileID: 4900639928728257651}
+  m_accessoryTransforms:
+  - {fileID: 2370271482378474682}
+  - {fileID: 5203012310695819137}
+  - {fileID: 8748453083072904355}
+  - {fileID: 8552303110713050955}
+  - {fileID: 1052645575294759202}
+  - {fileID: 5503234618711124794}
+  - {fileID: 3311521661191113512}
+  - {fileID: 1347323818341258434}
+  - {fileID: 5301405516014833497}
+  - {fileID: 2691969064584178185}
+  - {fileID: 1664754071536516196}
+  - {fileID: 4622910600014646430}
+  - {fileID: 6002198077827158103}
+  - {fileID: 6045920819377552704}
+  - {fileID: 4327969733311793764}
+  - {fileID: 5422138116854443792}
+  - {fileID: 6229753910307872607}
+  - {fileID: 6330796404591119737}
+  - {fileID: 7604075898337734047}
+  - {fileID: 1959868266845611680}
+  - {fileID: 5103643836000482050}
+  - {fileID: 6621051561761263879}
+  - {fileID: 4384609646075828299}
+  - {fileID: 2696278825051751533}
+  - {fileID: 6543410570513659470}
+  - {fileID: 7074863674084834041}
+  - {fileID: 3070184852886222684}
+  - {fileID: 3999382238247709930}
+  - {fileID: 4120589209393078668}
+  - {fileID: 3549485246414920339}
+  m_accessoryCostumeTransforms:
+  - {fileID: 5567721311703489658}
+  - {fileID: 1136515969880830947}
+  - {fileID: 298516836392487915}
+  - {fileID: 4097400675881946423}
+  - {fileID: 7600109846132386296}
+  - {fileID: 1974981507784382340}
+  - {fileID: 4327969733311793764}
+  m_accessoryHairSlotTransforms:
+  - {fileID: 5326330459167481609}
+  - {fileID: 1051436488480225785}
+  - {fileID: 4665241445089832095}
+  - {fileID: 4570485097921813850}
+  - {fileID: 8894612935241891568}
+  - {fileID: 699684739284951459}
+  - {fileID: 467636741663695911}
+  - {fileID: 4012177008356539132}
+  - {fileID: 5317822756606892351}
+  - {fileID: 2767014392642328882}
+  - {fileID: 7500724082667044702}
+  - {fileID: 4874082508727779687}
+  - {fileID: 2250922078550175063}
+  - {fileID: 5979169824041179414}
+  - {fileID: 8642331013415307493}
+  - {fileID: 6728968519302702276}
+  - {fileID: 4131272574399912225}
+  - {fileID: 3738103642276431942}
+  - {fileID: 7331242180999186335}
+  - {fileID: 4674294231813792640}
+  - {fileID: 8025107756792977453}
+  - {fileID: 2151061298653188003}
+  - {fileID: 3136582303349059496}
+  - {fileID: 5800441612040587732}
+  - {fileID: 3282656327484306137}
+  - {fileID: 294524369448723465}
+  - {fileID: 669973939305207645}
+  - {fileID: 4245145938472505236}
+  - {fileID: 4677261235640270328}
+  - {fileID: 515508076804765429}
+  - {fileID: 5814499164987345325}
+  - {fileID: 912070073629638737}
+  - {fileID: 324246537433008904}
+  - {fileID: 5099826286291583351}
+  - {fileID: 7308231489347231160}
+  - {fileID: 1834626219367344985}
+  - {fileID: 2333195604369750967}
+  - {fileID: 151124580231732463}
+  - {fileID: 2771507036810675906}
+  - {fileID: 4792602641874599012}
+  - {fileID: 2675928577591794620}
+  - {fileID: 5263603057739295301}
+  - {fileID: 7322453575257608838}
+  - {fileID: 8872930746653560343}
+  - {fileID: 4481230444571589363}
+  - {fileID: 189578657975178310}
+  - {fileID: 4633182935860774469}
+  - {fileID: 4705549548365809489}
+  - {fileID: 2739942295424439405}
+  - {fileID: 5090501092516513076}
+  - {fileID: 7889267201049904684}
+  - {fileID: 3850034907090117739}
+  - {fileID: 2794436380300277491}
+  - {fileID: 4505771230569885909}
+  - {fileID: 843329909091145162}
+  - {fileID: 3485659243306270659}
+  - {fileID: 5744353254123977594}
+  - {fileID: 3668035414550759525}
+  - {fileID: 7257114951922510680}
+  - {fileID: 7405001054524011800}
+  - {fileID: 8390544716559170613}
+  - {fileID: 9138936354481267142}
+  - {fileID: 3615903491467516662}
+  - {fileID: 4446071101858998090}
+  - {fileID: 8308194075111489078}
+  - {fileID: 7496421550606226685}
+  - {fileID: 1758967444096269063}
+  - {fileID: 6881915178554300577}
+  - {fileID: 5916885089999615760}
+  - {fileID: 4834392531156009096}
+  - {fileID: 1437714636561130844}
+  - {fileID: 2356089210480883667}
   m_bodyPartType: 0
 --- !u!95 &4999018571851096058
 Animator:
@@ -4285,6 +4469,20 @@ MonoBehaviour:
   - m_Rig: {fileID: 0}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &4081925768502075093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811199002143540146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868c4822b9a89e749a5b03db6b87376b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_timeBetweenFootsteps: 0.5
+  m_isFootstepPlaying: 0
 --- !u!1 &1846772365805519637
 GameObject:
   m_ObjectHideFlags: 0
@@ -4326,7 +4524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5560029064259851681}
   - component: {fileID: 2074635402962653821}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_ShirtDress_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4462,7 +4660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 20253434434730982}
   - component: {fileID: 1939741359238951874}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Magician_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4598,7 +4796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1624005266666996238}
   - component: {fileID: 3907931107901020464}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Witch_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4798,7 +4996,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7096028389092735909}
   - component: {fileID: 607518755767899065}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Superhero_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4934,7 +5132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8029883071578253968}
   - component: {fileID: 7990409522429224402}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_HolidayElf_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5141,7 +5339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1167028003552647296}
   - component: {fileID: 7111447308444868805}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Swimwear_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5277,7 +5475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5123907476860743830}
   - component: {fileID: 1750778221357134005}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Android_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5413,7 +5611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5704271714684391188}
   - component: {fileID: 5151918699801193562}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Ninja_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5664,7 +5862,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5663593564483677182}
   - component: {fileID: 1580455065973691468}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Princess_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5800,13 +5998,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4139251549774095969}
   - component: {fileID: 2032705729565491094}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Eyes_Male_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4139251549774095969
 Transform:
   m_ObjectHideFlags: 0
@@ -5936,7 +6134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 348274266058387775}
   - component: {fileID: 6641247199561505824}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Viking_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6072,7 +6270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9185941060797421083}
   - component: {fileID: 1958252401598149893}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Swimwear_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6271,7 +6469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6090869593720325871}
   - component: {fileID: 5952029028192296697}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Raincoat_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6407,7 +6605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9126113325341588425}
   - component: {fileID: 9218753160167598829}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Exercise_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6638,7 +6836,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6476059500988615088}
   - component: {fileID: 1538601159186072315}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Goblin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6865,7 +7063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2418370831211316783}
   - component: {fileID: 6197762798037213768}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Elf_Warrior_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7130,7 +7328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7447179520413910755}
   - component: {fileID: 644942373939628974}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Eyes_Female_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7445,7 +7643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6322577423131353397}
   - component: {fileID: 3237532382288113265}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Skeleton_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7613,7 +7811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6641774442011109126}
   - component: {fileID: 5595007786458069628}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Mummy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7781,7 +7979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511425817357356343}
   - component: {fileID: 3947209514214470036}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Ballerina_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7823,7 +8021,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7917,7 +8115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6605765300571053590}
   - component: {fileID: 3028274106518362142}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Eastern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8053,7 +8251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8602634918596369529}
   - component: {fileID: 1431018705195580477}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Hoodie_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8189,7 +8387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3172051717902070498}
   - component: {fileID: 3964421781294621830}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Pirate_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8486,13 +8684,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3203545298156395480}
   - component: {fileID: 6308440798167757964}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Exercise_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3203545298156395480
 Transform:
   m_ObjectHideFlags: 0
@@ -8528,7 +8726,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8622,7 +8820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1005543685173901502}
   - component: {fileID: 7364098509700589656}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Hoodie_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8758,7 +8956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 229034526964743163}
   - component: {fileID: 7875705500687073992}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Knight_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8957,7 +9155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4763642365975425914}
   - component: {fileID: 1472579162243862712}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Skater_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8999,7 +9197,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9127,7 +9325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 571300517122006830}
   - component: {fileID: 7851361231253491881}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Tracksuit_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9169,7 +9367,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9263,7 +9461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4489834161683567993}
   - component: {fileID: 4985656800185963049}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Onesie_Dino_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9399,7 +9597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3435332667547163677}
   - component: {fileID: 7492696884199293461}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Cowboy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9567,7 +9765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5151940235649565838}
   - component: {fileID: 2331920392755697124}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_PufferVest_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9734,7 +9932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6395054780760834376}
   - component: {fileID: 591501442858152784}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Raincoat_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9902,7 +10100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4091332854800900865}
   - component: {fileID: 3800518947501589945}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Cheerleader_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10038,7 +10236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6746846639304732000}
   - component: {fileID: 6957163249816661413}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Punk_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10206,7 +10404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5103923677075304159}
   - component: {fileID: 3526267750572396549}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Overalls_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10602,7 +10800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4817745978841570857}
   - component: {fileID: 3437971963159827915}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Goblin_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10738,7 +10936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9035383316634315650}
   - component: {fileID: 3175587212643334404}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Schoolboy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10874,7 +11072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8262766822510141892}
   - component: {fileID: 516904599816581612}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Schoolgirl_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11010,7 +11208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6455687538904379449}
   - component: {fileID: 787262626328120464}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_SnowJacket_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11178,7 +11376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5986209130466604017}
   - component: {fileID: 3669199952459325318}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Demon_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11346,7 +11544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8006197315963056617}
   - component: {fileID: 6427885092611420265}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Onesie_Cat_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11514,7 +11712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5241398134386400310}
   - component: {fileID: 7827648739541685890}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Fat_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11650,7 +11848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1214510073773391790}
   - component: {fileID: 7317563228070589795}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Survivor_Vest_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11786,7 +11984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467289706490118309}
   - component: {fileID: 2079442106896517372}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Casual_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11922,7 +12120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841000485936816311}
   - component: {fileID: 8087742498159590215}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Survivor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12058,7 +12256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6265573155661525749}
   - component: {fileID: 2454360723685763231}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Overalls_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12194,7 +12392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5006311720476260803}
   - component: {fileID: 5715852763177388054}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Scifi_Casual_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12330,7 +12528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4060609153859852597}
   - component: {fileID: 487296374132390463}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Scout_Skirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12498,7 +12696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6416626253062557276}
   - component: {fileID: 76319729302268949}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_JungleKid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12698,7 +12896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7629708512902127881}
   - component: {fileID: 3146038037812250526}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Dress_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12834,7 +13032,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4065079385065238432}
   - component: {fileID: 4964161164920696800}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Survivor_Armoured_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12970,7 +13168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1807401085878193186}
   - component: {fileID: 2638079820463894125}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Eastern_Skirt_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13170,7 +13368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2509355040463244408}
   - component: {fileID: 3164097638450001194}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Peasant_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13306,7 +13504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4674617372423143283}
   - component: {fileID: 8850935052309102207}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_PoliceOfficer_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13442,7 +13640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4393415422436893489}
   - component: {fileID: 5310941275861203455}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Superhero_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13578,7 +13776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2150762875117186568}
   - component: {fileID: 802973239213914068}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Ghost_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13745,7 +13943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8700793893055298036}
   - component: {fileID: 3587424580266323805}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Wetsuit_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13912,7 +14110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3929340413980447209}
   - component: {fileID: 7437639432105086072}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Hoodie_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14048,7 +14246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9208909102198501028}
   - component: {fileID: 8712424874384619154}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Farmer_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14184,7 +14382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5969671386202651797}
   - component: {fileID: 3650232043214517821}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Troll_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14352,7 +14550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1937418856140790255}
   - component: {fileID: 2699404872932920723}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Spacesuit_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14695,7 +14893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2906277013599820520}
   - component: {fileID: 7975007424718944739}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Doctor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14831,7 +15029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7480190621521338525}
   - component: {fileID: 2868791441821844430}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Adventure_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14969,7 +15167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7098811911349133484}
   - component: {fileID: 885148365760885489}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Scifi_Spacesuit_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15137,7 +15335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8719381834786976418}
   - component: {fileID: 4259134549993636636}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Pajamas_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15305,7 +15503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7621647857007097417}
   - component: {fileID: 2910911942516027412}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Wizard_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15347,7 +15545,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 823ac0e34852f1946b70b81aa0a7763c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15441,7 +15639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5220692127007687880}
   - component: {fileID: 3232101984827097499}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Zombie_Dress_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15577,7 +15775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6722652284277637846}
   - component: {fileID: 1386814927926420688}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Schoolboy_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15744,7 +15942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2909275485990719118}
   - component: {fileID: 5623778981474222144}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Onesie_Bunny_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15880,7 +16078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9115799058496236959}
   - component: {fileID: 6763696530208012695}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Overalls_Dress_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16016,7 +16214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3082258509499116692}
   - component: {fileID: 1830648626782046516}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Fat_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16152,13 +16350,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1706852038594274078}
   - component: {fileID: 2288401639971801070}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Eyebrows_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1706852038594274078
 Transform:
   m_ObjectHideFlags: 0
@@ -16462,7 +16660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103096806520473942}
   - component: {fileID: 5959817654751288876}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Zombie_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16598,7 +16796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8740957091643874699}
   - component: {fileID: 8783882098846020993}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Scout_Shorts_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16734,7 +16932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5230944650534109215}
   - component: {fileID: 4647275064647194493}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Alien_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16963,7 +17161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1331555564287352556}
   - component: {fileID: 5908775000818120242}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Explorer_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17193,7 +17391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 659790713402819931}
   - component: {fileID: 3483531735142036932}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Werewolf_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17329,7 +17527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2538419574989702119}
   - component: {fileID: 3125817534028316615}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: SM_Chr_Kid_Pilot_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17503,12 +17701,12 @@ PrefabInstance:
     - target: {fileID: 8280726901026911343, guid: 066c7c61539910b43b6d96f408826064,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0009806
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8280726901026911343, guid: 066c7c61539910b43b6d96f408826064,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0058770487
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8280726901026911343, guid: 066c7c61539910b43b6d96f408826064,
         type: 3}
@@ -18777,12 +18975,12 @@ PrefabInstance:
     - target: {fileID: 6490210555289548141, guid: 2d5a86e5873121542930daae8f333f89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0009806
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6490210555289548141, guid: 2d5a86e5873121542930daae8f333f89,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0058770487
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6490210555289548141, guid: 2d5a86e5873121542930daae8f333f89,
         type: 3}
@@ -23191,12 +23389,12 @@ PrefabInstance:
     - target: {fileID: 2361389975739651645, guid: 78df2eda5f99d2b42824824c20c5deed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0009806
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2361389975739651645, guid: 78df2eda5f99d2b42824824c20c5deed,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0058770487
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2361389975739651645, guid: 78df2eda5f99d2b42824824c20c5deed,
         type: 3}
@@ -23241,7 +23439,7 @@ PrefabInstance:
     - target: {fileID: 2361389975740008989, guid: 78df2eda5f99d2b42824824c20c5deed,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23902,12 +24100,12 @@ PrefabInstance:
     - target: {fileID: 1178914944294018125, guid: b32af6bedfcaad64dbdbd18de7ebe230,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0009806
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1178914944294018125, guid: b32af6bedfcaad64dbdbd18de7ebe230,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0058770487
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1178914944294018125, guid: b32af6bedfcaad64dbdbd18de7ebe230,
         type: 3}
@@ -29353,12 +29551,12 @@ PrefabInstance:
     - target: {fileID: 161860816214229888, guid: 2cf9ee404a2b28f4e99acfc71c278e32,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0009806
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 161860816214229888, guid: 2cf9ee404a2b28f4e99acfc71c278e32,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0058770487
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 161860816214229888, guid: 2cf9ee404a2b28f4e99acfc71c278e32,
         type: 3}
@@ -30746,7 +30944,7 @@ PrefabInstance:
     - target: {fileID: 4804856379237266301, guid: 1bc36a8ee80513041b76b06403d74b6c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -40,7 +40,7 @@ namespace DiscountDelirium
         {
             if (currentState is GameplayState)
             {
-                return m_gameStateMachine.m_playerSM.IsPaused && m_gameStateMachine.m_isGameStarted;
+                return m_gameStateMachine.m_playerSM.IsPaused && m_gameStateMachine.m_isGameStarted && !m_gameStateMachine.IsCheckingOut;
             }
             return false;
         }

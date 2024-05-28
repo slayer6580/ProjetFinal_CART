@@ -1,3 +1,4 @@
+using Manager;
 using System;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,8 @@ namespace DiscountDelirium
 {
     public class Timer : MonoBehaviour
     {
-        [SerializeField] private Image m_clockImage;
+		public static Timer Instance { get; private set; }
+		[SerializeField] private Image m_clockImage;
         [SerializeField] private TextMeshProUGUI m_timeText;
         private float m_timeAtStart;
         private float m_timeLeft;
@@ -18,10 +20,26 @@ namespace DiscountDelirium
 
         private void Awake()
         {
-           
+			if (Instance != null)
+			{
+				Debug.LogWarning("Timer already exists.");
+				Destroy(gameObject);
+				return;
+			}
+
+			Instance = this;
+		}
+
+        public float GetTimeAtStart()
+        {
+            return m_timeAtStart;
         }
 
-        private void Start () 
+		public float GetTimeLeft()
+		{
+			return m_timeLeft;
+		}
+		private void Start () 
         {
 			m_timeAtStart = GameStateMachine.Instance.GameLength;
 			GetReadyState.OnGameStarted += StartTimer;

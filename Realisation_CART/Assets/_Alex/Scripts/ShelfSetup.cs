@@ -31,6 +31,7 @@ namespace BoxSystem
         private List<List<Vector3>> m_slotsLocalPositionsPerSurface = new List<List<Vector3>>();
         private List<Vector3> m_allSlotsLocalPositions = new List<Vector3>();
         private List<Vector3> m_surfaceLocalEulers = new List<Vector3>();
+        private List<GameObject> m_allItems = new List<GameObject>();
 
         private Shelf m_shelf;
 
@@ -94,6 +95,7 @@ namespace BoxSystem
                 for (int j = 0; j < m_slotsLocalPositionsPerSurface[i].Count; j++)
                 {
                     GameObject item = SpawnItem();
+                    m_allItems.Add(item);
                     item.transform.SetParent(gameObject.transform);
                     Vector3 boxScale = boxInstance.GetLocalScale();
                     item.transform.localScale = new Vector3(boxScale.x * ScaleMultiplier.x, boxScale.y * ScaleMultiplier.y, boxScale.z * ScaleMultiplier.z);
@@ -140,6 +142,7 @@ namespace BoxSystem
                     int indexOfLocalPosition = randomIndex - oldCurrent;
 
                     GameObject item = SpawnItem();
+                    m_allItems.Add(item);
                     item.transform.SetParent(gameObject.transform);
                     Vector3 boxScale = boxInstance.GetLocalScale();
                     item.transform.localScale = new Vector3(boxScale.x * ScaleMultiplier.x, boxScale.y * ScaleMultiplier.y, boxScale.z * ScaleMultiplier.z);
@@ -148,6 +151,14 @@ namespace BoxSystem
                     break;
                 }
 
+            }
+        }
+
+        public void AllItemsEnabled(bool value)
+        {
+            foreach (GameObject item in m_allItems)
+            {
+                item.SetActive(value);
             }
         }
 

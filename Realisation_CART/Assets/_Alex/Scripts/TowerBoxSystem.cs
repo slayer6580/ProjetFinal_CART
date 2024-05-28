@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using DiscountDelirium;
 using Unity.VisualScripting;
 using static Manager.ScoreManager;
 using UnityEngine.SceneManagement;
@@ -62,11 +61,6 @@ namespace BoxSystem
             m_playerRb = Player.GetComponent<Rigidbody>();
         }
 
-        void Start()
-        {
-            //AddBoxToTower();
-        }
-
         private void Update()
         {
            // KeyboardDebug();
@@ -110,10 +104,7 @@ namespace BoxSystem
                 }
 
             }
-            else if (Input.GetKeyDown(KeyCode.Y))
-            {
-                Vector3 data = _ScoreManager.EmptyCartAndGetScore();
-            }
+
         }
 
         private void InitializeTowerPhysicsVariables()
@@ -200,7 +191,7 @@ namespace BoxSystem
         }
 
         /// <summary> Remove the top box with an impulse force </summary>
-        public void RemoveBoxImpulse()
+        public void RemoveBoxImpulse(bool willDestroy = true)
         {
             Box topBox = GetTopBox();
 
@@ -215,7 +206,9 @@ namespace BoxSystem
             Vector3 totalImpulse = topBox.transform.up * m_boxExpulsionForce;
             Rigidbody rb = topBox.AddComponent<Rigidbody>();
             rb.AddForce(totalImpulse, ForceMode.Impulse);
-            Destroy(topBox.gameObject, m_boxDestructionTime);
+
+            if(willDestroy)
+                Destroy(topBox.gameObject, m_boxDestructionTime);
 
             RemoveLastBoxFromTower();
             m_towerPhysics.RemoveBoxFromPhysicsTower();
@@ -469,6 +462,7 @@ namespace BoxSystem
         }
         #endregion
 
-    }
+
+	}
 
 }

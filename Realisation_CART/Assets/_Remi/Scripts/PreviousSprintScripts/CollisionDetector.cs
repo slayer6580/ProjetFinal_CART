@@ -1,4 +1,5 @@
 using UnityEngine;
+using static DynamicEnvironment.DynamicEnvironment;
 
 namespace DynamicEnvironment
 {
@@ -9,66 +10,115 @@ namespace DynamicEnvironment
 
         private bool m_isDestructionStageZero = false;
         private bool m_isDestructionStageOne = false;
-        private bool m_m_isDestructionStageTwo = false;
+        private bool m_isDestructionStageTwo = false;
 
-        [SerializeField] private float m_max_health = 2500.0f;
+        private float m_maxHealth = 500.0f;
+        private float m_currentHealth = 0.0f;
 
-        private float m_itemHealthPoints = 2500.0f;
         [SerializeField] private int m_id = 0;
+        private bool m_isBeingHit = false;
+        private float m_maxTimeBetweenHits = 1f;
+        private float m_timeSinceLastHit = 0.0f;
 
         private void Awake()
         {
             ResetItem();
+            m_timeSinceLastHit = m_maxTimeBetweenHits;
         }
-        
+
+        private void Update()
+        {
+            if (m_isBeingHit)
+            {
+                m_timeSinceLastHit -= Time.deltaTime;
+                //Debug.Log("m_timeSinceLastHit: " + m_timeSinceLastHit);
+                if (m_timeSinceLastHit <= 0)
+                {
+                    //Debug.Log("Resetting m_isBeingHit");
+                    m_isBeingHit = false;
+                    m_timeSinceLastHit = m_maxTimeBetweenHits;
+                }
+            }
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.layer != GameConstants.PLAYER_COLLIDER
-                && collision.gameObject.layer != GameConstants.CLIENT_COLLIDER)
+            //Debug.Log("Collision name: " + collision + " m_isBeingHit: " + m_isBeingHit);
+            if (collision.gameObject.layer == GameConstants.PLAYER_COLLIDER && m_isBeingHit == false)
+            {
+                //Debug.Log("m_isBeingHit: " + m_isBeingHit + " Parent fame object: " + gameObject.transform.parent.gameObject.name);
+                //Debug.Log("Player collision: " + collision.gameObject.name);
+                float velocity = collision.impulse.magnitude;
+                m_currentHealth -= velocity;
+                _DynamicEnvironment.SetItemDestructionStage(this);
+                m_isBeingHit = true;
+                //Debug.Log("m_isBeingHit: " + m_isBeingHit);
                 return;
-
-            float velocity = collision.impulse.magnitude;
-            m_itemHealthPoints -= velocity;
-            _DynamicEnvironment.SetItemDestructionStage(this);
+            }
+            else if (collision.gameObject.layer == GameConstants.CLIENT_COLLIDER && m_isBeingHit == false)
+            {
+                float velocity = collision.impulse.magnitude;
+                //if (velocity > 40.0f) velocity = 20; // NPCs are stronger in the five first seconds of the game
+                m_currentHealth -= (velocity / 4); // NPCs are weaker than the player
+                //Debug.Log("impact: " + (velocity /  1.5f));
+                //Debug.Log("velocity: " + velocity);
+                //Debug.Log("Current health: " + m_currentHealth);
+                _DynamicEnvironment.SetItemDestructionStage(this);
+                m_isBeingHit = true;
+                return;
+            }
         }
 
         /// <summary> Resets the item's health points and destruction stages </summary>
         internal void ResetItem()
         {
-            m_itemHealthPoints = m_max_health;
+            //Debug.Log("Resetting item");
+            m_currentHealth = m_maxHealth;
             m_isDestructionStageZero = false;
             m_isDestructionStageOne = false;
-            m_m_isDestructionStageTwo = false;
+            m_isDestructionStageTwo = false;
         }
 
         /// <summary> Returns the item's health points </summary>
-        internal float GetHItemHealthPoints()
+        internal float GetHItemCurrentHealth()
         {
-            return m_itemHealthPoints;
+            return m_currentHealth;
+        }
+
+        internal void ResetItemCurrentHealth()
+        {
+            //Debug.Log("Resetting item health");
+            m_currentHealth = m_maxHealth;
+        }
+
+        /// <summary> Returns the item's max health points </summary>
+        internal float GetMaxHealth()
+        {
+            return m_maxHealth;
         }
 
         /// <summary> Retrun true if the given has already been activated </summary>
-        internal bool GetIsStageDestructionActive(int stage)
+        internal bool GetIsStageDestructionActive(DestructionStage stage)
         {
-            if (stage == 0)
+            if (stage == DestructionStage.One)
                 return m_isDestructionStageZero;
-            else if (stage == 1)
+            else if (stage == DestructionStage.Two)
                 return m_isDestructionStageOne;
-            else if (stage == 2)
-                return m_m_isDestructionStageTwo;
+            else if (stage == DestructionStage.Three)
+                return m_isDestructionStageTwo;
             else
                 return false;
         }
 
         /// <summary> Sets the given stage to active or inactive </summary>
-        internal void SetIsStageDestructionActive(int stage, bool value)
+        internal void SetIsStageDestructionActive(DestructionStage stage, bool value)
         {
-            if (stage == 0)
+            if (stage == DestructionStage.One)
                 m_isDestructionStageZero = value;
-            else if (stage == 1)
+            else if (stage == DestructionStage.Two)
                 m_isDestructionStageOne = value;
-            else if (stage == 2)
-                m_m_isDestructionStageTwo = value;
+            else if (stage == DestructionStage.Three)
+                m_isDestructionStageTwo = value;
         }
 
         /// <summary> Returns the item's id </summary>

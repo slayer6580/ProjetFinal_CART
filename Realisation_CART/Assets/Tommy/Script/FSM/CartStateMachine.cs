@@ -73,9 +73,8 @@ namespace CartControl
         public CartMovement CartMovement { get; private set; }
         public ManageGrindVfx GrindVfx { get; private set; }
 
-
-		//
-		[Space]
+        //
+        [Space]
 		[Header("Temp Testing")]
 		public TowerBalanceAnimCtrlr m_towerCtrlr;
 
@@ -88,9 +87,10 @@ namespace CartControl
 		
 		[field: SerializeField] public float DriftingAccelerationUpgrades { get; private set; }
 
-		//
+        //
+        public CartPhysicsPresets _CartPhysicsPresets { get; private set; } = null;
 
-		[HideInInspector] public GameObject LastClientCollisionWith { get; set; }
+        [HideInInspector] public GameObject LastClientCollisionWith { get; set; }
         [HideInInspector] public bool ForceStartDrift { get; set; }
         [HideInInspector] public bool IsDrifting { get; set; }
         //[HideInInspector] public bool CanBoost { get; set; }
@@ -106,12 +106,6 @@ namespace CartControl
 
         private void InitializeVariables()
         {
-			/*
-            Scene scene = gameObject.scene;
-            GameObject[] gameObjects = scene.GetRootGameObjects();
-
-            GameObject cameras = gameObjects[0];
-			*/
 			GameObject cameras = GameObject.Find("CameraSystem");
 
 			if (cameras == null || cameras.name != "CameraSystem") Debug.LogError("Cameras not found");
@@ -133,10 +127,14 @@ namespace CartControl
             CartMovement = GetComponent<CartMovement>();
             GrindVfx = GetComponentInChildren<ManageGrindVfx>();
 
+
             ParentOfAllVisual = transform.GetChild(0).gameObject;
 
             if (ParentOfAllVisual.name == "GrindVFX") return; // Vérify if Player still has GrindVFX as first child.
             if (ParentOfAllVisual.name != "Parent") Debug.LogWarning("Not a client or Parent not found or not named Parent. Current name: " + ParentOfAllVisual.name);
+
+            _CartPhysicsPresets = gameObject.GetComponent<CartPhysicsPresets>();
+            if (_CartPhysicsPresets == null) Debug.LogError("CartPhysicsPresets not found");
         }
 
         protected override void Start()
@@ -219,7 +217,7 @@ namespace CartControl
 
 		public void OnCollisionEnter(Collision collision)
 		{
-			if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerCollider"))
+			if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerCollider") || collision.gameObject.layer == LayerMask.NameToLayer("ClientCollider"))
 			{
 				if(collision.gameObject.GetComponent<CartStateMachine>() != null)
 				{

@@ -9,12 +9,14 @@ namespace StatsSystem
         [SerializeField] private Material[] m_wheelsMaterials;
         [SerializeField] private Material[] m_shoesMaterials;
         [SerializeField] private Material[] m_rocketMaterials;
+        [SerializeField] private Material[] m_canonMaterials;
 
         [Header("All Parts")]
         [SerializeField] private MeshRenderer[] m_cartParts;
         [SerializeField] private MeshRenderer[] m_wheelParts;
         [SerializeField] private MeshRenderer[] m_rocketParts;
         [SerializeField] private SkinnedMeshRenderer m_shoePart;
+        [SerializeField] private MeshRenderer m_canonPart;
 
         private static VisualManager Instance;
 
@@ -41,6 +43,12 @@ namespace StatsSystem
             foreach (var wheelPart in m_wheelParts)
                 wheelPart.material = m_wheelsMaterials[wheelUpgrade];
 
+        }
+
+        private void UpdateCanon()
+        {
+            int canonUpgrade = PlayerPrefs.GetInt("Ranged", 0);
+            m_canonPart.material = m_canonMaterials[canonUpgrade];
         }
 
         private void UpdateCart()
@@ -75,6 +83,7 @@ namespace StatsSystem
             UpdateShoes();
             UpdateWheels();
             UpdateRockets();
+            UpdateCanon();
         }
 
     }

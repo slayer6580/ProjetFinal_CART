@@ -14,7 +14,7 @@ namespace DiscountDelirium
 
         private void Awake()
         {
-            Debug.Log("AudioManager Awake");
+            //Debug.Log("AudioManager Awake");
             if (_ClientPathList != null)
             {
                 Debug.LogWarning("AudioManager already exists.");

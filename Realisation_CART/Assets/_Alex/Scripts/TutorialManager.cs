@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -15,6 +16,7 @@ namespace DiscountDelirium
         [SerializeField] private Color32 m_sectionNotSelectedColor;
         [SerializeField] private TextMeshProUGUI m_AButtonText;
         [SerializeField] private GameObject m_backPanel;
+        private Vector3 m_UIAudioPosition = new Vector3(0, 0, 0);
         private int m_currentPage = 0;
         private int m_nbOfPages = 0;
 
@@ -30,6 +32,8 @@ namespace DiscountDelirium
 
         private void UpdatePage()
         {
+            DeselectAllButtons();
+
             if ( (m_currentPage == 0))            
                 m_backPanel.SetActive(false);            
             else
@@ -77,6 +81,8 @@ namespace DiscountDelirium
             }
 
             UpdatePage();
+
+            _AudioManager.PlayUIHoverSound();
         }
 
         public void OnDecline()
@@ -87,6 +93,14 @@ namespace DiscountDelirium
             m_currentPage--;
 
             UpdatePage();
+
+            _AudioManager.PlayUIBackSound();
+        }
+
+        private void DeselectAllButtons()
+        {
+            GameObject myEventSystem = GameObject.Find("EventSystem");
+            myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
         }
     }
 }
