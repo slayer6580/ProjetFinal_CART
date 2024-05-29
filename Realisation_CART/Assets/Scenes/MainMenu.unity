@@ -7193,7 +7193,7 @@ MonoBehaviour:
   m_cursor: {fileID: 629666003}
   m_masterSlider: {fileID: 2077791762}
   m_musicSlider: {fileID: 249897515}
-  m_soundSlider: {fileID: 433409720}
+  m_soundFXSlider: {fileID: 433409720}
   <MainMenuMusic>k__BackingField: 0
 --- !u!1001 &5276695586665175190
 PrefabInstance:
