@@ -114,7 +114,7 @@ namespace DiscountDelirium
 
         public void SetSoundVolume()
         {
-            Debug.Log("Sound Volume: " + m_soundSlider.value);
+            //Debug.Log("Sound Volume: " + m_soundSlider.value);
             PlayerPrefs.SetFloat("SoundVolume", m_soundSlider.value);
             for (int i = 0; i < _AudioManager.GetAudioBox().Count; i++)
             {
