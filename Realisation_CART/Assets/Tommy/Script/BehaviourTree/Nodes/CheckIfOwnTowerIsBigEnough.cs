@@ -10,7 +10,7 @@ namespace BehaviourTree
 
 		protected override void OnStart()
 		{
-			boxNeeded = Random.Range(m_minBoxRequired, m_maxBoxRequired);
+			boxNeeded = Random.Range(m_blackboard.m_boxBeforeCheckout - 2, m_blackboard.m_boxBeforeCheckout + 2);
 		}
 
 		protected override void OnStop()

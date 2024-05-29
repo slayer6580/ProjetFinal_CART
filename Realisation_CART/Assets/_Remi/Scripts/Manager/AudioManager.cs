@@ -134,7 +134,7 @@ namespace Manager
             }
             else if (modif == EAudioModification.SoundVolume)
             {
-                float currentVolume = PlayerPrefs.GetFloat("SoundVolume", 1);
+                float currentVolume = PlayerPrefs.GetFloat("SoundFXVolume", 1);
                 audioSource.volume = Mathf.Min(value, currentVolume);
             }
             else if (modif == EAudioModification.MusicVolume)
