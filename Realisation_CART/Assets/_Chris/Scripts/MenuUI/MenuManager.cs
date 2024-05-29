@@ -12,6 +12,7 @@ namespace DiscountDelirium
         [Header("Menus")]
         [SerializeField] private GameObject m_mainMenu;
         [SerializeField] private GameObject m_optionsMenu;
+        [SerializeField] private GameObject m_creditsPanel;
 
         [Header("Virtual Cursor")]
         [SerializeField] private GameObject m_cursor;
@@ -120,6 +121,12 @@ namespace DiscountDelirium
             {
                 _AudioManager.ModifyAudio(i, EAudioModification.SoundVolume, m_soundSlider.value);
             }
+        }
+
+        public void ShowCredits(bool active) 
+        {
+            m_mainMenu.SetActive(!active);
+            m_creditsPanel.SetActive(active);
         }
     }
 }
