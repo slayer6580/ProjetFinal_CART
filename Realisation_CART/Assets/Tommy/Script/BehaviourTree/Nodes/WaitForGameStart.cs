@@ -10,6 +10,7 @@ namespace BehaviourTree
 
 		protected override void OnStart()
 		{
+			Debug.Log("Test");
 			GetReadyState.OnGameStarted += GameStarted;
 		}
 

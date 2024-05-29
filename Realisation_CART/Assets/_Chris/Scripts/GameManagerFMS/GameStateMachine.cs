@@ -72,6 +72,7 @@ namespace DiscountDelirium
             m_possibleStates.Add(new GameCheckoutState());
         }
 
+        
         public void GetScoreFromCart(Vector3 data) 
         {         
             m_nbItems += (int)data.x;
@@ -81,5 +82,10 @@ namespace DiscountDelirium
 
             m_upgrademanager.AddMoney((int)data.z);
 		}
+
+        public GameState GetCurrentState()
+        {
+            return m_currentState;
+        }
     }
 }
