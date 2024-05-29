@@ -1473,7 +1473,7 @@ namespace Spawner
 
         internal void RandomizeHairMaterial()
         {
-            Debug.Log("Randomize Hair Material");
+            //Debug.Log("Randomize Hair Material");
             int randomMaterial = UnityEngine.Random.Range(0, 4);
             Material material = null;
 
