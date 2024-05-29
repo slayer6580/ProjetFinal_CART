@@ -122,7 +122,7 @@ namespace DiscountDelirium
         public void SetSoundVolume()
         {
             if (m_soundFXSlider == null) Debug.LogError("No sound slider found!");
-            Debug.Log("Sound slide value: " + m_soundFXSlider.value);
+            //Debug.Log("Sound slide value: " + m_soundFXSlider.value);
             PlayerPrefs.SetFloat("SoundFXVolume", m_soundFXSlider.value);
             for (int i = 0; i < _AudioManager.GetAudioBox().Count; i++)
             {
