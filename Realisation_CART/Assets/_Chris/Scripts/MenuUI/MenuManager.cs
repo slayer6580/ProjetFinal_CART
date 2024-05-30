@@ -46,7 +46,7 @@ namespace DiscountDelirium
             m_UIFXSlider.value = PlayerPrefs.GetFloat("UIFXVolume", 1.0f);
 
             _AudioManager.SetMainMenuMusic(MainMenuMusic);
-            //m_audioSourceIndex = _AudioManager.StartCurrentSceneMusic();
+            _AudioManager.StartCurrentSceneMusic();
         }
 
         public void StartGame()
