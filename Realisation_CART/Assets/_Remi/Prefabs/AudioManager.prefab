@@ -71,7 +71,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 284a0b27986b9cf4e82d884a86a1f83f, type: 3}
   - {fileID: 8300000, guid: 93a8481c23155f847b813e63749ec147, type: 3}
   m_musicPool:
-  - {fileID: 8300000, guid: 6c5d9f9fe6f2fd64ab994c5e0c11286b, type: 3}
+  - {fileID: 8300000, guid: d01bb565ee1700f41b3c00fd7a790e09, type: 3}
   - {fileID: 8300000, guid: 41aebfe3e376c6740a2e3c716ca87fa4, type: 3}
   - {fileID: 8300000, guid: baab972e31af7fd4fb4e95cc64d4c309, type: 3}
   - {fileID: 8300000, guid: 21ecd5559fc781d439a4e4fa229c0b4d, type: 3}
