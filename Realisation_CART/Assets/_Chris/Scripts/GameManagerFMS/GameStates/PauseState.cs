@@ -13,7 +13,8 @@ namespace DiscountDelirium
             Debug.LogWarning("GameState : PAUSE");
 
             _AudioManager.MuteAllAudioBoxes(true);
-   
+            _AudioManager.PauseMusic(true);
+
             OnPause?.Invoke();
             
             Time.timeScale = 0;
@@ -38,6 +39,7 @@ namespace DiscountDelirium
 			OnResume?.Invoke();
 
             _AudioManager.MuteAllAudioBoxes(false);
+            _AudioManager.PauseMusic(false);
         }
 
         public override bool CanEnter(IState currentState)

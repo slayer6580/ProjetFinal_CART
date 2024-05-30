@@ -514,5 +514,17 @@ namespace Manager
                 }
             }
         }
+
+        internal void PauseMusic(bool isPaused)
+        {
+            if (isPaused)
+            {
+                MusicAudioSource.Pause();
+            }
+            else
+            {
+                MusicAudioSource.UnPause();
+            }
+        }
     }
 }
