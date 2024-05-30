@@ -25,12 +25,16 @@ namespace StatsSystem
 
         [field: Header("Put main character here")]
         [field: SerializeField] public CartStateMachine CartMachine { get; private set; }
+      
 
         [Header("Next Scene")]
         [SerializeField] private string m_nextSceneName;
 
         [Header("Put main virtual camera here")]
         [SerializeField] private CinemachineVirtualCamera m_virtualCamera;
+
+        [Header("Put cinemachineBrain here")]
+        [SerializeField] private CinemachineBrain m_cinemachineBrain;
 
         [Header("Put character scene position here")]
         [SerializeField] private Transform m_scenePosition;
@@ -256,6 +260,9 @@ namespace StatsSystem
         {
             UpdateAll();
             m_virtualCamera.Priority = 8;
+
+            m_cinemachineBrain.m_DefaultBlend.m_Style = CinemachineBlendDefinition.Style.Cut;
+
             Rigidbody rb = CartMachine.gameObject.GetComponent<Rigidbody>();
 
             if (rb != null)
