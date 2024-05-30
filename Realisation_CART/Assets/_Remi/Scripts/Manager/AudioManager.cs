@@ -93,7 +93,9 @@ namespace Manager
             MusicAudioSource = GetComponent<AudioSource>();
             if (MusicAudioSource == null) Debug.LogError("No AudioSource on AudioManager");
 
-            UIAudioSource = GetComponentInChildren<AudioSource>();
+            GameObject child = transform.GetChild(0).gameObject;
+            if (child.name != "UIAudioSource") Debug.LogWarning("UIAudioSource renamed, moved or not found! Current game object: " + child.name);
+            UIAudioSource = child.GetComponent<AudioSource>();
             if (UIAudioSource == null) Debug.LogError("No UI AudioSource on AudioManager");
         }
 
@@ -125,7 +127,6 @@ namespace Manager
         {
             //Debug.Log("StopUIScrollSound");
             StopUISoundLoop();
-
         }
 
         private void PlayUISoundOneShot(ESound uiSound)
