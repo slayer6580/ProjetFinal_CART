@@ -67,6 +67,7 @@ namespace Manager
             SoundPitch,
             SoundVolume,
             MusicVolume,
+            UIVolume,
             MasterVolume,
             Count
         }
@@ -169,27 +170,32 @@ namespace Manager
         /// <summary> Modify the pitch or volume of a sound of a music </summary>
         public void ModifyAudio(int index, EAudioModification modif, float value = 0)
         {
-            if (index < 0 || index >= m_audioBox.Count)
+            Debug.Log("ModifyAudio: " + modif + " Value: " + value + " Index: " + index);
+            if (index > 0 && index <= m_audioBox.Count)
             {
-                Debug.LogWarning("No more audio box available");
+                //Debug.LogWarning("No more audio box available");
+                AudioSource audioSource = m_audioBox[index]._AudioSource;
+
+                if (modif == EAudioModification.SoundPitch)
+                {
+                    audioSource.pitch = value;
+                }
+                else if (modif == EAudioModification.SoundVolume)
+                {
+                    float currentVolume = PlayerPrefs.GetFloat("SoundFXVolume", 1);
+                    audioSource.volume = Mathf.Min(value, currentVolume);
+                }
                 return;
-            }
-
-            AudioSource audioSource = m_audioBox[index]._AudioSource;
-
-            if (modif == EAudioModification.SoundPitch)
-            {
-                audioSource.pitch = value;
-            }
-            else if (modif == EAudioModification.SoundVolume)
-            {
-                float currentVolume = PlayerPrefs.GetFloat("SoundFXVolume", 1);
-                audioSource.volume = Mathf.Min(value, currentVolume);
             }
             else if (modif == EAudioModification.MusicVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
                 MusicAudioSource.volume = Mathf.Min(value, currentVolume);
+            }
+            else if (modif == EAudioModification.UIVolume)
+            {
+                float currentVolume = PlayerPrefs.GetFloat("SoundFXVolume", 1);
+                UIAudioSource.volume = Mathf.Min(value, currentVolume);
             }
             else if (modif == EAudioModification.MasterVolume)
             {

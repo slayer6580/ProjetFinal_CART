@@ -24,7 +24,7 @@ namespace DiscountDelirium
 
         [field: Header("Main Menu Scene")]
         [field: SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
-        private int m_audioSourceIndex;
+        //private int m_audioSourceIndex;
 
         private void Awake()
         {
@@ -41,7 +41,7 @@ namespace DiscountDelirium
             m_soundFXSlider.value = PlayerPrefs.GetFloat("SoundFXVolume", 1.0f);
 
             _AudioManager.SetMainMenuMusic(MainMenuMusic);
-            m_audioSourceIndex = _AudioManager.StartCurrentSceneMusic();
+            //m_audioSourceIndex = _AudioManager.StartCurrentSceneMusic();
         }
 
         public void StartGame()
@@ -108,14 +108,14 @@ namespace DiscountDelirium
         {
             //Debug.Log("Master Volume: " + m_masterSlider.value);
             PlayerPrefs.SetFloat("MasterVolume", m_masterSlider.value);
-            _AudioManager.ModifyAudio(0, EAudioModification.MasterVolume, m_masterSlider.value);
+            _AudioManager.ModifyAudio(-1, EAudioModification.MasterVolume, m_masterSlider.value);
         }
 
         public void SetMusicVolume()
         {
             //Debug.Log("Music Volume: " + m_musicSlider.value);
             PlayerPrefs.SetFloat("MusicVolume", m_musicSlider.value);
-            _AudioManager.ModifyAudio(m_audioSourceIndex, EAudioModification.MusicVolume, m_musicSlider.value);
+            _AudioManager.ModifyAudio(-1, EAudioModification.MusicVolume, m_musicSlider.value);
         }
 
         public void SetSoundVolume()
@@ -127,6 +127,8 @@ namespace DiscountDelirium
             {
                 _AudioManager.ModifyAudio(i, EAudioModification.SoundVolume, m_soundFXSlider.value);
             }
+
+            _AudioManager.ModifyAudio(-1, EAudioModification.UIVolume, m_soundFXSlider.value);
         }
 
         public void ShowCredits(bool active) 
