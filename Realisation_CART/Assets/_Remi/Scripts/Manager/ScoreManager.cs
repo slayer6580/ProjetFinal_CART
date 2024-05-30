@@ -21,8 +21,8 @@ namespace Manager
         private float m_checkoutTimer;
         private int m_boxCheckoutActivated;
         private int m_boxCheckoutIsDone;
-        private float fallingBoxOverTime;
-        private CheckoutZone m_currentCheckoutZone;
+        private float m_fallingBoxOverTime;
+		private CheckoutZone m_currentCheckoutZone;
         private List<GameObject> m_bonusText = new List<GameObject>();
         private const float BOX_FALL_HEIGHT = 3;
 
@@ -82,7 +82,9 @@ namespace Manager
                                                                                                 m_currentCheckoutZone.BonusText.transform.position.y + (i * BoxManager.GetInstance().BoxHeight),
                                                                                                 m_currentCheckoutZone.BonusText.transform.position.z), m_currentCheckoutZone.BonusText.transform.rotation, m_currentCheckoutZone.transform);
                             m_bonusText.Add(bonusText);
-                            bonusText.GetComponent<TextMesh>().text = "x" + Mathf.Pow(2, i).ToString();
+
+		                           
+                            bonusText.GetComponent<TextMesh>().text = "+" + (1+(i*2)).ToString();
                             bonusText.SetActive(true);
                             m_boxCheckoutIsDone++;
 
@@ -90,7 +92,7 @@ namespace Manager
                             if (m_boxCheckoutIsDone >= m_boxList.Count)
                             {
                                 //Get the time to manage next step of the animation
-                                fallingBoxOverTime = m_checkoutTimer;
+                                m_fallingBoxOverTime = m_checkoutTimer;
                                 //Stop the camera animation
                                 m_currentCheckoutZone.ThisAnimatior.speed = 0;
 
@@ -99,7 +101,7 @@ namespace Manager
                     }
                 }
 
-                if (m_checkoutTimer > fallingBoxOverTime + m_restTimeAfterAllBoxOnCounter)
+                if (m_checkoutTimer > m_fallingBoxOverTime + m_restTimeAfterAllBoxOnCounter)
                 {
 
                     if (m_checkOutEnding == false)
@@ -118,7 +120,7 @@ namespace Manager
                     }
 
                     //Reset everything and stop checkout
-                    if (m_checkoutTimer > fallingBoxOverTime + m_restTimeAfterAllBoxOnCounter + m_showBoxGoesUpTime)
+                    if (m_checkoutTimer > m_fallingBoxOverTime + m_restTimeAfterAllBoxOnCounter + m_showBoxGoesUpTime)
                     {
                         foreach (Box box in m_boxList)
                         {
@@ -148,9 +150,10 @@ namespace Manager
             m_checkoutTimer = 0;
             m_boxCheckoutActivated = 0;
             m_boxCheckoutIsDone = 0;
-            fallingBoxOverTime = 1000;
+            m_fallingBoxOverTime = 1000;
             m_currentCheckoutZone.ThisAnimatior.speed = 1;
-            m_boxList.Clear();
+
+			m_boxList.Clear();
 
             CalculateCartokens();
             int totalScore = 0;
