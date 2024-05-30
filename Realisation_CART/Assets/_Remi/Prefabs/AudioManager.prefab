@@ -80,6 +80,13 @@ MonoBehaviour:
   m_audioBoxPrefab: {fileID: 4505294473948690396, guid: 3c1558d66b0fbd644aa718b3bdcab989,
     type: 3}
   m_audioBox: []
+  m_masterGroup: {fileID: 24300002, guid: d22ed9f5a87cf594f83902a148fd925c, type: 2}
+  m_sfxGroup: {fileID: -5515098868320193637, guid: d22ed9f5a87cf594f83902a148fd925c,
+    type: 2}
+  m_musicGroup: {fileID: 3623662677712181665, guid: d22ed9f5a87cf594f83902a148fd925c,
+    type: 2}
+  m_uiGroup: {fileID: 4889462055886787233, guid: d22ed9f5a87cf594f83902a148fd925c,
+    type: 2}
   <MainMenuMusic>k__BackingField: 0
   <LevelOneMusic>k__BackingField: 1
   <LevelTwoMusic>k__BackingField: 2

@@ -9,6 +9,8 @@ namespace AudioControl
         [SerializeField] private float m_minVolume = -40;
         [SerializeField] private float m_maxVolume = 20;
 
+       
+
         private void Awake()
         {
             SetVolume();
@@ -16,13 +18,15 @@ namespace AudioControl
 
         public void SetVolume()
         {
-            float master = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("MasterVolume", 1));
-            float music = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("MusicVolume", 1));
-            float sfx = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("SoundFXVolume", 1));
+            float master = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("MasterVolume", 0));
+            float music = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("MusicVolume", 0));
+            float sfx = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("SoundFXVolume", 0));
+            float ui = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("UIFXVolume", 0));
 
             m_audioMixer.SetFloat("MasterVolume", master);
             m_audioMixer.SetFloat("MusicVolume", music);
             m_audioMixer.SetFloat("SoundFXVolume", sfx);
+            m_audioMixer.SetFloat("UIFXVolume", ui);
         }
     }
 }
