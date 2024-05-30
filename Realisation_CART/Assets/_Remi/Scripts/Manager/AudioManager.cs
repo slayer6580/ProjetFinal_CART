@@ -120,7 +120,7 @@ namespace Manager
         public void PlayUIScrollSound()
         {
             //Debug.Log("PlayUIScrollSound");
-            m_scrollAudioBox = MusicOptionSliderEffect(ESound.UIScroll, Vector3.zero);
+            //m_scrollAudioBox = MusicOptionSliderEffect(ESound.UIScroll, Vector3.zero);
             PlayUISoundLoop(ESound.UIScroll);
         }
 
@@ -162,15 +162,18 @@ namespace Manager
 
         private void StopUISoundLoop()
         {
-            UIAudioSource.volume = 1;
-            UIAudioSource.pitch = 1;
+            Debug.Log("StopUISoundLoop");
+            UIAudioSource.Pause();
             UIAudioSource.Stop();
+            UIAudioSource.loop = false;
+            UIAudioSource.pitch = 1;
+            UIAudioSource.volume = 1;
         }
 
         /// <summary> Modify the pitch or volume of a sound of a music </summary>
         public void ModifyAudio(int index, EAudioModification modif, float value = 0)
         {
-            Debug.Log("ModifyAudio: " + modif + " Value: " + value + " Index: " + index);
+            //Debug.Log("ModifyAudio: " + modif + " Value: " + value + " Index: " + index);
             if (index > 0 && index <= m_audioBox.Count)
             {
                 //Debug.LogWarning("No more audio box available");

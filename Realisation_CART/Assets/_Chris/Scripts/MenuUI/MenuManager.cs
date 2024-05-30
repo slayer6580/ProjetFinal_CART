@@ -72,6 +72,7 @@ namespace DiscountDelirium
                 m_mainMenu.SetActive(false);
                 m_optionsMenu.SetActive(false);
                 m_cursor.SetActive(false);
+                _AudioManager.StopUIScrollSound();
             }
         }
 
@@ -109,6 +110,7 @@ namespace DiscountDelirium
             //Debug.Log("Master Volume: " + m_masterSlider.value);
             PlayerPrefs.SetFloat("MasterVolume", m_masterSlider.value);
             _AudioManager.ModifyAudio(-1, EAudioModification.MasterVolume, m_masterSlider.value);
+            _AudioManager.ModifyAudio(-1, EAudioModification.UIVolume, m_masterSlider.value);
         }
 
         public void SetMusicVolume()
