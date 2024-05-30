@@ -1,3 +1,4 @@
+using CartControl;
 using System;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ namespace DiscountDelirium
             m_gameStateMachine.m_scoreUI.EnableUI(true);
             m_gameStateMachine.m_scoreUI.ShowScore(PlayerPrefs.GetInt("Score", 0), m_gameStateMachine.m_nbItems, m_gameStateMachine.m_nbOfCartokens, m_gameStateMachine.Score);
             m_gameStateMachine.m_playerSM.IsPaused = true;
+
+            // Désactiver le pause au endGame
+            MainInputsHandler mainInput = m_gameStateMachine.m_playerSM.gameObject.GetComponent<MainInputsHandler>();
+            mainInput.enabled = false;
+
             OnEndGame.Invoke();
         }
 
