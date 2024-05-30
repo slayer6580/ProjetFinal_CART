@@ -280,7 +280,8 @@ namespace Manager
 
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
-            MoveAudioBoxLocal(audiobox, Vector3.zero);
+            //MoveAudioBoxLocal(audiobox, Vector3.zero);
+            MoveAudioBoxWorld(audiobox, parent.position);
             PlayClipLoop(audiobox, sound);
             return index;
         }

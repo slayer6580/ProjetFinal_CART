@@ -102,7 +102,6 @@ namespace DiscountDelirium
                 return;
             }
             Debug.LogWarning("No cursor");
-            
         }
 
         public void SetMasterVolume()

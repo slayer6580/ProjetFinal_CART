@@ -19,5 +19,19 @@ namespace AudioControl
             m_audioMixer.SetFloat("MusicVolume", music);
             m_audioMixer.SetFloat("SoundFXVolume", sfx);
         }
+
+        public void SetMasterVolume(float volume)
+        {
+            PlayerPrefs.SetFloat("MasterVolume", volume);
+            float master = Mathf.Lerp(m_minVolume, m_maxVolume, volume);
+            m_audioMixer.SetFloat("MasterVolume", master);
+        }
+
+        public void SetMusicVolume(float volume)
+        {
+            PlayerPrefs.SetFloat("MusicVolume", volume);
+            float music = Mathf.Lerp(m_minVolume, m_maxVolume, volume);
+            m_audioMixer.SetFloat("MusicVolume", music);
+        }
     }
 }
