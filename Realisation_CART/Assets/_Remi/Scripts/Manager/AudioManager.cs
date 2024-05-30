@@ -272,7 +272,7 @@ namespace Manager
             audiobox._AudioSource.volume = volume;
             audiobox._AudioSource.pitch = pitch;
 
-            MoveAudioBoxLocal(audiobox, newPosition);
+            MoveAudioBoxWorld(audiobox, newPosition);
             PlayClipOneShot(audiobox, sound);
             StartCoroutine(ReActivateAudioBox(audiobox, clip));
         }
