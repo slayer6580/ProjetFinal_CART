@@ -63,9 +63,12 @@ namespace BoxSystem
 
         private void Update()
         {
-            KeyboardDebug();
+       
             BoxMovement();
             CollisionAnimation();
+#if UNITY_EDITOR
+            KeyboardDebug();
+#endif
         }
 
 
