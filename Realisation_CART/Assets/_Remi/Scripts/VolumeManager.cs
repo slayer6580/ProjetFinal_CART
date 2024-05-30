@@ -11,6 +11,11 @@ namespace AudioControl
 
         private void Awake()
         {
+            SetVolume();
+        }
+
+        public void SetVolume()
+        {
             float master = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("MasterVolume", 1));
             float music = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("MusicVolume", 1));
             float sfx = Mathf.Lerp(m_minVolume, m_maxVolume, PlayerPrefs.GetFloat("SoundFXVolume", 1));

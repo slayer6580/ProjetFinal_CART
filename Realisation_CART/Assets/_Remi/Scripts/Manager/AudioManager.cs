@@ -48,6 +48,7 @@ namespace Manager
             MeleeSwoosh, CannonSound, Hit, Splat,
             UIHover, UIClick, UIBack, UIScroll,
             FireStart, FireLoop, Sprinklers,
+            Countdown,
             Count
         }
 

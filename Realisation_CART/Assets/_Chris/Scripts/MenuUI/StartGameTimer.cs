@@ -54,17 +54,7 @@ namespace DiscountDelirium
             if (!m_timerEnded) 
             {
                 m_timeText.text = Mathf.Ceil(m_timeLeft).ToString();
-            }
-
-            if(m_oldString != m_timeText.text)
-            {
-                print("CHange text");
-				m_oldString = m_timeText.text;
-				_AudioManager.PlaySoundEffectsOneShot(ESound.GrabItem, m_player.transform.position, 1f);
-
-			}
-
-            
+            }  
         }
 
         IEnumerator ShowTextAfterTimer() 
