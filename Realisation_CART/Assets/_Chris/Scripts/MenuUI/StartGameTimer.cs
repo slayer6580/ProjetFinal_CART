@@ -1,7 +1,9 @@
+using Manager;
 using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -14,8 +16,12 @@ namespace DiscountDelirium
         [SerializeField] private string m_messageAfterTimer;
         [SerializeField] private int m_messageDuration;
 
-        private float m_timeLeft;
+        [SerializeField] private GameObject m_player;
+
+		private float m_timeLeft;
         private bool m_timerEnded;
+
+        private string m_oldString;
 
         void Start()
         {
@@ -49,6 +55,15 @@ namespace DiscountDelirium
             {
                 m_timeText.text = Mathf.Ceil(m_timeLeft).ToString();
             }
+
+            if(m_oldString != m_timeText.text)
+            {
+                print("CHange text");
+				m_oldString = m_timeText.text;
+				_AudioManager.PlaySoundEffectsOneShot(ESound.GrabItem, m_player.transform.position, 1f);
+
+			}
+
             
         }
 
