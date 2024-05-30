@@ -38,7 +38,6 @@ namespace DiscountDelirium
             m_masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
             m_musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
             if (m_soundFXSlider == null) Debug.LogError("No sound slider found!");
-            else Debug.Log("SoundFX slider found!"); ;
             m_soundFXSlider.value = PlayerPrefs.GetFloat("SoundFXVolume", 1.0f);
 
             _AudioManager.SetMainMenuMusic(MainMenuMusic);

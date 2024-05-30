@@ -21,6 +21,8 @@ namespace Manager
         [SerializeField] private List<AudioBox> m_audioBox;
 
         private AudioSource MusicAudioSource { get; set; }
+        private AudioSource UIAudioSource { get; set; }
+
         public static AudioManager _AudioManager { get; private set; }
 
         [field: SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
@@ -90,31 +92,77 @@ namespace Manager
 
             MusicAudioSource = GetComponent<AudioSource>();
             if (MusicAudioSource == null) Debug.LogError("No AudioSource on AudioManager");
+
+            UIAudioSource = GetComponentInChildren<AudioSource>();
+            if (UIAudioSource == null) Debug.LogError("No UI AudioSource on AudioManager");
         }
 
         public void PlayUIHoverSound()
         {
-            PlaySoundEffectsOneShot(ESound.UIHover, Vector3.zero);
+            PlayUISoundOneShot(ESound.UIHover);
         }
 
         public void PlayUIClickSound()
         {
-            PlaySoundEffectsOneShot(ESound.UIClick, Vector3.zero);
+            //Debug.Log("PlayUIClickSound");
+            PlayUISoundOneShot(ESound.UIClick);
         }
 
         public void PlayUIBackSound()
         {
-            PlaySoundEffectsOneShot(ESound.UIBack, Vector3.zero);
+            //Debug.Log("PlayUIBackSound");
+            PlayUISoundOneShot(ESound.UIBack);
         }
 
         public void PlayUIScrollSound()
         {
+            //Debug.Log("PlayUIScrollSound");
             m_scrollAudioBox = MusicOptionSliderEffect(ESound.UIScroll, Vector3.zero);
+            PlayUISoundLoop(ESound.UIScroll);
         }
 
         public void StopUIScrollSound()
         {
-            StopSoundEffectsLoop(m_scrollAudioBox);
+            //Debug.Log("StopUIScrollSound");
+            StopUISoundLoop();
+
+        }
+
+        private void PlayUISoundOneShot(ESound uiSound)
+        {
+            float volume = 1;
+            float pitch = 1;
+
+            AudioClip clip = m_soundsPool[(int)uiSound];
+
+            UIAudioSource.volume = volume;
+            UIAudioSource.pitch = pitch;
+
+            UIAudioSource.loop = false;
+            UIAudioSource.clip = m_soundsPool[(int)uiSound];
+            UIAudioSource.Play();
+        }
+
+        private void PlayUISoundLoop(ESound uiSound)
+        {
+            float volume = 1;
+            float pitch = 1;
+
+            AudioClip clip = m_soundsPool[(int)uiSound];
+
+            UIAudioSource.volume = volume;
+            UIAudioSource.pitch = pitch;
+
+            UIAudioSource.loop = true;
+            UIAudioSource.clip = m_soundsPool[(int)uiSound];
+            UIAudioSource.Play();
+        }
+
+        private void StopUISoundLoop()
+        {
+            UIAudioSource.volume = 1;
+            UIAudioSource.pitch = 1;
+            UIAudioSource.Stop();
         }
 
         /// <summary> Modify the pitch or volume of a sound of a music </summary>
@@ -238,7 +286,7 @@ namespace Manager
 
             AudioClip clip = m_soundsPool[(int)sound];
             audiobox.m_isPlaying = true;
-            MoveAudioBoxLocal(audiobox, newPosition);
+            MoveAudioBoxWorld(audiobox, newPosition);
             PlayClipLoop(audiobox, sound);
             return index;
         }
@@ -412,6 +460,27 @@ namespace Manager
             collisionPitch = ModifyAudioBasedOnBodySpeed(speed, EAudioModification.SoundPitch, collisionPitch);
             //Debug.Log("CollisionVolume: " + collisionVolume + " CollisionPitch: " + collisionPitch);
             _AudioManager.PlaySoundEffectsOneShot(ESound.CartCollision, position, collisionVolume, collisionPitch);
+        }
+
+        public void MuteAllAudioBoxes(bool isMuted)
+        {
+            //Debug.Log("MuteAllAudioBoxes");
+            foreach (AudioBox audioBox in m_audioBox)
+            {
+                //if (audioBox.m_isPlaying == false) return;
+
+                if (isMuted)
+                {
+                    //Debug.Log("MuteAllAudioBoxes: Mute");
+                    audioBox._AudioSource.mute = true;
+                    audioBox._AudioSource.Pause();
+                }
+                else
+                {
+                    audioBox._AudioSource.mute = false;
+                    audioBox._AudioSource.UnPause();
+                }
+            }
         }
     }
 }

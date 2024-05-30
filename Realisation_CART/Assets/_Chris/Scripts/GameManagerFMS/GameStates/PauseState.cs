@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -10,10 +11,13 @@ namespace DiscountDelirium
         public override void OnEnter()
         {
             Debug.LogWarning("GameState : PAUSE");
+
+            _AudioManager.MuteAllAudioBoxes(true);
    
             OnPause?.Invoke();
             
             Time.timeScale = 0;
+
         }
 
         public override void OnUpdate()
@@ -32,8 +36,8 @@ namespace DiscountDelirium
 
 			Time.timeScale = 1;
 			OnResume?.Invoke();
-            
-            
+
+            _AudioManager.MuteAllAudioBoxes(false);
         }
 
         public override bool CanEnter(IState currentState)
