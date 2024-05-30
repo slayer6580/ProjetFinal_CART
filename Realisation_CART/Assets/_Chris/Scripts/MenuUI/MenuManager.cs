@@ -1,3 +1,4 @@
+using AudioControl;
 using Manager;
 using System;
 using UnityEngine;
@@ -21,6 +22,9 @@ namespace DiscountDelirium
         [SerializeField] private Slider m_masterSlider;
         [SerializeField] private Slider m_musicSlider;
         [SerializeField] private Slider m_soundFXSlider;
+        [SerializeField] private Slider m_UIFXSlider;
+
+        [SerializeField] private VolumeManager m_volumeManager;
 
         [field: Header("Main Menu Scene")]
         [field: SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
@@ -39,6 +43,7 @@ namespace DiscountDelirium
             m_musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
             if (m_soundFXSlider == null) Debug.LogError("No sound slider found!");
             m_soundFXSlider.value = PlayerPrefs.GetFloat("SoundFXVolume", 1.0f);
+            m_UIFXSlider.value = PlayerPrefs.GetFloat("UIFXVolume", 1.0f);
 
             _AudioManager.SetMainMenuMusic(MainMenuMusic);
             //m_audioSourceIndex = _AudioManager.StartCurrentSceneMusic();
@@ -106,30 +111,29 @@ namespace DiscountDelirium
 
         public void SetMasterVolume()
         {
-            //Debug.Log("Master Volume: " + m_masterSlider.value);
             PlayerPrefs.SetFloat("MasterVolume", m_masterSlider.value);
-            _AudioManager.ModifyAudio(-1, EAudioModification.MasterVolume, m_masterSlider.value);
-            _AudioManager.ModifyAudio(-1, EAudioModification.UIVolume, m_masterSlider.value);
+            m_volumeManager.SetVolume();
+
         }
 
         public void SetMusicVolume()
-        {
-            //Debug.Log("Music Volume: " + m_musicSlider.value);
+        {     
             PlayerPrefs.SetFloat("MusicVolume", m_musicSlider.value);
-            _AudioManager.ModifyAudio(-1, EAudioModification.MusicVolume, m_musicSlider.value);
+            m_volumeManager.SetVolume();
+    
         }
 
         public void SetSoundVolume()
-        {
-            if (m_soundFXSlider == null) Debug.LogError("No sound slider found!");
-            //Debug.Log("Sound slide value: " + m_soundFXSlider.value);
+        { 
             PlayerPrefs.SetFloat("SoundFXVolume", m_soundFXSlider.value);
-            for (int i = 0; i < _AudioManager.GetAudioBox().Count; i++)
-            {
-                _AudioManager.ModifyAudio(i, EAudioModification.SoundVolume, m_soundFXSlider.value);
-            }
+            m_volumeManager.SetVolume();
+ 
+        }
 
-            _AudioManager.ModifyAudio(-1, EAudioModification.UIVolume, m_soundFXSlider.value);
+        public void SetUIVolume()
+        {
+            PlayerPrefs.SetFloat("UIFXVolume", m_UIFXSlider.value);
+            m_volumeManager.SetVolume();
         }
 
         public void ShowCredits(bool active) 

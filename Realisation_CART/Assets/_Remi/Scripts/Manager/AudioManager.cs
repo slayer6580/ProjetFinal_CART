@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 namespace Manager
@@ -22,6 +23,11 @@ namespace Manager
 
         private AudioSource MusicAudioSource { get; set; }
         private AudioSource UIAudioSource { get; set; }
+
+        [SerializeField] private AudioMixerGroup m_masterGroup;
+        [SerializeField] private AudioMixerGroup m_sfxGroup;
+        [SerializeField] private AudioMixerGroup m_musicGroup;
+        [SerializeField] private AudioMixerGroup m_uiGroup;
 
         public static AudioManager _AudioManager { get; private set; }
 
@@ -118,11 +124,11 @@ namespace Manager
             PlayUISoundOneShot(ESound.UIBack);
         }
 
-        public void PlayUIScrollSound()
+        public void PlayUIScrollSound(int value)
         {
             //Debug.Log("PlayUIScrollSound");
             //m_scrollAudioBox = MusicOptionSliderEffect(ESound.UIScroll, Vector3.zero);
-            PlayUISoundLoop(ESound.UIScroll);
+            PlayUISoundLoop(value);
         }
 
         public void StopUIScrollSound()
@@ -146,25 +152,39 @@ namespace Manager
             UIAudioSource.Play();
         }
 
-        private void PlayUISoundLoop(ESound uiSound)
+        private void PlayUISoundLoop(int value)
         {
-            float volume = 1;
-            float pitch = 1;
+            AudioMixerGroup mixerGroup;
+            switch (value)
+            {
+                case 0:
+                    mixerGroup = m_masterGroup;
+                    break;
+                case 1:
+                    mixerGroup = m_musicGroup;
+                    break;
+                case 2:
+                    mixerGroup = m_sfxGroup;
+                    break;
+                case 3:
+                    mixerGroup = m_uiGroup;
+                    break;
+                default:
+                    mixerGroup = m_uiGroup;
+                    break;
+            }
 
-            AudioClip clip = m_soundsPool[(int)uiSound];
-
-            UIAudioSource.volume = volume;
-            UIAudioSource.pitch = pitch;
+            UIAudioSource.outputAudioMixerGroup = mixerGroup;
 
             UIAudioSource.loop = true;
-            UIAudioSource.clip = m_soundsPool[(int)uiSound];
+            UIAudioSource.clip = m_soundsPool[19];
             UIAudioSource.Play();
         }
 
         private void StopUISoundLoop()
         {
             Debug.Log("StopUISoundLoop");
-            UIAudioSource.Pause();
+           // UIAudioSource.Pause();
             UIAudioSource.Stop();
             UIAudioSource.loop = false;
             UIAudioSource.pitch = 1;
@@ -339,31 +359,31 @@ namespace Manager
             {
                 Debug.Log("Playing MainMenuMusic");
                 index = PlayMusic(_AudioManager.MainMenuMusic);
-                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
+             //   ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Tutorial")
             { 
                 Debug.Log("Playing WaitingRoomMusic");
                 index = PlayMusic(_AudioManager.TutorialMusic);
-                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
+               // ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Level01")
             {
                 Debug.Log("Playing LevelOneMusic");
                 index = PlayMusic(_AudioManager.LevelOneMusic);
-                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
+               // ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Level02")
             { 
                 Debug.Log("Playing LevelTwoMusic");
                 index = PlayMusic(_AudioManager.LevelTwoMusic);
-                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
+               // ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Level03")
             {
                 Debug.Log("Playing LevelThreeMusic");
                 index = PlayMusic(_AudioManager.LevelThreeMusic);
-                ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
+               // ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
 
             if (index != -1)
