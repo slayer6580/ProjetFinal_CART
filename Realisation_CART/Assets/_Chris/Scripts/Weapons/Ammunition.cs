@@ -123,7 +123,7 @@ namespace DiscountDelirium
         }
         private void StopTarget()
         {
-            _AudioManager.PlaySoundEffectsOneShot(ESound.Splat, transform.position, 0.5f);
+            _AudioManager.PlaySoundEffectsOneShot(ESound.Splat, transform.position);
             m_target.GetComponent<Target>().StopMovement();
         }
 

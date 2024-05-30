@@ -55,6 +55,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f4a4945cd584b34a91f32d59a203e9f, type: 3}
   - {fileID: 8300000, guid: 1ec2570cb7dedd341be8e5061fb8efe9, type: 3}
   - {fileID: 8300000, guid: a73af11312f31b8468e6f55197abae0f, type: 3}
+  - {fileID: 8300000, guid: 7410fe4c838ba2545bfa214ac1b44547, type: 3}
+  - {fileID: 8300000, guid: dc34b7506be3b5f4b816c88fc0a9e422, type: 3}
   - {fileID: 8300000, guid: d2a51115fdef52145b2a2f8e6e4c2793, type: 3}
   - {fileID: 8300000, guid: b6ea485c919563d439460716370e687a, type: 3}
   - {fileID: 8300000, guid: 05ba3a8ef0799ae45a46912eb41a0312, type: 3}
@@ -204,8 +206,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_audioMixer: {fileID: 24100000, guid: d22ed9f5a87cf594f83902a148fd925c, type: 2}
-  m_minVolume: -40
-  m_maxVolume: 20
 --- !u!1 &3077067073724894080
 GameObject:
   m_ObjectHideFlags: 0

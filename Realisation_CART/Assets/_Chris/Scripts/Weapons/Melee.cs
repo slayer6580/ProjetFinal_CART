@@ -90,7 +90,7 @@ namespace DiscountDelirium
 
         public void PlaySound() 
         {
-            _AudioManager.PlaySoundEffectsOneShot(ESound.MeleeSwoosh, transform.position, 0.5f);
+            _AudioManager.PlaySoundEffectsOneShot(ESound.MeleeSwoosh, transform.position);
         }
 
         private void PlayVFX(Vector3 pos) 
@@ -100,7 +100,7 @@ namespace DiscountDelirium
             {
                 vfx.transform.position = pos;
                 vfx.GetComponent<ParticleSystem>().Play();
-                _AudioManager.PlaySoundEffectsOneShot(ESound.Hit, transform.position, 1f);
+                _AudioManager.PlaySoundEffectsOneShot(ESound.Hit, transform.position);
             }
         }
 

@@ -43,7 +43,7 @@ namespace BoxSystem
         /// <summary> Take an item from the shelf </summary>
         public void TakeItemFromShelf(Shelf shelf)
         {
-            _AudioManager.PlaySoundEffectsOneShot(ESound.GrabItem, transform.position, 0.1f);
+            _AudioManager.PlaySoundEffectsOneShot(ESound.GrabItem, transform.position);
 
             GameObject itemTaken = shelf.GetItemFromShelf();
             Item itemScript = itemTaken.GetComponent<Item>();

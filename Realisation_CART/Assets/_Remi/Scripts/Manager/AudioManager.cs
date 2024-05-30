@@ -42,6 +42,7 @@ namespace Manager
         private int m_scrollAudioBox;
         private bool m_isLevelMusicPlaying = false;
         private int m_sceneMusicIndex = -1;
+        private float m_musicVolume;
 
         /// <summary> This enum is used to store all the sounds in the game </summary>
         public enum ESound
@@ -49,6 +50,7 @@ namespace Manager
             CartCollision, CartRolling,
             Step01, Step02, Step03, Step04,
             GrabItem,
+            StartBeep01, StartBeep02,
             DriftBegin, DriftLoop,
             CashRegister, BoxDropOnCounter, BoxDropSpecial,
             MeleeSwoosh, CannonSound, Hit, Splat,
@@ -261,7 +263,7 @@ namespace Manager
         /// <summary> Play a sound effect one shot </summary>
         public void PlaySoundEffectsOneShot(ESound sound, Vector3 newPosition, float volume = 1, float pitch = 1)
         {
-            AudioBox audiobox = FindAValidAudioBox();
+			AudioBox audiobox = FindAValidAudioBox();
 
             if (audiobox == null)
                 return;
@@ -278,9 +280,10 @@ namespace Manager
         }
 
         /// <summary> Play a sound one shot on a transform </summary>
-        public int PlaySoundEffectsLoopOnTransform(ESound sound, Transform parent)
+        public int PlaySoundEffectsLoopOnTransform(ESound sound, Transform parent, float volume = 1)
         {
-            if (parent == null)
+			
+			if (parent == null)
             {
                 Debug.LogWarning("Parent is null, playing sound on AudioManager");
                 parent = transform;
@@ -294,7 +297,7 @@ namespace Manager
                 return -1;
 
             audiobox._AudioSource.pitch = 1;
-            audiobox._AudioSource.volume = 1;
+            audiobox._AudioSource.volume = volume;
 
             audiobox.transform.SetParent(parent, false);
             audiobox.transform.localPosition = Vector3.zero;
@@ -348,7 +351,8 @@ namespace Manager
         /// <summary> Start the music of the current scene </summary>
         public int StartCurrentSceneMusic()
         {
-            if (m_isLevelMusicPlaying) return m_sceneMusicIndex;
+			m_musicVolume = 0.5f;
+			if (m_isLevelMusicPlaying) return m_sceneMusicIndex;
           
             //Debug.Log("StartCurrentSceneMusic");
             Scene currentScene = SceneManager.GetActiveScene();
@@ -358,7 +362,8 @@ namespace Manager
             if (sceneName == "MainMenu")
             {
                 Debug.Log("Playing MainMenuMusic");
-                index = PlayMusic(_AudioManager.MainMenuMusic);
+                
+				index = PlayMusic(_AudioManager.MainMenuMusic);
              //   ModifyAudio(index, EAudioModification.MusicVolume, 1.0f);
             }
             else if (sceneName == "Tutorial")
@@ -406,7 +411,7 @@ namespace Manager
 
             audiobox.m_isPlaying = true;
             MusicAudioSource.clip = m_musicPool[(int)music];
-            MusicAudioSource.volume = PlayerPrefs.GetFloat("MusicVolume", 1);
+            MusicAudioSource.volume = m_musicVolume;
             MusicAudioSource.Play();
             return index;
         }
