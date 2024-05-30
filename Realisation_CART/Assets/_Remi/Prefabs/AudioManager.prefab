@@ -70,6 +70,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e466f067aeb246347a80f8ed63b661f2, type: 3}
   - {fileID: 8300000, guid: 284a0b27986b9cf4e82d884a86a1f83f, type: 3}
   - {fileID: 8300000, guid: 93a8481c23155f847b813e63749ec147, type: 3}
+  - {fileID: 8300000, guid: 3531d789e95ab3044a5cf1804392a826, type: 3}
   m_musicPool:
   - {fileID: 8300000, guid: d01bb565ee1700f41b3c00fd7a790e09, type: 3}
   - {fileID: 8300000, guid: 41aebfe3e376c6740a2e3c716ca87fa4, type: 3}

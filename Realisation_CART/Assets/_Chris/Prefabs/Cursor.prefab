@@ -137,7 +137,7 @@ MonoBehaviour:
   m_CursorGraphic: {fileID: 8287235738246418179}
   m_CursorTransform: {fileID: 8144971903727694791}
   m_canvasRectTransform: {fileID: 0}
-  m_CursorSpeed: 500
+  m_CursorSpeed: 650
   m_basedResolution: {x: 1920, y: 1080}
   m_ScrollSpeed: 45
   m_StickAction:

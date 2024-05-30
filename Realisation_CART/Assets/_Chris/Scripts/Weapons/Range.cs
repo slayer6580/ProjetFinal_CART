@@ -59,6 +59,7 @@ namespace DiscountDelirium
                     return;
                 }
                 _AudioManager.PlaySoundEffectsOneShot(ESound.CannonSound, transform.position, 0.25f);
+                Debug.Log("RANGE: " + transform.position);
                 StartCoroutine("Fire", ammo); 
             }
         }
