@@ -59,6 +59,7 @@ namespace DiscountDelirium
 
 			if (m_oldString != m_timeText.text)
 			{
+                if(m_timeText.text == "2" || m_timeText.text == "1")
 				_AudioManager.PlaySoundEffectsOneShot(ESound.StartBeep01, m_player.transform.position);
 				m_oldString = m_timeText.text;
 
