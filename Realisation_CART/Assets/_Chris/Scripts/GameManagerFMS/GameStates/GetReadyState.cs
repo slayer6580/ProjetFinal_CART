@@ -14,7 +14,7 @@ namespace DiscountDelirium
             Debug.LogWarning("GameState : GetReady");
             StartGameTimer.OnStartingTimeEnded += StartGame;
             m_gameStateMachine.m_playerSM.IsPaused = true;
-            _AudioManager.PlaySoundEffectsOneShot(ESound.Countdown, m_gameStateMachine.m_playerSM.transform.position, 1f, 1f);
+            
         }
 
         public override void OnUpdate()

@@ -73,8 +73,8 @@ namespace Manager
                         //m_boxCheckoutIsDone is used to do this section only once by box
                         if (m_boxCheckoutIsDone <= i)
                         {
-                            _AudioManager.PlaySoundEffectsOneShot(ESound.BoxDropOnCounter, transform.position);
-                            _AudioManager.PlaySoundEffectsOneShot(ESound.BoxDropSpecial, transform.position, 1f, 0.5f + (i * 0.05f));
+                            _AudioManager.PlaySoundEffectsOneShot(ESound.BoxDropOnCounter, m_counterPos.transform.position);
+                            _AudioManager.PlaySoundEffectsOneShot(ESound.BoxDropSpecial, m_counterPos.transform.position, 1f, 0.5f + (i * 0.05f));
 
                             //Spawn a text to show obtained bonus
                             GameObject bonusText = Instantiate(m_currentCheckoutZone.BonusText, new Vector3(
@@ -106,7 +106,7 @@ namespace Manager
 
                     if (m_checkOutEnding == false)
                     {
-                        _AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, transform.position, 1f);
+                        _AudioManager.PlaySoundEffectsOneShot(ESound.CashRegister, m_counterPos.transform.position, 1f);
                         m_checkOutEnding = true;
                         foreach (Box box in m_boxList)
                         {

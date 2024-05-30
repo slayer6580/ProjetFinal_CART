@@ -33,8 +33,8 @@ namespace DiscountDelirium
             DecrementTimer();
             UpdateUI();
         }
-
-        private void DecrementTimer()
+		
+		private void DecrementTimer()
         {
             if (m_timeLeft >= 0)
             {
@@ -54,12 +54,20 @@ namespace DiscountDelirium
             if (!m_timerEnded) 
             {
                 m_timeText.text = Mathf.Ceil(m_timeLeft).ToString();
-            }  
-        }
+            }
+
+			if (m_oldString != m_timeText.text)
+			{
+				_AudioManager.PlaySoundEffectsOneShot(ESound.StartBeep01, m_player.transform.position);
+				m_oldString = m_timeText.text;
+
+			}
+		}
 
         IEnumerator ShowTextAfterTimer() 
         {
-            m_timeText.text = m_messageAfterTimer;
+			_AudioManager.PlaySoundEffectsOneShot(ESound.StartBeep02, m_player.transform.position);
+			m_timeText.text = m_messageAfterTimer;
             yield return new WaitForSeconds(m_messageDuration);
             m_timeText.text = "";
         }

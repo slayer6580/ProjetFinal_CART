@@ -1,6 +1,7 @@
 using CartControl;
 using System;
 using UnityEngine;
+using static Manager.AudioManager;
 
 namespace DiscountDelirium
 {
@@ -18,7 +19,9 @@ namespace DiscountDelirium
             MainInputsHandler mainInput = m_gameStateMachine.m_playerSM.gameObject.GetComponent<MainInputsHandler>();
             mainInput.enabled = false;
 
-            OnEndGame.Invoke();
+			_AudioManager.PlayMusic(EMusic.WaitingRoomMusic);
+
+			OnEndGame.Invoke();
         }
 
         public override void OnUpdate()

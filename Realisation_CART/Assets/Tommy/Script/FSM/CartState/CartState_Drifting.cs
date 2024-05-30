@@ -20,7 +20,7 @@ namespace CartControl
 			}
 
 			//SFX
-			_AudioManager.PlaySoundEffectsOneShot(ESound.DriftBegin, m_cartStateMachine.transform.position, 0.25f);
+			_AudioManager.PlaySoundEffectsOneShot(ESound.DriftBegin, m_cartStateMachine.transform.position);
 			m_audioSourceIndex = _AudioManager.PlaySoundEffectsLoopOnTransform(ESound.DriftLoop, m_cartStateMachine.transform);
 			
 			m_cartStateMachine.ForceStartDrift = false;
