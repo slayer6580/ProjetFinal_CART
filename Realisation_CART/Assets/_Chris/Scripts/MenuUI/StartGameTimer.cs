@@ -25,7 +25,8 @@ namespace DiscountDelirium
 
         void Start()
         {
-            m_timeLeft = m_startingTime;
+			m_timeText.fontSize = 500;
+			m_timeLeft = m_startingTime;
         }
 
         void Update()
@@ -66,6 +67,7 @@ namespace DiscountDelirium
 
         IEnumerator ShowTextAfterTimer() 
         {
+            m_timeText.fontSize = 125;
 			_AudioManager.PlaySoundEffectsOneShot(ESound.StartBeep02, m_player.transform.position);
 			m_timeText.text = m_messageAfterTimer;
             yield return new WaitForSeconds(m_messageDuration);
