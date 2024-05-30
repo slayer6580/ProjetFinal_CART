@@ -14,7 +14,6 @@ namespace DiscountDelirium
             Debug.LogWarning("GameState : GetReady");
             StartGameTimer.OnStartingTimeEnded += StartGame;
             m_gameStateMachine.m_playerSM.IsPaused = true;
-            _AudioManager.StartCurrentSceneMusic();
         }
 
         public override void OnUpdate()
@@ -45,7 +44,8 @@ namespace DiscountDelirium
         private void StartGame()
         {
             OnGameStarted?.Invoke();
-            m_gameStateMachine.m_playerSM.IsPaused = false;
+			_AudioManager.StartCurrentSceneMusic();
+			m_gameStateMachine.m_playerSM.IsPaused = false;
             m_gameStateMachine.m_isGameStarted = true;
         }
     }
