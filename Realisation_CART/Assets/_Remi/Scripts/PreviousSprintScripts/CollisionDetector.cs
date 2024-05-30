@@ -46,23 +46,16 @@ namespace DynamicEnvironment
             //Debug.Log("Collision name: " + collision + " m_isBeingHit: " + m_isBeingHit);
             if (collision.gameObject.layer == GameConstants.PLAYER_COLLIDER && m_isBeingHit == false)
             {
-                //Debug.Log("m_isBeingHit: " + m_isBeingHit + " Parent fame object: " + gameObject.transform.parent.gameObject.name);
-                //Debug.Log("Player collision: " + collision.gameObject.name);
                 float velocity = collision.impulse.magnitude;
-                m_currentHealth -= velocity;
+                m_currentHealth -= velocity * 3;
                 _DynamicEnvironment.SetItemDestructionStage(this);
                 m_isBeingHit = true;
-                //Debug.Log("m_isBeingHit: " + m_isBeingHit);
                 return;
             }
             else if (collision.gameObject.layer == GameConstants.CLIENT_COLLIDER && m_isBeingHit == false)
             {
                 float velocity = collision.impulse.magnitude;
-                //if (velocity > 40.0f) velocity = 20; // NPCs are stronger in the five first seconds of the game
                 m_currentHealth -= (velocity / 4); // NPCs are weaker than the player
-                //Debug.Log("impact: " + (velocity /  1.5f));
-                //Debug.Log("velocity: " + velocity);
-                //Debug.Log("Current health: " + m_currentHealth);
                 _DynamicEnvironment.SetItemDestructionStage(this);
                 m_isBeingHit = true;
                 return;

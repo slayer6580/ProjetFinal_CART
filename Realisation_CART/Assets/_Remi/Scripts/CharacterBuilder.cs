@@ -154,7 +154,7 @@ namespace Spawner
             m_humanFemaleFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Ballerina_01"));
             m_humanFemaleFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Cheerleader_01"));
             m_humanFemaleFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Dress_01"));
-            m_humanFemaleFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Eastern_Skirt_01"));
+            m_humanFemaleFullBodyHeadCoveredTransforms.Add(transform.Find("SM_Chr_Kid_Eastern_Skirt_01"));
             m_humanFemaleFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Overalls_02"));
             m_humanFemaleFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Overalls_Dress_01"));
             m_humanFemaleFullBodyTransforms.Add(transform.Find("SM_Chr_Kid_Punk_01"));
