@@ -71,7 +71,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_DynamicEnvironment>k__BackingField: {fileID: 6223559365110368883}
-  m_max_health: 2500
   m_id: 0
 --- !u!1 &1041142658004482530
 GameObject:
@@ -152,8 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4eb149dfc9fba340b75adbf0a518fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SlipperyTurningDrag>k__BackingField: 0
-  <SlipperyDriftingDrag>k__BackingField: 0
 --- !u!1 &1477524592469649724
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,9 +202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SpecialFXGOFireSprinklers>k__BackingField: {fileID: 5319003617737148906}
   <SpecialFXGOWaterPuddles>k__BackingField: {fileID: 1041142658004482530}
-  <SpecialFXGOFireStages>k__BackingField: []
+  <SpecialFXGOFireStagesGO>k__BackingField: []
   m_puddleAnimationSpeed: 0.1
-  m_max_health: 2500
 --- !u!1 &1897653127337657716
 GameObject:
   m_ObjectHideFlags: 0
@@ -4864,7 +4860,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_DynamicEnvironment>k__BackingField: {fileID: 6223559365110368883}
-  m_max_health: 2500
   m_id: 0
 --- !u!1 &5228116387774518578
 GameObject:
@@ -4961,7 +4956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7777892244822481788
 Transform:
   m_ObjectHideFlags: 0

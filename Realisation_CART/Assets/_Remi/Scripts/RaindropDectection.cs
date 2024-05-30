@@ -20,6 +20,7 @@ namespace Shader
 
             _RaidropShaderUpdater = FindObjectOfType<RaidropShaderUpdater>();
             if (_RaidropShaderUpdater == null) Debug.LogError("RaindropDectection: _RaidropShaderUpdater not found");
+            gameObject.SetActive(false);
         }
 
         private void OnTriggerEnter(Collider other)
