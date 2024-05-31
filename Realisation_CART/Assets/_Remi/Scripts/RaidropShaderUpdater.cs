@@ -1,3 +1,4 @@
+using CartControl;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -20,6 +21,10 @@ namespace Shader
         private void Awake()
         {
             DeactivateRaindop();
+            CartStateMachine cartStateMachine = FindObjectOfType<CartStateMachine>();
+            if (cartStateMachine.gameObject.name != "Character") Debug.LogError("CartStateMachine not found or not the Player.");
+            m_playerRigidbody = cartStateMachine.GetComponent<Rigidbody>();
+            if (m_playerRigidbody == null) Debug.LogError("Player Rigidbody not found.");
         }
 
         void Update()
