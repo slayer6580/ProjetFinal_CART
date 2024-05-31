@@ -27,6 +27,8 @@ namespace Spawner
 
         public const float SIXTY_SECONDES = 60.0f;
 
+        [SerializeField] private Quaternion m_npcsOrientation = Quaternion.identity;
+
 
         private void Awake()
         {
@@ -133,7 +135,7 @@ namespace Spawner
 
             if (EntranceSpawningSpots.Contains(GetZoneGOList()[randomSpot]))
             {
-                Instantiate(NPCPrefab, GetZoneGOList()[randomSpot].transform.position, Quaternion.identity);
+                Instantiate(NPCPrefab, GetZoneGOList()[randomSpot].transform.position, m_npcsOrientation);
                 EntranceSpawningSpots.Remove(GetZoneGOList()[randomSpot]);
 
                 GameStateMachine.Instance.ClientsList.Add(NPCPrefab);

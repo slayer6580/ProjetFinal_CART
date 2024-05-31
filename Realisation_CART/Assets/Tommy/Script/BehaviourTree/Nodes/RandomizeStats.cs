@@ -14,6 +14,8 @@ namespace BehaviourTree
 		public int m_maxAggressive;
 		public int m_minTacticalAtk;
 		public int m_maxTacticalAtk;
+		[Range(3, 10)] public int m_minBoxWantedForCheckout;
+		[Range(3, 10)] public int m_maxBoxWantedForCheckout;
 
 		protected override void OnStart()
 		{
@@ -31,6 +33,7 @@ namespace BehaviourTree
 			m_blackboard.m_wantClosestPath = Random.Range(m_minClosest, m_maxClosest);
 			m_blackboard.m_aggressiveness = Random.Range(m_minAggressive, m_maxAggressive);
 			m_blackboard.m_tacticalAttack = Random.Range(m_minTacticalAtk, m_maxTacticalAtk);
+			m_blackboard.m_boxBeforeCheckout = Random.Range(m_minBoxWantedForCheckout, m_maxBoxWantedForCheckout);
 
 			return State.Success;
 		}

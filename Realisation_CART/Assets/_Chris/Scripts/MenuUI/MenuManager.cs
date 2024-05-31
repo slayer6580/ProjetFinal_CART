@@ -12,6 +12,7 @@ namespace DiscountDelirium
         [Header("Menus")]
         [SerializeField] private GameObject m_mainMenu;
         [SerializeField] private GameObject m_optionsMenu;
+        [SerializeField] private GameObject m_creditsPanel;
 
         [Header("Virtual Cursor")]
         [SerializeField] private GameObject m_cursor;
@@ -19,8 +20,9 @@ namespace DiscountDelirium
         [Header("Volume Sliders")]
         [SerializeField] private Slider m_masterSlider;
         [SerializeField] private Slider m_musicSlider;
-        [SerializeField] private Slider m_soundSlider;
+        [SerializeField] private Slider m_soundFXSlider;
 
+        [field: Header("Main Menu Scene")]
         [field: SerializeField] public EMusic MainMenuMusic { get; private set; } = EMusic.ThemeMusic;
         private int m_audioSourceIndex;
 
@@ -29,16 +31,21 @@ namespace DiscountDelirium
             PauseState.OnPause += OpenMainMenu;
             PauseState.OnResume += CloseMainMenu;
             EndGameState.OnEndGame += ShowCursor;
+        }
+
+        private void Start()
+        {
+            m_masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
+            m_musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+            if (m_soundFXSlider == null) Debug.LogError("No sound slider found!");
+            else Debug.Log("SoundFX slider found!"); ;
+            m_soundFXSlider.value = PlayerPrefs.GetFloat("SoundFXVolume", 1.0f);
 
             _AudioManager.SetMainMenuMusic(MainMenuMusic);
             m_audioSourceIndex = _AudioManager.StartCurrentSceneMusic();
-
-            m_masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
-            m_musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
-            m_soundSlider.value = PlayerPrefs.GetFloat("SoundVolume", 1.0f);
         }
 
-		public void StartGame()
+        public void StartGame()
         {
             PlayerPrefs.SetInt("Score", 0);
             SceneManager.LoadScene("Tutorial");
@@ -114,12 +121,19 @@ namespace DiscountDelirium
 
         public void SetSoundVolume()
         {
-            Debug.Log("Sound Volume: " + m_soundSlider.value);
-            PlayerPrefs.SetFloat("SoundVolume", m_soundSlider.value);
+            if (m_soundFXSlider == null) Debug.LogError("No sound slider found!");
+            //Debug.Log("Sound slide value: " + m_soundFXSlider.value);
+            PlayerPrefs.SetFloat("SoundFXVolume", m_soundFXSlider.value);
             for (int i = 0; i < _AudioManager.GetAudioBox().Count; i++)
             {
-                _AudioManager.ModifyAudio(i, EAudioModification.SoundVolume, m_soundSlider.value);
+                _AudioManager.ModifyAudio(i, EAudioModification.SoundVolume, m_soundFXSlider.value);
             }
+        }
+
+        public void ShowCredits(bool active) 
+        {
+            m_mainMenu.SetActive(!active);
+            m_creditsPanel.SetActive(active);
         }
     }
 }

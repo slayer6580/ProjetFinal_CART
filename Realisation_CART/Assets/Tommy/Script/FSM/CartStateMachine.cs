@@ -133,7 +133,7 @@ namespace CartControl
             if (ParentOfAllVisual.name == "GrindVFX") return; // Vérify if Player still has GrindVFX as first child.
             if (ParentOfAllVisual.name != "Parent") Debug.LogWarning("Not a client or Parent not found or not named Parent. Current name: " + ParentOfAllVisual.name);
 
-            _CartPhysicsPresets = gameObject.GetComponent<CartPhysicsPresets>();
+            _CartPhysicsPresets = GetComponent<CartPhysicsPresets>();
             if (_CartPhysicsPresets == null) Debug.LogError("CartPhysicsPresets not found");
         }
 

@@ -134,16 +134,13 @@ namespace Manager
             }
             else if (modif == EAudioModification.SoundVolume)
             {
-                float currentVolume = PlayerPrefs.GetFloat("SoundVolume", 1);
+                float currentVolume = PlayerPrefs.GetFloat("SoundFXVolume", 1);
                 audioSource.volume = Mathf.Min(value, currentVolume);
             }
             else if (modif == EAudioModification.MusicVolume)
             {
                 float currentVolume = PlayerPrefs.GetFloat("MusicVolume", 1);
-                //Debug.Log("currentVolume: " + currentVolume);
-                //Debug.Log("value: " + value);
                 MusicAudioSource.volume = Mathf.Min(value, currentVolume);
-                //Debug.Log("MusicAudioSource.volume: " + MusicAudioSource.volume);
             }
             else if (modif == EAudioModification.MasterVolume)
             {

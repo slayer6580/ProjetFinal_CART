@@ -77,15 +77,20 @@ namespace DynamicEnvironment
                 iterator++;
             }
 
+            ResteWaterPuddlesSizes();
+
+            m_sprinklersTransform = SpecialFXGOFireSprinklers.transform.GetChild(0);
+
+            m_slipperyFloorPhysics = FindObjectsOfType<SlipperyFloorDetector>();
+        }
+
+        private void ResteWaterPuddlesSizes()
+        {
             for (int i = 0; i < SpecialFXGOWaterPuddles.transform.childCount; i++)
             {
                 m_waterPuddleScales.Add(SpecialFXGOWaterPuddles.transform.GetChild(i).localScale.x);
                 SpecialFXGOWaterPuddles.transform.GetChild(i).localScale = new Vector3(0.1f, 0.1f, 0.1f);
             }
-
-            m_sprinklersTransform = SpecialFXGOFireSprinklers.transform.GetChild(0);
-
-            m_slipperyFloorPhysics = FindObjectsOfType<SlipperyFloorDetector>();
         }
 
         private void Update()
@@ -128,6 +133,7 @@ namespace DynamicEnvironment
             m_sprinflersAudioboxId = 0;
             m_currentItem.ResetItemCurrentHealth();
             ResetItensInEveryStages();
+            ResteWaterPuddlesSizes();
             DeactivateWaterPuddles();
 
             foreach (GameObject fireStage in SpecialFXGOFireStagesGO)
@@ -144,10 +150,10 @@ namespace DynamicEnvironment
 
             m_isFireSprinklersActive = false;
 
-            foreach (SlipperyFloorDetector slipperyFloorPhysic in m_slipperyFloorPhysics)
-            {
-                slipperyFloorPhysic.RemoveSlipperyFromAllCharacters();
-            }
+            //foreach (SlipperyFloorDetector slipperyFloorPhysic in m_slipperyFloorPhysics)
+            //{
+            //    slipperyFloorPhysic.RemoveSlipperyFromAllCharacters();
+            //}
         }
 
         /// <summary> Sets the item's destruction stage </summary>
